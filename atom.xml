@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[txgcwm Blog]]></title>
+  <title><![CDATA[txgcwm]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-05-19T16:51:18+08:00</updated>
+  <updated>2013-05-19T21:20:50+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[苍狼]]></name>
@@ -43,15 +43,6 @@
 <p>警察的行动速度真的太慢了，不知道当国家面临危险的时候，你们是否只会选择“打扫战场”。处理事情的方式是否也能改进改进，这么多乘客在这里并不只是专门是在等你如此解决问题，我们中的某一个或许就是你的目击证人，不然就辜负了司机师傅的用意了。</p>
 
 <p>这种事情每天都在公交车上上演，大家又是如何看待的？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[First Post]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/05/18/first-post/"/>
-    <updated>2013-05-18T22:38:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/05/18/first-post</id>
-    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
