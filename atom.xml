@@ -4,7 +4,7 @@
   <title><![CDATA[txgcwm]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-07T18:29:28+08:00</updated>
+  <updated>2013-07-07T19:37:28+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[苍狼]]></name>
@@ -25,6 +25,9 @@
 <li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
 <li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
 </ol>
+
+
+<!--more-->
 
 
 <p>用户空间的程序与设备通信的方法，主要有以下几种方式：</p>
@@ -167,6 +170,9 @@ UDEVD_CTRL_RELOAD_RULES //重新加载配置文件
 
 <p>设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下：用b除a，得a＝bq&hellip;r1(0≤r1)。若r1=0，则(a，b)＝b；若r1≠0，则再用r1除b，得b＝r1q&hellip;r2(0≤r2)。若r2＝0，则(a，b)＝r1，若r2≠0，则继续用r2除r1,&hellip;如此下去，直到能整除为止。其最后一个非零余数即为(a，b)。</p>
 
+<!--more-->
+
+
 <p>辗转相除法是利用以下性质来确定两个正整数a和b的最大公因子的：</p>
 
 <p>1、若r是a÷b的余数,则gcd(a,b) = gcd(b,r)；</p>
@@ -267,6 +273,9 @@ $ ./rand
 </code></pre>
 
 <p>从以上的结果可以看出，rand两次产生的随机数是一样的，之所以这样是因为“在调用rand函数产生随机数前没有先利用srand()设好随机数种子”。如果未设随机数种子，rand()在调用时会自动设随机数种子为1。</p>
+
+<!--more-->
+
 
 <h1>srand设置随机数种子</h1>
 
@@ -414,6 +423,9 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
 
 <pre><code>$ sudo aptitude install pdftk
 </code></pre>
+
+<!--more-->
+
 
 <p>将两个或更多个PDF合并成一个新文档：</p>
 
@@ -597,6 +609,9 @@ int c = isdigit(3);
 <pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
 </code></pre>
 
+<!--more-->
+
+
 <p>Linux内核中isdigit的实现，其代码如下所示：</p>
 
 <pre><code>#define _U 0x01 /* upper */
@@ -703,6 +718,9 @@ unsigned char _ctype[] = {0x00, /* EOF */
 <p>司机见此状况，将车子停在了路的一旁，开始调解。司机问A有没有东西被偷，是否要报警，A和B都同意报警，司机和B都打电话报了警。司机接着又补充道“警察未来之前谁也不准离开”，这个做法全国的公交应该都这样吧，个人不是反对而是赞成。</p>
 
 <p>在这间隙，A诉说着她事件：她站在靠下车门的地方，B站在另一测，另外一个女人C站在她的同一侧，她刚好在B和C的中间，她本能的感觉到有手深入她的手提包在偷她的东西，她怀疑B和C在合谋偷她的东西。接着发生了前面提到的那一幕。A也补充到她上车的时候手提包的拉链是拉紧的。B也解释道没有偷A的东西，同时也不认识C。由于当时是低着头看手机，加上距离比较的远，我并不清楚事情到底是否有偷窃的事情。</p>
+
+<!--more-->
+
 
 <p>过了一小会儿，警察还是没有来到。很多人就问司机能不能让那两个女人下车，让她们独自等待警察，然后送我们去上班，司机拒绝了这些不合理的请求。在这种情况下，他们就转向了A，让她们自己下去。其他人的声音我听得不是很清楚，我身边的一个女人的话大概是这样的：“东西有没有被偷呢？没有的话就算了。要叫警察的话，你们自己下去等，浪费别人的时间。我们又没有偷你的东西，对我们凶什么凶了，神经病的！”车上80%的人表示的都是类似的声音。面对如此喧嚣的声音，我的前座的一个男人和前座的前座的一个男人都劝大家稍安误噪，要多体谅。</p>
 
