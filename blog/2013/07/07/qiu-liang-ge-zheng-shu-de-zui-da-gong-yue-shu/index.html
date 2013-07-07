@@ -5,16 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - txgcwm</title>
+  <title>求两个整数的最大公约数 - txgcwm</title>
   <meta name="author" content="苍狼">
 
   
-  <meta name="description" content="Blog Archive 2013 求两个整数的最大公约数
-Jul 07 2013 Linux下C语言伪随机数编程
-Jul 07 2013 Linux下PDF文件的操作与转换
-Jul 07 2013 内核中关于isdigit和min（max）的实现
-Jul 07 2013 公交小事
-May 19 &hellip;">
+  <meta name="description" content="辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。 设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +18,7 @@ May 19 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/archives">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="txgcwm" type="application/atom+xml">
@@ -69,71 +64,138 @@ May 19 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">求两个整数的最大公约数</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T17:10:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。</p>
 
-  
-  <h2>2013</h2>
+<p>设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下：用b除a，得a＝bq&hellip;r1(0≤r1)。若r1=0，则(a，b)＝b；若r1≠0，则再用r1除b，得b＝r1q&hellip;r2(0≤r2)。若r2＝0，则(a，b)＝r1，若r2≠0，则继续用r2除r1,&hellip;如此下去，直到能整除为止。其最后一个非零余数即为(a，b)。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a></h1>
-<time datetime="2013-07-07T17:10:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p>辗转相除法是利用以下性质来确定两个正整数a和b的最大公因子的：</p>
 
+<p>1、若r是a÷b的余数,则gcd(a,b) = gcd(b,r)；</p>
 
-</article>
+<p>2、若b为0，则其最大公因子为a。</p>
 
+<p>另一种置换实现方式：</p>
 
+<p>1、r为a÷b所得余数（0≤r＜b）。若r=0，算法结束，b即为答案；</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/">Linux下C语言伪随机数编程</a></h1>
-<time datetime="2013-07-07T12:50:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p>2、若r不为0，则互换：置a←b，b←r，并返回第一步。</p>
 
+<p>递归实现：</p>
 
-</article>
+<pre><code>int gcd(int a,int b)
+{
+    if(b == 0)
+        return a;
+    else
+        return gcd(b, a%b);
+}
+</code></pre>
 
+<p>对递归实现的改进：</p>
 
+<pre><code>int gcd(int a,int b)
+{
+    return b ? gcd(b, a%b) : a;
+}
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/">Linux下PDF文件的操作与转换</a></h1>
-<time datetime="2013-07-07T11:21:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p>置换实现：</p>
 
+<pre><code>int gcd( int a, int b)
+{
+    int temp;
 
-</article>
+     while(b) {
+        temp = b;
+        b = a%b;
+        a = temp;      
+     }
 
+     return a;
+}
+</code></pre>
 
+<p>对置换实现的改进：</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
-<time datetime="2013-07-07T10:41:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<pre><code>int gcd(int a, int b)
+{
+    while(b)
+        b = a%b + 0/(a=b);
 
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
-<time datetime="2013-05-19T16:05:00+08:00" pubdate><span class='month'>May</span> <span class='day'>19</span> <span class='year'>2013</span></time>
-
-
-</article>
-
+    return a;
+}
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">苍狼</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T17:10:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://txgcwm.github.io/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/" data-via="" data-counturl="http://txgcwm.github.io/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/" title="Previous Post: Linux下C语言伪随机数编程">&laquo; Linux下C语言伪随机数编程</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
