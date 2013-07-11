@@ -9,9 +9,15 @@
   <meta name="author" content="苍狼">
 
   
-  <meta name="description" content="在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。 1
-#include "minilzo.h" 其中，lzo_init()函数包含在以下的头文件中。 1
-#include " &hellip;">
+  <meta name="description" content="Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b。）。其值如下： 1
+2
+3
+4
+5
+6
+7
+8
+'A', 'B', 'C', 'D &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +73,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T23:09:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b。）。其值如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+</span><span class='line'>'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+</span><span class='line'>'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+</span><span class='line'>'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+</span><span class='line'>'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+</span><span class='line'>'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+</span><span class='line'>'w', 'x', 'y', 'z', '0', '1', '2', '3',
+</span><span class='line'>'4', '5', '6', '7', '8', '9', '+', '/',</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果被加密的字符串每3个一组，还剩1或2个字符，使用特殊字符&#8221;=&ldquo;补齐。例如编码只有2个字符“me”，m的ascii是109，e的是101，用二进制表示分别是01101101、01100101，连接起来就是0110110101100101，再按6位分为一组：011011、010110、010100（不足6位补0），ascii分别是27、22、 20，即Base64值为bWU，不足4字用＝补齐，因此bWU＝就me的Base64值。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -547,6 +614,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/">Minilzo无损压缩库测试例子（二）</a>
       </li>
     
@@ -560,10 +631,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/">Linux下C语言伪随机数编程</a>
       </li>
     
   </ul>
