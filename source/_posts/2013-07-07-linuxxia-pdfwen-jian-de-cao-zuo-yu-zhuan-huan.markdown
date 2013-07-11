@@ -13,6 +13,8 @@ categories:
 
     $ sudo aptitude install pdftk
 
+<!--more-->
+
 将两个或更多个PDF合并成一个新文档：
 
     $ pdftk 1.pdf 2.pdf 3.pdf cat output 123.pdf
