@@ -4,7 +4,7 @@
   <title><![CDATA[txgcwm]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-11T23:34:19+08:00</updated>
+  <updated>2013-07-11T23:37:00+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[苍狼]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/"/>
     <updated>2013-07-11T23:09:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa</id>
-    <content type="html"><![CDATA[<p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b。）。其值如下：</p>
+    <content type="html"><![CDATA[<p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
