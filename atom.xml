@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[txgcwm]]></title>
+  <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-13T23:05:49+08:00</updated>
+  <updated>2013-07-13T23:27:41+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
-    <name><![CDATA[苍狼]]></name>
+    <name><![CDATA[残剑]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
