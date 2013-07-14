@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-13T23:27:41+08:00</updated>
+  <updated>2013-07-14T11:33:01+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pkg-config的使用]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong/"/>
+    <updated>2013-07-14T11:22:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong</id>
+    <content type="html"><![CDATA[<p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pkg-config --libs --cflags opencv
+</span><span class='line'>-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
+
+<p>那pkg-config从哪儿知道这些信息的呢？它是从包名为xxx.pc这个文件中查找到的。缺省情况下，pkg-config首先在prefix/lib/pkgconfig/中查找相关包（譬如opencv）对应的相应的文件（opencv.pc）。在linux上上述路径名为/usr/lib/pkconfig/。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Package opencv was not found in the pkg-config search path.
+</span><span class='line'>Perhaps you should add the directory containing `opencv.pc'
+</span><span class='line'>to the PKG_CONFIG_PATH environment variable
+</span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设置环境变量PKG_CONFIG_PATH方法如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux下删除文本文件中的所有空行]]></title>
