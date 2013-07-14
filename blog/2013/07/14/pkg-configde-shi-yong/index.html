@@ -122,6 +122,9 @@ $ pkg-config --libs --cflags opencv
 </span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
 
 
+<!--more-->
+
+
 <p>设置环境变量PKG_CONFIG_PATH方法如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -144,6 +147,8 @@ $ pkg-config --libs --cflags opencv
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ cat opencv.pc 
 </span><span class='line'># Package Information for pkg-config
 </span><span class='line'>
@@ -156,7 +161,9 @@ $ pkg-config --libs --cflags opencv
 </span><span class='line'>Name: OpenCV
 </span><span class='line'>Description: Open Source Computer Vision Library
 </span><span class='line'>Version: 2.3.1
-</span><span class='line'>Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann
+</span><span class='line'>Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
+</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib 
+</span><span class='line'>-lopencv_legacy -lopencv_flann
 </span><span class='line'>Cflags: -I${includedir_old} -I${includedir_new}</span></code></pre></td></tr></table></div></figure>
 
 </div>
