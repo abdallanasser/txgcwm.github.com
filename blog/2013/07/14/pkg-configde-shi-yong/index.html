@@ -128,6 +128,36 @@ $ pkg-config --libs --cflags opencv
 </pre></td><td class='code'><pre><code class=''><span class='line'>export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH</span></code></pre></td></tr></table></div></figure>
 
 
+<p>查看opencv.pc文件的内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat opencv.pc 
+</span><span class='line'># Package Information for pkg-config
+</span><span class='line'>
+</span><span class='line'>prefix=/usr
+</span><span class='line'>exec_prefix=${prefix}
+</span><span class='line'>libdir=${exec_prefix}/lib
+</span><span class='line'>includedir_old=${prefix}/include/opencv
+</span><span class='line'>includedir_new=${prefix}/include
+</span><span class='line'>
+</span><span class='line'>Name: OpenCV
+</span><span class='line'>Description: Open Source Computer Vision Library
+</span><span class='line'>Version: 2.3.1
+</span><span class='line'>Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib -lopencv_legacy -lopencv_flann
+</span><span class='line'>Cflags: -I${includedir_old} -I${includedir_new}</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
