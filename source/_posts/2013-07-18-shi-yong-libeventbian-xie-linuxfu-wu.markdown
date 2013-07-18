@@ -86,7 +86,7 @@ event_add(&ev, NULL)
 
 libevent提供了多种方式来进入事件循环，常用的是event_dispatch和event_base_loop，前者最后实际是使用当前事件根基来调用event_base_loop。
 ```
-   event_base_loop(main_base, 0);
+event_base_loop(main_base, 0);
 ```
 
 
@@ -146,21 +146,21 @@ void buffered_on_read(struct bufferevent *bev, void * arg){
 利用libevent编写服务端程序，主要有4部分。
 （1）创建主通知链base
 ```
-  base = event_base_new();
+base = event_base_new();
 ```
 （2）创建要监听的事件，并将其加入到主通知链中。
 ```
-  listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
-  event_add(listener_event, NULL);
-  event_free( listener_event ); //释放由event_new申请的结构体
+listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
+event_add(listener_event, NULL);
+event_free( listener_event ); //释放由event_new申请的结构体
 ``` 
 （3）主循环
 ```
-  event_base_dispatch(base);
+event_base_dispatch(base);
 ```
 （4）释放
 ```
-  event_base_free(base);
+event_base_free(base);
 ```
 以下程序中do_read, do_write是异步的，为了解决了异步之间的问题，程序使用了state这个结构体变量将do_read和do_write联系起来。
 ```
