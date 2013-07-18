@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、 &hellip;">
+  <meta name="description" content="辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。 设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下： &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T17:10:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。</p>
+
+<p>设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下：用b除a，得a＝bq&hellip;r1(0≤r1)。若r1=0，则(a，b)＝b；若r1≠0，则再用r1除b，得b＝r1q&hellip;r2(0≤r2)。若r2＝0，则(a，b)＝r1，若r2≠0，则继续用r2除r1,&hellip;如此下去，直到能整除为止。其最后一个非零余数即为(a，b)。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -306,6 +349,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">使用libevent编写Linux服务</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/15/lian-zhan/">链栈</a>
       </li>
     
@@ -319,10 +366,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/">Minilzo无损压缩库测试例子（二）</a>
       </li>
     
   </ul>
