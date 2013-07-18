@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-18T19:47:01+08:00</updated>
+  <updated>2013-07-18T19:55:35+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -148,7 +148,7 @@
 <p>libevent提供了多种方式来进入事件循环，常用的是event_dispatch和event_base_loop，前者最后实际是使用当前事件根基来调用event_base_loop。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   event_base_loop(main_base, 0);</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>event_base_loop(main_base, 0);</span></code></pre></td></tr></table></div></figure>
 
 
 <h1>处理连接</h1>
@@ -223,7 +223,7 @@
 （1）创建主通知链base</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  base = event_base_new();</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>base = event_base_new();</span></code></pre></td></tr></table></div></figure>
 
 
 <p>（2）创建要监听的事件，并将其加入到主通知链中。</p>
@@ -231,22 +231,22 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
-</span><span class='line'>  event_add(listener_event, NULL);
-</span><span class='line'>  event_free( listener_event ); //释放由event_new申请的结构体</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
+</span><span class='line'>event_add(listener_event, NULL);
+</span><span class='line'>event_free( listener_event ); //释放由event_new申请的结构体</span></code></pre></td></tr></table></div></figure>
 
 
 <p>
 （3）主循环</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  event_base_dispatch(base);</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>event_base_dispatch(base);</span></code></pre></td></tr></table></div></figure>
 
 
 <p>（4）释放</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  event_base_free(base);</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>event_base_free(base);</span></code></pre></td></tr></table></div></figure>
 
 
 <p>以下程序中do_read, do_write是异步的，为了解决了异步之间的问题，程序使用了state这个结构体变量将do_read和do_write联系起来。</p>
