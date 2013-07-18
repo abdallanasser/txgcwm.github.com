@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-19T00:18:40+08:00</updated>
+  <updated>2013-07-19T00:26:02+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -55,7 +55,7 @@
 
 <h1>对回答的评论</h1>
 
-<p>对于网友的回答，我假设大家都是“看到问题后大脑的第一个想法”，说的并不一定正确，请多多包含。</p>
+<p>对于网友的回答，我假设大家都是“看到问题后，涌入大脑里的第一个想法”。</p>
 
 <p>djsxut、hellioncu、cokeboL、windoze：都是从工程的问题出发解决问题。djsxut的第一种方法简单有效。hellioncu的方法比djsxut的第二种方法精准些。cokeboL虽然没有说出具体的一种计算方法，但我也认为他也明白的表述了他的思想。cokeboL后面一句“这还能有啥”，我不清楚为何会有这个提问（你说“原来是脑筋急转弯啊”，但我并不认为它是个脑筋急转弯，它并不需要你转，只是看看你的第一个反应是什么）。windoze的方法比较费时了。</p>
 
@@ -2063,7 +2063,7 @@ UDEVD_CTRL_RELOAD_RULES //重新加载配置文件
 
 <p>另一种置换实现方式：</p>
 
-<p>1、r为a÷b所得余数（0≤r＜b）。若r=0，算法结束，b即为答案；</p>
+<p>1、r为a÷b所得余数（0≤r&lt;b）。若r=0，算法结束，b即为答案；</p>
 
 <p>2、若r不为0，则互换：置a←b，b←r，并返回第一步。</p>
 
