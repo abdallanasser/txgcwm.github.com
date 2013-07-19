@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu下编译vlc-android源代码 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令： 1
+2
+$ apt-get install apache-ant(or ant) autoconf automake autopoint &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu下编译vlc-android源代码</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T21:18:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get install  apache-ant(or ant)  autoconf automake autopoint  libtool  gawk (or nawk)
+</span><span class='line'>gcc  g++  pkg-config  cmake  patch subversion git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ant工具在最后编译android源码生成apk文件会用到，所以需要安装。如果手动安装了ant，需要在环境变量中配置好ant的 path，或者在编译前执行命令<code>export PATH=$PATH:/xxx/ant/bin</code>，保证可以在执行编译的命令行中执行ant命令即可。</p>
+
+<!--more-->
+
+
+<h1>环境变量配置</h1>
+
+<p>配置ANDROID_SDK（请把path改为自己的路径）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export ANDROID_SDK=/path/to/android-sdk</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置ANDROID_NDK</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export ANDROID_NDK=/path/to/android-ndk</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置PATH变量</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置NEON相关信息（一般编译的时候，会编译NO_NEON和支持NEON两种包出来）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export NO_NEON=1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果设备不支持NEON技术，请务必配置此项；如果机器支持NEON技术，可以不用配置此项。关于NEON的简单信息：根据维基百科英文版ARM架构中的介绍，Cortex-A8架构的设备均支持NEON技术，而在Cortex-A9架构的设备中则是可选的，更多信息请参考 <a href="http://www.arm.com/zh/products/processors/technologies/neon.php">NEON</a> 和 <a href="http://en.wikipedia.org/wiki/ARM_architecture#Advanced_SIMD_.28NEON.29">ARM architecture</a> 。</p>
+
+<p>配置ABI</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export ANDROID_ABI=armeabi-v7a</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>获取源码</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git://git.videolan.org/vlc-ports/android.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>编译源码</h1>
+
+<p>下载完成后，进入android文件夹执行<code>sh compile.sh</code>，开始自动编译。如果编译过程中遇到错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>checking host system type… Invalid configuration `arm-linux-androideabi’: system 
+</span><span class='line'>`androideabi’ not recognized</span></code></pre></td></tr></table></div></figure>
+
+
+<p>请在重新编译之前执行以下操作：1. 到 <a href="http://git.savannah.gnu.org/gitweb/?p=config.git;a=tree">这里</a>下载最新的config.guess和config.sub文件；2. 将下载的文件拷贝到/usr/share/misc目录下；3. 重新启动编译。</p>
+
+<p>最后提示BUILD SUCESSFUL，说明编译成功了，在android/vlc-android/bin目录下会生成一个apk文件，可以直接拿来安装。如果想自己调整界面部分，或者添加、修改其它功能，可以直接把项目导入eclipse进行开发。</p>
+
+<h1>出错处理</h1>
+
+<p>如果编译过程中提示缺少某一软件的错误，请根据错误提示安装对应的工具，或者在执行编译之前就把之前提到的工具全部安装好。</p>
+
+<p>出错信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> CC     posix/plugin.lo
+</span><span class='line'>../../src/posix/plugin.c: In function 'module_Load':
+</span><span class='line'>../../src/posix/plugin.c:50:50: warning: unused parameter 'lazy' [-Wunused-parameter]
+</span><span class='line'>  CC     posix/thread.lo
+</span><span class='line'>../../src/posix/thread.c:85:5: warning: #warning Monotonic clock not available. Expect timing issues. [-Wcpp]
+</span><span class='line'>../../src/posix/thread.c: In function 'vlc_cancel':
+</span><span class='line'>../../src/posix/thread.c:830:5: error: implicit declaration of function 'pthread_cancel' [-Werror=implicit-function-declaration]
+</span><span class='line'>../../src/posix/thread.c: In function 'vlc_savecancel':
+</span><span class='line'>../../src/posix/thread.c:847:5: error: implicit declaration of function 'pthread_setcancelstate' [-Werror=implicit-function-declaration]
+</span><span class='line'>../../src/posix/thread.c:847:39: error: 'PTHREAD_CANCEL_DISABLE' undeclared (first use in this function)
+</span><span class='line'>../../src/posix/thread.c:847:39: note: each undeclared identifier is reported only once for each function it appears in
+</span><span class='line'>../../src/posix/thread.c: In function 'vlc_restorecancel':
+</span><span class='line'>../../src/posix/thread.c:867:9: error: 'PTHREAD_CANCEL_DISABLE' undeclared (first use in this function)
+</span><span class='line'>../../src/posix/thread.c: In function 'vlc_testcancel':
+</span><span class='line'>../../src/posix/thread.c:884:5: error: implicit declaration of function 'pthread_testcancel' [-Werror=implicit-function-declaration]
+</span><span class='line'>cc1: some warnings being treated as errors
+</span><span class='line'>
+</span><span class='line'>make[3]: *** [posix/thread.lo] Error 1
+</span><span class='line'>make[3]: Leaving directory `/srv/android/vlc/android/src'
+</span><span class='line'>make[2]: *** [all] Error 2
+</span><span class='line'>make[2]: Leaving directory `/srv/android/vlc/android/src'
+</span><span class='line'>make[1]: *** [all-recursive] Error 1
+</span><span class='line'>make[1]: Leaving directory `/srv/android/vlc/android'
+</span><span class='line'>make: *** [all] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决方法：
+进入下载的android vlc目录，执行以下指令。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd vlc
+</span><span class='line'>$ git reset --hard origin
+</span><span class='line'>$ git pull origin master
+</span><span class='line'>$ git checkout -b android ${TESTED_HASH}
+</span><span class='line'>$ git am ../patches/*</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注：在老的git版本中git checkout并没有-B的选项，所以一开始执行的时候并没有下载android版本的vlc代码，故使用<code>git checkout -b android ${TESTED_HASH}</code>。</p>
+
+<p>出错信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>BUILD FAILED
+</span><span class='line'>/usr/local/android-sdk-linux/tools/ant/build.xml:517: Unable to resolve project target 'android-15'
+</span><span class='line'>
+</span><span class='line'>Total time: 3 seconds
+</span><span class='line'>make: *** [vlc-android/bin/VLC-debug.apk] Error 1
+</span><span class='line'>rm android-libs/libmedia.c android-libs/libutils.c android-libs/libstagefright.c android-libs/libbinder.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决方法：
+进入到android-sdk-linux/tools目录，执行<code>./android</code>下载Android 4.0.3（API15）的相关文件。</p>
+
+<p>出错信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -f -L -- "http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz" &gt; "../../contrib/tarballs/speex-git.tar.gz"
+</span><span class='line'>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span><span class='line'>                                 Dload  Upload   Total   Spent    Left  Speed
+</span><span class='line'>100   814  100   814    0     0    226      0  0:00:03  0:00:03 --:--:-- 23941
+</span><span class='line'>../../contrib/src/speex/rules.mak:20: .sum-speex not implemented
+</span><span class='line'>touch .sum-speex
+</span><span class='line'>touch -r .sum-speex .sum-speexdsp
+</span><span class='line'>rm -Rf speex-git
+</span><span class='line'>mkdir -p speex-git
+</span><span class='line'>zcat "../../contrib/tarballs/speex-git.tar.gz" | (cd speex-git && tar xv --strip-components=1)
+</span><span class='line'>
+</span><span class='line'>gzip: ../../contrib/tarballs/speex-git.tar.gz: not in gzip format
+</span><span class='line'>tar: This does not look like a tar archive
+</span><span class='line'>tar: Exiting with failure status due to previous errors
+</span><span class='line'>make: *** [speex] Error 2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>解决方法：
+将<code>http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz</code>输入到浏览器地址栏中就会开始下载你所需要的文件，然后将相应下载的压缩文件存放于contrib/tarballs/目录下，将名字改成speex-git.tar.gz。若碰到其它的库文件有类似的错误，可采用该办法。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T21:18:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://txgcwm.github.io/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/" data-via="" data-counturl="http://txgcwm.github.io/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/19/che-su-de-ji-suan/" title="Previous Post: 车速的计算">&laquo; 车速的计算</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/che-su-de-ji-suan/">车速的计算</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">使用libevent编写Linux服务</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/15/lian-zhan/">链栈</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/pkg-configde-shi-yong/">Pkg-config的使用</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
