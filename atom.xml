@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-20T16:27:27+08:00</updated>
+  <updated>2013-07-20T16:59:30+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -699,7 +699,7 @@
 </span><span class='line'>(require 'bar-cursor)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可。</p>
+<p>到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 [这里]（<a href="https://github.com/txgcwm/emacs.d%EF%BC%89%E4%B8%8B%E8%BD%BD%E3%80%82">https://github.com/txgcwm/emacs.d%EF%BC%89%E4%B8%8B%E8%BD%BD%E3%80%82</a></p>
 ]]></content>
   </entry>
   
