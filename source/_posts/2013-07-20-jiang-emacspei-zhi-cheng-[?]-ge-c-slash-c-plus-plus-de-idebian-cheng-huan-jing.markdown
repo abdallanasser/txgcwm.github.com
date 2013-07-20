@@ -397,4 +397,4 @@ f9-f11的一些绑定：
 (require 'bar-cursor)
 ```
 
-到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 [这里]（https://github.com/txgcwm/emacs.d）下载。
+到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 [这里](https://github.com/txgcwm/emacs.d) 下载。
