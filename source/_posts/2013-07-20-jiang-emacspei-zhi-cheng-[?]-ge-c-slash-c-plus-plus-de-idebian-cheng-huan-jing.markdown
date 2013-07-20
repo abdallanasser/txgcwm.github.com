@@ -3,7 +3,7 @@ layout: post
 title: "将Emacs配置成一个C/C++的IDE编程环境"
 date: 2013-07-20 14:47
 comments: true
-categories: 
+categories: [IDE, Unix/Linux]
 ---
 在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用`sudo apt-get install emacs`来安装Emaces。
 

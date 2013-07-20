@@ -3,7 +3,8 @@ layout: post
 title: "Linux下C语言伪随机数编程"
 date: 2013-07-07 12:50
 comments: true
-categories: 
+categories: [Unix/Linux, C/C++]
+keywords: 
 ---
 
 在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、srand来生成伪随机数。

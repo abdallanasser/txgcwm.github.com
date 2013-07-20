@@ -3,7 +3,7 @@ layout: post
 title: "内核中关于isdigit和min（max）的实现"
 date: 2013-07-07 10:41
 comments: true
-categories: 
+categories: [Unix/Linux, C/C++]
 ---
 isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。
 

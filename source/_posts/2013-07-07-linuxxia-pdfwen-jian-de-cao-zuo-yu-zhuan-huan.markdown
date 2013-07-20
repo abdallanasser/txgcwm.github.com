@@ -3,7 +3,8 @@ layout: post
 title: "Linux下PDF文件的操作与转换"
 date: 2013-07-07 11:21
 comments: true
-categories: 
+categories: [Shell, Unix/Linux]
+keywords:
 ---
 在Linux中常常涉及到多种文档格式（如doc、txt、html、rtf等等），为了方便文件传递，就可能需要在各种格式之间进行转换。下面介绍几个命令行下的工具，用于将pdf文件转换成其它我们需要的文件格式。
 

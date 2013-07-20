@@ -3,7 +3,7 @@ layout: post
 title: "使用libevent编写Linux服务"
 date: 2013-07-18 19:01
 comments: true
-categories: 
+categories: [C/C++, 开源库, Unix/Linux]
 ---
 libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。
 

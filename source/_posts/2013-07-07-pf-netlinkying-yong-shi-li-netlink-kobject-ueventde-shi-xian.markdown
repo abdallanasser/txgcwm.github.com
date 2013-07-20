@@ -3,7 +3,7 @@ layout: post
 title: "PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现"
 date: 2013-07-07 17:43
 comments: true
-categories: 
+categories: [Unix/Linux, C/C++]
 ---
 
 udev的文档介绍：

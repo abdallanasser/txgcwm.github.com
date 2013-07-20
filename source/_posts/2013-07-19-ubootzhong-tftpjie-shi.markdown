@@ -3,7 +3,7 @@ layout: post
 title: "Uboot中TFTP解释"
 date: 2013-07-19 22:45
 comments: true
-categories: 
+categories: [网络应用, Unix/Linux]
 ---
 
 TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用`tftp MemoryAddress FileName`命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。

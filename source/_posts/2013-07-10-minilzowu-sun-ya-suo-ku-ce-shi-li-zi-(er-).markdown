@@ -3,7 +3,7 @@ layout: post
 title: "minilzo无损压缩库测试例子（二）"
 date: 2013-07-10 23:01
 comments: true
-categories: 
+categories: [Unix/Linux, 开源库]
 ---
 
 在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。

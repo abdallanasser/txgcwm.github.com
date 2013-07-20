@@ -3,7 +3,7 @@ layout: post
 title: "pkg-config的使用"
 date: 2013-07-14 11:22
 comments: true
-categories: 
+categories: [Shell, Unix/Linux]
 ---
 pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。
 ```

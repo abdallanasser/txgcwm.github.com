@@ -3,7 +3,7 @@ layout: post
 title: "Base64编码解码算法"
 date: 2013-07-11 23:09
 comments: true
-categories: 
+categories: [Unix/Linux, C/C++, 数据结构算法]
 ---
 Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下：
 ```

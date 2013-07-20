@@ -3,7 +3,8 @@ layout: post
 title: "公交小事"
 date: 2013-05-19 16:05
 comments: true
-categories: 
+categories: [茶余酒后]
+keywords:
 ---
 
 {% img right http://www.gscn.com.cn/upload/image/2009/10/21/1256085698750.jpg 300 386 Place Kitten #3 %}

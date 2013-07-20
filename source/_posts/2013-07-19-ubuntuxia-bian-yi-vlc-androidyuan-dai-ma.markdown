@@ -3,7 +3,7 @@ layout: post
 title: "Ubuntu下编译vlc-android源代码"
 date: 2013-07-19 21:18
 comments: true
-categories: 
+categories: [Android, Unix/Linux]
 ---
 
 在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令：

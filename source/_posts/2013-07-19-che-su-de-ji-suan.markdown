@@ -3,7 +3,7 @@ layout: post
 title: "车速的计算"
 date: 2013-07-19 00:04
 comments: true
-categories: 
+categories: [茶余酒后]
 ---
 假设你坐在汽车内，你会如何计算汽车在高速路上的平均速度？说说方法，请写下闯入你大脑的第一个想法，希望不要太离谱。没有标准，百家争鸣！
 

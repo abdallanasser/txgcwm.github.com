@@ -3,7 +3,7 @@ layout: post
 title: "Linux下c语言获取网络接口IP地址"
 date: 2013-07-19 22:34
 comments: true
-categories: 
+categories: [C/C++, Unix/Linux, 网络应用]
 ---
 在Linux环境下，可以使用以下的代码获取网络的ip地址：
 ```

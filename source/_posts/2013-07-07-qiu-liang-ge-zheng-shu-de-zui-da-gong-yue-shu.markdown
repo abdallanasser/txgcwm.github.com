@@ -3,7 +3,7 @@ layout: post
 title: "求两个整数的最大公约数"
 date: 2013-07-07 17:10
 comments: true
-categories: 
+categories: [Unix/Linux, C/C++, 数据结构算法]
 ---
 
 辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。
