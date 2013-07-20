@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 网络应用 | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/wang-luo-ying-yong/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2013-07-21T01:41:38+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Uboot中TFTP解释]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/"/>
+    <updated>2013-07-19T22:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi</id>
+    <content type="html"><![CDATA[<p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+
+<p>使用TFTP传送文件的步骤：</p>
+
+<ol>
+<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
+<li>调用TftpStart 函数开始文件传送。</li>
+</ol>
+
+
+<!--more-->
+
+
+<h1>客户端状态</h1>
+
+<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
+
+<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
+
+<h1>包类型</h1>
+
+<p>使用TFTP传送的包分为6种类型：</p>
+
+<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
+
+<h1>各种包结构</h1>
+
+<p>TFTP协议中各种包的结构：</p>
+
+<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
+
+<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
+
+<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
+
+<p>ACK（确认帧）结构：</p>
+
+<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
+
+<h1>主要函数及作用</h1>
+
+<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：
+```
+/<em> 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存</em>/
+static <strong>inline</strong> void store_block (unsigned block, uchar * src, unsigned len);</p>
+
+<p>/<em> 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） </em>/
+static void TftpSend (void) ;</p>
+
+<p>/<em> 处理收到的Tftp包 </em>/
+static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;</p>
+
+<p>/<em> 超时处理函数 </em>/
+static void TftpTimeout (void);</p>
+
+<p>/<em> 初始化各个需要的数据 然后开始发送TFTP读请求 </em>/
+void TftpStart (void);
+```</p>
+
+<h1>流程</h1>
+
+<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
+
+<p>以下是客户端和服务器端通信的流程图：</p>
+
+<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
+
+<p>客户端程序流程：</p>
+
+<ol>
+<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
+<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
+<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下c语言获取网络接口IP地址]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/"/>
+    <updated>2013-07-19T22:34:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux环境下，可以使用以下的代码获取网络的ip地址：
+```</p>
+
+<pre><code>if (gethostname(host, sizeof(host)) &lt; 0) {
+    printf("Can't get hostname\n");
+    return -1;
+}
+if ((hp = gethostbyname(host)) == NULL) {
+    printf("Can't get host address\n");
+    return -1;
+}
+memcpy((char *) &amp;intaddr, (char *) hp-&gt;h_addr_list[0],
+        (size_t) hp-&gt;h_length);
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：
+```</p>
+
+<pre><code>#include &lt;sys/socket.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;net/if.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+
+static int getIfaceName(char *iface_name, int len)
+{
+    int r = -1;
+    int flgs, ref, use, metric, mtu, win, ir;
+    unsigned long int d, g, m;    
+    char devname[20];
+    FILE *fp = NULL;
+
+    if((fp = fopen("/proc/net/route", "r")) == NULL) {
+        perror("fopen error!\n");
+        return -1;
+    }
+
+    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
+        fclose(fp);
+        return -1;
+    }
+
+    while (1) {
+        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
+                 devname, &amp;d, &amp;g, &amp;flgs, &amp;ref, &amp;use,
+                 &amp;metric, &amp;m, &amp;mtu, &amp;win, &amp;ir);
+        if (r != 11) {
+            if ((r &lt; 0) &amp;&amp; feof(fp)) {
+                break;
+            }
+            continue;
+        }
+
+        strncpy(iface_name, devname, len);
+        fclose(fp);
+        return 0;
+    }
+
+    fclose(fp);
+
+    return -1;
+}
+
+static int getIpAddress(char *iface_name, char *ip_addr, int len)
+{
+    int sockfd = -1;
+    struct ifreq ifr;
+    struct sockaddr_in *addr = NULL;
+
+    memset(&amp;ifr, 0, sizeof(struct ifreq));
+    strcpy(ifr.ifr_name, iface_name);
+    addr = (struct sockaddr_in *)&amp;ifr.ifr_addr;
+    addr-&gt;sin_family = AF_INET;
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
+        perror("create socket error!\n");
+        return -1;
+    }
+
+    if (ioctl(sockfd, SIOCGIFADDR, &amp;ifr) == 0) {
+        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
+        close(sockfd);
+        return 0;
+    }
+
+    close(sockfd);
+
+    return -1;
+}
+
+int main(int argc, char** argv)
+{
+    struct in_addr    intaddr;
+    char iface_name[20];
+
+    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
+        printf("get interface name error!\n");
+        return -1;
+    }
+
+    if(getIpAddress(iface_name, (char *) &amp;intaddr, 15) &lt; 0) {
+        printf("get interface ip address error!\n");
+        return -1;
+    }
+
+    printf("address:%s\n",(char *) &amp;intaddr);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

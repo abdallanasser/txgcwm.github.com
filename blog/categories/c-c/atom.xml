@@ -1,0 +1,1055 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C/C++ | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/c-c/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2013-07-21T01:41:38+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下c语言获取网络接口IP地址]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/"/>
+    <updated>2013-07-19T22:34:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux环境下，可以使用以下的代码获取网络的ip地址：
+```</p>
+
+<pre><code>if (gethostname(host, sizeof(host)) &lt; 0) {
+    printf("Can't get hostname\n");
+    return -1;
+}
+if ((hp = gethostbyname(host)) == NULL) {
+    printf("Can't get host address\n");
+    return -1;
+}
+memcpy((char *) &amp;intaddr, (char *) hp-&gt;h_addr_list[0],
+        (size_t) hp-&gt;h_length);
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：
+```</p>
+
+<pre><code>#include &lt;sys/socket.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;net/if.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+
+static int getIfaceName(char *iface_name, int len)
+{
+    int r = -1;
+    int flgs, ref, use, metric, mtu, win, ir;
+    unsigned long int d, g, m;    
+    char devname[20];
+    FILE *fp = NULL;
+
+    if((fp = fopen("/proc/net/route", "r")) == NULL) {
+        perror("fopen error!\n");
+        return -1;
+    }
+
+    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
+        fclose(fp);
+        return -1;
+    }
+
+    while (1) {
+        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
+                 devname, &amp;d, &amp;g, &amp;flgs, &amp;ref, &amp;use,
+                 &amp;metric, &amp;m, &amp;mtu, &amp;win, &amp;ir);
+        if (r != 11) {
+            if ((r &lt; 0) &amp;&amp; feof(fp)) {
+                break;
+            }
+            continue;
+        }
+
+        strncpy(iface_name, devname, len);
+        fclose(fp);
+        return 0;
+    }
+
+    fclose(fp);
+
+    return -1;
+}
+
+static int getIpAddress(char *iface_name, char *ip_addr, int len)
+{
+    int sockfd = -1;
+    struct ifreq ifr;
+    struct sockaddr_in *addr = NULL;
+
+    memset(&amp;ifr, 0, sizeof(struct ifreq));
+    strcpy(ifr.ifr_name, iface_name);
+    addr = (struct sockaddr_in *)&amp;ifr.ifr_addr;
+    addr-&gt;sin_family = AF_INET;
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
+        perror("create socket error!\n");
+        return -1;
+    }
+
+    if (ioctl(sockfd, SIOCGIFADDR, &amp;ifr) == 0) {
+        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
+        close(sockfd);
+        return 0;
+    }
+
+    close(sockfd);
+
+    return -1;
+}
+
+int main(int argc, char** argv)
+{
+    struct in_addr    intaddr;
+    char iface_name[20];
+
+    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
+        printf("get interface name error!\n");
+        return -1;
+    }
+
+    if(getIpAddress(iface_name, (char *) &amp;intaddr, 15) &lt; 0) {
+        printf("get interface ip address error!\n");
+        return -1;
+    }
+
+    printf("address:%s\n",(char *) &amp;intaddr);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用libevent编写Linux服务]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/"/>
+    <updated>2013-07-18T19:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu</id>
+    <content type="html"><![CDATA[<p>libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。</p>
+
+<h1>初始化事件</h1>
+
+<p>首先完成对libenvent的事件初始化和事件驱动模型的选择。在使用多线程的情况下，一般我们需获取所返回的事件根基。
+<code>
+main_base = event_init();
+</code>
+event_init函数返回的是一个event_base对象，该对象包括了事件处理过程中的一些全局变量，其结构为：
+```
+struct event_base {</p>
+
+<pre><code>const struct eventop *evsel;
+void *evbase;
+int event_count;        /* counts number of total events */
+int event_count_active; /* counts number of active events */
+int event_gotterm;      /* Set to terminate loop */
+int event_break;        /* Set to terminate loop immediately */
+/* active event management */
+struct event_list **activequeues;
+int nactivequeues;
+/* signal handling info */
+struct evsignal_info sig;
+struct event_list eventqueue;
+struct timeval event_tv;
+struct min_heap timeheap;
+struct timeval tv_cache;
+</code></pre>
+
+<p>};
+```</p>
+
+<!--more-->
+
+
+<h1>添加事件</h1>
+
+<p>事件初始化完毕后，可以使用event_set设置事件，然后使用event_add将其加入。首先完成socket的监听，然后将其加入到事件队列中（这里对所有的异常都不做考虑）。</p>
+
+<p>（1）socket监听
+```
+struct sockaddr_in listen_addr;</p>
+
+<p>int port = 10000; //socket监听端口
+int listen_fd = socket(AF_INET, SOCK_STREAM, 0);</p>
+
+<p>memset(&amp;listen_addr, 0, sizeof(listen_addr));</p>
+
+<p>listen_addr.sin_family = AF_INET;
+listen_addr.sin_addr.s_addr = INADDR_ANY;
+listen_addr.sin_port = htons(port)</p>
+
+<p>reuseaddr_on = 1;</p>
+
+<p>/<em>支持端口复用</em>/
+setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &amp;reuseaddr_on, sizeof(reuseaddr_on));</p>
+
+<p>bind(listen_fd, (struct sockaddr *) &amp;listen_addr, sizeof(listen_addr));
+listen(listen_fd, 1024);</p>
+
+<p>/<em>将描述符设置为非阻塞</em>/
+int flags = fcntl(listen_fd,F_GETFL);
+flags |= O_NONBLOCK;
+fcntl(listen_fd, F_SETFL, flags);
+```
+（2）事件设置</p>
+
+<p>socket服务建立后，就可以进行事件设置。使用event_set来设置事件对象，其传入参数包括事件根基(event_base对象)，描述符，事件类型，事件发生时的回调函数，回调函数传入参数。其中事件类型包括EV_READ、EV_WRITE、EV_PERSIST，EV_PERSIST和前两者结合使用，表示该事件为持续事件。
+```
+struct event ev;</p>
+
+<p>event_set(&amp;ev, listen_fd, EV_READ | EV_PERSIST, accept_handle, (void *)&amp;ev);
+```
+（3）事件添加与删除</p>
+
+<p>事件设置好后，就可以将其加入事件队列。event_add用来将事件加入，它接受两个参数：要添加的事件和时间的超时值。如果需要将事件删除，可以使用event_del来完成。event_del函数会取消所指定的事件。
+<code>
+event_add(&amp;ev, NULL)
+</code></p>
+
+<h1>进入事件循环</h1>
+
+<p>libevent提供了多种方式来进入事件循环，常用的是event_dispatch和event_base_loop，前者最后实际是使用当前事件根基来调用event_base_loop。
+<code>
+event_base_loop(main_base, 0);
+</code></p>
+
+<h1>处理连接</h1>
+
+<p>已经完成了事件的设置、事件的添加并进入到了事件循环，但是当事件发生时又如何处理呢？ 当连接建立时回调函数accept_handle会自动的得到调用。对于缓冲区的读写在非阻塞式网络编程中是一个难以处理的问题，幸运的是libevent提供了bufferevent和evbuf来替我们完成该项工作。这里我们采用bufferevent来处理。</p>
+
+<p>（1）生成bufferevent对象</p>
+
+<p>使用bufferevent_new对象来生成bufferevent对象，并分别指定读、写、连接错误时的处理函数和函数传入参数。</p>
+
+<p>（2）设置读取量</p>
+
+<p>bufferevent的读事件激活以后，即使用户没有读取完bufferevent缓冲区中的数据, bufferevent读事件也不会再次被激活。因为bufferevent的读事件是由其所监控的描述符的读事件激活的，只有描述符可读，读事件才会被激活。可通过设置wm_read.high来控制bufferevent从描述符缓冲区中读取的数据量。</p>
+
+<p>（3）将事件加入事件队列</p>
+
+<p>和前面一样，在事件设置好后，需将事件加入到事件队列中， 不过bufferevent的有自己专门的加入函数bufferevent_base_set和激活函数bufferevent_enable。bufferevent接收两个参数事件根基和事件对象，前者用来指定事件将加入到哪个事件根基中，后者说明需将那个bufferevnet事件加入。在bufferevent初始化完毕后，可以使用bufferevent_enable和bufferevent_disable反复的激活与禁止事件，其接收参数为事件对象和事件标志。其中标志参数为EV_READ和EV_WRITE。
+```
+void accept_handle(const int sfd, const short event, void *arg)
+{</p>
+
+<pre><code>struct sockaddr_in addr;
+
+socklen_t addrlen = sizeof(addr);
+
+int fd = accept(sfd, (struct sockaddr *) &amp;addr, &amp;addrlen); //处理连接
+
+buf_ev = bufferevent_new(fd,   buffered_on_read, NULL, NULL, fd)
+buf_ev-&gt;wm_read.high = 4096
+bufferevent_base_set(main_base, buf_ev);
+bufferevent_enable(buf_ev, EV_READ);
+</code></pre>
+
+<p>}
+```</p>
+
+<h1>读取缓冲区</h1>
+
+<p>当缓冲区读就绪时会自动激活前面注册的缓冲区读函数，我们可以使用bufferevent_read函数来读取缓冲区，bufferevent_read函数参数分别为:所需读取的事件缓冲区，读入数据的存放地，希望读取的字节数。函数返回实际读取的字节数。注意：即时缓冲区未读完，事件也不会再次被激活（除非再次有数据）。因此此处需反复读取直到全部读取完毕。</p>
+
+<h1>写回客户端</h1>
+
+<p>bufferevent系列函数不但支持读取缓冲区，而且支持写缓冲区（即将结果返回给客户端）。
+```
+void buffered_on_read(struct bufferevent *bev, void * arg){</p>
+
+<pre><code>char buffer[4096]
+
+ret = bufferevent_read(bev, &amp;buffer, 4096);
+bufferevent_write(bef, (void *)&amp;buffer, 4096);
+</code></pre>
+
+<p>}
+```</p>
+
+<h1>异步事件处理示例</h1>
+
+<p>利用libevent编写服务端程序，主要有4部分。
+（1）创建主通知链base
+<code>
+base = event_base_new();
+</code>
+（2）创建要监听的事件，并将其加入到主通知链中。
+<code>
+listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
+event_add(listener_event, NULL);
+event_free( listener_event ); //释放由event_new申请的结构体
+</code>
+（3）主循环
+<code>
+event_base_dispatch(base);
+</code>
+（4）释放
+<code>
+event_base_free(base);
+</code>
+以下程序中do_read, do_write是异步的，为了解决了异步之间的问题，程序使用了state这个结构体变量将do_read和do_write联系起来。
+```</p>
+
+<pre><code>#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;event2/event.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+
+#define MAX_LINE 16384
+#define PORT 9999
+
+void do_read(evutil_socket_t fd, short events, void *arg);
+void do_write(evutil_socket_t fd, short events, void *arg);
+
+struct fd_state {
+    char buffer[MAX_LINE];
+    size_t buffer_used;
+
+    size_t n_written;
+    size_t write_upto;
+
+    struct event *read_event;
+    struct event *write_event;
+};
+
+struct fd_state *alloc_fd_state(struct event_base *base, evutil_socket_t fd)
+{
+    struct fd_state *state =
+     (struct fd_state *)malloc(sizeof(struct fd_state));
+    if (!state) {
+        return NULL;
+    }
+
+    state-&gt;read_event =
+     event_new(base, fd, EV_READ | EV_PERSIST, do_read, state);
+    if (!state-&gt;read_event) {
+        free(state);
+        return NULL;
+    }
+
+    state-&gt;write_event =
+     event_new(base, fd, EV_WRITE | EV_PERSIST, do_write, state);
+    if (!state-&gt;write_event) {
+        event_free(state-&gt;read_event);
+        free(state);
+        return NULL;
+    }
+
+    assert(state-&gt;write_event);
+
+    return state;
+}
+
+void free_fd_state(struct fd_state *state)
+{
+    event_free(state-&gt;read_event);
+    event_free(state-&gt;write_event);
+    free(state);
+}
+
+void do_read(evutil_socket_t fd, short events, void *arg)
+{
+    struct fd_state *state = arg;
+    char buf[1024];
+    int i;
+    ssize_t result;
+    while (1) {
+        // assert(state-&gt;write_event);
+        result = recv(fd, buf, sizeof(buf), 0);
+        if (result &lt;= 0)
+            break;
+        printf("[%s][%d]buf=[%s]len=[%d]\n", __FILE__, __LINE__, buf,
+         result);
+    }
+
+    memcpy(state-&gt;buffer, "reply", sizeof("reply"));
+    assert(state-&gt;write_event);
+    event_add(state-&gt;write_event, NULL);
+    state-&gt;write_upto = state-&gt;buffer_used;
+
+    if (result == 0) {
+        free_fd_state(state);
+    } else if (result &lt; 0) {
+        if (errno == EAGAIN)    // XXXX use evutil macro
+            return;
+        perror("recv");
+        free_fd_state(state);
+    }
+}
+
+void do_write(evutil_socket_t fd, short events, void *arg)
+{
+    struct fd_state *state = arg;
+
+    //while (state-&gt;n_written &lt; state-&gt;write_upto)
+    {
+        //ssize_t result = send(fd, state-&gt;buffer + state-&gt;n_written,
+        //state-&gt;write_upto - state-&gt;n_written, 0);
+        ssize_t result =
+         send(fd, state-&gt;buffer, strlen(state-&gt;buffer), 0);
+        if (result &lt; 0) {
+            if (errno == EAGAIN)    // XXX use evutil macro
+                return;
+            free_fd_state(state);
+            return;
+        }
+        assert(result != 0);
+        state-&gt;n_written += result;
+    }
+
+    //if (state-&gt;n_written == state-&gt;buffer_used)
+    {
+        state-&gt;n_written = state-&gt;write_upto = state-&gt;buffer_used = 1;
+    }
+
+    event_del(state-&gt;write_event);
+}
+
+void do_accept(evutil_socket_t listener, short event, void *arg)
+{
+    struct event_base *base = arg;
+    struct sockaddr_storage ss;
+    socklen_t slen = sizeof(ss);
+
+    int fd = accept(listener, (struct sockaddr *)&amp;ss, &amp;slen);
+    if (fd &lt; 0) {        // XXXX eagain??
+        perror("accept");
+    } else if (fd &gt; FD_SETSIZE) {
+        close(fd);    // XXX replace all closes with EVUTIL_CLOSESOCKET */
+    } else {
+        struct fd_state *state;
+        evutil_make_socket_nonblocking(fd);
+        state = alloc_fd_state(base, fd);
+
+        assert(state);    /*XXX err */
+        assert(state-&gt;write_event);
+        event_add(state-&gt;read_event, NULL);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    evutil_socket_t listener;
+    struct sockaddr_in sin;
+    struct event_base *base;
+    struct event *listener_event;
+
+    setvbuf(stdout, NULL, _IONBF, 0);
+
+    base = event_base_new();
+    if (!base)
+        return -1;        /*XXXerr */
+
+    sin.sin_family = AF_INET;
+    sin.sin_addr.s_addr = 0;
+    sin.sin_port = htons(PORT);
+
+    listener = socket(AF_INET, SOCK_STREAM, 0);
+    evutil_make_socket_nonblocking(listener);
+
+#ifndef WIN32
+    {
+        int one = 1;
+        setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &amp;one,
+             sizeof(one));
+    }
+#endif
+
+    if (bind(listener, (struct sockaddr *)&amp;sin, sizeof(sin)) &lt; 0) {
+        perror("bind");
+        return -1;
+    }
+
+    if (listen(listener, 16) &lt; 0) {
+        perror("listen");
+        return -1;
+    }
+
+    listener_event =
+     event_new(base, listener, EV_READ | EV_PERSIST, do_accept,
+         (void *)base);
+    /*XXX check it */
+    event_add(listener_event, NULL);
+    event_base_dispatch(base);
+    event_base_free(base);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[链栈]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/15/lian-zhan/"/>
+    <updated>2013-07-15T21:49:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/15/lian-zhan</id>
+    <content type="html"><![CDATA[<p>栈是限制在表的一端进行插入和删除运算的线性表。通常称插入、删除的这一端为栈顶，另一端称为栈底；当表中没有元素时称为空栈；栈为后进先出的线性表，简称为LIFO表；栈的修改是按后进先出的原则进行；每次删除的总是当前栈中最新的元素（即最后插入的元素），而最先插入的被放在栈的底部，要到最后才能删除。</p>
+
+<h1>链栈结点</h1>
+
+<p>出栈与入栈是栈的最主要操作，当无法预见栈所需大小时，往往需要采用链栈的方式。在链栈中，不需要像单链表一样需要头结点。链栈的结构如下图所示：</p>
+
+<p><img src="/images/2013/7/lian-zhan/stacknode.png" alt=" stacknode " /></p>
+
+<p>可将其结构定义为：
+```</p>
+
+<pre><code>typedef char SElemType
+
+typedef struct StackNode
+{
+    SElemType data;//根据实际需要定义数据类型
+    struct StackNode *next;
+}StackNode,*LinkStackPtr;
+
+typedef struct LinkStack
+{
+    LinkStackPtr top;//指向栈链顶部
+    int count;//用以判断栈是否为空，可初始化为0
+}LinkStack;
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h1>进栈</h1>
+
+<p>能够进栈的前提是已成功建立栈空间。进栈函数所需的参数主要是指向栈顶的指针和入栈的内容，因此可定义为：
+<code>
+int Push(LinkStack *pS, SElemType e);
+</code>
+进栈操作的过程如下图所示:</p>
+
+<p><img src="/images/2013/7/lian-zhan/stackpush.png" alt=" stackpush " /></p>
+
+<p>Step1：开辟内存，将需要入栈的元素压入栈；
+<code>
+LinkStackPtr s = (LinkStackPtr)malloc(sizeof(StackNode));
+s-&gt;data = e;
+</code>
+Step2：更改指针；
+<code>
+s-&gt;next = pS-&gt;top; //新结点的next指向原来栈顶
+pS-&gt;top = s; //链栈新的top指针指向新建立的结点
+</code>
+Step3：更改栈状态（累计入栈元素个数）。
+<code>
+pS-&gt;count++;
+</code></p>
+
+<h1>出栈</h1>
+
+<p>出栈之前需要判断当前栈的状态，如果栈元素个数为零，则是空栈，无法进行出栈操作。出栈操作函数同样需要两个参数，一是指向链栈的指针，二是弹出的栈元素，因此定义为：
+<code>
+int Pop(LinkStackPtr *pS, SElemType *e); //之所以是*e，是为了在函数结束后可以取得该弹出元素
+</code>
+出栈操作过程如下图所示：</p>
+
+<p><img src="/images/2013/7/lian-zhan/stackpop.png" alt=" stackpop " /></p>
+
+<p>Step1：获取弹出元素；
+<code>
+*e = pS-&gt;top-&gt;data;
+</code>
+Step2：top指针指向栈顶；
+<code>
+p = pS-&gt;top ;
+pS-&gt;top = p-&gt;next;//LinkStackPtr p;
+</code>
+Step3：释放结点；
+<code>
+free(p);
+</code>
+Step4：更改栈状态。
+<code>
+pS-&gt;count--;
+</code></p>
+
+<h1>测试程序</h1>
+
+<p>```</p>
+
+<pre><code>#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+typedef char SElemType;
+
+typedef struct StackNode {
+    SElemType data;
+    struct StackNode *next;
+} StackNode, *LinkStackPtr;
+
+typedef struct LinkStack {
+    LinkStackPtr top;
+    int count;
+} LinkStack;
+
+void InitialStack(LinkStack * L)
+{
+    L-&gt;top = NULL;
+    L-&gt;count = 0;
+
+    return;
+}
+
+int StackEmpty(LinkStack * pS)
+{
+    return (!pS-&gt;count);
+}
+
+int Push(LinkStack * pS, SElemType e)
+{
+    LinkStackPtr s = (LinkStackPtr) malloc(sizeof(StackNode));
+    if(s == NULL) {
+        printf("no enough memory!\n");
+        return -1;
+    }
+    s-&gt;data = e;
+    s-&gt;next = pS-&gt;top;
+    pS-&gt;top = s;
+    pS-&gt;count++;
+
+    return 0;
+}
+
+int Pop(LinkStack * pS, SElemType * e)
+{
+    LinkStackPtr p = NULL;
+
+    if (StackEmpty(pS)) {
+        printf("stack is empty！\n");
+        return 0;
+    }
+
+    *e = pS-&gt;top-&gt;data;
+    p = pS-&gt;top;
+    pS-&gt;top = p-&gt;next;
+    free(p);
+    pS-&gt;count--;
+
+    return 0;
+}
+
+void PrintStackLink(LinkStack * pS)
+{
+    int i;
+    LinkStackPtr L = NULL;
+
+    L = pS-&gt;top;
+    if (StackEmpty(pS)) {
+        printf("stack is empty！\n");
+        return;
+    }
+
+    for (i = 0; i &lt; (pS-&gt;count); i++) {
+        printf("%c\n", L-&gt;data);
+        L = L-&gt;next;
+    }
+
+    return;
+}
+
+int main(int argc, char **argv)
+{
+    char getch;
+    char outch;
+    LinkStack myStack;
+
+    InitialStack(&amp;myStack);
+
+    printf("请输入压入栈的数据（char型），输入#结束:\n");
+    scanf("%c", &amp;getch);
+    while (getch != '#') {
+        Push(&amp;myStack, getch);
+        scanf("%c", &amp;getch);
+    }
+    printf("栈链内容为：\n");
+    PrintStackLink(&amp;myStack);
+
+    while (!StackEmpty(&amp;myStack)) {
+        Pop(&amp;myStack, &amp;outch);
+        printf("弹出内容为：%c\n", outch);
+    }
+    PrintStackLink(&amp;myStack);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Base64编码解码算法]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/"/>
+    <updated>2013-07-11T23:09:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa</id>
+    <content type="html"><![CDATA[<p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下：
+```</p>
+
+<pre><code>'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+'w', 'x', 'y', 'z', '0', '1', '2', '3',
+'4', '5', '6', '7', '8', '9', '+', '/',
+</code></pre>
+
+<p>```
+如果被加密的字符串每3个一组，还剩1或2个字符，使用特殊字符"=&ldquo;补齐。例如编码只有2个字符“me”，m的ascii是109，e的是101，用二进制表示分别是01101101、01100101，连接起来就是0110110101100101，再按6位分为一组：011011、010110、010100（不足6位补0），ascii分别是27、22、 20，即Base64值为bWU，不足4字用＝补齐，因此bWU＝就me的Base64值。</p>
+
+<!--more-->
+
+
+<p>在<a href="https://github.com/dwjackson/basenc">这里</a>可以找到一个c语言的base32/base64开源库。以下是goahead中base64编码解码的实现：
+```</p>
+
+<pre><code>static char_t    map64[] = {
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
+    -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
+    -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+};
+
+static char_t    alphabet64[] = {
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+    'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+    'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+    'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+    'w', 'x', 'y', 'z', '0', '1', '2', '3',
+    '4', '5', '6', '7', '8', '9', '+', '/',
+};
+
+/*********************************** Code *************************************/
+/*
+ *    Decode a buffer from "string" and into "outbuf"
+ */
+int websDecode64(char_t *outbuf, char_t *string, int outlen)
+{
+    unsigned long    shiftbuf;
+    char_t            *cp, *op;
+    int                c, i, j, shift;
+
+    op = outbuf;
+    *op = '\0';
+    cp = string;
+    while (*cp &amp;&amp; *cp != '=') {
+        /*
+         *        Map 4 (6bit) input bytes and store in a single long (shiftbuf)
+         */
+        shiftbuf = 0;
+        shift = 18;
+        for (i = 0; i &lt; 4 &amp;&amp; *cp &amp;&amp; *cp != '='; i++, cp++) {
+            c = map64[*cp &amp; 0xff];
+            if (c == -1) {
+                error(E_L, E_LOG, T("Bad string: %s at %c index %d"), string,
+                      c, i);
+                return -1;
+            }
+            shiftbuf = shiftbuf | (c &lt;&lt; shift);
+            shift -= 6;
+        }
+        /*
+         *        Interpret as 3 normal 8 bit bytes (fill in reverse order).
+         *        Check for potential buffer overflow before filling.
+         */
+        --i;
+        if ((op + i) &gt;= &amp;outbuf[outlen]) {
+            gstrcpy(outbuf, T("String too big"));
+            return -1;
+        }
+        for (j = 0; j &lt; i; j++) {
+            *op++ = (char_t) ((shiftbuf &gt;&gt; (8 * (2 - j))) &amp; 0xff);
+        }
+        *op = '\0';
+    }
+    return 0;
+}
+
+/******************************************************************************/
+/*
+ *    Encode a buffer from "string" into "outbuf"
+ */
+void websEncode64(char_t *outbuf, char_t *string, int outlen)
+{
+    unsigned long    shiftbuf;
+    char_t            *cp, *op;
+    int                x, i, j, shift;
+
+    op = outbuf;
+    *op = '\0';
+    cp = string;
+    while (*cp) {
+        /*
+         *        Take three characters and create a 24 bit number in shiftbuf
+         */
+        shiftbuf = 0;
+        for (j = 2; j &gt;= 0 &amp;&amp; *cp; j--, cp++) {
+            shiftbuf |= ((*cp &amp; 0xff) &lt;&lt; (j * 8));
+        }
+        /*
+         *        Now convert shiftbuf to 4 base64 letters. The i,j magic calculates
+         *        how many letters need to be output.
+         */
+        shift = 18;
+        for (i = ++j; i &lt; 4 &amp;&amp; op &lt; &amp;outbuf[outlen] ; i++) {
+            x = (shiftbuf &gt;&gt; shift) &amp; 0x3f;
+            *op++ = alphabet64[(shiftbuf &gt;&gt; shift) &amp; 0x3f];
+            shift -= 6;
+        }
+        /*
+         *        Pad at the end with '='
+         */
+        while (j-- &gt; 0) {
+            *op++ = '=';
+        }
+        *op = '\0';
+    }
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Linux提供了命令行方式的base64编码和解码。</p>
+
+<ul>
+<li>将字符串str+换行 编码为base64字符串输出。
+<code>
+  $ echo "str" | base64
+</code></li>
+<li>将字符串str编码为base64字符串输出。
+<code>
+  $ echo -n "str" | base64
+</code></li>
+<li>从指定的文件file中读取数据，编码为base64字符串输出。
+<code>
+  $ base64 file
+</code></li>
+<li>从标准输入中读取已经进行base64编码的内容，解码输出。
+<code>
+  $ base64 -d
+</code></li>
+<li>从标准输入中读取已经进行base64编码的内容，解码输出。加上-i参数，忽略非字母表字符，比如换行符。
+<code>
+  $ base64 -d -i
+</code></li>
+<li>将base64编码的字符串str+换行 解码输出。
+<code>
+  $ echo "str" | base64 -d
+</code></li>
+<li>将base64编码的字符串str解码输出。
+<code>
+  $ echo -n "str" | base64 -d
+</code></li>
+<li>从指定的文件file中读取base64编码的内容，解码输出。
+<code>
+  $ base64 -d file
+</code></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/"/>
+    <updated>2013-07-07T17:43:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian</id>
+    <content type="html"><![CDATA[<p>udev的文档介绍：</p>
+
+<ol>
+<li><p>dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。</p></li>
+<li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
+<li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
+</ol>
+
+
+<!--more-->
+
+
+<p>用户空间的程序与设备通信的方法，主要有以下几种方式：</p>
+
+<ol>
+<li><p>通过ioperm获取操作IO端口的权限，然后用inb/inw/ inl/ outb/outw/outl等函数，避开设备驱动程序，直接去操作IO端口。</p></li>
+<li><p>用ioctl函数去操作/dev目录下对应的设备，这是设备驱动程序提供的接口。像键盘、鼠标和触摸屏等输入设备一般都是这样做的。</p></li>
+<li><p>用write/read/mmap去操作/dev目录下对应的设备，这也是设备驱动程序提供的接口。像framebuffer等都是这样做的。</p></li>
+</ol>
+
+
+<p>上面的方法在大多数情况下都可以正常工作，但是对于热插拨(hotplug)的设备，比如像U盘就有点困难了，因为你不知道“什么时候设备插上了，什么时候设备拔掉了”。这就是所谓的hotplug问题了。</p>
+
+<p>处理hotplug传统的方法是在内核中执行一个称为hotplug的程序，相关参数通过环境变量传递，再由hotplug通知其它关注hotplug事件的应用程序。这样做不但效率低下，而且也不那么优雅。新的方法是采用NETLINK实现，这是一种特殊类型的socket，专门用于内核空间与用户空间的异步通信。下面的这个例子可以监听来自内核hotplug事件。</p>
+
+<pre><code>#include &lt;linux/netlink.h&gt;
+#include &lt;linux/types.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;sys/un.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+
+#define UEVENT_BUFFER_SIZE 2048
+
+static int init_hotplug_sock(void)
+{
+    int ret;
+    int s = -1;
+    const int buffersize = 1024;
+    struct sockaddr_nl snl;
+
+    bzero(&amp;snl, sizeof(struct sockaddr_nl));
+    snl.nl_family = AF_NETLINK;
+    snl.nl_pid = getpid();
+    snl.nl_groups = 1;
+
+    s = socket(PF_NETLINK, SOCK_DGRAM, NETLINK_KOBJECT_UEVENT);
+    if (s == -1) {
+        perror("socket");
+        return -1;
+    }
+    setsockopt(s, SOL_SOCKET, SO_RCVBUF, &amp;buffersize, sizeof(buffersize));
+
+    ret = bind(s, (struct sockaddr *)&amp;snl, sizeof(struct sockaddr_nl));
+    if (ret &lt; 0) {
+        perror("bind");
+        close(s);
+        return -1;
+    }
+
+    return s;
+}
+
+int main(int argc, char *argv[])
+{
+    int hotplug_sock = init_hotplug_sock();
+
+    while (1) {    
+        char buf[UEVENT_BUFFER_SIZE * 2] = { 0 };
+
+        recv(hotplug_sock, &amp;buf, sizeof(buf), 0);
+        printf("%s\n", buf);
+
+        /* USB 设备的插拔会出现字符信息，通过比较不同的信息确定特定设备的插拔，在这添加比较代码 */
+    }
+
+    return 0;
+}
+</code></pre>
+
+<p>编译：</p>
+
+<pre><code>$ gcc -g hotplug.c -o hotplug
+</code></pre>
+
+<p>执行：</p>
+
+<pre><code>$ ./hotplug
+remove@/devices/pci0000:00/0000:00:1d.7/usb2/2-1/2-1:1.0
+remove@/devices/pci0000:00/0000:00:1d.7/usb2/2-1
+add@/devices/pci0000:00/0000:00:1d.7/usb2/2-1
+add@/devices/pci0000:00/0000:00:1d.7/usb2/2-1/2-1:1.0
+</code></pre>
+
+<p>udev的主体部分在udevd.c文件中，它主要监控来自4个文件描述符的事件/消息，并做出处理：</p>
+
+<ol>
+<li>来自客户端的控制消息。这通常由udevcontrol命令通过地址为/org/kernel/udev/udevd的本地socket，向udevd发送控制消息。其中消息类型有：</li>
+</ol>
+
+
+<pre><code>UDEVD_CTRL_STOP_EXEC_QUEUE  //停止处理消息队列
+UDEVD_CTRL_START_EXEC_QUEUE //开始处理消息队列
+UDEVD_CTRL_SET_LOG_LEVEL //设置LOG的级别
+UDEVD_CTRL_SET_MAX_CHILDS //设置最大子进程数限制
+UDEVD_CTRL_SET_MAX_CHILDS_RUNNING //设置最大运行子进程数限制(遍历proc目录下所有进程，根据session的值判断) 
+UDEVD_CTRL_RELOAD_RULES //重新加载配置文件
+</code></pre>
+
+
+<ol>
+<li><p>来自内核的hotplug事件。如果有事件来源于hotplug，它读取该事件，创建一个udevd_uevent_msg对象，记录当前的消息序列号，设置消息的状态为EVENT_QUEUED，然后放入running_list和exec_list两个队列中，稍后再进行处理。</p></li>
+<li><p>来自signal handler中的事件。signal handler是异步执行的，即使有signal产生，主进程的select并不会唤醒，为了唤醒主进程的select，它建立了一个管道，在signal handler中，向该管道写入长度为1个子节的数据，这样就可以唤醒主进程的select了。</p></li>
+<li><p>来自配置文件变化的事件。udev通过文件系统inotify功能，监控其配置文件目录/etc/udev/rules.d，一旦该目录中文件有变化，它就重新加载配置文件。</p></li>
+</ol>
+
+
+<p>其中最主要的事件当然是来自内核的hotplug事件，如何处理这些事件是udev的关键。udev本身并不知道如何处理这些事件，也没有必要知道，因为它只实现机制，而不实现策略。事件的处理是由配置文件决定的，这些配置文件即所谓的rule。</p>
+
+<p>关于rule的编写方法可以参考《writing_udev_rules》，udev_rules.c实现了对规则的解析。在规则中，可以让外部应用程序处理某个事件，这有两种方式：一种是直接执行命令，通常是让modprobe去加载驱动程序，或者让mount去加载分区；另外一种是通过本地socket发送消息给某个应用程序。</p>
+
+<p>在udevd.c的udev_event_process函数中，我们可以看到：如果RUN参数以”socket:”开头则认为是发到socket，否则认为是执行指定的程序。</p>
+
+<p>下面的规则是执行指定程序：</p>
+
+<pre><code>60-pcmcia.rules: RUN+="/sbin/modprobe pcmcia"
+</code></pre>
+
+<p>下面的规则是通过socket发送消息：</p>
+
+<pre><code>90-hal.rules:RUN+="socket:/org/freedesktop/hal/udev_event"
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>
