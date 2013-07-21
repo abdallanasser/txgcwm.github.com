@@ -103,6 +103,17 @@ category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-
 default_asides: [asides/recent_posts.html, custom/asides/category_list.html]
 ```
 
+`_posts/*.markdown`文件头中添加categories标签示例：
+```
+---
+layout: post
+title: "使用libevent编写Linux服务"
+date: 2013-07-18 19:01
+comments: true
+categories: [C/C++, 开源库, Unix/Linux]
+---
+```
+
 到此为止，Octopress中添加分类侧边栏并使其支持中文的修改设置已经完毕。
 
 
