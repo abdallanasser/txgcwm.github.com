@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-21T12:53:05+08:00</updated>
+  <updated>2013-07-21T12:59:41+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -173,6 +173,24 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/recent_posts.html, custom/asides/category_list.html]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>_posts/*.markdown</code>文件头中添加categories标签示例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "使用libevent编写Linux服务"
+</span><span class='line'>date: 2013-07-18 19:01
+</span><span class='line'>comments: true
+</span><span class='line'>categories: [C/C++, 开源库, Unix/Linux]
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
 
 
 <p>到此为止，Octopress中添加分类侧边栏并使其支持中文的修改设置已经完毕。</p>
