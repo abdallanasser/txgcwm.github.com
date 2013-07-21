@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-21T01:41:38+08:00</updated>
+  <updated>2013-07-21T12:53:05+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,141 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加中文标签功能]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/"/>
+    <updated>2013-07-21T11:02:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng</id>
+    <content type="html"><![CDATA[<p>Octopress有自带的分类，详情请见 <a href="http://octopress.org/docs/plugins/category-generator/">官方文档</a> 。<code>_config.yml</code>中配置项如下：
+<code>
+category_dir: blog/categories
+category_title_prefix: "Category: "
+</code>
+然后添加类似<code>categories: [Ruby&amp;Rails]</code>或<code>categories: [Ruby&amp;Rails，C/C++]</code>的分类标签配置到每个<code>_posts/*.markdown</code>文件头中，示例如下:</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: &ldquo;Octopress添加中文标签功能&rdquo;
+date: 2013-07-21 11:02
+comments: true</p>
+
+<h2>categories: [Ruby&amp;Rails,Octopress]</h2>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h1>添加分类侧边栏并支持中文</h1>
+
+<p>尽管Octopress有自带的分类，但它并不支持中文，如果你在文章中定义了中文分类，那么点击的时候会链接到404页面。事实上，这个分类功能是通过plugins/category_generator.rb来实现，所以只要对该文件进行适当的修改和作一些其它的配置就可以提供中文分类的支持。</p>
+
+<ul>
+<li>category_generator.rb的修改我直接使用 <a href="https://github.com/denjones/denjones.github.com/blob/source/plugins/category_generator.rb">这个</a> 文件作了替换，然后作一些细微的修改。</li>
+</ul>
+
+
+<p>SPRabbit(超科学兔耳中队)的 <a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">修改方法</a> 是重新定义分类标签在文章中的格式，例如用<code>中文分类标签名{英文别名}</code>这样的格式来定义标签。于是在文章中显示的是中文分类，但实际链接到英文别名上。这种方法虽然定义标签麻烦些，但可定制性强。</p>
+
+<p>由于书写很麻烦，所以很不喜欢以上重新定义标签的方式，在 <a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">这里</a> 找到了另外一种更改方式。它同样是修改category_generator.rb文件来达到目的，利用了stringex包的to_url函数将中文分类标签的链接名和category_dir下的目录名都转换成相应的拼音，这样无论在本地还是GitHub上都没有问题。事实上，Octopress系统在利用rake new_[post|page]命令创建含有中文名的文章时也采用了这样的技巧。</p>
+
+<p>找到<code>def write_category_indexes</code>中定义category目录的部分：
+<code>
+self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase), category)
+</code>
+将其修改为：
+<code>
+self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase), category)
+</code>
+再找到<code>def category_links(categories)</code>中定义中文分类网页标签的部分：
+<code>
+"&lt;a class='category' href='http://txgcwm.github.io/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase}/'&gt;#{item}&lt;/a&gt;"
+</code>
+将其修改为：
+<code>
+"&lt;a class='category' href='http://txgcwm.github.io/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase}/'&gt;#{item}&lt;/a&gt;"
+</code>
+注意，上面两处的修改就是在相应的地方加上to_url函数进行地址的转换。如果不想折腾的话，你也可以直接到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/plugins/category_generator.rb">这里</a> 下载我更改后的category_generator.rb插件。</p>
+
+<ul>
+<li>在plugins目录中创建category_list_tag.rb文件，文件内容如下：
+```
+require &lsquo;stringex&rsquo;</li>
+</ul>
+
+
+<p>module Jekyll
+  class CategoryListTag &lt; Liquid::Tag</p>
+
+<pre><code>def render(context)
+  html = ""
+  categories = context.registers[:site].categories.keys
+  category_dir = context.registers[:site].config['category_dir']
+  categories.sort.each do |category|
+    posts_in_category = context.registers[:site].categories[category].size  
+    category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)
+    html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://txgcwm.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+  end
+  html
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>Liquid::Template.register_tag(&lsquo;category_list&rsquo;, Jekyll::CategoryListTag)
+<code>
+在实际使用（rake generate/rake preview）的时候，若blog整体采用了非ascii码的编码格式（比如utf-8）就会出现类似这样的错误：
+</code>
+Liquid error: incompatible encoding regexp match (ascii-8bit regexp with utf-8 string)
+<code>
+其实是由于插件文件plugins/category_list_tag.rb本身是ascii编码所致:
+</code>
+$ chardet category_list_tag.rb
+category_list_tag.rb: ascii (confidence: 1.00)
+```
+category_list_tag.rb中很多地方用到了ruby的正则表达式，而ruby的正则表达式在匹配的时候，默认是按照“代码源文件”的编码格式(在这里是ascii)进行匹配的，而如果blog是utf-8编码的话就会出现上述错误。有两种解决办法：</p>
+
+<ol>
+<li>将category_list_tag.rb转成utf-8格式。</li>
+<li>更改category_list_tag.rb中所有的正则表达式声明，加上<code>u</code>选项（<code>u</code>的意思就是以utf-8编码格式来进行匹配）。例如，若原正则表达式是<code>/regexp/</code>, 则改成<code>/regexp/u</code>。</li>
+</ol>
+
+
+<p>在我实际处理问题的时候采用了第二种方法，category_list_tag.rb文件中的更改网上大多采用以下的方式：
+<code>
+category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase)
+</code>
+更改成如下形式（只是简单增加了<code>u</code>选项）：
+<code>
+category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)
+</code></p>
+
+<ul>
+<li><p>添加source/_includes/custom/asides/category_list.html文件，内容可到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/source/_includes/custom/asides/category_list.html">这里</a> 查看。</p></li>
+<li><p>修改_config.yml文件，在default_asides项中添加custom/asides/category_list.html，值之间以逗号隔开。
+<code>
+default_asides: [asides/recent_posts.html, custom/asides/category_list.html]
+</code></p></li>
+</ul>
+
+
+<p>到此为止，Octopress中添加分类侧边栏并使其支持中文的修改设置已经完毕。</p>
+
+<h1>参考文章</h1>
+
+<ul>
+<li><a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">Octopress博客设置</a></li>
+<li><a href="http://ikeepu.com/bar/10393365">Octopress博客分类添加中文支持</a></li>
+<li><a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">Octopress易筋经，中文分类标签</a></li>
+<li><a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">关于在64位 Windows 7 中部署中文化的Octopress</a></li>
+<li><a href="http://pfmiles.github.io/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">Liquid Error About Regexp Match When Using Octopress-tagcloud</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[将Emacs配置成一个C/C++的IDE编程环境]]></title>
@@ -779,372 +914,6 @@ make: *** [speex] Error 2
 
 <p>解决方法：
 将<code>http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz</code>输入到浏览器地址栏中就会开始下载你所需要的文件，然后将相应下载的压缩文件存放于contrib/tarballs/目录下，将名字改成speex-git.tar.gz。若碰到其它的库文件有类似的错误，可采用该办法。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[使用libevent编写Linux服务]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/"/>
-    <updated>2013-07-18T19:01:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu</id>
-    <content type="html"><![CDATA[<p>libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。</p>
-
-<h1>初始化事件</h1>
-
-<p>首先完成对libenvent的事件初始化和事件驱动模型的选择。在使用多线程的情况下，一般我们需获取所返回的事件根基。
-<code>
-main_base = event_init();
-</code>
-event_init函数返回的是一个event_base对象，该对象包括了事件处理过程中的一些全局变量，其结构为：
-```
-struct event_base {</p>
-
-<pre><code>const struct eventop *evsel;
-void *evbase;
-int event_count;        /* counts number of total events */
-int event_count_active; /* counts number of active events */
-int event_gotterm;      /* Set to terminate loop */
-int event_break;        /* Set to terminate loop immediately */
-/* active event management */
-struct event_list **activequeues;
-int nactivequeues;
-/* signal handling info */
-struct evsignal_info sig;
-struct event_list eventqueue;
-struct timeval event_tv;
-struct min_heap timeheap;
-struct timeval tv_cache;
-</code></pre>
-
-<p>};
-```</p>
-
-<!--more-->
-
-
-<h1>添加事件</h1>
-
-<p>事件初始化完毕后，可以使用event_set设置事件，然后使用event_add将其加入。首先完成socket的监听，然后将其加入到事件队列中（这里对所有的异常都不做考虑）。</p>
-
-<p>（1）socket监听
-```
-struct sockaddr_in listen_addr;</p>
-
-<p>int port = 10000; //socket监听端口
-int listen_fd = socket(AF_INET, SOCK_STREAM, 0);</p>
-
-<p>memset(&amp;listen_addr, 0, sizeof(listen_addr));</p>
-
-<p>listen_addr.sin_family = AF_INET;
-listen_addr.sin_addr.s_addr = INADDR_ANY;
-listen_addr.sin_port = htons(port)</p>
-
-<p>reuseaddr_on = 1;</p>
-
-<p>/<em>支持端口复用</em>/
-setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &amp;reuseaddr_on, sizeof(reuseaddr_on));</p>
-
-<p>bind(listen_fd, (struct sockaddr *) &amp;listen_addr, sizeof(listen_addr));
-listen(listen_fd, 1024);</p>
-
-<p>/<em>将描述符设置为非阻塞</em>/
-int flags = fcntl(listen_fd,F_GETFL);
-flags |= O_NONBLOCK;
-fcntl(listen_fd, F_SETFL, flags);
-```
-（2）事件设置</p>
-
-<p>socket服务建立后，就可以进行事件设置。使用event_set来设置事件对象，其传入参数包括事件根基(event_base对象)，描述符，事件类型，事件发生时的回调函数，回调函数传入参数。其中事件类型包括EV_READ、EV_WRITE、EV_PERSIST，EV_PERSIST和前两者结合使用，表示该事件为持续事件。
-```
-struct event ev;</p>
-
-<p>event_set(&amp;ev, listen_fd, EV_READ | EV_PERSIST, accept_handle, (void *)&amp;ev);
-```
-（3）事件添加与删除</p>
-
-<p>事件设置好后，就可以将其加入事件队列。event_add用来将事件加入，它接受两个参数：要添加的事件和时间的超时值。如果需要将事件删除，可以使用event_del来完成。event_del函数会取消所指定的事件。
-<code>
-event_add(&amp;ev, NULL)
-</code></p>
-
-<h1>进入事件循环</h1>
-
-<p>libevent提供了多种方式来进入事件循环，常用的是event_dispatch和event_base_loop，前者最后实际是使用当前事件根基来调用event_base_loop。
-<code>
-event_base_loop(main_base, 0);
-</code></p>
-
-<h1>处理连接</h1>
-
-<p>已经完成了事件的设置、事件的添加并进入到了事件循环，但是当事件发生时又如何处理呢？ 当连接建立时回调函数accept_handle会自动的得到调用。对于缓冲区的读写在非阻塞式网络编程中是一个难以处理的问题，幸运的是libevent提供了bufferevent和evbuf来替我们完成该项工作。这里我们采用bufferevent来处理。</p>
-
-<p>（1）生成bufferevent对象</p>
-
-<p>使用bufferevent_new对象来生成bufferevent对象，并分别指定读、写、连接错误时的处理函数和函数传入参数。</p>
-
-<p>（2）设置读取量</p>
-
-<p>bufferevent的读事件激活以后，即使用户没有读取完bufferevent缓冲区中的数据, bufferevent读事件也不会再次被激活。因为bufferevent的读事件是由其所监控的描述符的读事件激活的，只有描述符可读，读事件才会被激活。可通过设置wm_read.high来控制bufferevent从描述符缓冲区中读取的数据量。</p>
-
-<p>（3）将事件加入事件队列</p>
-
-<p>和前面一样，在事件设置好后，需将事件加入到事件队列中， 不过bufferevent的有自己专门的加入函数bufferevent_base_set和激活函数bufferevent_enable。bufferevent接收两个参数事件根基和事件对象，前者用来指定事件将加入到哪个事件根基中，后者说明需将那个bufferevnet事件加入。在bufferevent初始化完毕后，可以使用bufferevent_enable和bufferevent_disable反复的激活与禁止事件，其接收参数为事件对象和事件标志。其中标志参数为EV_READ和EV_WRITE。
-```
-void accept_handle(const int sfd, const short event, void *arg)
-{</p>
-
-<pre><code>struct sockaddr_in addr;
-
-socklen_t addrlen = sizeof(addr);
-
-int fd = accept(sfd, (struct sockaddr *) &amp;addr, &amp;addrlen); //处理连接
-
-buf_ev = bufferevent_new(fd,   buffered_on_read, NULL, NULL, fd)
-buf_ev-&gt;wm_read.high = 4096
-bufferevent_base_set(main_base, buf_ev);
-bufferevent_enable(buf_ev, EV_READ);
-</code></pre>
-
-<p>}
-```</p>
-
-<h1>读取缓冲区</h1>
-
-<p>当缓冲区读就绪时会自动激活前面注册的缓冲区读函数，我们可以使用bufferevent_read函数来读取缓冲区，bufferevent_read函数参数分别为:所需读取的事件缓冲区，读入数据的存放地，希望读取的字节数。函数返回实际读取的字节数。注意：即时缓冲区未读完，事件也不会再次被激活（除非再次有数据）。因此此处需反复读取直到全部读取完毕。</p>
-
-<h1>写回客户端</h1>
-
-<p>bufferevent系列函数不但支持读取缓冲区，而且支持写缓冲区（即将结果返回给客户端）。
-```
-void buffered_on_read(struct bufferevent *bev, void * arg){</p>
-
-<pre><code>char buffer[4096]
-
-ret = bufferevent_read(bev, &amp;buffer, 4096);
-bufferevent_write(bef, (void *)&amp;buffer, 4096);
-</code></pre>
-
-<p>}
-```</p>
-
-<h1>异步事件处理示例</h1>
-
-<p>利用libevent编写服务端程序，主要有4部分。
-（1）创建主通知链base
-<code>
-base = event_base_new();
-</code>
-（2）创建要监听的事件，并将其加入到主通知链中。
-<code>
-listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
-event_add(listener_event, NULL);
-event_free( listener_event ); //释放由event_new申请的结构体
-</code>
-（3）主循环
-<code>
-event_base_dispatch(base);
-</code>
-（4）释放
-<code>
-event_base_free(base);
-</code>
-以下程序中do_read, do_write是异步的，为了解决了异步之间的问题，程序使用了state这个结构体变量将do_read和do_write联系起来。
-```</p>
-
-<pre><code>#include &lt;netinet/in.h&gt;
-#include &lt;sys/socket.h&gt;
-#include &lt;event2/event.h&gt;
-#include &lt;assert.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;errno.h&gt;
-#include &lt;fcntl.h&gt;
-
-#define MAX_LINE 16384
-#define PORT 9999
-
-void do_read(evutil_socket_t fd, short events, void *arg);
-void do_write(evutil_socket_t fd, short events, void *arg);
-
-struct fd_state {
-    char buffer[MAX_LINE];
-    size_t buffer_used;
-
-    size_t n_written;
-    size_t write_upto;
-
-    struct event *read_event;
-    struct event *write_event;
-};
-
-struct fd_state *alloc_fd_state(struct event_base *base, evutil_socket_t fd)
-{
-    struct fd_state *state =
-     (struct fd_state *)malloc(sizeof(struct fd_state));
-    if (!state) {
-        return NULL;
-    }
-
-    state-&gt;read_event =
-     event_new(base, fd, EV_READ | EV_PERSIST, do_read, state);
-    if (!state-&gt;read_event) {
-        free(state);
-        return NULL;
-    }
-
-    state-&gt;write_event =
-     event_new(base, fd, EV_WRITE | EV_PERSIST, do_write, state);
-    if (!state-&gt;write_event) {
-        event_free(state-&gt;read_event);
-        free(state);
-        return NULL;
-    }
-
-    assert(state-&gt;write_event);
-
-    return state;
-}
-
-void free_fd_state(struct fd_state *state)
-{
-    event_free(state-&gt;read_event);
-    event_free(state-&gt;write_event);
-    free(state);
-}
-
-void do_read(evutil_socket_t fd, short events, void *arg)
-{
-    struct fd_state *state = arg;
-    char buf[1024];
-    int i;
-    ssize_t result;
-    while (1) {
-        // assert(state-&gt;write_event);
-        result = recv(fd, buf, sizeof(buf), 0);
-        if (result &lt;= 0)
-            break;
-        printf("[%s][%d]buf=[%s]len=[%d]\n", __FILE__, __LINE__, buf,
-         result);
-    }
-
-    memcpy(state-&gt;buffer, "reply", sizeof("reply"));
-    assert(state-&gt;write_event);
-    event_add(state-&gt;write_event, NULL);
-    state-&gt;write_upto = state-&gt;buffer_used;
-
-    if (result == 0) {
-        free_fd_state(state);
-    } else if (result &lt; 0) {
-        if (errno == EAGAIN)    // XXXX use evutil macro
-            return;
-        perror("recv");
-        free_fd_state(state);
-    }
-}
-
-void do_write(evutil_socket_t fd, short events, void *arg)
-{
-    struct fd_state *state = arg;
-
-    //while (state-&gt;n_written &lt; state-&gt;write_upto)
-    {
-        //ssize_t result = send(fd, state-&gt;buffer + state-&gt;n_written,
-        //state-&gt;write_upto - state-&gt;n_written, 0);
-        ssize_t result =
-         send(fd, state-&gt;buffer, strlen(state-&gt;buffer), 0);
-        if (result &lt; 0) {
-            if (errno == EAGAIN)    // XXX use evutil macro
-                return;
-            free_fd_state(state);
-            return;
-        }
-        assert(result != 0);
-        state-&gt;n_written += result;
-    }
-
-    //if (state-&gt;n_written == state-&gt;buffer_used)
-    {
-        state-&gt;n_written = state-&gt;write_upto = state-&gt;buffer_used = 1;
-    }
-
-    event_del(state-&gt;write_event);
-}
-
-void do_accept(evutil_socket_t listener, short event, void *arg)
-{
-    struct event_base *base = arg;
-    struct sockaddr_storage ss;
-    socklen_t slen = sizeof(ss);
-
-    int fd = accept(listener, (struct sockaddr *)&amp;ss, &amp;slen);
-    if (fd &lt; 0) {        // XXXX eagain??
-        perror("accept");
-    } else if (fd &gt; FD_SETSIZE) {
-        close(fd);    // XXX replace all closes with EVUTIL_CLOSESOCKET */
-    } else {
-        struct fd_state *state;
-        evutil_make_socket_nonblocking(fd);
-        state = alloc_fd_state(base, fd);
-
-        assert(state);    /*XXX err */
-        assert(state-&gt;write_event);
-        event_add(state-&gt;read_event, NULL);
-    }
-}
-
-int main(int argc, char **argv)
-{
-    evutil_socket_t listener;
-    struct sockaddr_in sin;
-    struct event_base *base;
-    struct event *listener_event;
-
-    setvbuf(stdout, NULL, _IONBF, 0);
-
-    base = event_base_new();
-    if (!base)
-        return -1;        /*XXXerr */
-
-    sin.sin_family = AF_INET;
-    sin.sin_addr.s_addr = 0;
-    sin.sin_port = htons(PORT);
-
-    listener = socket(AF_INET, SOCK_STREAM, 0);
-    evutil_make_socket_nonblocking(listener);
-
-#ifndef WIN32
-    {
-        int one = 1;
-        setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &amp;one,
-             sizeof(one));
-    }
-#endif
-
-    if (bind(listener, (struct sockaddr *)&amp;sin, sizeof(sin)) &lt; 0) {
-        perror("bind");
-        return -1;
-    }
-
-    if (listen(listener, 16) &lt; 0) {
-        perror("listen");
-        return -1;
-    }
-
-    listener_event =
-     event_new(base, listener, EV_READ | EV_PERSIST, do_accept,
-         (void *)base);
-    /*XXX check it */
-    event_add(listener_event, NULL);
-    event_base_dispatch(base);
-    event_base_free(base);
-
-    return 0;
-}
-</code></pre>
-
-<p>```</p>
 ]]></content>
   </entry>
   

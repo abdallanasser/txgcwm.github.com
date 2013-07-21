@@ -72,6 +72,71 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/14/pkg-configde-shi-yong/">Pkg-config的使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-14T11:22:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pkg-config --libs --cflags opencv
+</span><span class='line'>-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
+</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect 
+</span><span class='line'>-lopencv_contrib -lopencv_legacy -lopencv_flann</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
+
+<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Package opencv was not found in the pkg-config search path.
+</span><span class='line'>Perhaps you should add the directory containing `opencv.pc'
+</span><span class='line'>to the PKG_CONFIG_PATH environment variable
+</span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/14/pkg-configde-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/">Linux下删除文本文件中的所有空行</a></h1>
     
     
@@ -559,54 +624,6 @@ $ ./rand
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/">Linux下PDF文件的操作与转换</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T11:21:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux中常常涉及到多种文档格式（如doc、txt、html、rtf等等），为了方便文件传递，就可能需要在各种格式之间进行转换。下面介绍几个命令行下的工具，用于将pdf文件转换成其它我们需要的文件格式。</p>
-
-<h1>Pdftk</h1>
-
-<p>如果说PDF是电子纸张，那么pdftk就是电子起钉器、打孔机、粘合剂、解密指环和X光镜片。pdftk是一个简单的工具，可以对PDF文档进行各种日常操作，让你简单而自由地操作PDF。它不需要Acrobat，并且可以运行在Linux,Windows,Mac OS X,FreeBSD和Solaris上。在Debian/Ubuntu中你可以通过apt安装pdftk:</p>
-
-<pre><code>$ sudo aptitude install pdftk
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -624,6 +641,10 @@ $ ./rand
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Octopress添加中文标签功能</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a>
       </li>
     
@@ -639,10 +660,6 @@ $ ./rand
         <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/19/che-su-de-ji-suan/">车速的计算</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -651,8 +668,9 @@ $ ./rand
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
 <li class='category'><a href='/blog/categories/c-c/'>C/C++ (8)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (3)</a></li>
-<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (16)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (17)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
