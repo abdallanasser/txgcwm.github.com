@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Shell | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2013-07-23T00:05:56+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[pkg-config的使用]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong/"/>
+    <updated>2013-07-14T11:22:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong</id>
+    <content type="html"><![CDATA[<p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。
+<code>
+$ pkg-config --libs --cflags opencv
+-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
+-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect
+-lopencv_contrib -lopencv_legacy -lopencv_flann
+</code>
+以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
+
+<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：
+<code>
+Package opencv was not found in the pkg-config search path.
+Perhaps you should add the directory containing `opencv.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'opencv' found
+</code></p>
+
+<!--more-->
+
+
+<p>设置环境变量PKG_CONFIG_PATH方法如下：
+<code>
+export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH
+</code></p>
+
+<p>查看opencv.pc文件的内容如下：
+```
+$ cat opencv.pc</p>
+
+<h1>Package Information for pkg-config</h1>
+
+<p>prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir_old=${prefix}/include/opencv
+includedir_new=${prefix}/include</p>
+
+<p>Name: OpenCV
+Description: Open Source Computer Vision Library
+Version: 2.3.1
+Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
+-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib
+-lopencv_legacy -lopencv_flann
+Cflags: -I${includedir_old} -I${includedir_new}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下删除文本文件中的所有空行]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/"/>
+    <updated>2013-07-13T22:20:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing</id>
+    <content type="html"><![CDATA[<p>很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。</p>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>TEMP_F=&ldquo;del.lines.$$&rdquo;</p>
+
+<p>usage()
+{</p>
+
+<pre><code>echo "Usage: $0 filename [filename...]"
+exit -1
+</code></pre>
+
+<p>}</p>
+
+<p>if [ $# -eq 0 ] ; then</p>
+
+<pre><code>usage
+</code></pre>
+
+<p>fi</p>
+
+<p>while [ $# -gt 0 ]
+do</p>
+
+<pre><code>FILE_NAME=$1
+
+case $1 in 
+    --help)
+        usage
+    ;;
+
+    *)
+        if [ -f $1 ] ; then
+            sed '/^$/d' $FILE_NAME &gt; $TEMP_F
+            mv $TEMP_F $FILE_NAME
+        else
+            echo "$0 can not find this file: $1"
+        fi      
+    ;;
+esac
+
+shift
+</code></pre>
+
+<p>done
+```</p>
+
+<!--more-->
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下PDF文件的操作与转换]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/"/>
+    <updated>2013-07-07T11:21:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan</id>
+    <content type="html"><![CDATA[<p>在Linux中常常涉及到多种文档格式（如doc、txt、html、rtf等等），为了方便文件传递，就可能需要在各种格式之间进行转换。下面介绍几个命令行下的工具，用于将pdf文件转换成其它我们需要的文件格式。</p>
+
+<h1>Pdftk</h1>
+
+<p>如果说PDF是电子纸张，那么pdftk就是电子起钉器、打孔机、粘合剂、解密指环和X光镜片。pdftk是一个简单的工具，可以对PDF文档进行各种日常操作，让你简单而自由地操作PDF。它不需要Acrobat，并且可以运行在Linux,Windows,Mac OS X,FreeBSD和Solaris上。在Debian/Ubuntu中你可以通过apt安装pdftk:</p>
+
+<pre><code>$ sudo aptitude install pdftk
+</code></pre>
+
+<!--more-->
+
+
+<p>将两个或更多个PDF合并成一个新文档：</p>
+
+<pre><code>$ pdftk 1.pdf 2.pdf 3.pdf cat output 123.pdf
+</code></pre>
+
+<p>或者使用句柄:</p>
+
+<pre><code>$ pdftk A=1.pdf B=2.pdf cat A B output 12.pdf
+</code></pre>
+
+<p>或者使用通配符:</p>
+
+<pre><code>$ pdftk *.pdf cat output combined.pdf
+</code></pre>
+
+<p>将多个PDF中选定的页面分离出来并形成一个新文档：</p>
+
+<pre><code>$ pdftk A=one.pdf B=two.pdf cat A1-7 B1-5 A8 output combined.pdf
+</code></pre>
+
+<p>将PDF的第一页顺时针旋转90度：</p>
+
+<pre><code>$ pdftk in.pdf cat 1E 2-end output out.pdf
+</code></pre>
+
+<p>将整个PDF文档的页面旋转180度：</p>
+
+<pre><code>$ pdftk in.pdf cat 1-endS output out.pdf
+</code></pre>
+
+<p>用128位强度（默认）对一个PDF进行加密，保留所有权利（默认）：</p>
+
+<pre><code>$ pdftk mydoc.pdf output mydoc.128.pdf owner_pw foopass
+</code></pre>
+
+<p>同上，唯一例外的是需要密码才能打开这个PDF：</p>
+
+<pre><code>$ pdftk mydoc.pdf output mydoc.128.pdf owner_pw foo user_pw baz
+</code></pre>
+
+<p>同上，例外的是允许打印(在PDF被打开以后)：</p>
+
+<pre><code>$ pdftk mydoc.pdf output mydoc.128.pdf owner_pw foo user_pw baz allow printing
+</code></pre>
+
+<p>加密一个PDF：</p>
+
+<pre><code>$ pdftk secured.pdf input_pw foopass output unsecured.pdf
+</code></pre>
+
+<p>合并两个文件，其中一个是加密的 (输出是不加密的)：</p>
+
+<pre><code>$ pdftk A=secured.pdf mydoc.pdf input_pw A=foopass cat output combined.pdf
+</code></pre>
+
+<p>解压PDF页面流，以便可以在文本编辑器中编辑PDF代码：</p>
+
+<pre><code>$ pdftk mydoc.pdf output mydoc.clear.pdf uncompress
+</code></pre>
+
+<p>修复一个PDF被破坏的XREF表和流长度 (如果可能的话)：</p>
+
+<pre><code>$ pdftk broken.pdf output fixed.pdf
+</code></pre>
+
+<p>将单个PDF文档拆分成一个个页面，并且将相关数据报告到doc_data.txt：</p>
+
+<pre><code>$ pdftk mydoc.pdf burst
+</code></pre>
+
+<p>报告PDF文档的元数据、书签和页面标签：</p>
+
+<pre><code>$ pdftk mydoc.pdf dump_data output report.txt
+</code></pre>
+
+<h1>Poppler</h1>
+
+<p>Poppler是一个基于xpdf-3.0代码基础的PDF渲染库。 Poppler-utils软件包包括了pdftops (PDF到PostScript的转换器), pdfinfo (PDF文档信息提取器), pdfimages (PDF图像提取器), pdftohtml (PDF到HTML的转换器), pdftotext (PDF到text的转换器), 以及pdffonts (PDF字体分析器)。Debian/Ubuntu用户可以通过apt安装poppler:</p>
+
+<pre><code>$ sudo aptitude install poppler-utils
+</code></pre>
+
+<p>将可移植文档格式(PDF)文件转换成纯文本：</p>
+
+<pre><code>$ pdftotext example.pdf example.txt
+</code></pre>
+
+<p>如果文本文件未指定, pdftotext将file.pdf转换成file.txt。如果文本文件是?-’，则文本会被送到标准输出。</p>
+
+<p>转换第3到7页(包括3和7)使用:</p>
+
+<pre><code>$ pdftotext -f 3 -l 7 example.pdf example.txt
+</code></pre>
+
+<p>只提取第3页：</p>
+
+<pre><code>$ pdftotext -f 3 -l 3 example.pdf example.txt
+</code></pre>
+
+<p>下面的命令可以维持原始的物理布局并按阅读顺序输出文本。如果不想插入页面分隔符你可以设置-nopgbrk选项。如果PDF文件有密码保护，可以设置-opw (拥有者密码)或者-upw (用户密码)选项。</p>
+
+<pre><code>$ pdftotext -layout example.pdf example.txt
+</code></pre>
+
+<p>pdftohtml是一个将pdf文档转换成html的程序，它在当前工作目录中产生输出。pdf文件转换成html:</p>
+
+<pre><code>$ pdftohtml file.pdf file.html
+</code></pre>
+
+<p>如果你想要看到图形，需要使用-c(也就是“complex”) 选项:</p>
+
+<pre><code>$ pdftohtml -c file.pdf file.html
+</code></pre>
+
+<h1>Pdfimages</h1>
+
+<p>Pdfimages从可移植文档格式(PDF)文件中提取图片，保存为可移植像素图(PPM), 可移植位图(PBM), 或者JPEG文件。Pdfimages读取PDF文件，扫描一个或多个页面，并将每一个图像写入一个名为image-root-nnn.xxx的PPM、PBM或者JPEG文件，其中nnn是图像编号，xxx是图像类型(.ppm, .pbm, .jpg)。Pdfimages从PDF文件提取原始图像数据，不做任何额外的变化。任何PDF内容流里的旋转，剪切，颜色反转等动作都被忽略。</p>
+
+<p>从example.pdf提取所有的图像，图像会被保存为PPM格式：</p>
+
+<pre><code>$ pfdimages example.pdf exampleimage
+</code></pre>
+
+<p>使用-j选项将图像保存为JPG格式：</p>
+
+<pre><code>$ pfdimages -j example.pdf exampleimage
+</code></pre>
+
+<p>使用-f和-l选项制定起始页和结束页。为了扫描第3至7页(包括3和7)使用：</p>
+
+<pre><code>$ pfdimages -f 3 -l 7 example.pdf exampleimage
+</code></pre>
+
+<p>只扫描指定的某一页使用:</p>
+
+<pre><code>$ pfdimages -f 3 -l 3 example.pdf exampleimage
+</code></pre>
+
+<p>如果PDF文件有密码保护使用-opw和-upw选项:
+-opw 拥有者密码
+-upw 用户密码</p>
+
+<h1>ImageMagick</h1>
+
+<p>如果要将PDF转换到图像，首先你的机器上必须已经安装ImageMagick。要在Debian/Ubuntu上安装ImageMagick可以运行下面的命令：</p>
+
+<pre><code>$ sudo aptitude install imagemagick
+</code></pre>
+
+<p>要将pdf文件转换成图像使用‘convert‘命令:</p>
+
+<pre><code>$ convert doc.pdf doc.jpeg
+</code></pre>
+
+<p>转换成tiff</p>
+
+<pre><code>$ convert doc.pdf doc.tiff
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

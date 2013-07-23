@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 开源库 | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/kai-yuan-ku/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2013-07-23T00:05:56+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[使用libevent编写Linux服务]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/"/>
+    <updated>2013-07-18T19:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu</id>
+    <content type="html"><![CDATA[<p>libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。</p>
+
+<h1>初始化事件</h1>
+
+<p>首先完成对libenvent的事件初始化和事件驱动模型的选择。在使用多线程的情况下，一般我们需获取所返回的事件根基。
+<code>
+main_base = event_init();
+</code>
+event_init函数返回的是一个event_base对象，该对象包括了事件处理过程中的一些全局变量，其结构为：
+```
+struct event_base {</p>
+
+<pre><code>const struct eventop *evsel;
+void *evbase;
+int event_count;        /* counts number of total events */
+int event_count_active; /* counts number of active events */
+int event_gotterm;      /* Set to terminate loop */
+int event_break;        /* Set to terminate loop immediately */
+/* active event management */
+struct event_list **activequeues;
+int nactivequeues;
+/* signal handling info */
+struct evsignal_info sig;
+struct event_list eventqueue;
+struct timeval event_tv;
+struct min_heap timeheap;
+struct timeval tv_cache;
+</code></pre>
+
+<p>};
+```</p>
+
+<!--more-->
+
+
+<h1>添加事件</h1>
+
+<p>事件初始化完毕后，可以使用event_set设置事件，然后使用event_add将其加入。首先完成socket的监听，然后将其加入到事件队列中（这里对所有的异常都不做考虑）。</p>
+
+<p>（1）socket监听
+```
+struct sockaddr_in listen_addr;</p>
+
+<p>int port = 10000; //socket监听端口
+int listen_fd = socket(AF_INET, SOCK_STREAM, 0);</p>
+
+<p>memset(&amp;listen_addr, 0, sizeof(listen_addr));</p>
+
+<p>listen_addr.sin_family = AF_INET;
+listen_addr.sin_addr.s_addr = INADDR_ANY;
+listen_addr.sin_port = htons(port)</p>
+
+<p>reuseaddr_on = 1;</p>
+
+<p>/<em>支持端口复用</em>/
+setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &amp;reuseaddr_on, sizeof(reuseaddr_on));</p>
+
+<p>bind(listen_fd, (struct sockaddr *) &amp;listen_addr, sizeof(listen_addr));
+listen(listen_fd, 1024);</p>
+
+<p>/<em>将描述符设置为非阻塞</em>/
+int flags = fcntl(listen_fd,F_GETFL);
+flags |= O_NONBLOCK;
+fcntl(listen_fd, F_SETFL, flags);
+```
+（2）事件设置</p>
+
+<p>socket服务建立后，就可以进行事件设置。使用event_set来设置事件对象，其传入参数包括事件根基(event_base对象)，描述符，事件类型，事件发生时的回调函数，回调函数传入参数。其中事件类型包括EV_READ、EV_WRITE、EV_PERSIST，EV_PERSIST和前两者结合使用，表示该事件为持续事件。
+```
+struct event ev;</p>
+
+<p>event_set(&amp;ev, listen_fd, EV_READ | EV_PERSIST, accept_handle, (void *)&amp;ev);
+```
+（3）事件添加与删除</p>
+
+<p>事件设置好后，就可以将其加入事件队列。event_add用来将事件加入，它接受两个参数：要添加的事件和时间的超时值。如果需要将事件删除，可以使用event_del来完成。event_del函数会取消所指定的事件。
+<code>
+event_add(&amp;ev, NULL)
+</code></p>
+
+<h1>进入事件循环</h1>
+
+<p>libevent提供了多种方式来进入事件循环，常用的是event_dispatch和event_base_loop，前者最后实际是使用当前事件根基来调用event_base_loop。
+<code>
+event_base_loop(main_base, 0);
+</code></p>
+
+<h1>处理连接</h1>
+
+<p>已经完成了事件的设置、事件的添加并进入到了事件循环，但是当事件发生时又如何处理呢？ 当连接建立时回调函数accept_handle会自动的得到调用。对于缓冲区的读写在非阻塞式网络编程中是一个难以处理的问题，幸运的是libevent提供了bufferevent和evbuf来替我们完成该项工作。这里我们采用bufferevent来处理。</p>
+
+<p>（1）生成bufferevent对象</p>
+
+<p>使用bufferevent_new对象来生成bufferevent对象，并分别指定读、写、连接错误时的处理函数和函数传入参数。</p>
+
+<p>（2）设置读取量</p>
+
+<p>bufferevent的读事件激活以后，即使用户没有读取完bufferevent缓冲区中的数据, bufferevent读事件也不会再次被激活。因为bufferevent的读事件是由其所监控的描述符的读事件激活的，只有描述符可读，读事件才会被激活。可通过设置wm_read.high来控制bufferevent从描述符缓冲区中读取的数据量。</p>
+
+<p>（3）将事件加入事件队列</p>
+
+<p>和前面一样，在事件设置好后，需将事件加入到事件队列中， 不过bufferevent的有自己专门的加入函数bufferevent_base_set和激活函数bufferevent_enable。bufferevent接收两个参数事件根基和事件对象，前者用来指定事件将加入到哪个事件根基中，后者说明需将那个bufferevnet事件加入。在bufferevent初始化完毕后，可以使用bufferevent_enable和bufferevent_disable反复的激活与禁止事件，其接收参数为事件对象和事件标志。其中标志参数为EV_READ和EV_WRITE。
+```
+void accept_handle(const int sfd, const short event, void *arg)
+{</p>
+
+<pre><code>struct sockaddr_in addr;
+
+socklen_t addrlen = sizeof(addr);
+
+int fd = accept(sfd, (struct sockaddr *) &amp;addr, &amp;addrlen); //处理连接
+
+buf_ev = bufferevent_new(fd,   buffered_on_read, NULL, NULL, fd)
+buf_ev-&gt;wm_read.high = 4096
+bufferevent_base_set(main_base, buf_ev);
+bufferevent_enable(buf_ev, EV_READ);
+</code></pre>
+
+<p>}
+```</p>
+
+<h1>读取缓冲区</h1>
+
+<p>当缓冲区读就绪时会自动激活前面注册的缓冲区读函数，我们可以使用bufferevent_read函数来读取缓冲区，bufferevent_read函数参数分别为:所需读取的事件缓冲区，读入数据的存放地，希望读取的字节数。函数返回实际读取的字节数。注意：即时缓冲区未读完，事件也不会再次被激活（除非再次有数据）。因此此处需反复读取直到全部读取完毕。</p>
+
+<h1>写回客户端</h1>
+
+<p>bufferevent系列函数不但支持读取缓冲区，而且支持写缓冲区（即将结果返回给客户端）。
+```
+void buffered_on_read(struct bufferevent *bev, void * arg){</p>
+
+<pre><code>char buffer[4096]
+
+ret = bufferevent_read(bev, &amp;buffer, 4096);
+bufferevent_write(bef, (void *)&amp;buffer, 4096);
+</code></pre>
+
+<p>}
+```</p>
+
+<h1>异步事件处理示例</h1>
+
+<p>利用libevent编写服务端程序，主要有4部分。
+（1）创建主通知链base
+<code>
+base = event_base_new();
+</code>
+（2）创建要监听的事件，并将其加入到主通知链中。
+<code>
+listener_event = event_new(base, listener, EV_READ|EV_PERSIST, do_accept, (void*)base);
+event_add(listener_event, NULL);
+event_free( listener_event ); //释放由event_new申请的结构体
+</code>
+（3）主循环
+<code>
+event_base_dispatch(base);
+</code>
+（4）释放
+<code>
+event_base_free(base);
+</code>
+以下程序中do_read, do_write是异步的，为了解决了异步之间的问题，程序使用了state这个结构体变量将do_read和do_write联系起来。
+```</p>
+
+<pre><code>#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;event2/event.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+
+#define MAX_LINE 16384
+#define PORT 9999
+
+void do_read(evutil_socket_t fd, short events, void *arg);
+void do_write(evutil_socket_t fd, short events, void *arg);
+
+struct fd_state {
+    char buffer[MAX_LINE];
+    size_t buffer_used;
+
+    size_t n_written;
+    size_t write_upto;
+
+    struct event *read_event;
+    struct event *write_event;
+};
+
+struct fd_state *alloc_fd_state(struct event_base *base, evutil_socket_t fd)
+{
+    struct fd_state *state =
+     (struct fd_state *)malloc(sizeof(struct fd_state));
+    if (!state) {
+        return NULL;
+    }
+
+    state-&gt;read_event =
+     event_new(base, fd, EV_READ | EV_PERSIST, do_read, state);
+    if (!state-&gt;read_event) {
+        free(state);
+        return NULL;
+    }
+
+    state-&gt;write_event =
+     event_new(base, fd, EV_WRITE | EV_PERSIST, do_write, state);
+    if (!state-&gt;write_event) {
+        event_free(state-&gt;read_event);
+        free(state);
+        return NULL;
+    }
+
+    assert(state-&gt;write_event);
+
+    return state;
+}
+
+void free_fd_state(struct fd_state *state)
+{
+    event_free(state-&gt;read_event);
+    event_free(state-&gt;write_event);
+    free(state);
+}
+
+void do_read(evutil_socket_t fd, short events, void *arg)
+{
+    struct fd_state *state = arg;
+    char buf[1024];
+    int i;
+    ssize_t result;
+    while (1) {
+        // assert(state-&gt;write_event);
+        result = recv(fd, buf, sizeof(buf), 0);
+        if (result &lt;= 0)
+            break;
+        printf("[%s][%d]buf=[%s]len=[%d]\n", __FILE__, __LINE__, buf,
+         result);
+    }
+
+    memcpy(state-&gt;buffer, "reply", sizeof("reply"));
+    assert(state-&gt;write_event);
+    event_add(state-&gt;write_event, NULL);
+    state-&gt;write_upto = state-&gt;buffer_used;
+
+    if (result == 0) {
+        free_fd_state(state);
+    } else if (result &lt; 0) {
+        if (errno == EAGAIN)    // XXXX use evutil macro
+            return;
+        perror("recv");
+        free_fd_state(state);
+    }
+}
+
+void do_write(evutil_socket_t fd, short events, void *arg)
+{
+    struct fd_state *state = arg;
+
+    //while (state-&gt;n_written &lt; state-&gt;write_upto)
+    {
+        //ssize_t result = send(fd, state-&gt;buffer + state-&gt;n_written,
+        //state-&gt;write_upto - state-&gt;n_written, 0);
+        ssize_t result =
+         send(fd, state-&gt;buffer, strlen(state-&gt;buffer), 0);
+        if (result &lt; 0) {
+            if (errno == EAGAIN)    // XXX use evutil macro
+                return;
+            free_fd_state(state);
+            return;
+        }
+        assert(result != 0);
+        state-&gt;n_written += result;
+    }
+
+    //if (state-&gt;n_written == state-&gt;buffer_used)
+    {
+        state-&gt;n_written = state-&gt;write_upto = state-&gt;buffer_used = 1;
+    }
+
+    event_del(state-&gt;write_event);
+}
+
+void do_accept(evutil_socket_t listener, short event, void *arg)
+{
+    struct event_base *base = arg;
+    struct sockaddr_storage ss;
+    socklen_t slen = sizeof(ss);
+
+    int fd = accept(listener, (struct sockaddr *)&amp;ss, &amp;slen);
+    if (fd &lt; 0) {        // XXXX eagain??
+        perror("accept");
+    } else if (fd &gt; FD_SETSIZE) {
+        close(fd);    // XXX replace all closes with EVUTIL_CLOSESOCKET */
+    } else {
+        struct fd_state *state;
+        evutil_make_socket_nonblocking(fd);
+        state = alloc_fd_state(base, fd);
+
+        assert(state);    /*XXX err */
+        assert(state-&gt;write_event);
+        event_add(state-&gt;read_event, NULL);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    evutil_socket_t listener;
+    struct sockaddr_in sin;
+    struct event_base *base;
+    struct event *listener_event;
+
+    setvbuf(stdout, NULL, _IONBF, 0);
+
+    base = event_base_new();
+    if (!base)
+        return -1;        /*XXXerr */
+
+    sin.sin_family = AF_INET;
+    sin.sin_addr.s_addr = 0;
+    sin.sin_port = htons(PORT);
+
+    listener = socket(AF_INET, SOCK_STREAM, 0);
+    evutil_make_socket_nonblocking(listener);
+
+#ifndef WIN32
+    {
+        int one = 1;
+        setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &amp;one,
+             sizeof(one));
+    }
+#endif
+
+    if (bind(listener, (struct sockaddr *)&amp;sin, sizeof(sin)) &lt; 0) {
+        perror("bind");
+        return -1;
+    }
+
+    if (listen(listener, 16) &lt; 0) {
+        perror("listen");
+        return -1;
+    }
+
+    listener_event =
+     event_new(base, listener, EV_READ | EV_PERSIST, do_accept,
+         (void *)base);
+    /*XXX check it */
+    event_add(listener_event, NULL);
+    event_base_dispatch(base);
+    event_base_free(base);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[minilzo无损压缩库测试例子（二）]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/"/>
+    <updated>2013-07-10T23:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-(er-)</id>
+    <content type="html"><![CDATA[<p>在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。
+```</p>
+
+<h1>include &ldquo;minilzo.h&rdquo;</h1>
+
+<p><code>
+其中，lzo_init()函数包含在以下的头文件中。
+</code></p>
+
+<h1>include &ldquo;lzoconf.h&rdquo;</h1>
+
+<p>```
+lzoconf.h已包含在minilzo.h中，所以在写测试例子时只需包含minilzo.h头文件即可。</p>
+
+<p>将原始数据存放在in中且定义其长度为IN_LEN，压缩后的数据存放在out中且定义其长度为OUT_LEN。因为输入块可能是不可压缩的，所以我们必须提供多一点的输出空间。
+```</p>
+
+<h1>if defined(__LZO_STRICT_16BIT)</h1>
+
+<h1>define IN_LEN      (8*1024u)</h1>
+
+<h1>elif defined(LZO_ARCH_I086) &amp;&amp; !defined(LZO_HAVE_MM_HUGE_ARRAY)</h1>
+
+<h1>define IN_LEN      (60*1024u)</h1>
+
+<h1>else</h1>
+
+<h1>define IN_LEN      (128*1024ul)</h1>
+
+<h1>endif</h1>
+
+<h1>define OUT_LEN     (IN_LEN + IN_LEN / 16 + 64 + 3)</h1>
+
+<p>static unsigned char <strong>LZO_MMODEL in  [ IN_LEN ];
+static unsigned char </strong>LZO_MMODEL out [ OUT_LEN ];
+```</p>
+
+<!--more-->
+
+
+<p>压缩需要工作缓冲区，内存分配以‘lzo_align_t’（而不是‘char’）为单元，以确保它对齐。
+```</p>
+
+<h1>define HEAP_ALLOC(var,size) \</h1>
+
+<pre><code>lzo_align_t __LZO_MMODEL var [ ((size) + (sizeof(lzo_align_t) - 1)) / \
+                                sizeof(lzo_align_t) ]
+</code></pre>
+
+<p>static HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);
+```</p>
+
+<p>Step 1: 初始化lzo库。
+```</p>
+
+<pre><code>if (lzo_init() != LZO_E_OK)
+{
+    printf("internal error - lzo_init() failed !!!\n");
+    printf("(this usually indicates a compiler bug - try recompiling\n
+                without optimizations, and enable '-DLZO_DEBUG' for diagnostics)\n");
+    return 3;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Step 2: 准备将要被压缩的输入块，在这个例子程序中我们只是简单的写入“0”。在实际的应用中，应该写入真正需要压缩的数据。
+```</p>
+
+<pre><code>in_len = IN_LEN;
+lzo_memset(in,0,in_len);
+</code></pre>
+
+<p>```</p>
+
+<p>Step 3: 使用LZO1X-1将in中的数据压缩到out中。
+```</p>
+
+<pre><code>r = lzo1x_1_compress(in,in_len,out,&amp;out_len,wrkmem);
+if (r == LZO_E_OK)
+    printf("compressed %lu bytes into %lu bytes\n",
+        (unsigned long) in_len, (unsigned long) out_len);
+else
+{
+    /* this should NEVER happen */
+    printf("internal error - compression failed: %d\n", r);
+    return 2;
+}
+/* check for an incompressible block */
+if (out_len &gt;= in_len)
+{
+    printf("This block contains incompressible data.\n");
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>Step 4: 将out中的数据解压缩到in中。
+```</p>
+
+<pre><code>new_len = in_len;
+r = lzo1x_decompress(out,out_len,in,&amp;new_len,NULL);
+if (r == LZO_E_OK &amp;&amp; new_len == in_len)
+    printf("decompressed %lu bytes back into %lu bytes\n",
+        (unsigned long) out_len, (unsigned long) in_len);
+else
+{
+    /* this should NEVER happen */
+    printf("internal error - decompression failed: %d\n", r);
+    return 1;
+}
+</code></pre>
+
+<p>```</p>
+
+<p>minilzo支持多个平台，在编译的时候应该设置编译选项。在Linux系统中，编译该测试例程使用以下指令。
+<code>
+$ make gcc
+gcc  -s -Wall -O2 -fomit-frame-pointer -o testmini testmini.c minilzo.c
+</code>
+以下为运行结果。
+```
+$ ./testmini</p>
+
+<p>LZO real-time data compression library (v2.06, Aug 12 2011).
+Copyright &copy; 1996-2011 Markus Franz Xaver Johannes Oberhumer
+All Rights Reserved.</p>
+
+<p>compressed 131072 bytes into 598 bytes
+decompressed 598 bytes back into 131072 bytes</p>
+
+<p>miniLZO simple compression test passed.
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[minilzo无损压缩库介绍（一）]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/"/>
+    <updated>2013-07-07T23:32:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-([?]-)</id>
+    <content type="html"><![CDATA[<p>在网络上传输大批量数据的时候，网络的传输速度是固定的（比如100 Mb的以太网实际测量的传输速度大概在10 MB/s左右），而想要在固定时间内传输更多容量的数据，最常见的解决方案是——在传输之前通过一定的算法把数据的容量压缩，然后通过网络传输，对端接收到数据之后再通过相应的算法进行解压还原。如果“压缩的时间 + 压缩后数据的传输时间 + 解压缩的时间 &lt; 未压缩数据的传输时间”，就相当于提高了单位时间内的传输能力，拓宽了网络传输的带宽。</p>
+
+<h1>minilzo库使用介绍</h1>
+
+<p>lzo是一个开源的无损压缩c语言库，其优点是压缩/解压缩比较迅速且占用内存小等特点。具体可查看 <a href="http://www.oberhumer.com/opensource/lzo/">这里</a>，提供了比较全的lzo库和一个minilzo库。minilzo库提供了1个c文件和3个头文件，解压后的目录树如下：
+```</p>
+
+<pre><code>minilzo-2.06$ tree
+.
+├── COPYING
+├── lzoconf.h
+├── lzodefs.h
+├── Makefile
+├── minilzo.c
+├── minilzo.h
+├── README.LZO
+└── testmini.c
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>常用的有4个API（在使用的时候包含minilzo.h即可）：
+```</p>
+
+<pre><code>/* lzo_init() should be the first function you call.
+ * Check the return code !
+ *
+ * lzo_init() is a macro to allow checking that the library and the
+ * compiler's view of various types are consistent.
+ */
+#define lzo_init() __lzo_init_v2(LZO_VERSION,(int)sizeof(short),(int)sizeof(int),\
+    (int)sizeof(long),(int)sizeof(lzo_uint32),(int)sizeof(lzo_uint),\
+    (int)lzo_sizeof_dict_t,(int)sizeof(char *),(int)sizeof(lzo_voidp),\
+    (int)sizeof(lzo_callback_t))
+
+/* compression */
+LZO_EXTERN(int)
+lzo1x_1_compress        ( const lzo_bytep src, lzo_uint  src_len,
+                                lzo_bytep dst, lzo_uintp dst_len,
+                                lzo_voidp wrkmem );
+
+/* decompression */
+LZO_EXTERN(int)
+lzo1x_decompress        ( const lzo_bytep src, lzo_uint  src_len,
+                                lzo_bytep dst, lzo_uintp dst_len,
+                                lzo_voidp wrkmem /* NOT USED */ );
+
+/* safe decompression with overrun testing */
+LZO_EXTERN(int)
+lzo1x_decompress_safe   ( const lzo_bytep src, lzo_uint  src_len,
+                                lzo_bytep dst, lzo_uintp dst_len,
+                                lzo_voidp wrkmem /* NOT USED */ );
+</code></pre>
+
+<p>```
+minilzo库使用十分简单，在压缩和解压缩之前先调用lzo_init函数进行初始化，返回LZO_E_OK表示初始化成功。压缩数据时调用lzo1x_1_compress函数；解压数据时调用lzo1x_decompress函数或lzo1x_decompress_safe函数，这两个函数的区别是——lzo1x_decompress_safe函数会对解压缩数据的有效性进行验证，验证通过才会进行解压缩操作，而lzo1x_decompress函数则不会这么做，数据不是有效时就会产生“段错误”，建议使用lzo1x_decompress_safe函数。以下是这些函数的详细操作说明：</p>
+
+<ul>
+<li><p>lzo1x_1_compress函数进行压缩数据操作，需要5个参数：压缩的数据、压缩数据的大小、压缩后数据的缓冲区、压缩缓冲区的大小、压缩工作缓冲区。压缩数据成功之后会返回LZO_E_OK。第4个参数传进去的是用来指示存放压缩后数据缓冲区的大小，执行成功之后通过指针返回的结果是压缩后的数据实际使用的缓冲区大小（即压缩后的数据大小）。压缩后需要的数据缓冲区大小的上限是可以根据未压缩数据大小进行计算的，其公式为：
+<code>
+  output_size = input_size + (input_size / 16) + 64 + 3；
+</code>
+第5个参数是压缩的时候需要使用的工作缓冲区，缓冲的生成在minilzo库提供的测试例程中有相关的宏定义。</p></li>
+<li><p>lzo1x_decompress和lzo1x_decompress_safe函数进行数据的解压缩操作，需要5个参数：解压缩的数据、解压缩数据的大小、解压缩后数据的存放缓冲区、原始数据（未压缩数据）大小、解压缩工作缓冲区（不需要，可以置为NULL）。执行成功之后返回LZO_E_OK。第4个参数传进去的值是原始的未压缩数据的大小，执行成功之后通过指针返回的是实际解压缩后数据的大小。所以压缩之后的数据在传输的时候需要将原始数据的大小和压缩后数据一起传输，否则对方在解压缩的时候将无法解压。可以定义一个数据结构专门用来传输，这些数据在传输的时候相当于有效载荷：
+<code>
+  typedef struct{
+      unsigned long org_data_size;    /* 原始的未压缩数据大小 */
+      unsigned char data[MAX_DATA_SIZE];  /* 压缩之后的数据 */
+  }COMP_DATA, *P_COMP_DATA;
+</code></p></li>
+</ul>
+
+
+<h1>压缩/解压缩时间的计算</h1>
+
+<p>在压缩/解压缩数据之前，可以通过gettimeofday函数获取当前的系统时间，接着进行相关操作，完成之后再次获取系统时间，对2次获取的时间进行减操作即可得到实际操作所花费的时间。以下是计算操作所需花费时间的例子：
+```</p>
+
+<pre><code>unsigned long interval_ms = 0;       /* 间隔的毫秒数 */
+struct timeval stime, etime;
+
+gettimeofday(&amp;stime, NULL);
+
+/* TODO:Do compression or decompression */
+
+gettimeofday(&amp;etime, NULL);
+
+interval_ms = (etime.tv_sec - stime.tv_sec) * 1000.0 + \
+                    （etime.tv_usec - stime.tv_usec）/ 1000.0;
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

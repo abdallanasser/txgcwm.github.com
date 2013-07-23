@@ -1,0 +1,1135 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>将Emacs配置成一个C/C++的IDE编程环境 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用sudo apt-get install emacs来安装Emaces。 Emacs的基本操作和组合键 模式键定义 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li> 
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">将Emacs配置成一个C/C++的IDE编程环境</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-20T14:47:00+08:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用<code>sudo apt-get install emacs</code>来安装Emaces。</p>
+
+<h1>Emacs的基本操作和组合键</h1>
+
+<h2>模式键定义</h2>
+
+<p>四个模式键：C&mdash;-Ctrl；M&mdash;-Alt；s&mdash;-Super(Win)；S&mdash;-Shift</p>
+
+<p>比如：</p>
+
+<p>C-x：表示按下ctrl键，然后按下x键。</p>
+
+<p>C-x c C-c：表示按下ctrl，然后按下x键，松开后再按下c键。</p>
+
+<p>C-x k：表示按下ctrl，同时按下x和k键。</p>
+
+<!--more-->
+
+
+<h2>基本组合键</h2>
+
+<p>C-x C-c：退出Emacs。</p>
+
+<p>C-x C-s：保存当前buffer。</p>
+
+<p>C-x C-f：打开和新建文件。</p>
+
+<p>C-n：光标移到下一行。</p>
+
+<p>C-p：光标移到上一行。</p>
+
+<p>C-k：删除一行。</p>
+
+<p>M-x：执行命令。</p>
+
+<h1>启动时的大小和屏幕中的位置</h1>
+
+<p>关于修改Emacs启动大小和屏幕中的位置有两种方法：1、修该~/.Xdefault文件，然后运行<code>xrdb ~/.Xdefault</code>；2、在~/.emacs文件中进行修改。按照第二种方法作如下设置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;设置启动的大小和屏幕中的位置
+</span><span class='line'>(setq default-frame-alist
+</span><span class='line'>  '((height . 35)(width . 100)(menubar-lines . 20)(tool-bar-lines . 0)))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上语句表示Emacs在启动后其高度为35，宽度为100，显示在屏幕的x=20，y=0处。</p>
+
+<h1>Emacs的基本常规设定</h1>
+
+<p>按照一般的习惯，.emacs文件中一般不会放太多的设置信息，一般放一些emacs的搜索路径信息。这里将emacs的配置文件（即lisp脚本）都放在~/.emacs.d/emacs的文件夹中。因此首先添加一个emacs的搜索路径：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;;; 添加Emacs搜索路径
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/ecb-2.40")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/codepilot")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/emacs-eclim")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/icicles")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/gnuserv")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后加载我们对emacs的设置脚本，在.emacs中添加如下语句：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;;;读取脚本
+</span><span class='line'>(load "base.el")
+</span><span class='line'>(load "cyexpand.el")
+</span><span class='line'>(load "cykbd.el")
+</span><span class='line'>(load "addon.el")
+</span><span class='line'>
+</span><span class='line'>;;编程的配置
+</span><span class='line'>(load "cycode.el")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对emacs的基本设置，即base.el文件（在~/.emacs.d/emacs中），base.el文件中的部分内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;显示时间
+</span><span class='line'>;;(display-time)
+</span><span class='line'>(display-time-mode 1);;启用时间显示设置，在minibuffer上面的那个杠上
+</span><span class='line'>(setq display-time-24hr-format t);;时间使用24小时制
+</span><span class='line'>(setq display-time-day-and-date t);;时间显示包括日期和具体时间
+</span><span class='line'>;;(setq display-time-use-mail-icon t);;时间栏旁边启用邮件设置
+</span><span class='line'>;;(setq display-time-interval 10);;时间的变化频率，单位多少来着？
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>;;显示列号
+</span><span class='line'>(setq column-number-mode t)
+</span><span class='line'>;;没列左边显示行号,按f3显示/隐藏行号
+</span><span class='line'>(require 'setnu)
+</span><span class='line'>(setnu-mode t)
+</span><span class='line'>;;(global-set-key[f3] (quote setnu-mode))
+</span><span class='line'>
+</span><span class='line'>;;显示标题栏 %f 缓冲区完整路径 %p 页面百分数 %l 行号
+</span><span class='line'>(setq frame-title-format "%f")
+</span><span class='line'>
+</span><span class='line'>;;=======================================================================
+</span><span class='line'>;;缓冲区
+</span><span class='line'>;;=====================================================================
+</span><span class='line'>;;设定行距
+</span><span class='line'>(setq default-line-spaceing 4)
+</span><span class='line'>;;页宽
+</span><span class='line'>(setq default-fill-column 60)
+</span><span class='line'>;;缺省模式 text-mode
+</span><span class='line'>;;(setq default-major-mode 'text-mode)
+</span><span class='line'>;;设置删除记录
+</span><span class='line'>(setq kill-ring-max 200)
+</span><span class='line'>;;以空行结束
+</span><span class='line'>;;(setq require-final-newline t)
+</span><span class='line'>;;开启语法高亮。
+</span><span class='line'>(global-font-lock-mode 1)
+</span><span class='line'>;;高亮显示区域选择
+</span><span class='line'>(transient-mark-mode t)
+</span><span class='line'>;;页面平滑滚动,scroll-margin 3 靠近屏幕边沿3行开始滚动，正好可以看到上下文
+</span><span class='line'>;;(setq scroll-margin 3 scroll-consrvatively 10000)
+</span><span class='line'>;;高亮显示成对括号
+</span><span class='line'>(show-paren-mode t)
+</span><span class='line'>(setq show-paren-style 'parentheses)
+</span><span class='line'>;;鼠标指针避光标
+</span><span class='line'>(mouse-avoidance-mode 'animate)
+</span><span class='line'>;;粘贴于光标处,而不是鼠标指针处
+</span><span class='line'>(setq mouse-yank-at-point t)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>设置默认工作目录，即启动emacs后所在的目录，在base.el中加上下面一句：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;设置默认工作目录
+</span><span class='line'>(setq default-directory "/srv") </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>C/C++的配置</h1>
+
+<p>C/C++的配置主要是cycode.el文件。开发时很重要的一步就是调试，所以首先就是增加图形化调试界面：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;==============================================================
+</span><span class='line'>;;gdb-UI配置
+</span><span class='line'>;;==============================================================
+</span><span class='line'>(setq gdb-many-windows t)
+</span><span class='line'>(load-library "multi-gud.el")
+</span><span class='line'>(load-library "multi-gdb-ui.el")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面加载了两个lisp的脚本文件，这两个文件是直接在网上下载的图形化调试文件。</p>
+
+<p>为了能高效的浏览和编辑代码，需要安装cedet插件。从官网下载cedet后，在~/.emacs.d/emacs目录中解压，根据解压出来文件夹中的INSTALL文件说明的方法安装cedet即可。有一点需要注意就是安装完成后不能删除安装后的文件，也就是需要保留解压后的文件夹。安装完成后，用下面的语句将我们需要的一些东西包含进来。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;==================================================
+</span><span class='line'>;;cedet插件设置
+</span><span class='line'>;;==================================================
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/speedbar")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/eieio")
+</span><span class='line'>(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/semantic")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后就可进行有关cedet的设置，这里仅以一个代码折叠和展开为例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;代码折叠
+</span><span class='line'>;;(require 'semantic-tag-folding nil 'noerror)
+</span><span class='line'>(global-semantic-tag-folding-mode 1)
+</span><span class='line'>;;折叠和打开整个buffer的所有代码
+</span><span class='line'>(define-key semantic-tag-folding-mode-map (kbd "C--") 'semantic-tag-folding-fold-all)
+</span><span class='line'>(define-key semantic-tag-folding-mode-map (kbd "C-=") 'semantic-tag-folding-show-all)
+</span><span class='line'>;;折叠和打开单个buffer的所有代码
+</span><span class='line'>(define-key semantic-tag-folding-mode-map (kbd "C-_") 'semantic-tag-folding-fold-block)
+</span><span class='line'>(define-key semantic-tag-folding-mode-map (kbd "C-+") 'semantic-tag-folding-show-block)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了使用更方便（即对上面cedet插件的一个补充），需要再安装一个ecb插件。下载ecb后解压到~/.emacs.d/emacs目录中即可，然后加上下面两句：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;==============================================================
+</span><span class='line'>;;ecb配置
+</span><span class='line'>;;==============================================================
+</span><span class='line'>;;(require 'ecb)
+</span><span class='line'>;;开启ecb用,M-x:ecb-activate
+</span><span class='line'>(require 'ecb-autoloads)
+</span><span class='line'>;;自动启动ecb并且不显示每日提示
+</span><span class='line'>;;(require 'ecb)
+</span><span class='line'>;;(setq ecb-auto-activate t)
+</span><span class='line'>(setq ecb-tip-of-the-day nil)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了实现自动补全功能，需要安装auto-complete和yasnippet这两个插件。auto-complete下载后放到~/.emacs.d/emacs目录中解压，然后进入解压后的目录输入make命令即可；yasnippet下载后解压到~/.emacs.d/emacs目录中即可。下面是关于这两个插件的配置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;==========================================================
+</span><span class='line'>;;YASnippet的配置
+</span><span class='line'>;;==========================================================
+</span><span class='line'>(require 'yasnippet)    ;;not yasnippet-bundle
+</span><span class='line'>(yas/initialize)
+</span><span class='line'>(yas/load-directory "~/.emacs.d/emacs/yasnippet-0.6.1c/snippets")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>装完插件后，作一些综合的配置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;配置Semantic搜索范围
+</span><span class='line'>(setq semanticdb-project-roots
+</span><span class='line'>    (list
+</span><span class='line'>     (expand-file-name "/")))
+</span><span class='line'>;;自定义补全命令，如果单词在中间就补全，否则就tab
+</span><span class='line'>(defun my-indent-or-complete()
+</span><span class='line'>  (interactive)
+</span><span class='line'>  (if (looking-at "\\&gt;")
+</span><span class='line'>    (hippie-expand nil)
+</span><span class='line'>    (indent-for-tab-command))
+</span><span class='line'>  )
+</span><span class='line'>;;补全快捷键，ctrl+tab用senator补全，不显示列表
+</span><span class='line'>;;alt+/补全，显示列表让选择
+</span><span class='line'>(global-set-key [(control tab)] 'my-indent-or-complete)
+</span><span class='line'>(define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
+</span><span class='line'>(autoload 'senator-try-expand-semantic "senator")
+</span><span class='line'>(setq hippie-expand-try-functions-list
+</span><span class='line'>    '(
+</span><span class='line'>      senator-try-expand-semantic
+</span><span class='line'>      try-expand-dabbrev
+</span><span class='line'>      try-expand-dabbrev-visible
+</span><span class='line'>      try-expand-dabbrev-all-buffers
+</span><span class='line'>      try-expand-dabbrev-from-kill
+</span><span class='line'>      try-expand-list
+</span><span class='line'>      try-expand-list-all-buffers
+</span><span class='line'>      try-expand-line
+</span><span class='line'>      try-expand-line-all-buffers
+</span><span class='line'>      try-complete-file-name-partially
+</span><span class='line'>      try-complete-file-name
+</span><span class='line'>      try-expand-whole-kill
+</span><span class='line'>      )
+</span><span class='line'>    )</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>键绑定</h1>
+
+<p>为了使用emacs更方便，需要一些键绑定（即自己定义一些组合键），这也是emacs配置中必不可少的一步。自定义组合键放在cykbd.el文件中。根据一般的习惯用f1来表示帮助，即man命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(global-set-key [f1] 'manual-entry)
+</span><span class='line'>(global-set-key [C-f1] 'info )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>f3-f5的一些绑定：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;f3为查找字符串,alt+f3关闭当前缓冲区
+</span><span class='line'>(global-set-key [f3] 'grep-find)
+</span><span class='line'>(global-set-key [M-f3] 'kill-this-buffer)
+</span><span class='line'>
+</span><span class='line'>;;.emacs中设一个speedbar的快捷键
+</span><span class='line'>(global-set-key [(f4)] 'speedbar-get-focus)
+</span><span class='line'>;;ctrl-f4,激活,ecb
+</span><span class='line'>(global-set-key [C-f4] 'ecb-activate)
+</span><span class='line'>
+</span><span class='line'>;;F5显示/隐藏工具栏 方便调试
+</span><span class='line'>(global-set-key [f5] 'tool-bar-mode)
+</span><span class='line'>;;ctrl-F5显示/隐藏菜单栏 ;; M-x menu-bar-open
+</span><span class='line'>(global-set-key [C-f5] 'menu-bar-mode)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>f6为gdb调试，f7调用make来对原文件进行编译：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(global-set-key [f6] 'gdb)
+</span><span class='line'>
+</span><span class='line'>;;  C-f7, 设置编译命令; f7, 保存所有文件然后编译当前窗口文件
+</span><span class='line'>(defun du-onekey-compile ()
+</span><span class='line'>  "Save buffers and start compile"
+</span><span class='line'>  (interactive)
+</span><span class='line'>  (save-some-buffers t)
+</span><span class='line'>  (switch-to-buffer-other-window "*compilation*")
+</span><span class='line'>  (compile compile-command))
+</span><span class='line'>  
+</span><span class='line'>(setq-default compile-command "make")    
+</span><span class='line'>(global-set-key [C-f7] 'compile)
+</span><span class='line'> (global-set-key [f7] 'du-onekey-compile)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将f8为对buffer的一些常用操作：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;目的是开一个shell的小buffer，用于更方便地测试程序(也就是运行程序了)，我经常会用到。
+</span><span class='line'>;;f8就是另开一个buffer然后打开shell，C-f8则是在当前的buffer打开shell,shift+f8清空eshell
+</span><span class='line'>(defun open-eshell-other-buffer ()
+</span><span class='line'>  "Open eshell in other buffer"
+</span><span class='line'>  (interactive)
+</span><span class='line'>  (split-window-vertically)
+</span><span class='line'>  (eshell))
+</span><span class='line'>(defun my-eshell-clear-buffer ()
+</span><span class='line'>  "Eshell clear buffer."
+</span><span class='line'>  (interactive)
+</span><span class='line'>  (let ((eshell-buffer-maximum-lines 0))
+</span><span class='line'>    (eshell-truncate-buffer)))
+</span><span class='line'>(global-set-key [(f8)] 'open-eshell-other-buffer)
+</span><span class='line'>(global-set-key [C-f8] 'eshell)
+</span><span class='line'>(global-set-key [S-f8] 'my-eshell-clear-buffer)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>f9-f11的一些绑定：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;设置[C-f9]为调用dired命令
+</span><span class='line'>(global-set-key [C-f9] 'dired)
+</span><span class='line'>(global-set-key [f9] 'other-window);f9在其他窗口之间旋转
+</span><span class='line'>
+</span><span class='line'>;;设置F10为撤销
+</span><span class='line'>(global-set-key [C-f10] 'undo)
+</span><span class='line'>
+</span><span class='line'>;;设置F11快捷键指定Emacs 的日历系统
+</span><span class='line'>(global-set-key [C-f11] 'calendar) </span></code></pre></td></tr></table></div></figure>
+
+
+<p>用f12查看函数定义：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;设置C-F12 快速察看日程安排
+</span><span class='line'>;;F12调到函数定义
+</span><span class='line'>(global-set-key [f12] 'semantic-ia-fast-jump)
+</span><span class='line'>(global-set-key [C-f12] 'list-bookmarks)
+</span><span class='line'>;;shift-f12跳回去
+</span><span class='line'>(global-set-key [S-f12]
+</span><span class='line'>  (lambda ()
+</span><span class='line'>  (interactive)
+</span><span class='line'>  (if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
+</span><span class='line'>  (error "Semantic Bookmark ring is currently empty"))
+</span><span class='line'>  (let* ((ring (oref semantic-mru-bookmark-ring ring))
+</span><span class='line'>  (alist (semantic-mrub-ring-to-assoc-list ring))
+</span><span class='line'>  (first (cdr (car alist))))
+</span><span class='line'>  (if (semantic-equivalent-tag-p (oref first tag)
+</span><span class='line'>  (semantic-current-tag))
+</span><span class='line'>  (setq frist (cdr (car (cdr alist)))))
+</span><span class='line'>  (semantic-mrub-switch-tags first))))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对ecb的键绑定：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;==================ecb的配置=================================
+</span><span class='line'>;;为了ecb窗口的切换
+</span><span class='line'>(global-set-key [M-left] 'windmove-left)
+</span><span class='line'>(global-set-key [M-right] 'windmove-right)
+</span><span class='line'>(global-set-key [M-up] 'windmove-up)
+</span><span class='line'>(global-set-key [M-down] 'windmove-down)
+</span><span class='line'>;;隐藏和显示ecb窗口
+</span><span class='line'>(global-set-key [f11] 'ecb-hide-ecb-windows)
+</span><span class='line'>(global-set-key [S-f11] 'ecb-show-ecb-windows)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>对窗口的一些键绑定：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;;关闭当前窗口,alt+4
+</span><span class='line'>(global-set-key (kbd "M-4") 'delete-window)
+</span><span class='line'>;;(global-set-key (kbd "M-4") 'kill-this-buffer)
+</span><span class='line'>;;关闭其他窗口,alt+1
+</span><span class='line'>(global-set-key (kbd "M-1") 'delete-other-windows)
+</span><span class='line'>;;水平分割窗口,alt+2
+</span><span class='line'>(global-set-key (kbd "M-2") 'split-window-vertically)
+</span><span class='line'>;;垂直分割窗口,alt+3
+</span><span class='line'>(global-set-key (kbd "M-3") 'split-window-horizontally)
+</span><span class='line'>;;切换到其他窗口，alt+0
+</span><span class='line'>(global-set-key (kbd "M-0") 'other-window)
+</span><span class='line'>;;显示缓冲区完整名称
+</span><span class='line'>(global-set-key (kbd "M-5") 'display-buffer-name)</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Emacs的扩展配置</h1>
+
+<p>为了使emacs更符合个人的习惯，增加了一个cyexpand.el配置文件，其部分设置如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>;; 编码设置
+</span><span class='line'>(require 'coding-settings)
+</span><span class='line'>
+</span><span class='line'>;; `mode-line'显示格式
+</span><span class='line'>(require 'mode-line-settings)
+</span><span class='line'>
+</span><span class='line'>;; 各种语言开发方面的设置,这个设置牵涉到太多配置....
+</span><span class='line'>(require 'dev-settings)
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>;; 显示行号
+</span><span class='line'>(require 'linum-settings)
+</span><span class='line'>
+</span><span class='line'>;; color theme Emacs主题,很多face文件
+</span><span class='line'>(require 'color-theme-settings)
+</span><span class='line'>
+</span><span class='line'>(require 'ahei-face)
+</span><span class='line'>(require 'color-theme-ahei)
+</span><span class='line'>(require 'face-settings)
+</span><span class='line'>
+</span><span class='line'>;; 高亮当前行
+</span><span class='line'>(require 'hl-line-settings)
+</span><span class='line'>
+</span><span class='line'>;; 字体配置
+</span><span class='line'>(require 'font-settings)
+</span><span class='line'>;; diff
+</span><span class='line'>(require 'diff-settings)
+</span><span class='line'>;; Emacs的diff: ediff,有个my-fontest-win的文件很关键
+</span><span class='line'>(require 'ediff-settings)
+</span><span class='line'>
+</span><span class='line'>;; 在buffer中方便的查找字符串: color-moccur
+</span><span class='line'>(require 'moccur-settings)
+</span><span class='line'>;; Emacs超强的增量搜索Isearch配置
+</span><span class='line'>(require 'isearch-settings)
+</span><span class='line'>
+</span><span class='line'>;; 增加更丰富的高亮
+</span><span class='line'>(require 'generic-x)
+</span><span class='line'>
+</span><span class='line'>;; spell check
+</span><span class='line'>(setq-default ispell-program-name "aspell")
+</span><span class='line'>
+</span><span class='line'>;; Emacs中的包管理器
+</span><span class='line'>(require 'package)
+</span><span class='line'>(package-initialize)
+</span><span class='line'>
+</span><span class='line'>;; 在Emacs里面使用shell
+</span><span class='line'>(require 'term-settings)
+</span><span class='line'>(require 'multi-term-settings)
+</span><span class='line'>
+</span><span class='line'>;; 可以把光标由方块变成一个小长条
+</span><span class='line'>(require 'bar-cursor)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 <a href="https://github.com/txgcwm/emacs.d">这里</a> 下载。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-20T14:47:00+08:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ide/'>IDE</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/19/ubootzhong-tftpjie-shi/" title="Previous Post: Uboot中TFTP解释">&laquo; Uboot中TFTP解释</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/" title="Next Post: Octopress添加中文标签功能">Octopress添加中文标签功能 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Octopress添加中文标签功能</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Uboot中TFTP解释</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Linux下c语言获取网络接口IP地址</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (8)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (3)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (17)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (2)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,533 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux下删除文本文件中的所有空行 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。 1
+2
+3 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li> 
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux下删除文本文件中的所有空行</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T22:20:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>TEMP_F="del.lines.$$"
+</span><span class='line'>
+</span><span class='line'>usage()
+</span><span class='line'>{
+</span><span class='line'>  echo "Usage: $0 filename [filename...]"
+</span><span class='line'>  exit -1
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>if [ $# -eq 0 ] ; then
+</span><span class='line'>  usage
+</span><span class='line'>fi
+</span><span class='line'>
+</span><span class='line'>while [ $# -gt 0 ]
+</span><span class='line'>do
+</span><span class='line'>  FILE_NAME=$1
+</span><span class='line'>
+</span><span class='line'>  case $1 in 
+</span><span class='line'>      --help)
+</span><span class='line'>          usage
+</span><span class='line'>      ;;
+</span><span class='line'>
+</span><span class='line'>      *)
+</span><span class='line'>          if [ -f $1 ] ; then
+</span><span class='line'>              sed '/^$/d' $FILE_NAME &gt; $TEMP_F
+</span><span class='line'>              mv $TEMP_F $FILE_NAME
+</span><span class='line'>          else
+</span><span class='line'>              echo "$0 can not find this file: $1"
+</span><span class='line'>          fi      
+</span><span class='line'>      ;;
+</span><span class='line'>  esac
+</span><span class='line'>
+</span><span class='line'>  shift
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T22:20:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>Shell</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/" title="Previous Post: Base64编码解码算法">&laquo; Base64编码解码算法</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/14/pkg-configde-shi-yong/" title="Next Post: pkg-config的使用">pkg-config的使用 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Octopress添加中文标签功能</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Uboot中TFTP解释</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Linux下c语言获取网络接口IP地址</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (8)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (3)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (17)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (2)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
