@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IDE | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/ide/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-23T23:09:24+08:00</updated>
+  <updated>2013-07-23T23:26:55+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -72,7 +72,7 @@ Categories=Application;Development;
 <p>也可以先安装package control组件，然后直接在线安装：</p>
 
 <ul>
-<li>按Ctrl + <code>调出console ，其中</code>是键盘左上角那个符号。</li>
+<li>按Ctrl + `调出console ，其中`是键盘左上角那个符号。</li>
 <li>粘贴以下代码到底部命令行并回车。
 <code>
 import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'

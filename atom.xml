@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-23T23:09:24+08:00</updated>
+  <updated>2013-07-23T23:26:55+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -86,7 +86,7 @@
 <p>也可以先安装package control组件，然后直接在线安装：</p>
 
 <ul>
-<li>按Ctrl + <code>调出console ，其中</code>是键盘左上角那个符号。</li>
+<li>按Ctrl + `调出console ，其中`是键盘左上角那个符号。</li>
 <li>粘贴以下代码到底部命令行并回车。</li>
 </ul>
 
