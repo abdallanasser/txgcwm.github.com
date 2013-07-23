@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-23T22:52:00+08:00</updated>
+  <updated>2013-07-23T23:06:44+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -32,11 +32,12 @@ $ sudo apt-get update
 $ sudo apt-get install sublime-text-2
 </code></p>
 
+<!--more-->
+
+
 <h2>直接下载安装</h2>
 
-<p>从 <a href="http://www.sublimetext.com/2">这里</a>下载所需要的版本。</p>
-
-<p>解压文件到安装目录
+<p>从 <a href="http://www.sublimetext.com/2">这里</a>下载所需要的版本，然后解压文件到安装目录。
 <code>
 $ sudo tar -jxvf Sublime\ Text\ 2.0.1.tar.bz2 -C /usr/local/
 </code></p>

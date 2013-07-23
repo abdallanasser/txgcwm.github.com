@@ -113,75 +113,12 @@
 </span><span class='line'>$ sudo apt-get install sublime-text-2</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>直接下载安装</h2>
-
-<p>从 <a href="http://www.sublimetext.com/2">这里</a>下载所需要的版本。</p>
-
-<p>解压文件到安装目录</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo tar -jxvf Sublime\ Text\ 2.0.1.tar.bz2 -C /usr/local/</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>在applications菜单中创建快捷方式</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo gedit /usr/share/applications/sublimetext.desktop 
-</span><span class='line'>
-</span><span class='line'>[Desktop Entry]
-</span><span class='line'>Encoding=UTF-8
-</span><span class='line'>Name=Sublime Text
-</span><span class='line'>Comment=Sublime Text
-</span><span class='line'>Exec=/usr/local/SublimeText/sublime_text
-</span><span class='line'>Icon=/usr/local/SublimeText/Icon/48x48/sublime_text.png
-</span><span class='line'>Terminal=false
-</span><span class='line'>StartupNotify=true
-</span><span class='line'>Type=Application
-</span><span class='line'>Categories=Application;Development;</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>安装插件</h1>
-
-<p>安装Sublime text 2插件也有两种方法：直接安装和使用Package Control组件安装。</p>
-
-<h2>直接安装</h2>
-
-<p>可以直接下载安装包解压缩到Packages目录（菜单->preferences->packages）。</p>
-
-<h2>使用Package Control组件安装</h2>
-
-<p>也可以先安装package control组件，然后直接在线安装：</p>
-
-<ul>
-<li>按Ctrl + <code>调出console ，其中</code>是键盘左上角那个符号。</li>
-<li>粘贴以下代码到底部命令行并回车。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>重启Sublime Text 2。</li>
-<li>如果在Perferences->package settings中看到package control这一项，则安装成功。 如果这种方法不能安装成功，可以到 <a href="http://wbond.net/sublime_packages/package_control/installation">这里</a> 下载文件手动安装。</li>
-</ul>
-
-
-<p>用Package Control安装插件的方法：a、按下<code>Ctrl+Shift+P</code>调出命令面板；b、输入<code>install</code>调出Install Package选项并回车，然后在列表中选中要安装的插件。</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/">Read on &rarr;</a>
+    </footer>
   
 
 
