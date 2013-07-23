@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-23T22:46:52+08:00</updated>
+  <updated>2013-07-23T22:52:00+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -60,16 +60,16 @@
 <span class='line-number'>12</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo gedit /usr/share/applications/sublimetext.desktop 
 </span><span class='line'>
-</span><span class='line'>    [Desktop Entry]
-</span><span class='line'>    Encoding=UTF-8
-</span><span class='line'>    Name=Sublime Text
-</span><span class='line'>    Comment=Sublime Text
-</span><span class='line'>    Exec=/usr/local/SublimeText/sublime_text
-</span><span class='line'>    Icon=/usr/local/SublimeText/Icon/48x48/sublime_text.png
-</span><span class='line'>    Terminal=false
-</span><span class='line'>    StartupNotify=true
-</span><span class='line'>    Type=Application
-</span><span class='line'>    Categories=Application;Development;</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>[Desktop Entry]
+</span><span class='line'>Encoding=UTF-8
+</span><span class='line'>Name=Sublime Text
+</span><span class='line'>Comment=Sublime Text
+</span><span class='line'>Exec=/usr/local/SublimeText/sublime_text
+</span><span class='line'>Icon=/usr/local/SublimeText/Icon/48x48/sublime_text.png
+</span><span class='line'>Terminal=false
+</span><span class='line'>StartupNotify=true
+</span><span class='line'>Type=Application
+</span><span class='line'>Categories=Application;Development;</span></code></pre></td></tr></table></div></figure>
 
 
 <h1>安装插件</h1>
@@ -84,29 +84,23 @@
 
 <p>也可以先安装package control组件，然后直接在线安装：</p>
 
-<ol>
-<li>按`Ctrl + &#8220;调出console ，其中&#8220;`是键盘左上角那个符号。</li>
+<ul>
+<li>按Ctrl + <code>调出console ，其中</code>是键盘左上角那个符号。</li>
 <li>粘贴以下代码到底部命令行并回车。</li>
-</ol>
+</ul>
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'</span></code></pre></td></tr></table></div></figure>
 
 
-<ol>
+<ul>
 <li>重启Sublime Text 2。</li>
 <li>如果在Perferences->package settings中看到package control这一项，则安装成功。 如果这种方法不能安装成功，可以到 <a href="http://wbond.net/sublime_packages/package_control/installation">这里</a> 下载文件手动安装。</li>
-</ol>
+</ul>
 
 
-<p>用Package Control安装插件的方法：</p>
-
-<ol>
-<li>按下Ctrl+Shift+P调出命令面板。</li>
-<li>输入install调出Install Package选项并回车，然后在列表中选中要安装的插件。</li>
-</ol>
-
+<p>用Package Control安装插件的方法：a、按下<code>Ctrl+Shift+P</code>调出命令面板；b、输入<code>install</code>调出Install Package选项并回车，然后在列表中选中要安装的插件。</p>
 ]]></content>
   </entry>
   
