@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-23T23:26:55+08:00</updated>
+  <updated>2013-07-24T18:30:06+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to reslove "error opening terminal Linux"]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/24/how-to-reslove-error-opening-terminal-linux/"/>
+    <updated>2013-07-24T18:27:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/24/how-to-reslove-error-opening-terminal-linux</id>
+    <content type="html"><![CDATA[<p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error opening terminal Linux
+</span><span class='line'>error opening terminal xterm
+</span><span class='line'>error opening terminal vt100
+</span><span class='line'>error opening terminal vt102
+</span><span class='line'>error opening terminal unknown
+</span><span class='line'>error opening terminal cgywin
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以按照以下两步解决问题：</p>
+
+<ol>
+<li>首先要确定ncurses库是否已经正确安装。在Debian或Ubuntu上，可以用<code>dpkg -l | grep ncurses</code>查看ncurses库是否已安装。</li>
+<li>如果ncurses已经安装了，需要查看TERM和TERMINFO两个环境变量是否已经设置正确。如果没有设置正确，需要设置为正确的值。</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
+</span><span class='line'>$ echo $TERMINFO</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于TERMINFO, 应设置为terminfo的路径，比如/usr/share/terminfo或者/lib/terminfo。查看terminfo的存储位置用以下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ whereis terminfo
+</span><span class='line'>terminfo: /etc/terminfo /lib/terminfo /usr/share/terminfo /usr/share/man/man5/terminfo.5.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看terminfo目录下是否保存了终端信息文件：其中通常分为a, b, c, d&hellip;z这些字母目录，每个目录中包含了以该字母开头的term信息。比如vt100放在&#8221;v&#8221;目录中。我们需要的term必须在对应的目录中存在term信息。确定这些信息后，就可以设置TERM和TERMINFO信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export TERM=vt100
+</span><span class='line'>$ export TERMINFO=/usr/share/terminfo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的设置必须保证/usr/share/terminfo中存在term信息，且/usr/share/terminfo/v/vt100是存在的。关于TERM的设置，有可能需要设置成Linux，vt100-putty等不同的TERM。Linux通常用于Linux控制台，vt100-putty顾名思义是使用putty远程登录的vt100终端。</p>
+
+<p>以下是在Ubuntu12.10环境下，解决了此问题后TERM和TERMINFO两个环境变量的值。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
+</span><span class='line'>xterm
+</span><span class='line'>$ echo $TERMINFO
+</span><span class='line'>/lib/terminfo/</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu下安装SublimeText2及其插件]]></title>
@@ -4090,44 +4159,6 @@ unsigned char _ctype[] = {0x00, /* EOF */
 <p>3、(void)(&amp;<em>x == &amp;</em>y);这一句的作用：判断<em>x和</em>y的类型是否一样。如果是不同的类型，编译器会报“warning: comparison of distinct pointer types lacks a cast”的警告信息。</p>
 
 <p>其实，内核的宏定义就是先引入和x及y同样类型的两个临时变量，然后对临时变量进行求最大值或者最小值。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[公交小事]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/05/19/gong-jiao-xiao-shi/"/>
-    <updated>2013-05-19T16:05:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/05/19/gong-jiao-xiao-shi</id>
-    <content type="html"><![CDATA[<p><img class="right" src="http://www.gscn.com.cn/upload/image/2009/10/21/1256085698750.jpg" width="300" height="386" title="Place Kitten #3" ></p>
-
-<p>很舒适的坐在公交后面的位置上，拿着手机看完了一篇文章，退出了应用看了一下时间是8：19，不到百米的距离就要到站了。正当我暗自庆幸能够很早到公司的时候，传来一个女人A的声音“你偷我东西”。A推了女人B一把，B也不甘示弱，迅速还击，两个女人拳打脚踢，几个乘客也因激烈的战斗而离开自身的座位。现在我才明白比男人的战争更恐怖的是女人间的战争。</p>
-
-<p>司机见此状况，将车子停在了路的一旁，开始调解。司机问A有没有东西被偷，是否要报警，A和B都同意报警，司机和B都打电话报了警。司机接着又补充道“警察未来之前谁也不准离开”，这个做法全国的公交应该都这样吧，个人不是反对而是赞成。</p>
-
-<p>在这间隙，A诉说着她事件：她站在靠下车门的地方，B站在另一测，另外一个女人C站在她的同一侧，她刚好在B和C的中间，她本能的感觉到有手深入她的手提包在偷她的东西，她怀疑B和C在合谋偷她的东西。接着发生了前面提到的那一幕。A也补充到她上车的时候手提包的拉链是拉紧的。B也解释道没有偷A的东西，同时也不认识C。由于当时是低着头看手机，加上距离比较的远，我并不清楚事情到底是否有偷窃的事情。</p>
-
-<!--more-->
-
-
-<p>过了一小会儿，警察还是没有来到。很多人就问司机能不能让那两个女人下车，让她们独自等待警察，然后送我们去上班，司机拒绝了这些不合理的请求。在这种情况下，他们就转向了A，让她们自己下去。其他人的声音我听得不是很清楚，我身边的一个女人的话大概是这样的：“东西有没有被偷呢？没有的话就算了。要叫警察的话，你们自己下去等，浪费别人的时间。我们又没有偷你的东西，对我们凶什么凶了，神经病的！”车上80%的人表示的都是类似的声音。面对如此喧嚣的声音，我的前座的一个男人和前座的前座的一个男人都劝大家稍安误噪，要多体谅。</p>
-
-<p>女人A面对这些攻势，有些激动，大声的回应道：“要不是我不让你们走，是司机不让你们走。幸好东西没有被偷，偷了的话你们就高兴了是吧？大家上班不就是为了挣钱嘛，要是东西被偷了还挣钱干嘛。要是你们被偷了会怎样？我已经被偷了两个iphone4s了。”</p>
-
-<p>过了30分钟左右，警察来了。警察看了司机的证件，同时要了B的证件，让她们几个当事人下车。C没有跟着去，A走到C的面前，厉声道“你也一起走”。她们下了车，公交车继续前行。警察没有询问公交车上乘客任何问题，不至于每个人都低着头看手机而没有看到一些事情吧？我认为这是警察做得不足之处。</p>
-
-<p>下车之后，一个哥们说B和C她们肯定是小偷，我不知道他的判断依据是什么，或许每个人都有自己的判断吧。</p>
-
-<p>以上当事人的话语并不完完全全是原话，所写的是表达她们原话的意思。有几点我很不解：一、那时公交车上已不是很挤，人很稀疏的站在车内，加上是监控对准的地方，如果要偷窃的话，她们是不是很傻或者是神偷；二、女人B报了警，或许真的被冤枉，或许技术高超到知道如何挡住摄像头，我不明白；三、我没有听到女人C一句反驳的话语，如果被冤枉的话，一般人的反应不会那么平静，难道是见过大世面的人。</p>
-
-<p>从以往的经历来看，A可能被偷怕了，对这类事情已经过敏了。或许是自己忘记了将拉链拉上，这些我们也无从知晓。警察调出视频查阅后，如果没有发生偷窃的事情，当然是好事，可以还B和C一个清白，那么A可能需要反省一下自己；如果真的有这样的事情发生，那么该惩罚的应该得到相应的惩罚。</p>
-
-<p>发生这种事情，如果我们是事件中的A，我们又会如何处理：没有被偷就算了，还是报警？我们是旁观者，当我们思考着因报警而耽误上班时间的时候，我们是否应当先思考一下这个问题呢。当很多事情与我们无关的时候，我们是否应该如此的漠视呢？当我们是受害者的时候，如果得不到旁观者的支持，我们是否会觉得孤独，这个世界很残忍呢？面对这个繁杂而又浮躁的社会，我们真的应该学会设身处地的思考。</p>
-
-<p>司机师傅的举动，由衷向他表示敬意。</p>
-
-<p>警察的行动速度真的太慢了，不知道当国家面临危险的时候，你们是否只会选择“打扫战场”。处理事情的方式是否也能改进改进，这么多乘客在这里并不只是专门是在等你如此解决问题，我们中的某一个或许就是你的目击证人，不然就辜负了司机师傅的用意了。</p>
-
-<p>这种事情每天都在公交车上上演，大家又是如何看待的？</p>
 ]]></content>
   </entry>
   

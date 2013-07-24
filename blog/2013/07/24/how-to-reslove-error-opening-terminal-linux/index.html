@@ -5,11 +5,19 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: 茶余酒后 - 残剑</title>
+  <title>How to reslove "error opening terminal Linux" - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Category: 茶余酒后">
+  <meta name="description" content="Linux环境下，编译嵌入式系统时会用到make menuconfig或make config命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息： 1
+2
+3
+4
+5
+6
+7
+error opening terminal Linux
+error &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.ioblog/categories/cha-yu-jiu-hou">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/24/how-to-reslove-error-opening-terminal-linux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -65,50 +73,169 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: 茶余酒后</h1>
+    
+      <h1 class="entry-title">How to Reslove "Error Opening Terminal Linux"</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T18:27:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：</p>
 
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/07/19/che-su-de-ji-suan/">车速的计算</a></h1>
-<time datetime="2013-07-19T00:04:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>19</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
-<time datetime="2013-05-19T16:05:00+08:00" pubdate><span class='month'>May</span> <span class='day'>19</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error opening terminal Linux
+</span><span class='line'>error opening terminal xterm
+</span><span class='line'>error opening terminal vt100
+</span><span class='line'>error opening terminal vt102
+</span><span class='line'>error opening terminal unknown
+</span><span class='line'>error opening terminal cgywin
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>可以按照以下两步解决问题：</p>
+
+<ol>
+<li>首先要确定ncurses库是否已经正确安装。在Debian或Ubuntu上，可以用<code>dpkg -l | grep ncurses</code>查看ncurses库是否已安装。</li>
+<li>如果ncurses已经安装了，需要查看TERM和TERMINFO两个环境变量是否已经设置正确。如果没有设置正确，需要设置为正确的值。</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
+</span><span class='line'>$ echo $TERMINFO</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于TERMINFO, 应设置为terminfo的路径，比如/usr/share/terminfo或者/lib/terminfo。查看terminfo的存储位置用以下指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ whereis terminfo
+</span><span class='line'>terminfo: /etc/terminfo /lib/terminfo /usr/share/terminfo /usr/share/man/man5/terminfo.5.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看terminfo目录下是否保存了终端信息文件：其中通常分为a, b, c, d&hellip;z这些字母目录，每个目录中包含了以该字母开头的term信息。比如vt100放在&#8221;v&#8221;目录中。我们需要的term必须在对应的目录中存在term信息。确定这些信息后，就可以设置TERM和TERMINFO信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export TERM=vt100
+</span><span class='line'>$ export TERMINFO=/usr/share/terminfo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的设置必须保证/usr/share/terminfo中存在term信息，且/usr/share/terminfo/v/vt100是存在的。关于TERM的设置，有可能需要设置成Linux，vt100-putty等不同的TERM。Linux通常用于Linux控制台，vt100-putty顾名思义是使用putty远程登录的vt100终端。</p>
+
+<p>以下是在Ubuntu12.10环境下，解决了此问题后TERM和TERMINFO两个环境变量的值。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
+</span><span class='line'>xterm
+</span><span class='line'>$ echo $TERMINFO
+</span><span class='line'>/lib/terminfo/</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T18:27:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/uinx-linux/'>Uinx/Linux</a>, <a class='category' href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/" title="Previous Post: Ubuntu下安装SublimeText2及其插件">&laquo; Ubuntu下安装SublimeText2及其插件</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -377,7 +504,10 @@
       var disqus_shortname = 'txgcwm';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/24/how-to-reslove-error-opening-terminal-linux/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/24/how-to-reslove-error-opening-terminal-linux/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
