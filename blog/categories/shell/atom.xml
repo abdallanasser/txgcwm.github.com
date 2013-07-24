@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-24T18:34:56+08:00</updated>
+  <updated>2013-07-24T18:37:42+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[astyle格式化代码]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/"/>
+    <updated>2013-07-24T18:36:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma</id>
+    <content type="html"><![CDATA[<p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
+
+<p>下面介绍一下astyle的简单使用。例如有以下的源码：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{int i;printf(&ldquo;Just a test!\n&rdquo;);for(i=0;i&lt;10;++i)printf(&ldquo;%d\n&rdquo;,i);}return 0;}
+```</p>
+
+<!--more-->
+
+
+<p>然后在终端下输入以下指令：
+<code>
+$ astyle test1.c
+</code>
+效果如下：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>int i;
+printf("Just a test!\n");
+for(i=0; i&lt;10; ++i) {
+    printf("%d\n",i);
+}
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>当然也可以加上一些选项，例如“astyle &mdash;style=bsd test1.c”，“ astyle &mdash;style=gnu test1.c”等等。</p>
+
+<p>在vim中的命令模式下，可以使用下面的某一种方式来格式化代码。
+<code>
+%!astyle (simple case - astyle default mode is C/C++)
+</code>
+或者
+<code>
+%!astyle --mode=c --style=ansi -s2 (ansi C++ style, use two spaces per indent level)
+</code>
+或者
+<code>
+1,40!astyle --mode=c --style=ansi (ansi C++ style, filter only lines 1-40)
+</code></p>
+
+<p>在格式化完代码后，会生成一个后缀为orig的文件，格式化完成之后将它们删除。为方便使用，可以把它写成一个脚本，代码如下：
+```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>for f in $(find . -name &lsquo;<em>.c&rsquo; -or -name &lsquo;</em>.cpp&rsquo; -or -name &lsquo;*.h&rsquo; -type f)
+do</p>
+
+<pre><code>astyle $f
+</code></pre>
+
+<p>done</p>
+
+<h1>after formate the code,we need to rm &lsquo;*.orig&rsquo; files</h1>
+
+<p>for f in $(find . -name &lsquo;*.orig&rsquo; -type f)
+do</p>
+
+<pre><code>rm $f
+</code></pre>
+
+<p>done
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pkg-config的使用]]></title>

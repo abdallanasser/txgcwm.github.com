@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: C/C++ - 残剑</title>
+  <title>astyle格式化代码 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Category: C/C++">
+  <meta name="description" content="astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令sudo apt-get install astyle安装，也可以到 这里 下载源码后自己编译安装。 下面介绍一下astyle的简单使用。例如有以下的源码： 1
+2
+3
+#include &lt &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.ioblog/categories/c-c">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -65,134 +68,200 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: C/C++</h1>
+    
+      <h1 class="entry-title">Astyle格式化代码</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T18:36:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
 
-  
-  <h2>2013</h2>
+<p>下面介绍一下astyle的简单使用。例如有以下的源码：</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Linux下c语言获取网络接口IP地址</a></h1>
-<time datetime="2013-07-19T22:34:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>19</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/wang-luo-ying-yong/'>网络应用</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{int i;printf("Just a test!\n");for(i=0;i&lt;10;++i)printf("%d\n",i);}return 0;}</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<!--more-->
 
 
+<p>然后在终端下输入以下指令：</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">使用libevent编写Linux服务</a></h1>
-<time datetime="2013-07-18T19:01:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>18</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/kai-yuan-ku/'>开源库</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ astyle test1.c</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>效果如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>    int i;
+</span><span class='line'>    printf("Just a test!\n");
+</span><span class='line'>    for(i=0; i&lt;10; ++i) {
+</span><span class='line'>        printf("%d\n",i);
+</span><span class='line'>    }
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
+<p>当然也可以加上一些选项，例如“astyle &mdash;style=bsd test1.c”，“ astyle &mdash;style=gnu test1.c”等等。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/15/lian-zhan/">链栈</a></h1>
-<time datetime="2013-07-15T21:49:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>15</span> <span class='year'>2013</span></time>
+<p>在vim中的命令模式下，可以使用下面的某一种方式来格式化代码。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%!astyle (simple case - astyle default mode is C/C++)</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>或者</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%!astyle --mode=c --style=ansi -s2 (ansi C++ style, use two spaces per indent level)</span></code></pre></td></tr></table></div></figure>
 
 
+<p>或者</p>
 
-<article>
-  
-<h1><a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a></h1>
-<time datetime="2013-07-11T23:09:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>11</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1,40!astyle --mode=c --style=ansi (ansi C++ style, filter only lines 1-40)</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>在格式化完代码后，会生成一个后缀为orig的文件，格式化完成之后将它们删除。为方便使用，可以把它写成一个脚本，代码如下：</p>
 
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现</a></h1>
-<time datetime="2013-07-07T17:43:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a></h1>
-<time datetime="2013-07-07T17:10:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/">Linux下C语言伪随机数编程</a></h1>
-<time datetime="2013-07-07T12:50:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
-<time datetime="2013-07-07T10:41:00+08:00" pubdate><span class='month'>Jul</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a></span>
-</footer>
-
-
-</article>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>
+</span><span class='line'>for f in $(find . -name '*.c' -or -name '*.cpp' -or -name '*.h' -type f)
+</span><span class='line'>do
+</span><span class='line'>    astyle $f
+</span><span class='line'>done
+</span><span class='line'>
+</span><span class='line'># after formate the code,we need to rm '*.orig' files 
+</span><span class='line'>for f in $(find . -name '*.orig' -type f)
+</span><span class='line'>do
+</span><span class='line'>    rm $f
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T18:36:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>Shell</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/" title="Previous Post: How to resolve "error opening terminal Linux"">&laquo; How to resolve "error opening terminal Linux"</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -460,7 +529,10 @@
       var disqus_shortname = 'txgcwm';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

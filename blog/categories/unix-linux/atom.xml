@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-24T18:34:56+08:00</updated>
+  <updated>2013-07-24T18:37:42+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[astyle格式化代码]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/"/>
+    <updated>2013-07-24T18:36:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma</id>
+    <content type="html"><![CDATA[<p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
+
+<p>下面介绍一下astyle的简单使用。例如有以下的源码：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{int i;printf(&ldquo;Just a test!\n&rdquo;);for(i=0;i&lt;10;++i)printf(&ldquo;%d\n&rdquo;,i);}return 0;}
+```</p>
+
+<!--more-->
+
+
+<p>然后在终端下输入以下指令：
+<code>
+$ astyle test1.c
+</code>
+效果如下：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>int i;
+printf("Just a test!\n");
+for(i=0; i&lt;10; ++i) {
+    printf("%d\n",i);
+}
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>当然也可以加上一些选项，例如“astyle &mdash;style=bsd test1.c”，“ astyle &mdash;style=gnu test1.c”等等。</p>
+
+<p>在vim中的命令模式下，可以使用下面的某一种方式来格式化代码。
+<code>
+%!astyle (simple case - astyle default mode is C/C++)
+</code>
+或者
+<code>
+%!astyle --mode=c --style=ansi -s2 (ansi C++ style, use two spaces per indent level)
+</code>
+或者
+<code>
+1,40!astyle --mode=c --style=ansi (ansi C++ style, filter only lines 1-40)
+</code></p>
+
+<p>在格式化完代码后，会生成一个后缀为orig的文件，格式化完成之后将它们删除。为方便使用，可以把它写成一个脚本，代码如下：
+```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>for f in $(find . -name &lsquo;<em>.c&rsquo; -or -name &lsquo;</em>.cpp&rsquo; -or -name &lsquo;*.h&rsquo; -type f)
+do</p>
+
+<pre><code>astyle $f
+</code></pre>
+
+<p>done</p>
+
+<h1>after formate the code,we need to rm &lsquo;*.orig&rsquo; files</h1>
+
+<p>for f in $(find . -name &lsquo;*.orig&rsquo; -type f)
+do</p>
+
+<pre><code>rm $f
+</code></pre>
+
+<p>done
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to resolve "error opening terminal Linux"]]></title>
@@ -702,89 +785,6 @@ f9-f11的一些绑定：
 ```</p>
 
 <p>到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 <a href="https://github.com/txgcwm/emacs.d">这里</a> 下载。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Uboot中TFTP解释]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/"/>
-    <updated>2013-07-19T22:45:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi</id>
-    <content type="html"><![CDATA[<p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
-
-<p>使用TFTP传送文件的步骤：</p>
-
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
-
-
-<!--more-->
-
-
-<h1>客户端状态</h1>
-
-<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
-
-<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
-
-<h1>包类型</h1>
-
-<p>使用TFTP传送的包分为6种类型：</p>
-
-<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
-
-<h1>各种包结构</h1>
-
-<p>TFTP协议中各种包的结构：</p>
-
-<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
-
-<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
-
-<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
-
-<p>ACK（确认帧）结构：</p>
-
-<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
-
-<h1>主要函数及作用</h1>
-
-<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：
-```
-/<em> 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存</em>/
-static <strong>inline</strong> void store_block (unsigned block, uchar * src, unsigned len);</p>
-
-<p>/<em> 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） </em>/
-static void TftpSend (void) ;</p>
-
-<p>/<em> 处理收到的Tftp包 </em>/
-static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;</p>
-
-<p>/<em> 超时处理函数 </em>/
-static void TftpTimeout (void);</p>
-
-<p>/<em> 初始化各个需要的数据 然后开始发送TFTP读请求 </em>/
-void TftpStart (void);
-```</p>
-
-<h1>流程</h1>
-
-<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
-
-<p>以下是客户端和服务器端通信的流程图：</p>
-
-<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
-
-<p>客户端程序流程：</p>
-
-<ol>
-<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
-<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
-<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
-</ol>
-
 ]]></content>
   </entry>
   
