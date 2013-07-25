@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 路由器/防火墙 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/lu-you-qi-fang-huo-qiang/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-25T23:54:51+08:00</updated>
+  <updated>2013-07-26T00:09:00+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -24,9 +24,12 @@
 
 <p><img src="/images/2013/7/iptables/flow.png" alt=" flow " /></p>
 
+<!--more-->
+
+
 <ol>
 <li>当一个数据包进入网卡时，它首先进入PREROUTING链，内核根据数据包目的ip地址判断是否需要转送出去。</li>
-<li>如果数据包就是进入本机的，它就会沿着图向下移动，到达INPUT链。数据包到了INPUT链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过OUTPUT链，然后到达POSTROUTING链输出。</li>
+<li>如果数据包就是进入本机的，它就会沿着上图所指方向向下移动，到达INPUT链。数据包到了INPUT链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过OUTPUT链，然后到达POSTROUTING链输出。</li>
 <li>如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过FORWARD链，然后到达POSTROUTING链输出。</li>
 </ol>
 
