@@ -117,12 +117,18 @@
         <lastmod>2013-07-24T18:37:30+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/
+        </loc>
+        <lastmod>2013-07-25T23:38:12+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://txgcwm.github.io/about/</loc>
         <lastmod>2013-05-18T22:37:41+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/blog/archives/</loc>
-        <lastmod>2013-07-24T18:37:30+08:00</lastmod>
+        <lastmod>2013-07-25T23:38:12+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/robots.txt</loc>
@@ -130,6 +136,6 @@
     </url>
     <url>
         <loc>http://txgcwm.github.io/</loc>
-        <lastmod>2013-07-24T18:37:30+08:00</lastmod>
+        <lastmod>2013-07-25T23:38:12+08:00</lastmod>
     </url>
 </urlset>

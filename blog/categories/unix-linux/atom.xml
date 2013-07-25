@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-24T18:37:42+08:00</updated>
+  <updated>2013-07-25T23:38:36+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,215 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下iptables防火墙原理及使用]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/"/>
+    <updated>2013-07-25T23:36:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong</id>
+    <content type="html"><![CDATA[<p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
+
+<h1>iptables传输数据包的过程</h1>
+
+<ol>
+<li>当一个数据包进入网卡时，它首先进入PREROUTING链，内核根据数据包目的ip地址判断是否需要转送出去。</li>
+<li>如果数据包就是进入本机的，它就会沿着图向下移动，到达INPUT链。数据包到了INPUT链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过OUTPUT链，然后到达POSTROUTING链输出。</li>
+<li>如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过FORWARD链，然后到达POSTROUTING链输出。</li>
+</ol>
+
+
+<h1>规则表和规则链</h1>
+
+<p>iptables采用“表”和“链”的分层结构。表（tables）提供特定的功能，iptables内置了4个表，即Filter表、Nat表、Mangle表和Raw表，分别用于实现包过滤、网络地址转换、包重构(修改)和数据跟踪处理。链（chains）是数据包传播的路径，每一条链其实就是众多规则中的一个检查清单，每一条链中可以有一条或数条规则。当一个数据包到达一个链时，iptables就会从链中第一条规则开始检查，看该数据包是否满足规则所定义的条件。如果满足，系统就会根据该条规则所定义的方法处理该数据包，否则iptables将继续检查下一条规则。如果该数据包不符合链中任一条规则，iptables就会根据该链预先定义的默认策略来处理数据包。</p>
+
+<h2>规则表</h2>
+
+<p>iptables有4个规则表，其之间的优先顺序为Raw&mdash;-Mangle&mdash;-Nat&mdash;-Filter。</p>
+
+<ol>
+<li><p>Filter表有三个链：INPUT、FORWARD、OUTPUT</p>
+
+<p> 作用：过滤数据包<br/>
+ 内核模块：iptables_filter</p></li>
+<li><p>Nat表有三个链：PREROUTING、POSTROUTING、OUTPUT</p>
+
+<p> 作用：用于网络地址转换（IP、端口） <br/>
+ 内核模块：iptable_nat</p></li>
+<li><p>Mangle表有五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD</p>
+
+<p> 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS   <br/>
+ 内核模块：iptable_mangle</p></li>
+<li><p>Raw表有两个链：OUTPUT、PREROUTING</p>
+
+<p> 作用：决定数据包是否被状态跟踪机制处理<br/>
+ 内核模块：iptable_raw</p></li>
+</ol>
+
+
+<h2>规则链</h2>
+
+<ol>
+<li>INPUT——进来的数据包应用此规则链中的策略。</li>
+<li>OUTPUT——外出的数据包应用此规则链中的策略。</li>
+<li>FORWARD——转发数据包时应用此规则链中的策略。</li>
+<li>PREROUTING——对数据包作路由选择前应用此链中的规则，所有的数据包进来的时侯都先由这个链处理。</li>
+<li>POSTROUTING——对数据包作路由选择后应用此链中的规则，所有的数据包出来的时侯都先由这个链处理。</li>
+</ol>
+
+
+<p>规则链之间的优先顺序分三种情况：</p>
+
+<ol>
+<li><p>入站数据流向</p>
+
+<p> 从外界到达防火墙的数据包，先被PREROUTING规则链处理（是否修改数据包地址等），之后会进行路由选择（判断该数据包应该发往何处），如果数据包的目标主机是防火墙本机（比如说Internet用户访问防火墙主机中的web服务器的数据包），那么内核将其传给INPUT链进行处理（决定是否允许通过等），通过以后再交给系统上层的应用程序（比如Apache服务器）进行响应。</p></li>
+<li><p>转发数据流向</p>
+
+<p> 来自外界的数据包到达防火墙后，首先被PREROUTING规则链处理，之后会进行路由选择，如果数据包的目标地址是其它外部地址（比如局域网用户通过网关访问QQ站点的数据包），则内核将其传递给FORWARD链进行处理（是否转发或拦截），然后再交给POSTROUTING规则链（是否修改数据包的地址等）进行处理。</p></li>
+<li><p>出站数据流向</p>
+
+<p> 防火墙本机向外部地址发送的数据包（比如在防火墙主机中测试公网DNS服务器时），首先被OUTPUT规则链处理，之后进行路由选择，然后传递给POSTROUTING规则链（是否修改数据包的地址等）进行处理。</p></li>
+</ol>
+
+
+<h1>管理和设置iptables规则</h1>
+
+<p>规则（rules）其实就是网络管理员预定义的条件，规则一般的定义为“如果数据包头符合这样的条件，就这样处理这个数据包”。规则存储在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输协议（如TCP、UDP、ICMP）和服务类型（如HTTP、FTP和SMTP）等。当数据包与规则匹配时，iptables就根据规则所定义的方法来处理这些数据包，如放行（accept）、拒绝（reject）和丢弃（drop）等。配置防火墙的主要工作就是添加、修改和删除这些规则。</p>
+
+<h2>iptables的基本语法格式</h2>
+
+<p>iptables [-t 表名] 命令选项 ［链名］ ［条件匹配］ ［-j 目标动作或跳转］</p>
+
+<p>说明：表名、链名用于指定iptables命令所操作的表和链，命令选项用于指定管理iptables规则的方式（比如插入、增加、删除、查看等）；条件匹配用于指定对符合什么样条件的数据包进行处理；目标动作或跳转用于指定数据包的处理方式（比如允许通过、拒绝、丢弃、跳转给其它链处理）。</p>
+
+<p>iptables命令的管理控制选项：
+<code>
+-A 在指定链的末尾添加（append）一条新的规则
+-D 删除（delete）指定链中的某一条规则，可以按规则序号和内容删除
+-I 在指定链中插入（insert）一条新的规则，默认在第一行添加
+-R 修改、替换（replace）指定链中的某一条规则，可以按规则序号和内容替换
+-L 列出（list）指定链中所有的规则进行查看
+-E 重命名用户定义的链，不改变链本身
+-F 清空（flush）
+-N 新建（new-chain）一条用户自己定义的规则链
+-X 删除指定表中用户自定义的规则链（delete-chain）
+-P 设置指定链的默认策略（policy）
+-Z 将所有表的所有链的字节和数据包计数器清零
+-n 使用数字形式（numeric）显示输出结果
+-v 查看规则表详细信息（verbose）的信息
+-V 查看版本(version)
+-h 获取帮助（help）
+</code></p>
+
+<h2>防火墙处理数据包的四种方式</h2>
+
+<ol>
+<li>ACCEPT：允许数据包通过。</li>
+<li>DROP：直接丢弃数据包，不给任何回应信息</li>
+<li>REJECT：拒绝数据包通过，必要时会给数据发送端一个响应的信息。</li>
+<li>LOG：在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则。</li>
+</ol>
+
+
+<h2>防火墙规则的保存与恢复</h2>
+
+<p>iptables-save把规则保存到文件中（生成保存规则的文件名为/etc/sysconfig/iptables），再由rc.d目录下的脚本（/etc/rc.d/init.d/iptables）自动装载。使用<code>iptables-save &gt; /etc/sysconfig/iptables</code>命令来保存规则，也可以用<code>service iptables save</code>指令把规则自动保存起来。当计算机启动时，rc.d下的脚本将用命令<code>iptables-restore</code>调用这个文件，从而就自动恢复了规则。</p>
+
+<h2>防火墙常用策略</h2>
+
+<ul>
+<li><p>拒绝进入防火墙的所有ICMP协议数据包
+<code>
+  $ iptables -I INPUT -p icmp -j REJECT
+</code></p></li>
+<li><p>允许防火墙转发除ICMP协议以外的所有数据包，使用“！”可以将条件取反。
+<code>
+  $ iptables -A FORWARD -p ! icmp -j ACCEPT
+</code></p></li>
+<li><p>拒绝转发来自192.168.1.10主机的数据，允许转发来自192.168.0.0/24网段的数据。要把拒绝的放在前面，不然就不起作用了。
+<code>
+  $ iptables -A FORWARD -s 192.168.1.11 -j REJECT
+  $ iptables -A FORWARD -s 192.168.0.0/24 -j ACCEPT
+</code></p></li>
+<li><p>丢弃从外网接口（eth1）进入防火墙本机的源地址为私网地址的数据包。
+<code>
+  $ iptables -A INPUT -i eth1 -s 192.168.0.0/16 -j DROP
+  $ iptables -A INPUT -i eth1 -s 172.16.0.0/12 -j DROP
+  $ iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j DROP
+</code></p></li>
+<li><p>封堵网段（192.168.1.0/24），两小时后解封。这个策略可以借助crond计划任务来完成。
+```
+  $ iptables -I INPUT -s 10.20.30.0/24 -j DROP
+  $ iptables -I FORWARD -s 10.20.30.0/24 -j DROP
+  $ at now 2 hours at> iptables -D INPUT 1 at> iptables -D FORWARD 1</p>
+
+<p>  [1]   Stopped     at now 2 hours
+```</p></li>
+<li><p>只允许管理员从202.13.0.0/16网段使用SSH远程登录防火墙主机。比较适合对设备进行远程管理时使用，比如位于分公司中的SQL服务器需要被总公司的管理员管理时。
+<code>
+  $ iptables -A INPUT -p tcp --dport 22 -s 202.13.0.0/16 -j ACCEPT
+  $ iptables -A INPUT -p tcp --dport 22 -j DROP
+</code></p></li>
+<li><p>允许本机开放从TCP端口20-1024提供的应用服务。
+<code>
+  $ iptables -A INPUT -p tcp --dport 20:1024 -j ACCEPT
+  $ iptables -A OUTPUT -p tcp --sport 20:1024 -j ACCEPT
+</code></p></li>
+<li><p>允许转发来自192.168.0.0/24局域网段的DNS解析请求数据包。
+<code>
+  $ iptables -A FORWARD -s 192.168.0.0/24 -p udp --dport 53 -j ACCEPT
+  $ iptables -A FORWARD -d 192.168.0.0/24 -p udp --sport 53 -j ACCEPT
+</code></p></li>
+<li><p>禁止其他主机ping防火墙主机，但是允许从防火墙上ping其他主机
+<code>
+  $ iptables -I INPUT -p icmp --icmp-type Echo-Request -j DROP
+  $ iptables -I INPUT -p icmp --icmp-type Echo-Reply -j ACCEPT
+  $ iptables -I INPUT -p icmp --icmp-type destination-Unreachable -j ACCEPT
+</code></p></li>
+<li><p>禁止转发来自MAC地址为00：0C：29：27：55：3F的主机的数据包。iptables中使用“-m 模块关键字”的形式调用显示匹配。这里用“-m mac &mdash;mac-source”来表示数据包的源MAC地址。
+<code>
+  $ iptables -A FORWARD -m mac --mac-source 00:0c:29:27:55:3F -j DROP
+</code></p></li>
+<li><p>允许防火墙本机对外开放TCP端口20、21、25、110以及被动模式FTP端口1250-1280，这里用“-m multiport &mdash;dport”来指定目的端口及范围。
+<code>
+  $ iptables -A INPUT -p tcp -m multiport --dport 20,21,25,110,1250:1280 -j ACCEPT
+</code></p></li>
+<li><p>禁止转发源IP地址为192.168.1.20-192.168.1.99的TCP数据包。此处用“-m iprange &mdash;src-range”指定IP范围。
+<code>
+  $ iptables -A FORWARD -p tcp -m iprange --src-range 192.168.1.20-192.168.1.99 -j DROP
+</code></p></li>
+<li><p>禁止转发与正常TCP连接无关的非&mdash;syn请求数据包。“-m state”表示数据包的连接状态，“NEW”表示与任何连接无关。
+<code>
+  $ iptables -A FORWARD -m state --state NEW -p tcp ! --syn -j DROP
+</code></p></li>
+<li><p>拒绝访问防火墙的新数据包，但允许响应连接或与已有连接相关的数据包。“ESTABLISHED”表示已经响应请求或者已经建立连接的数据包，“RELATED”表示与已建立的连接有相关性的，比如FTP数据连接等。
+<code>
+  $ iptables -A INPUT -p tcp -m state --state NEW -j DROP
+  $ iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT
+</code></p></li>
+<li><p>只开放本机的web服务（80）、FTP(20、21、20450-20480)，放行外部主机发住服务器其它端口的应答数据包，将其他入站数据包均予以丢弃处理。
+<code>
+  $ iptables -I INPUT -p tcp -m multiport --dport 20,21,80 -j ACCEPT
+  $ iptables -I INPUT -p tcp --dport 20450:20480 -j ACCEPT
+  $ iptables -I INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
+  $ iptables -P INPUT DROP
+</code></p></li>
+</ul>
+
+
+<h1>文章参考</h1>
+
+<ul>
+<li><a href="http://netfilter.org/">netfilter</a></li>
+<li><a href="http://man.chinaunix.net/network/iptables-tutorial-cn-1.1.19.html">Iptables 指南 1.1.19</a>　</li>
+<li><a href="http://blog.csdn.net/thmono/archive/2010/04/08/5462043.aspx">iptable 笔记</a></li>
+<li><a href="http://netsecurity.51cto.com/art/200512/14457.htm">网络安全频道</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_40ba724c0100jz12.html">iptables_2</a></li>
+<li><a href="http://qiliuping.blog.163.com/blog/static/1023829320105245337799/">netfilter/iptables全攻略</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[astyle格式化代码]]></title>
@@ -369,422 +578,6 @@ comments: true</p>
 <li><a href="http://pfmiles.github.io/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">Liquid Error About Regexp Match When Using Octopress-tagcloud</a></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[将Emacs配置成一个C/C++的IDE编程环境]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/"/>
-    <updated>2013-07-20T14:47:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/20/jiang-emacspei-zhi-cheng-[?]-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing</id>
-    <content type="html"><![CDATA[<p>在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用<code>sudo apt-get install emacs</code>来安装Emaces。</p>
-
-<h1>Emacs的基本操作和组合键</h1>
-
-<h2>模式键定义</h2>
-
-<p>四个模式键：C&mdash;-Ctrl；M&mdash;-Alt；s&mdash;-Super(Win)；S&mdash;-Shift</p>
-
-<p>比如：</p>
-
-<p>C-x：表示按下ctrl键，然后按下x键。</p>
-
-<p>C-x c C-c：表示按下ctrl，然后按下x键，松开后再按下c键。</p>
-
-<p>C-x k：表示按下ctrl，同时按下x和k键。</p>
-
-<!--more-->
-
-
-<h2>基本组合键</h2>
-
-<p>C-x C-c：退出Emacs。</p>
-
-<p>C-x C-s：保存当前buffer。</p>
-
-<p>C-x C-f：打开和新建文件。</p>
-
-<p>C-n：光标移到下一行。</p>
-
-<p>C-p：光标移到上一行。</p>
-
-<p>C-k：删除一行。</p>
-
-<p>M-x：执行命令。</p>
-
-<h1>启动时的大小和屏幕中的位置</h1>
-
-<p>关于修改Emacs启动大小和屏幕中的位置有两种方法：1、修该~/.Xdefault文件，然后运行<code>xrdb ~/.Xdefault</code>；2、在~/.emacs文件中进行修改。按照第二种方法作如下设置：
-```
-;;设置启动的大小和屏幕中的位置
-(setq default-frame-alist</p>
-
-<pre><code>'((height . 35)(width . 100)(menubar-lines . 20)(tool-bar-lines . 0)))
-</code></pre>
-
-<p>```
-以上语句表示Emacs在启动后其高度为35，宽度为100，显示在屏幕的x=20，y=0处。</p>
-
-<h1>Emacs的基本常规设定</h1>
-
-<p>按照一般的习惯，.emacs文件中一般不会放太多的设置信息，一般放一些emacs的搜索路径信息。这里将emacs的配置文件（即lisp脚本）都放在~/.emacs.d/emacs的文件夹中。因此首先添加一个emacs的搜索路径：
-<code>
-;;;; 添加Emacs搜索路径
-(add-to-list 'load-path "~/.emacs.d/emacs")
-(add-to-list 'load-path "~/.emacs.d/emacs/ecb-2.40")
-(add-to-list 'load-path "~/.emacs.d/emacs/codepilot")
-(add-to-list 'load-path "~/.emacs.d/emacs/emacs-eclim")
-(add-to-list 'load-path "~/.emacs.d/emacs/icicles")
-(add-to-list 'load-path "~/.emacs.d/emacs/gnuserv")
-</code>
-然后加载我们对emacs的设置脚本，在.emacs中添加如下语句：
-```
-;;;;读取脚本
-(load &ldquo;base.el&rdquo;)
-(load &ldquo;cyexpand.el&rdquo;)
-(load &ldquo;cykbd.el&rdquo;)
-(load &ldquo;addon.el&rdquo;)</p>
-
-<p>;;编程的配置
-(load &ldquo;cycode.el&rdquo;)
-<code>
-对emacs的基本设置，即base.el文件（在~/.emacs.d/emacs中），base.el文件中的部分内容如下：
-</code>
-;;显示时间
-;;(display-time)
-(display-time-mode 1);;启用时间显示设置，在minibuffer上面的那个杠上
-(setq display-time-24hr-format t);;时间使用24小时制
-(setq display-time-day-and-date t);;时间显示包括日期和具体时间
-;;(setq display-time-use-mail-icon t);;时间栏旁边启用邮件设置
-;;(setq display-time-interval 10);;时间的变化频率，单位多少来着？</p>
-
-<p>;;显示列号
-(setq column-number-mode t)
-;;没列左边显示行号,按f3显示/隐藏行号
-(require &lsquo;setnu)
-(setnu-mode t)
-;;(global-set-key[f3] (quote setnu-mode))</p>
-
-<p>;;显示标题栏 %f 缓冲区完整路径 %p 页面百分数 %l 行号
-(setq frame-title-format &ldquo;%f&rdquo;)</p>
-
-<p>;;=======================================================================
-;;缓冲区
-;;=====================================================================
-;;设定行距
-(setq default-line-spaceing 4)
-;;页宽
-(setq default-fill-column 60)
-;;缺省模式 text-mode
-;;(setq default-major-mode &lsquo;text-mode)
-;;设置删除记录
-(setq kill-ring-max 200)
-;;以空行结束
-;;(setq require-final-newline t)
-;;开启语法高亮。
-(global-font-lock-mode 1)
-;;高亮显示区域选择
-(transient-mark-mode t)
-;;页面平滑滚动,scroll-margin 3 靠近屏幕边沿3行开始滚动，正好可以看到上下文
-;;(setq scroll-margin 3 scroll-consrvatively 10000)
-;;高亮显示成对括号
-(show-paren-mode t)
-(setq show-paren-style 'parentheses)
-;;鼠标指针避光标
-(mouse-avoidance-mode 'animate)
-;;粘贴于光标处,而不是鼠标指针处
-(setq mouse-yank-at-point t)
-<code>
-设置默认工作目录，即启动emacs后所在的目录，在base.el中加上下面一句：
-</code>
-;;设置默认工作目录
-(setq default-directory &ldquo;/srv&rdquo;)
-```</p>
-
-<h1>C/C++的配置</h1>
-
-<p>C/C++的配置主要是cycode.el文件。开发时很重要的一步就是调试，所以首先就是增加图形化调试界面：
-<code>
-;;==============================================================
-;;gdb-UI配置
-;;==============================================================
-(setq gdb-many-windows t)
-(load-library "multi-gud.el")
-(load-library "multi-gdb-ui.el")
-</code>
-上面加载了两个lisp的脚本文件，这两个文件是直接在网上下载的图形化调试文件。</p>
-
-<p>为了能高效的浏览和编辑代码，需要安装cedet插件。从官网下载cedet后，在~/.emacs.d/emacs目录中解压，根据解压出来文件夹中的INSTALL文件说明的方法安装cedet即可。有一点需要注意就是安装完成后不能删除安装后的文件，也就是需要保留解压后的文件夹。安装完成后，用下面的语句将我们需要的一些东西包含进来。
-<code>
-;;==================================================
-;;cedet插件设置
-;;==================================================
-(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/speedbar")
-(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/eieio")
-(add-to-list 'load-path "~/.emacs.d/emacs/cedet-1.1/semantic")
-</code>
-然后就可进行有关cedet的设置，这里仅以一个代码折叠和展开为例：
-<code>
-;;代码折叠
-;;(require 'semantic-tag-folding nil 'noerror)
-(global-semantic-tag-folding-mode 1)
-;;折叠和打开整个buffer的所有代码
-(define-key semantic-tag-folding-mode-map (kbd "C--") 'semantic-tag-folding-fold-all)
-(define-key semantic-tag-folding-mode-map (kbd "C-=") 'semantic-tag-folding-show-all)
-;;折叠和打开单个buffer的所有代码
-(define-key semantic-tag-folding-mode-map (kbd "C-_") 'semantic-tag-folding-fold-block)
-(define-key semantic-tag-folding-mode-map (kbd "C-+") 'semantic-tag-folding-show-block)
-</code></p>
-
-<p>为了使用更方便（即对上面cedet插件的一个补充），需要再安装一个ecb插件。下载ecb后解压到~/.emacs.d/emacs目录中即可，然后加上下面两句：
-<code>
-;;==============================================================
-;;ecb配置
-;;==============================================================
-;;(require 'ecb)
-;;开启ecb用,M-x:ecb-activate
-(require 'ecb-autoloads)
-;;自动启动ecb并且不显示每日提示
-;;(require 'ecb)
-;;(setq ecb-auto-activate t)
-(setq ecb-tip-of-the-day nil)
-</code>
-为了实现自动补全功能，需要安装auto-complete和yasnippet这两个插件。auto-complete下载后放到~/.emacs.d/emacs目录中解压，然后进入解压后的目录输入make命令即可；yasnippet下载后解压到~/.emacs.d/emacs目录中即可。下面是关于这两个插件的配置：
-<code>
-;;==========================================================
-;;YASnippet的配置
-;;==========================================================
-(require 'yasnippet)    ;;not yasnippet-bundle
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/emacs/yasnippet-0.6.1c/snippets")
-</code>
-装完插件后，作一些综合的配置：
-```
-;;配置Semantic搜索范围
-(setq semanticdb-project-roots</p>
-
-<pre><code>  (list
-   (expand-file-name "/")))
-</code></pre>
-
-<p>;;自定义补全命令，如果单词在中间就补全，否则就tab
-(defun my-indent-or-complete()
-  (interactive)
-  (if (looking-at &ldquo;\>&rdquo;)</p>
-
-<pre><code>  (hippie-expand nil)
-  (indent-for-tab-command))
-</code></pre>
-
-<p>  )
-;;补全快捷键，ctrl+tab用senator补全，不显示列表
-;;alt+/补全，显示列表让选择
-(global-set-key [(control tab)] &lsquo;my-indent-or-complete)
-(define-key c-mode-base-map [(meta ?/)] 'semantic-ia-complete-symbol-menu)
-(autoload 'senator-try-expand-semantic &ldquo;senator&rdquo;)
-(setq hippie-expand-try-functions-list</p>
-
-<pre><code>  '(
-    senator-try-expand-semantic
-    try-expand-dabbrev
-    try-expand-dabbrev-visible
-    try-expand-dabbrev-all-buffers
-    try-expand-dabbrev-from-kill
-    try-expand-list
-    try-expand-list-all-buffers
-    try-expand-line
-    try-expand-line-all-buffers
-    try-complete-file-name-partially
-    try-complete-file-name
-    try-expand-whole-kill
-    )
-  )
-</code></pre>
-
-<p>```</p>
-
-<h1>键绑定</h1>
-
-<p>为了使用emacs更方便，需要一些键绑定（即自己定义一些组合键），这也是emacs配置中必不可少的一步。自定义组合键放在cykbd.el文件中。根据一般的习惯用f1来表示帮助，即man命令：
-<code>
-(global-set-key [f1] 'manual-entry)
-(global-set-key [C-f1] 'info )
-</code>
-f3-f5的一些绑定：
-```
-;;f3为查找字符串,alt+f3关闭当前缓冲区
-(global-set-key [f3] &lsquo;grep-find)
-(global-set-key [M-f3] 'kill-this-buffer)</p>
-
-<p>;;.emacs中设一个speedbar的快捷键
-(global-set-key [(f4)] &lsquo;speedbar-get-focus)
-;;ctrl-f4,激活,ecb
-(global-set-key [C-f4] 'ecb-activate)</p>
-
-<p>;;F5显示/隐藏工具栏 方便调试
-(global-set-key [f5] &lsquo;tool-bar-mode)
-;;ctrl-F5显示/隐藏菜单栏 ;; M-x menu-bar-open
-(global-set-key [C-f5] 'menu-bar-mode)
-<code>
-f6为gdb调试，f7调用make来对原文件进行编译：
-</code>
-(global-set-key [f6] 'gdb)</p>
-
-<p>;;  C-f7, 设置编译命令; f7, 保存所有文件然后编译当前窗口文件
-(defun du-onekey-compile ()
-  &ldquo;Save buffers and start compile&rdquo;
-  (interactive)
-  (save-some-buffers t)
-  (switch-to-buffer-other-window &ldquo;<em>compilation</em>&rdquo;)
-  (compile compile-command))</p>
-
-<p>(setq-default compile-command &ldquo;make&rdquo;)  <br/>
-(global-set-key [C-f7] &lsquo;compile)
- (global-set-key [f7] 'du-onekey-compile)
-```</p>
-
-<p>将f8为对buffer的一些常用操作：
-```
-;;目的是开一个shell的小buffer，用于更方便地测试程序(也就是运行程序了)，我经常会用到。
-;;f8就是另开一个buffer然后打开shell，C-f8则是在当前的buffer打开shell,shift+f8清空eshell
-(defun open-eshell-other-buffer ()
-  &ldquo;Open eshell in other buffer&rdquo;
-  (interactive)
-  (split-window-vertically)
-  (eshell))
-(defun my-eshell-clear-buffer ()
-  &ldquo;Eshell clear buffer.&rdquo;
-  (interactive)
-  (let ((eshell-buffer-maximum-lines 0))</p>
-
-<pre><code>(eshell-truncate-buffer)))
-</code></pre>
-
-<p>(global-set-key [(f8)] &lsquo;open-eshell-other-buffer)
-(global-set-key [C-f8] 'eshell)
-(global-set-key [S-f8] 'my-eshell-clear-buffer)
-<code>
-f9-f11的一些绑定：
-</code>
-;;设置[C-f9]为调用dired命令
-(global-set-key [C-f9] 'dired)
-(global-set-key [f9] 'other-window);f9在其他窗口之间旋转</p>
-
-<p>;;设置F10为撤销
-(global-set-key [C-f10] &lsquo;undo)</p>
-
-<p>;;设置F11快捷键指定Emacs 的日历系统
-(global-set-key [C-f11] &lsquo;calendar)
-<code>
-用f12查看函数定义：
-</code>
-;;设置C-F12 快速察看日程安排
-;;F12调到函数定义
-(global-set-key [f12] 'semantic-ia-fast-jump)
-(global-set-key [C-f12] 'list-bookmarks)
-;;shift-f12跳回去
-(global-set-key [S-f12]</p>
-
-<pre><code>(lambda ()
-(interactive)
-(if (ring-empty-p (oref semantic-mru-bookmark-ring ring))
-(error "Semantic Bookmark ring is currently empty"))
-(let* ((ring (oref semantic-mru-bookmark-ring ring))
-(alist (semantic-mrub-ring-to-assoc-list ring))
-(first (cdr (car alist))))
-(if (semantic-equivalent-tag-p (oref first tag)
-(semantic-current-tag))
-(setq frist (cdr (car (cdr alist)))))
-(semantic-mrub-switch-tags first))))
-</code></pre>
-
-<p><code>
-对ecb的键绑定：
-</code>
-;;==================ecb的配置=================================
-;;为了ecb窗口的切换
-(global-set-key [M-left] &lsquo;windmove-left)
-(global-set-key [M-right] 'windmove-right)
-(global-set-key [M-up] 'windmove-up)
-(global-set-key [M-down] 'windmove-down)
-;;隐藏和显示ecb窗口
-(global-set-key [f11] 'ecb-hide-ecb-windows)
-(global-set-key [S-f11] 'ecb-show-ecb-windows)
-<code>
-对窗口的一些键绑定：
-</code>
-;;关闭当前窗口,alt+4
-(global-set-key (kbd &ldquo;M-4&rdquo;) 'delete-window)
-;;(global-set-key (kbd &ldquo;M-4&rdquo;) 'kill-this-buffer)
-;;关闭其他窗口,alt+1
-(global-set-key (kbd &ldquo;M-1&rdquo;) 'delete-other-windows)
-;;水平分割窗口,alt+2
-(global-set-key (kbd &ldquo;M-2&rdquo;) 'split-window-vertically)
-;;垂直分割窗口,alt+3
-(global-set-key (kbd &ldquo;M-3&rdquo;) 'split-window-horizontally)
-;;切换到其他窗口，alt+0
-(global-set-key (kbd &ldquo;M-0&rdquo;) 'other-window)
-;;显示缓冲区完整名称
-(global-set-key (kbd &ldquo;M-5&rdquo;) 'display-buffer-name)
-```</p>
-
-<h1>Emacs的扩展配置</h1>
-
-<p>为了使emacs更符合个人的习惯，增加了一个cyexpand.el配置文件，其部分设置如下：
-```
-;; 编码设置
-(require &lsquo;coding-settings)</p>
-
-<p>;; `mode-line'显示格式
-(require &lsquo;mode-line-settings)</p>
-
-<p>;; 各种语言开发方面的设置,这个设置牵涉到太多配置&hellip;.
-(require &lsquo;dev-settings)</p>
-
-<p>;; 显示行号
-(require &lsquo;linum-settings)</p>
-
-<p>;; color theme Emacs主题,很多face文件
-(require &lsquo;color-theme-settings)</p>
-
-<p>(require &lsquo;ahei-face)
-(require 'color-theme-ahei)
-(require 'face-settings)</p>
-
-<p>;; 高亮当前行
-(require &lsquo;hl-line-settings)</p>
-
-<p>;; 字体配置
-(require &lsquo;font-settings)
-;; diff
-(require 'diff-settings)
-;; Emacs的diff: ediff,有个my-fontest-win的文件很关键
-(require 'ediff-settings)</p>
-
-<p>;; 在buffer中方便的查找字符串: color-moccur
-(require &lsquo;moccur-settings)
-;; Emacs超强的增量搜索Isearch配置
-(require 'isearch-settings)</p>
-
-<p>;; 增加更丰富的高亮
-(require &lsquo;generic-x)</p>
-
-<p>;; spell check
-(setq-default ispell-program-name &ldquo;aspell&rdquo;)</p>
-
-<p>;; Emacs中的包管理器
-(require &lsquo;package)
-(package-initialize)</p>
-
-<p>;; 在Emacs里面使用shell
-(require &lsquo;term-settings)
-(require 'multi-term-settings)</p>
-
-<p>;; 可以把光标由方块变成一个小长条
-(require &lsquo;bar-cursor)
-```</p>
-
-<p>到此为止，已经将emacs打造成了开发C/C++的简易IDE。在使用过程中只需要会配置base.el、cycode.el、cykbd.el、cyexpand.el这四个文件即可，相关配置文件和插件可以到 <a href="https://github.com/txgcwm/emacs.d">这里</a> 下载。</p>
 ]]></content>
   </entry>
   

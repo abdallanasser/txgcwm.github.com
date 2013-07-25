@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>残剑</title>
+  <title>Linux下iptables防火墙原理及使用 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="残剑的个人博客">
-  <meta name="keywords" content="Linux，C/C++，Geeker/Maker">
+  <meta name="description" content="netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。 &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -64,15 +64,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Linux下iptables防火墙原理及使用</a></h1>
+      <h1 class="entry-title">Linux下iptables防火墙原理及使用</h1>
     
     
       <p class="meta">
@@ -90,14 +87,14 @@
 
 <time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
         
-         | <a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
+<div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
 
 <h1>iptables传输数据包的过程</h1>
 
@@ -401,75 +398,16 @@
 </ul>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/24/astylege-shi-hua-dai-ma/">Astyle格式化代码</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
 
-<time datetime="2013-07-24T18:36:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/24/astylege-shi-hua-dai-ma/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
-
-<p>下面介绍一下astyle的简单使用。例如有以下的源码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{int i;printf("Just a test!\n");for(i=0;i&lt;10;++i)printf("%d\n",i);}return 0;}</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/24/astylege-shi-hua-dai-ma/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">How to Resolve &#8220;Error Opening Terminal Linux&#8221;</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -481,349 +419,60 @@
   
 
 
-<time datetime="2013-07-24T18:33:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>error opening terminal Linux
-</span><span class='line'>error opening terminal xterm
-</span><span class='line'>error opening terminal vt100
-</span><span class='line'>error opening terminal vt102
-</span><span class='line'>error opening terminal unknown
-</span><span class='line'>error opening terminal cgywin
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/">Ubuntu下安装SublimeText2及其插件</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙</a>
+  
+</span>
 
 
-<time datetime="2013-07-23T22:33:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/#disqus_thread">Comments</a>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。</p>
-
-<h1>软件安装</h1>
-
-<p>Ubuntu下安装Sublime Text 2有两种方式：指令安装和直接下载安装。</p>
-
-<h2>指令安装</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:webupd8team/sublime-text-2
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install sublime-text-2</span></code></pre></td></tr></table></div></figure>
-
-
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Octopress添加中文标签功能</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-21T11:02:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopress有自带的分类，详情请见 <a href="http://octopress.org/docs/plugins/category-generator/">官方文档</a> 。<code>_config.yml</code>中配置项如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>category_dir: blog/categories
-</span><span class='line'>category_title_prefix: "Category: "</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后添加类似<code>categories: [Ruby&amp;Rails]</code>或<code>categories: [Ruby&amp;Rails，C/C++]</code>的分类标签配置到每个<code>_posts/*.markdown</code>文件头中，示例如下:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: "Octopress添加中文标签功能"
-</span><span class='line'>date: 2013-07-21 11:02
-</span><span class='line'>comments: true
-</span><span class='line'>categories: [Ruby&Rails,Octopress]
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/blog/2013/07/24/astylege-shi-hua-dai-ma/" title="Previous Post: astyle格式化代码">&laquo; astyle格式化代码</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-20T14:47:00+08:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用<code>sudo apt-get install emacs</code>来安装Emaces。</p>
-
-<h1>Emacs的基本操作和组合键</h1>
-
-<h2>模式键定义</h2>
-
-<p>四个模式键：C&mdash;-Ctrl；M&mdash;-Alt；s&mdash;-Super(Win)；S&mdash;-Shift</p>
-
-<p>比如：</p>
-
-<p>C-x：表示按下ctrl键，然后按下x键。</p>
-
-<p>C-x c C-c：表示按下ctrl，然后按下x键，松开后再按下c键。</p>
-
-<p>C-x k：表示按下ctrl，同时按下x和k键。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Uboot中TFTP解释</a></h1>
-    
-    
-      <p class="meta">
-        
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
-
-<p>使用TFTP传送文件的步骤：</p>
-
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
-
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Linux下c语言获取网络接口IP地址</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T22:34:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux环境下，可以使用以下的代码获取网络的ip地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if (gethostname(host, sizeof(host)) &lt; 0) {
-</span><span class='line'>    printf("Can't get hostname\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>if ((hp = gethostbyname(host)) == NULL) {
-</span><span class='line'>    printf("Can't get host address\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>memcpy((char *) &intaddr, (char *) hp-&gt;h_addr_list[0],
-</span><span class='line'>        (size_t) hp-&gt;h_length);</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     
@@ -856,7 +505,7 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">How to Resolve &#8220;Error Opening Terminal Linux&#8221;</a>
+        <a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">How to Resolve "Error Opening Terminal Linux"</a>
       </li>
     
       <li class="post">
@@ -938,7 +587,7 @@
       <a href="http://tonybai.com/">Tony Bai</a>
     </li>        
 	<li>
-      <a href="http://www.roboby.com/">Roboby&#8217;s Home</a>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
     </li>
 	<li>
       <a href="http://www.zhizhihu.com/">丕子</a>
@@ -998,7 +647,7 @@
       <a href="http://www.wypblog.com/">过往记忆</a>
     </li>
 	<li>
-      <a href="http://edsionte.com/techblog/">edsionte&#8217;s Linuxworld|新手区</a>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
     </li>
 	<li>
       <a href="http://basiccoder.com/">basic coder</a>
@@ -1019,7 +668,7 @@
       <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
     </li>
 	<li>
-      <a href="http://wangcong.org/blog/">A Geek&#8217;s Page</a>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
     </li>                
 	<li>
       <a href="http://bachiscoding.com/">巴赫在编码</a>
@@ -1074,6 +723,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -1088,7 +738,10 @@
       var disqus_shortname = 'txgcwm';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
