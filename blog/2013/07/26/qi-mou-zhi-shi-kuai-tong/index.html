@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux下C语言伪随机数编程 - 残剑</title>
+  <title>奇谋之士蒯通 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、 &hellip;">
+  <meta name="description" content="《史记》中有各式各样的人物，司马迁却没有给奇谋之士蒯通单独列传，留下那不平凡的事迹给后人称颂。关于蒯通这个人的事迹，也只能从其他人的列传里了解到他，对于他的谋略以及对天下形势的远见都令人佩服。 如此有才华的人，却为何没有自己的列传，只能出现在他人的列传之中？原因很简单，司马迁写书的时代是大汉王朝， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -69,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux下C语言伪随机数编程</h1>
+      <h1 class="entry-title">奇谋之士蒯通</h1>
     
     
       <p class="meta">
@@ -85,7 +85,7 @@
   
 
 
-<time datetime="2013-07-07T12:50:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2013-07-26T21:52:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,175 +94,33 @@
   </header>
 
 
-<div class="entry-content"><p>在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、srand来生成伪随机数。</p>
+<div class="entry-content"><p>《史记》中有各式各样的人物，司马迁却没有给奇谋之士蒯通单独列传，留下那不平凡的事迹给后人称颂。关于蒯通这个人的事迹，也只能从其他人的列传里了解到他，对于他的谋略以及对天下形势的远见都令人佩服。</p>
 
-<h1>rand产生伪随机数</h1>
+<p>如此有才华的人，却为何没有自己的列传，只能出现在他人的列传之中？原因很简单，司马迁写书的时代是大汉王朝，而蒯通却在那个朝代犯下了特大的错误。那么这么一个人到底有什么样的才华呢？且让我们看看他的一些事迹。</p>
 
-<p>Linux中rand()会返回一随机数值，范围在0至RAND_MAX 间，其中RAND_MAX定义在stdlib.h，其值为2147483647。</p>
+<h1>善待秦吏</h1>
 
-<p>以下例子利用rand函数生成随机数。</p>
+<p>他还是在范阳的时候，那时也是很不得志。山东群起的农民大军攻入了他所在的县城，并且捕捉了县令，由于长期受到秦国法律的压制，很多人都建议处死县令以快人心。这样看来，也是情理之中！可这时他站了出来，极力反对这样做，认为这样做是极其愚蠢的。</p>
 
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
+<p>“县令之所以那么做，只是按照秦国的法律办事，如果没有照办的话，他就会受到法律的惩罚。将军认为自己的军队是要听从统帅的命令，还是自作主张。如果将军认为服从命令是有必要的话，那么他作为一个秦国的官员是很尽职的。将军执意要处死一个遵从命令的士兵，这种事能不让人心寒吗？在残酷的秦法之下，他也是一个受害者。恰恰相反，将军要厚待县令，尽管他之前所做的一切近乎残忍。如果你杀了他的话，秦国其它的县令听到了这个消息后又会怎么想，他们看不到希望就只会奋死反抗，那时将军有把握战胜他们吗？秦王专政确实不得民心，可是他强大的军队是值得将军深思的。”将军遵从了他的意见，没有杀那个县令，并且厚待了他，让他到未攻下的县城郊外游玩，以示义军对过去的错误既往不咎。看到这一幕，秦国的县令纷纷投城，这就是所谓的不战而屈人之兵啊！</p>
 
-#define LOOP_TIMES    5
+<p>之后不知道他为什么没有留在那个将军的麾下，或许他认为那个将军无才吧。也难怪，我竭力在记忆中去寻找那个将军的名字，可是我就是想不起来。他作出了一个抉择，去投靠了韩信。或许投靠韩信也是一个错误，韩信的优柔寡断注定了蒯通的命运是悲哀的。</p>
 
-int main(int argc, char *argv[])
-{
-    int i;
+<h1>三分天下</h1>
 
-    for(i=0; i&lt; LOOP_TIMES; i++)
-        printf("%d ", rand());
+<p>汉王被楚围攻，不能逃脱，此时求助于韩信，蒯通说齐王：“今天下三分，而大王已经得到了一份，现在就看大王你的决定了。要是你投靠了汉王，汉王就会取得天下。那时你的死期也就到了，之所以你现在还活得好好的是因为天下还有一个楚王存在，而你就是他的克星，现在留着你是很有价值的。你要是投靠项王，项王就会取得天下，虽然项王不用大才，你却可以暂时保全性命。要是你选择谁都不帮的话，从此以后三分天下，谁都不敢先动。凭借着齐国的财富，可以修炼兵甲，鼓励农耕，不出几年齐国就可以东进，一举歼灭汉楚大军。那时，即便他们联手也无济于事。将军的丰功伟业也将会被世人传颂，还望将军慎思！”</p>
 
-    printf("\n");
+<p>然而，韩信并没有接纳他的意见，摆出了那一大堆仁义高论，搬兵去救刘邦了。</p>
 
-    return 0;
-}
-</code></pre>
+<h1>各为其主</h1>
 
-<p>运行结果：</p>
+<p>蒯通给自己埋下了一个杀头的伏笔，他竟然劝韩信造反：“虽然天下已经太平，可是将军功高盖主，汉王坐在龙椅上会安心吗？把你除掉只是暂时没有一个合适的理由，将军趁现在世局还不太稳定要早做决定啊！时间一久很多部下就可能被汉王给收买了，那时将军想再起兵就难上加难了。”可是，韩信再一次没有听从他的意见，最终落得个身首异处的下场。</p>
 
-<pre><code>$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793 
-$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793
-</code></pre>
+<p>韩信在最后的留言中有这么一句“信言恨不用蒯通计”。在清除同党的时候，刘邦特别强调一定要活捉蒯通。刘邦见到他就大骂“是不是你教淮阴侯造反的”，蒯通回答的也干脆“是的，就是我教他的，他不用我的计策，所以被杀了；要是他用的话，大王你能够杀了他吗&#8221;。刘邦很生气，直接来了这么一句“亨之”。这时，他喊冤了。汉王很是好奇“是你教韩信造反的，你自己都承认了，亨了你，有何冤枉的”。蒯通辩道&#8221;秦国无道，天下的人都反对他；秦王失鹿，天下的人都追逐它。最终却被大王得到了。曾经那么多人为了得到它，都反对大王，难道大王真的要把他们都亨了吗？况且大王现在很多精锐部队都曾反对过你，难道你连他们都要亨了吗（言下之意是你杀了他们你靠谁去，你就不怕他们联合起来造反吗，到时候就不知道谁亨谁了）”。当然，他也没有忘了夸刘邦两句“当是时，臣唯独知韩信，非知陛下也”。最后，刘邦仔细想想还是放了蒯通。如果蒯通没有足够的谋略，他能够从虎口脱身吗？</p>
 
-<p>从以上的结果可以看出，rand两次产生的随机数是一样的，之所以这样是因为“在调用rand函数产生随机数前没有先利用srand()设好随机数种子”。如果未设随机数种子，rand()在调用时会自动设随机数种子为1。</p>
+<p>之所以他没有被写入列传里，就是他劝说韩信造反。这件事他没有做错，错的是韩信没有采纳，或者说他在某种意义上选错了主子。司马迁要是敢给他列传，或许还要受一次腐刑，汉武帝会同意他的《史记》出版吗？你给他列传，这不是明摆着让天下人造我大汉的反吗，这事怎么能忍。</p>
 
-<!--more-->
-
-
-<h1>srand设置随机数种子</h1>
-
-<p>要想每次运行得到的随机数不同，我们还要设置随机数种子。既然要设置随机数种子，那我们就使用srand()来设置rand()产生随机数时的随机数种子。参数seed必须是个整数，通常可以利用geypid()或time(NULL)的返回值来当做seed。如果每次seed都设相同值，rand()所产生的随机数值每次就会一样。</p>
-
-<p>以下例子设置随机数种子然后生成随机数。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-
-#define LOOP_TIMES    5
-
-int main(int argc, char *argv[])
-{
-    int i;
-
-    srand((unsigned int) time(NULL));
-
-    for(i=0; i&lt;LOOP_TIMES; i++)
-        printf("%d ", rand());
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-1943306114 679448932 319436844 1922998560 1458181616 
-$ ./rand
-1789418334 999331839 757991171 363979956 882919632 
-</code></pre>
-
-<h1>合理利用随机数</h1>
-
-<p>运行结果是不是不同了，但这么大的数对我们来说也没有多大意义，又怎么利用这些这些随机数呢？我们可对它进行范围化分，这样就可以产生我们想要范围内的数。</p>
-
-<p>产生一定范围随机数的通用表示公式：a + rand() % n，其中的a是起始值，n是整数的范围；</p>
-
-<p>要取得[a,b)的随机整数，使用(rand() % (b-a))+ a;</p>
-
-<p>要取得[a,b]的随机整数，使用(rand() % (b-a+1))+ a，另一种表示为a + (int)b * rand() / (RAND_MAX + 1)；</p>
-
-<p>要取得(a,b]的随机整数，使用(rand() % (b-a))+ a + 1;</p>
-
-<p>要取得0～1之间的浮点数，可以使用rand() / double(RAND_MAX)。</p>
-
-<p>以下例子生成［0，26］之间的数，使用了语句“nu = 0 + (int)( 26.0 *rand()/(RAND_MAX + 1.0));”来获取a到b之间的随机整数。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-
-#define LOOP_TIMES    5
-
-int main(int argc, char *argv[])
-{
-    int i, nu;
-
-    srand((unsigned int) time(NULL));
-
-    for(i=0; i&lt; LOOP_TIMES; i++) {
-        nu = 0 + (int)( 26.0 *rand()/(RAND_MAX + 1.0));
-        printf("%d ", nu);
-    }
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-6 21 20 22 7
-$ ./rand
-4 12 25 3 13
-</code></pre>
-
-<h1>生成随机字符串</h1>
-
-<p>以下例子用来生成一个指定长度的随机字符串。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-
-#define BUFFER_LENGTH 257
-
-int main(int argc, char *argv[])
-{
-    int leng = 128 ;
-    int i, nu;
-    char buffer[BUFFER_LENGTH];
-
-    printf("Please Input length for the String, Default is 128, The Maxest legth is 256:");
-    fgets(buffer, BUFFER_LENGTH, stdin);
-    buffer[strlen(buffer)-1] = '\0' ;
-
-    if(buffer[0] != '\0')
-        leng = atoi(buffer);
-
-    srand((unsigned int)time(NULL));
-    bzero(buffer, BUFFER_LENGTH);
-
-    for (i= 0; i&lt; leng; i++)
-        buffer[i] = 'a' + ( 0+ (int)(26.0 *rand()/(RAND_MAX + 1.0)));
-
-    buffer[strlen(buffer)] = '\0';
-
-    printf("The randm String is [ %s ]\n", buffer);
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-Please Input length for the String, Default is 128, The Maxest legth is 256:8
-The randm String is [ rdekbnxj ]
-$ ./rand
-Please Input length for the String, Default is 128, The Maxest legth is 256:36
-The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
-</code></pre>
-
-<p>注意，需要使用bzero(buffer, 257)这条语句将缓存清空，否则生成的随机字符串中可能就会出现乱码的情况。</p>
+<p>《史记》毕竟是司马迁一生的心血，他不能那么做，只能舍弃他了。舍弃你一个，而其他千万的大才会被历史记住！所以，只能委屈你了，蒯通&hellip;&hellip;.要是你不生在汉朝成立的时代，要是在战国，那么你的事迹在今天也会被很多人传颂。虽然对你我所知道的很少，但这一些已经足够，足以显现你的大智大勇！</p>
 </div>
 
 
@@ -285,12 +143,12 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
   
 
 
-<time datetime="2013-07-07T12:50:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2013-07-26T21:52:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/bo-gu-tong-jin/'>博古通今</a>
   
 </span>
 
@@ -324,10 +182,8 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/" title="Previous Post: Linux下PDF文件的操作与转换">&laquo; Linux下PDF文件的操作与转换</a>
+        <a class="basic-alignment left" href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/" title="Previous Post: Linux下iptables防火墙原理及使用">&laquo; Linux下iptables防火墙原理及使用</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/" title="Next Post: 求两个整数的最大公约数">求两个整数的最大公约数 &raquo;</a>
       
     </p>
   </footer>
@@ -608,8 +464,8 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/';
         var disqus_script = 'embed.js';
       
     (function () {
