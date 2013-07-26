@@ -60,7 +60,7 @@ Categories=Application;Development;
 
 也可以先安装package control组件，然后直接在线安装：
 
-+ 按Ctrl + `调出console ，其中`是键盘左上角那个符号。
++ 按Ctrl + \`调出console ，其中\`是键盘左上角那个符号。
 + 粘贴以下代码到底部命令行并回车。
 ``` 
 import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
