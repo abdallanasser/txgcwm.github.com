@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-27T14:41:09+08:00</updated>
+  <updated>2013-07-27T14:57:39+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -24,88 +24,134 @@
 
 <p>以上指令的中间数字是什么意思呢？是man的分卷号，所有的手册页都属于一个特定的分卷号，用一个字符来表示。Linux下最通用的分卷号及其名称和说明如下表所示。</p>
 
-<p>|领域 |名称 |说明|</p>
-
-<p>|1 |用户命令，| 可由任何人启动的。|</p>
-
-<p>|2| 系统调用，| 即由内核提供的函数。|</p>
-
-<p>|3| 例程，| 即库函数。|<br/>
-|4| 设备，| 即/dev目录下的特殊文件。|
-|5| 文件格式描述，| 例如/etc/passwd。|
-|6| 游戏，| 不用解释啦！|
-|7| 杂项，| 例如宏命令包、惯例等。|
-|8| 系统管理员工具，| 只能由root启动。|
-|9| 其他（Linux特定的），| 用来存放内核例行程序的文档。|
-|n| 新文档，| 可能要移到更适合的领域。|
-|o| 老文档，| 可能会在一段期限内保留。|
-|l| 本地文档，| 与本特定系统有关的。|</p>
-
 <table>
 <thead>
 <tr>
-<th>Tables        </th>
-<th> Are           </th>
-<th> Cool</th>
+<th>分卷号         </th>
+<th>名称 </th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>col 3 is      </td>
-<td> right-aligned </td>
-<td> $1600   </td>
+<td>1</td>
+<td> 用户命令     </td>
+<td> 可由任何人启动  </td>
 </tr>
 <tr>
-<td>col 2 is      </td>
-<td> centered      </td>
-<td>   $12   </td>
+<td>2</td>
+<td> 系统调用     </td>
+<td> 由内核提供的函数  </td>
 </tr>
 <tr>
-<td>zebra stripes </td>
-<td> are neat      </td>
-<td>    $1  </td>
+<td>3</td>
+<td> 例程        </td>
+<td> 库函数    </td>
+</tr>
+<tr>
+<td>4</td>
+<td> 设备        </td>
+<td> /dev目录下的特殊文件   </td>
+</tr>
+<tr>
+<td>5</td>
+<td> 文件格式描述  </td>
+<td> 例如/etc/passwd   </td>
+</tr>
+<tr>
+<td>6</td>
+<td> 游戏        </td>
+<td> 略  </td>
+</tr>
+<tr>
+<td>7</td>
+<td> 杂项        </td>
+<td> 例如宏命令包、惯例等  </td>
+</tr>
+<tr>
+<td>8</td>
+<td> 系统管理员工具</td>
+<td> 只能由root启动  </td>
+</tr>
+<tr>
+<td>9</td>
+<td> 其他（Linux特定的）</td>
+<td> 用来存放内核例行程序的文档  </td>
+</tr>
+<tr>
+<td>n</td>
+<td> 新文档           </td>
+<td> 可能要移到更适合的领域  </td>
+</tr>
+<tr>
+<td>o</td>
+<td> 老文档           </td>
+<td> 可能会在一段期限内保留  </td>
+</tr>
+<tr>
+<td>l</td>
+<td> 本地文档          </td>
+<td> 与特定系统有关的  </td>
 </tr>
 </tbody>
 </table>
 
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th> Column1     </th>
-<th> Column2      </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td> foo         </td>
-<td> foo          |</td>
-</tr>
-</tbody>
-</table>
+<!--more-->
+
+
+<br></br>
 
 
 <h1>常用参数和用法</h1>
 
 <ul>
-<li><p>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。</p>
+<li>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。</li>
+</ul>
 
-<p>  $ man -a cmd</p></li>
-<li><p>显示所有cmd的所有手册文件的路径，如<code>man -aw fam</code>指令。</p>
 
-<p>  $ man -aw cmd</p></li>
-<li><p>直接指定特定领域内搜索手册页，如<code>man 3 fam</code>直接进入库函数版的帮助。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -a cmd</span></code></pre></td></tr></table></div></figure>
 
-<p>  $ man 领域代号 cmd</p></li>
-<li><p>指定手册文件的搜索路径，如<code>man -M /home/mysql/man mysql</code>显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。</p>
 
-<p>  $ man -M cmd</p></li>
-<li><p>把man手册信息输出到文本文件。</p>
+<ul>
+<li>显示所有cmd的所有手册文件的路径，如<code>man -aw fam</code>指令。</li>
+</ul>
 
-<p>  $ man cmd | col -b > cmd.txt</p></li>
-<li><p>查看特定语言版本的手册页，显示特定语言manpage文件的路径。</p></li>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -aw cmd</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>直接指定特定领域内搜索手册页，如<code>man 3 fam</code>直接进入库函数版的帮助。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ man 领域代号 cmd</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>指定手册文件的搜索路径，如<code>man -M /home/mysql/man mysql</code>显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -M cmd</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>把man手册信息输出到文本文件。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ man cmd | col -b &gt; cmd.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>查看特定语言版本的手册页，显示特定语言manpage文件的路径。</li>
 </ul>
 
 
