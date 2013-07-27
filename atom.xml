@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-27T13:41:42+08:00</updated>
+  <updated>2013-07-27T13:43:54+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/"/>
     <updated>2013-07-27T13:27:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling</id>
-    <content type="html"><![CDATA[<p>Unix/Linux下的man命令可以查询常用的命令和函数。可是对于只知道用&#8221;man 函数名&#8221;来查询的人来说，会遇到很多问题。比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
+    <content type="html"><![CDATA[<p>Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
 
 <h1>分卷号</h1>
 
