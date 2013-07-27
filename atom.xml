@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-26T23:30:32+08:00</updated>
+  <updated>2013-07-27T13:39:00+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux操作系统下的MAN命令]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/"/>
+    <updated>2013-07-27T13:27:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling</id>
+    <content type="html"><![CDATA[<p>Unix/Linux下的man命令可以查询常用的命令和函数。可是对于只知道用&#8221;man 函数名&#8221;来查询的人来说，会遇到很多问题。比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
+
+<h1>分卷号</h1>
+
+<p>以上指令的中间数字是什么意思呢？是man的分卷号，所有的手册页都属于一个特定的分卷号，用一个字符来表示。Linux下最通用的分卷号及其名称和说明如下表所示。</p>
+
+<p>|领域 |名称 |说明|
+|1 |用户命令，| 可由任何人启动的。|
+|2| 系统调用，| 即由内核提供的函数。|
+|3| 例程，| 即库函数。|
+|4| 设备，| 即/dev目录下的特殊文件。|
+|5| 文件格式描述，| 例如/etc/passwd。|
+|6| 游戏，| 不用解释啦！|
+|7| 杂项，| 例如宏命令包、惯例等。|
+|8| 系统管理员工具，| 只能由root启动。|
+|9| 其他（Linux特定的），| 用来存放内核例行程序的文档。|
+|n| 新文档，| 可能要移到更适合的领域。|
+|o| 老文档，| 可能会在一段期限内保留。|
+|l| 本地文档，| 与本特定系统有关的。|</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[奇谋之士蒯通]]></title>
@@ -4078,78 +4105,6 @@ UDEVD_CTRL_RELOAD_RULES //重新加载配置文件
 <p>下面的规则是通过socket发送消息：</p>
 
 <pre><code>90-hal.rules:RUN+="socket:/org/freedesktop/hal/udev_event"
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[求两个整数的最大公约数]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/"/>
-    <updated>2013-07-07T17:10:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu</id>
-    <content type="html"><![CDATA[<p>辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。</p>
-
-<p>设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下：用b除a，得a＝bq&hellip;r1(0≤r1)。若r1=0，则(a，b)＝b；若r1≠0，则再用r1除b，得b＝r1q&hellip;r2(0≤r2)。若r2＝0，则(a，b)＝r1，若r2≠0，则继续用r2除r1,&hellip;如此下去，直到能整除为止。其最后一个非零余数即为(a，b)。</p>
-
-<!--more-->
-
-
-<p>辗转相除法是利用以下性质来确定两个正整数a和b的最大公因子的：</p>
-
-<p>1、若r是a÷b的余数,则gcd(a,b) = gcd(b,r)；</p>
-
-<p>2、若b为0，则其最大公因子为a。</p>
-
-<p>另一种置换实现方式：</p>
-
-<p>1、r为a÷b所得余数（0≤r&lt;b）。若r=0，算法结束，b即为答案；</p>
-
-<p>2、若r不为0，则互换：置a←b，b←r，并返回第一步。</p>
-
-<p>递归实现：</p>
-
-<pre><code>int gcd(int a,int b)
-{
-    if(b == 0)
-        return a;
-    else
-        return gcd(b, a%b);
-}
-</code></pre>
-
-<p>对递归实现的改进：</p>
-
-<pre><code>int gcd(int a,int b)
-{
-    return b ? gcd(b, a%b) : a;
-}
-</code></pre>
-
-<p>置换实现：</p>
-
-<pre><code>int gcd( int a, int b)
-{
-    int temp;
-
-     while(b) {
-        temp = b;
-        b = a%b;
-        a = temp;      
-     }
-
-     return a;
-}
-</code></pre>
-
-<p>对置换实现的改进：</p>
-
-<pre><code>int gcd(int a, int b)
-{
-    while(b)
-        b = a%b + 0/(a=b);
-
-    return a;
-}
 </code></pre>
 ]]></content>
   </entry>
