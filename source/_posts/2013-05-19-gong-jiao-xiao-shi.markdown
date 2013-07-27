@@ -7,7 +7,7 @@ categories: [茶余酒后]
 keywords:
 ---
 
-{% img right http://a.hiphotos.baidu.com/baike/c%3DbaikeA2%2C10%2C95/sign=bb531650f91986185547b8d523864b32/a71ea8d3fd1f41349f42964f241f95cad0c8a786c9177eb5.jpg 300 386 Place Kitten #3 %}
+{% img right http://www.sxgov.cn/shuozhou/shuozhou_content/attachement/jpg/site2/20120421/50e549b0c31210fc608301.jpg 400 567 Place Kitten #3 %}
 
 很舒适的坐在公交后面的位置上，拿着手机看完了一篇文章，退出了应用看了一下时间是8：19，不到百米的距离就要到站了。正当我暗自庆幸能够很早到公司的时候，传来一个女人A的声音“你偷我东西”。A推了女人B一把，B也不甘示弱，迅速还击，两个女人拳打脚踢，几个乘客也因激烈的战斗而离开自身的座位。现在我才明白比男人的战争更恐怖的是女人间的战争。
 
