@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-27T13:48:40+08:00</updated>
+  <updated>2013-07-27T14:02:14+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -43,66 +43,50 @@
 
 <h1>常用参数和用法</h1>
 
-<pre><code>$ man -a cmd
-</code></pre>
+<ul>
+<li><p>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。</p>
 
-<p>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。</p>
+<p>  $ man -a cmd</p></li>
+<li><p>显示所有cmd的所有手册文件的路径，如<code>man -aw fam</code>指令。</p>
 
-<pre><code>$ man -aw cmd
-</code></pre>
+<p>  $ man -aw cmd</p></li>
+<li><p>直接指定特定领域内搜索手册页，如<code>man 3 fam</code>直接进入库函数版的帮助。</p>
 
-<p>显示所有cmd的所有手册文件的路径，如 man -aw fam 就是</p>
+<p>  $ man 领域代号 cmd</p></li>
+<li><p>指定手册文件的搜索路径，如<code>man -M /home/mysql/man mysql</code>显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。</p>
 
-<p>/usr/share/man/man1/fam.1m.gz
-/usr/share/man/man3/fam.3x.gz</p>
+<p>  $ man -M cmd</p></li>
+<li><p>把man手册信息输出到文本文件。</p>
 
-<pre><code>$ man 领域代号 cmd
-</code></pre>
-
-<p>直接指定特定领域内搜索手册页，如 man 3 fam 直接进入库函数版的帮助</p>
-
-<pre><code>$ man -M cmd
-</code></pre>
-
-<p>指定手册文件的搜索路径，如 man -M /home/mysql/man mysql 显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。</p>
-
-<pre><code>$ man cmd | col -b &gt; cmd.txt
-</code></pre>
-
-<p>把man手册信息输出到文本文件
+<p>  $ man cmd | col -b > cmd.txt</p></li>
+<li><p>查看特定语言版本的手册页，显示特定语言manpage文件的路径。
 <code>
 $ LANG=语言代号
 $ man -w cmd
-</code>
-man 特定语言manpage文件的路径</p>
+</code></p></li>
+</ul>
 
-<p>查看特定语言版本的手册页</p>
 
-<p>例如，要查看mplayer的中文man</p>
-
-<p>$ LANG=zh</p>
-
-<p>$ man -w mplayer</p>
-
-<p>/usr/share/man/zh/man1/mplayer.1.gz</p>
-
-<p>新开一个shell窗口（或在原窗口 shell> LANG=en_US.UTF-8)</p>
-
-<p>shell> man /usr/share/man/zh/man1/mplayer.1.gz</p>
+<p>例如要查看mplayer的中文man路径：
+<code>
+$ LANG=en_US.UTF-8
+$ man -w mplayer
+/usr/share/man/zh/man1/mplayer.1.gz
+</code></p>
 
 <h1>配置文件/etc/man.config</h1>
 
-<p>如果你不想每次man cmd都要用-M指定路径，那么可以通过修改配置文件，添加内容如</p>
+<p>如果不想每次<code>man cmd</code>都要用<code>-M</code>指定路径，那么可以通过修改配置文件，添加内容如：</p>
 
 <pre><code>MANPATH /home/mysql/man
 </code></pre>
 
-<p>man在各领域的搜索次序可以通过修改</p>
+<p>man在各领域的搜索次序可以通过修改以下设置：</p>
 
 <pre><code>MANSECT 1:8:2:3:4:5:6:7:9:tcl:n:l:p:o
 </code></pre>
 
-<p>实现，一般不推荐修改。</p>
+<p>不过，一般不推荐修改man的配置文件。</p>
 ]]></content>
   </entry>
   
