@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux操作系统下的MAN命令 - 残剑</title>
+  <title>关于微访谈 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如man read，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数， &hellip;">
+  <meta name="description" content="想法的初衷 进入社会后，周围的事情与我们想象的并不一样，起初我们无所适从，慢慢的我们适应了这个复杂的社会。在这个适应的过程中，背负着社会和家庭的压力，或许有许多人蹉跎了岁月、消磨了意志、荒废了理想，也应该有一些人坚持不懈地行走在通往理想的道路上。有多少人还曾记得自己当初的梦想， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux操作系统下的MAN命令</h1>
+      <h1 class="entry-title">关于微访谈</h1>
     
     
       <p class="meta">
@@ -86,7 +86,7 @@
   
 
 
-<time datetime="2013-07-27T13:27:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
+<time datetime="2013-07-27T23:34:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,172 +95,30 @@
   </header>
 
 
-<div class="entry-content"><p>Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
+<div class="entry-content"><p><img class="right" src="http://pic002.cnblogs.com/images/2010/14032/2010111217383632.jpg" width="228" height="221" title="Place Kitten #3" ></p>
 
-<h1>分卷号</h1>
+<h1>想法的初衷</h1>
 
-<p>以上指令的中间数字是什么意思呢？是man的分卷号，所有的手册页都属于一个特定的分卷号，用一个字符来表示。Linux下最通用的分卷号及其名称和说明如下表所示。</p>
+<p>进入社会后，周围的事情与我们想象的并不一样，起初我们无所适从，慢慢的我们适应了这个复杂的社会。在这个适应的过程中，背负着社会和家庭的压力，或许有许多人蹉跎了岁月、消磨了意志、荒废了理想，也应该有一些人坚持不懈地行走在通往理想的道路上。有多少人还曾记得自己当初的梦想，记得或不记得都有很多的感慨。我们也常想把它记录下来，但真正提笔的时候却不知道从何处下手，所以也就放弃了。</p>
 
-<table>
-<thead>
-<tr>
-<th>分卷号         </th>
-<th>名称 </th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td> 用户命令     </td>
-<td> 可由任何人启动  </td>
-</tr>
-<tr>
-<td>2</td>
-<td> 系统调用     </td>
-<td> 由内核提供的函数  </td>
-</tr>
-<tr>
-<td>3</td>
-<td> 例程        </td>
-<td> 库函数    </td>
-</tr>
-<tr>
-<td>4</td>
-<td> 设备        </td>
-<td> /dev目录下的特殊文件   </td>
-</tr>
-<tr>
-<td>5</td>
-<td> 文件格式描述  </td>
-<td> 例如/etc/passwd   </td>
-</tr>
-<tr>
-<td>6</td>
-<td> 游戏        </td>
-<td> 略  </td>
-</tr>
-<tr>
-<td>7</td>
-<td> 杂项        </td>
-<td> 例如宏命令包、惯例等  </td>
-</tr>
-<tr>
-<td>8</td>
-<td> 系统管理员工具</td>
-<td> 只能由root启动  </td>
-</tr>
-<tr>
-<td>9</td>
-<td> 其他（Linux特定的）</td>
-<td> 用来存放内核例行程序的文档  </td>
-</tr>
-<tr>
-<td>n</td>
-<td> 新文档           </td>
-<td> 可能要移到更适合的领域  </td>
-</tr>
-<tr>
-<td>o</td>
-<td> 老文档           </td>
-<td> 可能会在一段期限内保留  </td>
-</tr>
-<tr>
-<td>l</td>
-<td> 本地文档          </td>
-<td> 与特定系统有关的  </td>
-</tr>
-</tbody>
-</table>
+<p>曾经一个同学在QQ上上传了一张“关于某某事意见签名”的单子，那时引起了强烈的反响，很多人都不曾记得有那么一回事。是的，岁月在消磨着我们的记忆。很多事情我们应该用笔把它记录下来，但多少人会使用日记把过往的经历记录下来呢？那么这个艰难的任务就交由我来处理吧，让我当一次“小史公”来记录你们走过的道路。虽然不能记录每一天的状况，但我们可以记录下一大段时间内的精彩。</p>
 
+<p>由于行业、地域等方面的原因，交流圈变得小型化、区域化，彼此之间的交流越来越少，但我相信大家牵挂着彼此。借助这样一个机会，让大家了解一下我们的近况，增进彼此之间的认识，同时也可以让我们认识到更多的行业。</p>
 
-<!--more-->
+<p>或许我们小有成就，认为这一切不足以拿来分享，可你的经历却可能给一些朋友带来帮助，其它朋友也可能给你带去更好的建议促你成长；或许我们过得很艰辛，这又如何，只有经历过辛酸才能品味美好。无论怎样，我们都可能得获取到宝贵的建议，让我们越走越好。</p>
 
+<h1>执行流程</h1>
 
-<br></br>
+<p>按照初步的设计，本次微访谈的大概流程如下：</p>
 
+<p>1、向受访者发出要求，朋友们也可以主动告知我希望接受这样一个访谈；
+2、如果接受的话，请告知我目前你所从事的事业、想法等等基本信息，我根据获取到的信息设计一些问题；
+3、可以选择以邮件回复的方式或跟我以网络通讯工具交谈的方式来完成微访谈；
+4、整理微访谈的问答以博文的形式发出，问答中所使用的署名采用受访者的网名，如果不同意可以不发表。</p>
 
-<h1>常用参数和用法</h1>
+<h1>后续计划</h1>
 
-<ul>
-<li>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -a cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>显示所有cmd的所有手册文件的路径，如<code>man -aw fam</code>指令。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -aw cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>直接指定特定领域内搜索手册页，如<code>man 3 fam</code>直接进入库函数版的帮助。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ man 领域代号 cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>指定手册文件的搜索路径，如<code>man -M /home/mysql/man mysql</code>显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ man -M cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>把man手册信息输出到文本文件。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ man cmd | col -b &gt; cmd.txt</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>查看特定语言版本的手册页，显示特定语言manpage文件的路径。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ LANG=语言代号
-</span><span class='line'>$ man -w cmd</span></code></pre></td></tr></table></div></figure>
-
-
-<p>例如要查看mplayer的中文man路径：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ LANG=en_US.UTF-8
-</span><span class='line'>$ man -w mplayer
-</span><span class='line'>/usr/share/man/zh/man1/mplayer.1.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>配置文件/etc/man.config</h1>
-
-<p>如果不想每次<code>man cmd</code>都要用<code>-M</code>指定路径，那么可以通过修改配置文件，添加内容如：</p>
-
-<pre><code>MANPATH /home/mysql/man
-</code></pre>
-
-<p>man在各领域的搜索次序可以通过修改以下设置：</p>
-
-<pre><code>MANSECT 1:8:2:3:4:5:6:7:9:tcl:n:l:p:o
-</code></pre>
-
-<p>不过，一般不推荐修改man的配置文件。</p>
+<p>或许很多人不屑于这样的一次访谈，认为一个小小人物不值得记述，但我认为小人物的故事同样精彩。若干年后，或许我们成功了，又或许依旧平凡，回过头看看我们又会有怎样的感慨呢？所以，我希望两年后再做一次微访谈。</p>
 </div>
 
 
@@ -283,12 +141,12 @@
   
 
 
-<time datetime="2013-07-27T13:27:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
+<time datetime="2013-07-27T23:34:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/shell/'>Shell</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/wei-fang-tan/'>微访谈</a>
   
 </span>
 
@@ -322,10 +180,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/" title="Previous Post: 奇谋之士蒯通">&laquo; 奇谋之士蒯通</a>
+        <a class="basic-alignment left" href="/blog/2013/07/27/octopresstian-jia-biao-ge/" title="Previous Post: Octopress添加表格">&laquo; Octopress添加表格</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/27/octopresstian-jia-biao-ge/" title="Next Post: Octopress添加表格">Octopress添加表格 &raquo;</a>
       
     </p>
   </footer>
@@ -607,8 +463,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan/';
         var disqus_script = 'embed.js';
       
     (function () {

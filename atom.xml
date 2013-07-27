@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-27T15:43:06+08:00</updated>
+  <updated>2013-07-27T23:37:39+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于微访谈]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan/"/>
+    <updated>2013-07-27T23:34:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://pic002.cnblogs.com/images/2010/14032/2010111217383632.jpg" width="228" height="221" title="Place Kitten #3" ></p>
+
+<h1>想法的初衷</h1>
+
+<p>进入社会后，周围的事情与我们想象的并不一样，起初我们无所适从，慢慢的我们适应了这个复杂的社会。在这个适应的过程中，背负着社会和家庭的压力，或许有许多人蹉跎了岁月、消磨了意志、荒废了理想，也应该有一些人坚持不懈地行走在通往理想的道路上。有多少人还曾记得自己当初的梦想，记得或不记得都有很多的感慨。我们也常想把它记录下来，但真正提笔的时候却不知道从何处下手，所以也就放弃了。</p>
+
+<p>曾经一个同学在QQ上上传了一张“关于某某事意见签名”的单子，那时引起了强烈的反响，很多人都不曾记得有那么一回事。是的，岁月在消磨着我们的记忆。很多事情我们应该用笔把它记录下来，但多少人会使用日记把过往的经历记录下来呢？那么这个艰难的任务就交由我来处理吧，让我当一次“小史公”来记录你们走过的道路。虽然不能记录每一天的状况，但我们可以记录下一大段时间内的精彩。</p>
+
+<p>由于行业、地域等方面的原因，交流圈变得小型化、区域化，彼此之间的交流越来越少，但我相信大家牵挂着彼此。借助这样一个机会，让大家了解一下我们的近况，增进彼此之间的认识，同时也可以让我们认识到更多的行业。</p>
+
+<p>或许我们小有成就，认为这一切不足以拿来分享，可你的经历却可能给一些朋友带来帮助，其它朋友也可能给你带去更好的建议促你成长；或许我们过得很艰辛，这又如何，只有经历过辛酸才能品味美好。无论怎样，我们都可能得获取到宝贵的建议，让我们越走越好。</p>
+
+<h1>执行流程</h1>
+
+<p>按照初步的设计，本次微访谈的大概流程如下：</p>
+
+<p>1、向受访者发出要求，朋友们也可以主动告知我希望接受这样一个访谈；
+2、如果接受的话，请告知我目前你所从事的事业、想法等等基本信息，我根据获取到的信息设计一些问题；
+3、可以选择以邮件回复的方式或跟我以网络通讯工具交谈的方式来完成微访谈；
+4、整理微访谈的问答以博文的形式发出，问答中所使用的署名采用受访者的网名，如果不同意可以不发表。</p>
+
+<h1>后续计划</h1>
+
+<p>或许很多人不屑于这样的一次访谈，认为一个小小人物不值得记述，但我认为小人物的故事同样精彩。若干年后，或许我们成功了，又或许依旧平凡，回过头看看我们又会有怎样的感慨呢？所以，我希望两年后再做一次微访谈。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress添加表格]]></title>
@@ -4106,166 +4138,6 @@
 </span><span class='line'>
 </span><span class='line'>miniLZO simple compression test passed.</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[minilzo无损压缩库介绍（一）]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/"/>
-    <updated>2013-07-07T23:32:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-([?]-)</id>
-    <content type="html"><![CDATA[<p>在网络上传输大批量数据的时候，网络的传输速度是固定的（比如100 Mb的以太网实际测量的传输速度大概在10 MB/s左右），而想要在固定时间内传输更多容量的数据，最常见的解决方案是——在传输之前通过一定的算法把数据的容量压缩，然后通过网络传输，对端接收到数据之后再通过相应的算法进行解压还原。如果“压缩的时间 + 压缩后数据的传输时间 + 解压缩的时间 &lt; 未压缩数据的传输时间”，就相当于提高了单位时间内的传输能力，拓宽了网络传输的带宽。</p>
-
-<h1>minilzo库使用介绍</h1>
-
-<p>lzo是一个开源的无损压缩c语言库，其优点是压缩/解压缩比较迅速且占用内存小等特点。具体可查看 <a href="http://www.oberhumer.com/opensource/lzo/">这里</a>，提供了比较全的lzo库和一个minilzo库。minilzo库提供了1个c文件和3个头文件，解压后的目录树如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>minilzo-2.06$ tree
-</span><span class='line'>.
-</span><span class='line'>├── COPYING
-</span><span class='line'>├── lzoconf.h
-</span><span class='line'>├── lzodefs.h
-</span><span class='line'>├── Makefile
-</span><span class='line'>├── minilzo.c
-</span><span class='line'>├── minilzo.h
-</span><span class='line'>├── README.LZO
-</span><span class='line'>└── testmini.c</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>常用的有4个API（在使用的时候包含minilzo.h即可）：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* lzo_init() should be the first function you call.
-</span><span class='line'> * Check the return code !
-</span><span class='line'> *
-</span><span class='line'> * lzo_init() is a macro to allow checking that the library and the
-</span><span class='line'> * compiler's view of various types are consistent.
-</span><span class='line'> */
-</span><span class='line'>#define lzo_init() __lzo_init_v2(LZO_VERSION,(int)sizeof(short),(int)sizeof(int),\
-</span><span class='line'>    (int)sizeof(long),(int)sizeof(lzo_uint32),(int)sizeof(lzo_uint),\
-</span><span class='line'>    (int)lzo_sizeof_dict_t,(int)sizeof(char *),(int)sizeof(lzo_voidp),\
-</span><span class='line'>    (int)sizeof(lzo_callback_t))
-</span><span class='line'>
-</span><span class='line'>/* compression */
-</span><span class='line'>LZO_EXTERN(int)
-</span><span class='line'>lzo1x_1_compress        ( const lzo_bytep src, lzo_uint  src_len,
-</span><span class='line'>                                lzo_bytep dst, lzo_uintp dst_len,
-</span><span class='line'>                                lzo_voidp wrkmem );
-</span><span class='line'>
-</span><span class='line'>/* decompression */
-</span><span class='line'>LZO_EXTERN(int)
-</span><span class='line'>lzo1x_decompress        ( const lzo_bytep src, lzo_uint  src_len,
-</span><span class='line'>                                lzo_bytep dst, lzo_uintp dst_len,
-</span><span class='line'>                                lzo_voidp wrkmem /* NOT USED */ );
-</span><span class='line'>
-</span><span class='line'>/* safe decompression with overrun testing */
-</span><span class='line'>LZO_EXTERN(int)
-</span><span class='line'>lzo1x_decompress_safe   ( const lzo_bytep src, lzo_uint  src_len,
-</span><span class='line'>                                lzo_bytep dst, lzo_uintp dst_len,
-</span><span class='line'>                                lzo_voidp wrkmem /* NOT USED */ );</span></code></pre></td></tr></table></div></figure>
-
-
-<p>minilzo库使用十分简单，在压缩和解压缩之前先调用lzo_init函数进行初始化，返回LZO_E_OK表示初始化成功。压缩数据时调用lzo1x_1_compress函数；解压数据时调用lzo1x_decompress函数或lzo1x_decompress_safe函数，这两个函数的区别是——lzo1x_decompress_safe函数会对解压缩数据的有效性进行验证，验证通过才会进行解压缩操作，而lzo1x_decompress函数则不会这么做，数据不是有效时就会产生“段错误”，建议使用lzo1x_decompress_safe函数。以下是这些函数的详细操作说明：</p>
-
-<ul>
-<li>lzo1x_1_compress函数进行压缩数据操作，需要5个参数：压缩的数据、压缩数据的大小、压缩后数据的缓冲区、压缩缓冲区的大小、压缩工作缓冲区。压缩数据成功之后会返回LZO_E_OK。第4个参数传进去的是用来指示存放压缩后数据缓冲区的大小，执行成功之后通过指针返回的结果是压缩后的数据实际使用的缓冲区大小（即压缩后的数据大小）。压缩后需要的数据缓冲区大小的上限是可以根据未压缩数据大小进行计算的，其公式为：</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>output_size = input_size + (input_size / 16) + 64 + 3；</span></code></pre></td></tr></table></div></figure>
-
-
-<p>第5个参数是压缩的时候需要使用的工作缓冲区，缓冲的生成在minilzo库提供的测试例程中有相关的宏定义。</p>
-
-<ul>
-<li>lzo1x_decompress和lzo1x_decompress_safe函数进行数据的解压缩操作，需要5个参数：解压缩的数据、解压缩数据的大小、解压缩后数据的存放缓冲区、原始数据（未压缩数据）大小、解压缩工作缓冲区（不需要，可以置为NULL）。执行成功之后返回LZO_E_OK。第4个参数传进去的值是原始的未压缩数据的大小，执行成功之后通过指针返回的是实际解压缩后数据的大小。所以压缩之后的数据在传输的时候需要将原始数据的大小和压缩后数据一起传输，否则对方在解压缩的时候将无法解压。可以定义一个数据结构专门用来传输，这些数据在传输的时候相当于有效载荷：</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>typedef struct{
-</span><span class='line'>    unsigned long org_data_size;    /* 原始的未压缩数据大小 */
-</span><span class='line'>    unsigned char data[MAX_DATA_SIZE];  /* 压缩之后的数据 */
-</span><span class='line'>}COMP_DATA, *P_COMP_DATA;</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<h1>压缩/解压缩时间的计算</h1>
-
-<p>在压缩/解压缩数据之前，可以通过gettimeofday函数获取当前的系统时间，接着进行相关操作，完成之后再次获取系统时间，对2次获取的时间进行减操作即可得到实际操作所花费的时间。以下是计算操作所需花费时间的例子：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>unsigned long interval_ms = 0;       /* 间隔的毫秒数 */
-</span><span class='line'>struct timeval stime, etime;
-</span><span class='line'>
-</span><span class='line'>gettimeofday(&stime, NULL);
-</span><span class='line'>
-</span><span class='line'>/* TODO:Do compression or decompression */
-</span><span class='line'>
-</span><span class='line'>gettimeofday(&etime, NULL);
-</span><span class='line'>
-</span><span class='line'>interval_ms = (etime.tv_sec - stime.tv_sec) * 1000.0 + \
-</span><span class='line'>                    （etime.tv_usec - stime.tv_usec）/ 1000.0;</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
 ]]></content>
   </entry>
   
