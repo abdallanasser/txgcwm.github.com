@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-29T20:30:25+08:00</updated>
+  <updated>2013-07-29T23:55:46+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux的硬链接与软链接]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/"/>
+    <updated>2013-07-29T23:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie</id>
+    <content type="html"><![CDATA[<p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。图 1.展示了程序通过文件名获取文件内容的过程。</p>
+
+<p><img src="/images/2013/7/link/file.png" alt=" file " /></p>
+
+<p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
+
+<p><img src="/images/2013/7/link/access.png" alt=" access " /></p>
+
+<h1>硬链接</h1>
+
+<p>硬链接可由命令link或ln创建。如下是对文件oldfile创建硬链接。
+<code>
+link oldfile newfile
+ln oldfile newfile
+</code></p>
+
+<p>由于硬链接是有着相同inode号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
+
+<ul>
+<li>文件有相同的 inode 及 data block；</li>
+<li>只能对已存在的文件进行创建；</li>
+<li>不能交叉文件系统进行硬链接的创建；</li>
+<li>不能对目录进行创建，只可对文件创建；</li>
+<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件。</li>
+</ul>
+
+
+<p>文件 old.file 与 hard.link 有着相同的 inode 号：660650 及文件权限，inode 是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当 inode 存在且链接计数器（link count）不为 0 时。inode 号仅在各文件系统下是唯一的，当 Linux 挂载多个文件系统后将出现 inode 号重复的现象（如 清单 5.所示，文件 t3.jpg、sync 及 123.txt 并无关联，却有着相同的 inode 号），因此硬链接创建时不可跨文件系统。设备文件目录 /dev 使用的文件系统是 devtmpfs，而 /root（与根目录 / 一致）使用的是磁盘文件系统 ext4。清单 5.展示了使用命令 df 查看当前系统中挂载的文件系统类型、各文件系统 inode 使用情况及文件系统挂载点。</p>
+
+<p>值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的 inode号可知其实这两目录就是两个硬链接（注意目录 /mnt/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
+
+<h1>软链接</h1>
+
+<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的 inode 号以及用户数据块（见 图 2.）。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+
+<ul>
+<li>软链接有自己的文件属性及权限等；</li>
+<li>可对不存在的文件或目录创建软链接；</li>
+<li>软链接可交叉文件系统；</li>
+<li>软链接可对文件或目录创建；</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux操作系统下的MAN命令]]></title>
@@ -512,79 +564,6 @@ xterm
 $ echo $TERMINFO
 /lib/terminfo/
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu下安装SublimeText2及其插件]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/"/>
-    <updated>2013-07-23T22:33:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian</id>
-    <content type="html"><![CDATA[<p>Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。</p>
-
-<h1>软件安装</h1>
-
-<p>Ubuntu下安装Sublime Text 2有两种方式：指令安装和直接下载安装。</p>
-
-<h2>指令安装</h2>
-
-<p><code>
-$ sudo add-apt-repository ppa:webupd8team/sublime-text-2
-$ sudo apt-get update
-$ sudo apt-get install sublime-text-2
-</code></p>
-
-<!--more-->
-
-
-<h2>直接下载安装</h2>
-
-<p>从 <a href="http://www.sublimetext.com/2">这里</a>下载所需要的版本，然后解压文件到安装目录。
-<code>
-$ sudo tar -jxvf Sublime\ Text\ 2.0.1.tar.bz2 -C /usr/local/
-</code></p>
-
-<h1>在applications菜单中创建快捷方式</h1>
-
-<p>```
-$ sudo gedit /usr/share/applications/sublimetext.desktop</p>
-
-<p>[Desktop Entry]
-Encoding=UTF-8
-Name=Sublime Text
-Comment=Sublime Text
-Exec=/usr/local/SublimeText/sublime_text
-Icon=/usr/local/SublimeText/Icon/48x48/sublime_text.png
-Terminal=false
-StartupNotify=true
-Type=Application
-Categories=Application;Development;
-```</p>
-
-<h1>安装插件</h1>
-
-<p>安装Sublime text 2插件也有两种方法：直接安装和使用Package Control组件安装。</p>
-
-<h2>直接安装</h2>
-
-<p>可以直接下载安装包解压缩到Packages目录（菜单->preferences->packages）。</p>
-
-<h2>使用Package Control组件安装</h2>
-
-<p>也可以先安装package control组件，然后直接在线安装：</p>
-
-<ul>
-<li>按Ctrl + `调出console ，其中`是键盘左上角那个符号。</li>
-<li>粘贴以下代码到底部命令行并回车。
-<code>
-import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'
-</code></li>
-<li>重启Sublime Text 2。</li>
-<li>如果在Perferences->package settings中看到package control这一项，则安装成功。 如果这种方法不能安装成功，可以到 <a href="http://wbond.net/sublime_packages/package_control/installation">这里</a> 下载文件手动安装。</li>
-</ul>
-
-
-<p>用Package Control安装插件的方法：a、按下<code>Ctrl+Shift+P</code>调出命令面板；b、输入<code>install</code>调出Install Package选项并回车，然后在列表中选中要安装的插件。</p>
 ]]></content>
   </entry>
   

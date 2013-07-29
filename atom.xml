@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-07-29T20:30:25+08:00</updated>
+  <updated>2013-07-29T23:55:46+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux的硬链接与软链接]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/"/>
+    <updated>2013-07-29T23:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie</id>
+    <content type="html"><![CDATA[<p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。图 1.展示了程序通过文件名获取文件内容的过程。</p>
+
+<p><img src="http://txgcwm.github.io/images/2013/7/link/file.png" alt=" file " /></p>
+
+<p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
+
+<p><img src="http://txgcwm.github.io/images/2013/7/link/access.png" alt=" access " /></p>
+
+<h1>硬链接</h1>
+
+<p>硬链接可由命令link或ln创建。如下是对文件oldfile创建硬链接。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>link oldfile newfile 
+</span><span class='line'>ln oldfile newfile </span></code></pre></td></tr></table></div></figure>
+
+
+<p>由于硬链接是有着相同inode号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
+
+<ul>
+<li>文件有相同的 inode 及 data block；</li>
+<li>只能对已存在的文件进行创建；</li>
+<li>不能交叉文件系统进行硬链接的创建；</li>
+<li>不能对目录进行创建，只可对文件创建；</li>
+<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件。</li>
+</ul>
+
+
+<p>文件 old.file 与 hard.link 有着相同的 inode 号：660650 及文件权限，inode 是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当 inode 存在且链接计数器（link count）不为 0 时。inode 号仅在各文件系统下是唯一的，当 Linux 挂载多个文件系统后将出现 inode 号重复的现象（如 清单 5.所示，文件 t3.jpg、sync 及 123.txt 并无关联，却有着相同的 inode 号），因此硬链接创建时不可跨文件系统。设备文件目录 /dev 使用的文件系统是 devtmpfs，而 /root（与根目录 / 一致）使用的是磁盘文件系统 ext4。清单 5.展示了使用命令 df 查看当前系统中挂载的文件系统类型、各文件系统 inode 使用情况及文件系统挂载点。</p>
+
+<p>值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的 inode号可知其实这两目录就是两个硬链接（注意目录 /mnt/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
+
+<h1>软链接</h1>
+
+<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的 inode 号以及用户数据块（见 图 2.）。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+
+<ul>
+<li>软链接有自己的文件属性及权限等；</li>
+<li>可对不存在的文件或目录创建软链接；</li>
+<li>软链接可交叉文件系统；</li>
+<li>软链接可对文件或目录创建；</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于提建议]]></title>
@@ -3557,84 +3611,6 @@
 </span><span class='line'>
 </span><span class='line'>    return 0;
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pkg-config的使用]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong/"/>
-    <updated>2013-07-14T11:22:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong</id>
-    <content type="html"><![CDATA[<p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pkg-config --libs --cflags opencv
-</span><span class='line'>-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
-</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect 
-</span><span class='line'>-lopencv_contrib -lopencv_legacy -lopencv_flann</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
-
-<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Package opencv was not found in the pkg-config search path.
-</span><span class='line'>Perhaps you should add the directory containing `opencv.pc'
-</span><span class='line'>to the PKG_CONFIG_PATH environment variable
-</span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>设置环境变量PKG_CONFIG_PATH方法如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查看opencv.pc文件的内容如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat opencv.pc 
-</span><span class='line'># Package Information for pkg-config
-</span><span class='line'>
-</span><span class='line'>prefix=/usr
-</span><span class='line'>exec_prefix=${prefix}
-</span><span class='line'>libdir=${exec_prefix}/lib
-</span><span class='line'>includedir_old=${prefix}/include/opencv
-</span><span class='line'>includedir_new=${prefix}/include
-</span><span class='line'>
-</span><span class='line'>Name: OpenCV
-</span><span class='line'>Description: Open Source Computer Vision Library
-</span><span class='line'>Version: 2.3.1
-</span><span class='line'>Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
-</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib 
-</span><span class='line'>-lopencv_legacy -lopencv_flann
-</span><span class='line'>Cflags: -I${includedir_old} -I${includedir_new}</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
