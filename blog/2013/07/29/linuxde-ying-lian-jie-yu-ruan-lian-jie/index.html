@@ -95,13 +95,16 @@
   </header>
 
 
-<div class="entry-content"><p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。图 1.展示了程序通过文件名获取文件内容的过程。</p>
+<div class="entry-content"><p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。下图展示了程序通过文件名获取文件内容的过程。</p>
 
 <p><img src="/images/2013/7/link/file.png" alt=" file " /></p>
 
 <p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
 
 <p><img src="/images/2013/7/link/access.png" alt=" access " /></p>
+
+<!--more-->
+
 
 <h1>硬链接</h1>
 
@@ -116,21 +119,163 @@
 <p>由于硬链接是有着相同inode号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
 
 <ul>
-<li>文件有相同的 inode 及 data block；</li>
+<li>文件有相同的inode及data block；</li>
 <li>只能对已存在的文件进行创建；</li>
 <li>不能交叉文件系统进行硬链接的创建；</li>
 <li>不能对目录进行创建，只可对文件创建；</li>
-<li>删除一个硬链接文件并不影响其他有相同 inode 号的文件。</li>
+<li>删除一个硬链接文件并不影响其它有相同inode号的文件。</li>
 </ul>
 
 
-<p>文件 old.file 与 hard.link 有着相同的 inode 号：660650 及文件权限，inode 是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当 inode 存在且链接计数器（link count）不为 0 时。inode 号仅在各文件系统下是唯一的，当 Linux 挂载多个文件系统后将出现 inode 号重复的现象（如 清单 5.所示，文件 t3.jpg、sync 及 123.txt 并无关联，却有着相同的 inode 号），因此硬链接创建时不可跨文件系统。设备文件目录 /dev 使用的文件系统是 devtmpfs，而 /root（与根目录 / 一致）使用的是磁盘文件系统 ext4。清单 5.展示了使用命令 df 查看当前系统中挂载的文件系统类型、各文件系统 inode 使用情况及文件系统挂载点。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -li
+</span><span class='line'>total 0
+</span><span class='line'>
+</span><span class='line'>// 只能对已存在的文件创建硬连接
+</span><span class='line'>$ link old.file hard.link
+</span><span class='line'>link: cannot create link `hard.link' to `old.file': No such file or directory
+</span><span class='line'>
+</span><span class='line'>$ echo "This is an original file" &gt; old.file
+</span><span class='line'>$ cat old.file
+</span><span class='line'>This is an original file
+</span><span class='line'>$ stat old.file
+</span><span class='line'>  File: `old.file'
+</span><span class='line'>  Size: 25            Blocks: 8          IO Block: 4096   regular file
+</span><span class='line'>Device: 807h/2055d    Inode: 796901      Links: 1
+</span><span class='line'>Access: (0664/-rw-rw-r--)  Uid: ( 1000/  txgcwm)   Gid: ( 1000/  txgcwm)
+</span><span class='line'>Access: 2013-07-29 23:57:49.435157205 +0800
+</span><span class='line'>Modify: 2013-07-29 23:57:27.295157688 +0800
+</span><span class='line'>Change: 2013-07-29 23:57:27.295157688 +0800
+</span><span class='line'> Birth: -
+</span><span class='line'> 
+</span><span class='line'>// 文件有相同的inode号以及data block
+</span><span class='line'>$ link old.file hard.link | ls -li
+</span><span class='line'>total 8
+</span><span class='line'>796901 -rw-rw-r-- 2 txgcwm txgcwm 25 Jul 29 23:57 hard.link
+</span><span class='line'>796901 -rw-rw-r-- 2 txgcwm txgcwm 25 Jul 29 23:57 old.file
+</span><span class='line'>
+</span><span class='line'>// 不能交叉文件系统
+</span><span class='line'>$ sudo ln /dev/input/event5 /root/bfile.txt
+</span><span class='line'>[sudo] password for txgcwm: 
+</span><span class='line'>ln: failed to create hard link `/root/bfile.txt' =&gt; `/dev/input/event5': Invalid cross-device link
+</span><span class='line'>
+</span><span class='line'>// 不能对目录进行创建硬连接
+</span><span class='line'>$ mkdir -p old.dir/test
+</span><span class='line'>$ ln old.dir/ hardlink.dir
+</span><span class='line'>ln: `old.dir/': hard link not allowed for directory</span></code></pre></td></tr></table></div></figure>
 
-<p>值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的 inode号可知其实这两目录就是两个硬链接（注意目录 /mnt/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
+
+<p>文件old.file与hard.link有着相同的inode号（796901）及文件权限，inode是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当inode存在且链接计数器（link count）不为0时。inode号仅在各文件系统下是唯一的，当Linux挂载多个文件系统后将出现inode号重复的现象，因此硬链接创建时不可跨文件系统。设备文件目录/dev使用的文件系统是devtmpfs，而/home（与根目录/一致）使用的是磁盘文件系统ext4。以下使用命令df查看当前系统中挂载的文件系统类型、各文件系统inode使用情况及文件系统挂载点。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo df -i --print-type
+</span><span class='line'>Filesystem     Type      Inodes  IUsed   IFree IUse% Mounted on
+</span><span class='line'>/dev/sda5      ext4     1250928  63404 1187524    6% /
+</span><span class='line'>udev           devtmpfs  211313    603  210710    1% /dev
+</span><span class='line'>tmpfs          tmpfs     215180    566  214614    1% /run
+</span><span class='line'>none           tmpfs     215180      3  215177    1% /run/lock
+</span><span class='line'>none           tmpfs     215180      9  215171    1% /run/shm
+</span><span class='line'>none           tmpfs     215180     23  215157    1% /run/user
+</span><span class='line'>/dev/sda6      ext4       62464    355   62109    1% /boot
+</span><span class='line'>/dev/sda7      ext4     1250928  91579 1159349    8% /home
+</span><span class='line'>/dev/sda11     ext4     2501856 336584 2165272   14% /srv
+</span><span class='line'>/dev/sda12     ext4     1875968 144226 1731742    8% /opt
+</span><span class='line'>/dev/sda8      ext4      249984    132  249852    1% /tmp
+</span><span class='line'>/dev/sda9      ext4     1250928 584616  666312   47% /usr
+</span><span class='line'>/dev/sda10     ext4      249984  24565  225419   10% /var
+</span><span class='line'>
+</span><span class='line'>$ sudo find / -inum 1114
+</span><span class='line'>/lib/modules/3.5.0-25-generic/kernel/drivers/hwmon/mcp3021.ko
+</span><span class='line'>/sys/devices/LNXSYSTM:00/device:00/PNP0A08:00/device:02/PNP0C02:00/power/autosuspend_delay_ms</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的inode号可知其实这两目录就是两个硬链接（注意目录/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ls -aliF /lost+found
+</span><span class='line'>total 20
+</span><span class='line'>11 drwx------  2 root root 16384 Nov 11  2012 ./
+</span><span class='line'> 2 drwxr-xr-x 23 root root  4096 Jul  7 13:47 ../
+</span><span class='line'> 
+</span><span class='line'>$ sudo stat /lost+found/
+</span><span class='line'>  File: `/lost+found/'
+</span><span class='line'>  Size: 16384         Blocks: 32         IO Block: 4096   directory
+</span><span class='line'>Device: 805h/2053d    Inode: 11          Links: 2
+</span><span class='line'>Access: (0700/drwx------)  Uid: (    0/    root)   Gid: (    0/    root)
+</span><span class='line'>Access: 2013-07-30 00:10:47.479140197 +0800
+</span><span class='line'>Modify: 2012-11-11 00:50:27.000000000 +0800
+</span><span class='line'>Change: 2012-11-11 00:50:27.000000000 +0800
+</span><span class='line'> Birth: -</span></code></pre></td></tr></table></div></figure>
+
 
 <h1>软链接</h1>
 
-<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的 inode 号以及用户数据块（见 图 2.）。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的inode号以及用户数据块。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
 
 <ul>
 <li>软链接有自己的文件属性及权限等；</li>
@@ -140,6 +285,68 @@
 <li>创建软链接时，链接计数 i_nlink 不会增加；</li>
 <li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
 </ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -li
+</span><span class='line'>total 0
+</span><span class='line'>
+</span><span class='line'>// 可对不存在的文件创建软链接
+</span><span class='line'>$ ln -s old.file soft.link
+</span><span class='line'>$ ls -liF
+</span><span class='line'>total 0
+</span><span class='line'>796810 lrwxrwxrwx 1 txgcwm txgcwm 8 Jul 30 00:25 soft.link -&gt; old.file
+</span><span class='line'>
+</span><span class='line'>// 由于被指向的文件不存在，此时的软链接 soft.link 就是死链接
+</span><span class='line'>$ cat soft.link
+</span><span class='line'>cat: soft.link: No such file or directory
+</span><span class='line'>
+</span><span class='line'>// 创建被指向的文件 old.file，soft.link 恢复成正常的软链接
+</span><span class='line'>$ echo "This is an original file_A" &gt;&gt; old.file
+</span><span class='line'>$ cat soft.link
+</span><span class='line'>This is an original file_A
+</span><span class='line'>
+</span><span class='line'>// 对不存在的目录创建软链接
+</span><span class='line'>$ ln -s old.dir soft.link.dir
+</span><span class='line'>$ mkdir -p old.dir/test
+</span><span class='line'>$ tree . -F --inodes
+</span><span class='line'>.
+</span><span class='line'>├── [ 796834]  old.dir/
+</span><span class='line'>│   └── [ 796851]  test/
+</span><span class='line'>├── [ 796830]  old.file
+</span><span class='line'>├── [ 796830]  soft.link -&gt; old.file
+</span><span class='line'>└── [ 796834]  soft.link.dir -&gt; old.dir/
+</span><span class='line'>
+</span><span class='line'>3 directories, 2 files</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
