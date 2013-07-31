@@ -73,6 +73,66 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/31/liao-liao-ce-shi/">聊聊测试</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-31T23:26:00+08:00" pubdate data-updated="true">Jul 31<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/31/liao-liao-ce-shi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.51testing.com/zhuanti/img/csvskf_02.gif"></p>
+
+<p>从工作到现在，一直有较长时间跟测试方面的人员交流，所以也顺道聊聊测试的话题。有一部分人只把测试看作是试用用户，并不认为她们在整个过程中能够起到多大的作用，而忽略了她们的巨大价值。一件产品只有通过测试的点头之后才能够走向市场，否则即便上市了每个人的心里都会胆寒，说不定在某个时刻就爆发了问题。测试不仅仅是高级的试用用户，更是一个开发师、设计师和分析师。</p>
+
+<p>在第一家设备公司的时候，经常去复现测试人员提交的bug，但总是测试不出来，于是就去找她们复现这些问题。当找到她们的时候，她们总能又一次把问题复现。我真的不了解那些测试人员是什么样的思维，很多bug能够被她们用奇特的方法测试出来。很多开发人员总是跑过去跟测试人员讲“你不能这么测试，你应该这么测试”，一般测试人员辩驳几句后会选择沉默。但她们还是坚持着自己的观点，然后把提交的测试问题重新返还给开发人员，只要开发人员不解决她们就不会把问题关闭，跟你死耗着，看你怎么办。由于跟测试人员待在一起时间长了，很了解她们的实力，所以我一般都不会自信的说“这个肯定没有问题，怎么可能出现这样的bug”。如果我真的那么自信的说话，当她们重新复现到问题的时候，我是否会无地自容呢？长久下来，当她们复现出问题的时候，她们都会很和蔼的说“没事，慢慢修复吧。如果复现不了，再来找我，我再帮你复现”。每次的交流都是心平气和，不会有不愉快的冲突。</p>
+
+<p>到了第二家公司的时候，遇到了一个更好的测试人员。她不仅能够清楚的描述问题，还能够附带她的分析，对解决问题起到了很大的帮助。她经常会问我设备内软件的设计架构和原理，我也非常乐意告诉她这些东西。一旦她了解了，就会帮助我分析问题，这样就加快了我解决bug的速度。以下的一段文字是她提交某一bug的描述：</p>
+
+<blockquote><p>【测试版本】：Vxxx
+【测试步骤】：
+1、PC接入终端（PCB板已增加屏蔽罩），通过VLC观看频点xxxxxx的节目流畅。
+2、手机接入终端，启动android客户端但不观看电视节目，此时观察VLC节目中周期性出现水幕或跳跃问题。分析原因是android客户端启动后会向终端获取状态信息。
+3、操作手机客户端观看电视节目，VLC和手机客户端的节目均播放流畅，分析原因是手机客户端在观看视频时不会获取心跳信息。
+4、启动windows客户端但不观看电视节目，VLC和手机客户端的节目又周期性出现水幕或跳跃问题。分析原因是windows客户端启动后回获取心跳信息。
+5、windows客户端观看电视节目后，VLC和手机客户端的节目扔会周期性出现水幕或跳跃问题。原因是windows客户端在节目播放过程中仍会获取状态信息。
+问题：客户端周期性获取终端状态会导致节目播放时出现水幕，心跳机制需优化。
+【测试结论】：客户端周期性获取心跳包会影响节目播放效果</p></blockquote>
+
+<p>写的很清楚，分析得很有道理。我根据她提供的描述信息去查看问题，检测到引发问题的原因与上述描述的一致。正因她详细地描述测试现象及相关的对比实验、细致的分析，我仅花了几分钟的时间就解决了这个问题。如果没有她所做的工作，我可能会从“视频流传输”方面去分析，这或许会花费几个小时甚至几天的时间去跟踪这个问题。</p>
+
+<p>我曾问过一个朋友“你们公司的测试人员会如何去做”，他回道“在自己的设备上遇到问题后再在使用其它公司的设备作对比测试，然后将问题提交给开发人员”。如他所述，很多测试人员都会做基本的对比测试，却缺少了自己对问题的必要分析。</p>
+
+<p>一个好的测试人员不仅能够发现问题，还能够帮你分析问题且提出解决问题的方案。开发人员很多时候不应该去左右她们，不应该去影响她们，不应该给她们一个框架，她们的思维需要的就是天马行空！</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/">Linux的硬链接与软链接</a></h1>
     
     
@@ -486,53 +546,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/">奇谋之士蒯通</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-26T21:52:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://pic.baike.soso.com/p/20120927/20120927185828-406438040.jpg" width="210" height="248" title="Place Kitten #2" ></p>
-
-<p>《史记》中有各式各样的人物，司马迁却没有给奇谋之士蒯通单独列传，留下那不平凡的事迹给后人称颂。关于蒯通这个人的事迹，也只能从其他人的列传里了解到他，对于他的谋略以及对天下形势的远见都令人佩服。</p>
-
-<p>如此有才华的人，却为何没有自己的列传，只能出现在他人的列传之中？原因很简单，司马迁写书的时代是大汉王朝，而蒯通却在那个朝代犯下了特大的错误。那么这么一个人到底有什么样的才华呢？且让我们看看他的一些事迹。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -565,6 +578,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/31/liao-liao-ce-shi/">聊聊测试</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/">Linux的硬链接与软链接</a>
       </li>
     
@@ -578,10 +595,6 @@
     
       <li class="post">
         <a href="/blog/2013/07/28/lue-shuo-bo-ke/">略说博客</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/27/guan-yu-wei-fang-tan/">关于微访谈</a>
       </li>
     
   </ul>
@@ -609,7 +622,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (5)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (6)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 
   </ul>
