@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C/C++ | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/c-c/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-02T00:50:23+08:00</updated>
+  <updated>2013-08-02T00:55:55+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -27,6 +27,9 @@
 
 
 <p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+<!--more-->
+
 
 <h1>管道的结构</h1>
 
@@ -214,6 +217,11 @@ return 0;
 <p>}
 ```
 编译后，执行程序可以看到它不停的打印消息，若管道内没有数据的话，read就直接返回了。</p>
+
+<h1>参考文章</h1>
+
+<p><a href="http://oss.org.cn/kernel-book/ch07/7.1.1.htm">Linux管道的实现机制</a>
+<a href="http://bbs.chinaunix.net/thread-4069374-1-1.html">进程通信管道问题</a></p>
 ]]></content>
   </entry>
   
