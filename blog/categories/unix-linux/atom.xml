@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-02T01:07:35+08:00</updated>
+  <updated>2013-08-02T01:10:02+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -220,7 +220,7 @@ return 0;
 
 <h1>参考文章</h1>
 
-<p><a href="http://oss.org.cn/kernel-book/ch07/7.1.1.htm">Linux管道的实现机制</a>
+<p><a href="http://oss.org.cn/kernel-book/ch07/7.1.1.htm">Linux管道的实现机制</a> <br/>
 <a href="http://bbs.chinaunix.net/thread-4069374-1-1.html">进程通信管道问题</a></p>
 ]]></content>
   </entry>
