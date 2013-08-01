@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-01T22:53:19+08:00</updated>
+  <updated>2013-08-02T00:35:08+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux管道的实现机制]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/"/>
+    <updated>2013-08-02T00:24:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
+
+<ul>
+<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不象文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
+<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
+</ul>
+
+
+<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+<h1>管道的结构</h1>
+
+<p>在Linux中，管道的实现并没有使用专门的数据结构，而是借助了文件系统的file结构和VFS的索引节点inode。通过将两个file结构指向同一个临时的VFS索引节点，而这个 VFS 索引节点又指向一个物理页面而实现的。如图 7.1所示。</p>
+
+<p><img src="/images/2013/8/pipe/struct.png" alt=" struct " /></p>
+
+<p>图7.1中有两个 file 数据结构，但它们定义文件操作例程地址是不同的，其中一个是向管道中写入数据的例程地址，而另一个是从管道中读出数据的例程地址。这样，用户程序的系统调用仍然是通常的文件操作，而内核却利用这种抽象机制实现了管道这一特殊操作。</p>
+
+<h1>管道的读写</h1>
+
+<p>管道实现的源代码在fs/pipe.c中，在pipe.c中有很多函数，其中有两个函数比较重要，即管道读函数pipe_read()和管道写函数pipe_wrtie()。管道写函数通过将字节复制到 VFS 索引节点指向的物理内存而写入数据，而管道读函数则通过复制物理内存中的字节而读出数据。当然，内核必须利用一定的机制同步对管道的访问，为此，内核使用了锁、等待队列和信号。</p>
+
+<p>当写进程向管道中写入时，它利用标准的库函数write()，系统根据库函数传递的文件描述符，可找到该文件的 file 结构。file结构中指定了用来进行写操作的函数（即写入函数）地址，于是，内核调用该函数完成写操作。写入函数在向内存中写入数据之前，必须首先检查 VFS 索引节点中的信息，同时满足如下条件时，才能进行实际的内存复制工作：</p>
+
+<ul>
+<li>内存中有足够的空间可容纳所有要写入的数据；</li>
+<li>内存没有被读程序锁定。</li>
+</ul>
+
+
+<p>如果同时满足上述条件，写入函数首先锁定内存，然后从写进程的地址空间中复制数据到内存。否则，写入进程就休眠在 VFS 索引节点的等待队列中，接下来，内核将调用调度程序，而调度程序会选择其他进程运行。写入进程实际处于可中断的等待状态，当内存中有足够的空间可以容纳写入数据，或内存被解锁时，读取进程会唤醒写入进程，这时，写入进程将接收到信号。当数据写入内存之后，内存被解锁，而所有休眠在索引节点的读取进程会被唤醒。</p>
+
+<p>管道的读取过程和写入过程类似。但是，进程可以在没有数据或内存被锁定时立即返回错误信息，而不是阻塞该进程，这依赖于文件或管道的打开模式。反之，进程可以休眠在索引节点的等待队列中等待写入进程写入数据。当所有的进程完成了管道操作之后，管道的索引节点被丢弃，而共享数据页也被释放。</p>
+
+<h1>CU上的问题</h1>
+
+<h2>popkart718的提问</h2>
+
+<p><img src="/images/2013/8/pipe/sync.jpg" alt=" sync " /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux的硬链接与软链接]]></title>
@@ -619,61 +666,6 @@ do</p>
 
 <p>done
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to resolve "error opening terminal Linux"]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/"/>
-    <updated>2013-07-24T18:33:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux</id>
-    <content type="html"><![CDATA[<p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：
-<code>
-error opening terminal Linux
-error opening terminal xterm
-error opening terminal vt100
-error opening terminal vt102
-error opening terminal unknown
-error opening terminal cgywin
-...
-</code></p>
-
-<!--more-->
-
-
-<p>可以按照以下两步解决问题：</p>
-
-<ol>
-<li>首先要确定ncurses库是否已经正确安装。在Debian或Ubuntu上，可以用<code>dpkg -l | grep ncurses</code>查看ncurses库是否已安装。</li>
-<li>如果ncurses已经安装了，需要查看TERM和TERMINFO两个环境变量是否已经设置正确。如果没有设置正确，需要设置为正确的值。
-<code>
- $ echo $TERM
- $ echo $TERMINFO
-</code></li>
-</ol>
-
-
-<p>关于TERMINFO, 应设置为terminfo的路径，比如/usr/share/terminfo或者/lib/terminfo。查看terminfo的存储位置用以下指令：
-<code>
-$ whereis terminfo
-terminfo: /etc/terminfo /lib/terminfo /usr/share/terminfo /usr/share/man/man5/terminfo.5.gz
-</code></p>
-
-<p>查看terminfo目录下是否保存了终端信息文件：其中通常分为a, b, c, d&hellip;z这些字母目录，每个目录中包含了以该字母开头的term信息。比如vt100放在"v"目录中。我们需要的term必须在对应的目录中存在term信息。确定这些信息后，就可以设置TERM和TERMINFO信息：
-<code>
-$ export TERM=vt100
-$ export TERMINFO=/usr/share/terminfo
-</code></p>
-
-<p>上面的设置必须保证/usr/share/terminfo中存在term信息，且/usr/share/terminfo/v/vt100是存在的。关于TERM的设置，有可能需要设置成Linux，vt100-putty等不同的TERM。Linux通常用于Linux控制台，vt100-putty顾名思义是使用putty远程登录的vt100终端。</p>
-
-<p>以下是在Ubuntu12.10环境下，解决了此问题后TERM和TERMINFO两个环境变量的值。
-<code>
-$ echo $TERM
-xterm
-$ echo $TERMINFO
-/lib/terminfo/
-</code></p>
 ]]></content>
   </entry>
   

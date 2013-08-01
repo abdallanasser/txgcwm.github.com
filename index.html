@@ -73,6 +73,82 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-02T00:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
+
+<ul>
+<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不象文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
+<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
+</ul>
+
+
+<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+<h1>管道的结构</h1>
+
+<p>在Linux中，管道的实现并没有使用专门的数据结构，而是借助了文件系统的file结构和VFS的索引节点inode。通过将两个file结构指向同一个临时的VFS索引节点，而这个 VFS 索引节点又指向一个物理页面而实现的。如图 7.1所示。</p>
+
+<p><img src="/images/2013/8/pipe/struct.png" alt=" struct " /></p>
+
+<p>图7.1中有两个 file 数据结构，但它们定义文件操作例程地址是不同的，其中一个是向管道中写入数据的例程地址，而另一个是从管道中读出数据的例程地址。这样，用户程序的系统调用仍然是通常的文件操作，而内核却利用这种抽象机制实现了管道这一特殊操作。</p>
+
+<h1>管道的读写</h1>
+
+<p>管道实现的源代码在fs/pipe.c中，在pipe.c中有很多函数，其中有两个函数比较重要，即管道读函数pipe_read()和管道写函数pipe_wrtie()。管道写函数通过将字节复制到 VFS 索引节点指向的物理内存而写入数据，而管道读函数则通过复制物理内存中的字节而读出数据。当然，内核必须利用一定的机制同步对管道的访问，为此，内核使用了锁、等待队列和信号。</p>
+
+<p>当写进程向管道中写入时，它利用标准的库函数write()，系统根据库函数传递的文件描述符，可找到该文件的 file 结构。file结构中指定了用来进行写操作的函数（即写入函数）地址，于是，内核调用该函数完成写操作。写入函数在向内存中写入数据之前，必须首先检查 VFS 索引节点中的信息，同时满足如下条件时，才能进行实际的内存复制工作：</p>
+
+<ul>
+<li>内存中有足够的空间可容纳所有要写入的数据；</li>
+<li>内存没有被读程序锁定。</li>
+</ul>
+
+
+<p>如果同时满足上述条件，写入函数首先锁定内存，然后从写进程的地址空间中复制数据到内存。否则，写入进程就休眠在 VFS 索引节点的等待队列中，接下来，内核将调用调度程序，而调度程序会选择其他进程运行。写入进程实际处于可中断的等待状态，当内存中有足够的空间可以容纳写入数据，或内存被解锁时，读取进程会唤醒写入进程，这时，写入进程将接收到信号。当数据写入内存之后，内存被解锁，而所有休眠在索引节点的读取进程会被唤醒。</p>
+
+<p>管道的读取过程和写入过程类似。但是，进程可以在没有数据或内存被锁定时立即返回错误信息，而不是阻塞该进程，这依赖于文件或管道的打开模式。反之，进程可以休眠在索引节点的等待队列中等待写入进程写入数据。当所有的进程完成了管道操作之后，管道的索引节点被丢弃，而共享数据页也被释放。</p>
+
+<h1>CU上的问题</h1>
+
+<h2>popkart718的提问</h2>
+
+<p><img src="/images/2013/8/pipe/sync.jpg" alt=" sync " /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/01/guan-zhu-ni-de-shi-shui/">关注你的是谁</a></h1>
     
     
@@ -389,73 +465,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Octopress添加表格</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-27T15:08:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/27/octopresstian-jia-biao-ge/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式；而Markdown是一种书写格式。正因如此，Markdown的格式化语法仅需解决用纯文本表达的问题。</p>
-
-<p>下面的这个例子是在一篇Markdown文章中添加一个HTML表格：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;table&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;Column1&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;Column2&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>&lt;/table&gt;    </span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -488,6 +497,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/01/guan-zhu-ni-de-shi-shui/">关注你的是谁</a>
       </li>
     
@@ -501,10 +514,6 @@
     
       <li class="post">
         <a href="/blog/2013/07/29/guan-yu-ti-jian-yi/">关于提建议</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/28/%5B%3F%5D-feng-guan-yu-shu-xie-ji-zhu-wen-dang-ti-yi-de-xin/">一封关于“书写技术文档提议”的信</a>
       </li>
     
   </ul>
@@ -521,11 +530,11 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
-<li class='category'><a href='/blog/categories/c-c/'>C/C++ (8)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (9)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (6)</a></li>
-<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (23)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (24)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (1)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
