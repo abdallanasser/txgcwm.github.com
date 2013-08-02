@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-03T01:50:41+08:00</updated>
+  <updated>2013-08-03T01:51:24+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -48,6 +48,9 @@
 </span><span class='line'>      );
 </span><span class='line'>   return ret;
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：</p>
