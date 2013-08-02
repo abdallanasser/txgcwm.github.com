@@ -120,7 +120,10 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
 </span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
 
 
-<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考  <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a>。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看<a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a>。</p>
+<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考 <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a> 。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a> 。</p>
+
+<!--more-->
+
 
 <p>对于结构体内的in和out两个变量，内核是作如下处理的:1、在读入数据时增加in；2、在取出数据时增加out；3、当检测到两个相等的时候将它们复位归0。1和2不作讨论和分析，针对第3点的处理，内核代码如下：</p>
 
@@ -188,7 +191,7 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
 </span><span class='line'>memcpy(fifo-&gt;buffer + (fifo-&gt;in & (fifo-&gt;size - 1)), buffer, l);</span></code></pre></td></tr></table></div></figure>
 
 
-<p>注意(fifo->in &amp; (fifo->size &ndash; 1)这里用了<code>&amp;</code>符号，而不是直接<code>%fifo-&gt;size</code>，也就是说，初始化的时候size必然得设置成2的n次方（这个限制在内核里很合理，因为内核分配的空间通常是2的倍数，比如一个page）。</p>
+<p>注意<code>(fifo-&gt;in &amp; (fifo-&gt;size - 1)</code>这里用了<code>&amp;</code>符号，而不是直接<code>%fifo-&gt;size</code>，也就是说，初始化的时候size必然得设置成2的n次方（这个限制在内核里很合理，因为内核分配的空间通常是2的倍数，比如一个page）。</p>
 
 <p>在像x86这种溢出跟取模操作等价的处理器上，对于当前的写入操作实际上“正好”没有风险。同样的，由于in/out都是 unsigned int，在后续的 kfifo_get/kfifo_len 里面<code>in - out</code>(比如说<code>2 - 4294967295</code>，你可以试试)，结果仍然“正好”是正确的。</p>
 
