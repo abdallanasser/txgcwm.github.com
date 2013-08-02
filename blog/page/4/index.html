@@ -73,6 +73,87 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/15/lian-zhan/">链栈</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T21:49:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/15/lian-zhan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>栈是限制在表的一端进行插入和删除运算的线性表。通常称插入、删除的这一端为栈顶，另一端称为栈底；当表中没有元素时称为空栈；栈为后进先出的线性表，简称为LIFO表；栈的修改是按后进先出的原则进行；每次删除的总是当前栈中最新的元素（即最后插入的元素），而最先插入的被放在栈的底部，要到最后才能删除。</p>
+
+<h1>链栈结点</h1>
+
+<p>出栈与入栈是栈的最主要操作，当无法预见栈所需大小时，往往需要采用链栈的方式。在链栈中，不需要像单链表一样需要头结点。链栈的结构如下图所示：</p>
+
+<p><img src="/images/2013/7/lian-zhan/stacknode.png" alt=" stacknode " /></p>
+
+<p>可将其结构定义为：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typedef char SElemType
+</span><span class='line'>
+</span><span class='line'>typedef struct StackNode
+</span><span class='line'>{
+</span><span class='line'>    SElemType data;//根据实际需要定义数据类型
+</span><span class='line'>    struct StackNode *next;
+</span><span class='line'>}StackNode,*LinkStackPtr;
+</span><span class='line'>
+</span><span class='line'>typedef struct LinkStack
+</span><span class='line'>{
+</span><span class='line'>    LinkStackPtr top;//指向栈链顶部
+</span><span class='line'>    int count;//用以判断栈是否为空，可初始化为0
+</span><span class='line'>}LinkStack;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/15/lian-zhan/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/14/pkg-configde-shi-yong/">Pkg-config的使用</a></h1>
     
     
@@ -564,83 +645,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/">Linux下C语言伪随机数编程</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T12:50:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、srand来生成伪随机数。</p>
-
-<h1>rand产生伪随机数</h1>
-
-<p>Linux中rand()会返回一随机数值，范围在0至RAND_MAX 间，其中RAND_MAX定义在stdlib.h，其值为2147483647。</p>
-
-<p>以下例子利用rand函数生成随机数。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-
-#define LOOP_TIMES    5
-
-int main(int argc, char *argv[])
-{
-    int i;
-
-    for(i=0; i&lt; LOOP_TIMES; i++)
-        printf("%d ", rand());
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793 
-$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793
-</code></pre>
-
-<p>从以上的结果可以看出，rand两次产生的随机数是一样的，之所以这样是因为“在调用rand函数产生随机数前没有先利用srand()设好随机数种子”。如果未设随机数种子，rand()在调用时会自动设随机数种子为1。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -675,6 +679,10 @@ $ ./rand
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/03/log10de-shi-xian/">Log10的实现</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">kfifo.c中in和out的溢出问题</a>
       </li>
     
@@ -688,10 +696,6 @@ $ ./rand
     
       <li class="post">
         <a href="/blog/2013/07/31/liao-liao-ce-shi/">聊聊测试</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/">Linux的硬链接与软链接</a>
       </li>
     
   </ul>
@@ -708,11 +712,11 @@ $ ./rand
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
-<li class='category'><a href='/blog/categories/c-c/'>C/C++ (9)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (10)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (6)</a></li>
-<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (24)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (25)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (1)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>

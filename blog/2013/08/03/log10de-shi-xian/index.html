@@ -5,14 +5,25 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopress添加中文标签功能 - 残剑</title>
+  <title>log10的实现 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Octopress有自带的分类，详情请见 官方文档 。_config.yml中配置项如下： 1
+  <meta name="description" content="在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？ 在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。 1
 2
-category_dir: blog/categories
-category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rails &hellip;">
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+double my_log10(double x)
+{ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +32,7 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -73,7 +84,7 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   
   <header>
     
-      <h1 class="entry-title">Octopress添加中文标签功能</h1>
+      <h1 class="entry-title">Log10的实现</h1>
     
     
       <p class="meta">
@@ -89,7 +100,7 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   
 
 
-<time datetime="2013-07-21T11:02:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
+<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -98,15 +109,9 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   </header>
 
 
-<div class="entry-content"><p>Octopress有自带的分类，详情请见 <a href="http://octopress.org/docs/plugins/category-generator/">官方文档</a> 。<code>_config.yml</code>中配置项如下：</p>
+<div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>category_dir: blog/categories
-</span><span class='line'>category_title_prefix: "Category: "</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后添加类似<code>categories: [Ruby&amp;Rails]</code>或<code>categories: [Ruby&amp;Rails，C/C++]</code>的分类标签配置到每个<code>_posts/*.markdown</code>文件头中，示例如下:</p>
+<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -115,61 +120,68 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: "Octopress添加中文标签功能"
-</span><span class='line'>date: 2013-07-21 11:02
-</span><span class='line'>comments: true
-</span><span class='line'>categories: [Ruby&Rails,Octopress]
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
+</span><span class='line'>{
+</span><span class='line'>    register double ret;
+</span><span class='line'>
+</span><span class='line'>       __asm__(
+</span><span class='line'>  "fldlg2\n\t" 
+</span><span class='line'>  "fxch\n\t" 
+</span><span class='line'>  "fyl2x"
+</span><span class='line'>  :"=t"(ret)
+</span><span class='line'>          :"0"(x)
+</span><span class='line'>      );
+</span><span class='line'>   return ret;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<!--more-->
-
-
-<h1>添加分类侧边栏并支持中文</h1>
-
-<p>尽管Octopress有自带的分类，但它并不支持中文，如果你在文章中定义了中文分类，那么点击的时候会链接到404页面。事实上，这个分类功能是通过plugins/category_generator.rb来实现，所以只要对该文件进行适当的修改和作一些其它的配置就可以提供中文分类的支持。</p>
-
-<ul>
-<li>category_generator.rb的修改我直接使用 <a href="https://github.com/denjones/denjones.github.com/blob/source/plugins/category_generator.rb">这个</a> 文件作了替换，然后作一些细微的修改。</li>
-</ul>
-
-
-<p>SPRabbit(超科学兔耳中队)的 <a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">修改方法</a> 是重新定义分类标签在文章中的格式，例如用<code>中文分类标签名{英文别名}</code>这样的格式来定义标签。于是在文章中显示的是中文分类，但实际链接到英文别名上。这种方法虽然定义标签麻烦些，但可定制性强。</p>
-
-<p>由于书写很麻烦，所以很不喜欢以上重新定义标签的方式，在 <a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">这里</a> 找到了另外一种更改方式。它同样是修改category_generator.rb文件来达到目的，利用了stringex包的to_url函数将中文分类标签的链接名和category_dir下的目录名都转换成相应的拼音，这样无论在本地还是GitHub上都没有问题。事实上，Octopress系统在利用rake new_[post|page]命令创建含有中文名的文章时也采用了这样的技巧。</p>
-
-<p>找到<code>def write_category_indexes</code>中定义category目录的部分：</p>
+<p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase), category)</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double __log10 (double x)
+</span><span class='line'>{
+</span><span class='line'>    if (__builtin_expect (islessequal (x, 0.0), 0) && _LIB_VERSION != _IEEE_)
+</span><span class='line'>    {
+</span><span class='line'>        if (x == 0.0)
+</span><span class='line'>        {
+</span><span class='line'>             feraiseexcept (FE_DIVBYZERO);
+</span><span class='line'>             return __kernel_standard (x, x, 18); /* log10(0) */
+</span><span class='line'>        }
+</span><span class='line'>        else
+</span><span class='line'>        {
+</span><span class='line'>            feraiseexcept (FE_INVALID);
+</span><span class='line'>            return __kernel_standard (x, x, 19); /* log10(x&lt;0) */
+</span><span class='line'>        }
+</span><span class='line'>     }
+</span><span class='line'>
+</span><span class='line'>   return  __ieee754_log10 (x);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>将其修改为：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase), category)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再找到<code>def category_links(categories)</code>中定义中文分类网页标签的部分：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"&lt;a class='category' href='/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase}/'&gt;#{item}&lt;/a&gt;"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>将其修改为：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>"&lt;a class='category' href='/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase}/'&gt;#{item}&lt;/a&gt;"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意，上面两处的修改就是在相应的地方加上to_url函数进行地址的转换。如果不想折腾的话，你也可以直接到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/plugins/category_generator.rb">这里</a> 下载我更改后的category_generator.rb插件。</p>
-
-<ul>
-<li>在plugins目录中创建category_list_tag.rb文件，文件内容如下：</li>
-</ul>
-
+<p>参考 <a href="http://www.cnblogs.com/skyivben/archive/2013/02/15/2912914.html">这里</a> 实现了一个c语言版本的log10快速算法，还不是很完善。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -190,100 +202,131 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'stringex'
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;math.h&gt;
+</span><span class='line'>#include &lt;string.h&gt;
+</span><span class='line'>#include &lt;stdio.h&gt;
 </span><span class='line'>
-</span><span class='line'>module Jekyll
-</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
-</span><span class='line'>    def render(context)
-</span><span class='line'>      html = ""
-</span><span class='line'>      categories = context.registers[:site].categories.keys
-</span><span class='line'>    category_dir = context.registers[:site].config['category_dir']
-</span><span class='line'>      categories.sort.each do |category|
-</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size    
-</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)
-</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-</span><span class='line'>      end
-</span><span class='line'>      html
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end
+</span><span class='line'>static double Sqrt(double x)
+</span><span class='line'>{
+</span><span class='line'>    if (x &lt; 0)
+</span><span class='line'>        return -1;
+</span><span class='line'>    if (x == 0)
+</span><span class='line'>        return 0;
+</span><span class='line'>    double y = (double)sqrt((double)x);
 </span><span class='line'>
-</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在实际使用（rake generate/rake preview）的时候，若blog整体采用了非ascii码的编码格式（比如utf-8）就会出现类似这样的错误：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Liquid error: incompatible encoding regexp match (ascii-8bit regexp with utf-8 string)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其实是由于插件文件plugins/category_list_tag.rb本身是ascii编码所致:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ chardet category_list_tag.rb
-</span><span class='line'>category_list_tag.rb: ascii (confidence: 1.00)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>category_list_tag.rb中很多地方用到了ruby的正则表达式，而ruby的正则表达式在匹配的时候，默认是按照“代码源文件”的编码格式(在这里是ascii)进行匹配的，而如果blog是utf-8编码的话就会出现上述错误。有两种解决办法：</p>
-
-<ol>
-<li>将category_list_tag.rb转成utf-8格式。</li>
-<li>更改category_list_tag.rb中所有的正则表达式声明，加上<code>u</code>选项（<code>u</code>的意思就是以utf-8编码格式来进行匹配）。例如，若原正则表达式是<code>/regexp/</code>, 则改成<code>/regexp/u</code>。</li>
-</ol>
-
-
-<p>在我实际处理问题的时候采用了第二种方法，category_list_tag.rb文件中的更改网上大多采用以下的方式：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>更改成如下形式（只是简单增加了<code>u</code>选项）：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li><p>添加source/_includes/custom/asides/category_list.html文件，内容可到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/source/_includes/custom/asides/category_list.html">这里</a> 查看。</p></li>
-<li><p>修改_config.yml文件，在default_asides项中添加custom/asides/category_list.html，值之间以逗号隔开。</p></li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>default_asides: [asides/recent_posts.html, custom/asides/category_list.html]</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>_posts/*.markdown</code>文件头中添加categories标签示例：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: "使用libevent编写Linux服务"
-</span><span class='line'>date: 2013-07-18 19:01
-</span><span class='line'>comments: true
-</span><span class='line'>categories: [C/C++, 开源库, Unix/Linux]
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
-
-
-<p>到此为止，Octopress中添加分类侧边栏并使其支持中文的修改设置已经完毕。</p>
-
-<h1>参考文章</h1>
-
-<ul>
-<li><a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">Octopress博客设置</a></li>
-<li><a href="http://ikeepu.com/bar/10393365">Octopress博客分类添加中文支持</a></li>
-<li><a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">Octopress易筋经，中文分类标签</a></li>
-<li><a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">关于在64位 Windows 7 中部署中文化的Octopress</a></li>
-<li><a href="http://pfmiles.github.io/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">Liquid Error About Regexp Match When Using Octopress-tagcloud</a></li>
-</ul>
+</span><span class='line'>    return (y + x / y) / 2;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static double NegativeLog(double q)
+</span><span class='line'>{                           
+</span><span class='line'>    int p;
+</span><span class='line'>    double pi2 = 6.283185307179586476925286766559;
+</span><span class='line'>    double eps2 = 0.00000000000001; // 1e-14
+</span><span class='line'>    double eps1;    // 1e-28
+</span><span class='line'>    double r = q, s = q, n = q, q2 = q * q, q1 = q2 * q;
+</span><span class='line'>
+</span><span class='line'>    eps1 = eps2 * eps2;
+</span><span class='line'>
+</span><span class='line'>    for (p = 1; (n *= q1) &gt; eps1; s += n, q1 *= q2)
+</span><span class='line'>        r += (p = !p) ? n : -n;
+</span><span class='line'>
+</span><span class='line'>    double u = 1 - 2 * r, v = 1 + 2 * s, t = u / v;
+</span><span class='line'>    double a = 1, b = Sqrt(1 - t * t * t * t);
+</span><span class='line'>
+</span><span class='line'>    for (; a - b &gt; eps2; b = Sqrt(a * b), a = t)
+</span><span class='line'>        t = (a + b) / 2;
+</span><span class='line'>
+</span><span class='line'>    return pi2 / (a + b) / v / v;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static double Log(double x)
+</span><span class='line'>{
+</span><span class='line'>    int k = 0;
+</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
+</span><span class='line'>
+</span><span class='line'>    if (x &lt;= 0)
+</span><span class='line'>        return -1;
+</span><span class='line'>    if (x == 1)
+</span><span class='line'>        return 0;
+</span><span class='line'>
+</span><span class='line'>    for (; x &gt; 0.1; k++)
+</span><span class='line'>        x /= 10;
+</span><span class='line'>    for (; x &lt;= 0.01; k--)
+</span><span class='line'>        x *= 10;
+</span><span class='line'>
+</span><span class='line'>    return k * ln10 - NegativeLog(x);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>double Log10(double x)
+</span><span class='line'>{
+</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
+</span><span class='line'>
+</span><span class='line'>    return Log(x) / ln10;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1000), log10(1000));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1), log10(1));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(8192.1024), log10(8192.1024));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(0.3), log10(0.3));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(33.8), log10(33.8));
+</span><span class='line'>
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -307,12 +350,12 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   
 
 
-<time datetime="2013-07-21T11:02:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
+<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
   
 </span>
 
@@ -346,10 +389,8 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/" title="Previous Post: 将Emacs配置成一个C/C++的IDE编程环境">&laquo; 将Emacs配置成一个C/C++的IDE编程环境</a>
+        <a class="basic-alignment left" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/" title="Previous Post: kfifo.c中in和out的溢出问题">&laquo; kfifo.c中in和out的溢出问题</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/" title="Next Post: Ubuntu下安装SublimeText2及其插件">Ubuntu下安装SublimeText2及其插件 &raquo;</a>
       
     </p>
   </footer>
@@ -632,8 +673,8 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
         var disqus_script = 'embed.js';
       
     (function () {

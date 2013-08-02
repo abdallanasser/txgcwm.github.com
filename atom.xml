@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-03T01:21:22+08:00</updated>
+  <updated>2013-08-03T01:50:41+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,233 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[log10的实现]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/"/>
+    <updated>2013-08-03T01:46:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian</id>
+    <content type="html"><![CDATA[<p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
+
+<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
+</span><span class='line'>{
+</span><span class='line'>    register double ret;
+</span><span class='line'>
+</span><span class='line'>       __asm__(
+</span><span class='line'>  "fldlg2\n\t" 
+</span><span class='line'>  "fxch\n\t" 
+</span><span class='line'>  "fyl2x"
+</span><span class='line'>  :"=t"(ret)
+</span><span class='line'>          :"0"(x)
+</span><span class='line'>      );
+</span><span class='line'>   return ret;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double __log10 (double x)
+</span><span class='line'>{
+</span><span class='line'>    if (__builtin_expect (islessequal (x, 0.0), 0) && _LIB_VERSION != _IEEE_)
+</span><span class='line'>    {
+</span><span class='line'>        if (x == 0.0)
+</span><span class='line'>        {
+</span><span class='line'>             feraiseexcept (FE_DIVBYZERO);
+</span><span class='line'>             return __kernel_standard (x, x, 18); /* log10(0) */
+</span><span class='line'>        }
+</span><span class='line'>        else
+</span><span class='line'>        {
+</span><span class='line'>            feraiseexcept (FE_INVALID);
+</span><span class='line'>            return __kernel_standard (x, x, 19); /* log10(x&lt;0) */
+</span><span class='line'>        }
+</span><span class='line'>     }
+</span><span class='line'>
+</span><span class='line'>   return  __ieee754_log10 (x);
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考 <a href="http://www.cnblogs.com/skyivben/archive/2013/02/15/2912914.html">这里</a> 实现了一个c语言版本的log10快速算法，还不是很完善。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;math.h&gt;
+</span><span class='line'>#include &lt;string.h&gt;
+</span><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>static double Sqrt(double x)
+</span><span class='line'>{
+</span><span class='line'>    if (x &lt; 0)
+</span><span class='line'>        return -1;
+</span><span class='line'>    if (x == 0)
+</span><span class='line'>        return 0;
+</span><span class='line'>    double y = (double)sqrt((double)x);
+</span><span class='line'>
+</span><span class='line'>    return (y + x / y) / 2;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static double NegativeLog(double q)
+</span><span class='line'>{                           
+</span><span class='line'>    int p;
+</span><span class='line'>    double pi2 = 6.283185307179586476925286766559;
+</span><span class='line'>    double eps2 = 0.00000000000001; // 1e-14
+</span><span class='line'>    double eps1;    // 1e-28
+</span><span class='line'>    double r = q, s = q, n = q, q2 = q * q, q1 = q2 * q;
+</span><span class='line'>
+</span><span class='line'>    eps1 = eps2 * eps2;
+</span><span class='line'>
+</span><span class='line'>    for (p = 1; (n *= q1) &gt; eps1; s += n, q1 *= q2)
+</span><span class='line'>        r += (p = !p) ? n : -n;
+</span><span class='line'>
+</span><span class='line'>    double u = 1 - 2 * r, v = 1 + 2 * s, t = u / v;
+</span><span class='line'>    double a = 1, b = Sqrt(1 - t * t * t * t);
+</span><span class='line'>
+</span><span class='line'>    for (; a - b &gt; eps2; b = Sqrt(a * b), a = t)
+</span><span class='line'>        t = (a + b) / 2;
+</span><span class='line'>
+</span><span class='line'>    return pi2 / (a + b) / v / v;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>static double Log(double x)
+</span><span class='line'>{
+</span><span class='line'>    int k = 0;
+</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
+</span><span class='line'>
+</span><span class='line'>    if (x &lt;= 0)
+</span><span class='line'>        return -1;
+</span><span class='line'>    if (x == 1)
+</span><span class='line'>        return 0;
+</span><span class='line'>
+</span><span class='line'>    for (; x &gt; 0.1; k++)
+</span><span class='line'>        x /= 10;
+</span><span class='line'>    for (; x &lt;= 0.01; k--)
+</span><span class='line'>        x *= 10;
+</span><span class='line'>
+</span><span class='line'>    return k * ln10 - NegativeLog(x);
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>double Log10(double x)
+</span><span class='line'>{
+</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
+</span><span class='line'>
+</span><span class='line'>    return Log(x) / ln10;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1000), log10(1000));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1), log10(1));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(8192.1024), log10(8192.1024));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(0.3), log10(0.3));
+</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(33.8), log10(33.8));
+</span><span class='line'>
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[kfifo.c中in和out的溢出问题]]></title>
@@ -2854,234 +3081,6 @@
 <li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
 <li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
 </ol>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux下c语言获取网络接口IP地址]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/"/>
-    <updated>2013-07-19T22:34:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi</id>
-    <content type="html"><![CDATA[<p>在Linux环境下，可以使用以下的代码获取网络的ip地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if (gethostname(host, sizeof(host)) &lt; 0) {
-</span><span class='line'>    printf("Can't get hostname\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>if ((hp = gethostbyname(host)) == NULL) {
-</span><span class='line'>    printf("Can't get host address\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>memcpy((char *) &intaddr, (char *) hp-&gt;h_addr_list[0],
-</span><span class='line'>        (size_t) hp-&gt;h_length);</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/socket.h&gt;
-</span><span class='line'>#include &lt;sys/ioctl.h&gt;
-</span><span class='line'>#include &lt;arpa/inet.h&gt;
-</span><span class='line'>#include &lt;netinet/in.h&gt;
-</span><span class='line'>#include &lt;net/if.h&gt;
-</span><span class='line'>#include &lt;stdlib.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>static int getIfaceName(char *iface_name, int len)
-</span><span class='line'>{
-</span><span class='line'>    int r = -1;
-</span><span class='line'>    int flgs, ref, use, metric, mtu, win, ir;
-</span><span class='line'>    unsigned long int d, g, m;    
-</span><span class='line'>    char devname[20];
-</span><span class='line'>    FILE *fp = NULL;
-</span><span class='line'>
-</span><span class='line'>    if((fp = fopen("/proc/net/route", "r")) == NULL) {
-</span><span class='line'>        perror("fopen error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
-</span><span class='line'>        fclose(fp);
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    while (1) {
-</span><span class='line'>        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
-</span><span class='line'>                 devname, &d, &g, &flgs, &ref, &use,
-</span><span class='line'>                 &metric, &m, &mtu, &win, &ir);
-</span><span class='line'>        if (r != 11) {
-</span><span class='line'>            if ((r &lt; 0) && feof(fp)) {
-</span><span class='line'>                break;
-</span><span class='line'>            }
-</span><span class='line'>            continue;
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        strncpy(iface_name, devname, len);
-</span><span class='line'>        fclose(fp);
-</span><span class='line'>        return 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    fclose(fp);
-</span><span class='line'>
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static int getIpAddress(char *iface_name, char *ip_addr, int len)
-</span><span class='line'>{
-</span><span class='line'>    int sockfd = -1;
-</span><span class='line'>    struct ifreq ifr;
-</span><span class='line'>    struct sockaddr_in *addr = NULL;
-</span><span class='line'>
-</span><span class='line'>    memset(&ifr, 0, sizeof(struct ifreq));
-</span><span class='line'>    strcpy(ifr.ifr_name, iface_name);
-</span><span class='line'>    addr = (struct sockaddr_in *)&ifr.ifr_addr;
-</span><span class='line'>    addr-&gt;sin_family = AF_INET;
-</span><span class='line'>
-</span><span class='line'>    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
-</span><span class='line'>        perror("create socket error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    if (ioctl(sockfd, SIOCGIFADDR, &ifr) == 0) {
-</span><span class='line'>        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
-</span><span class='line'>        close(sockfd);
-</span><span class='line'>        return 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    close(sockfd);
-</span><span class='line'>
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char** argv)
-</span><span class='line'>{
-</span><span class='line'>    struct in_addr    intaddr;
-</span><span class='line'>    char iface_name[20];
-</span><span class='line'>
-</span><span class='line'>    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
-</span><span class='line'>        printf("get interface name error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    if(getIpAddress(iface_name, (char *) &intaddr, 15) &lt; 0) {
-</span><span class='line'>        printf("get interface ip address error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    printf("address:%s\n",(char *) &intaddr);
-</span><span class='line'>
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
