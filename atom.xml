@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-03T15:10:47+08:00</updated>
+  <updated>2013-08-03T15:16:28+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[致未来的合作伙伴]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/"/>
+    <updated>2013-08-03T15:12:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban</id>
+    <content type="html"><![CDATA[<p><img src="http://trusbe.com/wp-content/uploads/2013/05/%E4%B8%AD%E5%9B%BD%E5%90%88%E4%BC%99%E4%BA%BA-%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C.png"></p>
+
+<p>首先想说的是——你选择了我作为你的合作伙伴，我感到万分的荣幸。对于当代的我们来说，要靠一个人独自去做一件事或者事业真的很难，唯有合作才能创就一番事业，毕竟个人的能力总是有限的。起初我认为凭借个人的力量能够做得很好（的确我依旧这么认为），可是那要花费大量的时间，等到真正完成的时候时机可能已经错过了。</p>
+
+<!--more-->
+
+
+<h2>信誉是第一</h2>
+
+<p>从小到大，家长、老师都在教导我们，做人必须讲信誉。确实如此，上了大学对此深有体会。我发现很多人答应其他人的事情只是信誓旦旦，等到真正要做的时候却推脱。这就好比是一个突然的袭击，或许这只是一件小事，但也是致命的打击！我也清楚，在某些时候确实是有一些要紧的事要办，可是既然已经答应了，这件事情就是第一位的。如果要离开团队，那就提前说明，不要等到关键的时刻。当然，紧急的事情也是会得到队友谅解的。所以，在做一个决定前首先考虑仔细，不要轻易答应别人的邀请。我们都已经很大了，心血来潮已经不属于我们。我敢肯定的是，当你失信别人一次时，这种事情就没有第二次发生了，而且你的声名也就此远播了。</p>
+
+<h2>做事第二</h2>
+
+<p>做事也就是做人，看一个的做事态度就可以看出一个人的做人态度，我很坚信这一点。很多人或许会认为“做事要积极”这话说的很虚，我也认同。可我要换种说法，做事要主动，不要总是等着别人告诉你去做什么才开始动手或者等到任务下来，要主动去询问。在很多的时候，谁都不知道接下来要做的事情，只有在不断的探讨中才会发现，或许那就是在不知不觉中创造的机遇。我想很多人都是喜欢主动型的。因为我们是合伙人，所以彼此的地位是平等的，在这个团队中我们都有责任去发现更多的问题，不能总是等待。如果只是等待，迟早有一天你要么出局，要么是昔日合作伙伴的下属。</p>
+
+<h2>实力是第三</h2>
+
+<p>我们自己有多少本事，我们自己心里都很清楚，有多少力量做多少的事。打肿脸蛋充胖子是很划不来的，迟早是要被看穿的。在一个人说话做事的时候，一个人的实力就暴露无遗了。经常看到人们总是在显示自己的才华，可那正是在述说着自己的无知。所以，我依然坚信“是金子总是是会发光的”！当然，我们不能一味的埋藏自己，把自己藏在别人无法看到的地方。</p>
+
+<p>很喜欢这样一个故事——一个年轻人去看手相，大师没有看，只是让他握紧了手，然后问道“你的事业线在哪”，年轻人很不解地道“在我的手上啊”。大师只是说了那么一句“既然在你的手上，那你何必跑过来问我呢！你还是回去吧”。年轻人大悟&hellip;&hellip;</p>
+
+<p>命运就掌握在我们的手上，我们又何必苦苦去追寻呢！ 一起努力吧，未来的世界属于我们。一个人的成功重点不在于智力，而在于一个人做人的态度。正如我上面把“做事就当成是做人”不是很准确，做人它包含了很多的方面，以上的三点归根结底也就是做人了！ 我坚信你是一个不平凡的人，如果你看到了最后，那么我决定&hellip;</p>
+
+<br></br>
+
+
+<p>书于7#527宿舍，2009年8月7日10时2分</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我们为什么败了]]></title>
@@ -2015,106 +2050,6 @@
 <li><a href="http://blog.sina.com.cn/s/blog_40ba724c0100jz12.html">iptables_2</a></li>
 <li><a href="http://qiliuping.blog.163.com/blog/static/1023829320105245337799/">netfilter/iptables全攻略</a></li>
 </ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[astyle格式化代码]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/"/>
-    <updated>2013-07-24T18:36:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma</id>
-    <content type="html"><![CDATA[<p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
-
-<p>下面介绍一下astyle的简单使用。例如有以下的源码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{int i;printf("Just a test!\n");for(i=0;i&lt;10;++i)printf("%d\n",i);}return 0;}</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>然后在终端下输入以下指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ astyle test1.c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>效果如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>    int i;
-</span><span class='line'>    printf("Just a test!\n");
-</span><span class='line'>    for(i=0; i&lt;10; ++i) {
-</span><span class='line'>        printf("%d\n",i);
-</span><span class='line'>    }
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>当然也可以加上一些选项，例如“astyle &mdash;style=bsd test1.c”，“ astyle &mdash;style=gnu test1.c”等等。</p>
-
-<p>在vim中的命令模式下，可以使用下面的某一种方式来格式化代码。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>%!astyle (simple case - astyle default mode is C/C++)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>%!astyle --mode=c --style=ansi -s2 (ansi C++ style, use two spaces per indent level)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或者</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>1,40!astyle --mode=c --style=ansi (ansi C++ style, filter only lines 1-40)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在格式化完代码后，会生成一个后缀为orig的文件，格式化完成之后将它们删除。为方便使用，可以把它写成一个脚本，代码如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
-</span><span class='line'>
-</span><span class='line'>for f in $(find . -name '*.c' -or -name '*.cpp' -or -name '*.h' -type f)
-</span><span class='line'>do
-</span><span class='line'>    astyle $f
-</span><span class='line'>done
-</span><span class='line'>
-</span><span class='line'># after formate the code,we need to rm '*.orig' files 
-</span><span class='line'>for f in $(find . -name '*.orig' -type f)
-</span><span class='line'>do
-</span><span class='line'>    rm $f
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
