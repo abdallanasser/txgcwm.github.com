@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-04T00:05:35+08:00</updated>
+  <updated>2013-08-04T00:09:53+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -42,14 +42,18 @@
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
 </span><span class='line'>
 </span><span class='line'>FILE *popen( const char* command, const char* mode )
 </span><span class='line'>
 </span><span class='line'>参数说明：
 </span><span class='line'>
-</span><span class='line'>　　command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。
-</span><span class='line'>　　mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。
+</span><span class='line'>　　command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，
+</span><span class='line'>            shell将执行这个命令。
+</span><span class='line'>　　mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。
+</span><span class='line'>         如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。
 </span><span class='line'>
 </span><span class='line'>返回值：
 </span><span class='line'>
