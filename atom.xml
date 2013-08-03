@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-04T00:20:03+08:00</updated>
+  <updated>2013-08-04T00:21:46+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -48,7 +48,7 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
 
 <p>如果调用失败，返回-1。</p>
 
-<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本像从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：</p>
+<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本想从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
