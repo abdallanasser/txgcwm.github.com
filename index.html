@@ -109,22 +109,6 @@
 <p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
 mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
 
-<p>返回值</p>
-
-<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int pclose (FILE* stream)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参数说明</p>
-
-<p>stream： popen返回的文件指针。</p>
-
-<p>返回值</p>
-
-<p>如果调用失败，返回-1。</p>
-
 </div>
   
   
