@@ -10,13 +10,7 @@
 
   
   <meta name="description" content="标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义： 1
-2
-3
-4
-5
-6
-7
-8 &hellip;">
+FILE *popen( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -105,54 +99,29 @@
 <div class="entry-content"><p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>FILE *popen( const char* command, const char* mode )
-</span><span class='line'>
-</span><span class='line'>参数说明：
-</span><span class='line'>
-</span><span class='line'>　　command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，
-</span><span class='line'>            shell将执行这个命令。
-</span><span class='line'>　　mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。
-</span><span class='line'>         如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。
-</span><span class='line'>
-</span><span class='line'>返回值：
-</span><span class='line'>
-</span><span class='line'>　　如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。
-</span><span class='line'>
-</span><span class='line'>int pclose (FILE* stream)
-</span><span class='line'>
-</span><span class='line'>参数说明：
-</span><span class='line'>
-</span><span class='line'>　　stream： popen返回的文件指针。
-</span><span class='line'>
-</span><span class='line'>返回值：
-</span><span class='line'>
-</span><span class='line'>　　如果调用失败，返回-1。</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FILE *popen( const char* command, const char* mode )</span></code></pre></td></tr></table></div></figure>
 
+
+<p>参数说明</p>
+
+<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
+mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
+
+<p>返回值</p>
+
+<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int pclose (FILE* stream)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参数说明</p>
+
+<p>stream： popen返回的文件指针。</p>
+
+<p>返回值</p>
+
+<p>如果调用失败，返回-1。</p>
 
 <!--more-->
 
