@@ -177,5 +177,5 @@ int main(int argc, char **argv)
 
 #参考文章
 
-[Linux管道的实现机制](http://oss.org.cn/kernel-book/ch07/7.1.1.htm)
+[Linux管道的实现机制](http://oss.org.cn/kernel-book/ch07/7.1.1.htm)   
 [进程通信管道问题](http://bbs.chinaunix.net/thread-4069374-1-1.html)
