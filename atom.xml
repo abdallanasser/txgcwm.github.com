@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-03T14:35:29+08:00</updated>
+  <updated>2013-08-03T14:49:24+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[推荐一本好书《货币战争》]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/03/tui-jian-%5B%3F%5D-ben-hao-shu-%3C%3Chuo-bi-zhan-zheng-%3E%3E/"/>
+    <updated>2013-08-03T14:39:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/03/tui-jian-[?]-ben-hao-shu-<<huo-bi-zhan-zheng->></id>
+    <content type="html"><![CDATA[<p><img src="http://www.cr173.com/up/2010-7/2010719183816.jpg"></p>
+
+<p>如果你酷爱金融或者不想让自己在未来的金融大战中灭亡的话，看一下这本书是绝对没有错的。在本学期我所看过的书中，《货币战争》我认为是很不错的。世纪大战的可能性现在几乎很小，可是有另外的一种战场，那就是金融大战，它的毁坏能力超过了战争。</p>
+
+<!--more-->
+
+
+<p>国际上的金融被一群叫做“国际银行家”的精英小团体所控制着，操纵着欧美国家的货币发行。欧美国家的政府是没有货币发行权的，掌控这一切的是那些个人小群体，而国家通过抵押国债来获取货币，这些国家是以人民的未来税收作抵押。也就是说他们永远也还不清他们所欠下的债务，利滚利的威力是无穷的。</p>
+
+<p>欧洲的政府在斗争过程中失败了，美国政府的努力也没有取得进展，美联储照样被私有化了（美联储的职责就和中国的中央银行一样）。国际银行家们正在试图着废除“黄金是货币之王”的地位，如此他们就可以永无止境的发行货币，达到他们的野心。虽然每一次的斗争，他们都没有取得胜利，可是他们都取得了一些“成就”，为下一步做好了准备。</p>
+
+<p>要知道中国是少数几个政府拥有货币发行权的国家之一，国际银行家们早就在觊觎这块肥肉了，那时对于中国是个很大的危机——富裕了少部分人，却使多数人无比贫穷。迫在目睫的大问题已出现，如果应对失误，2009年的中国将会面临巨大的损失。现在中国要对付的不仅仅是国际银行家了，那些国家也在支持着他们，中国的经济正在使他们恐惧！</p>
+
+<p>这是一场不可避免的战争，而我们要做的是从中学到相应的措施避免造成重大的损失。如果你认为自己不是那些精英中的一员的话，就支持国家的各项措施。我敢保证此书的意图绝对是避免让大部分的人免于贫穷！</p>
+
+<br></br>
+
+
+<p>书于7#527宿舍，2008年7月12日22时16分</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[中国的股市需要你们]]></title>
@@ -2110,98 +2137,6 @@
 </span><span class='line'>$ echo $TERMINFO
 </span><span class='line'>/lib/terminfo/</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu下安装SublimeText2及其插件]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/"/>
-    <updated>2013-07-23T22:33:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian</id>
-    <content type="html"><![CDATA[<p>Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。</p>
-
-<h1>软件安装</h1>
-
-<p>Ubuntu下安装Sublime Text 2有两种方式：指令安装和直接下载安装。</p>
-
-<h2>指令安装</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:webupd8team/sublime-text-2
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install sublime-text-2</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<h2>直接下载安装</h2>
-
-<p>从 <a href="http://www.sublimetext.com/2">这里</a>下载所需要的版本，然后解压文件到安装目录。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo tar -jxvf Sublime\ Text\ 2.0.1.tar.bz2 -C /usr/local/</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>在applications菜单中创建快捷方式</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo gedit /usr/share/applications/sublimetext.desktop 
-</span><span class='line'>
-</span><span class='line'>[Desktop Entry]
-</span><span class='line'>Encoding=UTF-8
-</span><span class='line'>Name=Sublime Text
-</span><span class='line'>Comment=Sublime Text
-</span><span class='line'>Exec=/usr/local/SublimeText/sublime_text
-</span><span class='line'>Icon=/usr/local/SublimeText/Icon/48x48/sublime_text.png
-</span><span class='line'>Terminal=false
-</span><span class='line'>StartupNotify=true
-</span><span class='line'>Type=Application
-</span><span class='line'>Categories=Application;Development;</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>安装插件</h1>
-
-<p>安装Sublime text 2插件也有两种方法：直接安装和使用Package Control组件安装。</p>
-
-<h2>直接安装</h2>
-
-<p>可以直接下载安装包解压缩到Packages目录（菜单->preferences->packages）。</p>
-
-<h2>使用Package Control组件安装</h2>
-
-<p>也可以先安装package control组件，然后直接在线安装：</p>
-
-<ul>
-<li>按Ctrl + `调出console ，其中`是键盘左上角那个符号。</li>
-<li>粘贴以下代码到底部命令行并回车。</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>import urllib2,os; pf='Package Control.sublime-package'; ipp=sublime.installed_packages_path(); os.makedirs(ipp) if not os.path.exists(ipp) else None; urllib2.install_opener(urllib2.build_opener(urllib2.ProxyHandler())); open(os.path.join(ipp,pf),'wb').write(urllib2.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read()); print 'Please restart Sublime Text to finish installation'</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>重启Sublime Text 2。</li>
-<li>如果在Perferences->package settings中看到package control这一项，则安装成功。 如果这种方法不能安装成功，可以到 <a href="http://wbond.net/sublime_packages/package_control/installation">这里</a> 下载文件手动安装。</li>
-</ul>
-
-
-<p>用Package Control安装插件的方法：a、按下<code>Ctrl+Shift+P</code>调出命令面板；b、输入<code>install</code>调出Install Package选项并回车，然后在列表中选中要安装的插件。</p>
 ]]></content>
   </entry>
   
