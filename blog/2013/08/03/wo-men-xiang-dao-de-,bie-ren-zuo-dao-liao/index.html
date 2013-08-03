@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Uboot中TFTP解释 - 残剑</title>
+  <title>我们想到的，别人做到了 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用tftp MemoryAddress FileName命令即可， &hellip;">
+  <meta name="description" content="我们有很多很多的想法，但又有谁扪心问过之后，可以坚信的说“我不仅想到了，而且做到了”。不得不承认，我完全没有做到，在某种意义上说，我就是一个失败者。大学的三年里，没有留下太多的回忆！借老大的一句话来描述我此时的心情以及三年的感触——三年过去了，你已经站在了我需要仰望的地方。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Uboot中TFTP解释</h1>
+      <h1 class="entry-title">我们想到的，别人做到了</h1>
     
     
       <p class="meta">
@@ -86,7 +86,7 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2013-08-03T15:24:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,95 +95,55 @@
   </header>
 
 
-<div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+<div class="entry-content"><p><img src="http://img1.gtimg.com/gongyi/pics/hv1/76/103/1016/66091741.jpg"></p>
 
-<p>使用TFTP传送文件的步骤：</p>
+<p>我们有很多很多的想法，但又有谁扪心问过之后，可以坚信的说“我不仅想到了，而且做到了”。不得不承认，我完全没有做到，在某种意义上说，我就是一个失败者。大学的三年里，没有留下太多的回忆！借老大的一句话来描述我此时的心情以及三年的感触——三年过去了，你已经站在了我需要仰望的地方。</p>
 
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
-
+<p>在成长的过程中我们逐渐与别人产生了差距，很多的事情我们想到了，可别人却已经做到。</p>
 
 <!--more-->
 
 
-<h1>客户端状态</h1>
+<p></p>
 
-<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
+<h1>盒饭</h1>
 
-<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
+<p>暑假有很多的留校生（考研生，实习生，培训生，还有一部分无所事事生），总计600多人。而且我们这里有暑期的学府考研班，来到这里的还有西安工程大学和二炮的学生，他们下午要继续上课，所以中午必然留在我们学校。这是一个巨大的市场！</p>
 
-<h1>包类型</h1>
+<p>送盒饭的理由：一、食堂的伙食并不是很符合广大同学的心意；二、外面的饭店开张的并不是很多，吃饭等待的时间比较长；三、夏天真的很热，我们是“天之骄子”，惧怕这毒辣的太阳。</p>
 
-<p>使用TFTP传送的包分为6种类型：</p>
+<p>产生了这个想法，但始终没有行动。过了几天，我发现有同学已经在开展这项业务，并且宣传已经做到了我们的门上。有一天终于联系到了一个老板，他同意和我们合作。我们开始做了，每天都活在期待中，期待手机的响动，等待着那些客户。过了一些时间，我们的对手不见了，他们破产了，据说是质量不是很好。可是，我们也在十多天后破产了，其中的原因我也在前面的文章里提到了。不过我要说的是，我们的那个老板很不错，手艺也不错，价格很低廉。他的店名叫“巴渝川香居”，我极力推荐，如果各位朋友有机会的话，可以去品尝品尝！</p>
 
-<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
+<h1>莲子</h1>
 
-<h1>各种包结构</h1>
+<p>偶然间，和几个同学走到了学校的三里河畔，看到了荷花盛开，那一株株莲子妖艳的向来往的过客招手。它们清楚，处在河的中间地段不会招来杀生之祸。可是它们错了，不幸的是遇见了我。下了水，结束了它们的性命。摘的不是莲子，而是一种乐趣！</p>
 
-<p>TFTP协议中各种包的结构：</p>
+<p>回到了宿舍有种想法，我可以出售莲苞——在七夕情人节这一天。卖的不是莲子的营养，而是一种概念。我并不是一个很开放的人，需要一个人合作，可没有找到一个合作的伙伴，结果这个计划流产了。说实在的，针对七夕情人节的广告我都已经做好了。</p>
 
-<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
+<p>没有实施这个计划，我把莲子送给了一个我一直喜欢着的女孩，本想送上两株莲苞的，可她没有收下，只要了6颗莲子。原本只是摘给她的，可是一冲动就摘得有点多了，剩下的就和同学分享了。</p>
 
-<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
+<h1>打包的袋子</h1>
 
-<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
+<p>马上就要搬到雁塔校区了，那时肯定需要很多的编织袋，这毫无疑问。我和同学一商量，决定做这桩生意。起先的时候，我们根本没有把握，都已经做好了赔本的准备。我们没有太大的胆量，所以只投入了600元。起初也没想盈利，只是想尝试着做一件事情。</p>
 
-<p>ACK（确认帧）结构：</p>
+<p>就以在校的同学为对象，我们跑到宿舍作了一个调查，了解同学们的一个具体看法。我们来到一个宿舍（他们之后就是我们的对手了），当推进门的时候，我发现他们宿舍已经放满了编织袋，数量是五百之上。我们很佩服他的魄力，能够一次购买如此大的货量。最主要的是，我们还只是停留在想法的时候，他们已经开始行动了。我们不得不佩服！</p>
 
-<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
+<p>我们进的布制编织袋价格比较的贵，所以第一次进的量比较的少，进了150个。有了上次的教训，我们的行动也就早了些。学校规定的是在24号到学校，我们在18的晚上就开始行动了，我们避开了对手，在6号楼开始了试销。第二天晚上，我们到了1号楼销售，在这里我们占据了很大的一个市场。可以肯定的说，我们销售是在所有的学生商家中是最早的。</p>
 
-<h1>主要函数及作用</h1>
+<p>第一次的150多个我们花了较长的时间才把它卖完。那时很多的同学都没有来，于是我们决定再去进货，这次我们又进了150个，这一次我们用了1天多的时间就把它卖完了。或许是因为贪婪吧，又进行了第三次进货（150），这次进货用的是我们前两次的利润，可以说我们是在赌了（可事实告诉我们，并不是我们想的那样，市场还有很大的容量，只是我们并不知晓这个市场的具体情况）。第三次，我们花了1天的时间全部清货。后来，我们实在不敢进货了，我们就等着电话订单，统计之后完全能够赚回成本，我们又进行了第四次的进货（73个，比订单多进了10多个）。这次，我们清货的速度更快。很多同学再问的时候，我们只能拒绝了。</p>
 
-<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：</p>
+<p>在后来的一两天内，我们接到了很多的电话，定的数量也很大，但我们都拒绝了，我们制止了我们自己的贪婪。同时，我们也想让自己休息一下，这些天下来实在很累。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存*/
-</span><span class='line'>static __inline__ void store_block (unsigned block, uchar * src, unsigned len);
-</span><span class='line'>
-</span><span class='line'>/* 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） */
-</span><span class='line'>static void TftpSend (void) ;
-</span><span class='line'>
-</span><span class='line'>/* 处理收到的Tftp包 */
-</span><span class='line'>static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;
-</span><span class='line'>
-</span><span class='line'>/* 超时处理函数 */
-</span><span class='line'>static void TftpTimeout (void);
-</span><span class='line'>
-</span><span class='line'>/* 初始化各个需要的数据 然后开始发送TFTP读请求 */
-</span><span class='line'>void TftpStart (void);</span></code></pre></td></tr></table></div></figure>
+<p>有人说，卖袋子赚钱了。我说，确实赚钱了。可是又有谁看到了其中的艰辛，没有人能够体会到。我和我的合作伙伴已经被楼管阿姨给封杀了，只要见到我们就盘问，盘问的结果就是不让我们进宿舍楼（当然我们自己的宿舍楼还是可以进的），即便你是去找老同学。</p>
+
+<p>非常感谢我的合作伙伴，辛勤的付出和不懈的努力，以及那些具有智慧的商业策略。可以毫不自夸的说，我们的质量是最好的，我们的销售是最早的，我们的售后服务是最好的，我们合伙人的人均利润是最高的，我们合伙人的数量是最少的，我们也是最早销售完的。可是，也有很多东西我们没有做得最好，我们并不是最早行动的，别人已经在行动，而我们只是停留在想法当中！</p>
+
+<p>但愿此文在今后的日子里，给自己有所提示。有了想法之后，尽早的采取行动。如果我们想要成功，我们就必须不懈的努力，比别人多做一些，行动的更早一些！</p>
+
+<br></br>
 
 
-<h1>流程</h1>
-
-<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
-
-<p>以下是客户端和服务器端通信的流程图：</p>
-
-<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
-
-<p>客户端程序流程：</p>
-
-<ol>
-<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
-<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
-<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
-</ol>
-
+<p>书于雁塔校区本部宿舍，2009年8月29日21时11分</p>
 </div>
 
 
@@ -206,12 +166,12 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2013-08-03T15:24:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/wang-luo-ying-yong/'>网络应用</a>
+    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
   
 </span>
 
@@ -245,10 +205,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/" title="Previous Post: Linux下c语言获取网络接口IP地址">&laquo; Linux下c语言获取网络接口IP地址</a>
+        <a class="basic-alignment left" href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/" title="Previous Post: 致未来的合作伙伴">&laquo; 致未来的合作伙伴</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/" title="Next Post: 将Emacs配置成一个C/C++的IDE编程环境">将Emacs配置成一个C/C++的IDE编程环境 &raquo;</a>
       
     </p>
   </footer>
@@ -531,8 +489,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/';
         var disqus_script = 'embed.js';
       
     (function () {
