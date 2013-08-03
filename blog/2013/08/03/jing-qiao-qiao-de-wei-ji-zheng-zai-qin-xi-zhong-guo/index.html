@@ -5,25 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>log10的实现 - 残剑</title>
+  <title>静悄悄的危机正在侵袭中国 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？ 在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-double my_log10(double x)
-{ &hellip;">
+  <meta name="description" content="作为一个发展迅速的大国，一直是美国打击的对象，它不容得任何的新势力动摇它的霸权地位。80年代的广场协议迫使日本货币升值，还有97年的东南亚金融危机，无不跟美国有关系。 80年代的日本经济发展迅速，GDP超越了美国的一半以上，在未来的几年内大家都看好日本的经济，都认为会在几年内超越美国。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,7 +18,7 @@ double my_log10(double x)
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -84,7 +70,7 @@ double my_log10(double x)
   
   <header>
     
-      <h1 class="entry-title">Log10的实现</h1>
+      <h1 class="entry-title">静悄悄的危机正在侵袭中国</h1>
     
     
       <p class="meta">
@@ -100,7 +86,7 @@ double my_log10(double x)
   
 
 
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2013-08-03T14:00:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,228 +95,34 @@ double my_log10(double x)
   </header>
 
 
-<div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
+<div class="entry-content"><p><img src="http://a3.att.hudong.com/74/68/01300000238080122631688199226.jpg"></p>
 
-<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    register double ret;
-</span><span class='line'>
-</span><span class='line'>       __asm__(
-</span><span class='line'>  "fldlg2\n\t" 
-</span><span class='line'>  "fxch\n\t" 
-</span><span class='line'>  "fyl2x"
-</span><span class='line'>  :"=t"(ret)
-</span><span class='line'>          :"0"(x)
-</span><span class='line'>      );
-</span><span class='line'>   return ret;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
+<p>作为一个发展迅速的大国，一直是美国打击的对象，它不容得任何的新势力动摇它的霸权地位。80年代的广场协议迫使日本货币升值，还有97年的东南亚金融危机，无不跟美国有关系。</p>
 
 <!--more-->
 
 
-<p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：</p>
+<p>80年代的日本经济发展迅速，GDP超越了美国的一半以上，在未来的几年内大家都看好日本的经济，都认为会在几年内超越美国。而事实就是那样，日本确实很有实力，可是美国这时候不同意，凭借着自己的霸气，迫使日本签订了广场协议，从此日本的经济痛苦了十年，而恰恰这十年又是美国复苏的十年，又一个辉煌的十年。美国从日本人的手中收回了大量的财富，而这都是日本人辛苦聚集的，通用公司在一买一卖前后两个过程中赚了四亿，而投资大亨在宣布签订协议的一个晚上的时间就赚了四千万美圆，滚滚财富都流入了美国。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double __log10 (double x)
-</span><span class='line'>{
-</span><span class='line'>    if (__builtin_expect (islessequal (x, 0.0), 0) && _LIB_VERSION != _IEEE_)
-</span><span class='line'>    {
-</span><span class='line'>        if (x == 0.0)
-</span><span class='line'>        {
-</span><span class='line'>             feraiseexcept (FE_DIVBYZERO);
-</span><span class='line'>             return __kernel_standard (x, x, 18); /* log10(0) */
-</span><span class='line'>        }
-</span><span class='line'>        else
-</span><span class='line'>        {
-</span><span class='line'>            feraiseexcept (FE_INVALID);
-</span><span class='line'>            return __kernel_standard (x, x, 19); /* log10(x&lt;0) */
-</span><span class='line'>        }
-</span><span class='line'>     }
-</span><span class='line'>
-</span><span class='line'>   return  __ieee754_log10 (x);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<p>苏联解体了，美国没有了对手，这下是收拾他们的时候了，美国深知养虎为患的道理。当年的亚洲四小龙是为了抵抗苏联和中国这两个强大的社会主义经济体，强力扶植这四个地方（注意我这里用的并不是国家两个字，香港和台湾都是中国的，它们只属于地方）。我个人并不认为索罗斯以及那些投资军团有那么强大的实力能够击垮东南亚的经济体，他们的背后肯定有一个强大的主子，那就是美帝国主义！没有美国的默许以及暗地里的支持，他们能够支撑到那么久，能够和众多的国家对抗。</p>
+
+<p>亚洲四小龙倒下了，美国高枕无忧了几年，可是中国却在不断的崛起，成了一个比苏联还要强大的对手，在各个领域与美国争夺，这还得了，是该时候收拾收拾了，要将它扼杀在萌芽阶段。贸易壁垒，支持台独（虽然没有口头上说支持，可是对台出售武器，可恶的航母在太平洋上耀武扬威，这比没有说做得还过分，加上不断的联合演习，不是对中国才是怪事呢），次贷危机转嫁给中国（次贷的债务抛给了中国，据说中国为此支付了比汶川地震的损失还要多的金钱），迫使人民币升值有一次吸取了中国人民辛苦创造的财富，等等。</p>
+
+<p>最近越南出现了股市和楼市危机，金融界出现了一片慌乱，还好对中国的影响暂时不是很大。可是原本就低迷的中国股市在这一波中还是有不小的影响的，都调整了几个月，依旧徘徊在3300点左右，还在不断的探底，国际的投机者还在不断地向中国输送大量的资金，致使中国的印钞机在不断的工作，制造了大量的人民币，这又加剧了中国的通胀压力。人民币太多了！！！</p>
+
+<p>今天到超市买东西，物价又一次的上涨了，都说人民币升值了，可是并不是这样子，只是美圆在一直的贬值。一旦大量的外资从中国撤离，人民币就会迅速的贬值，留给中国政府的只是如何去处理通胀这个后事。危机又一次来到了东南亚，而这些投资家为何要青睐东南亚而不选择发达的欧盟，原因大概是我们的体系太脆弱，比较容易击垮，进而从中获取高额的利润。越南的民众现在是一片恐慌，都忙着拿越南盾兑换美圆或者是黄金，政府已经对整个体系失去了控制，只能求助于国际货币组织，这时美国作为一个大国又会跑出来做一个好人，又从中敲诈。中国的股市，楼市又一次面临着一个巨大的挑战。</p>
+
+<p>97年的金融危机，中国从中走出来了，当那时候也是遍体鳞伤，花了多年的时间才得到了恢复。这一次，在中国面临那么多的挑战之后，又会怎么样呢，希望中国的民众加油，战胜这次金融危机。尽管我们有大量的外汇储备，可是那并不是我们不用当心危机不会侵袭中国的理由。居安思危，这是古人的告诫！</p>
+
+<p>静悄悄的危机，正在侵袭中国，你我都准备好了吗？在这个关键的时刻，我们要遵从政府，听从政府的安排，不要错误的认为政府是在害我们，我们不应该有太多的抱怨。政府也是在和那些想破环中国经济体的恶势力在作战，我们袖手旁观可以，但是我们不能给政府添乱。</p>
+
+<br></br>
 
 
-<p>参考 <a href="http://www.cnblogs.com/skyivben/archive/2013/02/15/2912914.html">这里</a> 实现了一个c语言版本的log10快速算法，还不是很完善。</p>
+<br></br>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;math.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>static double Sqrt(double x)
-</span><span class='line'>{
-</span><span class='line'>    if (x &lt; 0)
-</span><span class='line'>        return -1;
-</span><span class='line'>    if (x == 0)
-</span><span class='line'>        return 0;
-</span><span class='line'>    double y = (double)sqrt((double)x);
-</span><span class='line'>
-</span><span class='line'>    return (y + x / y) / 2;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static double NegativeLog(double q)
-</span><span class='line'>{                           
-</span><span class='line'>    int p;
-</span><span class='line'>    double pi2 = 6.283185307179586476925286766559;
-</span><span class='line'>    double eps2 = 0.00000000000001; // 1e-14
-</span><span class='line'>    double eps1;    // 1e-28
-</span><span class='line'>    double r = q, s = q, n = q, q2 = q * q, q1 = q2 * q;
-</span><span class='line'>
-</span><span class='line'>    eps1 = eps2 * eps2;
-</span><span class='line'>
-</span><span class='line'>    for (p = 1; (n *= q1) &gt; eps1; s += n, q1 *= q2)
-</span><span class='line'>        r += (p = !p) ? n : -n;
-</span><span class='line'>
-</span><span class='line'>    double u = 1 - 2 * r, v = 1 + 2 * s, t = u / v;
-</span><span class='line'>    double a = 1, b = Sqrt(1 - t * t * t * t);
-</span><span class='line'>
-</span><span class='line'>    for (; a - b &gt; eps2; b = Sqrt(a * b), a = t)
-</span><span class='line'>        t = (a + b) / 2;
-</span><span class='line'>
-</span><span class='line'>    return pi2 / (a + b) / v / v;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static double Log(double x)
-</span><span class='line'>{
-</span><span class='line'>    int k = 0;
-</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
-</span><span class='line'>
-</span><span class='line'>    if (x &lt;= 0)
-</span><span class='line'>        return -1;
-</span><span class='line'>    if (x == 1)
-</span><span class='line'>        return 0;
-</span><span class='line'>
-</span><span class='line'>    for (; x &gt; 0.1; k++)
-</span><span class='line'>        x /= 10;
-</span><span class='line'>    for (; x &lt;= 0.01; k--)
-</span><span class='line'>        x *= 10;
-</span><span class='line'>
-</span><span class='line'>    return k * ln10 - NegativeLog(x);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>double Log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
-</span><span class='line'>
-</span><span class='line'>    return Log(x) / ln10;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1000), log10(1000));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1), log10(1));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(8192.1024), log10(8192.1024));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(0.3), log10(0.3));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(33.8), log10(33.8));
-</span><span class='line'>
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
+<p>书于7#527宿舍，2008年6月8日23时55分</p>
 </div>
 
 
@@ -353,12 +145,12 @@ double my_log10(double x)
   
 
 
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2013-08-03T14:00:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
   
 </span>
 
@@ -392,10 +184,8 @@ double my_log10(double x)
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/" title="Previous Post: kfifo.c中in和out的溢出问题">&laquo; kfifo.c中in和out的溢出问题</a>
+        <a class="basic-alignment left" href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/" title="Previous Post: 扩大内需对当前的中国非常有必要">&laquo; 扩大内需对当前的中国非常有必要</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/" title="Next Post: 扩大内需对当前的中国非常有必要">扩大内需对当前的中国非常有必要 &raquo;</a>
       
     </p>
   </footer>
@@ -678,8 +468,8 @@ double my_log10(double x)
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/';
         var disqus_script = 'embed.js';
       
     (function () {
