@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-06T21:42:44+08:00</updated>
+  <updated>2013-08-07T01:13:28+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,144 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu上安装LaTeX]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/07/ubuntushang-an-zhuang-latex/"/>
+    <updated>2013-08-07T00:53:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/07/ubuntushang-an-zhuang-latex</id>
+    <content type="html"><![CDATA[<p>LaTeX（音译“拉泰赫”）是一种基于TeX的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。</p>
+
+<p>可以在Ubuntu安装很多LaTeX的分发版，其中一个是TeX Live，使用下面命令可以在Ubuntu上安装Tex Live（软件有好几百M，需要慢慢等待）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install texlive-full</span></code></pre></td></tr></table></div></figure>
+
+
+<p>要编辑LaTeX文档需要一个编辑器，你可以找到很多编辑器，这里我们推荐使用Texmaker。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install texmaker</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<!--more-->
+
+
+<p><code>apt-cache search cjk</code>找到相关宏包安装：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install cjk-latex latex-cjk-chinese</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装喜欢的中文字体：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install xfonts-wqy ttf-wqy-microhei ttf-wqy-zenhei</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装英文字体：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-cache search 'courier new'
+</span><span class='line'>ttf-mscorefonts-installer - Installer for Microsoft TrueType core fonts
+</span><span class='line'>
+</span><span class='line'>$ sudo apt-get install ttf-mscorefonts-installer</span></code></pre></td></tr></table></div></figure>
+
+
+<p>需要更新字体缓存：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fc-cache</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了使整个系统下的用户的字体列缓存都更新，建议使用root权限执行:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo fc-cache -f -s -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用fc-list查看可用的字体：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fc-list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者只查看中文的字体</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ fc-list ：lang=zh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果能看到想要的中文字体，就可以了。</p>
+
+<p>新增一个test.tex名字的文件，内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>% dependencies: xelatex, xecjk package，Courier New字体，wenquanyi中文字体，也可以设置其他的中英文字体
+</span><span class='line'>% Usage: xelatex filename[.tex]
+</span><span class='line'>
+</span><span class='line'>\documentclass[11pt]{article}
+</span><span class='line'>\usepackage{xeCJK}
+</span><span class='line'>\setmainfont{Courier New} % 设置英文衬线字体
+</span><span class='line'>% \setmonofont{} % 设置英文等宽字体，等宽英文字体大全：http://zh.wikipedia.org/wiki/%E7%AD%89%E5%AE%BD%E5%AD%97%E4%BD%93
+</span><span class='line'>% \setsansfont{} % 设置英文无衬线字体
+</span><span class='line'>\setCJKmainfont{WenQuanYi Micro Hei} % 设置缺省中文字体
+</span><span class='line'>%\setCJKfamilyfont{WenQuanYi Micro Hei} % 与setCJKmainfon t等同，http://bbs.ctex.org/forum.php?mod=viewthread&tid=51057
+</span><span class='line'>\parindent 2em   %段首缩进
+</span><span class='line'> 
+</span><span class='line'>\begin{document}
+</span><span class='line'>\section{举例}
+</span><span class='line'>\begin{verbatim}
+</span><span class='line'>标点。
+</span><span class='line'>\end{verbatim}
+</span><span class='line'> 
+</span><span class='line'>汉字Chinese数学$x=y$空格
+</span><span class='line'>\end{document}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再用xelatex编译，就可以生成pdf文档了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ xelatex filename.tex</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://forum.ubuntu.org.cn/viewtopic.php?t=274400">ku10.04下 tevlive-xetex 、texmaker 、ctex宏包 安装成功</a> <br/>
+<a href="http://forum.ubuntu.com.cn/viewtopic.php?f=35&amp;t=331555">natty narwahl 源安装 texlive2009 及 中文配置教程总结</a> <br/>
+<a href="http://blog.sina.com.cn/s/blog_5e16f1770100lgs5.html">LaTeX技巧345：modernCV-xelatex中文支持简历</a> <br/>
+<a href="http://linuxandfriends.com/latex-resume-templates/">LaTeX Resume Templates</a> <br/>
+<a href="http://www.cnblogs.com/bamboo-talking/archive/2013/01/07/2848914.html">xelatex+xeCJK在ubuntu Linux中显示中文</a> <br/>
+<a href="http://linux-wiki.cn/wiki/zh-hans/LaTeX%E4%B8%AD%E6%96%87%E6%8E%92%E7%89%88%EF%BC%88%E4%BD%BF%E7%94%A8XeTeX%EF%BC%89">LaTeX中文排版（使用XeTeX）</a> <br/>
+<a href="http://mathslinux.org/?p=58">用 org-mode 写 LaTeX</a> <br/>
+<a href="http://www.oschina.net/question/12_63776">在 Ubuntu 上安装 LaTeX</a> <br/>
+<a href="http://blog.csdn.net/yming0221/article/details/7616846">LaTeX使用&mdash;XeLaTeX入门基础（一）</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[毕业后的抉择]]></title>
@@ -1577,44 +1715,6 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
 <p>很不幸的是，2013年年初的时候CU博客改版了，书写博客的整体体验很差，也向管理员反应过这个事件，可并未察觉出它们有更新博客系统的迹象。慢慢的就开始不爽了！5月份的时候就基于github和Octopress搭建了一个个人独立博客，陆陆续续到7月份才构建了一个自己认为比较满意的博客。独立博客的好处在于其可定制性强，不好的地方就是对于一个小白博主来说有一定的技术难度。</p>
 
 <p>如果你是技术狼/媛，对Linux方面有兴趣的话可以看我的 <a href="http://blog.chinaunix.net/uid/25885064.html">CU博客</a> 和 <a href="http://txgcwm.github.io/">个人独立博客</a> 。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[关于微访谈]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan/"/>
-    <updated>2013-07-27T23:34:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/27/guan-yu-wei-fang-tan</id>
-    <content type="html"><![CDATA[<p><img class="left" src="http://pic002.cnblogs.com/images/2010/14032/2010111217383632.jpg" width="228" height="221" title="Place Kitten #2" ></p>
-
-<h1>想法的初衷</h1>
-
-<p>进入社会后，周围的事情与我们想象的并不一样，起初我们无所适从，慢慢的我们适应了这个复杂的社会。在这个适应的过程中，背负着社会和家庭的压力，或许有许多人蹉跎了岁月、消磨了意志、荒废了理想，也应该有一些人坚持不懈地行走在通往理想的道路上。有多少人还曾记得自己当初的梦想，记得或不记得都有很多的感慨。我们也常想把它记录下来，但真正提笔的时候却不知道从何处下手，所以也就放弃了。</p>
-
-<!--more-->
-
-
-<p>曾经一个同学在QQ上上传了一张“关于某某事意见签名”的单子，那时引起了强烈的反响，很多人都不曾记得有那么一回事。是的，岁月在消磨着我们的记忆。很多事情我们应该用笔把它记录下来，但多少人会使用日记把过往的经历记录下来呢？那么这个艰难的任务就交由我来处理吧，让我当一次“小史公”来记录你们走过的道路。虽然不能记录每一天的状况，但我们可以记录下一大段时间内的精彩。</p>
-
-<p>由于行业、地域等方面的原因，交流圈变得小型化、区域化，彼此之间的交流越来越少，但我相信大家牵挂着彼此。借助这样一个机会，让大家了解一下我们的近况，增进彼此之间的认识，同时也可以让我们认识到更多的行业。</p>
-
-<p>或许我们小有成就，认为这一切不足以拿来分享，可你的经历却可能给一些朋友带来帮助，其它朋友也可能给你带去更好的建议促你成长；或许我们过得很艰辛，这又如何，只有经历过辛酸才能品味美好。无论怎样，我们都可能得获取到宝贵的建议，让我们越走越好。</p>
-
-<h1>执行流程</h1>
-
-<p>按照初步的设计，本次微访谈的大概流程如下：</p>
-
-<ol>
-<li>向受访者发出要求，朋友们也可以主动告知我希望接受这样一个访谈；</li>
-<li>如果接受的话，请告知我目前你所从事的事业、想法等等基本信息，我根据获取到的信息设计一些问题；</li>
-<li>可以选择以邮件回复的方式或跟我以网络通讯工具交谈的方式来完成微访谈；</li>
-<li>整理微访谈的问答以博文的形式发出，问答中所使用的署名采用受访者的网名，如果不同意可以不发表。</li>
-</ol>
-
-
-<h1>后续计划</h1>
-
-<p>或许很多人不屑于这样的一次访谈，认为一个小小人物不值得记述，但我认为小人物的故事同样精彩。若干年后，或许我们成功了，又或许依旧平凡，回过头看看我们又会有怎样的感慨呢？所以，我希望两年后再做一次微访谈。</p>
 ]]></content>
   </entry>
   

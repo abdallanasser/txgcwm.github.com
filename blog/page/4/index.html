@@ -73,6 +73,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Linux下iptables防火墙原理及使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
+
+<h1>iptables传输数据包的过程</h1>
+
+<p><img src="/images/2013/7/iptables/flow.png" alt=" flow " /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/24/astylege-shi-hua-dai-ma/">Astyle格式化代码</a></h1>
     
     
@@ -477,57 +524,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T21:18:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get install  apache-ant(or ant)  autoconf automake autopoint  libtool  gawk (or nawk)
-</span><span class='line'>gcc  g++  pkg-config  cmake  patch subversion git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ant工具在最后编译android源码生成apk文件会用到，所以需要安装。如果手动安装了ant，需要在环境变量中配置好ant的 path，或者在编译前执行命令<code>export PATH=$PATH:/xxx/ant/bin</code>，保证可以在执行编译的命令行中执行ant命令即可。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -562,6 +558,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/07/ubuntushang-an-zhuang-latex/">Ubuntu上安装LaTeX</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/06/bi-ye-hou-de-jue-ze/">毕业后的抉择</a>
       </li>
     
@@ -575,10 +575,6 @@
     
       <li class="post">
         <a href="/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/">我们想到的，别人做到了</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">致未来的合作伙伴</a>
       </li>
     
   </ul>
@@ -599,7 +595,7 @@
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (6)</a></li>
-<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (26)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (27)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (2)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
