@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-07T01:13:28+08:00</updated>
+  <updated>2013-08-07T01:19:41+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2013/08/07/ubuntushang-an-zhuang-latex/"/>
     <updated>2013-08-07T00:53:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/08/07/ubuntushang-an-zhuang-latex</id>
-    <content type="html"><![CDATA[<p>LaTeX（音译“拉泰赫”）是一种基于TeX的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天，甚至几小时内生成很多具有书籍质量的印刷品。</p>
+    <content type="html"><![CDATA[<p>LaTeX（音译“拉泰赫”）是一种基于TeX的排版系统，由美国计算机学家莱斯利·兰伯特（Leslie Lamport）在20世纪80年代初期开发，利用这种格式，即使使用者没有排版和程序设计的知识也可以充分发挥由TeX所提供的强大功能，能在几天甚至几小时内生成很多具有书籍质量的印刷品。</p>
 
 <p>可以在Ubuntu安装很多LaTeX的分发版，其中一个是TeX Live，使用下面命令可以在Ubuntu上安装Tex Live（软件有好几百M，需要慢慢等待）。</p>
 
@@ -26,7 +26,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install texlive-full</span></code></pre></td></tr></table></div></figure>
 
 
-<p>要编辑LaTeX文档需要一个编辑器，你可以找到很多编辑器，这里我们推荐使用Texmaker。</p>
+<p>要编辑LaTeX文档需要一个编辑器，你可以找到很多编辑器，这里推荐使用Texmaker。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install texmaker</span></code></pre></td></tr></table></div></figure>
@@ -79,7 +79,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ fc-list</span></code></pre></td></tr></table></div></figure>
 
 
-<p>或者只查看中文的字体</p>
+<p>或者只查看中文的字体：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ fc-list ：lang=zh</span></code></pre></td></tr></table></div></figure>
