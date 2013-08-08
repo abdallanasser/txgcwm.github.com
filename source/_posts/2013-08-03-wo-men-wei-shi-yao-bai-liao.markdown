@@ -6,7 +6,7 @@ comments: true
 categories: [茶余酒后]
 ---
 
-{% img http://apollo.s.dpool.sina.com.cn/nd/grouphenan/pics/c3/b6/c3b60fcf7612ed5ff4a01fb525f47765.jpg %}
+{% img center http://apollo.s.dpool.sina.com.cn/nd/grouphenan/pics/c3/b6/c3b60fcf7612ed5ff4a01fb525f47765.jpg %}
 
 当我问出“为之奈何？”时，我已经作出了决定——宣布我们的事业失败。就在昨天晚上正式结束了。原本没有死心，想看看7月26日的状况，可是没有人“买单”了，问题已经很明显，根本没有必要强撑着了。
 

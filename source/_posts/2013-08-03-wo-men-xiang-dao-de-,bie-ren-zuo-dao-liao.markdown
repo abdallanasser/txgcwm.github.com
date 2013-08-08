@@ -6,7 +6,7 @@ comments: true
 categories: [茶余酒后]
 ---
 
-{% img http://www.empowernetwork.com/freedomlife/files/2013/03/Action.png %}
+{% img center http://www.empowernetwork.com/freedomlife/files/2013/03/Action.png %}
 
 我们有很多很多的想法，但又有谁扪心问过之后，可以坚信的说“我不仅想到了，而且做到了”。不得不承认，我完全没有做到，在某种意义上说，我就是一个失败者。大学的三年里，没有留下太多的回忆！借老大的一句话来描述我此时的心情以及三年的感触——三年过去了，你已经站在了我需要仰望的地方。
 
