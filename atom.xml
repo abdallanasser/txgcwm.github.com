@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-08T21:47:26+08:00</updated>
+  <updated>2013-08-08T21:49:20+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -629,7 +629,7 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
     <link href="http://txgcwm.github.io/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/"/>
     <updated>2013-08-03T14:00:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo</id>
-    <content type="html"><![CDATA[<p><img src="http://a3.att.hudong.com/74/68/01300000238080122631688199226.jpg"></p>
+    <content type="html"><![CDATA[<p><img class="center" src="http://a3.att.hudong.com/74/68/01300000238080122631688199226.jpg"></p>
 
 <p>作为一个发展迅速的大国，一直是美国打击的对象，它不容得任何的新势力动摇它的霸权地位。80年代的广场协议迫使日本货币升值，还有97年的东南亚金融危机，无不跟美国有关系。</p>
 
@@ -662,7 +662,7 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
     <link href="http://txgcwm.github.io/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/"/>
     <updated>2013-08-03T13:37:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao</id>
-    <content type="html"><![CDATA[<p><img src="http://i3.cnfolimg.com/money/2_1060062.jpg"></p>
+    <content type="html"><![CDATA[<p><img class="center" src="http://i3.cnfolimg.com/money/2_1060062.jpg"></p>
 
 <p>中国当前的消费模式：赚钱，存钱，有了足够的钱之后就是买房，买了房后口袋里的钱几乎就剩下不多了，接下来的问题就要考虑养老问题了，这时候已经到了一定的年龄阶段，过去的激情已经不再存在，一生所赚的钱几乎大部分都花在了这两个方面，其它的消费就是在生活必需品上了，剩下的消费少得可怜！</p>
 
