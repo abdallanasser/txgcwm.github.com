@@ -3,7 +3,7 @@ layout: post
 title: "在路上"
 date: 2013-08-08 21:36
 comments: true
-categories: []
+categories: [茶余酒后]
 ---
 
 {% img center http://www.freewings.cn/discuz!/attachments/forumid_12/20080626_ac480e54d992f3c4d793X9QMHnxmiOAZ.jpg %}
