@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-08-16T00:50:55+08:00</updated>
+  <updated>2013-08-19T22:17:45+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我所看到的科技企业]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/19/wo-suo-kan-dao-de-ke-ji-qi-ye/"/>
+    <updated>2013-08-19T22:15:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/19/wo-suo-kan-dao-de-ke-ji-qi-ye</id>
+    <content type="html"><![CDATA[<p><img src="http://news.mydrivers.com/img/20130305/2f4a289b1f0d40238cf65350a42b84c2.jpg"></p>
+
+<p>在大学毕业的时候，曾经写过一篇文章讨论区域经济趋势，讲的是整体形式，到现在我还坚信着那个观点。随着对事物的了解，对有些东西不敢随意进行评论。本来以《再论未来区域经济》为题，觉得自身水平不是很足，写的东西不是那么全面，所以更名为《我所看到的科技企业》。以下阐述的观点基于本人的社会经历、了解的领域以及对事物的理解，难免有不足之处。</p>
+
+<!--more-->
+
+
+<p>近几年，各地都涌现了大量的创业公司和创客团体，给整个社会添加了润滑剂。10年后，移动互联网的发展很强劲，只要是一个差不多的项目，风投就会疯狂的往里投钱，唯恐错过赚钱的机会。这里面肯定存在很多的泡沫的，这几年经过整合、吞并、破产，可能会去除很大一部分的泡沫，到时侯会出现一些新型的高技术公司。创客团体也不甘寂寞，他们挖掘着硬件的潜能，创造出新奇的产品，或许某一样产品就会得到市场的认同，从而迅速的崛起。</p>
+
+<p>深圳是一个硬件生产基地，华强北提供着丰富的元器件。旧的硬件厂商已经跟不上时代的步伐，很多都在寻求转型，转型不成功的将会被淘汰。新型的硬件企业也在茁壮成长，例如Seeed Studio。现在很多的国外创客团队也搬到了深圳，这为他们采购元器件、生产设备提供了很大的便利，也节省了不少成本。</p>
+
+<p>开源中国也落户在深圳，这几年为开源界也做了不少贡献，每一场源创会都很精彩，每一次都在进步。现在这里吸引了很多的IT从业者，他们在这里解决疑难，分享知识，结交朋友，贡献开源软件，有的甚至在这里找到了老婆。它们开发的OSC开源客户端也不错，学习android的朋友可以直接下载它们的源码学习。</p>
+
+<p>有朋友会有这样的疑惑：对于马云，现在的他不知道是阿里的精神导师还是其前进障碍，把一个企业发展的规划定义于一个人，是否有违于制度管理高于一切的原则？ 马云是阿里巴巴的精神导师，这个导师带出了更多的独立思考者，我不认为他会阻碍阿里的前行，反而会促进它的发展，因为阿里本身已经形成了一个良好的独特的文化——独立思考、乐于分享、敢于批驳、勇于创业。</p>
+
+<p>在杭州很多新创的互联网企业都有阿里的背景。为什么是阿里人在创业大军中显得格外耀眼？这跟阿里本身的文化息息相关，永不放弃，勇敢地追求心中的梦想。我们所熟知的微信公众帐号，也有很多人是阿里出身，他们追求时尚，追求创新，追求完美，是不折不扣的独立思考者。</p>
+
+<p>这里我特别想提一下Segmentfault，它是阿里人出来创办的IT问答类社区，现落户于杭州。它祛除了以往论坛中“顶”的诟病，每一个答案力求完美。虽然不能灌水，但帮助他人的乐趣也让自己无比快乐，他人得到了答案，而收获最多的恰恰是自己。</p>
+
+<p>上海、北京、成都、武汉、重庆、西安等地也有很多的创业公司，但不是很了解，这里不作过多的论述。北京、上海、深圳是中国的三大创客基地，杭州也是一个有创客基因的地方，希望在某一天能够崛起，创造属于自己的辉煌。</p>
+
+<p>知乎、蘑菇街、美丽说、简书、一席、源创派&hellip;这些都是很好的创业公司，它们不再浮躁，而是努力将一件事情做得精致、完美。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[狂论创业]]></title>
@@ -1172,301 +1202,6 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
 
 <p><a href="http://segmentfault.com/q/1010000000249362">内核kfifo.c中in和out的问题</a> <br/>
 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">内核中kfifo.c相关的问题</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux管道的实现机制]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/"/>
-    <updated>2013-08-02T00:24:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi</id>
-    <content type="html"><![CDATA[<p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
-
-<ul>
-<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不像文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
-<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
-</ul>
-
-
-<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
-
-<!--more-->
-
-
-<h1>管道的结构</h1>
-
-<p>在Linux中，管道的实现并没有使用专门的数据结构，而是借助了文件系统的file结构和VFS的索引节点inode。通过将两个file结构指向同一个临时的VFS索引节点，而这个VFS索引节点又指向一个物理页面而实现的。如下图所示。</p>
-
-<p><img src="http://txgcwm.github.io/images/2013/8/pipe/struct.png" alt=" struct " /></p>
-
-<p>图中有两个file数据结构，但它们定义文件操作例程地址是不同的，其中一个是向管道中写入数据的例程地址，而另一个是从管道中读出数据的例程地址。这样，用户程序的系统调用仍然是通常的文件操作，而内核却利用这种抽象机制实现了管道这一特殊操作。</p>
-
-<h1>管道的读写</h1>
-
-<p>管道实现的源代码在fs/pipe.c中，在pipe.c中有很多函数，其中有两个函数比较重要，即管道读函数pipe_read()和管道写函数pipe_wrtie()。管道写函数通过将字节复制到VFS索引节点指向的物理内存而写入数据，而管道读函数则通过复制物理内存中的字节而读出数据。当然，内核必须利用一定的机制同步对管道的访问，为此，内核使用了锁、等待队列和信号。</p>
-
-<p>当写进程向管道中写入时，它利用标准的库函数write()，系统根据库函数传递的文件描述符，可找到该文件的file结构。file结构中指定了用来进行写操作的函数（即写入函数）地址，于是，内核调用该函数完成写操作。写入函数在向内存中写入数据之前，必须首先检查VFS索引节点中的信息，同时满足如下条件时，才能进行实际的内存复制工作：</p>
-
-<ul>
-<li>内存中有足够的空间可容纳所有要写入的数据；</li>
-<li>内存没有被读程序锁定。</li>
-</ul>
-
-
-<p>如果同时满足上述条件，写入函数首先锁定内存，然后从写进程的地址空间中复制数据到内存。否则，写入进程就休眠在VFS索引节点的等待队列中，接下来，内核将调用调度程序，而调度程序会选择其他进程运行。写入进程实际处于可中断的等待状态，当内存中有足够的空间可以容纳写入数据，或内存被解锁时，读取进程会唤醒写入进程，这时，写入进程将接收到信号。当数据写入内存之后，内存被解锁，而所有休眠在索引节点的读取进程会被唤醒。</p>
-
-<p>管道的读取过程和写入过程类似。但是，进程可以在没有数据或内存被锁定时立即返回错误信息，而不是阻塞该进程，这依赖于文件或管道的打开模式。反之，进程可以休眠在索引节点的等待队列中等待写入进程写入数据。当所有的进程完成了管道操作之后，管道的索引节点被丢弃，而共享数据页也被释放。</p>
-
-<h1>CU上的问题</h1>
-
-<h2>popkart718的提问</h2>
-
-<p>《Unix环境高级编程》403页中部分描述如下：</p>
-
-<p><img src="http://txgcwm.github.io/images/2013/8/pipe/sync.jpg" alt=" sync " /></p>
-
-<p>明明是两个管道，为什么read的时候会发生阻塞呢？</p>
-
-<h2>解答</h2>
-
-<p>read依赖于管道的打开模式，打开管道时可使用pipe2设定相应的flags。书上所写的阻塞是在管道中没有数据的情况下发生的。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>   int pipe2(int pipefd[2], int flags);
-</span><span class='line'>
-</span><span class='line'>DESCRIPTION
-</span><span class='line'>   pipe()  creates  a  pipe, a unidirectional data channel that can be used for interprocess communication.  The array pipefd is used to return
-</span><span class='line'>   two file descriptors referring to the ends of the pipe.  pipefd[0] refers to the read end of the pipe.  pipefd[1] refers to the write end of
-</span><span class='line'>   the  pipe.  Data written to the write end of the pipe is buffered by the kernel until it is read from the read end of the pipe.  For further
-</span><span class='line'>   details, see pipe(7).
-</span><span class='line'>
-</span><span class='line'>   If flags is 0, then pipe2() is the same as pipe().  The following values can be bitwise ORed in flags to obtain different behavior:
-</span><span class='line'>
-</span><span class='line'>   O_NONBLOCK  Set the O_NONBLOCK file status flag on the two new open file descriptions.  Using this flag saves extra  calls  to  fcntl(2)  to
-</span><span class='line'>               achieve the same result.
-</span><span class='line'>
-</span><span class='line'>   O_CLOEXEC   Set  the  close-on-exec  (FD_CLOEXEC) flag on the two new file descriptors.  See the description of the same flag in open(2) for
-</span><span class='line'>               reasons why this may be useful.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>同时也可以查看内核文件fs/pipe.c中的pipe_read函数实现。以下是简单的测试程序。</p>
-
-<p>测试一：使用pipe2且传入参数的flags为0（相当于使用pipe）</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;unistd.h&gt;
-</span><span class='line'>#include &lt;signal.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>int fd[2];
-</span><span class='line'>
-</span><span class='line'>void handle(int sig)
-</span><span class='line'>{
-</span><span class='line'>  if (sig == SIGUSR1)
-</span><span class='line'>      write(fd[1], "p", 1);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>  char c;
-</span><span class='line'>  pid_t pid;
-</span><span class='line'>
-</span><span class='line'>  if (pipe2(fd, 0) &lt; 0) {
-</span><span class='line'>      printf("can not creat pipe!\n");
-</span><span class='line'>      return -1;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  if ((pid = fork()) &lt; 0) {
-</span><span class='line'>      printf("can not fork!\n");
-</span><span class='line'>      return -1;
-</span><span class='line'>  } else if (pid &gt; 0) {
-</span><span class='line'>      close(fd[0]);
-</span><span class='line'>      signal(SIGUSR1, handle);
-</span><span class='line'>      for (;;) {
-</span><span class='line'>      }
-</span><span class='line'>  } else {
-</span><span class='line'>      close(fd[1]);
-</span><span class='line'>      for (;;) {
-</span><span class='line'>          if (read(fd[0], &c, 1) == 1)
-</span><span class='line'>              printf("c:%c\n", c);
-</span><span class='line'>          else
-</span><span class='line'>              printf("nothing to read!\n");
-</span><span class='line'>
-</span><span class='line'>          sleep(2);
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>编译后，可以看到程序阻塞在那里，当使用“kill -10 进程号”时，才会从管道中读出数据。</p>
-
-<p>测试二：使用pipe2时设置flags的参数为O_NONBLOCK</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/types.h&gt;
-</span><span class='line'>#include &lt;sys/stat.h&gt;
-</span><span class='line'>#include &lt;fcntl.h&gt;
-</span><span class='line'>#include &lt;unistd.h&gt;
-</span><span class='line'>#include &lt;signal.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>int fd[2];
-</span><span class='line'>
-</span><span class='line'>void handle(int sig)
-</span><span class='line'>{
-</span><span class='line'>  if (sig == SIGUSR1)
-</span><span class='line'>      write(fd[1], "p", 1);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>  char c;
-</span><span class='line'>  pid_t pid;
-</span><span class='line'>
-</span><span class='line'>  if (pipe2(fd, O_NONBLOCK) &lt; 0) {
-</span><span class='line'>      printf("can not creat pipe!\n");
-</span><span class='line'>      return -1;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  if ((pid = fork()) &lt; 0) {
-</span><span class='line'>      printf("can not fork!\n");
-</span><span class='line'>      return -1;
-</span><span class='line'>  } else if (pid &gt; 0) {
-</span><span class='line'>      close(fd[0]);
-</span><span class='line'>      signal(SIGUSR1, handle);
-</span><span class='line'>      for (;;) {
-</span><span class='line'>      }
-</span><span class='line'>  } else {
-</span><span class='line'>      close(fd[1]);
-</span><span class='line'>      for (;;) {
-</span><span class='line'>          if (read(fd[0], &c, 1) == 1)
-</span><span class='line'>              printf("c:%c\n", c);
-</span><span class='line'>          else
-</span><span class='line'>              printf("nothing to read!\n");
-</span><span class='line'>
-</span><span class='line'>          sleep(2);
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>编译后，执行程序可以看到它不停的打印消息，若管道内没有数据的话，read就直接返回了。</p>
-
-<h1>参考文章</h1>
-
-<p><a href="http://oss.org.cn/kernel-book/ch07/7.1.1.htm">Linux管道的实现机制</a> <br/>
-<a href="http://bbs.chinaunix.net/thread-4069374-1-1.html">进程通信管道问题</a></p>
 ]]></content>
   </entry>
   
