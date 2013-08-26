@@ -73,6 +73,63 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+
+<h1>isdigit</h1>
+
+<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
+
+<pre><code>int a = isdigit('1');
+int b = isdigit('a');
+int c = isdigit(3);
+</code></pre>
+
+<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
+
+<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
     
     
@@ -149,6 +206,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/08/27/tan-tan-ubuntu/">谈谈Ubuntu</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/08/23/ku-chuang-yi/">酷创意</a>
       </li>
     
@@ -162,10 +223,6 @@
     
       <li class="post">
         <a href="/blog/2013/08/19/wo-suo-kan-dao-de-ke-ji-qi-ye/">我所看到的科技企业</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/16/kuang-lun-chuang-ye/">狂论创业</a>
       </li>
     
   </ul>
@@ -195,7 +252,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (24)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (25)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 
   </ul>
