@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-09-09T00:06:29+08:00</updated>
+  <updated>2013-09-09T20:47:17+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,42 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[致新同事书]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/09/09/zhi-xin-tong-shi-shu/"/>
+    <updated>2013-09-09T20:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/09/09/zhi-xin-tong-shi-shu</id>
+    <content type="html"><![CDATA[<p>相处的时间不长，只有三周的时间，但彼此的交流还算顺畅。短暂的时间里，只能匆匆忙忙地将工作的事情交接给你。原本想跟你说说其它方面的东西，但交接的事情已经耗费了你好多的精力，也就作罢。如果真的有口头上的讲述时间，我想我也不一定能够很好的表达出来，仔细思考之后，我将这些想说的话整理成文字，希望对你今后的工作有所帮助。</p>
+
+<p>技术上的东西只要用心、花费时间，很多技术还是能够很快掌握的，但工作中最重要不是那些技术而是那些无形的工作习惯、品质。</p>
+
+<!--more-->
+
+
+<p>很多时候公司会重新设计方案，当一个对终端技术不懂的主管想要设计这些东西的时候，你一定要勇于发表自己的意见，而不是作为一个旁观者只是在听讲。当上司不了解这些东西的时候，他的想法必然会想当然，容易作出一些错误的判断，这时的你应该指出其中的错误。在那时你不发表任何意见的话，后面出现的问题必然是由你负责的。你会觉得自己不该负这个责任，但起初因你的沉默已经表示了你的认同，也表明当初的方案是可行的，那么出现问题就是你执行的不行了。</p>
+
+<p>工作毕竟和学校里的事情不一样，它需要的是更精准和完美。学校里做出来的雏形就就可以拿去参赛，但工作中要做的产品并不是那么一回事，它需要考虑的更多。所以当你会些什么的时候，不要认为它就可以应用在实际的产品中。如果公司真的让你做那些的时候，实际工作中你才觉得自己当初说了大话，那时耗费掉你的时间是小事（你必须为自己不负责任的大话付出的代价，当然对于你个人来说还有可能学习到很多东西），给公司造成损失才是大事。当你能做某件事情的时候，一定要在大脑中先仔细的思考，然后认真的告诉你的上司“你能够做什么、不能做什么、可能需要付出什么样的代价”。</p>
+
+<p>工作的时候，你只需要对你的上司负责。你可能不知道，你最初两周的工作安排是我向上级申请“我来安排”的。人事那边曾用Skype告知我“全权负责”此事，但我发现知道这事的只有我和她。实际的情况，你却被另一方要求做些其它的事情。在这种情况下，我写了封邮件正式申请了一下，同时也知会了相关的人员。如果我告诉你要做这些，而其他人又告诉你要完成另外的一个功能，我想这时的你肯定不知道做什么好。所以你只需听从你上司的安排，对他负责就可以了，至于其他的人，只要你做好了，你的上司是会替你解释的。</p>
+
+<p>有些时候，你们建立了一个讨论组在讨论bug，却没有把我加入进去（我的感觉是你们已经把我当作外人了，至少我认为只要是终端相关的问题就应该加一下我，毕竟公司那时只有我对终端部分最了解），而你又私信问我相关的问题。我是不太认同你们的这种做法的，这大大增加了交流的成本，况且你再给我传述问题的时候它的一部分东西已经失真了，这样不利于问题的解决。所以请尽量不要几个人私下交流，要以群组的方式讨论的话也要多加入相关的人员。如果有些事情很重要的话，请以邮件的方式进行讨论（邮件的书写也需要多加练习），做到有据可查。宁可多加，也不可遗漏可能提供帮助的人员。</p>
+
+<p>我发现很多人工作很多年了，都没有给处理的问题写状况的习惯，一般都看到的只是问题状态的变化，我真的没看出他们是怎么处理这些问题的。我发现你也有这样的坏习惯（在问题上上传了两个image文件，却没有丝毫的标注，你让测试到底去下载哪个固件呢？处理的问题也没有一点说明，你让其他同事如何帮你把关呢？），还好你很年轻且工作不久，从现在开始改进的话，可以改掉这个坏毛病。</p>
+
+<p>让他人帮忙的时候，态度也要认真点。你发给我一个文件，让我帮你合并到服务器上，其它的任何说明一点都没有，偌大的一个文件难道是要我替你去对比原始文件和你更改的文件吗？当我追问的时候，你才告诉我更改了哪些地方。如果你将文件发给我的同时告诉我一些细节问题，又怎么会多出一些不必要的事情呢？这些归根结底是工作态度的问题，所以以后请多多注意。</p>
+
+<p>请尽量养成午睡的习惯。不要告诉我你的精力很充足，很多次我都能够看到你闭上的双眼，我实在不忍心把你叫醒，即便把你叫醒了你也不会有精力投入到工作中。这样的话，还不如让你多休息一会儿，或许后续的几个小时你能够精力充沛，好好的工作一下。中午的那一小会儿是十分宝贵的，请珍惜它（尽量不要玩那些其它时间可以玩的东西），睡上半个小时或者眯上十几分钟就不会让你整个下午无精打采。</p>
+
+<p>说这么多并不是要数落你的缺点，只是希望你能够做得更好。一个不相识的人，我又何必去费那么多的口水呢？90后的你，真的很年轻，有时都让我嫉妒。但年轻并不表示你有机会可以去犯更多的错误，犯错误后借用年轻这个理由也是一种不负责任、脆弱、缺乏勇气的表现。虽然我没有丰富的经验给你更多有价值的东西，但我写给你的东西都是我认为正确且值得参考的东西。</p>
+
+<p>想想自己几年以前，也很讨厌一些“老人”在自己的面前“指手画脚”，对于他们的意见不以为然，总是按照自己的方法在做事，可事实证明我是错误的，最后我还是要按照他们提供的经验去做一些事情。这让我吃了一些苦头，希望你不要走我从前的路，少走一些弯路。</p>
+
+<p>说的话，看着就是一些公知的事情，可没有实际经历过的人又怎么会体会到其中的真正含义呢？但愿你能沉下心，仔细地思考我所提到的问题。</p>
+
+<p>最后祝你在新的工作环境中工作快乐，希望在你成长后的某一天也将自己的经验告诉其它的年轻朋友。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[剑问君答：网络监控工程师]]></title>
@@ -986,133 +1022,6 @@
 <p>韩信正催马疾奔，可眼前一条大河挡住去路。河水又宽又深，河面上无桥，水中无船，就连个打鱼的小划子也没有。韩信急得在河边乱转，心想：“等会儿霸王赶到，如何是好？要是跟他回去，永无出头之日；要是不跟他回去，我又打不过他，非得命丧于此不可。难道真的是老天要绝我韩信吗？”正叹着，忽听身后有咳嗽声，转身一看，是个头发胡子都花白的老头。韩信慌忙下马，上前深施一礼说：“老人家，此处是什么地方，可有渡船过河？”老头还了一礼，对道：“这是陈仓地界，此河叫陈仓河，河面上没有桥，也没有渡船，你要过河吗？看你知礼，我知道什么地方能过河，你跟我来吧。”韩信跟老头来到河边的一棵弯槐树下，老头说：“从这里下去，水下二尺深有条暗桥，叫陈仓桥。这暗桥如今也只有我知道了。”说完老头牵着韩信的手，把韩信带到暗桥边。 上岸后，韩信跪倒给老头磕了三个头说：“不知你老人家高姓大名？日后我也好报答。”老头说：“我姓吕，叫吕昌合。”韩信爬起来又深施一礼说：“我记住您老人家的救命之恩了。”话没落音，拔出宝剑，一剑把老头的人头砍了下来。霸王没有人引路过河，又一次没把韩信追回去。</p>
 
 <p>故事说完了，不想谈论些什么，各位看官“仁者见仁，智者见智”吧！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[popen和pclose函数]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu/"/>
-    <updated>2013-08-03T22:07:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu</id>
-    <content type="html"><![CDATA[<p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>FILE *popen( const char* command, const char* mode )</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参数说明</p>
-
-<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
-mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
-
-<!--more-->
-
-
-<p>返回值</p>
-
-<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int pclose (FILE* stream)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>参数说明</p>
-
-<p>stream： popen返回的文件指针。</p>
-
-<p>返回值</p>
-
-<p>如果调用失败，返回-1。</p>
-
-<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本想从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int get_device_info(void)
-</span><span class='line'>{
-</span><span class='line'>  FILE *fp = NULL;
-</span><span class='line'>  char buffer[128];
-</span><span class='line'>  char *ptr = NULL;
-</span><span class='line'>  int vid, pid;
-</span><span class='line'>
-</span><span class='line'>  fp = popen("lsusb", "r");
-</span><span class='line'>  if (fp == NULL)
-</span><span class='line'>      return -1;
-</span><span class='line'>
-</span><span class='line'>  while (NULL != fgets(buffer, sizeof(buffer), fp)) {
-</span><span class='line'>      ptr = strstr(buffer, "ID");
-</span><span class='line'>      if (ptr) {
-</span><span class='line'>          sscanf(ptr, "ID %04x:%04x", &vid, &pid);
-</span><span class='line'>          printf("%04x:%04x\n", vid, pid);
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>  pclose(fp);
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>编写主函数调用以上的接口，使用<code>lsusb</code>查看usb设备及执行测试程序：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ lsusb 
-</span><span class='line'>Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-</span><span class='line'>Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-</span><span class='line'>Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-</span><span class='line'>Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-</span><span class='line'>Bus 001 Device 003: ID 1532:0016 Razer USA, Ltd DeathAdder Mouse
-</span><span class='line'>Bus 001 Device 004: ID 058f:b002 Alcor Micro Corp. 
-</span><span class='line'>
-</span><span class='line'>$ ./a.out 
-</span><span class='line'>8087:0024
-</span><span class='line'>8087:0024
-</span><span class='line'>1d6b:0002
-</span><span class='line'>1d6b:0002
-</span><span class='line'>1532:0016
-</span><span class='line'>058f:b002
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://my.oschina.net/renhc/blog/35116">基于管道的popen和pclose函数</a><br/>
-<a href="http://networking.ctocio.com.cn/tips/137/9412137.shtml">Linux popen函数的使用总结</a><br/>
-<a href="http://bbs.chinaunix.net/thread-4087539-1-1.html">关于/proc/iomem中信息解释</a>  <br/>
-<a href="http://tech.watchstor.com/storage-systems-117859.htm">proc文件系统功能总览</a></p>
 ]]></content>
   </entry>
   
