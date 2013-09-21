@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>内核中关于isdigit和min（max）的实现 - 残剑</title>
+  <title>K192，潜行巴蜀 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。 isdigit 在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如： int a = isdigit('1');
-int &hellip;">
+  <meta name="description" content="晚上，姨夫开车送我去重庆秀山站等火车。一路上行走的都是山路，打开窗户能够清晰地看见外面的山头，公路和山头是起平的，也时不时能够看到“前方x公里下坡，请注意安全”的提示。一排路灯看上去像一条弯弯曲曲的带子。很多时候虽然看不到外面远方的景色，但能够感受到那种上上下下的状态。很快我们就到了秀山站， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ int &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/09/22/k192%2Cqian-xing-ba-shu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -71,7 +70,7 @@ int &hellip;">
   
   <header>
     
-      <h1 class="entry-title">内核中关于isdigit和min（max）的实现</h1>
+      <h1 class="entry-title">K192，潜行巴蜀</h1>
     
     
       <p class="meta">
@@ -87,7 +86,7 @@ int &hellip;">
   
 
 
-<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2013-09-22T01:09:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,116 +95,20 @@ int &hellip;">
   </header>
 
 
-<div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+<div class="entry-content"><p>晚上，姨夫开车送我去重庆秀山站等火车。一路上行走的都是山路，打开窗户能够清晰地看见外面的山头，公路和山头是起平的，也时不时能够看到“前方x公里下坡，请注意安全”的提示。一排路灯看上去像一条弯弯曲曲的带子。很多时候虽然看不到外面远方的景色，但能够感受到那种上上下下的状态。很快我们就到了秀山站，这里的地势比较平坦。</p>
 
-<h1>isdigit</h1>
-
-<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
-
-<pre><code>int a = isdigit('1');
-int b = isdigit('a');
-int c = isdigit(3);
-</code></pre>
-
-<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
-
-<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
-</code></pre>
+<p>虽然到目的地了，可还是要等2个多小时，可提示牌却告诉我火车要晚点3个多小时，后面上车才了解到这趟火车在首发站发车的时候已经晚了3个多小时。人不是太多，直接占了几个位置休息了一下。</p>
 
 <!--more-->
 
 
-<p>Linux内核中isdigit的实现，其代码如下所示：</p>
+<p>找到座位，放好行李，趴下睡觉，可一个女人脱了鞋子，把她的脚放在我的座椅上，趴下时鼻子刚好对着她的脚，气味真的不好，可实在太困了，就那么将就着睡觉了。睡了4个多小时，醒了，听到有卧铺可以补，就直接去补了一张，虽然车上人很少，坐得很舒服，但有些东西实在受不了。</p>
 
-<pre><code>#define _U 0x01 /* upper */
-#define _L 0x02 /* lower */
-#define _D 0x04 /* digit */
-#define _C 0x08 /* cntrl */
-#define _P 0x10 /* punct */
-#define _S 0x20 /* white space (space/lf/tab) */
-#define _X 0x40 /* hex digit */
-#define _SP 0x80 /* hard space (0x20) */
+<p>到了卧铺处，稍微小憩了一下。重庆这边，火车轨道沿线的房子都是依山而建，高低错落。到了四川地界，地势比较的平坦，房屋基本建在同一地平面上，同东部城市的风格一样。西举巴、蜀，当时秦国的政策还是很正确的：巴地有群山包围，是一个天然的防御带；蜀地平坦，适合种植粮食。一个是天险，一个是粮仓，粮仓刚好在天险的后面，两者组合起来是秦国最好的保障。自古攻秦地都是从函谷关进军，极少从巴地进军，所以只要派遣一个优秀的将领就能守护这方疆土。秦国最终被攻破，那只能说明“防民之口甚于防川”，即便有天险依靠，失去民心照样保不了天下。</p>
 
-extern unsigned char _ctype[];
+<p>火车上几个列车员妹子在谈论爱情的东西，很多东西没有听懂，“姐姐我分分钟把他搞定”这句倒是听的很清楚，难怪人们常说少不入蜀，川妹子的强悍或许也是其中的一个理由吧，娶了一个川妹子，可能就很难出蜀喽。</p>
 
-#define isdigit(c) ((_ctype+1)[c]&amp;(_D))
-
-unsigned char _ctype[] = {0x00, /* EOF */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 0-7 */
- _C,_C|_S,_C|_S,_C|_S,_C|_S,_C|_S,_C,_C, /* 8-15 */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 16-23 */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 24-31 */
- _S|_SP,_P,_P,_P,_P,_P,_P,_P, /* 32-39 */
- _P,_P,_P,_P,_P,_P,_P,_P, /* 40-47 */
- _D,_D,_D,_D,_D,_D,_D,_D, /* 48-55 */
- _D,_D,_P,_P,_P,_P,_P,_P, /* 56-63 */
- _P,_U|_X,_U|_X,_U|_X,_U|_X,_U|_X,_U|_X,_U, /* 64-71 */
- _U,_U,_U,_U,_U,_U,_U,_U, /* 72-79 */
- _U,_U,_U,_U,_U,_U,_U,_U, /* 80-87 */
- _U,_U,_U,_P,_P,_P,_P,_P, /* 88-95 */
- _P,_L|_X,_L|_X,_L|_X,_L|_X,_L|_X,_L|_X,_L, /* 96-103 */
- _L,_L,_L,_L,_L,_L,_L,_L, /* 104-111 */
- _L,_L,_L,_L,_L,_L,_L,_L, /* 112-119 */
- _L,_L,_L,_P,_P,_P,_P,_C, /* 120-127 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 128-143 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 144-159 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 160-175 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 176-191 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 192-207 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 208-223 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 224-239 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /* 240-255 */
-</code></pre>
-
-<p>字符&#8217;0&#8217;~&lsquo;9&#8217;对应的ASCII码为48~57，映射到上面的<em>ctype数组，相应的位置全是</em>D，<em>D&amp;</em>D则为真，其它的字符则判断为false。对不同种类的字符进行了分类，并使用唯一的二进制来进行标识，使用&amp;和|保证了不同类别的字符不会同时满足两种分类的条件。</p>
-
-<h1>min和max</h1>
-
-<p>实现min和max这两个函数，可以有三种形式：1）定义宏；2）定义函数； 3）定义inline函数。以定义宏举例，一般都是以下形式：</p>
-
-<pre><code>#define min(x,y) ((x)&gt;(y)?(y):(x))
-#define max(x,y) ((x)&gt;(y)?(x):(y))
-</code></pre>
-
-<p>但是上面的写法是有副作用的。比如输入：</p>
-
-<pre><code>minval = min(x++, y);
-</code></pre>
-
-<p>替换宏之后，代码变成：</p>
-
-<pre><code>minval = ((x++)&gt;(y)? (y):(x++))
-</code></pre>
-
-<p>可以看出，如果x是最小值，那么它加了两次，很明显是不对的。</p>
-
-<p>Linux内核实现min和max宏：</p>
-
-<pre><code>/*
- * min()/max() macros that also do
- * strict type-checking.. See the
- * "unnecessary" pointer comparison.
- */
- #define min(x, y) ({ \
-         typeof(x) _min1 = (x); \
-         typeof(y) _min2 = (y); \
-         (void) (&amp;_min1 == &amp;_min2); \
-         _min1 &lt; _min2 ? _min1 : _min2; })
-
- #define max(x, y) ({ \
-         typeof(x) _max1 = (x); \
-         typeof(y) _max2 = (y); \
-         (void) (&amp;_max1 == &amp;_max2); \
-         _max1 &gt; _max2 ? _max1 : _max2; })
-</code></pre>
-
-<p>1、typeof(x)的用途：得到x的类型信息，比如typeof(10) 为int， typeof(1.0)为double。</p>
-
-<p>2、({})的用途：一句语句，({ 和 })之间可以有很多表达式，它的值为最后一个表达式的值。</p>
-
-<p>3、(void)(&amp;<em>x == &amp;</em>y);这一句的作用：判断<em>x和</em>y的类型是否一样。如果是不同的类型，编译器会报“warning: comparison of distinct pointer types lacks a cast”的警告信息。</p>
-
-<p>其实，内核的宏定义就是先引入和x及y同样类型的两个临时变量，然后对临时变量进行求最大值或者最小值。</p>
+<p>老大到公交站接我，他还是老样子，一点都没有变，岁月竟然没有让我们变得太多，可能我们依旧保持着一份纯真。晚上入住老大的住处，一切顺利。</p>
 </div>
 
 
@@ -228,12 +131,12 @@ unsigned char _ctype[] = {0x00, /* EOF */
   
 
 
-<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2013-09-22T01:09:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
   
 </span>
 
@@ -267,10 +170,8 @@ unsigned char _ctype[] = {0x00, /* EOF */
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/19/gong-jiao-xiao-shi/" title="Previous Post: 公交小事">&laquo; 公交小事</a>
+        <a class="basic-alignment left" href="/blog/2013/09/21/song-tao/" title="Previous Post: 松桃">&laquo; 松桃</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/" title="Next Post: Linux下PDF文件的操作与转换">Linux下PDF文件的操作与转换 &raquo;</a>
       
     </p>
   </footer>
@@ -556,8 +457,8 @@ unsigned char _ctype[] = {0x00, /* EOF */
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/09/22/k192%2Cqian-xing-ba-shu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/09/22/k192%2Cqian-xing-ba-shu/';
         var disqus_script = 'embed.js';
       
     (function () {
