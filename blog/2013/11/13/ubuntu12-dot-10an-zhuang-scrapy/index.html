@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ubuntu12.10安装Scrapy - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="根据官网Ubuntu packages上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。 &lsquo;&rsquo;&lsquo;
+$ scrapy startproject tutorial
+Traceback (most recent call last): &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li> 
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ubuntu12.10安装Scrapy</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ scrapy startproject tutorial<br/>
+Traceback (most recent call last):<br/>
+  File &ldquo;/usr/bin/scrapy&rdquo;, line 4, in <module></p>
+
+<pre><code>execute()  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 121, in execute</p>
+
+<pre><code>cmds = _get_commands_dict(settings, inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 45, in _get_commands_dict</p>
+
+<pre><code>cmds = _get_commands_from_module('scrapy.commands', inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 28, in _get_commands_from_module</p>
+
+<pre><code>for cmd in _iter_command_classes(module):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 19, in _iter_command_classes</p>
+
+<pre><code>for module in walk_modules(module_name):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/utils/misc.py&rdquo;, line 66, in walk_modules</p>
+
+<pre><code>submod = __import__(fullpath, {}, {}, [''])  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py&rdquo;, line 13, in <module></p>
+
+<pre><code>from w3lib.form import encode_multipart  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/w3lib/form.py&rdquo;, line 2, in <module></p>
+
+<pre><code>if six.PY2:  
+</code></pre>
+
+<p>AttributeError: &lsquo;module&rsquo; object has no attribute &lsquo;PY2&#8217;<br/>
+&rsquo;&lsquo;&rsquo;</p>
+
+<!--more-->
+
+
+<p>从网上找到了一个答案，需要利用pip去安装。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ pip install Scrapy<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7 <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): w3lib>=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Downloading six-1.4.1.tar.gz <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: six <br/>
+  Found existing installation: six 1.1.0</p>
+
+<pre><code>Uninstalling six:   
+</code></pre>
+
+<p>Exception: <br/>
+Traceback (most recent call last): <br/>
+  File &ldquo;/usr/lib/python2.7/dist-packages/pip/basecommand.py&rdquo;, line 104, in main</p>
+
+<pre><code>status = self.run(options, args)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/commands/install.py&rdquo;, line 250, in run</p>
+
+<pre><code>requirement_set.install(install_options, global_options)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1129, in install</p>
+
+<pre><code>requirement.uninstall(auto_confirm=True)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 486, in uninstall</p>
+
+<pre><code>paths_to_remove.remove(auto_confirm)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1431, in remove</p>
+
+<pre><code>renames(path, new_path)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/util.py&rdquo;, line 263, in renames</p>
+
+<pre><code>shutil.move(old, new)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/shutil.py&rdquo;, line 302, in move</p>
+
+<pre><code>os.unlink(src)   
+</code></pre>
+
+<p>OSError: [Errno 13] Permission denied: &lsquo;/usr/share/pyshared/six-1.1.0.egg-info&rsquo;</p>
+
+<p>Storing complete log in /home/txgcwm/.pip/pip.log <br/>
+&lsquo;&rsquo;&#8217;</p>
+
+<p>借助新得立把six给卸载掉，然后重新安装。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ sudo pip install Scrapy<br/>
+Downloading/unpacking Scrapy <br/>
+  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded <br/>
+  Running setup.py egg_info for package Scrapy</p>
+
+<pre><code>no previously-included directories found matching 'docs/build'   
+</code></pre>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking w3lib>=1.2 (from Scrapy) <br/>
+  Downloading w3lib-1.5.tar.gz <br/>
+  Running setup.py egg_info for package w3lib</p>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking cssselect>=0.9 (from Scrapy) <br/>
+  Downloading cssselect-0.9.1.tar.gz <br/>
+  Running setup.py egg_info for package cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: Scrapy, w3lib, cssselect, six <br/>
+  Running setup.py install for Scrapy</p>
+
+<pre><code>changing mode of build/scripts-2.7/scrapy from 644 to 755   
+
+no previously-included directories found matching 'docs/build'   
+changing mode of /usr/local/bin/scrapy to 755   
+</code></pre>
+
+<p>  Running setup.py install for w3lib</p>
+
+<p>  Running setup.py install for cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>  Running setup.py install for six</p>
+
+<p>Successfully installed Scrapy w3lib cssselect six <br/>
+Cleaning up&hellip; <br/>
+&lsquo;&rsquo;&#8217;</p>
+
+<p>创立一个项目。</p>
+
+<p>&lsquo;&rsquo;&lsquo;     <br/>
+$ sudo scrapy startproject tutorial <br/>
+&rsquo;&lsquo;&rsquo;</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>Python</a>, <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+  
+     <!-- Baidu Button BEGIN -->
+	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+	<a class="bds_qzone"></a>
+	<a class="bds_tsina"></a>
+	<a class="bds_tqq"></a>
+	<a class="bds_renren"></a>
+	<a class="bds_t163"></a>
+	<span class="bds_more">More</span>
+	<a class="shareCount"></a>
+	</div>
+	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
+	<script type="text/javascript" id="bdshell_js"></script>
+	<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+	</script>
+	<!-- Baidu Button END -->
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/10/xie-wen-zhang-na-dian-shi-%28san-%29/" title="Previous Post: 写文章那点事（三）">&laquo; 写文章那点事（三）</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/">Ubuntu12.10安装Scrapy</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/10/xie-wen-zhang-na-dian-shi-%28san-%29/">写文章那点事（三）</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/10/jian-wen-jun-da-%3Aren-shi-xing-zheng/">剑问君答：人事行政</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/07/jian-wen-jun-da-%3Ace-shi-slash-shu-ju-fen-xi-gong-cheng-shi/">剑问君答：测试/数据分析工程师</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/14/lu-xing-de-shou-huo/">旅行的收获</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (11)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (6)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (27)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (3)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (1)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (6)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (13)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (2)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (30)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

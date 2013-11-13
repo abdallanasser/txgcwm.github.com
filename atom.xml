@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-11-10T22:33:56+08:00</updated>
+  <updated>2013-11-13T16:15:01+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,183 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu12.10安装Scrapy]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/"/>
+    <updated>2013-11-13T15:59:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy</id>
+    <content type="html"><![CDATA[<p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ scrapy startproject tutorial<br/>
+Traceback (most recent call last):<br/>
+  File &ldquo;/usr/bin/scrapy&rdquo;, line 4, in <module></p>
+
+<pre><code>execute()  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 121, in execute</p>
+
+<pre><code>cmds = _get_commands_dict(settings, inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 45, in _get_commands_dict</p>
+
+<pre><code>cmds = _get_commands_from_module('scrapy.commands', inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 28, in _get_commands_from_module</p>
+
+<pre><code>for cmd in _iter_command_classes(module):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 19, in _iter_command_classes</p>
+
+<pre><code>for module in walk_modules(module_name):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/utils/misc.py&rdquo;, line 66, in walk_modules</p>
+
+<pre><code>submod = __import__(fullpath, {}, {}, [''])  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py&rdquo;, line 13, in <module></p>
+
+<pre><code>from w3lib.form import encode_multipart  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/w3lib/form.py&rdquo;, line 2, in <module></p>
+
+<pre><code>if six.PY2:  
+</code></pre>
+
+<p>AttributeError: &lsquo;module&rsquo; object has no attribute &lsquo;PY2&#8217;<br/>
+&rsquo;&lsquo;&rsquo;</p>
+
+<!--more-->
+
+
+<p>从网上找到了一个答案，需要利用pip去安装。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ pip install Scrapy<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7 <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): w3lib>=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Downloading six-1.4.1.tar.gz <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: six <br/>
+  Found existing installation: six 1.1.0</p>
+
+<pre><code>Uninstalling six:   
+</code></pre>
+
+<p>Exception: <br/>
+Traceback (most recent call last): <br/>
+  File &ldquo;/usr/lib/python2.7/dist-packages/pip/basecommand.py&rdquo;, line 104, in main</p>
+
+<pre><code>status = self.run(options, args)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/commands/install.py&rdquo;, line 250, in run</p>
+
+<pre><code>requirement_set.install(install_options, global_options)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1129, in install</p>
+
+<pre><code>requirement.uninstall(auto_confirm=True)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 486, in uninstall</p>
+
+<pre><code>paths_to_remove.remove(auto_confirm)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1431, in remove</p>
+
+<pre><code>renames(path, new_path)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/util.py&rdquo;, line 263, in renames</p>
+
+<pre><code>shutil.move(old, new)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/shutil.py&rdquo;, line 302, in move</p>
+
+<pre><code>os.unlink(src)   
+</code></pre>
+
+<p>OSError: [Errno 13] Permission denied: &lsquo;/usr/share/pyshared/six-1.1.0.egg-info&rsquo;</p>
+
+<p>Storing complete log in /home/txgcwm/.pip/pip.log <br/>
+&lsquo;&rsquo;&#8217;</p>
+
+<p>借助新得立把six给卸载掉，然后重新安装。</p>
+
+<p>&lsquo;&rsquo;&lsquo;
+$ sudo pip install Scrapy<br/>
+Downloading/unpacking Scrapy <br/>
+  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded <br/>
+  Running setup.py egg_info for package Scrapy</p>
+
+<pre><code>no previously-included directories found matching 'docs/build'   
+</code></pre>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking w3lib>=1.2 (from Scrapy) <br/>
+  Downloading w3lib-1.5.tar.gz <br/>
+  Running setup.py egg_info for package w3lib</p>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking cssselect>=0.9 (from Scrapy) <br/>
+  Downloading cssselect-0.9.1.tar.gz <br/>
+  Running setup.py egg_info for package cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: Scrapy, w3lib, cssselect, six <br/>
+  Running setup.py install for Scrapy</p>
+
+<pre><code>changing mode of build/scripts-2.7/scrapy from 644 to 755   
+
+no previously-included directories found matching 'docs/build'   
+changing mode of /usr/local/bin/scrapy to 755   
+</code></pre>
+
+<p>  Running setup.py install for w3lib</p>
+
+<p>  Running setup.py install for cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>  Running setup.py install for six</p>
+
+<p>Successfully installed Scrapy w3lib cssselect six <br/>
+Cleaning up&hellip; <br/>
+&lsquo;&rsquo;&#8217;</p>
+
+<p>创立一个项目。</p>
+
+<p>&lsquo;&rsquo;&lsquo;     <br/>
+$ sudo scrapy startproject tutorial <br/>
+&rsquo;&lsquo;&rsquo;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[写文章那点事（三）]]></title>
@@ -617,42 +794,6 @@
 <p>残剑：在技术方面，你喜欢哪方面的东西？</p>
 
 <p>斯佩狩：可以说什么方面的东西都感兴趣，但是要持久感兴趣必须得有项目做，如果难度大则需要依靠有经验的人的指导了。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[致新同事书]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/09/09/zhi-xin-tong-shi-shu/"/>
-    <updated>2013-09-09T20:45:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/09/09/zhi-xin-tong-shi-shu</id>
-    <content type="html"><![CDATA[<p>相处的时间不长，只有三周的时间，但彼此的交流还算顺畅。短暂的时间里，只能匆匆忙忙地将工作的事情交接给你。原本想跟你说说其它方面的东西，但交接的事情已经耗费了你好多的精力，也就作罢。如果真的有口头上的讲述时间，我想我也不一定能够很好的表达出来，仔细思考之后，我将这些想说的话整理成文字，希望对你今后的工作有所帮助。</p>
-
-<p>技术上的东西只要用心、花费时间，很多技术还是能够很快掌握的，但工作中最重要不是那些技术而是那些无形的工作习惯、品质。</p>
-
-<!--more-->
-
-
-<p>很多时候公司会重新设计方案，当一个对终端技术不懂的主管想要设计这些东西的时候，你一定要勇于发表自己的意见，而不是作为一个旁观者只是在听讲。当上司不了解这些东西的时候，他的想法必然会想当然，容易作出一些错误的判断，这时的你应该指出其中的错误。在那时你不发表任何意见的话，后面出现的问题必然是由你负责的。你会觉得自己不该负这个责任，但起初因你的沉默已经表示了你的认同，也表明当初的方案是可行的，那么出现问题就是你执行的不行了。</p>
-
-<p>工作毕竟和学校里的事情不一样，它需要的是更精准和完美。学校里做出来的雏形就就可以拿去参赛，但工作中要做的产品并不是那么一回事，它需要考虑的更多。所以当你会些什么的时候，不要认为它就可以应用在实际的产品中。如果公司真的让你做那些的时候，实际工作中你才觉得自己当初说了大话，那时耗费掉你的时间是小事（你必须为自己不负责任的大话付出的代价，当然对于你个人来说还有可能学习到很多东西），给公司造成损失才是大事。当你能做某件事情的时候，一定要在大脑中先仔细的思考，然后认真的告诉你的上司“你能够做什么、不能做什么、可能需要付出什么样的代价”。</p>
-
-<p>工作的时候，你只需要对你的上司负责。你可能不知道，你最初两周的工作安排是我向上级申请“我来安排”的。人事那边曾用Skype告知我“全权负责”此事，但我发现知道这事的只有我和她。实际的情况，你却被另一方要求做些其它的事情。在这种情况下，我写了封邮件正式申请了一下，同时也知会了相关的人员。如果我告诉你要做这些，而其他人又告诉你要完成另外的一个功能，我想这时的你肯定不知道做什么好。所以你只需听从你上司的安排，对他负责就可以了，至于其他的人，只要你做好了，你的上司是会替你解释的。</p>
-
-<p>有些时候，你们建立了一个讨论组在讨论bug，却没有把我加入进去（我的感觉是你们已经把我当作外人了，至少我认为只要是终端相关的问题就应该加一下我，毕竟公司那时只有我对终端部分最了解），而你又私信问我相关的问题。我是不太认同你们的这种做法的，这大大增加了交流的成本，况且你再给我传述问题的时候它的一部分东西已经失真了，这样不利于问题的解决。所以请尽量不要几个人私下交流，要以群组的方式讨论的话也要多加入相关的人员。如果有些事情很重要的话，请以邮件的方式进行讨论（邮件的书写也需要多加练习），做到有据可查。宁可多加，也不可遗漏可能提供帮助的人员。</p>
-
-<p>我发现很多人工作很多年了，都没有给处理的问题写状况的习惯，一般都看到的只是问题状态的变化，我真的没看出他们是怎么处理这些问题的。我发现你也有这样的坏习惯（在问题上上传了两个image文件，却没有丝毫的标注，你让测试到底去下载哪个固件呢？处理的问题也没有一点说明，你让其他同事如何帮你把关呢？），还好你很年轻且工作不久，从现在开始改进的话，可以改掉这个坏毛病。</p>
-
-<p>让他人帮忙的时候，态度也要认真点。你发给我一个文件，让我帮你合并到服务器上，其它的任何说明一点都没有，偌大的一个文件难道是要我替你去对比原始文件和你更改的文件吗？当我追问的时候，你才告诉我更改了哪些地方。如果你将文件发给我的同时告诉我一些细节问题，又怎么会多出一些不必要的事情呢？这些归根结底是工作态度的问题，所以以后请多多注意。</p>
-
-<p>请尽量养成午睡的习惯。不要告诉我你的精力很充足，很多次我都能够看到你闭上的双眼，我实在不忍心把你叫醒，即便把你叫醒了你也不会有精力投入到工作中。这样的话，还不如让你多休息一会儿，或许后续的几个小时你能够精力充沛，好好的工作一下。中午的那一小会儿是十分宝贵的，请珍惜它（尽量不要玩那些其它时间可以玩的东西），睡上半个小时或者眯上十几分钟就不会让你整个下午无精打采。</p>
-
-<p>说这么多并不是要数落你的缺点，只是希望你能够做得更好。一个不相识的人，我又何必去费那么多的口水呢？90后的你，真的很年轻，有时都让我嫉妒。但年轻并不表示你有机会可以去犯更多的错误，犯错误后借用年轻这个理由也是一种不负责任、脆弱、缺乏勇气的表现。虽然我没有丰富的经验给你更多有价值的东西，但我写给你的东西都是我认为正确且值得参考的东西。</p>
-
-<p>想想自己几年以前，也很讨厌一些“老人”在自己的面前“指手画脚”，对于他们的意见不以为然，总是按照自己的方法在做事，可事实证明我是错误的，最后我还是要按照他们提供的经验去做一些事情。这让我吃了一些苦头，希望你不要走我从前的路，少走一些弯路。</p>
-
-<p>说的话，看着就是一些公知的事情，可没有实际经历过的人又怎么会体会到其中的真正含义呢？但愿你能沉下心，仔细地思考我所提到的问题。</p>
-
-<p>最后祝你在新的工作环境中工作快乐，希望在你成长后的某一天也将自己的经验告诉其它的年轻朋友。</p>
 ]]></content>
   </entry>
   
