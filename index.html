@@ -100,51 +100,45 @@
 
   <div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
 
-<p>&lsquo;&rsquo;&lsquo;
-$ scrapy startproject tutorial<br/>
-Traceback (most recent call last):<br/>
-  File &ldquo;/usr/bin/scrapy&rdquo;, line 4, in <module></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject tutorial  
+</span><span class='line'>Traceback (most recent call last):  
+</span><span class='line'>  File "/usr/bin/scrapy", line 4, in &lt;module&gt;  
+</span><span class='line'>    execute()  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 121, in execute  
+</span><span class='line'>    cmds = _get_commands_dict(settings, inproject)  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 45, in _get_commands_dict
+</span><span class='line'>    cmds = _get_commands_from_module('scrapy.commands', inproject)  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 28, in _get_commands_from_module  
+</span><span class='line'>    for cmd in _iter_command_classes(module):  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 19, in _iter_command_classes  
+</span><span class='line'>    for module in walk_modules(module_name):  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/utils/misc.py", line 66, in walk_modules
+</span><span class='line'>    submod = __import__(fullpath, {}, {}, [''])  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py", line 13, in &lt;module&gt;
+</span><span class='line'>    from w3lib.form import encode_multipart  
+</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/w3lib/form.py", line 2, in &lt;module&gt;
+</span><span class='line'>    if six.PY2:  
+</span><span class='line'>AttributeError: 'module' object has no attribute 'PY2'  </span></code></pre></td></tr></table></div></figure>
 
-<pre><code>execute()  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 121, in execute</p>
-
-<pre><code>cmds = _get_commands_dict(settings, inproject)  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 45, in _get_commands_dict</p>
-
-<pre><code>cmds = _get_commands_from_module('scrapy.commands', inproject)  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 28, in _get_commands_from_module</p>
-
-<pre><code>for cmd in _iter_command_classes(module):  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 19, in _iter_command_classes</p>
-
-<pre><code>for module in walk_modules(module_name):  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/utils/misc.py&rdquo;, line 66, in walk_modules</p>
-
-<pre><code>submod = __import__(fullpath, {}, {}, [''])  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py&rdquo;, line 13, in <module></p>
-
-<pre><code>from w3lib.form import encode_multipart  
-</code></pre>
-
-<p>  File &ldquo;/usr/lib/python2.7/dist-packages/w3lib/form.py&rdquo;, line 2, in <module></p>
-
-<pre><code>if six.PY2:  
-</code></pre>
-
-<p>AttributeError: &lsquo;module&rsquo; object has no attribute &lsquo;PY2&#8217;<br/>
-&rsquo;&lsquo;&rsquo;</p>
 
 </div>
   

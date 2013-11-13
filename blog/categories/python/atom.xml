@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2013-11-13T17:06:45+08:00</updated>
+  <updated>2013-11-13T17:10:34+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -20,7 +20,7 @@
     <id>http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy</id>
     <content type="html"><![CDATA[<p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
 
-<p>&lsquo;&rsquo;&lsquo;
+<p>```
 $ scrapy startproject tutorial<br/>
 Traceback (most recent call last):<br/>
   File &ldquo;/usr/bin/scrapy&rdquo;, line 4, in <module></p>
@@ -64,14 +64,14 @@ Traceback (most recent call last):<br/>
 </code></pre>
 
 <p>AttributeError: &lsquo;module&rsquo; object has no attribute &lsquo;PY2'<br/>
-&rsquo;&lsquo;&rsquo;</p>
+```</p>
 
 <!--more-->
 
 
 <p>从网上找到了一个答案，需要利用pip去安装。</p>
 
-<p>&lsquo;&rsquo;&lsquo;
+<p>```
 $ pip install Scrapy<br/>
 Requirement already satisfied (use &mdash;upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7 <br/>
 Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
@@ -129,11 +129,11 @@ Traceback (most recent call last): <br/>
 <p>OSError: [Errno 13] Permission denied: &lsquo;/usr/share/pyshared/six-1.1.0.egg-info&rsquo;</p>
 
 <p>Storing complete log in /home/txgcwm/.pip/pip.log <br/>
-&lsquo;&rsquo;'</p>
+```</p>
 
 <p>借助新得立把six给卸载掉，然后重新安装。</p>
 
-<p>&lsquo;&rsquo;&lsquo;
+<p>```
 $ sudo pip install Scrapy<br/>
 Downloading/unpacking Scrapy <br/>
   Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded <br/>
@@ -180,15 +180,13 @@ changing mode of /usr/local/bin/scrapy to 755
 
 <p>Successfully installed Scrapy w3lib cssselect six <br/>
 Cleaning up&hellip; <br/>
-&lsquo;&rsquo;'</p>
+```</p>
 
 <p>创立一个项目。</p>
 
-<p>&lsquo;&rsquo;'</p>
-
-<p>$ sudo scrapy startproject tutorial</p>
-
-<p>&lsquo;&rsquo;'</p>
+<p><code>
+$ sudo scrapy startproject tutorial   
+</code></p>
 ]]></content>
   </entry>
   
