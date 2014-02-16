@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-02-16T22:35:05+08:00</updated>
+  <updated>2014-02-16T22:38:55+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/"/>
     <updated>2014-02-16T21:54:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi</id>
-    <content type="html"><![CDATA[<p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是“RIFF”。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
+    <content type="html"><![CDATA[<p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
 
 <pre><code>------------------------------------------------
 |             RIFF WAVE Chunk                  |
@@ -34,8 +34,6 @@
 |             Data Chunk                       |
 |             ID = 'data'                      |
 ------------------------------------------------
-
-        图1   Wav格式包含Chunk示例
 </code></pre>
 
 <p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
@@ -51,14 +49,12 @@
 ----------------------------------
 | Type  |  4 Bytes |   'WAVE'    |
 ----------------------------------
-
-        图2  RIFF WAVE Chunk
 </code></pre>
 
 <!--more-->
 
 
-<p>以'FIFF'作为标示，然后紧跟着为size字段，该size是整个wav文件大小减去ID和Size所占用的字节数，即FileLen &ndash; 8 = Size。然后是Type字段，为'WAVE'，表示是wav文件。结构定义如下：
+<p>以<code>FIFF</code>作为标示，然后紧跟着为size字段，该size是整个wav文件大小减去ID和Size所占用的字节数，即FileLen &ndash; 8 = Size。然后是Type字段，为<code>WAVE</code>，表示是wav文件。结构定义如下：
 ```
 struct RIFF_HEADER
 {</p>
@@ -94,11 +90,9 @@ char szRiffFormat[4]; // 'W','A','V','E'
 --------------------------------------------------------------------
 |               |  2 Bytes  | 附加信息（可选，通过Size来判断有无）       |
 -------------------------------------------------------------------- 
-
-                        图3  Format Chunk
 </code></pre>
 
-<p>以'fmt &lsquo;作为标示。一般情况下Size为16，此时最后附加信息没有；如果为18，则最后多了2个字节的附加信息。主要由一些软件制成的wav格式中含有该2个字节的附加信息。结构定义如下：
+<p>以<code>fmt</code>作为标示。一般情况下Size为16，此时最后附加信息没有；如果为18，则最后多了2个字节的附加信息。主要由一些软件制成的wav格式中含有该2个字节的附加信息。结构定义如下：
 ```
 struct WAVE_FORMAT
 {</p>
@@ -136,8 +130,6 @@ WAVE_FORMAT wavFormat;
 ----------------------------------
 | data  |  4 Bytes |             |
 ----------------------------------
-
-        图4  Fact Chunk
 </code></pre>
 
 <p>Fact Chunk是可选字段，一般当wav文件由某些软件转化而成，则包含该Chunk。结构定义如下：
@@ -163,11 +155,9 @@ DWORD  dwFactSize;
 ----------------------------------
 | data  |          |             |
 ----------------------------------
-
-         图5 Data Chunk
 </code></pre>
 
-<p>Data Chunk是真正保存wav数据的地方，以'data'作为该Chunk的标示。然后是数据的大小。紧接着就是wav数据。根据Format Chunk中的声道数以及采样bit数，wav数据的bit位置可以分成以下几种形式：</p>
+<p>Data Chunk是真正保存wav数据的地方，以<code>data</code>作为该Chunk的标示。然后是数据的大小。紧接着就是wav数据。根据Format Chunk中的声道数以及采样bit数，wav数据的bit位置可以分成以下几种形式：</p>
 
 <pre><code>---------------------------------------------------------------------
 |   单声道   |    取样1    |    取样2    |    取样3    |    取样4       |
@@ -188,8 +178,6 @@ DWORD  dwFactSize;
 | 16bit量化 |  声道0(左)  |  声道0(左)  |  声道1(右)  |  声道1(右)       |
 |           | (低位字节)  | (高位字节)  | (低位字节)  | (高位字节)        |
 ---------------------------------------------------------------------
-
-                     图6 wav数据bit位置安排方式
 </code></pre>
 
 <p>Data Chunk头结构定义如下：

@@ -98,7 +98,7 @@
   </header>
 
 
-  <div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是“RIFF”。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
+  <div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
 
 <pre><code>------------------------------------------------
 |             RIFF WAVE Chunk                  |
@@ -114,8 +114,6 @@
 |             Data Chunk                       |
 |             ID = 'data'                      |
 ------------------------------------------------
-
-        图1   Wav格式包含Chunk示例
 </code></pre>
 
 <p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
@@ -131,8 +129,6 @@
 ----------------------------------
 | Type  |  4 Bytes |   'WAVE'    |
 ----------------------------------
-
-        图2  RIFF WAVE Chunk
 </code></pre>
 
 </div>
