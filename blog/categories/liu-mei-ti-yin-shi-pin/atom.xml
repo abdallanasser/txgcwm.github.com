@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-02-16T22:38:55+08:00</updated>
+  <updated>2014-02-16T23:15:41+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -190,7 +190,8 @@ DWORD dwDataSize;
 </code></pre>
 
 <p>};
-```</p>
+```
+wave文件解析及头部格式添加的参考代码请查阅<a href="https://github.com/txgcwm/Linux-C-Examples/tree/master/audio-video/wave">这里</a> 。</p>
 
 <p><big>参考文章</big></p>
 
