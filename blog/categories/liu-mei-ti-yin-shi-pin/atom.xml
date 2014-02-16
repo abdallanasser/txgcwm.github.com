@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-02-16T22:31:27+08:00</updated>
+  <updated>2014-02-16T22:35:05+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -34,6 +34,7 @@
 |             Data Chunk                       |
 |             ID = 'data'                      |
 ------------------------------------------------
+
         图1   Wav格式包含Chunk示例
 </code></pre>
 
@@ -50,6 +51,7 @@
 ----------------------------------
 | Type  |  4 Bytes |   'WAVE'    |
 ----------------------------------
+
         图2  RIFF WAVE Chunk
 </code></pre>
 
@@ -92,6 +94,7 @@ char szRiffFormat[4]; // 'W','A','V','E'
 --------------------------------------------------------------------
 |               |  2 Bytes  | 附加信息（可选，通过Size来判断有无）       |
 -------------------------------------------------------------------- 
+
                         图3  Format Chunk
 </code></pre>
 
@@ -133,6 +136,7 @@ WAVE_FORMAT wavFormat;
 ----------------------------------
 | data  |  4 Bytes |             |
 ----------------------------------
+
         图4  Fact Chunk
 </code></pre>
 
@@ -159,6 +163,7 @@ DWORD  dwFactSize;
 ----------------------------------
 | data  |          |             |
 ----------------------------------
+
          图5 Data Chunk
 </code></pre>
 
@@ -183,6 +188,7 @@ DWORD  dwFactSize;
 | 16bit量化 |  声道0(左)  |  声道0(左)  |  声道1(右)  |  声道1(右)       |
 |           | (低位字节)  | (高位字节)  | (低位字节)  | (高位字节)        |
 ---------------------------------------------------------------------
+
                      图6 wav数据bit位置安排方式
 </code></pre>
 
