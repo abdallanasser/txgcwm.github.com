@@ -73,6 +73,67 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">kfifo.c中in和out的溢出问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T01:08:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>先上内核循环缓冲结构体的定义：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct kfifo {
+</span><span class='line'>    unsigned char *buffer;        /* the buffer holding the data */
+</span><span class='line'>    unsigned int size;        /* the size of the allocated buffer */
+</span><span class='line'>    unsigned int in;        /* data is added at offset (in % size) */
+</span><span class='line'>    unsigned int out;        /* data is extracted from off. (out % size) */
+</span><span class='line'>    spinlock_t *lock;        /* protects concurrent modifications */
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考 <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a> 。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a> 。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a></h1>
     
     
@@ -393,53 +454,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/27/guan-yu-wei-fang-tan/">关于微访谈</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-27T23:34:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/27/guan-yu-wei-fang-tan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="left" src="http://pic002.cnblogs.com/images/2010/14032/2010111217383632.jpg" width="228" height="221" title="Place Kitten #2" ></p>
-
-<h1>想法的初衷</h1>
-
-<p>进入社会后，周围的事情与我们想象的并不一样，起初我们无所适从，慢慢的我们适应了这个复杂的社会。在这个适应的过程中，背负着社会和家庭的压力，或许有许多人蹉跎了岁月、消磨了意志、荒废了理想，也应该有一些人坚持不懈地行走在通往理想的道路上。有多少人还曾记得自己当初的梦想，记得或不记得都有很多的感慨。我们也常想把它记录下来，但真正提笔的时候却不知道从何处下手，所以也就放弃了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/27/guan-yu-wei-fang-tan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -474,6 +488,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/24/ceng-xiang-shi/">曾相识</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/19/liao-jian-shu-tan-xie-zuo/">聊简书谈写作</a>
       </li>
     
@@ -487,10 +505,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/07/xie-zai-2014zhi-shi/">写在2014之始</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/25/cong-bai-du-bai-jia-shuo-qi/">从百度百家说起</a>
       </li>
     
   </ul>
@@ -519,6 +533,7 @@
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (3)</a></li>
 <li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (8)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (13)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (1)</a></li>
