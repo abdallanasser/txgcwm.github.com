@@ -73,6 +73,56 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T17:43:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>udev的文档介绍：</p>
+
+<ol>
+<li><p>dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。</p></li>
+<li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
+<li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a></h1>
     
     
@@ -378,6 +428,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/09/mx3shi-yong-xiao-ji/">MX3使用小记</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/08/meng-xing-sui-tan/">梦醒随谈</a>
       </li>
     
@@ -391,10 +445,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2014/02/19/liao-jian-shu-tan-xie-zuo/">聊简书谈写作</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/">Wav文件格式解析</a>
       </li>
     
   </ul>
@@ -417,6 +467,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (6)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (27)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (1)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
