@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-11T22:51:38+08:00</updated>
+  <updated>2014-03-11T22:54:09+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -107,7 +107,7 @@
 
 <p>即为h_addr_list[0]，表示第一个地址，这个符号其实是兼容老系统而存在的。</p>
 
-<p>写一个程序来获取主机www.163.com的详细信息：</p>
+<p>写一个程序来获取主机的详细信息：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
