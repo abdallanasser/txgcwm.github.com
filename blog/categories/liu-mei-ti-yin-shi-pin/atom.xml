@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-11T22:54:09+08:00</updated>
+  <updated>2014-03-11T23:06:21+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu下的音视频工具]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju/"/>
+    <updated>2014-03-11T23:02:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju</id>
+    <content type="html"><![CDATA[<p><a href="http://linzhibin824.blog.163.com/blog/static/7355771020133754752964/">Ubuntu下音/视频转换工具transmageddon</a></p>
+
+<p><a href="http://blog.ubuntusoft.com/handbrake.html#.UvWQsqFBr3w">Handbrake：优秀的视频转换器</a></p>
+
+<p><a href="http://blog.ubuntusoft.com/ubuntu-next-video-converter-arista.html#.UvWQt6FBr3w">ubuntu下视频转换器：arista</a></p>
+
+<p><a href="http://www.heimizhou.com/media-converter-in-ubuntu.html">Ubuntu视频转换工具与DVD制作</a></p>
+
+<p><a href="http://hi.baidu.com/rlhpuybgopbiqwd/item/d1c1ee11c45f9f48e65e0638">SoundConverter──音频转换软件</a></p>
+
+<p><a href="http://www.ibm.com/developerworks/cn/opensource/os-audacity/#ibm-pcon">功能强大的Audacity</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[wav文件格式解析]]></title>

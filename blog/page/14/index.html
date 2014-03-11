@@ -73,6 +73,63 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+
+<h1>isdigit</h1>
+
+<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
+
+<pre><code>int a = isdigit('1');
+int b = isdigit('a');
+int c = isdigit(3);
+</code></pre>
+
+<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
+
+<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
     
     
@@ -149,6 +206,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju/">Ubuntu下的音视频工具</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Gethostbyname和hostent结构体详解</a>
       </li>
     
@@ -162,10 +223,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/09/mx3shi-yong-xiao-ji/">MX3使用小记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/08/meng-xing-sui-tan/">梦醒随谈</a>
       </li>
     
   </ul>
@@ -198,7 +255,7 @@
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (16)</a></li>
-<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (2)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (38)</a></li>
