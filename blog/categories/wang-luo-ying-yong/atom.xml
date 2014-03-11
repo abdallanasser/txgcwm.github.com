@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络应用 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-ying-yong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-10T23:19:26+08:00</updated>
+  <updated>2014-03-11T22:51:38+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,174 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[gethostbyname和hostent结构体详解]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/"/>
+    <updated>2014-03-11T22:43:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie</id>
+    <content type="html"><![CDATA[<p><code>
+struct hostent *gethostbyname(const char *name);
+</code>
+gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent：
+```</p>
+
+<h1>include &lt;netdb.h></h1>
+
+<p>struct hostent {</p>
+
+<pre><code>char  *h_name;            /* official name of host */
+char **h_aliases;         /* alias list */
+int    h_addrtype;        /* host address type */
+int    h_length;          /* length of address */
+char **h_addr_list;       /* list of addresses */
+</code></pre>
+
+<p>}</p>
+
+<h1>define h_addr h_addr_list[0]  /<em> for backward compatibility </em>/</h1>
+
+<p>```</p>
+
+<p>除了服务器的ip地址外，这个结构体还包含了更多服务器的信息，有：
+```
+char *h_name</p>
+
+<p>This is the “official” name of the host.
+<code>
+</code>
+char **h_aliases</p>
+
+<p>These are alternative names for the host, represented as a null-terminated vector of strings.
+```
+主机的可选名字，以NULL作为结束标记。</p>
+
+<!--more-->
+
+
+<p>```
+int h_addrtype</p>
+
+<p>This is the host address type; in practice, its value is always either AF_INET or AF_INET6, with the latter being used for IPv6 hosts. In principle other kinds of addresses could be represented in the database as well as Internet addresses; if this were done, you might find a value in this field other than AF_INET or AF_INET6. See Socket Addresses.
+<code>
+</code>
+int h_length</p>
+
+<p>This is the length, in bytes, of each address.
+<code>
+ip地址的长度，ipv4对应4个字节。
+</code>
+char **h_addr_list</p>
+
+<p>This is the vector of addresses for the host. (Recall that the host might be connected to multiple networks and have different addresses on each one.) The vector is terminated by a null pointer.
+<code>
+一般主机可以有多个ip地址，比如www.163.com就有121.14.228.43和121.11.151.72两个ip，h_addr_list就用来保存多个ip地址。
+</code>
+char *h_addr</p>
+
+<p>This is a synonym for h_addr_list[0]; in other words, it is the first host address.
+```
+即为h_addr_list[0]，表示第一个地址，这个符号其实是兼容老系统而存在的。</p>
+
+<p>写一个程序来获取主机www.163.com的详细信息：</p>
+
+<p>```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdlib.h></h1>
+
+<h1>include &lt;sys/types.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>include &lt;netdb.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>define SERVPORT 80</h1>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>int i, sockfd;
+struct hostent *host;
+struct sockaddr_in serv_addr;
+
+if ((host = gethostbyname(argv[1])) == NULL) {
+    printf("gethostbyname error\n");
+    exit(0);
+}
+
+printf("official name: %s\n\n", host-&gt;h_name);
+printf("address length: %d bytes\n\n", host-&gt;h_length);
+
+printf("host name alias: \n");
+for (i = 0; host-&gt;h_aliases[i]; i++) {
+    printf("%s\n", host-&gt;h_aliases[i]);
+}
+printf("\naddress list: \n");
+
+for (i = 0; host-&gt;h_addr_list[i]; i++) {
+    if ((sockfd = socket(AF_INET, SOCK_STREAM,0)) == -1) {
+        printf("socket error\n");
+        exit(0);
+    }
+    // 先清零，然后用struct sockaddr_in来填值
+    bzero(&amp;serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(SERVPORT);
+    /* h_addr_list[i]指向in_addr类型 */
+    serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);
+    const char *ip = inet_ntoa(serv_addr.sin_addr);
+    printf("connect to %s  ", ip);
+
+    // 系统调用的时候，把sockaddr_in转换成sockaddr
+    if (connect(sockfd, (struct sockaddr *)&amp;serv_addr, \
+                sizeof(struct sockaddr)) == -1) {
+        printf("error\n");
+        exit(0);
+    }
+    printf("success\n");
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>这个程序首先调用gethostbyname得到服务器的各种信息，其中就包含它拥有的ip地址，保存在h_addr_list中，然后对于h_addr_list中的每个ip地址，都调用connect连接其80端口。h_addr_list保存的ip地址类型是char *，struct sockaddr_in中sin_addr的类型是struct in_addr，而程序中却直接把h_addr_list[i]强制转换成struct in_addr *
+<code>
+serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);
+</code>
+这是没有问题的，因为h_addr_list保存的并不是真正的字符串，而是指向struct in_addr类型的指针。</p>
+
+<p>另外，struct in_addr用来表示ip地址，本质上是一个long类型，刚好4个字节。然后我们调用inet_ntoa把它转换成可读性更强的dots-and-number字符串。关于ip地址和dots-and-number字符串之间的转换有4个函数：</p>
+
+<p>```</p>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>/<em> network to ascii </em>/
+char *inet_ntoa(struct in_addr in);</p>
+
+<p>/<em> ascii to network </em>/
+int inet_aton(const char <em>cp, struct in_addr </em>inp);</p>
+
+<p>const char <em>inet_ntop(int af, const void </em>src, char *dst, socklen_t size);</p>
+
+<p>int inet_pton(int af, const char <em>src, void </em>dst);  /<em> presentation format to network </em>/
+```
+inet_ntoa和inet_aton不支持ipv6, 据说迟早要废除，不过目前来说，很多系统都可以看见这两个函数。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Uboot中TFTP解释]]></title>
