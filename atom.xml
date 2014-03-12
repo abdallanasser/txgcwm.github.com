@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-11T23:24:22+08:00</updated>
+  <updated>2014-03-12T23:40:19+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -29,7 +29,7 @@
 <p>Handbrake是一款跨平台的视频转换器，无须任何技巧即可完成对视频的格式换转。特性：</p>
 
 <ul>
-<li>跨平台(Linux \ Win \Mac)；</li>
+<li>跨平台(Linux\Win\Mac)；</li>
 <li>输入源：支持DVD，如VIDEO_TS、DVD映像文件、DVD 光盘、.VOB、.TS，视频格式方面几乎支持所有视频格式；</li>
 <li>输出源：MP4(M4V)、MKV\MPEG-4(ffmpeg), H.264(x264), or Theora(libtheora)\AAC, CoreAudio AAC(OS X Only), MP3, or Vorbis. AC-3 pass-through, DTS pass-thorugh(MKV only)；</li>
 <li>支持设置格式文件的质量、参数。</li>
