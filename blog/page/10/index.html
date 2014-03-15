@@ -73,6 +73,79 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/03/log10de-shi-xian/">Log10的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/log10de-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
+
+<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
+</span><span class='line'>{
+</span><span class='line'>    register double ret;
+</span><span class='line'>
+</span><span class='line'>       __asm__(
+</span><span class='line'>  "fldlg2\n\t" 
+</span><span class='line'>  "fxch\n\t" 
+</span><span class='line'>  "fyl2x"
+</span><span class='line'>  :"=t"(ret)
+</span><span class='line'>          :"0"(x)
+</span><span class='line'>      );
+</span><span class='line'>   return ret;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/log10de-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">kfifo.c中in和out的溢出问题</a></h1>
     
     
@@ -409,51 +482,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/28/lue-shuo-bo-ke/">略说博客</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-28T12:29:00+08:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/28/lue-shuo-bo-ke/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://www.youdao.com/help/toys/bloggadget/001/1.gif"></p>
-
-<p>在平时搜索技术问题的时候，收藏了一些技术博客。我发现博主的所在地域、服务公司、学习背景、年龄分布都有一些特性，初步作了一些整理同大家分享。在这里只论那些搭建独立博客的博主，而不讨论那些在各大论坛上构建博客的博主。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/28/lue-shuo-bo-ke/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -488,6 +516,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/15/adnsyu-ming-jie-xi-ku/">Adns域名解析库</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/">剑问君答：PCB Layout女豪</a>
       </li>
     
@@ -501,10 +533,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/10/chi-kai-la-sa-de-qian-ye-%3Amai-suan-nai-de-zhong-a-yi/">离开拉萨的前夜：卖酸奶的钟阿姨</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/09/chi-kai-la-sa-de-qian-ye-%3Awo-he-hua-yuan-zhe/">离开拉萨的前夜：我和化缘者</a>
       </li>
     
   </ul>

@@ -5,12 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>popen和pclose函数 - 残剑</title>
+  <title>adns域名解析库 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义： 1
-FILE *popen( &hellip;">
+  <meta name="description" content="adns接口介绍及示例 adns是一个开源的dns解析库，官方文档点击这里。 初始化 1
+2
+3
+adns_state adns;
+adns_query query;
+adns_answer *answer; 函数原型： 1
+int adns_init(adns_state *newstate_r &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +24,7 @@ FILE *popen( &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -71,7 +76,7 @@ FILE *popen( &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Popen和pclose函数</h1>
+      <h1 class="entry-title">Adns域名解析库</h1>
     
     
       <p class="meta">
@@ -87,7 +92,7 @@ FILE *popen( &hellip;">
   
 
 
-<time datetime="2013-08-03T22:07:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-03-15T10:59:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -96,37 +101,112 @@ FILE *popen( &hellip;">
   </header>
 
 
-<div class="entry-content"><p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：</p>
+<div class="entry-content"><h1>adns接口介绍及示例</h1>
+
+<p>adns是一个开源的dns解析库，官方文档点击<a href="http://www.chiark.greenend.org.uk/~ian/adns/">这里</a>。</p>
+
+<p>初始化</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>FILE *popen( const char* command, const char* mode )</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_state   adns;
+</span><span class='line'>adns_query   query;
+</span><span class='line'>adns_answer   *answer;</span></code></pre></td></tr></table></div></figure>
 
 
-<p>参数说明</p>
-
-<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
-mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
-
-<!--more-->
-
-
-<p>返回值</p>
-
-<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
+<p>
+函数原型：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int pclose (FILE* stream)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int adns_init(adns_state *newstate_r, adns_initflags flags, FILE *diagfile /*0=&gt;stderr*/);</span></code></pre></td></tr></table></div></figure>
 
 
-<p>参数说明</p>
+<p>
+举例：</p>
 
-<p>stream： popen返回的文件指针。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_init(&adns, adns_if_noenv, 0);</span></code></pre></td></tr></table></div></figure>
 
-<p>返回值</p>
 
-<p>如果调用失败，返回-1。</p>
+<p>提交待解析的域名
+函数原型：</p>
 
-<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本想从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int adns_submit(adns_state ads, 
+</span><span class='line'>                const char *owner, 
+</span><span class='line'>                adns_rrtype type, 
+</span><span class='line'>                adns_queryflags flags, 
+</span><span class='line'>                void *context, 
+</span><span class='line'>                adns_query *query_r);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+举例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_submit(adns, argv[1], adns_r_a, (adns_queryflags) 0, NULL, &query);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>检测是否有域名已检测完成
+函数原型：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int adns_check(adns_state ads,
+</span><span class='line'>           adns_query *query_io,
+</span><span class='line'>           adns_answer **answer_r,
+</span><span class='line'>           void **context_r);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+举例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_check(adns, &query, &answer, NULL);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数原型：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int adns_wait(adns_state ads,
+</span><span class='line'>          adns_query *query_io,
+</span><span class='line'>          adns_answer **answer_r,
+</span><span class='line'>          void **context_r);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+举例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_wait(adns, &query, &answer, NULL);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>检测是否已完成所有提交的域名的解析
+函数原型：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>void adns_finish(adns_state ads);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+举例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>adns_finish(adns);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>示例代码（解析IPv4地址可使用adns v1.2或adns v1.4，解析IPv6地址使用adns v1.6）：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -150,31 +230,165 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
 <span class='line-number'>20</span>
 <span class='line-number'>21</span>
 <span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int get_device_info(void)
-</span><span class='line'>{
-</span><span class='line'>  FILE *fp = NULL;
-</span><span class='line'>  char buffer[128];
-</span><span class='line'>  char *ptr = NULL;
-</span><span class='line'>  int vid, pid;
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/errno.h&gt; 
+</span><span class='line'>#include &lt;sys/socket.h&gt;                    
+</span><span class='line'>#include &lt;netinet/in.h&gt;                      
+</span><span class='line'>#include &lt;arpa/inet.h&gt; 
 </span><span class='line'>
-</span><span class='line'>  fp = popen("lsusb", "r");
-</span><span class='line'>  if (fp == NULL)
-</span><span class='line'>      return -1;
-</span><span class='line'>
-</span><span class='line'>  while (NULL != fgets(buffer, sizeof(buffer), fp)) {
-</span><span class='line'>      ptr = strstr(buffer, "ID");
-</span><span class='line'>      if (ptr) {
-</span><span class='line'>          sscanf(ptr, "ID %04x:%04x", &vid, &pid);
-</span><span class='line'>          printf("%04x:%04x\n", vid, pid);
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>  pclose(fp);
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>#include "adns.h"
+</span><span class='line'> 
+</span><span class='line'>int test_dns(char *host)   
+</span><span class='line'>{ 
+</span><span class='line'>    adns_state ads; 
+</span><span class='line'>    adns_initflags flags;   
+</span><span class='line'>    flags = adns_if_nosigpipe | adns_if_noerrprint; 
+</span><span class='line'>    adns_init(&ads, flags, NULL); 
+</span><span class='line'>           
+</span><span class='line'>    adns_query quer = NULL; 
+</span><span class='line'> 
+</span><span class='line'>    adns_submit(ads, host, (adns_rrtype) adns_r_a, (adns_queryflags) 0, NULL, &quer); 
+</span><span class='line'>           
+</span><span class='line'>    int tryCount = -1; 
+</span><span class='line'>    int adns_cname = 0; 
+</span><span class='line'> 
+</span><span class='line'>    while(tryCount &lt; 32) { 
+</span><span class='line'>        tryCount += 1; 
+</span><span class='line'>           
+</span><span class='line'>        adns_answer *ans; 
+</span><span class='line'>        int res = adns_check(ads, &quer, &ans, NULL); 
+</span><span class='line'>        if(res == 0) {       
+</span><span class='line'>            if (ans-&gt;status == adns_s_prohibitedcname) { 
+</span><span class='line'>                char cname[128]; 
+</span><span class='line'>                strncpy(cname, ans-&gt;cname, 127); 
+</span><span class='line'>                cname[strlen(ans-&gt;cname)] = '\0';       
+</span><span class='line'>                adns_query quer = NULL; 
+</span><span class='line'>                adns_submit(ads, cname, (adns_rrtype) adns_r_addr, (adns_queryflags) 0, NULL, &quer);       
+</span><span class='line'>                adns_cname = 1; 
+</span><span class='line'>            } else { 
+</span><span class='line'>                //resolve IPv4 address      
+</span><span class='line'>               /*
+</span><span class='line'>　　　　　　　　 * if(adns_cname) 
+</span><span class='line'>               *     printf("ip: %s\n", ans-&gt;status == adns_s_ok ? inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
+</span><span class='line'>               *     else 
+</span><span class='line'>               *     printf("ip: %s\n", ans-&gt;status == adns_s_ok ? inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); 
+</span><span class='line'>               */
+</span><span class='line'>     
+</span><span class='line'>                //resolve IPv6 address
+</span><span class='line'>                if(adns_cname){
+</span><span class='line'>                    if(ans-&gt;status == adns_s_ok){
+</span><span class='line'>                        char buf[INET6_ADDRSTRLEN];
+</span><span class='line'>                        inet_ntop(AF_INET6, &ans-&gt;rrs.addr-&gt;addr.inet6.sin6_addr, buf, sizeof(buf));
+</span><span class='line'>                        printf("ip: %s\n", buf);
+</span><span class='line'>                    }
+</span><span class='line'>                    else{
+</span><span class='line'>                         printf("no\n");
+</span><span class='line'>                     }
+</span><span class='line'>                 }
+</span><span class='line'>                 else{
+</span><span class='line'>                     if(ans-&gt;status == adns_s_ok){
+</span><span class='line'>                         char buf[INET6_ADDRSTRLEN];
+</span><span class='line'>                         inet_ntop(AF_INET6, ans-&gt;rrs.in6addr, buf, sizeof(buf));
+</span><span class='line'>                         printf("ip: %s\n", buf);
+</span><span class='line'>                     }
+</span><span class='line'>                     else{
+</span><span class='line'>                          printf("no\n");
+</span><span class='line'>                     }
+</span><span class='line'>                 }
+</span><span class='line'>                 adns_finish(ads); 
+</span><span class='line'>                 break; 
+</span><span class='line'>            }                   
+</span><span class='line'>        }        
+</span><span class='line'>        else if (res == ESRCH || res == EAGAIN) { 
+</span><span class='line'>            sleep(1); 
+</span><span class='line'>        } else { 
+</span><span class='line'>            printf("host(%s) is err!\n", host); 
+</span><span class='line'>        } 
+</span><span class='line'>    }   
+</span><span class='line'>    
+</span><span class='line'>    return 0; 
+</span><span class='line'>} 
+</span><span class='line'> 
+</span><span class='line'>int main(int argc, char *argv[]) { 
+</span><span class='line'>    char host[128]; 
+</span><span class='line'>    while(1) { 
+</span><span class='line'>        scanf("%s", host); 
+</span><span class='line'>        if(strlen(host) == 3 && strcmp(host, "eof")) break; 
+</span><span class='line'>        test_dns(host); 
+</span><span class='line'> 
+</span><span class='line'>    } 
+</span><span class='line'>    
+</span><span class='line'>    return 0; 
+</span><span class='line'>}                    </span></code></pre></td></tr></table></div></figure>
 
 
-<p>编写主函数调用以上的接口，使用<code>lsusb</code>查看usb设备及执行测试程序：</p>
+<p>Makefile</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -191,30 +405,28 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ lsusb 
-</span><span class='line'>Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-</span><span class='line'>Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-</span><span class='line'>Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-</span><span class='line'>Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-</span><span class='line'>Bus 001 Device 003: ID 1532:0016 Razer USA, Ltd DeathAdder Mouse
-</span><span class='line'>Bus 001 Device 004: ID 058f:b002 Alcor Micro Corp. 
-</span><span class='line'>
-</span><span class='line'>$ ./a.out 
-</span><span class='line'>8087:0024
-</span><span class='line'>8087:0024
-</span><span class='line'>1d6b:0002
-</span><span class='line'>1d6b:0002
-</span><span class='line'>1532:0016
-</span><span class='line'>058f:b002
-</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CFLAGS = -g 
+</span><span class='line'>TARGETS = libadns.a 
+</span><span class='line'>LIBOBJS = types.o event.o query.o reply.o general.o setup.o transmit.om parse.o poll.o check.o 
+</span><span class='line'> 
+</span><span class='line'>all: testdns 
+</span><span class='line'> 
+</span><span class='line'>testdns: testdns.c libadns.a 
+</span><span class='line'>libadns.a: $(LIBOBJS) 
+</span><span class='line'>    rm -f $@ 
+</span><span class='line'>    $(AR) cq $@ $(LIBOBJS)
+</span><span class='line'>    
+</span><span class='line'>clean: 
+</span><span class='line'>        rm -f $(LIBOBJS) libadns.a *~ config.status 
+</span><span class='line'> 
+</span><span class='line'>distclean: clean 
+</span><span class='line'>        rm -f config.h .depend   
+</span><span class='line'> 
+</span><span class='line'>$(LIBOBJS): adns.h internal.h config.h</span></code></pre></td></tr></table></div></figure>
 
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://my.oschina.net/renhc/blog/35116">基于管道的popen和pclose函数</a><br/>
-<a href="http://networking.ctocio.com.cn/tips/137/9412137.shtml">Linux popen函数的使用总结</a><br/>
-<a href="http://bbs.chinaunix.net/thread-4087539-1-1.html">关于/proc/iomem中信息解释</a>  <br/>
-<a href="http://tech.watchstor.com/storage-systems-117859.htm">proc文件系统功能总览</a></p>
 </div>
 
 
@@ -237,14 +449,8 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
   
 
 
-<time datetime="2013-08-03T22:07:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-03-15T10:59:00+08:00" pubdate data-updated="true">Mar 15<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
-  
-</span>
 
 
     </p>
@@ -276,10 +482,8 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/" title="Previous Post: 我们想到的，别人做到了">&laquo; 我们想到的，别人做到了</a>
+        <a class="basic-alignment left" href="/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/" title="Previous Post: 剑问君答：PCB layout女豪">&laquo; 剑问君答：PCB layout女豪</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/08/05/chu-ba-wang-san-zhui-han-xin/" title="Next Post: 楚霸王三追韩信">楚霸王三追韩信 &raquo;</a>
       
     </p>
   </footer>
@@ -570,8 +774,8 @@ mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也�
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku/';
         var disqus_script = 'embed.js';
       
     (function () {
