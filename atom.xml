@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-15T11:26:31+08:00</updated>
+  <updated>2014-03-15T11:29:00+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -68,6 +68,9 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>adns_submit(adns, argv[1], adns_r_a, (adns_queryflags) 0, NULL, &query);</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
 
 
 <p>检测是否有域名已检测完成
