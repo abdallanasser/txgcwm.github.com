@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 开源库 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/kai-yuan-ku/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-15T18:05:52+08:00</updated>
+  <updated>2014-03-15T18:08:14+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,288 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[域名解析库]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku/"/>
+    <updated>2014-03-15T10:59:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku</id>
+    <content type="html"><![CDATA[<h1>一个问题</h1>
+
+<p>在实际的开发中遇到了不能域名解析的情况，在网上搜集了大量的资料，发现有网友遇到了和我一样的状况，所以把查找的资料汇总一下，作个记录。以下信息摘自<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">这里</a>：</p>
+
+<blockquote><p>I&rsquo;m using libcurl 7.29.0 on Android with c-ares 1.9.1.</p>
+
+<p>I&rsquo;ve been noticing a bug on a Samsung Galaxy S3 &amp; Samsung Galaxy Note 2 (and possibly other devices too) when the bearer switches from wifi to 3G where I can no longer connect to a host.</p>
+
+<p>If I undefine USE_ARES (build without c-ares) then this issue is gone, but I would like to keep c-ares for performance.</p>
+
+<p>Some other (useful?) info: <br/>
+1) Switching back to the original bearer will allow a connection again <br/>
+2) I tried performing a curl_global_cleanup() and curl_global_init(CURL_GLOBAL_ALL) during the switch, but it didn&rsquo;t seem to help.</p>
+
+<p>If anyone knows of anything that I can do to continue to use c-ares I would greatly appreciate it!</p></blockquote>
+
+<!--more-->
+
+
+<h1>Android NDK 编译c-ares</h1>
+
+<p>```
+export NDK=/tmp/android-ndk-r8b</p>
+
+<h1>Create the standalone toolchain</h1>
+
+<p>$NDK/build/tools/make-standalone-toolchain.sh \
+&mdash;platform=android-9 \
+&mdash;install-dir=/tmp/my-android-toolchain</p>
+
+<p>export PATH=/tmp/my-android-toolchain/bin:$PATH
+export SYSROOT=/tmp/my-android-toolchain/sysroot
+export CC=&ldquo;arm-linux-androideabi-gcc &mdash;sysroot $SYSROOT&rdquo;</p>
+
+<h1>Download the latest release</h1>
+
+<p>curl -O <a href="http://c-ares.haxx.se/download/c-ares-1.9.1.tar.gz">http://c-ares.haxx.se/download/c-ares-1.9.1.tar.gz</a>
+tar xvfz c-ares-1.9.1.tar.gz</p>
+
+<h1>Configure</h1>
+
+<p>cd c-ares-1.9.1 &amp;&amp; mkdir build
+./configure &mdash;prefix=$(pwd)/build \
+&mdash;host=arm-linux \
+&mdash;disable-shared \
+CFLAGS=&ldquo;-march=armv7-a&rdquo;</p>
+
+<h1>Build and install</h1>
+
+<p>make &amp;&amp; make install
+```</p>
+
+<h1>adns接口介绍及示例</h1>
+
+<p>adns是一个开源的dns解析库，官方文档点击<a href="http://www.chiark.greenend.org.uk/~ian/adns/">这里</a>。</p>
+
+<p>初始化
+<code>
+adns_state   adns;
+adns_query   query;
+adns_answer   *answer;
+</code>
+函数原型：
+<code>
+int adns_init(adns_state *newstate_r, adns_initflags flags, FILE *diagfile /*0=&gt;stderr*/);
+</code>
+举例：
+<code>
+adns_init(&amp;adns, adns_if_noenv, 0);
+</code></p>
+
+<p>提交待解析的域名 <br/>
+函数原型：
+```
+int adns_submit(adns_state ads,</p>
+
+<pre><code>            const char *owner, 
+            adns_rrtype type, 
+            adns_queryflags flags, 
+            void *context, 
+            adns_query *query_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_submit(adns, argv[1], adns_r_a, (adns_queryflags) 0, NULL, &amp;query);
+```</p>
+
+<p>检测是否有域名已检测完成 <br/>
+函数原型：
+```
+int adns_check(adns_state ads,</p>
+
+<pre><code>       adns_query *query_io,
+       adns_answer **answer_r,
+       void **context_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_check(adns, &amp;query, &amp;answer, NULL);
+```</p>
+
+<p>函数原型：
+```
+int adns_wait(adns_state ads,</p>
+
+<pre><code>      adns_query *query_io,
+      adns_answer **answer_r,
+      void **context_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_wait(adns, &amp;query, &amp;answer, NULL);
+```</p>
+
+<p>检测是否已完成所有提交的域名的解析 <br/>
+函数原型：
+<code>
+void adns_finish(adns_state ads);
+</code>
+举例：
+<code>
+adns_finish(adns);
+</code></p>
+
+<p>示例代码（解析IPv4地址可使用adns v1.2或adns v1.4，解析IPv6地址使用adns v1.6）：</p>
+
+<p>```</p>
+
+<h1>include &lt;sys/errno.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<h1>include &ldquo;adns.h&rdquo;</h1>
+
+<p>int test_dns(char *host) <br/>
+{</p>
+
+<pre><code>int tryCount = -1; 
+int adns_cname = 0;
+adns_state ads; 
+adns_initflags flags;  
+adns_query quer = NULL;  
+flags = adns_if_nosigpipe | adns_if_noerrprint; 
+
+adns_init(&amp;ads, flags, NULL); 
+adns_submit(ads, host, (adns_rrtype) adns_r_a, (adns_queryflags) 0, NULL, &amp;quer);  
+
+while(tryCount &lt; 32) { 
+    tryCount += 1; 
+
+    adns_answer *ans; 
+    int res = adns_check(ads, &amp;quer, &amp;ans, NULL); 
+    if(res == 0) {       
+        if (ans-&gt;status == adns_s_prohibitedcname) { 
+            char cname[128]; 
+            strncpy(cname, ans-&gt;cname, 127); 
+            cname[strlen(ans-&gt;cname)] = '\0';       
+            adns_query quer = NULL; 
+            adns_submit(ads, cname, (adns_rrtype) adns_r_addr, (adns_queryflags) 0, 
+                        NULL, &amp;quer);       
+            adns_cname = 1; 
+        } else { 
+            //resolve IPv4 address                 
+　　　　　　　/*if(adns_cname) 
+                printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
+                        inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
+           else 
+                printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
+                        inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); */              
+
+            //resolve IPv6 address
+            if(adns_cname){
+                if(ans-&gt;status == adns_s_ok){
+                    char buf[INET6_ADDRSTRLEN];
+                    inet_ntop(AF_INET6, &amp;ans-&gt;rrs.addr-&gt;addr.inet6.sin6_addr, 
+                                buf, sizeof(buf));
+                    printf("ip: %s\n", buf);
+                }
+                else{
+                     printf("no\n");
+                 }
+             }
+             else{
+                 if(ans-&gt;status == adns_s_ok){
+                     char buf[INET6_ADDRSTRLEN];
+                     inet_ntop(AF_INET6, ans-&gt;rrs.in6addr, buf, sizeof(buf));
+                     printf("ip: %s\n", buf);
+                 }
+                 else{
+                      printf("no\n");
+                 }
+             }
+             adns_finish(ads); 
+             break; 
+        }                   
+    }        
+    else if (res == ESRCH || res == EAGAIN) { 
+        sleep(1); 
+    } else { 
+        printf("host(%s) is err!\n", host); 
+    } 
+}   
+
+return 0; 
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, char *argv[]) {</p>
+
+<pre><code>char host[128]; 
+
+while(1) { 
+    scanf("%s", host); 
+
+    if(strlen(host) == 3 &amp;&amp; strcmp(host, "eof")) 
+        break; 
+
+    test_dns(host); 
+} 
+
+return 0; 
+</code></pre>
+
+<p>}                  <br/>
+```</p>
+
+<p>Makefile
+```
+CFLAGS = -g
+TARGETS = libadns.a
+LIBOBJS = types.o event.o query.o reply.o general.o setup.o transmit.om \</p>
+
+<pre><code>        parse.o poll.o check.o 
+</code></pre>
+
+<p>all: testdns</p>
+
+<p>testdns: testdns.c libadns.a
+libadns.a: $(LIBOBJS)</p>
+
+<pre><code>rm -f $@ 
+$(AR) cq $@ $(LIBOBJS)
+</code></pre>
+
+<p>clean:</p>
+
+<pre><code>    rm -f $(LIBOBJS) libadns.a *~ config.status 
+</code></pre>
+
+<p>distclean: clean</p>
+
+<pre><code>    rm -f config.h .depend   
+</code></pre>
+
+<p>$(LIBOBJS): adns.h internal.h config.h
+```</p>
+
+<p><big>参考链接：</big><br/>
+<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
+<a href="http://blog.chinaunix.net/uid-20535334-id-3757613.html">Android NDK 编译c-ares</a> <br/>
+<a href="http://c-ares.haxx.se/">c-ares</a> <br/>
+<a href="http://www.cnblogs.com/sunada2005/p/3232600.html">adns解析库——域名解析实例(C++、linux)</a> <br/>
+<a href="http://www.chiark.greenend.org.uk/~ian/adns/">GNU adns</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用libevent编写Linux服务]]></title>
