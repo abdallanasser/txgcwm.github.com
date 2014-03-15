@@ -292,8 +292,6 @@
 <span class='line-number'>85</span>
 <span class='line-number'>86</span>
 <span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/errno.h&gt; 
 </span><span class='line'>#include &lt;sys/socket.h&gt;                    
 </span><span class='line'>#include &lt;netinet/in.h&gt;                      
@@ -303,17 +301,15 @@
 </span><span class='line'> 
 </span><span class='line'>int test_dns(char *host)   
 </span><span class='line'>{ 
-</span><span class='line'>    adns_state ads; 
-</span><span class='line'>    adns_initflags flags;   
-</span><span class='line'>    flags = adns_if_nosigpipe | adns_if_noerrprint; 
-</span><span class='line'>    adns_init(&ads, flags, NULL); 
-</span><span class='line'>           
-</span><span class='line'>    adns_query quer = NULL; 
-</span><span class='line'> 
-</span><span class='line'>    adns_submit(ads, host, (adns_rrtype) adns_r_a, (adns_queryflags) 0, NULL, &quer); 
-</span><span class='line'>           
 </span><span class='line'>    int tryCount = -1; 
-</span><span class='line'>    int adns_cname = 0; 
+</span><span class='line'>    int adns_cname = 0;
+</span><span class='line'>    adns_state ads; 
+</span><span class='line'>    adns_initflags flags;  
+</span><span class='line'>    adns_query quer = NULL;  
+</span><span class='line'>    flags = adns_if_nosigpipe | adns_if_noerrprint; 
+</span><span class='line'>    
+</span><span class='line'>    adns_init(&ads, flags, NULL); 
+</span><span class='line'>    adns_submit(ads, host, (adns_rrtype) adns_r_a, (adns_queryflags) 0, NULL, &quer);  
 </span><span class='line'> 
 </span><span class='line'>    while(tryCount &lt; 32) { 
 </span><span class='line'>        tryCount += 1; 
@@ -329,11 +325,11 @@
 </span><span class='line'>                adns_submit(ads, cname, (adns_rrtype) adns_r_addr, (adns_queryflags) 0, NULL, &quer);       
 </span><span class='line'>                adns_cname = 1; 
 </span><span class='line'>            } else { 
-</span><span class='line'>                //resolve IPv4 address      
+</span><span class='line'>              //resolve IPv4 address      
 </span><span class='line'>               /*
 </span><span class='line'>　　　　　　　　 * if(adns_cname) 
 </span><span class='line'>               *     printf("ip: %s\n", ans-&gt;status == adns_s_ok ? inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
-</span><span class='line'>               *     else 
+</span><span class='line'>               *else 
 </span><span class='line'>               *     printf("ip: %s\n", ans-&gt;status == adns_s_ok ? inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); 
 </span><span class='line'>               */
 </span><span class='line'>     
@@ -374,11 +370,11 @@
 </span><span class='line'> 
 </span><span class='line'>int main(int argc, char *argv[]) { 
 </span><span class='line'>    char host[128]; 
+</span><span class='line'>    
 </span><span class='line'>    while(1) { 
 </span><span class='line'>        scanf("%s", host); 
 </span><span class='line'>        if(strlen(host) == 3 && strcmp(host, "eof")) break; 
 </span><span class='line'>        test_dns(host); 
-</span><span class='line'> 
 </span><span class='line'>    } 
 </span><span class='line'>    
 </span><span class='line'>    return 0; 
