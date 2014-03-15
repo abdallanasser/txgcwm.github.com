@@ -9,13 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="adns接口介绍及示例 adns是一个开源的dns解析库，官方文档点击这里。 初始化 1
-2
-3
-adns_state adns;
-adns_query query;
-adns_answer *answer; 函数原型： 1
-int adns_init(adns_state *newstate_r &hellip;">
+  <meta name="description" content="一个问题 在实际的开发中遇到了不能域名解析的情况，在网上搜集了大量的资料，发现有网友遇到了和我一样的状况，所以把查找的资料汇总一下，作个记录。以下信息摘自这里： I&rsquo;m using libcurl 7.29.0 on Android with c-ares 1.9.1. I&rsquo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,7 +95,78 @@ int adns_init(adns_state *newstate_r &hellip;">
   </header>
 
 
-<div class="entry-content"><h1>adns接口介绍及示例</h1>
+<div class="entry-content"><h1>一个问题</h1>
+
+<p>在实际的开发中遇到了不能域名解析的情况，在网上搜集了大量的资料，发现有网友遇到了和我一样的状况，所以把查找的资料汇总一下，作个记录。以下信息摘自<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">这里</a>：</p>
+
+<blockquote><p>I&rsquo;m using libcurl 7.29.0 on Android with c-ares 1.9.1.</p>
+
+<p>I&rsquo;ve been noticing a bug on a Samsung Galaxy S3 &amp; Samsung Galaxy Note 2 (and possibly other devices too) when the bearer switches from wifi to 3G where I can no longer connect to a host.</p>
+
+<p>If I undefine USE_ARES (build without c-ares) then this issue is gone, but I would like to keep c-ares for performance.</p>
+
+<p>Some other (useful?) info: <br/>
+1) Switching back to the original bearer will allow a connection again <br/>
+2) I tried performing a curl_global_cleanup() and curl_global_init(CURL_GLOBAL_ALL) during the switch, but it didn&rsquo;t seem to help.</p>
+
+<p>If anyone knows of anything that I can do to continue to use c-ares I would greatly appreciate it!</p></blockquote>
+
+<!--more-->
+
+
+<h1>Android NDK 编译c-ares</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export NDK=/tmp/android-ndk-r8b
+</span><span class='line'>
+</span><span class='line'># Create the standalone toolchain
+</span><span class='line'>$NDK/build/tools/make-standalone-toolchain.sh \
+</span><span class='line'>--platform=android-9 \
+</span><span class='line'>--install-dir=/tmp/my-android-toolchain
+</span><span class='line'>
+</span><span class='line'>export PATH=/tmp/my-android-toolchain/bin:$PATH
+</span><span class='line'>export SYSROOT=/tmp/my-android-toolchain/sysroot
+</span><span class='line'>export CC="arm-linux-androideabi-gcc --sysroot $SYSROOT"
+</span><span class='line'>
+</span><span class='line'># Download the latest release
+</span><span class='line'>curl -O http://c-ares.haxx.se/download/c-ares-1.9.1.tar.gz
+</span><span class='line'>tar xvfz c-ares-1.9.1.tar.gz
+</span><span class='line'>
+</span><span class='line'># Configure
+</span><span class='line'>cd c-ares-1.9.1 && mkdir build
+</span><span class='line'>./configure --prefix=$(pwd)/build \
+</span><span class='line'>--host=arm-linux \
+</span><span class='line'>--disable-shared \
+</span><span class='line'>CFLAGS="-march=armv7-a"
+</span><span class='line'>
+</span><span class='line'># Build and install
+</span><span class='line'>make && make install</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>adns接口介绍及示例</h1>
 
 <p>adns是一个开源的dns解析库，官方文档点击<a href="http://www.chiark.greenend.org.uk/~ian/adns/">这里</a>。</p>
 
@@ -151,9 +216,6 @@ int adns_init(adns_state *newstate_r &hellip;">
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>adns_submit(adns, argv[1], adns_r_a, (adns_queryflags) 0, NULL, &query);</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
 
 
 <p>检测是否有域名已检测完成 <br/>
@@ -337,15 +399,13 @@ int adns_init(adns_state *newstate_r &hellip;">
 </span><span class='line'>                            NULL, &quer);       
 </span><span class='line'>                adns_cname = 1; 
 </span><span class='line'>            } else { 
-</span><span class='line'>              //resolve IPv4 address      
-</span><span class='line'>               /*
-</span><span class='line'>    　　　　　　　if(adns_cname) 
+</span><span class='line'>                //resolve IPv4 address                 
+</span><span class='line'>    　　　　　　　/*if(adns_cname) 
 </span><span class='line'>                    printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
 </span><span class='line'>                            inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
 </span><span class='line'>               else 
 </span><span class='line'>                    printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
-</span><span class='line'>                            inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); 
-</span><span class='line'>               */
+</span><span class='line'>                            inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); */              
 </span><span class='line'>     
 </span><span class='line'>                //resolve IPv6 address
 </span><span class='line'>                if(adns_cname){
@@ -388,8 +448,10 @@ int adns_init(adns_state *newstate_r &hellip;">
 </span><span class='line'>    
 </span><span class='line'>    while(1) { 
 </span><span class='line'>        scanf("%s", host); 
+</span><span class='line'>        
 </span><span class='line'>        if(strlen(host) == 3 && strcmp(host, "eof")) 
 </span><span class='line'>            break; 
+</span><span class='line'>            
 </span><span class='line'>        test_dns(host); 
 </span><span class='line'>    } 
 </span><span class='line'>    
@@ -438,6 +500,13 @@ int adns_init(adns_state *newstate_r &hellip;">
 </span><span class='line'> 
 </span><span class='line'>$(LIBOBJS): adns.h internal.h config.h</span></code></pre></td></tr></table></div></figure>
 
+
+<p><big>参考链接：</big><br/>
+<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
+<a href="http://blog.chinaunix.net/uid-20535334-id-3757613.html">Android NDK 编译c-ares</a> <br/>
+<a href="http://c-ares.haxx.se/">c-ares</a> <br/>
+<a href="http://www.cnblogs.com/sunada2005/p/3232600.html">adns解析库——域名解析实例（C++、linux）</a> <br/>
+<a href="http://www.chiark.greenend.org.uk/~ian/adns/">GNU adns</a></p>
 </div>
 
 
