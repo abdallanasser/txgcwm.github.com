@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-15T17:59:57+08:00</updated>
+  <updated>2014-03-15T18:05:52+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[adns域名解析库]]></title>
+    <title type="html"><![CDATA[域名解析库]]></title>
     <link href="http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku/"/>
     <updated>2014-03-15T10:59:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku</id>
@@ -428,7 +428,7 @@
 <a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
 <a href="http://blog.chinaunix.net/uid-20535334-id-3757613.html">Android NDK 编译c-ares</a> <br/>
 <a href="http://c-ares.haxx.se/">c-ares</a> <br/>
-<a href="http://www.cnblogs.com/sunada2005/p/3232600.html">adns解析库——域名解析实例（C++、linux）</a> <br/>
+<a href="http://www.cnblogs.com/sunada2005/p/3232600.html">adns解析库——域名解析实例(C++、linux)</a> <br/>
 <a href="http://www.chiark.greenend.org.uk/~ian/adns/">GNU adns</a></p>
 ]]></content>
   </entry>
