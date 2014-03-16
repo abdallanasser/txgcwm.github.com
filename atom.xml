@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-15T18:08:14+08:00</updated>
+  <updated>2014-03-16T10:20:50+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -194,7 +194,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>adns_finish(adns);</span></code></pre></td></tr></table></div></figure>
 
 
-<p>示例代码（解析IPv4地址可使用adns v1.2或adns v1.4，解析IPv6地址使用adns v1.6）：</p>
+<p>示例代码<code>testdns.c</code>（解析IPv4地址可使用adns v1.2或adns v1.4，解析IPv6地址使用adns v1.6）：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -288,10 +288,18 @@
 <span class='line-number'>90</span>
 <span class='line-number'>91</span>
 <span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/errno.h&gt; 
 </span><span class='line'>#include &lt;sys/socket.h&gt;                    
 </span><span class='line'>#include &lt;netinet/in.h&gt;                      
 </span><span class='line'>#include &lt;arpa/inet.h&gt; 
+</span><span class='line'>#include &lt;stdlib.h&gt;
+</span><span class='line'>#include &lt;string.h&gt;
+</span><span class='line'>#include &lt;stdio.h&gt;
 </span><span class='line'>
 </span><span class='line'>#include "adns.h"
 </span><span class='line'> 
@@ -322,14 +330,15 @@
 </span><span class='line'>                            NULL, &quer);       
 </span><span class='line'>                adns_cname = 1; 
 </span><span class='line'>            } else { 
+</span><span class='line'>          #if 1
 </span><span class='line'>                //resolve IPv4 address                 
-</span><span class='line'>    　　　　　　　/*if(adns_cname) 
+</span><span class='line'>              if(adns_cname) 
 </span><span class='line'>                    printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
 </span><span class='line'>                            inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
 </span><span class='line'>               else 
 </span><span class='line'>                    printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
-</span><span class='line'>                            inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no"); */              
-</span><span class='line'>     
+</span><span class='line'>                            inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no");             
+</span><span class='line'>          #else
 </span><span class='line'>                //resolve IPv6 address
 </span><span class='line'>                if(adns_cname){
 </span><span class='line'>                    if(ans-&gt;status == adns_s_ok){
@@ -351,7 +360,8 @@
 </span><span class='line'>                     else{
 </span><span class='line'>                          printf("no\n");
 </span><span class='line'>                     }
-</span><span class='line'>                 }
+</span><span class='line'>              }
+</span><span class='line'>          #endif
 </span><span class='line'>                 adns_finish(ads); 
 </span><span class='line'>                 break; 
 </span><span class='line'>            }                   
@@ -379,7 +389,7 @@
 </span><span class='line'>    } 
 </span><span class='line'>    
 </span><span class='line'>    return 0; 
-</span><span class='line'>}                    </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Makefile</p>
@@ -402,27 +412,27 @@
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
 <span class='line-number'>18</span>
-<span class='line-number'>19</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>CFLAGS = -g 
 </span><span class='line'>TARGETS = libadns.a 
-</span><span class='line'>LIBOBJS = types.o event.o query.o reply.o general.o setup.o transmit.om \
+</span><span class='line'>LIBOBJS = types.o event.o query.o reply.o general.o setup.o \
 </span><span class='line'>            parse.o poll.o check.o 
 </span><span class='line'> 
 </span><span class='line'>all: testdns 
 </span><span class='line'> 
 </span><span class='line'>testdns: testdns.c libadns.a 
 </span><span class='line'>libadns.a: $(LIBOBJS) 
-</span><span class='line'>    rm -f $@ 
-</span><span class='line'>    $(AR) cq $@ $(LIBOBJS)
+</span><span class='line'>  $(AR) cq $@ $(LIBOBJS)
 </span><span class='line'>    
 </span><span class='line'>clean: 
-</span><span class='line'>        rm -f $(LIBOBJS) libadns.a *~ config.status 
+</span><span class='line'>  rm -f $(LIBOBJS) libadns.a *~ config.status 
 </span><span class='line'> 
 </span><span class='line'>distclean: clean 
-</span><span class='line'>        rm -f config.h .depend   
+</span><span class='line'>  rm -f config.h .depend   
 </span><span class='line'> 
 </span><span class='line'>$(LIBOBJS): adns.h internal.h config.h</span></code></pre></td></tr></table></div></figure>
 
+
+<p>下载adns-1.2的源码，然后加压，到<code>adns-1.2/</code>目录下执行<code>./configure</code>，进入到<code>src/</code>目录并加入以上的<code>testdns.c</code>、<code>Makefile</code>两个文件，<code>make</code>编译后就得到了我们需要的测试程序。</p>
 
 <p><big>参考链接：</big><br/>
 <a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
