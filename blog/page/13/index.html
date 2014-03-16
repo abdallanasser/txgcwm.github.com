@@ -73,6 +73,95 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">使用libevent编写Linux服务</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-18T19:01:00+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。</p>
+
+<h1>初始化事件</h1>
+
+<p>首先完成对libenvent的事件初始化和事件驱动模型的选择。在使用多线程的情况下，一般我们需获取所返回的事件根基。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>main_base = event_init();</span></code></pre></td></tr></table></div></figure>
+
+
+<p>event_init函数返回的是一个event_base对象，该对象包括了事件处理过程中的一些全局变量，其结构为：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct event_base {
+</span><span class='line'>    const struct eventop *evsel;
+</span><span class='line'>    void *evbase;
+</span><span class='line'>    int event_count;        /* counts number of total events */
+</span><span class='line'>    int event_count_active; /* counts number of active events */
+</span><span class='line'>    int event_gotterm;      /* Set to terminate loop */
+</span><span class='line'>    int event_break;        /* Set to terminate loop immediately */
+</span><span class='line'>    /* active event management */
+</span><span class='line'>    struct event_list **activequeues;
+</span><span class='line'>    int nactivequeues;
+</span><span class='line'>    /* signal handling info */
+</span><span class='line'>    struct evsignal_info sig;
+</span><span class='line'>    struct event_list eventqueue;
+</span><span class='line'>    struct timeval event_tv;
+</span><span class='line'>    struct min_heap timeheap;
+</span><span class='line'>    struct timeval tv_cache;
+</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/15/lian-zhan/">链栈</a></h1>
     
     
@@ -600,51 +689,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">求两个整数的最大公约数</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T17:10:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。</p>
-
-<p>设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下：用b除a，得a＝bq&hellip;r1(0≤r1)。若r1=0，则(a，b)＝b；若r1≠0，则再用r1除b，得b＝r1q&hellip;r2(0≤r2)。若r2＝0，则(a，b)＝r1，若r2≠0，则继续用r2除r1,&hellip;如此下去，直到能整除为止。其最后一个非零余数即为(a，b)。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/14/">&larr; Older</a>
@@ -679,6 +723,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/16/16ri-za-tan/">16日杂谈</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/15/adnsyu-ming-jie-xi-ku/">域名解析库</a>
       </li>
     
@@ -692,10 +740,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Gethostbyname和hostent结构体详解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/10/chi-kai-la-sa-de-qian-ye-%3Amai-suan-nai-de-zhong-a-yi/">离开拉萨的前夜：卖酸奶的钟阿姨</a>
       </li>
     
   </ul>
@@ -731,7 +775,7 @@
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (2)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (38)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (39)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 
