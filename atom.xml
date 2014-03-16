@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-16T10:20:50+08:00</updated>
+  <updated>2014-03-16T10:22:42+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -432,7 +432,7 @@
 </span><span class='line'>$(LIBOBJS): adns.h internal.h config.h</span></code></pre></td></tr></table></div></figure>
 
 
-<p>下载adns-1.2的源码，然后加压，到<code>adns-1.2/</code>目录下执行<code>./configure</code>，进入到<code>src/</code>目录并加入以上的<code>testdns.c</code>、<code>Makefile</code>两个文件，<code>make</code>编译后就得到了我们需要的测试程序。</p>
+<p>下载adns-1.2的源码，然后解压，到<code>adns-1.2/</code>目录下执行<code>./configure</code>，进入到<code>src/</code>目录并加入以上的<code>testdns.c</code>、<code>Makefile</code>两个文件，<code>make</code>编译后就得到了我们需要的测试程序。</p>
 
 <p><big>参考链接：</big><br/>
 <a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
