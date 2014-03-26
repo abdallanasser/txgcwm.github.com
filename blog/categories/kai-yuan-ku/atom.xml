@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 开源库 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/kai-yuan-ku/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-25T23:09:37+08:00</updated>
+  <updated>2014-03-26T23:06:49+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu下安装c-ares库]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku/"/>
+    <updated>2014-03-26T22:59:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku</id>
+    <content type="html"><![CDATA[<p>安装c-ares库的三种方法：</p>
+
+<h1>源码安装</h1>
+
+<p>到[这里]（<a href="http://c-ares.haxx.se/%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81%EF%BC%8C%E7%84%B6%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E6%8C%87%E4%BB%A4%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85%E3%80%82">http://c-ares.haxx.se/%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%BA%90%E7%A0%81%EF%BC%8C%E7%84%B6%E5%90%8E%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E6%8C%87%E4%BB%A4%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85%E3%80%82</a>
+<code>
+$ cd c-ares-1.10.0
+$ ./buildconf
+$ autoconf configure.ac
+$ ./configure
+$ make
+$ sudo make install
+</code></p>
+
+<h1>第三方软件安装</h1>
+
+<p>在新得立搜索c-ares，然后安装相应的库。</p>
+
+<h1>终端安装</h1>
+
+<p><code>
+$ sudo apt-get install libc-ares2 libc-ares-dev
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[域名解析库]]></title>
