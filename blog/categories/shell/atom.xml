@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-03-30T09:57:42+08:00</updated>
+  <updated>2014-03-30T10:02:29+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2014/03/30/cpming-ling/"/>
     <updated>2014-03-30T09:45:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/03/30/cpming-ling</id>
-    <content type="html"><![CDATA[<p>该命令的功能是将给出的文件或目录拷贝到另一文件或目录中，同MSDOS下的copy命令一样，功能十分强大。</p>
+    <content type="html"><![CDATA[<p>该命令的功能是将给出的文件或目录拷贝到另一文件或目录中，同MS-DOS下的copy命令一样，功能十分强大。</p>
 
 <p>语法:
 <code>
@@ -48,7 +48,8 @@ cp -i file1 file2    将文档file1复制成file2，-i为提示确认。
 cp file1 dir1        将文档file1复制到目录dir1下，文件名仍为file1。
 cp /tmp/file1 .      将目录/tmp下的文档file1复制到当前目录下，文档名仍为file1。
 cp /tmp/file1 file2  将目录/tmp下的文档file1复制到当前目录下，文档名为file2
-cp -r dir1 dir2      (recursive copy)复制整个目录。若目录dir2存在，则将目录dir1及其所有文档和子目录复制到目录dir2下，新目录名称为dir1。若目录dir2不存在，则将dir1及其所有文档和子目录复制为目录 dir2。
+cp -r dir1 dir2      (recursive copy)复制整个目录。若目录dir2存在，则将目录dir1及其所有文档和子目录复制
+到目录dir2下，新目录名称为dir1。若目录dir2不存在，则将dir1及其所有文档和子目录复制为目录 dir2。
 </code></p>
 ]]></content>
   </entry>
