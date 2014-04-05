@@ -73,6 +73,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/05/xi-tou-ye-shi-jing-ji-ren/">猎头也是经纪人</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-05T13:40:00+08:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/05/xi-tou-ye-shi-jing-ji-ren/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.shhekang.com/esite/shhekang/shoye/2013101216041808830.jpg" alt="alt text" /></p>
+
+<p>猎头这个职业，我至今都觉得它神秘，一直都想去探个究竟。因换过几份工作的原因，和他们有一些接触，这种接触也仅限于电话的沟通。我所了解到他们的工作流程是这样的：打电话给你了解基本的情况，然后把你的简历推荐到相应的公司，面试通过的话，他们收取相应的佣金。整个过程，你根本无需和他们见面，一切就顺顺当当地完成了。</p>
+
+<p>“猎聘网”针对的是那些年薪在10万以上的资深人员，对于这个要求我一直不解（既然推荐成功了，有佣金可以赚取，为何不赚呢？），直到和一个朋友交流过才明白其中的缘由。首先，一个年薪只有五、六万的人员对于他们来说赚取的佣金并不多；其次，招聘一个人需要花费时间成本，相同的时间花费还不如去挖掘一个高端的人才；再者，这个社会不缺低薪人员，招聘公司可以轻而易举的获取到大量的低薪人员简历。总之，人家猎头看不上你，你还没有足够优秀到让猎头花时间去关注你。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/05/xi-tou-ye-shi-jing-ji-ren/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/03/30/cpming-ling/">Cp命令</a></h1>
     
     
@@ -470,95 +517,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Gethostbyname和hostent结构体详解</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-11T22:43:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct hostent *gethostbyname(const char *name);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;netdb.h&gt;
-</span><span class='line'>
-</span><span class='line'>struct hostent {
-</span><span class='line'>  char  *h_name;            /* official name of host */
-</span><span class='line'>  char **h_aliases;         /* alias list */
-</span><span class='line'>  int    h_addrtype;        /* host address type */
-</span><span class='line'>  int    h_length;          /* length of address */
-</span><span class='line'>  char **h_addr_list;       /* list of addresses */
-</span><span class='line'>}
-</span><span class='line'>#define h_addr h_addr_list[0]  /* for backward compatibility */</span></code></pre></td></tr></table></div></figure>
-
-
-<p>除了服务器的ip地址外，这个结构体还包含了更多服务器的信息，有：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char *h_name
-</span><span class='line'>
-</span><span class='line'>This is the “official” name of the host. </span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char **h_aliases
-</span><span class='line'>
-</span><span class='line'>These are alternative names for the host, represented as a null-terminated vector of strings. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>主机的可选名字，以NULL作为结束标记。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -591,6 +549,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/05/xi-tou-ye-shi-jing-ji-ren/">猎头也是经纪人</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/03/30/cpming-ling/">Cp命令</a>
       </li>
     
@@ -604,10 +566,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/16/16ri-za-tan/">16日杂谈</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/15/adnsyu-ming-jie-xi-ku/">域名解析库</a>
       </li>
     
   </ul>
@@ -643,7 +601,7 @@
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (2)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (40)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (41)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 
