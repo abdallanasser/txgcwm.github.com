@@ -73,6 +73,51 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">致未来的合作伙伴</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T15:12:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://trusbe.com/wp-content/uploads/2013/05/%E4%B8%AD%E5%9B%BD%E5%90%88%E4%BC%99%E4%BA%BA-%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C.png"></p>
+
+<p>首先想说的是——你选择了我作为你的合作伙伴，我感到万分的荣幸。对于当代的我们来说，要靠一个人独自去做一件事或者事业真的很难，唯有合作才能创就一番事业，毕竟个人的能力总是有限的。起初我认为凭借个人的力量能够做得很好（的确我依旧这么认为），可是那要花费大量的时间，等到真正完成的时候时机可能已经错过了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/03/wo-men-wei-shi-yao-bai-liao/">我们为什么败了</a></h1>
     
     
@@ -427,57 +472,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-02T00:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
-
-<ul>
-<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不像文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
-<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
-</ul>
-
-
-<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -512,6 +506,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/07/yu-qian-ji/">于谦祭</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/05/xi-tou-ye-shi-jing-ji-ren/">猎头也是经纪人</a>
       </li>
     
@@ -525,10 +523,6 @@
     
       <li class="post">
         <a href="/blog/2014/03/25/wo-men-ying-gai-shuo/">我们应该说</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/16/16ri-za-tan/">16日杂谈</a>
       </li>
     
   </ul>
@@ -553,7 +547,7 @@
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
 <li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (1)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
-<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (3)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
 <li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
