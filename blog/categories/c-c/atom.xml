@@ -4,7 +4,7 @@
   <title><![CDATA[Category: C/C++ | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/c-c/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-17T00:38:26+08:00</updated>
+  <updated>2014-04-17T00:41:46+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -31,7 +31,8 @@
 <li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；
 ```
 if(ptr != NULL);  // 分号错误的添加
-  printf(&ldquo;[%s, %d] address: %p \n&rdquo;, <strong>FUNCTION</strong>, <strong>LINE</strong>, ptr); //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。</li>
+  printf(&ldquo;[%s, %d] address: %p \n&rdquo;, <strong>FUNCTION</strong>, <strong>LINE</strong>, ptr);
+  //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。</li>
 </ul>
 
 
@@ -57,7 +58,8 @@ if(ptr != NULL);  // 分号错误的添加
 
 <p>void SomeFunction(int param1, int param2)
 {
-  UNUSED(param2); UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
+  UNUSED(param2);
+  //UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
   //do stuff with param1
 }
 ```</p></li>
@@ -94,7 +96,7 @@ int SomeFunction(int param1, int param2)
 <p>void dcc_mon_siginfo_handler(int UNUSED(whatsig))
 ```</p>
 
-<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。这些警告那些老员工并不是没有察觉它们的重要性，只是他们已经习惯了自己的方式，懒得去处理，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
+<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。大伙并不是没有察觉到这些警告的重要性，只是已经习惯了自己的方式，而漠视了这一切，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
 
 <p><big>参考文章</big> <br/>
 <a href="http://bbs.csdn.net/topics/340049876">如何消除gcc编译警告 warning: &ldquo;unused parameter xxxx&rdquo;</a><br/>

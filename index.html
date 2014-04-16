@@ -117,8 +117,10 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
-</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
+</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); 
+</span><span class='line'>    //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
 </span><span class='line'>    
 </span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
 </span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>

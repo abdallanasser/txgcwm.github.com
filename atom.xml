@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-17T00:38:26+08:00</updated>
+  <updated>2014-04-17T00:41:46+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -37,8 +37,10 @@
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
-</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
+</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); 
+</span><span class='line'>    //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
 </span><span class='line'>    
 </span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
 </span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>
@@ -66,10 +68,12 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#define UNUSED(x) (void)x 
 </span><span class='line'>void SomeFunction(int param1, int param2) 
 </span><span class='line'>{ 
-</span><span class='line'>    UNUSED(param2); UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
+</span><span class='line'>    UNUSED(param2); 
+</span><span class='line'>    //UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
 </span><span class='line'>    //do stuff with param1 
 </span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
@@ -120,7 +124,7 @@
 </span><span class='line'>void dcc_mon_siginfo_handler(int UNUSED(whatsig)) </span></code></pre></td></tr></table></div></figure>
 
 
-<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。这些警告那些老员工并不是没有察觉它们的重要性，只是他们已经习惯了自己的方式，懒得去处理，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
+<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。大伙并不是没有察觉到这些警告的重要性，只是已经习惯了自己的方式，而漠视了这一切，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
 
 <p><big>参考文章</big> <br/>
 <a href="http://bbs.csdn.net/topics/340049876">如何消除gcc编译警告 warning: &ldquo;unused parameter xxxx&rdquo;</a><br/>
