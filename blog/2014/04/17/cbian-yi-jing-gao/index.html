@@ -5,23 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux下c语言获取网络接口IP地址 - 残剑</title>
+  <title>C编译警告 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在Linux环境下，可以使用以下的代码获取网络的ip地址： 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-if (gethostname(host, sizeof(host)) &lt; 0) { printf("Can't get hostname\n"); return -1;
-}
-if ((hp &hellip;">
+  <meta name="description" content="编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -30,7 +18,7 @@ if ((hp &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -82,7 +70,7 @@ if ((hp &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Linux下c语言获取网络接口IP地址</h1>
+      <h1 class="entry-title">C编译警告</h1>
     
     
       <p class="meta">
@@ -98,7 +86,7 @@ if ((hp &hellip;">
   
 
 
-<time datetime="2013-07-19T22:34:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,34 +95,85 @@ if ((hp &hellip;">
   </header>
 
 
-<div class="entry-content"><p>在Linux环境下，可以使用以下的代码获取网络的ip地址：</p>
+<div class="entry-content"><p>编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。</p>
+
+<p>在整个的清理过程中，主要发现以下几类警告信息：</p>
+
+<ul>
+<li>类在构建时，变量初始化的次序颠倒；</li>
+<li>有无符号数在作比较；</li>
+<li>宏定义不正确；</li>
+<li>定义了没有使用的变量，如果有很多条件宏定义的时候，这个处理要细致一些；</li>
+<li>结构体和数组的初始化方式不正确，其实是错误的方式，却也只是警告；</li>
+<li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if (gethostname(host, sizeof(host)) &lt; 0) {
-</span><span class='line'>    printf("Can't get hostname\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>if ((hp = gethostbyname(host)) == NULL) {
-</span><span class='line'>    printf("Can't get host address\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>memcpy((char *) &intaddr, (char *) hp-&gt;h_addr_list[0],
-</span><span class='line'>        (size_t) hp-&gt;h_length);</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
+</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
+</span><span class='line'>    
+</span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
+</span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>函数的形参定义了，在函数体内却没有使用到。</li>
+</ul>
 
 
 <!--more-->
 
 
-<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：</p>
+<p>针对最后一点警告信息，可以有以下的方式处理：</p>
+
+<ul>
+<li>去除没有使用的形参；</li>
+<li>使用<code>(void)x</code>的方式；</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define UNUSED(x) (void)x 
+</span><span class='line'>void SomeFunction(int param1, int param2) 
+</span><span class='line'>{ 
+</span><span class='line'>    UNUSED(param2); UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
+</span><span class='line'>    //do stuff with param1 
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>对没使用的参数使用<code>para=para</code>方式；</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int SomeFunction(int param1, int param2)
+</span><span class='line'>{
+</span><span class='line'>    param2=param2;    //添加该行
+</span><span class='line'>    //do stuff with param1 
+</span><span class='line'>    return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>使用<code>gcc</code>的<code>__attribute__((unused))</code>功能项；</li>
+</ul>
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -146,187 +185,23 @@ if ((hp &hellip;">
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;sys/socket.h&gt;
-</span><span class='line'>#include &lt;sys/ioctl.h&gt;
-</span><span class='line'>#include &lt;arpa/inet.h&gt;
-</span><span class='line'>#include &lt;netinet/in.h&gt;
-</span><span class='line'>#include &lt;net/if.h&gt;
-</span><span class='line'>#include &lt;stdlib.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
+</pre></td><td class='code'><pre><code class=''><span class='line'>#ifdef UNUSED
+</span><span class='line'>#elif defined(__GNUC__)
+</span><span class='line'># define UNUSED(x) UNUSED_ ## x __attribute__((unused))
+</span><span class='line'>#elif defined(__LCLINT__)
+</span><span class='line'># define UNUSED(x) /*@unused@*/ x
+</span><span class='line'>#else
+</span><span class='line'># define UNUSED(x) x
+</span><span class='line'>#endif
 </span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>static int getIfaceName(char *iface_name, int len)
-</span><span class='line'>{
-</span><span class='line'>    int r = -1;
-</span><span class='line'>    int flgs, ref, use, metric, mtu, win, ir;
-</span><span class='line'>    unsigned long int d, g, m;    
-</span><span class='line'>    char devname[20];
-</span><span class='line'>    FILE *fp = NULL;
-</span><span class='line'>
-</span><span class='line'>    if((fp = fopen("/proc/net/route", "r")) == NULL) {
-</span><span class='line'>        perror("fopen error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
-</span><span class='line'>        fclose(fp);
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    while (1) {
-</span><span class='line'>        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
-</span><span class='line'>                 devname, &d, &g, &flgs, &ref, &use,
-</span><span class='line'>                 &metric, &m, &mtu, &win, &ir);
-</span><span class='line'>        if (r != 11) {
-</span><span class='line'>            if ((r &lt; 0) && feof(fp)) {
-</span><span class='line'>                break;
-</span><span class='line'>            }
-</span><span class='line'>            continue;
-</span><span class='line'>        }
-</span><span class='line'>
-</span><span class='line'>        strncpy(iface_name, devname, len);
-</span><span class='line'>        fclose(fp);
-</span><span class='line'>        return 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    fclose(fp);
-</span><span class='line'>
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static int getIpAddress(char *iface_name, char *ip_addr, int len)
-</span><span class='line'>{
-</span><span class='line'>    int sockfd = -1;
-</span><span class='line'>    struct ifreq ifr;
-</span><span class='line'>    struct sockaddr_in *addr = NULL;
-</span><span class='line'>
-</span><span class='line'>    memset(&ifr, 0, sizeof(struct ifreq));
-</span><span class='line'>    strcpy(ifr.ifr_name, iface_name);
-</span><span class='line'>    addr = (struct sockaddr_in *)&ifr.ifr_addr;
-</span><span class='line'>    addr-&gt;sin_family = AF_INET;
-</span><span class='line'>
-</span><span class='line'>    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
-</span><span class='line'>        perror("create socket error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    if (ioctl(sockfd, SIOCGIFADDR, &ifr) == 0) {
-</span><span class='line'>        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
-</span><span class='line'>        close(sockfd);
-</span><span class='line'>        return 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    close(sockfd);
-</span><span class='line'>
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char** argv)
-</span><span class='line'>{
-</span><span class='line'>    struct in_addr    intaddr;
-</span><span class='line'>    char iface_name[20];
-</span><span class='line'>
-</span><span class='line'>    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
-</span><span class='line'>        printf("get interface name error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    if(getIpAddress(iface_name, (char *) &intaddr, 15) &lt; 0) {
-</span><span class='line'>        printf("get interface ip address error!\n");
-</span><span class='line'>        return -1;
-</span><span class='line'>    }
-</span><span class='line'>    
-</span><span class='line'>    printf("address:%s\n",(char *) &intaddr);
-</span><span class='line'>
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>void dcc_mon_siginfo_handler(int UNUSED(whatsig)) </span></code></pre></td></tr></table></div></figure>
 
+
+<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。这些警告那些老员工并不是没有察觉它们的重要性，只是他们已经习惯了自己的方式，懒得去处理，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
+
+<p><big>参考文章</big>
+<a href="http://bbs.csdn.net/topics/340049876">如何消除gcc编译警告 warning: &ldquo;unused parameter xxxx&rdquo;</a><br/>
+<a href="http://sourcefrog.net/weblog/software/languages/C/unused.html">UNUSED in gcc</a></p>
 </div>
 
 
@@ -349,12 +224,12 @@ if ((hp &hellip;">
   
 
 
-<time datetime="2013-07-19T22:34:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/wang-luo-ying-yong/'>网络应用</a>
+    <a class='category' href='/blog/categories/c-c/'>C/C++</a>
   
 </span>
 
@@ -388,10 +263,8 @@ if ((hp &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/" title="Previous Post: Ubuntu下编译vlc-android源代码">&laquo; Ubuntu下编译vlc-android源代码</a>
+        <a class="basic-alignment left" href="/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/" title="Previous Post: 微访谈后期安排">&laquo; 微访谈后期安排</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/19/ubootzhong-tftpjie-shi/" title="Next Post: Uboot中TFTP解释">Uboot中TFTP解释 &raquo;</a>
       
     </p>
   </footer>
@@ -682,8 +555,8 @@ if ((hp &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/';
         var disqus_script = 'embed.js';
       
     (function () {
