@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-26T21:49:30+08:00</updated>
+  <updated>2014-04-26T21:54:28+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -84,7 +84,9 @@
 
 <p><big>参考文章</big></p>
 
-<p><a href="http://www.cnblogs.com/qingquan/archive/2011/07/28/2120440.html">RTP 协议</a></p>
+<p><a href="http://www.cnblogs.com/qingquan/archive/2011/07/28/2120440.html">RTP 协议</a><br/>
+<a href="http://www.cnblogs.com/li0803/archive/2010/11/20/1882792.html">rtp协议详解/rtcp协议详解</a><br/>
+<a href="http://zhangjunhd.blog.51cto.com/113473/25481">RTP与RTCP协议介绍</a></p>
 ]]></content>
   </entry>
   
