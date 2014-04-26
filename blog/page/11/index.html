@@ -73,6 +73,53 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/">我们想到的，别人做到了</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T15:24:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="center" src="http://www.empowernetwork.com/freedomlife/files/2013/03/Action.png"></p>
+
+<p>我们有很多很多的想法，但又有谁扪心问过之后，可以坚信的说“我不仅想到了，而且做到了”。不得不承认，我完全没有做到，在某种意义上说，我就是一个失败者。大学的三年里，没有留下太多的回忆！借老大的一句话来描述我此时的心情以及三年的感触——三年过去了，你已经站在了我需要仰望的地方。</p>
+
+<p>在成长的过程中我们逐渐与别人产生了差距，很多的事情我们想到了，可别人却已经做到。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/wo-men-xiang-dao-de-%2Cbie-ren-zuo-dao-liao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">致未来的合作伙伴</a></h1>
     
     
@@ -411,67 +458,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">kfifo.c中in和out的溢出问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T01:08:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>先上内核循环缓冲结构体的定义：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct kfifo {
-</span><span class='line'>    unsigned char *buffer;        /* the buffer holding the data */
-</span><span class='line'>    unsigned int size;        /* the size of the allocated buffer */
-</span><span class='line'>    unsigned int in;        /* data is added at offset (in % size) */
-</span><span class='line'>    unsigned int out;        /* data is extracted from off. (out % size) */
-</span><span class='line'>    spinlock_t *lock;        /* protects concurrent modifications */
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考 <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a> 。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a> 。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -506,6 +492,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/26/rtpxie-yi-jian-shu/">RTP协议简述</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/">逍遥的晏老大（二）</a>
       </li>
     
@@ -519,10 +509,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/">一个业余小项目的想法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui/">杭州创客分享会</a>
       </li>
     
   </ul>
@@ -555,7 +541,7 @@
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (16)</a></li>
-<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (2)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (42)</a></li>

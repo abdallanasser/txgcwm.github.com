@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>杭州创客分享会 - 残剑</title>
+  <title>RTP协议简述 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="一个好的平台可以给你带去一些你原本未知的东西，“创客”一词我就是从“一席”这里获知的，从此对这方面的信息有了更多的关注。维基百科是这么解释的： 创客概念来源于英文Maker和Hacker两词的综合释义，它是指一群酷爱科技、热衷实践的人群，他们以分享技术、交流思想为乐，以创客为主体的社区（ &hellip;">
+  <meta name="description" content="实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/26/rtpxie-yi-jian-shu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">杭州创客分享会</h1>
+      <h1 class="entry-title">RTP协议简述</h1>
     
     
       <p class="meta">
@@ -86,7 +86,7 @@
   
 
 
-<time datetime="2014-04-19T19:05:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+<time datetime="2014-04-26T21:32:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,43 +95,90 @@
   </header>
 
 
-<div class="entry-content"><p><img src="http://leiphone.qiniudn.com/uploads/2014/04/webwxgetmsgimg1-1024x768.jpg" alt="alt text" /></p>
+<div class="entry-content"><p>实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTCP协议或者RTSP协议）。因为RTP自身具有Time stamp，所以在ffmpeg中被用做一种formate.</p>
 
-<p>一个好的平台可以给你带去一些你原本未知的东西，“创客”一词我就是从“一席”这里获知的，从此对这方面的信息有了更多的关注。<a href="http://zh.wikipedia.org/zh-cn/%E5%88%9B%E5%AE%A2">维基百科</a>是这么解释的：</p>
+<p>RTP协议格式：</p>
 
-<blockquote><p>创客概念来源于英文Maker和Hacker两词的综合释义，它是指一群酷爱科技、热衷实践的人群，他们以分享技术、交流思想为乐，以创客为主体的社区（Hackerspace）则成了创客文化的载体。</p></blockquote>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0                   1                   2                   3    
+</span><span class='line'>0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |V=2|P|X|  CC   |M|     PT      |       sequence number         |    
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |                           timestamp                           |   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |           synchronization source (SSRC) identifier            |   
+</span><span class='line'>   +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+   
+</span><span class='line'>   |            contributing source (CSRC) identifiers             |   
+</span><span class='line'>   |                             ....                              |  
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  </span></code></pre></td></tr></table></div></figure>
 
-<p>没有去了解它之前，对于DIY的想法更多的是停留在大学里的电子兴趣小组。但大学里的那些活动，大部分同学是带有目的性的，很少融入了个人的喜好，跟创客的文化有些背离，不过这部分人有一小部分会逐渐演变成创客。社会上的一些电子爱好者也经常DIY一些好的作品，但没有被社会所关注，创客文化兴起之后，一部分创客得到了曝光，在未来的一段时间内，我想他们会更多的走到前台。</p>
+
+<p></p>
 
 <!--more-->
 
 
-<p>目前，上海新车间、深圳柴火创客空间、北京创客空间这三个在国内是最有名的，做得也相当不错。杭州这边原本由中国美院的一个女学生创建了一个创客空间，但没有坚持，声音越来越小。去年的时候，由sheldon联合其他一些人重新创办了一个名叫“西湖创客汇”的创客空间，这次的分享会就是由他们举办的。它是个新生儿，很多东西都在完善中，希望杭州这片沃土能够孕育出一个优秀的创客空间。</p>
+<p>RTP报文由两部分组成：报头和有效载荷，其中：</p>
 
-<p>这次的主讲者就是sheldon（从他的言谈中，可以看出他是一个DIY的发烧友），和我们分享了他在“深圳Maker Faire 2014”见到的新奇东西，讲述了一些个人对创客的理解和与创客交流的方式。展示的新奇创意很多，整理一下对我有感触的产品（这么叫应该不太准确，或许应该叫作品）。</p>
+<p>1.V：RTP协议的版本号，占2位，当前协议版本号为2。</p>
 
-<p>3D打印大家都已很熟悉，虽然没有亲眼见过这个产品，但他拿起一个假手时，我吃惊了，原来这个打印机真的可以打印得这么逼真。据他介绍，他使用的有一部分东西完全借助3D打印机制造。</p>
+<p>2.P：填充标志，占1位，如果P=1，则在该报文的尾部填充一个或多个额外的八位组，它们不是有效载荷的一部分。</p>
 
-<p>机械手臂，人的手通过一些连接器控制它，进行一些常规操作。我想这东西在未来也很有用处：</p>
+<p>3.X：扩展标志，占1位，如果X=1，则在RTP报头后跟有一个扩展报头。</p>
 
-<ul>
-<li>一些精细、繁重、危险的活，人们通过控制手臂操作；</li>
-<li>等成熟了，整个模块放在机器人身上，它的操作或许跟人类无异；</li>
-<li>甚至可以给没有手臂的人移植一个灵活的机械手臂。</li>
-</ul>
+<p>4.CC：CSRC计数器，占4位，指示CSRC 标识符的个数。</p>
+
+<p>5.M: 标记，占1位，不同的有效载荷有不同的含义，对于视频，标记一帧的结束；对于音频，标记会话的开始。</p>
+
+<p>6.PT: 有效载荷类型，占7位，用于说明RTP报文中有效载荷的类型，如GSM音频、JPEM图像等,在流媒体中大部分是用来区分音频流和视频流的，这样便于客户端进行解析。</p>
+
+<p>7.序列号：占16位，用于标识发送者所发送的RTP报文的序列号，每发送一个报文，序列号增1。这个字段当下层的承载协议用UDP的时候，网络状况不好的时候可以用来检查丢包。同时出现网络抖动的情况可以用来对数据进行重新排序，在helix服务器中这个字段是从0开始的，同时音频包和视频包的sequence是分别记数的。</p>
+
+<p>8.时戳(Timestamp)：占32位，时戳反映了该RTP报文的第一个八位组的采样时刻。接收者使用时戳来计算延迟和延迟抖动，并进行同步控制。</p>
+
+<p>9.同步信源(SSRC)标识符：占32位，用于标识同步信源。该标识符是随机选择的，参加同一视频会议的两个同步信源不能有相同的SSRC。</p>
+
+<p>10.特约信源(CSRC)标识符：每个CSRC标识符占32位，可以有0～15个。每个CSRC标识了包含在该RTP报文有效载荷中的所有特约信源。</p>
+
+<p>如果扩展标志被置位，则说明紧跟在报头后面是一个头扩展，其格式如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>    0                   1                   2                   3
+</span><span class='line'>    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span><span class='line'>   |      defined by profile       |           length              |
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</span><span class='line'>   |                        header extension                       |
+</span><span class='line'>   |                             ....                              |</span></code></pre></td></tr></table></div></figure>
 
 
-<p>虚拟3D设备，让人看一张平面的东西有很强的立体感，影院的3D眼镜跟它比简直弱暴了。未来我们戴上这样一个设备在玩游戏、看电影，或许我们就感觉不出我们是处在一个虚拟的世界里了。不过这是国外创客的作品，国内暂时没有这样的技术。</p>
+<p>RTP协议的用途：</p>
 
-<p>一个高中女孩因为喜欢玩一个游戏，就自己去买了零器件，DIY了一部游戏机，据说成本在三、四千块左右，而市场价要上万。不得不佩服这些年轻的小伙伴，当我们还处在初级阶段的时候，他们已经创造了完全属于自己的东西。80后的我们早已被拍在了沙滩上，只是我们还一直错误地觉得自己还很年轻。</p>
+<p>主要用于在互联网上传递音频和视频的标准数据包。在当前三网融合中RTP可以用来承载TS流，进行电视媒体数据的传播。RTP可以用来传送像TS流这种自身已经具有formate的媒体流，同时也可以用来承载AVC，AAC等去除了fromate的媒体流，这时rtp协议可被看做为一种formate，其控制流由RTSP协议来提供。</p>
 
-<p>从他分享的图片可以知道，这次的活动很火爆，人挤着人，一些小朋友对这些新奇的玩具爱不释手。虽然有雨，却也没能阻挡他们的激情。intel这样的大公司也不甘寂寞，那里也有它们的展台。</p>
+<p><big>参考文章</big></p>
 
-<p>不过，sheldon也说——虽然很多作品有了一个demo，但可操作性并不是很强，用户体验需要提高。确实，DIY和产品是有很大区别的，产品需要酷的功能，也需要完善的用户体验，哪怕一个细小的点也需要花大量的人力去完善。</p>
-
-<p><big>备注：</big></p>
-
-<p>Maker Faire，世界上最大的DIY聚会，是一场宣扬创客文化的庆典，是一个展示创新和创造的舞台。已有着8年历史的 maker faire足迹遍布全球上百个国家，其中Featured级别的Maker Faire活动已在纽约、东京等国际大都市成功举办，而深圳也是继它们之后第七个获得举办的地方。</p>
+<p><a href="http://www.cnblogs.com/qingquan/archive/2011/07/28/2120440.html">RTP 协议</a></p>
 </div>
 
 
@@ -154,12 +201,12 @@
   
 
 
-<time datetime="2014-04-19T19:05:00+08:00" pubdate data-updated="true">Apr 19<span>th</span>, 2014</time>
+<time datetime="2014-04-26T21:32:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
+    <a class='category' href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频</a>
   
 </span>
 
@@ -193,10 +240,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/17/cbian-yi-jing-gao/" title="Previous Post: C编译警告">&laquo; C编译警告</a>
+        <a class="basic-alignment left" href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/" title="Previous Post: 逍遥的晏老大（二）">&laquo; 逍遥的晏老大（二）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/" title="Next Post: 一个业余小项目的想法">一个业余小项目的想法 &raquo;</a>
       
     </p>
   </footer>
@@ -489,8 +534,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/26/rtpxie-yi-jian-shu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/26/rtpxie-yi-jian-shu/';
         var disqus_script = 'embed.js';
       
     (function () {

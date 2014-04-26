@@ -73,6 +73,79 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/04/26/rtpxie-yi-jian-shu/">RTP协议简述</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T21:32:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/26/rtpxie-yi-jian-shu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTCP协议或者RTSP协议）。因为RTP自身具有Time stamp，所以在ffmpeg中被用做一种formate.</p>
+
+<p>RTP协议格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0                   1                   2                   3    
+</span><span class='line'>0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |V=2|P|X|  CC   |M|     PT      |       sequence number         |    
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |                           timestamp                           |   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |           synchronization source (SSRC) identifier            |   
+</span><span class='line'>   +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+   
+</span><span class='line'>   |            contributing source (CSRC) identifiers             |   
+</span><span class='line'>   |                             ....                              |  
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/rtpxie-yi-jian-shu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/">逍遥的晏老大（二）</a></h1>
     
     
@@ -417,59 +490,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/08/jian-wen-jun-da-%3Azhuan-zhu-de-linuxjiang-zhe/">剑问君答：专注的Linux匠者</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-08T23:32:00+08:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/08/jian-wen-jun-da-%3Azhuan-zhu-de-linuxjiang-zhe/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://cms.csdnimg.cn/article/201303/29/51550a259b137.jpg" alt="alt text" /></p>
-
-<p>残剑：认识你的方式比较的特别，是通过CU这个技术大平台。虽然未曾谋面，但通过你的文字了解到了你，对你的映像就是专注、认真、细致、谨慎（有很多的形容词，一时却不能想起恰当的）。从你的博客中，更多的是了解你技术方面的东西，可否谈谈你的工作以及你研究的领域？</p>
-
-<p>Bean：目前我在趋势科技从事开发工作。工作的内容宏观上说是防范APT攻击的，具体点说我负责一些后端的工作和DB的维护，性能优化等。我喜欢的领域是Linux 操作系统，PostgreSQL DB，性能调优，工作需要，自己也喜欢。</p>
-
-<hr />
-
-<p>残剑：除了跟工作相关的之外，你还关注哪些领域？比如火热的可穿戴智能设备、智能家居、物联网、移动互联网等。</p>
-
-<p>Bean：我关注的领域比较窄，上述你提到的东西，我都不太关注。很多情况下，早前读书期间，我涉猎各种精深的算法，读书太杂，收获很少，所以我告诫自己学习上不要四面出击。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/08/jian-wen-jun-da-%3Azhuan-zhu-de-linuxjiang-zhe/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -502,6 +522,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/26/rtpxie-yi-jian-shu/">RTP协议简述</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/">逍遥的晏老大（二）</a>
       </li>
     
@@ -515,10 +539,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/">一个业余小项目的想法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui/">杭州创客分享会</a>
       </li>
     
   </ul>
@@ -551,7 +571,7 @@
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (16)</a></li>
-<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (2)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (1)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (42)</a></li>
