@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 试衣坊 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shi-yi-fang/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T23:05:22+08:00</updated>
+  <updated>2014-04-27T23:47:01+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于爬虫开发的选择]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/"/>
+    <updated>2014-04-27T23:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze</id>
+    <content type="html"><![CDATA[<p>开发语言：Python
+爬虫框架：Scrapy
+数据库：PostgreSQL</p>
+
+<p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
+
+<p>引用一下jolie_yu对我的一句回复：</p>
+
+<blockquote><p>骚年，别急，缘分说到就到。显出你的个性，她会找到方向，走进你的世界。</p></blockquote>
+
+<!--more-->
+
+
+<p>对于志同道合的朋友不是靠去培养的，而是你们原本就属于同一路人，有共同的兴趣和想法，在机缘巧合的情况下你们走到了一起。为何迟迟没有聚到一起呢？或许是我们散发的光芒还不足以照亮他们寻找到我们，所以我们还需要做得更多、更好。</p>
+
+<p>更应该到一些专业的论坛发表我的想法，不太适合在QQ空间发表这些，我也清楚地明白这一点，但我看重它的强社交属性，我们了解彼此更多一些，这些花费是时间成本。至今没有一点共鸣，但我还是会静静地等待，直到那些人的出现，不需要太多，哪怕只有那么一个。</p>
+
+<p>且行，且看，且等待，世间不变的是一个人的初心！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一个业余小项目的想法]]></title>

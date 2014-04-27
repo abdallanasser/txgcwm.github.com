@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T23:05:22+08:00</updated>
+  <updated>2014-04-27T23:47:01+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[关于爬虫开发的选择]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/"/>
+    <updated>2014-04-27T23:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze</id>
+    <content type="html"><![CDATA[<p>开发语言：Python
+爬虫框架：Scrapy
+数据库：PostgreSQL</p>
+
+<p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
+
+<p>引用一下jolie_yu对我的一句回复：</p>
+
+<blockquote><p>骚年，别急，缘分说到就到。显出你的个性，她会找到方向，走进你的世界。</p></blockquote>
+
+<!--more-->
+
+
+<p>对于志同道合的朋友不是靠去培养的，而是你们原本就属于同一路人，有共同的兴趣和想法，在机缘巧合的情况下你们走到了一起。为何迟迟没有聚到一起呢？或许是我们散发的光芒还不足以照亮他们寻找到我们，所以我们还需要做得更多、更好。</p>
+
+<p>更应该到一些专业的论坛发表我的想法，不太适合在QQ空间发表这些，我也清楚地明白这一点，但我看重它的强社交属性，我们了解彼此更多一些，这些花费是时间成本。至今没有一点共鸣，但我还是会静静地等待，直到那些人的出现，不需要太多，哪怕只有那么一个。</p>
+
+<p>且行，且看，且等待，世间不变的是一个人的初心！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[运行Scrapy项目出错：KeyError: 'Spider not found: tutorial']]></title>
@@ -1519,254 +1545,6 @@
 <p>Audacity® 是一个声音编辑程序，它拥有一套完整的工具（用于立体声声道可视化）和过滤器，支持您轻松修改所选的音频波形部分。Audacity 是一个可编程编辑器，因此您可以根据项目的扩展需要扩展该编辑器的功能。Audacity 的功能十分强大，从制作简单的音频录制到编辑多声道作品都可以轻松完成。</p>
 
 <p>详细情况参考：<a href="http://www.ibm.com/developerworks/cn/opensource/os-audacity/#ibm-pcon">功能强大的Audacity</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[gethostbyname和hostent结构体详解]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/"/>
-    <updated>2014-03-11T22:43:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie</id>
-    <content type="html"><![CDATA[<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct hostent *gethostbyname(const char *name);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;netdb.h&gt;
-</span><span class='line'>
-</span><span class='line'>struct hostent {
-</span><span class='line'>  char  *h_name;            /* official name of host */
-</span><span class='line'>  char **h_aliases;         /* alias list */
-</span><span class='line'>  int    h_addrtype;        /* host address type */
-</span><span class='line'>  int    h_length;          /* length of address */
-</span><span class='line'>  char **h_addr_list;       /* list of addresses */
-</span><span class='line'>}
-</span><span class='line'>#define h_addr h_addr_list[0]  /* for backward compatibility */</span></code></pre></td></tr></table></div></figure>
-
-
-<p>除了服务器的ip地址外，这个结构体还包含了更多服务器的信息，有：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char *h_name
-</span><span class='line'>
-</span><span class='line'>This is the “official” name of the host. </span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char **h_aliases
-</span><span class='line'>
-</span><span class='line'>These are alternative names for the host, represented as a null-terminated vector of strings. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>主机的可选名字，以NULL作为结束标记。</p>
-
-<!--more-->
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int h_addrtype
-</span><span class='line'>
-</span><span class='line'>This is the host address type; in practice, its value is always either AF_INET or AF_INET6, with the latter being used for IPv6 hosts. In principle other kinds of addresses could be represented in the database as well as Internet addresses; if this were done, you might find a value in this field other than AF_INET or AF_INET6. See Socket Addresses. </span></code></pre></td></tr></table></div></figure>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int h_length
-</span><span class='line'>
-</span><span class='line'>This is the length, in bytes, of each address. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>ip地址的长度，ipv4对应4个字节。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char **h_addr_list
-</span><span class='line'>
-</span><span class='line'>This is the vector of addresses for the host. (Recall that the host might be connected to multiple networks and have different addresses on each one.) The vector is terminated by a null pointer. </span></code></pre></td></tr></table></div></figure>
-
-
-<p>一般主机可以有多个ip地址，比如www.163.com就有121.14.228.43和121.11.151.72两个ip，h_addr_list就用来保存多个ip地址。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>char *h_addr
-</span><span class='line'>
-</span><span class='line'>This is a synonym for h_addr_list[0]; in other words, it is the first host address.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>即为h_addr_list[0]，表示第一个地址，这个符号其实是兼容老系统而存在的。</p>
-
-<p>写一个程序来获取主机的详细信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdlib.h&gt;
-</span><span class='line'>#include &lt;sys/types.h&gt;
-</span><span class='line'>#include &lt;sys/socket.h&gt;
-</span><span class='line'>#include &lt;netdb.h&gt;
-</span><span class='line'>#include &lt;netinet/in.h&gt;
-</span><span class='line'>#include &lt;arpa/inet.h&gt;
-</span><span class='line'>#include &lt;sys/socket.h&gt;
-</span><span class='line'>
-</span><span class='line'>#define SERVPORT 80
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>    int i, sockfd;
-</span><span class='line'>    struct hostent *host;
-</span><span class='line'>    struct sockaddr_in serv_addr;
-</span><span class='line'>
-</span><span class='line'>    if ((host = gethostbyname(argv[1])) == NULL) {
-</span><span class='line'>        printf("gethostbyname error\n");
-</span><span class='line'>        exit(0);
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    printf("official name: %s\n\n", host-&gt;h_name);
-</span><span class='line'>    printf("address length: %d bytes\n\n", host-&gt;h_length);
-</span><span class='line'>
-</span><span class='line'>    printf("host name alias: \n");
-</span><span class='line'>    for (i = 0; host-&gt;h_aliases[i]; i++) {
-</span><span class='line'>        printf("%s\n", host-&gt;h_aliases[i]);
-</span><span class='line'>    }
-</span><span class='line'>    printf("\naddress list: \n");
-</span><span class='line'>
-</span><span class='line'>    for (i = 0; host-&gt;h_addr_list[i]; i++) {
-</span><span class='line'>        if ((sockfd = socket(AF_INET, SOCK_STREAM,0)) == -1) {
-</span><span class='line'>            printf("socket error\n");
-</span><span class='line'>            exit(0);
-</span><span class='line'>        }
-</span><span class='line'>        // 先清零，然后用struct sockaddr_in来填值
-</span><span class='line'>        bzero(&serv_addr, sizeof(serv_addr));
-</span><span class='line'>        serv_addr.sin_family = AF_INET;
-</span><span class='line'>        serv_addr.sin_port = htons(SERVPORT);
-</span><span class='line'>        /* h_addr_list[i]指向in_addr类型 */
-</span><span class='line'>        serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);
-</span><span class='line'>        const char *ip = inet_ntoa(serv_addr.sin_addr);
-</span><span class='line'>        printf("connect to %s  ", ip);
-</span><span class='line'>
-</span><span class='line'>        // 系统调用的时候，把sockaddr_in转换成sockaddr
-</span><span class='line'>        if (connect(sockfd, (struct sockaddr *)&serv_addr, \
-</span><span class='line'>                    sizeof(struct sockaddr)) == -1) {
-</span><span class='line'>            printf("error\n");
-</span><span class='line'>            exit(0);
-</span><span class='line'>        }
-</span><span class='line'>        printf("success\n");
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这个程序首先调用gethostbyname得到服务器的各种信息，其中就包含它拥有的ip地址，保存在h_addr_list中，然后对于h_addr_list中的每个ip地址，都调用connect连接其80端口。h_addr_list保存的ip地址类型是char *，struct sockaddr_in中sin_addr的类型是struct in_addr，而程序中却直接把h_addr_list[i]强制转换成struct in_addr *</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这是没有问题的，因为h_addr_list保存的并不是真正的字符串，而是指向struct in_addr类型的指针。</p>
-
-<p>另外，struct in_addr用来表示ip地址，本质上是一个long类型，刚好4个字节。然后我们调用inet_ntoa把它转换成可读性更强的dots-and-number字符串。关于ip地址和dots-and-number字符串之间的转换有4个函数：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;arpa/inet.h&gt;
-</span><span class='line'>/* network to ascii */
-</span><span class='line'>char *inet_ntoa(struct in_addr in);
-</span><span class='line'>                          
-</span><span class='line'>/* ascii to network */
-</span><span class='line'>int inet_aton(const char *cp, struct in_addr *inp);
-</span><span class='line'>
-</span><span class='line'>const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);
-</span><span class='line'>                              
-</span><span class='line'>int inet_pton(int af, const char *src, void *dst);  /* presentation format to network */</span></code></pre></td></tr></table></div></figure>
-
-
-<p>inet_ntoa和inet_aton不支持ipv6, 据说迟早要废除，不过目前来说，很多系统都可以看见这两个函数。</p>
 ]]></content>
   </entry>
   
