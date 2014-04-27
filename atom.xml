@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T21:52:56+08:00</updated>
+  <updated>2014-04-27T22:55:09+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[运行Scrapy项目出错：KeyError: 'Spider not found: tutorial]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/"/>
+    <updated>2014-04-27T22:40:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo</id>
+    <content type="html"><![CDATA[<p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
+</span><span class='line'>    execute()
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
+</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
+</span><span class='line'>    func(*a, **kw)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
+</span><span class='line'>    cmd.run(args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
+</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
+</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
+</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>查看<code>tutorial/spiders/dmoz_spider.py</code>文件中的内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat tutorial/spiders/dmoz_spider.py
+</span><span class='line'>from scrapy.spider import BaseSpider
+</span><span class='line'>
+</span><span class='line'>class DmozSpider(BaseSpider):
+</span><span class='line'>    name = "dmoz"
+</span><span class='line'>    allowed_domains = ["s.taobao.com"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        filename = response.url.split("/")[-2]
+</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name = "dmoz"</code>中的<code>dmoz</code>才是crawler的名字。修改crawler的名字后，正常运行如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl dmoz
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: tutorial)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'tutorial.spiders', 'SPIDER_MODULES': ['tutorial.spiders'], 'BOT_NAME': 'tutorial'}
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled item pipelines: 
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Spider opened
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Closing spider (finished)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Dumping Scrapy stats:
+</span><span class='line'>  {'downloader/request_bytes': 245,
+</span><span class='line'>   'downloader/request_count': 1,
+</span><span class='line'>   'downloader/request_method_count/GET': 1,
+</span><span class='line'>   'downloader/response_bytes': 35012,
+</span><span class='line'>   'downloader/response_count': 1,
+</span><span class='line'>   'downloader/response_status_count/200': 1,
+</span><span class='line'>   'finish_reason': 'finished',
+</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 27, 14, 50, 10, 637578),
+</span><span class='line'>   'log_count/DEBUG': 7,
+</span><span class='line'>   'log_count/INFO': 3,
+</span><span class='line'>   'response_received_count': 1,
+</span><span class='line'>   'scheduler/dequeued': 1,
+</span><span class='line'>   'scheduler/dequeued/memory': 1,
+</span><span class='line'>   'scheduler/enqueued': 1,
+</span><span class='line'>   'scheduler/enqueued/memory': 1,
+</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 27, 14, 50, 9, 940145)}
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big></big></p>
+
+<p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
+<a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
+<a href="http://stackoverflow.com/questions/9876793/scrapy-spider-not-found-error">Scrapy spider not found error</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[剑问君答：IT模范丈夫]]></title>
@@ -1619,52 +1767,6 @@
 
 
 <p>inet_ntoa和inet_aton不支持ipv6, 据说迟早要废除，不过目前来说，很多系统都可以看见这两个函数。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[离开拉萨的前夜：卖酸奶的钟阿姨]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/10/chi-kai-la-sa-de-qian-ye-%3Amai-suan-nai-de-zhong-a-yi/"/>
-    <updated>2014-03-10T00:28:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/10/chi-kai-la-sa-de-qian-ye-:mai-suan-nai-de-zhong-a-yi</id>
-    <content type="html"><![CDATA[<p><img src="http://images3.ctrip.com/images/wri/Pwri747117.jpg" alt="alt text" /></p>
-
-<p>距离我的目的地还剩10多分钟路程的时候，看到了一个卖牦牛酸奶的小摊位，有几个旅客坐在那里喝着。老板是一个阿姨，是内地人，见到的第一眼没有特别的感觉，只把她当作一个普普通通的摊主。对于一个除了只吃米饭而不喜欢吃其它东西的我，酸奶并不能引起我多大的兴趣，但既然来到了这里，不想错失这么一次机会，也想尝尝它的味道。</p>
-
-<p>询价之后，觉得7块钱有些贵。她也从我的表情中看出了一些端倪，所以她一再强调这是家里自制、没有添加剂的，她也承认相比之前是涨价了（可能在一年前，一杯也就5、6块），但也是随相关的物价而动，不是随意的个人行为。既然如此，顶多也就花费7块钱，花钱买个真实体会还是很值得的。我已记不起它的味道，只知道第一口喝的时候我十分不适应那种味道（也已记不清是否往酸奶里加糖了），慢慢喝之后，觉得这是很不错的美味，彻底接受了这种口感。</p>
-
-<p>酸奶装在纸杯里，接着在上面盖了一个自制的四方形的纸盖，然后用橡皮筋扎紧，要喝的时候吸管直接插进去就可以了。毕竟是在异地，人生地不熟，加上只有我一个人，我没有吱声，就专心的坐在那里喝着。从她和别人的交谈中，我了解到她姓钟，之后的交谈我顺理成章的就叫她钟阿姨了。</p>
-
-<!--more-->
-
-
-<p>钟阿姨是广东潮州人，早年追随援藏的丈夫（他是一名教书匠）来到这里的，在这里已有40多年，她把大把的青春都贡献给了西赞，见证了这个区域的发展。她也曾在西宁卖了10年多酸奶，那里的人都认识她，当她提及这事的时候还引以为傲。有个小青年说西宁的酸奶很有名气，并且提了一个模糊的人后，钟阿姨告诉他——他指的那人就是自己，因为家庭的原因她回到了拉萨。她有两个女儿，大女儿毕业了在深圳工作，小女儿在拉萨工作。现在每天晚上在家制作最新鲜的酸奶，上午来卖，卖完了下午还要再回家一次拿来，如果生意好的话，她一天要在家和摊位之间来往多次。</p>
-
-<p>她告诉我她被《藏地牛皮书》写入其中，同时也被多个地方电视台报道过，现在在优酷上也有她的视频。听她的自我介绍，我只是傻笑着面对她，半信半疑，拿出手机在网上查找着她说的一切。又有不少围了上来，钟阿姨一边乐呵呵地忙碌着她的生意，一边和我们交谈着。我以最快的速度查证着她的描述，万能的网络告诉我这一切都是真实的，那时我对她的态度开始了转变，一种敬佩之情油然而生。一个中年妇女竟然如此的时尚（这里并没有贬义的意思，我完全是根据她的经历作出的一个判断），我不得不重新审视她了。</p>
-
-<p>围上的人虽多，但大部分的人跟我起先的想法都差不多，很多的交易未必能够顺利达成。态度转变的那一刹那，我就已经决定要和钟阿姨一起唱一段双簧，尽我所能地配合她的生意。我好像发现新大陆似的，惊奇地说出一声“阿姨，你可真是名人啊，网上真能查到你的信息，牛逼啊”，钟阿姨也立马回道“那当然是真的了，我是不会随便吹牛的”。对于我这么个拿着手机查找、校对信息的游客，其他的游客是信任我的，估计也有很多人是带着《藏地牛皮书》进藏的，也不可能不知道钟阿姨。显然，我的话是有效果的，一些游客也不再砍价而是爽快的买下了，还有一个年轻人要给钟阿姨拍照，她收拾了摊位，配合拍了照。</p>
-
-<p>钟阿姨是一个很会自我营销的人，在人群聚集的时候，她会很详细的介绍自己做过的事情。没有想到，一个不怎么使用手机的阿姨，她竟然会加入一些社交网络去跟年轻人聊天，而且她说她喜欢跟年轻人交谈（大伙不要想歪了啊），她的心态是多么的年轻啊。</p>
-
-<p>我告诉她我吃晚饭时的经历，她告诉我不要做这样的事了，一些人是借着朝圣的名义在骗取钱财，他们在西藏生活的并不困苦，否则在拉萨这么高物价的地方他们根本生存不下去，他们每个月都有政府的补贴，反而是那些在拉萨打拼的内地人过得很艰苦。直到那一刻，我才明白，我当初的同情心并没有任何意义，或许可能成为那些人的笑柄。</p>
-
-<p>我很想听听她聊西藏的一些往事和自己的经历，所以又要了一杯，那时我已经喜欢上了那种味道。当得知我是浙江人的时候，显得异常的兴奋，似乎广东和浙江就是隔壁邻居一样，亲密无比，或许是时代让这两个地方的人走向了相同的道路，它们变得志同道合。我们谈论她的生意，谈论西藏地区可以做的一切生意。</p>
-
-<p>她也询问我的属相，我不知道她是何用意，但也高兴地告诉了她。她告诉我应该找一个属龙的女子，兔龙相配是最合适的。之所这么说，原来她一直在研究命理学以及属相学。她怕我不相信她说的，就给我举了很多现实中的例子。我真该问问她是否研究过星座学，可惜我现在才想起这些。除了那些之外，她也阅读了其它大量的书籍（这一点我深信不疑，从她的谈吐中很容易观察到）。这或许跟他丈夫是教师有很大的关系，但一个人是否会去做一些事情，就跟自身的毅力和觉悟有关了。</p>
-
-<p>第二杯喝完了，我起身要走，钟阿姨劝我坐在那里陪她聊天。时间不早了，布达拉宫广场上的锅庄舞就快开始了，我不想在这里留下遗憾，我还是选择离开，但我告诉她——如果等我回走她还在那里的话，我一定去再喝一杯，陪她谈天说地。其实我很明白，她有什么用意（后来她也告诉了我）。只要有我坐在那里喝奶，摊位就不会显得冷清，就会有人愿意过来询价，然后达成买卖。</p>
-
-<p>很快就到了布达拉宫广场，听着那让人兴奋的音乐，看着人们翩翩起舞，欣赏着布达拉宫的夜景。这般景色我已看过多遍，只因不想留下遗憾，内心才把自己带到了这里。不过，我还是想尽快结束夜景的欣赏，我的内心想着的是那个摊位和钟阿姨，因为那里有真实的故事，而这里一切已成为往事，历史雕塑在这些建筑上却无人述说。在广场上，我似乎只是一个游魂，在四处瞎逛却没有任何的收获。</p>
-
-<p>半个小时很快就过去了，我也往我的住处赶，路过原本的摊位的时候却没有见到她，我有些失望，不过我很快又找到了她的身影。因为天已很晚，没有多少的人流，她收拾了椅子，挪到了另外的一个地方。见到我重新回到她的摊位，她硬是去给我找了条椅子让我坐着。我也很自然的要了一杯酸奶，她要给我便宜一点，可我还是给了她原始的价钱，尽管我知道她赚的比我多（和她的交谈中，我了解到了她每日的销量），可一个人在寒风中经营这生意毕竟不容易，赚的都是辛苦钱。</p>
-
-<p>整个过程，我比较的配合，一直慢悠悠的喝着那杯奶。等有客人来的时候，我们就一起唱双簧。我不是一个喜欢重复的人，所以一直更换着说辞，目的只有一个，就是告诉他们——来西藏一定要到这个摊位喝酸奶，而且味道比超市里的好上千百倍。</p>
-
-<p>期间一个摆首饰品的姑娘跑到了我们的摊位，是来这里寻求帮助的。原来她原本的摊位别人不让她在那里摆了。钟阿姨重新给她找了个摊位，告诉她可以放心在那里做买卖。钟阿姨真是一位热心的人！</p>
-
-<p>在我们共同的努力下，那天的酸奶比以往任何时候卖的都快，这点我也不怀疑，生意就是这么一回事。当只剩下3杯左右的时候，我告诉她我要离开了，因为真的太晚了，在没有人烟的路上回旅社我真的怕出现一些意外。临走时，钟阿姨要送我一杯，我没要，实在是喝得太多了，肚子不能再撑下去了。若干年后，她也准备回到生养她的地方，同时还要出去旅行，可能会到杭州，所以我们彼此留下了号码（可惜我换手机之后就丢失了她的号码）。趁着路上还有其他的行人，我快步回到了住处，等待明天新的启程。</p>
-
-<p>钟阿姨生错了时代，去了一个错误的地方，否则以她的那种能力绝对能够成就一番更大的事业。她懂人性，懂经营，更重要的是有年轻的心态。有去拉萨的朋友，一定要去拜访一下这位钟阿姨，然后品尝一下她家自制的牦牛酸奶。或许我们只有一面之缘，但愿她的生活越来越美满。是她的存在，让我在离开拉萨之前更加了解西藏地区。与当地人交谈，了解那里的民俗、民风，这应该就是旅行的意义吧！</p>
 ]]></content>
   </entry>
   

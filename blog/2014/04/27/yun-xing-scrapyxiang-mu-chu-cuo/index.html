@@ -5,11 +5,27 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>wav文件格式解析 - 残剑</title>
+  <title>运行Scrapy项目出错：KeyError: 'Spider not found: tutorial - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是RIFF。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, &hellip;">
+  <meta name="description" content="运行Scrapy抓取网上数据的时候，出现了以下的错误： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+$ sudo scrapy crawl tutorial
+Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +34,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -70,7 +86,7 @@
   
   <header>
     
-      <h1 class="entry-title">Wav文件格式解析</h1>
+      <h1 class="entry-title">运行Scrapy项目出错：KeyError: 'Spider Not Found: Tutorial</h1>
     
     
       <p class="meta">
@@ -86,7 +102,7 @@
   
 
 
-<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-04-27T22:40:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,84 +111,7 @@
   </header>
 
 
-<div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
-
-<pre><code>------------------------------------------------
-|             RIFF WAVE Chunk                  |
-|             ID  = 'RIFF'                     |
-|             RiffType = 'WAVE'                |
-------------------------------------------------
-|             Format Chunk                     |
-|             ID = 'fmt '                      |
-------------------------------------------------
-|             Fact Chunk(optional)             |
-|             ID = 'fact'                      |
-------------------------------------------------
-|             Data Chunk                       |
-|             ID = 'data'                      |
-------------------------------------------------
-</code></pre>
-
-<p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
-
-<p>RIFF WAVE Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |  具体内容    |
-----------------------------------
-| ID    |  4 Bytes |   'RIFF'    |
-----------------------------------
-| Size  |  4 Bytes |             |
-----------------------------------
-| Type  |  4 Bytes |   'WAVE'    |
-----------------------------------
-</code></pre>
-
-<!--more-->
-
-
-<p>以<code>FIFF</code>作为标示，然后紧跟着为size字段，该size是整个wav文件大小减去ID和Size所占用的字节数，即FileLen &ndash; 8 = Size。然后是Type字段，为<code>WAVE</code>，表示是wav文件。结构定义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct RIFF_HEADER
-</span><span class='line'>{
-</span><span class='line'>    char szRiffID[4];  // 'R','I','F','F'
-</span><span class='line'>    DWORD dwRiffSize;
-</span><span class='line'>    char szRiffFormat[4]; // 'W','A','V','E'
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Format Chunk</p>
-
-<pre><code>--------------------------------------------------------------------
-|               |   字节数   |              具体内容                 |
---------------------------------------------------------------------
-| ID            |  4 Bytes  |   'fmt '                             |
---------------------------------------------------------------------
-| Size          |  4 Bytes  | 数值为16或18，18则最后有附加信息         |
---------------------------------------------------------------------
-| FormatTag     |  2 Bytes  | 编码方式，一般为0x0001                  |
---------------------------------------------------------------------
-| Channels      |  2 Bytes  | 声道数目，1--单声道；2--双声道           |
---------------------------------------------------------------------
-| SamplesPerSec |  4 Bytes  | 采样频率                               |
---------------------------------------------------------------------
-| AvgBytesPerSec|  4 Bytes  | 每秒所需字节数                          |
--------------------------------------------------------------------- 
-| BlockAlign    |  2 Bytes  | 数据块对齐单位(每个采样需要的字节数)       |
---------------------------------------------------------------------  
-| BitsPerSample |  2 Bytes  | 每个采样需要的bit数                     |
---------------------------------------------------------------------
-|               |  2 Bytes  | 附加信息（可选，通过Size来判断有无）       |
--------------------------------------------------------------------- 
-</code></pre>
-
-<p>以<code>fmt</code>作为标示。一般情况下Size为16，此时最后附加信息没有；如果为18，则最后多了2个字节的附加信息。主要由一些软件制成的wav格式中含有该2个字节的附加信息。结构定义如下：</p>
+<div class="entry-content"><p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -183,16 +122,33 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct WAVE_FORMAT
-</span><span class='line'>{
-</span><span class='line'>    WORD wFormatTag;
-</span><span class='line'>    WORD wChannels;
-</span><span class='line'>    DWORD dwSamplesPerSec;
-</span><span class='line'>    DWORD dwAvgBytesPerSec;
-</span><span class='line'>    WORD wBlockAlign;
-</span><span class='line'>    WORD wBitsPerSample;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
+</span><span class='line'>    execute()
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
+</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
+</span><span class='line'>    func(*a, **kw)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
+</span><span class='line'>    cmd.run(args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
+</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
+</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
+</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
 
+
+<!--more-->
+
+
+<p>查看<code>tutorial/spiders/dmoz_spider.py</code>文件中的内容如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -200,101 +156,101 @@
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct FMT_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char  szFmtID[4]; // 'f','m','t',' '
-</span><span class='line'>    DWORD  dwFmtSize;
-</span><span class='line'>    WAVE_FORMAT wavFormat;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat tutorial/spiders/dmoz_spider.py
+</span><span class='line'>from scrapy.spider import BaseSpider
+</span><span class='line'>
+</span><span class='line'>class DmozSpider(BaseSpider):
+</span><span class='line'>    name = "dmoz"
+</span><span class='line'>    allowed_domains = ["s.taobao.com"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        filename = response.url.split("/")[-2]
+</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Fact Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |  具体内容    |
-----------------------------------
-| ID    |  4 Bytes |   'fact'    |
-----------------------------------
-| Size  |  4 Bytes |   数值为4    |
-----------------------------------
-| data  |  4 Bytes |             |
-----------------------------------
-</code></pre>
-
-<p>Fact Chunk是可选字段，一般当wav文件由某些软件转化而成，则包含该Chunk。结构定义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct FACT_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char  szFactID[4]; // 'f','a','c','t'
-</span><span class='line'>    DWORD  dwFactSize;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Data Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |   具体内容   |
-----------------------------------
-| ID    |  4 Bytes |   'data'    |
-----------------------------------
-| Size  |  4 Bytes |             |
-----------------------------------
-| data  |          |             |
-----------------------------------
-</code></pre>
-
-<p>Data Chunk是真正保存wav数据的地方，以<code>data</code>作为该Chunk的标示。然后是数据的大小。紧接着就是wav数据。根据Format Chunk中的声道数以及采样bit数，wav数据的bit位置可以分成以下几种形式：</p>
-
-<pre><code>---------------------------------------------------------------------
-|   单声道   |    取样1    |    取样2    |    取样3    |    取样4       |
-|           |--------------------------------------------------------
-|  8bit量化 |    声道0    |    声道0    |    声道0    |    声道0        |
----------------------------------------------------------------------
-|   双声道  |          取样1            |           取样2              |
-|           |--------------------------------------------------------
-|  8bit量化 |  声道0(左)  |  声道1(右)  |  声道0(左)  |  声道1(右)       |
----------------------------------------------------------------------
-|           |          取样1            |           取样2             |
-|   单声道  |---------------------------------------------------------
-| 16bit量化 |    声道0    |  声道0      |    声道0    |  声道0          |
-|           | (低位字节)  | (高位字节)  | (低位字节)   |  (高位字节)      |
----------------------------------------------------------------------
-|           |                         取样1                          |
-|   双声道  |---------------------------------------------------------
-| 16bit量化 |  声道0(左)  |  声道0(左)  |  声道1(右)  |  声道1(右)       |
-|           | (低位字节)  | (高位字节)  | (低位字节)  | (高位字节)        |
----------------------------------------------------------------------
-</code></pre>
-
-<p>Data Chunk头结构定义如下：</p>
+<p><code>name = "dmoz"</code>中的<code>dmoz</code>才是crawler的名字。修改crawler的名字后，正常运行如下：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct DATA_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char szDataID[4]; // 'd','a','t','a'
-</span><span class='line'>    DWORD dwDataSize;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl dmoz
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: tutorial)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'tutorial.spiders', 'SPIDER_MODULES': ['tutorial.spiders'], 'BOT_NAME': 'tutorial'}
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled item pipelines: 
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Spider opened
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Closing spider (finished)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Dumping Scrapy stats:
+</span><span class='line'>  {'downloader/request_bytes': 245,
+</span><span class='line'>   'downloader/request_count': 1,
+</span><span class='line'>   'downloader/request_method_count/GET': 1,
+</span><span class='line'>   'downloader/response_bytes': 35012,
+</span><span class='line'>   'downloader/response_count': 1,
+</span><span class='line'>   'downloader/response_status_count/200': 1,
+</span><span class='line'>   'finish_reason': 'finished',
+</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 27, 14, 50, 10, 637578),
+</span><span class='line'>   'log_count/DEBUG': 7,
+</span><span class='line'>   'log_count/INFO': 3,
+</span><span class='line'>   'response_received_count': 1,
+</span><span class='line'>   'scheduler/dequeued': 1,
+</span><span class='line'>   'scheduler/dequeued/memory': 1,
+</span><span class='line'>   'scheduler/enqueued': 1,
+</span><span class='line'>   'scheduler/enqueued/memory': 1,
+</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 27, 14, 50, 9, 940145)}
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>wave文件解析及头部格式添加的参考代码请查阅<a href="https://github.com/txgcwm/Linux-C-Examples/tree/master/audio-video/wave">这里</a> 。</p>
+<p><big></big></p>
 
-<p><big>参考文章</big></p>
-
-<p><a href="http://blog.csdn.net/bluesoal/article/details/932395">wav文件格式分析详解</a><br/>
-<a href="http://ikinglai.blog.51cto.com/6220785/1224616">PCM录音数据转Wav格式（c语言版）</a><br/>
-<a href="http://blog.sina.com.cn/s/blog_717f471b0100uw98.html">wav文件格式分析详解和解析代码</a><br/>
-<a href="http://www.cnblogs.com/cheney23reg/archive/2010/08/08/1795067.html">wave文件(*.wav)格式、PCM数据格式</a><br/>
-<a href="http://blog.csdn.net/xiahouzuoxin/article/details/7875406">读取*.wav音频文件</a><br/>
-<a href="http://hmilyyang.bokee.com/3757847.html">使用Wav文件来封装G.726格式的原始音频数据</a></p>
+<p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
+<a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
+<a href="http://stackoverflow.com/questions/9876793/scrapy-spider-not-found-error">Scrapy spider not found error</a></p>
 </div>
 
 
@@ -317,12 +273,12 @@
   
 
 
-<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-04-27T22:40:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频</a>
+    <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
   
 </span>
 
@@ -356,10 +312,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/08/hong-yan-jie/" title="Previous Post: 红颜劫">&laquo; 红颜劫</a>
+        <a class="basic-alignment left" href="/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/" title="Previous Post: 剑问君答：IT模范丈夫">&laquo; 剑问君答：IT模范丈夫</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/19/liao-jian-shu-tan-xie-zuo/" title="Next Post: 聊简书谈写作">聊简书谈写作 &raquo;</a>
       
     </p>
   </footer>
@@ -652,8 +606,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/';
         var disqus_script = 'embed.js';
       
     (function () {

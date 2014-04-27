@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T21:52:56+08:00</updated>
+  <updated>2014-04-27T22:55:09+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[运行Scrapy项目出错：KeyError: 'Spider not found: tutorial]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/"/>
+    <updated>2014-04-27T22:40:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo</id>
+    <content type="html"><![CDATA[<p>运行Scrapy抓取网上数据的时候，出现了以下的错误：
+```
+$ sudo scrapy crawl tutorial
+Traceback (most recent call last):
+  File &ldquo;/usr/local/bin/scrapy&rdquo;, line 4, in <module></p>
+
+<pre><code>execute()
+</code></pre>
+
+<p>  File &ldquo;/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py&rdquo;, line 143, in execute</p>
+
+<pre><code>_run_print_help(parser, _run_command, cmd, args, opts)
+</code></pre>
+
+<p>  File &ldquo;/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py&rdquo;, line 89, in _run_print_help</p>
+
+<pre><code>func(*a, **kw)
+</code></pre>
+
+<p>  File &ldquo;/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py&rdquo;, line 150, in _run_command</p>
+
+<pre><code>cmd.run(args, opts)
+</code></pre>
+
+<p>  File &ldquo;/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py&rdquo;, line 48, in run</p>
+
+<pre><code>spider = crawler.spiders.create(spname, **opts.spargs)
+</code></pre>
+
+<p>  File &ldquo;/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py&rdquo;, line 44, in create</p>
+
+<pre><code>raise KeyError("Spider not found: %s" % spider_name)
+</code></pre>
+
+<p>KeyError: &lsquo;Spider not found: tutorial&rsquo;
+```</p>
+
+<!--more-->
+
+
+<p>查看<code>tutorial/spiders/dmoz_spider.py</code>文件中的内容如下：
+```
+$ cat tutorial/spiders/dmoz_spider.py
+from scrapy.spider import BaseSpider</p>
+
+<p>class DmozSpider(BaseSpider):</p>
+
+<pre><code>name = "dmoz"
+allowed_domains = ["s.taobao.com"]
+start_urls = [
+    "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+]
+
+def parse(self, response):
+    filename = response.url.split("/")[-2]
+    open(filename, 'wb').write(response.body)
+</code></pre>
+
+<p>```</p>
+
+<p><code>name = "dmoz"</code>中的<code>dmoz</code>才是crawler的名字。修改crawler的名字后，正常运行如下：
+```
+$ sudo scrapy crawl dmoz
+2014-04-27 22:50:09+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: tutorial)
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Overridden settings: {&lsquo;NEWSPIDER_MODULE&rsquo;: &lsquo;tutorial.spiders&rsquo;, &lsquo;SPIDER_MODULES&rsquo;: [&lsquo;tutorial.spiders&rsquo;], &lsquo;BOT_NAME&rsquo;: &lsquo;tutorial&rsquo;}
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled item pipelines:
+2014-04-27 22:50:09+0800 [dmoz] INFO: Spider opened
+2014-04-27 22:50:09+0800 [dmoz] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+2014-04-27 22:50:09+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+2014-04-27 22:50:10+0800 [dmoz] DEBUG: Crawled (200) <GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83> (referer: None)
+2014-04-27 22:50:10+0800 [dmoz] INFO: Closing spider (finished)
+2014-04-27 22:50:10+0800 [dmoz] INFO: Dumping Scrapy stats:</p>
+
+<pre><code>{'downloader/request_bytes': 245,
+ 'downloader/request_count': 1,
+ 'downloader/request_method_count/GET': 1,
+ 'downloader/response_bytes': 35012,
+ 'downloader/response_count': 1,
+ 'downloader/response_status_count/200': 1,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2014, 4, 27, 14, 50, 10, 637578),
+ 'log_count/DEBUG': 7,
+ 'log_count/INFO': 3,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2014, 4, 27, 14, 50, 9, 940145)}
+</code></pre>
+
+<p>2014-04-27 22:50:10+0800 [dmoz] INFO: Spider closed (finished)
+```</p>
+
+<p><big></big></p>
+
+<p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
+<a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
+<a href="http://stackoverflow.com/questions/9876793/scrapy-spider-not-found-error">Scrapy spider not found error</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu12.10安装Scrapy]]></title>
