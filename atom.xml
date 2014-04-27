@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T22:55:09+08:00</updated>
+  <updated>2014-04-27T22:57:48+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -153,7 +153,7 @@
 </span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
 
 
-<p><big></big></p>
+<p><big>参考文章：</big></p>
 
 <p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
 <a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
