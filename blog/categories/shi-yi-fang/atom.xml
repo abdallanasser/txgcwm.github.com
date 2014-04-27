@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 试衣坊 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shi-yi-fang/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T23:47:01+08:00</updated>
+  <updated>2014-04-27T23:49:19+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,8 +18,8 @@
     <link href="http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/"/>
     <updated>2014-04-27T23:45:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze</id>
-    <content type="html"><![CDATA[<p>开发语言：Python
-爬虫框架：Scrapy
+    <content type="html"><![CDATA[<p>开发语言：Python <br/>
+爬虫框架：Scrapy <br/>
 数据库：PostgreSQL</p>
 
 <p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
