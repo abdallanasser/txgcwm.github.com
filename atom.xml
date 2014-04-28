@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-28T23:08:33+08:00</updated>
+  <updated>2014-04-28T23:55:59+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/"/>
     <updated>2014-04-28T23:04:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-[?]</id>
-    <content type="html"><![CDATA[<p>在本教程中，我们将假设Scrapy已经安装在你的系统上。如果不是，请参见安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
+    <content type="html"><![CDATA[<p>在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
 
 <ol>
 <li>创建一个新的Scrapy项目；</li>
@@ -202,6 +202,8 @@
 </span><span class='line'>   'start_time': datetime.datetime(2014, 4, 28, 15, 1, 35, 615729)}
 </span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
 
+
+<p>从debug信息可以看出，我们发送的get请求是收到回复的，且是成功的。此时，在当前目录下你会看到一个叫s.taobao.com的文件生成，这就是我们抓取到的网页。</p>
 
 <p><big>参考文章</big></p>
 
