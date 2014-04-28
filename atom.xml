@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T23:49:19+08:00</updated>
+  <updated>2014-04-28T23:08:33+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,203 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scrapy入门简略教程（一）]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/"/>
+    <updated>2014-04-28T23:04:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-[?]</id>
+    <content type="html"><![CDATA[<p>在本教程中，我们将假设Scrapy已经安装在你的系统上。如果不是，请参见安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
+
+<ol>
+<li>创建一个新的Scrapy项目；</li>
+<li>定义你将提取的Items；</li>
+<li>写一个蜘蛛抓取网站并提取Items；</li>
+<li>写一个项目管道存储所提取的Items。</li>
+</ol>
+
+
+<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
+
+<h1>创建一个项目</h1>
+
+<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject shiyifang</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
+</span><span class='line'>.
+</span><span class='line'>├── scrapy.cfg
+</span><span class='line'>└── shiyifang
+</span><span class='line'>    ├── __init__.py
+</span><span class='line'>    ├── items.py
+</span><span class='line'>    ├── pipelines.py
+</span><span class='line'>    ├── settings.py
+</span><span class='line'>    └── spiders
+</span><span class='line'>        └── __init__.py
+</span><span class='line'>
+</span><span class='line'>2 directories, 6 files</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于该目录下文件和文件夹的说明：</p>
+
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
+<li>shiyifang/items.py: 项目的items文件。</li>
+<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
+<li>shiyifang/settings.py: 项目的settings文件。</li>
+<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h1>定义Item</h1>
+
+<p>Items包含了将要被抓取的数据，它们就像简单的Python dicts，但对未填充字段提供额外的保护，以防止错误。在shiyifang目录下编辑items.py文件，Item类看起来像如下的样子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.item import Item, Field
+</span><span class='line'>
+</span><span class='line'>class ShiyifangItem(Item):
+</span><span class='line'>    # define the fields for your item here like:
+</span><span class='line'>    # name = Field()
+</span><span class='line'>    title = Field()
+</span><span class='line'>    link = Field()
+</span><span class='line'>    desc = Field()</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第一个爬虫</h1>
+
+<p>爬虫是用户自己写的一个类，用于爬取一个或一组域名的数据，需要定义一个初始化的URL列表，要完成如何抓取链接和如何去解析数据等基本的工作。我们在shiyifang/spiders目录下创建一个叫shiyifang_spider.py文件：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.spider import BaseSpider
+</span><span class='line'>
+</span><span class='line'>class ShiyifangSpider(BaseSpider):
+</span><span class='line'>    name = "shiyifang"
+</span><span class='line'>    allowed_domains = ["s.taobao.com"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        filename = response.url.split("/")[-2]
+</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Crawling</h1>
+
+<p>到项目的顶层目录，执行以下的指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy crawl shiyifang
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: shiyifang)
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'shiyifang.spiders', 'SPIDER_MODULES': ['shiyifang.spiders'], 'BOT_NAME': 'shiyifang'}
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled item pipelines: 
+</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Spider opened
+</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Closing spider (finished)
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Dumping Scrapy stats:
+</span><span class='line'>  {'downloader/request_bytes': 245,
+</span><span class='line'>   'downloader/request_count': 1,
+</span><span class='line'>   'downloader/request_method_count/GET': 1,
+</span><span class='line'>   'downloader/response_bytes': 34569,
+</span><span class='line'>   'downloader/response_count': 1,
+</span><span class='line'>   'downloader/response_status_count/200': 1,
+</span><span class='line'>   'finish_reason': 'finished',
+</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 28, 15, 1, 36, 232914),
+</span><span class='line'>   'log_count/DEBUG': 7,
+</span><span class='line'>   'log_count/INFO': 3,
+</span><span class='line'>   'response_received_count': 1,
+</span><span class='line'>   'scheduler/dequeued': 1,
+</span><span class='line'>   'scheduler/dequeued/memory': 1,
+</span><span class='line'>   'scheduler/enqueued': 1,
+</span><span class='line'>   'scheduler/enqueued/memory': 1,
+</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 28, 15, 1, 35, 615729)}
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://doc.scrapy.org/en/latest/intro/tutorial.html">Scrapy Tutorial</a><br/>
+<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于爬虫开发的选择]]></title>
@@ -1483,68 +1680,6 @@
 <p>残剑：每年都能看到你在空间中更新那些出去旅行的照片，就我个人而言，我比较看来中国未来的旅游市场。你出去是认知一个新的世界，欣赏风景，陶冶情操，还是有一些自己独特的想法？</p>
 
 <p>东方如杨：我很少放照片吧，哈哈哈。我现在的想法是多带父母出去走走，他们年纪大了，我怕以后遗憾。我想带他们去其他地方走走，让他们看看这个地球其他地方，跟我们不一样的人，他们的风景，他们的生活。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu下的音视频工具]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju/"/>
-    <updated>2014-03-11T23:02:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju</id>
-    <content type="html"><![CDATA[<p>Whether you want to listen to music on your smartphone or watch movies on your iPad, you may need to convert you media files from one format to another depending on what your devices support.</p>
-
-<p>Transmageddon Video Transcoder is a great media converter for Ubuntu. It converts audio and video files, it has a simple interface, and it’s free.</p>
-
-<p>详细情况参考：<a href="http://linzhibin824.blog.163.com/blog/static/7355771020133754752964/">Ubuntu下音/视频转换工具transmageddon</a></p>
-
-<hr />
-
-<p>Handbrake是一款跨平台的视频转换器，无须任何技巧即可完成对视频的格式换转。特性：</p>
-
-<ul>
-<li>跨平台(Linux\Win\Mac)；</li>
-<li>输入源：支持DVD，如VIDEO_TS、DVD映像文件、DVD 光盘、.VOB、.TS，视频格式方面几乎支持所有视频格式；</li>
-<li>输出源：MP4(M4V)、MKV\MPEG-4(ffmpeg), H.264(x264), or Theora(libtheora)\AAC, CoreAudio AAC(OS X Only), MP3, or Vorbis. AC-3 pass-through, DTS pass-thorugh(MKV only)；</li>
-<li>支持设置格式文件的质量、参数。</li>
-</ul>
-
-
-<p>详细情况参考：<a href="http://blog.ubuntusoft.com/handbrake.html#.UvWQsqFBr3w">Handbrake：优秀的视频转换器</a></p>
-
-<!--more-->
-
-
-<hr />
-
-<p>Arista是一个易于使用的多媒体转换的GNOME桌面应用。它着重于目标的转换媒介，即设备要发挥新闻媒体上。它的目的是供人谁不熟悉音频和视频编码，并希望有一个简单的方法来获得他们的多媒体设备。它支持DVD和投入V4L设备以及定期文件。</p>
-
-<p>详细情况参考：<a href="http://blog.ubuntusoft.com/ubuntu-next-video-converter-arista.html#.UvWQt6FBr3w">ubuntu下视频转换器：arista</a></p>
-
-<hr />
-
-<p>今天和大家分享Ubuntu下的视频转换工具与DVD制作！首先出场的是DeVeDe这个工具，在ubuntu软件中心就能下载了，或者用文字终端安装:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install devede</span></code></pre></td></tr></table></div></figure>
-
-
-<p>详细情况参考：<a href="http://www.heimizhou.com/media-converter-in-ubuntu.html">Ubuntu视频转换工具与DVD制作</a></p>
-
-<hr />
-
-<p>常听音乐和歌曲的人总免不了音频之间的互相转换，这款软件支持将源文件（好像支持很多）转化成MP3、Wav、Flac、Ogg，不支持APE。另外好像也不能转换CD。反正就提供一个转换成这四种格式的简单功能。功能虽单一，但蛮简单且好用的，所以推荐给大家。安装方法如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install soundconverter</span></code></pre></td></tr></table></div></figure>
-
-
-<p>详细情况参考：<a href="http://hi.baidu.com/rlhpuybgopbiqwd/item/d1c1ee11c45f9f48e65e0638">SoundConverter──音频转换软件</a></p>
-
-<hr />
-
-<p>Audacity® 是一个声音编辑程序，它拥有一套完整的工具（用于立体声声道可视化）和过滤器，支持您轻松修改所选的音频波形部分。Audacity 是一个可编程编辑器，因此您可以根据项目的扩展需要扩展该编辑器的功能。Audacity 的功能十分强大，从制作简单的音频录制到编辑多声道作品都可以轻松完成。</p>
-
-<p>详细情况参考：<a href="http://www.ibm.com/developerworks/cn/opensource/os-audacity/#ibm-pcon">功能强大的Audacity</a></p>
 ]]></content>
   </entry>
   

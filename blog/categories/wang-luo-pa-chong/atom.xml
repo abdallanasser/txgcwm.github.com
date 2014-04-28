@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-27T23:49:19+08:00</updated>
+  <updated>2014-04-28T23:08:33+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,149 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scrapy入门简略教程（一）]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/"/>
+    <updated>2014-04-28T23:04:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-[?]</id>
+    <content type="html"><![CDATA[<p>在本教程中，我们将假设Scrapy已经安装在你的系统上。如果不是，请参见安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
+
+<ol>
+<li>创建一个新的Scrapy项目；</li>
+<li>定义你将提取的Items；</li>
+<li>写一个蜘蛛抓取网站并提取Items；</li>
+<li>写一个项目管道存储所提取的Items。</li>
+</ol>
+
+
+<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
+
+<h1>创建一个项目</h1>
+
+<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：
+<code>
+$ scrapy startproject shiyifang
+</code></p>
+
+<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：
+```
+$ tree
+.
+├── scrapy.cfg
+└── shiyifang</p>
+
+<pre><code>├── __init__.py
+├── items.py
+├── pipelines.py
+├── settings.py
+└── spiders
+    └── __init__.py
+</code></pre>
+
+<p>2 directories, 6 files
+```</p>
+
+<p>关于该目录下文件和文件夹的说明：</p>
+
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
+<li>shiyifang/items.py: 项目的items文件。</li>
+<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
+<li>shiyifang/settings.py: 项目的settings文件。</li>
+<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h1>定义Item</h1>
+
+<p>Items包含了将要被抓取的数据，它们就像简单的Python dicts，但对未填充字段提供额外的保护，以防止错误。在shiyifang目录下编辑items.py文件，Item类看起来像如下的样子：
+```
+from scrapy.item import Item, Field</p>
+
+<p>class ShiyifangItem(Item):</p>
+
+<pre><code># define the fields for your item here like:
+# name = Field()
+title = Field()
+link = Field()
+desc = Field()
+</code></pre>
+
+<p>```</p>
+
+<h1>第一个爬虫</h1>
+
+<p>爬虫是用户自己写的一个类，用于爬取一个或一组域名的数据，需要定义一个初始化的URL列表，要完成如何抓取链接和如何去解析数据等基本的工作。我们在shiyifang/spiders目录下创建一个叫shiyifang_spider.py文件：
+```
+from scrapy.spider import BaseSpider</p>
+
+<p>class ShiyifangSpider(BaseSpider):</p>
+
+<pre><code>name = "shiyifang"
+allowed_domains = ["s.taobao.com"]
+start_urls = [
+    "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+]
+
+def parse(self, response):
+    filename = response.url.split("/")[-2]
+    open(filename, 'wb').write(response.body)
+</code></pre>
+
+<p>```</p>
+
+<h1>Crawling</h1>
+
+<p>到项目的顶层目录，执行以下的指令：
+```
+$ scrapy crawl shiyifang
+2014-04-28 23:01:34+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: shiyifang)
+2014-04-28 23:01:34+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+2014-04-28 23:01:34+0800 [scrapy] DEBUG: Overridden settings: {&lsquo;NEWSPIDER_MODULE&rsquo;: &lsquo;shiyifang.spiders&rsquo;, &lsquo;SPIDER_MODULES&rsquo;: [&lsquo;shiyifang.spiders&rsquo;], &lsquo;BOT_NAME&rsquo;: &lsquo;shiyifang&rsquo;}
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled item pipelines:
+2014-04-28 23:01:35+0800 [shiyifang] INFO: Spider opened
+2014-04-28 23:01:35+0800 [shiyifang] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+2014-04-28 23:01:35+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+2014-04-28 23:01:36+0800 [shiyifang] DEBUG: Crawled (200) <GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83> (referer: None)
+2014-04-28 23:01:36+0800 [shiyifang] INFO: Closing spider (finished)
+2014-04-28 23:01:36+0800 [shiyifang] INFO: Dumping Scrapy stats:</p>
+
+<pre><code>{'downloader/request_bytes': 245,
+ 'downloader/request_count': 1,
+ 'downloader/request_method_count/GET': 1,
+ 'downloader/response_bytes': 34569,
+ 'downloader/response_count': 1,
+ 'downloader/response_status_count/200': 1,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2014, 4, 28, 15, 1, 36, 232914),
+ 'log_count/DEBUG': 7,
+ 'log_count/INFO': 3,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2014, 4, 28, 15, 1, 35, 615729)}
+</code></pre>
+
+<p>2014-04-28 23:01:36+0800 [shiyifang] INFO: Spider closed (finished)
+```</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://doc.scrapy.org/en/latest/intro/tutorial.html">Scrapy Tutorial</a><br/>
+<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[运行Scrapy项目出错：KeyError: 'Spider not found: tutorial']]></title>
