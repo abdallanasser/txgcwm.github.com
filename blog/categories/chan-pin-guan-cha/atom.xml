@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 产品观察 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/chan-pin-guan-cha/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-04-29T22:54:23+08:00</updated>
+  <updated>2014-04-29T23:55:19+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[向上滚动功能]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/29/xiang-shang-gun-dong-gong-neng/"/>
+    <updated>2014-04-29T23:53:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/29/xiang-shang-gun-dong-gong-neng</id>
+    <content type="html"><![CDATA[<p>使用微博、内涵段子和网易云阅读的时候，总是有两个问题困扰着我：一、什么时候才能够阅读完毕（这种情况一般是在没有心情阅读太多信息的时候会有），到达我上一次阅读过的地方；二、如果有新的更新，我想看到它们，我就得费劲地往上拉。</p>
+
+<p>所以产品经理们是否可以考虑以下的功能：一、刷新后定格到较新但不是排在第一条的信息处，继续阅读的话需要向上滚动而不是向下；二、增加一个回到顶部的功能。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MX3使用小记]]></title>
