@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Linux下C语言伪随机数编程 - 残剑</title>
+  <title>独自旅行不易 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、 &hellip;">
+  <meta name="description" content="看到一个朋友想独自出去旅行的文章，里面讲述了她那颗向往自由的心，还有就是父母的反对，可能也因此没有随心而动。去年的时候，一个人独自背上包，游走了西南的几个省市，体会最深的是：一个的人的旅行并不是一件简单的事情，吃、住、行都要靠自己去处理。 前十多天还好，毕竟有表弟、姨夫、阿姨及同学的照顾， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/30/du-zi-lu-xing-bu-yi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -70,7 +70,7 @@
   
   <header>
     
-      <h1 class="entry-title">Linux下C语言伪随机数编程</h1>
+      <h1 class="entry-title">独自旅行不易</h1>
     
     
       <p class="meta">
@@ -86,7 +86,7 @@
   
 
 
-<time datetime="2013-07-07T12:50:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2014-04-30T23:35:00+08:00" pubdate data-updated="true">Apr 30<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,175 +95,28 @@
   </header>
 
 
-<div class="entry-content"><p>在日常生活中，我们经常会遇到随机数（比如丢骰子，抓阄，抽签等等），那么在程序中如何实现随机数呢？现在很多操作系统内核都会提供相应的api，通过获取一些计算机运行时的原始信息（如内存，电压，物理信号等等，它们的值在一个时间段可以保证是唯一的）来生成随机数。下文介绍如何使用rand、srand来生成伪随机数。</p>
+<div class="entry-content"><p><img src="http://www.itoobz.com/uploads/allimg/1309/19-130926194459.jpg" alt="alt text" /></p>
 
-<h1>rand产生伪随机数</h1>
+<p>看到一个朋友想独自出去旅行的文章，里面讲述了她那颗向往自由的心，还有就是父母的反对，可能也因此没有随心而动。去年的时候，一个人独自背上包，游走了西南的几个省市，体会最深的是：一个的人的旅行并不是一件简单的事情，吃、住、行都要靠自己去处理。</p>
 
-<p>Linux中rand()会返回一随机数值，范围在0至RAND_MAX 间，其中RAND_MAX定义在stdlib.h，其值为2147483647。</p>
-
-<p>以下例子利用rand函数生成随机数。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-
-#define LOOP_TIMES    5
-
-int main(int argc, char *argv[])
-{
-    int i;
-
-    for(i=0; i&lt; LOOP_TIMES; i++)
-        printf("%d ", rand());
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793 
-$ ./rand
-1804289383 846930886 1681692777 1714636915 1957747793
-</code></pre>
-
-<p>从以上的结果可以看出，rand两次产生的随机数是一样的，之所以这样是因为“在调用rand函数产生随机数前没有先利用srand()设好随机数种子”。如果未设随机数种子，rand()在调用时会自动设随机数种子为1。</p>
+<p>前十多天还好，毕竟有表弟、姨夫、阿姨及同学的照顾，后面到的一些地方完全没有熟悉的人。在凤凰古城要和表弟分别的时候，心里有一种说不出的失落感，因为此后真的就是一个人在陌生的地方行走。</p>
 
 <!--more-->
 
 
-<h1>srand设置随机数种子</h1>
+<p>初到拉萨的时候，幸好在火车上认识了一个蒙古族的小伙伴，一个即将毕业的大学生，我们一起找住的，一起游玩，彼此有了一个照应。那次我们看完西藏大学里学生们跳的锅庄，步行回住的地方，因区域相对偏僻，所以路上行人寥寥无几。一个小孩追着我两要一块钱，要得不多，但对于这种无理的索取，我还是很厌恶的，加上我们是两个大男人在走着，我是坚决的不给。我的小伙伴拗不过那个小孩，加上那小孩跟了我们很久，他掏出钱给了，小孩也愉悦地离开了。事后他跟我说：“不要看只有一个小孩，可能后面还有几双大人的眼睛在盯着呢！在这个地方花点小钱，买个平安也好”。他说的，我又何尝没有想到过。如果是我一个人在黑夜中行走，又加上这种坚定的想法，我不敢想象那夜会发生些什么。在他离开之后，我一个人在黑夜的时候也就没有去过什么偏僻的地方，要出去也是往人多的地方挤，所以在拉萨我已非常熟悉北京路了。</p>
 
-<p>要想每次运行得到的随机数不同，我们还要设置随机数种子。既然要设置随机数种子，那我们就使用srand()来设置rand()产生随机数时的随机数种子。参数seed必须是个整数，通常可以利用geypid()或time(NULL)的返回值来当做seed。如果每次seed都设相同值，rand()所产生的随机数值每次就会一样。</p>
+<p>那个小伙伴走了，独自一人去了景点，但也是草草了事，毕竟要在黑夜之前找到一个可以安全容身的地方。回到拉萨市中心，下了公交车，见到两个拿着包包的男士在问路。我知道他们也是出来旅行的，就主动上去和他们搭讪，希望能够和他们结伴而行。虽然他们同意和我一同去寻找住所，从他们的言谈举止中可以看出，他们一点也不信任我。就体态而言，他们中的任何一个都可以把我轻易地击倒。把他们带到一个青年旅社，我看到了其他人寻求同行伙伴的信息时，我放弃了当初和他们同行的想法，被人如此的戒备是我心里不太愿意承受的一件事情。一人在外，有时你的真诚根本换取不到他人的信任。</p>
 
-<p>以下例子设置随机数种子然后生成随机数。</p>
+<p>之后在拉萨的几天，我是孤独的，因为真的没有任何的依靠和互助。一个人报团去一些陌生的地方游玩，幸运的是没有遇到一些心怀叵测的坏人。在拉萨的路上或者其它的景点，碰到不久前的一些团友，我们都是友好的打招呼，问玩过的景点，还有后续的安排，我们都在尝试了解彼此，探寻是否有再一次一同出行的机会。</p>
 
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
+<p>拉萨的消费很高，我只能找一些小巷子里的餐馆去吃饭。一次把寒碜的菜发到了朋友圈，姐夫让我把银行账户发给他，他要给我打钱，我只好告诉他我这只是在调侃这边的物价。母亲不知从哪里知道了我独自入藏的消息，几次三番打电话给我，让我疯几天后立马回杭州。这些就是家人的关怀，无论走多远，他们依然关怀着你的一切，让你的内心不再孤独。家永远是最好的港湾，是你最好的依托。</p>
 
-#define LOOP_TIMES    5
+<p>世上还是有纯真的人，至少在我的旅途中碰到的大部分是这样的人，他们有戒备，但不会拒绝你的真心。反走318线是和北京的两位姐姐拼车的，一路上她们都很照顾我，或许是我的坦诚和纯真赢得了她们。坐在车上，累了就会睡着，不经意的时候就会把脑袋搭到她们的肩膀上，她们没说，我也没提，但彼此心里都明白。出门在外，更多的是谅解和包容。成都，我们最终的目的地，也是我和她们分别的地方，一路走来，我们彼此了解，那时更多的是不舍，因为不知何时才能再相见，一切只能成为一种期待。</p>
 
-int main(int argc, char *argv[])
-{
-    int i;
+<p>一个人，没有依靠，会让自己的内心安静下来，然后思考去处理自己即将面临的事情，这个过程就是一种成长。没有走前，或许会考虑很多，但真正面临问题了，处理后你就会觉得不过如此。与其在畏惧，不如勇敢的走出去，追随一下内心真正的想法。虽然独自旅行不易，但我还是鼓励有想法的人多出去走走，万水千山到过了，你才能真切地体会到它们的美丽。</p>
 
-    srand((unsigned int) time(NULL));
-
-    for(i=0; i&lt;LOOP_TIMES; i++)
-        printf("%d ", rand());
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-1943306114 679448932 319436844 1922998560 1458181616 
-$ ./rand
-1789418334 999331839 757991171 363979956 882919632 
-</code></pre>
-
-<h1>合理利用随机数</h1>
-
-<p>运行结果是不是不同了，但这么大的数对我们来说也没有多大意义，又怎么利用这些这些随机数呢？我们可对它进行范围化分，这样就可以产生我们想要范围内的数。</p>
-
-<p>产生一定范围随机数的通用表示公式：a + rand() % n，其中的a是起始值，n是整数的范围；</p>
-
-<p>要取得[a,b)的随机整数，使用(rand() % (b-a))+ a;</p>
-
-<p>要取得[a,b]的随机整数，使用(rand() % (b-a+1))+ a，另一种表示为a + (int)b * rand() / (RAND_MAX + 1)；</p>
-
-<p>要取得(a,b]的随机整数，使用(rand() % (b-a))+ a + 1;</p>
-
-<p>要取得0～1之间的浮点数，可以使用rand() / double(RAND_MAX)。</p>
-
-<p>以下例子生成［0，26］之间的数，使用了语句“nu = 0 + (int)( 26.0 *rand()/(RAND_MAX + 1.0));”来获取a到b之间的随机整数。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-
-#define LOOP_TIMES    5
-
-int main(int argc, char *argv[])
-{
-    int i, nu;
-
-    srand((unsigned int) time(NULL));
-
-    for(i=0; i&lt; LOOP_TIMES; i++) {
-        nu = 0 + (int)( 26.0 *rand()/(RAND_MAX + 1.0));
-        printf("%d ", nu);
-    }
-
-    printf("\n");
-
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-6 21 20 22 7
-$ ./rand
-4 12 25 3 13
-</code></pre>
-
-<h1>生成随机字符串</h1>
-
-<p>以下例子用来生成一个指定长度的随机字符串。</p>
-
-<pre><code>#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include &lt;stdio.h&gt;
-#include &lt;time.h&gt;
-
-#define BUFFER_LENGTH 257
-
-int main(int argc, char *argv[])
-{
-    int leng = 128 ;
-    int i, nu;
-    char buffer[BUFFER_LENGTH];
-
-    printf("Please Input length for the String, Default is 128, The Maxest legth is 256:");
-    fgets(buffer, BUFFER_LENGTH, stdin);
-    buffer[strlen(buffer)-1] = '\0' ;
-
-    if(buffer[0] != '\0')
-        leng = atoi(buffer);
-
-    srand((unsigned int)time(NULL));
-    bzero(buffer, BUFFER_LENGTH);
-
-    for (i= 0; i&lt; leng; i++)
-        buffer[i] = 'a' + ( 0+ (int)(26.0 *rand()/(RAND_MAX + 1.0)));
-
-    buffer[strlen(buffer)] = '\0';
-
-    printf("The randm String is [ %s ]\n", buffer);
-    return 0;
-}
-</code></pre>
-
-<p>运行结果：</p>
-
-<pre><code>$ ./rand
-Please Input length for the String, Default is 128, The Maxest legth is 256:8
-The randm String is [ rdekbnxj ]
-$ ./rand
-Please Input length for the String, Default is 128, The Maxest legth is 256:36
-The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
-</code></pre>
-
-<p>注意，需要使用bzero(buffer, 257)这条语句将缓存清空，否则生成的随机字符串中可能就会出现乱码的情况。</p>
+<p>我在西藏旅行的时候，你告诉我你很喜欢《蓝莲花》这首歌，我听了也很有感触，今天我想以我的这种方式回送给你，希望你能够突破那层阻碍，找到你内心深处的那朵蓝莲花！</p>
 </div>
 
 
@@ -286,12 +139,12 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
   
 
 
-<time datetime="2013-07-07T12:50:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2014-04-30T23:35:00+08:00" pubdate data-updated="true">Apr 30<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
   
 </span>
 
@@ -325,10 +178,8 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/" title="Previous Post: Linux下PDF文件的操作与转换">&laquo; Linux下PDF文件的操作与转换</a>
+        <a class="basic-alignment left" href="/blog/2014/04/29/xiang-shang-gun-dong-gong-neng/" title="Previous Post: 向上滚动功能">&laquo; 向上滚动功能</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/07/qiu-liang-ge-zheng-shu-de-zui-da-gong-yue-shu/" title="Next Post: 求两个整数的最大公约数">求两个整数的最大公约数 &raquo;</a>
       
     </p>
   </footer>
@@ -621,8 +472,8 @@ The randm String is [ bvfrbvvhdcuwdoarefcrkytsntltawpbsusu ]
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/07/linuxxia-cyu-yan-wei-sui-ji-shu-bian-cheng/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/30/du-zi-lu-xing-bu-yi/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/30/du-zi-lu-xing-bu-yi/';
         var disqus_script = 'embed.js';
       
     (function () {

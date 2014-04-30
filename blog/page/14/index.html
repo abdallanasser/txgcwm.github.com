@@ -73,6 +73,126 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/">Linux操作系统下的MAN命令</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-27T13:27:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
+
+<h1>分卷号</h1>
+
+<p>以上指令的中间数字是什么意思呢？是man的分卷号，所有的手册页都属于一个特定的分卷号，用一个字符来表示。Linux下最通用的分卷号及其名称和说明如下表所示。</p>
+
+<table>
+<thead>
+<tr>
+<th>分卷号         </th>
+<th>名称 </th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td> 用户命令     </td>
+<td> 可由任何人启动  </td>
+</tr>
+<tr>
+<td>2</td>
+<td> 系统调用     </td>
+<td> 由内核提供的函数  </td>
+</tr>
+<tr>
+<td>3</td>
+<td> 例程        </td>
+<td> 库函数    </td>
+</tr>
+<tr>
+<td>4</td>
+<td> 设备        </td>
+<td> /dev目录下的特殊文件   </td>
+</tr>
+<tr>
+<td>5</td>
+<td> 文件格式描述  </td>
+<td> 例如/etc/passwd   </td>
+</tr>
+<tr>
+<td>6</td>
+<td> 游戏        </td>
+<td> 略  </td>
+</tr>
+<tr>
+<td>7</td>
+<td> 杂项        </td>
+<td> 例如宏命令包、惯例等  </td>
+</tr>
+<tr>
+<td>8</td>
+<td> 系统管理员工具</td>
+<td> 只能由root启动  </td>
+</tr>
+<tr>
+<td>9</td>
+<td> 其他（Linux特定的）</td>
+<td> 用来存放内核例行程序的文档  </td>
+</tr>
+<tr>
+<td>n</td>
+<td> 新文档           </td>
+<td> 可能要移到更适合的领域  </td>
+</tr>
+<tr>
+<td>o</td>
+<td> 老文档           </td>
+<td> 可能会在一段期限内保留  </td>
+</tr>
+<tr>
+<td>l</td>
+<td> 本地文档          </td>
+<td> 与特定系统有关的  </td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/">奇谋之士蒯通</a></h1>
     
     
@@ -455,57 +575,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Uboot中TFTP解释</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
-
-<p>使用TFTP传送文件的步骤：</p>
-
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -540,6 +609,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/30/du-zi-lu-xing-bu-yi/">独自旅行不易</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/29/xiang-shang-gun-dong-gong-neng/">向上滚动功能</a>
       </li>
     
@@ -553,10 +626,6 @@
     
       <li class="post">
         <a href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/">关于爬虫开发的选择</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">运行Scrapy项目出错：KeyError: &#8216;Spider Not Found: Tutorial&#8217;</a>
       </li>
     
   </ul>
@@ -588,7 +657,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (12)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
-<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (16)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
