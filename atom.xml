@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-05T01:11:13+08:00</updated>
+  <updated>2014-05-06T01:11:42+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[电子书阅读软件的UGC]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/06/dian-zi-shu-yue-du-ruan-jian-de-ugc/"/>
+    <updated>2014-05-06T01:10:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/06/dian-zi-shu-yue-du-ruan-jian-de-ugc</id>
+    <content type="html"><![CDATA[<p><img src="http://leiphone.qiniudn.com/uploads/08-3/-1/08-33-11-72.jpg" alt="alt text" /></p>
+
+<p>我一向很少使用电子书方面的阅读软件，在多看上下载了好几本电子书，却也一直没看，五一回家的路上就随便翻翻。下载的内容也都是一些电子期刊（极客公园、ifanr、知乎周刊、36Kr等）的精华版本，里面聚集了一些小编们认为好的，但对于我来说并不喜欢每一篇他们精心挑选的文章。</p>
+
+<p>我有一个毛病，就是看完了就想把它给删除了，我不愿它们占据我几K的空间。碰到一些好的段落，借助它们的复制粘贴功能可以保存到记事本里，但对于好的文章我却没有找到对应的功能（知道的朋友可以告诉我一声，要我整篇复制的话，我可没有那个耐性）。</p>
+
+<!--more-->
+
+
+<p>我想是否可以设计这样一个功能：添加一个选项，可以把自己喜欢的文章保存起来，集结在自己的专属文集里。虽然这是不起眼的功能，可我觉得它有以下的几个好处：</p>
+
+<ul>
+<li><p>需要使用该功能的用户需要注册（对于我来说，一个软件没有吸引我的东西，我是不会去注册的，而这样的功能恰是我需要的。虽然在不注册的情况下，软件照样可以肆无忌惮的收集你的个人资料，但注册后的效果就如同你给它颁发了结婚证一样，它可以以合法的理由强奸你）；</p></li>
+<li><p>一个喜欢收藏好文章的人，他必然有自己的品味，他会筛选出很多好的内容，整理成一个个文集，加上每个人都有展示的欲望，软件开发商可以鼓励这批用户把他们收集的内容show出来，这就是UGC了，这样阅读软件本身也就有了内容，这也不牵扯到侵权，因为这些都是用户的行为；</p></li>
+<li><p>这些文集的内容是精华中的精华，它会留住原有的用户，也会更好的吸引其他的读者。</p></li>
+</ul>
+
+
+<p>顺便也谈谈简书开放的“专题”功能，在我看来它其实就是传统的收藏功能（一些细心的人会为自己收藏的内容分类，其他的人也就只是简单的收藏，估计后续也不会怎么看），但简书的这个功能却有一个小的创新点，它是对外开放的，你创建的文集别人也能够看到，随着平台的壮大，它其实为内容的筛选起到了弥补的作用（如果单靠几个小编在折腾，就会错过很多优质的内容）。</p>
+
+<p>创新无需太大，一些微创新或许就能牵动很多人的心。苦逼的码农们，赶紧行动吧，我等待这个功能等得很着急呀！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[剑问君答：Horizon的回顾]]></title>
@@ -1249,43 +1278,6 @@
 </span><span class='line'>cp /tmp/file1 file2  将目录/tmp下的文档file1复制到当前目录下，文档名为file2
 </span><span class='line'>cp -r dir1 dir2      (recursive copy)复制整个目录。若目录dir2存在，则将目录dir1及其所有文档和子目录复制
 </span><span class='line'>到目录dir2下，新目录名称为dir1。若目录dir2不存在，则将dir1及其所有文档和子目录复制为目录dir2。</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu下安装c-ares库]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku/"/>
-    <updated>2014-03-26T22:59:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku</id>
-    <content type="html"><![CDATA[<p>安装c-ares库的三种方法：</p>
-
-<h1>源码安装</h1>
-
-<p>到<a href="http://c-ares.haxx.se/">这里</a>下载源码，然后执行以下指令编译和安装。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd c-ares-1.10.0
-</span><span class='line'>$ ./buildconf
-</span><span class='line'>$ autoconf configure.ac
-</span><span class='line'>$ ./configure
-</span><span class='line'>$ make
-</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>第三方软件安装</h1>
-
-<p>在新得立搜索c-ares，然后安装相应的库。</p>
-
-<h1>终端安装</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install libc-ares2 libc-ares-dev</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
