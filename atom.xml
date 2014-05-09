@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-10T00:53:30+08:00</updated>
+  <updated>2014-05-10T00:58:16+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -139,7 +139,7 @@
 
 <h2>方法二</h2>
 
-<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式，代码如下：</p>
+<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式。相关的HTML代码很简单，在<code>source/_include/custom/footer.html</code>中添加如下代码：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
