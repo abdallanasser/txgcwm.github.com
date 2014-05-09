@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-09T21:35:22+08:00</updated>
+  <updated>2014-05-09T23:10:57+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,258 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加二维码展示和返回顶部按钮]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"/>
+    <updated>2014-05-09T22:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu</id>
+    <content type="html"><![CDATA[<h1>二维码展示</h1>
+
+<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&trade;&lt;/abbr&gt;&lt;/h1&gt;
+</span><span class='line'>  &lt;a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在侧边栏显示，则将<code>qrcode.html</code>放入<code>source/_includes/custom/asides/</code>中，在<code>_config.yml</code>中<code>default_asides</code>添加<code>custom/asides/qrcode.html</code>即可显示。或者将<code>qrcode.html</code>代码添加到想展示页面的HTML文件中。</p>
+
+<!--more-->
+
+
+<h1>滑动返回顶部按钮</h1>
+
+<p>文章较长的情况，通常希望有一个返回顶部的按钮。如下方法实现了在页面右下方添加一个返回顶部的图片按钮，点击后可以滑动的返回顶部。</p>
+
+<h2>方法一</h2>
+
+<p>首先创建<code>source/javascripts/top.js</code>，实现滑动返回顶部效果，添加如下代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function goTop(acceleration, time) {
+</span><span class='line'>  acceleration = acceleration || 0.1;
+</span><span class='line'>  time = time || 16;
+</span><span class='line'>
+</span><span class='line'>  var x1 = 0;
+</span><span class='line'>  var y1 = 0;
+</span><span class='line'>  var x2 = 0;
+</span><span class='line'>  var y2 = 0;
+</span><span class='line'>  var x3 = 0;
+</span><span class='line'>  var y3 = 0;
+</span><span class='line'>
+</span><span class='line'>  if (document.documentElement) {
+</span><span class='line'>      x1 = document.documentElement.scrollLeft || 0;
+</span><span class='line'>      y1 = document.documentElement.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  if (document.body) {
+</span><span class='line'>      x2 = document.body.scrollLeft || 0;
+</span><span class='line'>      y2 = document.body.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  var x3 = window.scrollX || 0;
+</span><span class='line'>  var y3 = window.scrollY || 0;
+</span><span class='line'>
+</span><span class='line'>  var x = Math.max(x1, Math.max(x2, x3));
+</span><span class='line'>  var y = Math.max(y1, Math.max(y2, y3));
+</span><span class='line'>
+</span><span class='line'>  var speed = 1 + acceleration;
+</span><span class='line'>  window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
+</span><span class='line'>
+</span><span class='line'>  if(x &gt; 0 || y &gt; 0) {
+</span><span class='line'>      var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
+</span><span class='line'>      window.setTimeout(invokeFunction, time);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着创建<code>source/_includes/custom/totop.html</code>，设置返回顶部按钮样式和位置，代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!--返回顶部开始--&gt;
+</span><span class='line'>&lt;div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;"&gt;
+</span><span class='line'>  &lt;a href="#" onclick="goTop();return false;"&gt;&lt;img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/div&gt;
+</span><span class='line'>&lt;script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"&gt;&lt;/script&gt;
+</span><span class='line'>&lt;!--返回顶部结束--&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
+
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加`<!--返回顶部开始--></p>
+
+<div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+    <a href="#" onclick="goTop();return false;"><img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+
+
+<script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"></script>
+
+
+<!--返回顶部结束-->
+
+
+<p>`这句（这个在很多教程里都没有找到，对于一个不懂前端的人摸索了好久才整出来），代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'><!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress添加二维码展示和返回顶部按钮 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu">
+  <link href="http://txgcwm.github.io/favicon.png" rel="icon">
+  <link href="http://txgcwm.github.io/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://txgcwm.github.io/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <link href="http://txgcwm.github.io/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="http://txgcwm.github.io/javascripts/modernizr-2.0.js"></script>
+  <script src="http://txgcwm.github.io//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="http://txgcwm.github.io/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+</span><span class='line'>&#8230;
+</span><span class='line'>  &lt;nav role=&#8221;navigation&#8221;&gt;<ul class="subscription" data-subscription="rss">
+  <li><a href="http://txgcwm.github.io/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="http://txgcwm.github.io/">Home</a></li>
+  <li><a href="http://txgcwm.github.io/blog/archives">Archives</a></li>
+  <li><a href="http://txgcwm.github.io/about">About</a></li> 
+</ul>
+
+&lt;/nav&gt;
+</span><span class='line'>  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+    <a href="#" onclick="goTop();return false;"><img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+</span><span class='line'>&#8230;
+</span><span class='line'>  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</span><span class='line'>&lt;/body&gt;
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>参考文章</h1>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
+<a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
+<a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[电子书阅读软件的UGC]]></title>
@@ -1223,62 +1475,6 @@
 <p>据我了解，猎头公司从招聘公司获取到的佣金比例还是挺高的，但公司给内部推荐的员工的奖励却比这个比例要低很多，难道这就是传说中的利益链吗？</p>
 
 <p>我想未来猎头这个职业并不会是现在的这种工作方式（或许很多东西还是老样子，但它的属性会有很大的改变），甚至它可能是一种自由职业。未来似乎太遥远，不管怎样，且行且看未来的变化。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[cp命令]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/30/cpming-ling/"/>
-    <updated>2014-03-30T09:45:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/30/cpming-ling</id>
-    <content type="html"><![CDATA[<p>该命令的功能是将给出的文件或目录拷贝到另一文件或目录中，同MS-DOS下的copy命令一样，功能十分强大。</p>
-
-<p>语法:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp [选项] 源文件或目录 目标文件或目录</span></code></pre></td></tr></table></div></figure>
-
-
-<p>说明:该命令把指定的源文件复制到目标文件或把多个源文件复制到目标目录中。</p>
-
-<p>该命令的各选项含义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-a      该选项通常在拷贝目录时使用。它保留链接、文件属性，并递归地拷贝目录，其作用等于dpR选项的组合。
-</span><span class='line'>-d      拷贝时保留链接。
-</span><span class='line'>-f      删除已经存在的目标文件而不提示。
-</span><span class='line'>-i      和f选项相反，在覆盖目标文件之前将给出提示要求用户确认。回答y时目标文件将被覆盖，是交互式拷贝。
-</span><span class='line'>-p      此时cp除复制源文件的内容外，还将把其修改时间和访问权限也复制到新文件中。
-</span><span class='line'>-r      若给出的源文件是一目录文件，此时cp将递归复制该目录下所有的子目录和文件。此时目标文件必须是一个目录名。
-</span><span class='line'>-l      不作拷贝，只是链接文件。</span></code></pre></td></tr></table></div></figure>
-
-
-<p>需要说明的是，为防止用户在不经意的情况下用cp命令破坏另一个文件，如用户指定的目标文件名已存在，用cp命令拷贝文件后，这个文件就会被新源文件覆盖，因此，建议用户在使用cp命令拷贝文件时，最好使用i选项。</p>
-
-<!--more-->
-
-
-<p>例子:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>cp -i file1 file2    将文档file1复制成file2，-i为提示确认。
-</span><span class='line'>cp file1 dir1        将文档file1复制到目录dir1下，文件名仍为file1。
-</span><span class='line'>cp /tmp/file1 .      将目录/tmp下的文档file1复制到当前目录下，文档名仍为file1。
-</span><span class='line'>cp /tmp/file1 file2  将目录/tmp下的文档file1复制到当前目录下，文档名为file2
-</span><span class='line'>cp -r dir1 dir2      (recursive copy)复制整个目录。若目录dir2存在，则将目录dir1及其所有文档和子目录复制
-</span><span class='line'>到目录dir2下，新目录名称为dir1。若目录dir2不存在，则将dir1及其所有文档和子目录复制为目录dir2。</span></code></pre></td></tr></table></div></figure>
-
 ]]></content>
   </entry>
   

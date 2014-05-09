@@ -5,11 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>一个人的旅行 - 残剑</title>
+  <title>Octopress添加二维码展示和返回顶部按钮 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="一个人在大城市待久了，总感觉缺失点什么，但总是表达不出内心的那种缺失。出去走走或许会让自己变得开朗一些，减少一些忧郁。很早的时候，就有出去逛逛的打算，可被世俗的事情缠身，加上自己的一再拖延，很多的事情都没有去做，不能不说这是一种遗憾。少一些顾虑，多一些冲动，或许很多的事情才能够真正的做好。 &hellip;">
+  <meta name="description" content="二维码展示 在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击这里。 1
+2
+3
+4
+&lt;section&gt; &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/09/12/%5B%3F%5D-ge-ren-de-lu-xing">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -77,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">一个人的旅行</h1>
+      <h1 class="entry-title">Octopress添加二维码展示和返回顶部按钮</h1>
     
     
       <p class="meta">
@@ -93,7 +97,7 @@
   
 
 
-<time datetime="2013-09-12T00:04:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2013</time>
+<time datetime="2014-05-09T22:37:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -102,20 +106,250 @@
   </header>
 
 
-<div class="entry-content"><p><img src="http://img2081.poco.cn/mypoco/myphoto/20110831/22/56223085201108312248264284517817152_001.jpg"></p>
+<div class="entry-content"><h1>二维码展示</h1>
 
-<p>一个人在大城市待久了，总感觉缺失点什么，但总是表达不出内心的那种缺失。出去走走或许会让自己变得开朗一些，减少一些忧郁。很早的时候，就有出去逛逛的打算，可被世俗的事情缠身，加上自己的一再拖延，很多的事情都没有去做，不能不说这是一种遗憾。少一些顾虑，多一些冲动，或许很多的事情才能够真正的做好。趁着年轻，没有家庭的负担，我似乎没有理由放弃这段美好的时光。</p>
+<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&trade;&lt;/abbr&gt;&lt;/h1&gt;
+</span><span class='line'>  &lt;a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在侧边栏显示，则将<code>qrcode.html</code>放入<code>source/_includes/custom/asides/</code>中，在<code>_config.yml</code>中<code>default_asides</code>添加<code>custom/asides/qrcode.html</code>即可显示。或者将<code>qrcode.html</code>代码添加到想展示页面的HTML文件中。</p>
 
 <!--more-->
 
 
-<p>临近大学毕业的那会儿，冲动了一次，买了一辆二手的自行车，和基哥一同，从西安骑向宝鸡。骑行的时间花了大约18小时，当然这不包括旅馆过夜的几个小时，最后到达基哥的老家。那时我们骑的很匆忙，没有更多的欣赏沿途的风景，基哥骑得很快，我一个劲的在后面追赶。一个旅行者拍下了我们骑行的背影，不知道你是否还一直替我们保留着照片。那时的我们真的很羡慕，要是那时的我们有能力买一部属于自己的摄像机，那旅途又会增加一些新的乐趣。到了基哥的家里也没有多停留，隐隐地记得自己只在他家歇了一个晚上，第二天的下午就回学校了。当然这次坐的是公共汽车，如果还是骑行回西安的话，我想这不只是蛋碎的问题了。回到学校的第二天，就和几个小伙伴们踏上了征服华山的道路。凭借我们的脚力跑遍了华山的各个景点，那时的那双脚我都感觉不属于自己了，真正明白了“劳军远征，其师必疲，宜速击之”的道理，当一个人身体疲乏的时候，它完全可以磨灭一个人的意志。</p>
+<h1>滑动返回顶部按钮</h1>
 
-<p>多人单独旅行虽然可以相互照顾，但每个人都有不同兴趣点而不能形成统一的观点、行动方向，一次旅行未必会达到自己预期的效果。公司组织出游和跟旅行团虽有明确的目的，但每次都很仓促，跟打仗似的，每次都是急行军，搞得大伙身心俱疲，除了照片没有多少其它的回忆。一个人的旅行，喜欢的地方自己想待多久就可以待多久，不喜欢的地方也可以随时离开。一个人或许会很孤独，可拥有更多的独立的思考空间，可以仰望星空而不去想那些繁琐的世事。</p>
+<p>文章较长的情况，通常希望有一个返回顶部的按钮。如下方法实现了在页面右下方添加一个返回顶部的图片按钮，点击后可以滑动的返回顶部。</p>
 
-<p>人生就应该有一次说走就走的旅行，没有明确的目的地，没有足够的准备，只是毫无目的地向一个地方奔去。不需要太多的东西，一台笔记本电脑，一个手机，一个移动电源，几本书，几首路上听的曲子，几件换洗的衣服，一个背包，这些足够了。原本打算从网上购买的物品都到齐的时候再出行，却发现有些东西来的太忙，当思考的越多羁绊就越多，最后都有可能取消当初的计划。放下一些东西，去追寻内心真正的想法才是最重要的。人生不就是如此吗？有舍才会有得。</p>
+<h2>方法一</h2>
 
-<p>人的一生就是一次没有回程的旅行，不能苛求有第二次的机会，我们能做的就是让它的每一个阶段都有非凡的意义、活出属于自己的精彩。这样的旅行，如果只能带两样东西的话，我希望是坚强和执着；如果只能带一样东西上路的话，我希望是亲情！</p>
+<p>首先创建<code>source/javascripts/top.js</code>，实现滑动返回顶部效果，添加如下代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function goTop(acceleration, time) {
+</span><span class='line'>  acceleration = acceleration || 0.1;
+</span><span class='line'>  time = time || 16;
+</span><span class='line'>
+</span><span class='line'>  var x1 = 0;
+</span><span class='line'>  var y1 = 0;
+</span><span class='line'>  var x2 = 0;
+</span><span class='line'>  var y2 = 0;
+</span><span class='line'>  var x3 = 0;
+</span><span class='line'>  var y3 = 0;
+</span><span class='line'>
+</span><span class='line'>  if (document.documentElement) {
+</span><span class='line'>      x1 = document.documentElement.scrollLeft || 0;
+</span><span class='line'>      y1 = document.documentElement.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  if (document.body) {
+</span><span class='line'>      x2 = document.body.scrollLeft || 0;
+</span><span class='line'>      y2 = document.body.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  var x3 = window.scrollX || 0;
+</span><span class='line'>  var y3 = window.scrollY || 0;
+</span><span class='line'>
+</span><span class='line'>  var x = Math.max(x1, Math.max(x2, x3));
+</span><span class='line'>  var y = Math.max(y1, Math.max(y2, y3));
+</span><span class='line'>
+</span><span class='line'>  var speed = 1 + acceleration;
+</span><span class='line'>  window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
+</span><span class='line'>
+</span><span class='line'>  if(x &gt; 0 || y &gt; 0) {
+</span><span class='line'>      var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
+</span><span class='line'>      window.setTimeout(invokeFunction, time);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着创建<code>source/_includes/custom/totop.html</code>，设置返回顶部按钮样式和位置，代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!--返回顶部开始--&gt;
+</span><span class='line'>&lt;div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;"&gt;
+</span><span class='line'>  &lt;a href="#" onclick="goTop();return false;"&gt;&lt;img src="/images/top.png" border=0 alt="返回顶部"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/div&gt;
+</span><span class='line'>&lt;script src="/javascripts/top.js" type="text/javascript"&gt;&lt;/script&gt;
+</span><span class='line'>&lt;!--返回顶部结束--&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
+
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加`<!--返回顶部开始--></p>
+
+<div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+    <a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+
+
+<script src="/javascripts/top.js" type="text/javascript"></script>
+
+
+<!--返回顶部结束-->
+
+
+<p>`这句（这个在很多教程里都没有找到，对于一个不懂前端的人摸索了好久才整出来），代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'><!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Octopress添加二维码展示和返回顶部按钮 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+</span><span class='line'>&#8230;
+</span><span class='line'>  &lt;nav role=&#8221;navigation&#8221;&gt;<ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Home</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li> 
+</ul>
+
+&lt;/nav&gt;
+</span><span class='line'>  <!--返回顶部开始-->
+<div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+    <a href="#" onclick="goTop();return false;"><img src="/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+<script src="/javascripts/top.js" type="text/javascript"></script>
+<!--返回顶部结束-->
+
+</span><span class='line'>&#8230;
+</span><span class='line'>  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</span><span class='line'>&lt;/body&gt;
+</span><span class='line'>&lt;/html&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>参考文章</h1>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
+<a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
+<a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a></p>
 </div>
 
 
@@ -138,12 +372,12 @@
   
 
 
-<time datetime="2013-09-12T00:04:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2013</time>
+<time datetime="2014-05-09T22:37:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
   
 </span>
 
@@ -177,10 +411,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/09/11/jian-wen-jun-da-%3Aandroidying-yong-kai-fa-cheng-xu-yuan/" title="Previous Post: 剑问君答：Android应用开发程序媛">&laquo; 剑问君答：Android应用开发程序媛</a>
+        <a class="basic-alignment left" href="/blog/2014/05/06/dian-zi-shu-yue-du-ruan-jian-de-ugc/" title="Previous Post: 电子书阅读软件的UGC">&laquo; 电子书阅读软件的UGC</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/16/zai-yuan-ye-shang-kuang-ben/" title="Next Post: 在原野上狂奔">在原野上狂奔 &raquo;</a>
       
     </p>
   </footer>
@@ -198,7 +430,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/09/12/%5B%3F%5D-ge-ren-de-lu-xing/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/09/12/%5B%3F%5D-ge-ren-de-lu-xing/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -477,8 +709,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/09/12/%5B%3F%5D-ge-ren-de-lu-xing/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/09/12/%5B%3F%5D-ge-ren-de-lu-xing/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/';
         var disqus_script = 'embed.js';
       
     (function () {
