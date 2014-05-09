@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Android | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-09T23:04:40+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu下编译vlc-android源代码]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/"/>
+    <updated>2013-07-19T21:18:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma</id>
+    <content type="html"><![CDATA[<p>在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令：
+<code>
+$ apt-get install  apache-ant(or ant)  autoconf automake autopoint  libtool  gawk (or nawk)
+gcc  g++  pkg-config  cmake  patch subversion git
+</code>
+ant工具在最后编译android源码生成apk文件会用到，所以需要安装。如果手动安装了ant，需要在环境变量中配置好ant的 path，或者在编译前执行命令<code>export PATH=$PATH:/xxx/ant/bin</code>，保证可以在执行编译的命令行中执行ant命令即可。</p>
+
+<!--more-->
+
+
+<h1>环境变量配置</h1>
+
+<p>配置ANDROID_SDK（请把path改为自己的路径）
+<code>
+$ export ANDROID_SDK=/path/to/android-sdk
+</code>
+配置ANDROID_NDK
+<code>
+$ export ANDROID_NDK=/path/to/android-ndk
+</code>
+配置PATH变量
+<code>
+$ export PATH=$PATH:$ANDROID_SDK/tools:$ANDROID_SDK/platform-tools
+</code>
+配置NEON相关信息（一般编译的时候，会编译NO_NEON和支持NEON两种包出来）
+<code>
+$ export NO_NEON=1
+</code>
+如果设备不支持NEON技术，请务必配置此项；如果机器支持NEON技术，可以不用配置此项。关于NEON的简单信息：根据维基百科英文版ARM架构中的介绍，Cortex-A8架构的设备均支持NEON技术，而在Cortex-A9架构的设备中则是可选的，更多信息请参考 <a href="http://www.arm.com/zh/products/processors/technologies/neon.php">NEON</a> 和 <a href="http://en.wikipedia.org/wiki/ARM_architecture#Advanced_SIMD_.28NEON.29">ARM architecture</a> 。</p>
+
+<p>配置ABI
+<code>
+$ export ANDROID_ABI=armeabi-v7a
+</code></p>
+
+<h1>获取源码</h1>
+
+<p><code>
+$ git clone git://git.videolan.org/vlc-ports/android.git
+</code></p>
+
+<h1>编译源码</h1>
+
+<p>下载完成后，进入android文件夹执行<code>sh compile.sh</code>，开始自动编译。如果编译过程中遇到错误：
+<code>
+checking host system type… Invalid configuration `arm-linux-androideabi’: system
+`androideabi’ not recognized
+</code>
+请在重新编译之前执行以下操作：1. 到 <a href="http://git.savannah.gnu.org/gitweb/?p=config.git;a=tree">这里</a>下载最新的config.guess和config.sub文件；2. 将下载的文件拷贝到/usr/share/misc目录下；3. 重新启动编译。</p>
+
+<p>最后提示BUILD SUCESSFUL，说明编译成功了，在android/vlc-android/bin目录下会生成一个apk文件，可以直接拿来安装。如果想自己调整界面部分，或者添加、修改其它功能，可以直接把项目导入eclipse进行开发。</p>
+
+<h1>出错处理</h1>
+
+<p>如果编译过程中提示缺少某一软件的错误，请根据错误提示安装对应的工具，或者在执行编译之前就把之前提到的工具全部安装好。</p>
+
+<p>出错信息：
+```
+ CC     posix/plugin.lo
+../../src/posix/plugin.c: In function &lsquo;module_Load&rsquo;:
+../../src/posix/plugin.c:50:50: warning: unused parameter &lsquo;lazy&rsquo; [-Wunused-parameter]
+  CC     posix/thread.lo
+../../src/posix/thread.c:85:5: warning: #warning Monotonic clock not available. Expect timing issues. [-Wcpp]
+../../src/posix/thread.c: In function &lsquo;vlc_cancel&rsquo;:
+../../src/posix/thread.c:830:5: error: implicit declaration of function &lsquo;pthread_cancel&rsquo; [-Werror=implicit-function-declaration]
+../../src/posix/thread.c: In function &lsquo;vlc_savecancel&rsquo;:
+../../src/posix/thread.c:847:5: error: implicit declaration of function &lsquo;pthread_setcancelstate&rsquo; [-Werror=implicit-function-declaration]
+../../src/posix/thread.c:847:39: error: &lsquo;PTHREAD_CANCEL_DISABLE&rsquo; undeclared (first use in this function)
+../../src/posix/thread.c:847:39: note: each undeclared identifier is reported only once for each function it appears in
+../../src/posix/thread.c: In function &lsquo;vlc_restorecancel&rsquo;:
+../../src/posix/thread.c:867:9: error: &lsquo;PTHREAD_CANCEL_DISABLE&rsquo; undeclared (first use in this function)
+../../src/posix/thread.c: In function &lsquo;vlc_testcancel&rsquo;:
+../../src/posix/thread.c:884:5: error: implicit declaration of function &lsquo;pthread_testcancel&rsquo; [-Werror=implicit-function-declaration]
+cc1: some warnings being treated as errors</p>
+
+<p>make[3]: <strong><em> [posix/thread.lo] Error 1
+make[3]: Leaving directory <code>/srv/android/vlc/android/src'
+make[2]: *** [all] Error 2
+make[2]: Leaving directory</code>/srv/android/vlc/android/src'
+make[1]: </em></strong> [all-recursive] Error 1
+make[1]: Leaving directory `/srv/android/vlc/android'
+make: *** [all] Error 2
+```</p>
+
+<p>解决方法：
+进入下载的android vlc目录，执行以下指令。
+<code>
+$ cd vlc
+$ git reset --hard origin
+$ git pull origin master
+$ git checkout -b android ${TESTED_HASH}
+$ git am ../patches/*
+</code></p>
+
+<p>注：在老的git版本中git checkout并没有-B的选项，所以一开始执行的时候并没有下载android版本的vlc代码，故使用<code>git checkout -b android ${TESTED_HASH}</code>。</p>
+
+<p>出错信息：
+```
+BUILD FAILED
+/usr/local/android-sdk-linux/tools/ant/build.xml:517: Unable to resolve project target &lsquo;android-15&rsquo;</p>
+
+<p>Total time: 3 seconds
+make: *** [vlc-android/bin/VLC-debug.apk] Error 1
+rm android-libs/libmedia.c android-libs/libutils.c android-libs/libstagefright.c android-libs/libbinder.c
+```</p>
+
+<p>解决方法：
+进入到android-sdk-linux/tools目录，执行<code>./android</code>下载Android 4.0.3（API15）的相关文件。</p>
+
+<p>出错信息：
+```
+curl -f -L &mdash; &ldquo;<a href="http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz">http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz</a>&rdquo; > &ldquo;../../contrib/tarballs/speex-git.tar.gz&rdquo;
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</p>
+
+<pre><code>                             Dload  Upload   Total   Spent    Left  Speed
+</code></pre>
+
+<p>100   814  100   814    0     0    226      0  0:00:03  0:00:03 &mdash;:&mdash;:&mdash; 23941
+../../contrib/src/speex/rules.mak:20: .sum-speex not implemented
+touch .sum-speex
+touch -r .sum-speex .sum-speexdsp
+rm -Rf speex-git
+mkdir -p speex-git
+zcat &ldquo;../../contrib/tarballs/speex-git.tar.gz&rdquo; | (cd speex-git &amp;&amp; tar xv &mdash;strip-components=1)</p>
+
+<p>gzip: ../../contrib/tarballs/speex-git.tar.gz: not in gzip format
+tar: This does not look like a tar archive
+tar: Exiting with failure status due to previous errors
+make: *** [speex] Error 2
+```</p>
+
+<p>解决方法：
+将<code>http://git.xiph.org/?p=speex.git;a=snapshot;h=HEAD;sf=tgz</code>输入到浏览器地址栏中就会开始下载你所需要的文件，然后将相应下载的压缩文件存放于contrib/tarballs/目录下，将名字改成speex-git.tar.gz。若碰到其它的库文件有类似的错误，可采用该办法。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C/C++ | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/c-c/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-09T23:04:40+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C编译警告]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/"/>
+    <updated>2014-04-17T00:00:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao</id>
+    <content type="html"><![CDATA[<p>编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。</p>
+
+<p>在整个的清理过程中，主要发现以下几类警告信息：</p>
+
+<ul>
+<li>类在构建时，变量初始化的次序颠倒；</li>
+<li>有无符号数在作比较；</li>
+<li>宏定义不正确；</li>
+<li>定义了没有使用的变量，如果有很多条件宏定义的时候，这个处理要细致一些；</li>
+<li>结构体和数组的初始化方式不正确，其实是错误的方式，却也只是警告；</li>
+<li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；
+```
+if(ptr != NULL);  // 分号错误的添加
+  printf(&ldquo;[%s, %d] address: %p \n&rdquo;, <strong>FUNCTION</strong>, <strong>LINE</strong>, ptr);
+  //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。</li>
+</ul>
+
+
+<p>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。</p>
+
+<pre><code>/*do something*/
+</code></pre>
+
+<p>```
+&ndash; 函数的形参定义了，在函数体内却没有使用到。</p>
+
+<!--more-->
+
+
+<p>针对最后一点警告信息，可以有以下的方式处理：</p>
+
+<ul>
+<li>去除没有使用的形参；</li>
+<li>使用<code>(void)x</code>的方式；
+```
+
+<h1>define UNUSED(x) (void)x</h1>
+
+<p>void SomeFunction(int param1, int param2)
+{
+  UNUSED(param2);
+  //UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
+  //do stuff with param1
+}
+```</p></li>
+<li>对没使用的参数使用<code>para=para</code>方式；
+<code>
+int SomeFunction(int param1, int param2)
+{
+  param2=param2;    //添加该行
+  //do stuff with param1
+  return 0;
+}
+</code></li>
+<li>使用<code>gcc</code>的<code>__attribute__((unused))</code>功能项；
+```
+
+<h1>ifdef UNUSED</h1>
+
+<h1>elif defined(<strong>GNUC</strong>)</h1>
+
+<h1>define UNUSED(x) UNUSED_ ## x <strong>attribute</strong>((unused))</h1>
+
+<h1>elif defined(<strong>LCLINT</strong>)</h1>
+
+<h1>define UNUSED(x) /<em>@unused@</em>/ x</h1>
+
+<h1>else</h1>
+
+<h1>define UNUSED(x) x</h1>
+
+<h1>endif</h1></li>
+</ul>
+
+
+<p>void dcc_mon_siginfo_handler(int UNUSED(whatsig))
+```</p>
+
+<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。大伙并不是没有察觉到这些警告的重要性，只是已经习惯了自己的方式，而漠视了这一切，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
+
+<p><big>参考文章</big> <br/>
+<a href="http://bbs.csdn.net/topics/340049876">如何消除gcc编译警告 warning: &ldquo;unused parameter xxxx&rdquo;</a><br/>
+<a href="http://sourcefrog.net/weblog/software/languages/C/unused.html">UNUSED in gcc</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[popen和pclose函数]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu/"/>
+    <updated>2013-08-03T22:07:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu</id>
+    <content type="html"><![CDATA[<p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：
+<code>
+FILE *popen( const char* command, const char* mode )
+</code>
+参数说明</p>
+
+<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
+mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
+
+<!--more-->
+
+
+<p>返回值</p>
+
+<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
+
+<p><code>
+int pclose (FILE* stream)
+</code>
+参数说明</p>
+
+<p>stream： popen返回的文件指针。</p>
+
+<p>返回值</p>
+
+<p>如果调用失败，返回-1。</p>
+
+<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本想从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：
+```
+int get_device_info(void)
+{</p>
+
+<pre><code>FILE *fp = NULL;
+char buffer[128];
+char *ptr = NULL;
+int vid, pid;
+
+fp = popen("lsusb", "r");
+if (fp == NULL)
+    return -1;
+
+while (NULL != fgets(buffer, sizeof(buffer), fp)) {
+    ptr = strstr(buffer, "ID");
+    if (ptr) {
+        sscanf(ptr, "ID %04x:%04x", &amp;vid, &amp;pid);
+        printf("%04x:%04x\n", vid, pid);
+    }
+}
+pclose(fp);
+
+return 0;
+</code></pre>
+
+<p>}
+<code>
+编写主函数调用以上的接口，使用`lsusb`查看usb设备及执行测试程序：
+</code>
+$ lsusb
+Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 1532:0016 Razer USA, Ltd DeathAdder Mouse
+Bus 001 Device 004: ID 058f:b002 Alcor Micro Corp.</p>
+
+<p>$ ./a.out
+8087:0024
+8087:0024
+1d6b:0002
+1d6b:0002
+1532:0016
+058f:b002</p>
+
+<p>```</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://my.oschina.net/renhc/blog/35116">基于管道的popen和pclose函数</a><br/>
+<a href="http://networking.ctocio.com.cn/tips/137/9412137.shtml">Linux popen函数的使用总结</a><br/>
+<a href="http://bbs.chinaunix.net/thread-4087539-1-1.html">关于/proc/iomem中信息解释</a>  <br/>
+<a href="http://tech.watchstor.com/storage-systems-117859.htm">proc文件系统功能总览</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[log10的实现]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/"/>
+    <updated>2013-08-03T01:46:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian</id>
+    <content type="html"><![CDATA[<p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
+
+<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。
+```</p>
+
+<pre><code>double my_log10(double x)
+{
+    register double ret;
+
+ __asm__(
+    "fldlg2\n\t" 
+    "fxch\n\t" 
+    "fyl2x"
+    :"=t"(ret)
+    :"0"(x)
+        );
+   return ret;
+}
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：
+```</p>
+
+<pre><code>double __log10 (double x)
+{
+    if (__builtin_expect (islessequal (x, 0.0), 0) &amp;&amp; _LIB_VERSION != _IEEE_)
+    {
+        if (x == 0.0)
+        {
+             feraiseexcept (FE_DIVBYZERO);
+             return __kernel_standard (x, x, 18); /* log10(0) */
+        }
+        else
+        {
+            feraiseexcept (FE_INVALID);
+            return __kernel_standard (x, x, 19); /* log10(x&lt;0) */
+        }
+     }
+
+   return  __ieee754_log10 (x);
+}
+</code></pre>
+
+<p>```</p>
+
+<p>参考 <a href="http://www.cnblogs.com/skyivben/archive/2013/02/15/2912914.html">这里</a> 实现了一个c语言版本的log10快速算法，还不是很完善。
+```</p>
+
+<h1>include &lt;math.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>static double Sqrt(double x)
+{</p>
+
+<pre><code>if (x &lt; 0)
+    return -1;
+if (x == 0)
+    return 0;
+double y = (double)sqrt((double)x);
+
+return (y + x / y) / 2;
+</code></pre>
+
+<p>}</p>
+
+<p>static double NegativeLog(double q)
+{</p>
+
+<pre><code>int p;
+double pi2 = 6.283185307179586476925286766559;
+double eps2 = 0.00000000000001; // 1e-14
+double eps1;    // 1e-28
+double r = q, s = q, n = q, q2 = q * q, q1 = q2 * q;
+
+eps1 = eps2 * eps2;
+
+for (p = 1; (n *= q1) &gt; eps1; s += n, q1 *= q2)
+    r += (p = !p) ? n : -n;
+
+double u = 1 - 2 * r, v = 1 + 2 * s, t = u / v;
+double a = 1, b = Sqrt(1 - t * t * t * t);
+
+for (; a - b &gt; eps2; b = Sqrt(a * b), a = t)
+    t = (a + b) / 2;
+
+return pi2 / (a + b) / v / v;
+</code></pre>
+
+<p>}</p>
+
+<p>static double Log(double x)
+{</p>
+
+<pre><code>int k = 0;
+double ln10 = 2.30258509299404568401799145468;
+
+if (x &lt;= 0)
+    return -1;
+if (x == 1)
+    return 0;
+
+for (; x &gt; 0.1; k++)
+    x /= 10;
+for (; x &lt;= 0.01; k--)
+    x *= 10;
+
+return k * ln10 - NegativeLog(x);
+</code></pre>
+
+<p>}</p>
+
+<p>double Log10(double x)
+{</p>
+
+<pre><code>double ln10 = 2.30258509299404568401799145468;
+
+return Log(x) / ln10;
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>printf(" self Log10: %f\n math log10: %f\n\n", Log10(1000), log10(1000));
+printf(" self Log10: %f\n math log10: %f\n\n", Log10(1), log10(1));
+printf(" self Log10: %f\n math log10: %f\n\n", Log10(8192.1024), log10(8192.1024));
+printf(" self Log10: %f\n math log10: %f\n\n", Log10(0.3), log10(0.3));
+printf(" self Log10: %f\n math log10: %f\n\n", Log10(33.8), log10(33.8));
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux管道的实现机制]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/"/>
+    <updated>2013-08-02T00:24:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
+
+<ul>
+<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不像文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
+<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
+</ul>
+
+
+<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+<!--more-->
+
+
+<h1>管道的结构</h1>
+
+<p>在Linux中，管道的实现并没有使用专门的数据结构，而是借助了文件系统的file结构和VFS的索引节点inode。通过将两个file结构指向同一个临时的VFS索引节点，而这个VFS索引节点又指向一个物理页面而实现的。如下图所示。</p>
+
+<p><img src="/images/2013/8/pipe/struct.png" alt=" struct " /></p>
+
+<p>图中有两个file数据结构，但它们定义文件操作例程地址是不同的，其中一个是向管道中写入数据的例程地址，而另一个是从管道中读出数据的例程地址。这样，用户程序的系统调用仍然是通常的文件操作，而内核却利用这种抽象机制实现了管道这一特殊操作。</p>
+
+<h1>管道的读写</h1>
+
+<p>管道实现的源代码在fs/pipe.c中，在pipe.c中有很多函数，其中有两个函数比较重要，即管道读函数pipe_read()和管道写函数pipe_wrtie()。管道写函数通过将字节复制到VFS索引节点指向的物理内存而写入数据，而管道读函数则通过复制物理内存中的字节而读出数据。当然，内核必须利用一定的机制同步对管道的访问，为此，内核使用了锁、等待队列和信号。</p>
+
+<p>当写进程向管道中写入时，它利用标准的库函数write()，系统根据库函数传递的文件描述符，可找到该文件的file结构。file结构中指定了用来进行写操作的函数（即写入函数）地址，于是，内核调用该函数完成写操作。写入函数在向内存中写入数据之前，必须首先检查VFS索引节点中的信息，同时满足如下条件时，才能进行实际的内存复制工作：</p>
+
+<ul>
+<li>内存中有足够的空间可容纳所有要写入的数据；</li>
+<li>内存没有被读程序锁定。</li>
+</ul>
+
+
+<p>如果同时满足上述条件，写入函数首先锁定内存，然后从写进程的地址空间中复制数据到内存。否则，写入进程就休眠在VFS索引节点的等待队列中，接下来，内核将调用调度程序，而调度程序会选择其他进程运行。写入进程实际处于可中断的等待状态，当内存中有足够的空间可以容纳写入数据，或内存被解锁时，读取进程会唤醒写入进程，这时，写入进程将接收到信号。当数据写入内存之后，内存被解锁，而所有休眠在索引节点的读取进程会被唤醒。</p>
+
+<p>管道的读取过程和写入过程类似。但是，进程可以在没有数据或内存被锁定时立即返回错误信息，而不是阻塞该进程，这依赖于文件或管道的打开模式。反之，进程可以休眠在索引节点的等待队列中等待写入进程写入数据。当所有的进程完成了管道操作之后，管道的索引节点被丢弃，而共享数据页也被释放。</p>
+
+<h1>CU上的问题</h1>
+
+<h2>popkart718的提问</h2>
+
+<p>《Unix环境高级编程》403页中部分描述如下：</p>
+
+<p><img src="/images/2013/8/pipe/sync.jpg" alt=" sync " /></p>
+
+<p>明明是两个管道，为什么read的时候会发生阻塞呢？</p>
+
+<h2>解答</h2>
+
+<p>read依赖于管道的打开模式，打开管道时可使用pipe2设定相应的flags。书上所写的阻塞是在管道中没有数据的情况下发生的。
+```</p>
+
+<pre><code>   int pipe2(int pipefd[2], int flags);
+</code></pre>
+
+<p>DESCRIPTION</p>
+
+<pre><code>   pipe()  creates  a  pipe, a unidirectional data channel that can be used for interprocess communication.  The array pipefd is used to return
+   two file descriptors referring to the ends of the pipe.  pipefd[0] refers to the read end of the pipe.  pipefd[1] refers to the write end of
+   the  pipe.  Data written to the write end of the pipe is buffered by the kernel until it is read from the read end of the pipe.  For further
+   details, see pipe(7).
+
+   If flags is 0, then pipe2() is the same as pipe().  The following values can be bitwise ORed in flags to obtain different behavior:
+
+   O_NONBLOCK  Set the O_NONBLOCK file status flag on the two new open file descriptions.  Using this flag saves extra  calls  to  fcntl(2)  to
+               achieve the same result.
+
+   O_CLOEXEC   Set  the  close-on-exec  (FD_CLOEXEC) flag on the two new file descriptors.  See the description of the same flag in open(2) for
+               reasons why this may be useful.
+</code></pre>
+
+<p>```
+同时也可以查看内核文件fs/pipe.c中的pipe_read函数实现。以下是简单的测试程序。</p>
+
+<p>测试一：使用pipe2且传入参数的flags为0（相当于使用pipe）
+```</p>
+
+<h1>include &lt;unistd.h></h1>
+
+<h1>include &lt;signal.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int fd[2];</p>
+
+<p>void handle(int sig)
+{</p>
+
+<pre><code>if (sig == SIGUSR1)
+    write(fd[1], "p", 1);
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>char c;
+pid_t pid;
+
+if (pipe2(fd, 0) &lt; 0) {
+    printf("can not creat pipe!\n");
+    return -1;
+}
+
+if ((pid = fork()) &lt; 0) {
+    printf("can not fork!\n");
+    return -1;
+} else if (pid &gt; 0) {
+    close(fd[0]);
+    signal(SIGUSR1, handle);
+    for (;;) {
+    }
+} else {
+    close(fd[1]);
+    for (;;) {
+        if (read(fd[0], &amp;c, 1) == 1)
+            printf("c:%c\n", c);
+        else
+            printf("nothing to read!\n");
+
+        sleep(2);
+    }
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```
+编译后，可以看到程序阻塞在那里，当使用“kill -10 进程号”时，才会从管道中读出数据。</p>
+
+<p>测试二：使用pipe2时设置flags的参数为O_NONBLOCK
+```</p>
+
+<h1>include &lt;sys/types.h></h1>
+
+<h1>include &lt;sys/stat.h></h1>
+
+<h1>include &lt;fcntl.h></h1>
+
+<h1>include &lt;unistd.h></h1>
+
+<h1>include &lt;signal.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int fd[2];</p>
+
+<p>void handle(int sig)
+{</p>
+
+<pre><code>if (sig == SIGUSR1)
+    write(fd[1], "p", 1);
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>char c;
+pid_t pid;
+
+if (pipe2(fd, O_NONBLOCK) &lt; 0) {
+    printf("can not creat pipe!\n");
+    return -1;
+}
+
+if ((pid = fork()) &lt; 0) {
+    printf("can not fork!\n");
+    return -1;
+} else if (pid &gt; 0) {
+    close(fd[0]);
+    signal(SIGUSR1, handle);
+    for (;;) {
+    }
+} else {
+    close(fd[1]);
+    for (;;) {
+        if (read(fd[0], &amp;c, 1) == 1)
+            printf("c:%c\n", c);
+        else
+            printf("nothing to read!\n");
+
+        sleep(2);
+    }
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```
+编译后，执行程序可以看到它不停的打印消息，若管道内没有数据的话，read就直接返回了。</p>
+
+<h1>参考文章</h1>
+
+<p><a href="http://oss.org.cn/kernel-book/ch07/7.1.1.htm">Linux管道的实现机制</a> <br/>
+<a href="http://bbs.chinaunix.net/thread-4069374-1-1.html">进程通信管道问题</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下c语言获取网络接口IP地址]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/"/>
+    <updated>2013-07-19T22:34:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux环境下，可以使用以下的代码获取网络的ip地址：
+```</p>
+
+<pre><code>if (gethostname(host, sizeof(host)) &lt; 0) {
+    printf("Can't get hostname\n");
+    return -1;
+}
+if ((hp = gethostbyname(host)) == NULL) {
+    printf("Can't get host address\n");
+    return -1;
+}
+memcpy((char *) &amp;intaddr, (char *) hp-&gt;h_addr_list[0],
+        (size_t) hp-&gt;h_length);
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：
+```</p>
+
+<pre><code>#include &lt;sys/socket.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;net/if.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+
+static int getIfaceName(char *iface_name, int len)
+{
+    int r = -1;
+    int flgs, ref, use, metric, mtu, win, ir;
+    unsigned long int d, g, m;    
+    char devname[20];
+    FILE *fp = NULL;
+
+    if((fp = fopen("/proc/net/route", "r")) == NULL) {
+        perror("fopen error!\n");
+        return -1;
+    }
+
+    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
+        fclose(fp);
+        return -1;
+    }
+
+    while (1) {
+        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
+                 devname, &amp;d, &amp;g, &amp;flgs, &amp;ref, &amp;use,
+                 &amp;metric, &amp;m, &amp;mtu, &amp;win, &amp;ir);
+        if (r != 11) {
+            if ((r &lt; 0) &amp;&amp; feof(fp)) {
+                break;
+            }
+            continue;
+        }
+
+        strncpy(iface_name, devname, len);
+        fclose(fp);
+        return 0;
+    }
+
+    fclose(fp);
+
+    return -1;
+}
+
+static int getIpAddress(char *iface_name, char *ip_addr, int len)
+{
+    int sockfd = -1;
+    struct ifreq ifr;
+    struct sockaddr_in *addr = NULL;
+
+    memset(&amp;ifr, 0, sizeof(struct ifreq));
+    strcpy(ifr.ifr_name, iface_name);
+    addr = (struct sockaddr_in *)&amp;ifr.ifr_addr;
+    addr-&gt;sin_family = AF_INET;
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
+        perror("create socket error!\n");
+        return -1;
+    }
+
+    if (ioctl(sockfd, SIOCGIFADDR, &amp;ifr) == 0) {
+        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
+        close(sockfd);
+        return 0;
+    }
+
+    close(sockfd);
+
+    return -1;
+}
+
+int main(int argc, char** argv)
+{
+    struct in_addr    intaddr;
+    char iface_name[20];
+
+    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
+        printf("get interface name error!\n");
+        return -1;
+    }
+
+    if(getIpAddress(iface_name, (char *) &amp;intaddr, 15) &lt; 0) {
+        printf("get interface ip address error!\n");
+        return -1;
+    }
+
+    printf("address:%s\n",(char *) &amp;intaddr);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

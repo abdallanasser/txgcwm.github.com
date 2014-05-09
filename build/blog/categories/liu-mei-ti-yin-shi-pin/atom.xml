@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 流媒体/音视频 | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/liu-mei-ti-yin-shi-pin/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-09T23:04:40+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RTP协议简述]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/26/rtpxie-yi-jian-shu/"/>
+    <updated>2014-04-26T21:32:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/26/rtpxie-yi-jian-shu</id>
+    <content type="html"><![CDATA[<p>实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTCP协议或者RTSP协议）。因为RTP自身具有Time stamp，所以在ffmpeg中被用做一种formate.</p>
+
+<p>RTP协议格式：
+```</p>
+
+<pre><code>    0                   1                   2                   3    
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1   
+</code></pre>
+
+<p>   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+ <br/>
+   |V=2|P|X|  CC   |M|     PT      |       sequence number         |  <br/>
+   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+ <br/>
+   |                           timestamp                           | <br/>
+   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+ <br/>
+   |           synchronization source (SSRC) identifier            | <br/>
+   +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+ <br/>
+   |            contributing source (CSRC) identifiers             | <br/>
+   |                             &hellip;.                              |<br/>
+   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+<br/>
+```</p>
+
+<!--more-->
+
+
+<p>RTP报文由两部分组成：报头和有效载荷，其中：</p>
+
+<p>V：RTP协议的版本号，占2位，当前协议版本号为2。</p>
+
+<p>P：填充标志，占1位，如果P=1，则在该报文的尾部填充一个或多个额外的八位组，它们不是有效载荷的一部分。</p>
+
+<p>X：扩展标志，占1位，如果X=1，则在RTP报头后跟有一个扩展报头。</p>
+
+<p>CC：CSRC计数器，占4位，指示CSRC 标识符的个数。</p>
+
+<p>M: 标记，占1位，不同的有效载荷有不同的含义，对于视频，标记一帧的结束；对于音频，标记会话的开始。</p>
+
+<p>PT: 有效载荷类型，占7位，用于说明RTP报文中有效载荷的类型，如GSM音频、JPEM图像等,在流媒体中大部分是用来区分音频流和视频流的，这样便于客户端进行解析。</p>
+
+<p>序列号：占16位，用于标识发送者所发送的RTP报文的序列号，每发送一个报文，序列号增1。这个字段当下层的承载协议用UDP的时候，网络状况不好的时候可以用来检查丢包。同时出现网络抖动的情况可以用来对数据进行重新排序，在helix服务器中这个字段是从0开始的，同时音频包和视频包的sequence是分别记数的。</p>
+
+<p>时戳(Timestamp)：占32位，时戳反映了该RTP报文的第一个八位组的采样时刻。接收者使用时戳来计算延迟和延迟抖动，并进行同步控制。</p>
+
+<p>同步信源(SSRC)标识符：占32位，用于标识同步信源。该标识符是随机选择的，参加同一视频会议的两个同步信源不能有相同的SSRC。</p>
+
+<p>特约信源(CSRC)标识符：每个CSRC标识符占32位，可以有0～15个。每个CSRC标识了包含在该RTP报文有效载荷中的所有特约信源。</p>
+
+<p>如果扩展标志被置位，则说明紧跟在报头后面是一个头扩展，其格式如下：
+```</p>
+
+<pre><code>0                   1                   2                   3
+0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+</code></pre>
+
+<p>   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+
+   |      defined by profile       |           length              |
+   +&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+&ndash;+
+   |                        header extension                       |
+   |                             &hellip;.                              |
+```</p>
+
+<p>RTP协议的用途：</p>
+
+<p>主要用于在互联网上传递音频和视频的标准数据包。在当前三网融合中RTP可以用来承载TS流，进行电视媒体数据的传播。RTP可以用来传送像TS流这种自身已经具有formate的媒体流，同时也可以用来承载AVC，AAC等去除了fromate的媒体流，这时rtp协议可被看做为一种formate，其控制流由RTSP协议来提供。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://www.cnblogs.com/qingquan/archive/2011/07/28/2120440.html">RTP 协议</a><br/>
+<a href="http://www.cnblogs.com/li0803/archive/2010/11/20/1882792.html">rtp协议详解/rtcp协议详解</a><br/>
+<a href="http://zhangjunhd.blog.51cto.com/113473/25481">RTP与RTCP协议介绍</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu下的音视频工具]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju/"/>
+    <updated>2014-03-11T23:02:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju</id>
+    <content type="html"><![CDATA[<p>Whether you want to listen to music on your smartphone or watch movies on your iPad, you may need to convert you media files from one format to another depending on what your devices support.</p>
+
+<p>Transmageddon Video Transcoder is a great media converter for Ubuntu. It converts audio and video files, it has a simple interface, and it’s free.</p>
+
+<p>详细情况参考：<a href="http://linzhibin824.blog.163.com/blog/static/7355771020133754752964/">Ubuntu下音/视频转换工具transmageddon</a></p>
+
+<hr />
+
+<p>Handbrake是一款跨平台的视频转换器，无须任何技巧即可完成对视频的格式换转。特性：</p>
+
+<ul>
+<li>跨平台(Linux\Win\Mac)；</li>
+<li>输入源：支持DVD，如VIDEO_TS、DVD映像文件、DVD 光盘、.VOB、.TS，视频格式方面几乎支持所有视频格式；</li>
+<li>输出源：MP4(M4V)、MKV\MPEG-4(ffmpeg), H.264(x264), or Theora(libtheora)\AAC, CoreAudio AAC(OS X Only), MP3, or Vorbis. AC-3 pass-through, DTS pass-thorugh(MKV only)；</li>
+<li>支持设置格式文件的质量、参数。</li>
+</ul>
+
+
+<p>详细情况参考：<a href="http://blog.ubuntusoft.com/handbrake.html#.UvWQsqFBr3w">Handbrake：优秀的视频转换器</a></p>
+
+<!--more-->
+
+
+<hr />
+
+<p>Arista是一个易于使用的多媒体转换的GNOME桌面应用。它着重于目标的转换媒介，即设备要发挥新闻媒体上。它的目的是供人谁不熟悉音频和视频编码，并希望有一个简单的方法来获得他们的多媒体设备。它支持DVD和投入V4L设备以及定期文件。</p>
+
+<p>详细情况参考：<a href="http://blog.ubuntusoft.com/ubuntu-next-video-converter-arista.html#.UvWQt6FBr3w">ubuntu下视频转换器：arista</a></p>
+
+<hr />
+
+<p>今天和大家分享Ubuntu下的视频转换工具与DVD制作！首先出场的是DeVeDe这个工具，在ubuntu软件中心就能下载了，或者用文字终端安装:
+<code>
+sudo apt-get install devede
+</code></p>
+
+<p>详细情况参考：<a href="http://www.heimizhou.com/media-converter-in-ubuntu.html">Ubuntu视频转换工具与DVD制作</a></p>
+
+<hr />
+
+<p>常听音乐和歌曲的人总免不了音频之间的互相转换，这款软件支持将源文件（好像支持很多）转化成MP3、Wav、Flac、Ogg，不支持APE。另外好像也不能转换CD。反正就提供一个转换成这四种格式的简单功能。功能虽单一，但蛮简单且好用的，所以推荐给大家。安装方法如下：
+<code>
+sudo apt-get install soundconverter
+</code></p>
+
+<p>详细情况参考：<a href="http://hi.baidu.com/rlhpuybgopbiqwd/item/d1c1ee11c45f9f48e65e0638">SoundConverter──音频转换软件</a></p>
+
+<hr />
+
+<p>Audacity® 是一个声音编辑程序，它拥有一套完整的工具（用于立体声声道可视化）和过滤器，支持您轻松修改所选的音频波形部分。Audacity 是一个可编程编辑器，因此您可以根据项目的扩展需要扩展该编辑器的功能。Audacity 的功能十分强大，从制作简单的音频录制到编辑多声道作品都可以轻松完成。</p>
+
+<p>详细情况参考：<a href="http://www.ibm.com/developerworks/cn/opensource/os-audacity/#ibm-pcon">功能强大的Audacity</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[wav文件格式解析]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/"/>
+    <updated>2014-02-16T21:54:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi</id>
+    <content type="html"><![CDATA[<p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
+
+<pre><code>------------------------------------------------
+|             RIFF WAVE Chunk                  |
+|             ID  = 'RIFF'                     |
+|             RiffType = 'WAVE'                |
+------------------------------------------------
+|             Format Chunk                     |
+|             ID = 'fmt '                      |
+------------------------------------------------
+|             Fact Chunk(optional)             |
+|             ID = 'fact'                      |
+------------------------------------------------
+|             Data Chunk                       |
+|             ID = 'data'                      |
+------------------------------------------------
+</code></pre>
+
+<p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
+
+<p>RIFF WAVE Chunk</p>
+
+<pre><code>----------------------------------
+|       | 所占字节数 |  具体内容    |
+----------------------------------
+| ID    |  4 Bytes |   'RIFF'    |
+----------------------------------
+| Size  |  4 Bytes |             |
+----------------------------------
+| Type  |  4 Bytes |   'WAVE'    |
+----------------------------------
+</code></pre>
+
+<!--more-->
+
+
+<p>以<code>FIFF</code>作为标示，然后紧跟着为size字段，该size是整个wav文件大小减去ID和Size所占用的字节数，即FileLen &ndash; 8 = Size。然后是Type字段，为<code>WAVE</code>，表示是wav文件。结构定义如下：
+```
+struct RIFF_HEADER
+{</p>
+
+<pre><code>char szRiffID[4];  // 'R','I','F','F'
+DWORD dwRiffSize;
+char szRiffFormat[4]; // 'W','A','V','E'
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Format Chunk</p>
+
+<pre><code>--------------------------------------------------------------------
+|               |   字节数   |              具体内容                 |
+--------------------------------------------------------------------
+| ID            |  4 Bytes  |   'fmt '                             |
+--------------------------------------------------------------------
+| Size          |  4 Bytes  | 数值为16或18，18则最后有附加信息         |
+--------------------------------------------------------------------
+| FormatTag     |  2 Bytes  | 编码方式，一般为0x0001                  |
+--------------------------------------------------------------------
+| Channels      |  2 Bytes  | 声道数目，1--单声道；2--双声道           |
+--------------------------------------------------------------------
+| SamplesPerSec |  4 Bytes  | 采样频率                               |
+--------------------------------------------------------------------
+| AvgBytesPerSec|  4 Bytes  | 每秒所需字节数                          |
+-------------------------------------------------------------------- 
+| BlockAlign    |  2 Bytes  | 数据块对齐单位(每个采样需要的字节数)       |
+--------------------------------------------------------------------  
+| BitsPerSample |  2 Bytes  | 每个采样需要的bit数                     |
+--------------------------------------------------------------------
+|               |  2 Bytes  | 附加信息（可选，通过Size来判断有无）       |
+-------------------------------------------------------------------- 
+</code></pre>
+
+<p>以<code>fmt</code>作为标示。一般情况下Size为16，此时最后附加信息没有；如果为18，则最后多了2个字节的附加信息。主要由一些软件制成的wav格式中含有该2个字节的附加信息。结构定义如下：
+```
+struct WAVE_FORMAT
+{</p>
+
+<pre><code>WORD wFormatTag;
+WORD wChannels;
+DWORD dwSamplesPerSec;
+DWORD dwAvgBytesPerSec;
+WORD wBlockAlign;
+WORD wBitsPerSample;
+</code></pre>
+
+<p>};
+<code>
+</code>
+struct FMT_BLOCK
+{</p>
+
+<pre><code>char  szFmtID[4]; // 'f','m','t',' '
+DWORD  dwFmtSize;
+WAVE_FORMAT wavFormat;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Fact Chunk</p>
+
+<pre><code>----------------------------------
+|       | 所占字节数 |  具体内容    |
+----------------------------------
+| ID    |  4 Bytes |   'fact'    |
+----------------------------------
+| Size  |  4 Bytes |   数值为4    |
+----------------------------------
+| data  |  4 Bytes |             |
+----------------------------------
+</code></pre>
+
+<p>Fact Chunk是可选字段，一般当wav文件由某些软件转化而成，则包含该Chunk。结构定义如下：
+```
+struct FACT_BLOCK
+{</p>
+
+<pre><code>char  szFactID[4]; // 'f','a','c','t'
+DWORD  dwFactSize;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Data Chunk</p>
+
+<pre><code>----------------------------------
+|       | 所占字节数 |   具体内容   |
+----------------------------------
+| ID    |  4 Bytes |   'data'    |
+----------------------------------
+| Size  |  4 Bytes |             |
+----------------------------------
+| data  |          |             |
+----------------------------------
+</code></pre>
+
+<p>Data Chunk是真正保存wav数据的地方，以<code>data</code>作为该Chunk的标示。然后是数据的大小。紧接着就是wav数据。根据Format Chunk中的声道数以及采样bit数，wav数据的bit位置可以分成以下几种形式：</p>
+
+<pre><code>---------------------------------------------------------------------
+|   单声道   |    取样1    |    取样2    |    取样3    |    取样4       |
+|           |--------------------------------------------------------
+|  8bit量化 |    声道0    |    声道0    |    声道0    |    声道0        |
+---------------------------------------------------------------------
+|   双声道  |          取样1            |           取样2              |
+|           |--------------------------------------------------------
+|  8bit量化 |  声道0(左)  |  声道1(右)  |  声道0(左)  |  声道1(右)       |
+---------------------------------------------------------------------
+|           |          取样1            |           取样2             |
+|   单声道  |---------------------------------------------------------
+| 16bit量化 |    声道0    |  声道0      |    声道0    |  声道0          |
+|           | (低位字节)  | (高位字节)  | (低位字节)   |  (高位字节)      |
+---------------------------------------------------------------------
+|           |                         取样1                          |
+|   双声道  |---------------------------------------------------------
+| 16bit量化 |  声道0(左)  |  声道0(左)  |  声道1(右)  |  声道1(右)       |
+|           | (低位字节)  | (高位字节)  | (低位字节)  | (高位字节)        |
+---------------------------------------------------------------------
+</code></pre>
+
+<p>Data Chunk头结构定义如下：
+```
+struct DATA_BLOCK
+{</p>
+
+<pre><code>char szDataID[4]; // 'd','a','t','a'
+DWORD dwDataSize;
+</code></pre>
+
+<p>};
+```
+wave文件解析及头部格式添加的参考代码请查阅<a href="https://github.com/txgcwm/Linux-C-Examples/tree/master/audio-video/wave">这里</a> 。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/bluesoal/article/details/932395">wav文件格式分析详解</a><br/>
+<a href="http://ikinglai.blog.51cto.com/6220785/1224616">PCM录音数据转Wav格式（c语言版）</a><br/>
+<a href="http://blog.sina.com.cn/s/blog_717f471b0100uw98.html">wav文件格式分析详解和解析代码</a><br/>
+<a href="http://www.cnblogs.com/cheney23reg/archive/2010/08/08/1795067.html">wave文件(*.wav)格式、PCM数据格式</a><br/>
+<a href="http://blog.csdn.net/xiahouzuoxin/article/details/7875406">读取*.wav音频文件</a><br/>
+<a href="http://hmilyyang.bokee.com/3757847.html">使用Wav文件来封装G.726格式的原始音频数据</a></p>
+]]></content>
+  </entry>
+  
+</feed>
