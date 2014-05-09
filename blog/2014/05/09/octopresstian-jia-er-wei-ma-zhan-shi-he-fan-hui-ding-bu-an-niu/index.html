@@ -250,6 +250,8 @@
 
 <h2>方法二</h2>
 
+<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式，代码如下：</p>
+
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -297,16 +299,84 @@
 <span class='line-number'>45</span>
 <span class='line-number'>46</span>
 <span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;&lt;/script&gt;
 </span><span class='line'>
+</span><span class='line'>&lt;script type="text/javascript"&gt;
+</span><span class='line'>$(document).ready(function(){
+</span><span class='line'>
+</span><span class='line'>  // hide #back-top first
+</span><span class='line'>  $("#back-top").hide();
+</span><span class='line'>  
+</span><span class='line'>  // fade in #back-top
+</span><span class='line'>  $(function () {
+</span><span class='line'>      $(window).scroll(function () {
+</span><span class='line'>          if ($(this).scrollTop() &gt; 100) {
+</span><span class='line'>              $('#back-top').fadeIn();
+</span><span class='line'>          } else {
+</span><span class='line'>              $('#back-top').fadeOut();
+</span><span class='line'>          }
+</span><span class='line'>      });
+</span><span class='line'>
+</span><span class='line'>      // scroll body to 0px on click
+</span><span class='line'>      $('#back-top a').click(function () {
+</span><span class='line'>          $('body,html').animate({
+</span><span class='line'>              scrollTop: 0
+</span><span class='line'>          }, 800);
+</span><span class='line'>          return false;
+</span><span class='line'>      });
+</span><span class='line'>  });
+</span><span class='line'>
+</span><span class='line'>});
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;style type="text/css"&gt;
 </span><span class='line'>#back-top {
 </span><span class='line'>  position: fixed;
-</span><span class='line'>  bottom: 30px;
-</span><span class='line'>  margin-left: -150px;
+</span><span class='line'>  bottom: 50px;
+</span><span class='line'>  right: 100px;
 </span><span class='line'>}
 </span><span class='line'>
 </span><span class='line'>#back-top a {
-</span><span class='line'>  width: 108px;
+</span><span class='line'>  width: 80px;
 </span><span class='line'>  display: block;
 </span><span class='line'>  text-align: center;
 </span><span class='line'>  font: 11px/100% Arial, Helvetica, sans-serif;
@@ -325,11 +395,11 @@
 </span><span class='line'>
 </span><span class='line'>/* arrow icon (span tag) */
 </span><span class='line'>#back-top span {
-</span><span class='line'>  width: 108px;
-</span><span class='line'>  height: 108px;
+</span><span class='line'>  width: 80px;
+</span><span class='line'>  height: 80px;
 </span><span class='line'>  display: block;
 </span><span class='line'>  margin-bottom: 7px;
-</span><span class='line'>  background: #ddd url(../../images/top.png) no-repeat center center;
+</span><span class='line'>  background: #ddd url(/images/top.png) no-repeat center center;
 </span><span class='line'>
 </span><span class='line'>  /* rounded corners */
 </span><span class='line'>  -webkit-border-radius: 15px;
@@ -342,9 +412,18 @@
 </span><span class='line'>  transition: 1s;
 </span><span class='line'>}
 </span><span class='line'>#back-top a:hover span {
-</span><span class='line'>  background-color: #777;
+</span><span class='line'>  background-color: #888;
 </span><span class='line'>}
-</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>&lt;/style&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p id="back-top"&gt;
+</span><span class='line'>  &lt;a href="#top"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span><span class='line'>  Copyright &copy; 2014 - 残剑 -
+</span><span class='line'>  &lt;span class="credit"&gt;Powered by &lt;a href="http://octopress.org"&gt;Octopress&lt;/a&gt;&lt;/span&gt;
+</span><span class='line'>&lt;/p&gt;</span></code></pre></td></tr></table></div></figure>
 
 
 <h1>参考文章</h1>

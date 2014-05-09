@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-09T23:52:26+08:00</updated>
+  <updated>2014-05-09T23:57:49+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -136,71 +136,62 @@ if(x &gt; 0 || y &gt; 0) {
 
 <h2>方法二</h2>
 
+<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式，代码如下：</p>
+
 <p>```</p>
 
-<h1>back-top {</h1>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 
-<pre><code>position: fixed;
-bottom: 30px;
-margin-left: -150px;
-</code></pre>
 
-<p>}</p>
 
-<h1>back-top a {</h1>
 
-<pre><code>width: 108px;
-display: block;
-text-align: center;
-font: 11px/100% Arial, Helvetica, sans-serif;
-text-transform: uppercase;
-text-decoration: none;
-color: #bbb;
+<script type="text/javascript">
+$(document).ready(function(){
 
-/* transition */
--webkit-transition: 1s;
--moz-transition: 1s;
-transition: 1s;
-</code></pre>
+    // hide #back-top first
+    $("#back-top").hide();
+    
+    // fade in #back-top
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#back-top').fadeIn();
+            } else {
+                $('#back-top').fadeOut();
+            }
+        });
 
-<p>}</p>
+        // scroll body to 0px on click
+        $('#back-top a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
 
-<h1>back-top a:hover {</h1>
+});
+</script>
 
-<pre><code>color: #000;
-</code></pre>
 
-<p>}</p>
 
-<p>/<em> arrow icon (span tag) </em>/</p>
 
-<h1>back-top span {</h1>
 
-<pre><code>width: 108px;
-height: 108px;
-display: block;
-margin-bottom: 7px;
-background: #ddd url(../../images/top.png) no-repeat center center;
 
-/* rounded corners */
--webkit-border-radius: 15px;
--moz-border-radius: 15px;
-border-radius: 15px;
 
-/* transition */
--webkit-transition: 1s;
--moz-transition: 1s;
-transition: 1s;
-</code></pre>
 
-<p>}</p>
+<p id="back-top">
+    <a href="#top"><span></span></a>
+</p>
 
-<h1>back-top a:hover span {</h1>
 
-<pre><code>background-color: #777;
-</code></pre>
 
-<p>}</p>
+
+<p>
+  Copyright &copy; 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
 
 <p>```</p>
 
