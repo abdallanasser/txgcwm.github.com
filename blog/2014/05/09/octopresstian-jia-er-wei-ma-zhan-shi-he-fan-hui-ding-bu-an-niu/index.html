@@ -255,12 +255,112 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<h2>方法二</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>
+</span><span class='line'>#back-top {
+</span><span class='line'>  position: fixed;
+</span><span class='line'>  bottom: 30px;
+</span><span class='line'>  margin-left: -150px;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>#back-top a {
+</span><span class='line'>  width: 108px;
+</span><span class='line'>  display: block;
+</span><span class='line'>  text-align: center;
+</span><span class='line'>  font: 11px/100% Arial, Helvetica, sans-serif;
+</span><span class='line'>  text-transform: uppercase;
+</span><span class='line'>  text-decoration: none;
+</span><span class='line'>  color: #bbb;
+</span><span class='line'>
+</span><span class='line'>  /* transition */
+</span><span class='line'>  -webkit-transition: 1s;
+</span><span class='line'>  -moz-transition: 1s;
+</span><span class='line'>  transition: 1s;
+</span><span class='line'>}
+</span><span class='line'>#back-top a:hover {
+</span><span class='line'>  color: #000;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>/* arrow icon (span tag) */
+</span><span class='line'>#back-top span {
+</span><span class='line'>  width: 108px;
+</span><span class='line'>  height: 108px;
+</span><span class='line'>  display: block;
+</span><span class='line'>  margin-bottom: 7px;
+</span><span class='line'>  background: #ddd url(up-arrow.png) no-repeat center center;
+</span><span class='line'>
+</span><span class='line'>  /* rounded corners */
+</span><span class='line'>  -webkit-border-radius: 15px;
+</span><span class='line'>  -moz-border-radius: 15px;
+</span><span class='line'>  border-radius: 15px;
+</span><span class='line'>
+</span><span class='line'>  /* transition */
+</span><span class='line'>  -webkit-transition: 1s;
+</span><span class='line'>  -moz-transition: 1s;
+</span><span class='line'>  transition: 1s;
+</span><span class='line'>}
+</span><span class='line'>#back-top a:hover span {
+</span><span class='line'>  background-color: #777;
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h1>参考文章</h1>
 
 <p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
 <a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
 <a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
-<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a></p>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a><br/>
+<a href="http://webdesignerwall.com/tutorials/animated-scroll-to-top">Animated Scroll to Top</a></p>
 </div>
 
 
@@ -607,7 +707,87 @@
 
     </div>
   </div>
-  <footer role="contentinfo"><p>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+
+	// hide #back-top first
+	$("#back-top").hide();
+	
+	// fade in #back-top
+	$(function () {
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 100) {
+				$('#back-top').fadeIn();
+			} else {
+				$('#back-top').fadeOut();
+			}
+		});
+
+		// scroll body to 0px on click
+		$('#back-top a').click(function () {
+			$('body,html').animate({
+				scrollTop: 0
+			}, 800);
+			return false;
+		});
+	});
+
+});
+</script>
+
+#back-top {
+	position: fixed;
+	bottom: 30px;
+	margin-left: -150px;
+}
+
+#back-top a {
+	width: 108px;
+	display: block;
+	text-align: center;
+	font: 11px/100% Arial, Helvetica, sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #bbb;
+
+	/* transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover {
+	color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+	width: 108px;
+	height: 108px;
+	display: block;
+	margin-bottom: 7px;
+	background: #ddd url(up-arrow.png) no-repeat center center;
+
+	/* rounded corners */
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+
+	/* transition */
+	-webkit-transition: 1s;
+	-moz-transition: 1s;
+	transition: 1s;
+}
+#back-top a:hover span {
+	background-color: #777;
+}
+
+<p id="back-top">
+	<a href="#top"><span></span></a>
+</p>
+
+<p>
   Copyright &copy; 2014 - 残剑 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>

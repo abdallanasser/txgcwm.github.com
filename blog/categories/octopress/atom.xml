@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-09T23:18:40+08:00</updated>
+  <updated>2014-05-09T23:29:37+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -134,12 +134,83 @@ if(x &gt; 0 || y &gt; 0) {
 
 </code></p>
 
+<h2>方法二</h2>
+
+<p>```</p>
+
+<h1>back-top {</h1>
+
+<pre><code>position: fixed;
+bottom: 30px;
+margin-left: -150px;
+</code></pre>
+
+<p>}</p>
+
+<h1>back-top a {</h1>
+
+<pre><code>width: 108px;
+display: block;
+text-align: center;
+font: 11px/100% Arial, Helvetica, sans-serif;
+text-transform: uppercase;
+text-decoration: none;
+color: #bbb;
+
+/* transition */
+-webkit-transition: 1s;
+-moz-transition: 1s;
+transition: 1s;
+</code></pre>
+
+<p>}</p>
+
+<h1>back-top a:hover {</h1>
+
+<pre><code>color: #000;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> arrow icon (span tag) </em>/</p>
+
+<h1>back-top span {</h1>
+
+<pre><code>width: 108px;
+height: 108px;
+display: block;
+margin-bottom: 7px;
+background: #ddd url(up-arrow.png) no-repeat center center;
+
+/* rounded corners */
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+border-radius: 15px;
+
+/* transition */
+-webkit-transition: 1s;
+-moz-transition: 1s;
+transition: 1s;
+</code></pre>
+
+<p>}</p>
+
+<h1>back-top a:hover span {</h1>
+
+<pre><code>background-color: #777;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
 <h1>参考文章</h1>
 
 <p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
 <a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
 <a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
-<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a></p>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a><br/>
+<a href="http://webdesignerwall.com/tutorials/animated-scroll-to-top">Animated Scroll to Top</a></p>
 ]]></content>
   </entry>
   
