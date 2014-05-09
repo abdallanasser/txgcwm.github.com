@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 旅行散记 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/lu-xing-san-ji/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-10T00:14:09+08:00</updated>
+  <updated>2014-05-10T00:53:56+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -118,7 +118,7 @@
     <link href="http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you/"/>
     <updated>2014-03-06T23:25:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://www.enjoyeverywhere.com/data/files/mall/user/244/news/201311121925152076.jpg">http://www.enjoyeverywhere.com/data/files/mall/user/244/news/201311121925152076.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://www.enjoyeverywhere.com/data/files/mall/user/244/news/201311121925152076.jpg">http://www.enjoyeverywhere.com/data/files/mall/user/244/news/201311121925152076.jpg</a> %}</p>
 
 <p>到异地或者到周边走走，我喜欢用旅行这个词，而不愿用旅游来描述。有人说，出游是从一个自己厌倦的地方到一个其他人厌倦的地方，我却不以为然，有这种想法的人多半是由他的心态引发的。生活虽然让人烦躁、困惑，却不能把这种过错归咎于我们生活的地方。</p>
 

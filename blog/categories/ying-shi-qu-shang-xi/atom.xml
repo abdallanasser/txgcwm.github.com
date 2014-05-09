@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 影视曲赏析 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/ying-shi-qu-shang-xi/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-10T00:14:09+08:00</updated>
+  <updated>2014-05-10T00:53:56+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -18,7 +18,7 @@
     <link href="http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie/"/>
     <updated>2014-02-08T23:05:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://img.upload.tom.com/data1/upload/888/663/13329931112606233049.jpg">http://img.upload.tom.com/data1/upload/888/663/13329931112606233049.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://img.upload.tom.com/data1/upload/888/663/13329931112606233049.jpg">http://img.upload.tom.com/data1/upload/888/663/13329931112606233049.jpg</a> %}</p>
 
 <p>斩断情丝心犹乱，千头万绪仍纠缠。拱手让江山，低眉恋红颜。祸福轮流转，是劫还是缘。天机算不尽，交织悲与欢。古今痴男女，谁能过情关？</p>
 
@@ -47,7 +47,7 @@
     <link href="http://txgcwm.github.io/blog/2014/01/12/pin-ying-xiong-%28xia-%29/"/>
     <updated>2014-01-12T20:14:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/01/12/pin-ying-xiong-(xia-)</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a> %}</p>
 
 <h1>秦</h1>
 
@@ -83,7 +83,7 @@
     <link href="http://txgcwm.github.io/blog/2014/01/09/pin-ying-xiong-%28zhong-%29/"/>
     <updated>2014-01-09T22:42:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/01/09/pin-ying-xiong-(zhong-)</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a> %}</p>
 
 <h1>秦王政</h1>
 
@@ -121,7 +121,7 @@
     <link href="http://txgcwm.github.io/blog/2014/01/08/pin-ying-xiong-%28shang-%29/"/>
     <updated>2014-01-08T23:15:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2014/01/08/pin-ying-xiong-(shang-)</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://cimg.163.com/movie/0212/24/24yx06.jpg">http://cimg.163.com/movie/0212/24/24yx06.jpg</a> %}</p>
 
 <p>观看这部影片最早是在2003年，那是我们的语文老师在班级里给大伙集体放的，然后要求大家写一篇观后感。对于这种事情，大家可能把它当作了一种负担（文章大体是应付，没有一些独特的见解与感悟），可它对我的影响却很深远，10多年过去了，我却一直喜欢着它（除了《唐伯虎点秋香》外，它是我看的次数最多的一部电影），有空的时候总会再去看看，是一种很特殊的感情。</p>
 
@@ -153,7 +153,7 @@
     <link href="http://txgcwm.github.io/blog/2013/08/21/ba-wang-bie-ji/"/>
     <updated>2013-08-21T00:35:00+08:00</updated>
     <id>http://txgcwm.github.io/blog/2013/08/21/ba-wang-bie-ji</id>
-    <content type="html"><![CDATA[<p><img class="<a" src="href="http://image.zcool.com.cn/img2/62/59/m_1310544243292.jpg">http://image.zcool.com.cn/img2/62/59/m_1310544243292.jpg</a>"></p>
+    <content type="html"><![CDATA[<p>{% img <a href="http://image.zcool.com.cn/img2/62/59/m_1310544243292.jpg">http://image.zcool.com.cn/img2/62/59/m_1310544243292.jpg</a> %}</p>
 
 <p>霸王别姬描述的是项羽被兵围垓下，四面楚歌、八面埋伏的场景。霸王当年豪情壮志、意气风发，而如今众叛亲离、孤军奋战，想想不免让人觉得可惜、哀伤。项羽是个有血性的男儿，温情的丈夫，勇猛的将军，却不是一个好的君王。</p>
 

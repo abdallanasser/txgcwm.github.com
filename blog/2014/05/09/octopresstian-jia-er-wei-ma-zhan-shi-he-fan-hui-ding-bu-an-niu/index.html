@@ -216,31 +216,7 @@
 
 <p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
 
-<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>custom/totop.html</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来），代码如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;nav role="navigation"&gt;<ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:txgcwm.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li> 
-</ul>
-
-&lt;/nav&gt;
-</span><span class='line'>Included file 'custom/totop.html' not found in _includes directory</span></code></pre></td></tr></table></div></figure>
-
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>{ % include custom/totop.html % }</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。</p>
 
 <h2>方法二</h2>
 

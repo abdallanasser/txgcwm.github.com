@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-10T00:14:09+08:00</updated>
+  <updated>2014-05-10T00:53:56+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -25,7 +25,7 @@
 <section></p>
 
 <pre><code>&lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&amp;trade;&lt;/abbr&gt;&lt;/h1&gt;
-&lt;a href="http://txgcwm.github.ioblog/categories/octopress/atom.xml"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&amp;cht=qr&amp;chld=|0&amp;chco=165B94&amp;chl=http://txgcwm.github.ioblog/categories/octopress/atom.xml" alt="post-qrcode"&gt;&lt;/a&gt;
+&lt;a href="{{ site.url }}{{ page.url }}"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&amp;cht=qr&amp;chld=|0&amp;chco=165B94&amp;chl={{ site.url }}{{ page.url }}" alt="post-qrcode"&gt;&lt;/a&gt;
 </code></pre>
 
 <p></section>
@@ -104,29 +104,7 @@ if(x &gt; 0 || y &gt; 0) {
 
 <p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
 
-<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>custom/totop.html</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来），代码如下：
-<code>
-&lt;nav role="navigation"&gt;<ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:txgcwm.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Home</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li> 
-</ul>
-
-&lt;/nav&gt;
-Included file 'custom/totop.html' not found in _includes directory
-</code></p>
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>{ % include custom/totop.html % }</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。</p>
 
 <h2>方法二</h2>
 
@@ -182,7 +160,7 @@ $(document).ready(function(){
 
 
 <p>
-  Copyright &copy; 2014 - 残剑 -
+  Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }} -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
