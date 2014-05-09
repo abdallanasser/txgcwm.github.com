@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-09T23:31:34+08:00</updated>
+  <updated>2014-05-09T23:37:33+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -180,7 +180,7 @@ transition: 1s;
 height: 108px;
 display: block;
 margin-bottom: 7px;
-background: #ddd url(up-arrow.png) no-repeat center center;
+background: #ddd url(../../images/top.png) no-repeat center center;
 
 /* rounded corners */
 -webkit-border-radius: 15px;

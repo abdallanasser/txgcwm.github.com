@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-09T23:31:34+08:00</updated>
+  <updated>2014-05-09T23:37:33+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -248,7 +248,7 @@
 </span><span class='line'>  height: 108px;
 </span><span class='line'>  display: block;
 </span><span class='line'>  margin-bottom: 7px;
-</span><span class='line'>  background: #ddd url(up-arrow.png) no-repeat center center;
+</span><span class='line'>  background: #ddd url(../../images/top.png) no-repeat center center;
 </span><span class='line'>
 </span><span class='line'>  /* rounded corners */
 </span><span class='line'>  -webkit-border-radius: 15px;
