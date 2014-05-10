@@ -605,12 +605,18 @@
         <lastmod>2014-05-10T12:21:50+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://txgcwm.github.io/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/
+        </loc>
+        <lastmod>2014-05-10T19:48:45+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://txgcwm.github.io/about/</loc>
         <lastmod>2014-05-09T23:31:26+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/blog/archives/</loc>
-        <lastmod>2014-05-10T12:21:50+08:00</lastmod>
+        <lastmod>2014-05-10T19:48:45+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/robots.txt</loc>
@@ -618,7 +624,7 @@
     </url>
     <url>
         <loc>http://txgcwm.github.io/</loc>
-        <lastmod>2014-05-10T12:21:50+08:00</lastmod>
+        <lastmod>2014-05-10T19:48:45+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/404.html</loc>
