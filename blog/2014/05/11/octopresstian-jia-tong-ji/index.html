@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>旅行和旅游 - 残剑</title>
+  <title>Octopress添加统计 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="到异地或者到周边走走，我喜欢用旅行这个词，而不愿用旅游来描述。有人说，出游是从一个自己厌倦的地方到一个其他人厌倦的地方，我却不以为然，有这种想法的人多半是由他的心态引发的。生活虽然让人烦躁、困惑，却不能把这种过错归咎于我们生活的地方。 旅游的人，更希望到一个舒适的环境，欣赏美丽的风景， &hellip;">
+  <meta name="description" content="Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个google_analytics_tracking_id，添加到_config.yml中对应位置，并对网站进行验证即可，这样就可以通过Google &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">旅行和旅游</h1>
+      <h1 class="entry-title">Octopress添加统计</h1>
     
     
       <p class="meta">
@@ -98,7 +98,7 @@
   
 
 
-<time datetime="2014-03-06T23:25:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+<time datetime="2014-05-11T01:00:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,20 +107,18 @@
   </header>
 
 
-<div class="entry-content"><p><img src="http://www.enjoyeverywhere.com/data/files/mall/user/244/news/201311121925152076.jpg"></p>
+<div class="entry-content"><p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
 
-<p>到异地或者到周边走走，我喜欢用旅行这个词，而不愿用旅游来描述。有人说，出游是从一个自己厌倦的地方到一个其他人厌倦的地方，我却不以为然，有这种想法的人多半是由他的心态引发的。生活虽然让人烦躁、困惑，却不能把这种过错归咎于我们生活的地方。</p>
+<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
 
-<p>旅游的人，更希望到一个舒适的环境，欣赏美丽的风景，吃美味的食物。稍微有些不顺的事情，就会抱怨，悔恨自己来到这个地方，让自己活受罪。可以说，他们更喜欢自己的行程是一帆风顺。可这些只是理想的状态，世事哪有一切如意的呢？</p>
+<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
 
-<!--more-->
+<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
 
+<p><big>参考文章</big></p>
 
-<p>旅行的人恰恰相反，无论遇到怎样的状况，他都会心满意足，一切对于他来说都是享受。惧怕缺氧，又怎会见到蔚蓝的天空；忍受不了空旷，又怎会见到广阔的草原；厌恶崎岖的小道，又怎会见到美丽的山景。所有的，只会让我们增长更多的见识。旅行者的意义并不在于沿途中看了多少风景，也不在于是否到达了预期的目的地，而是在于旅行中的那种心境的变化和丰富的经历。不会停留，永远没有终点，无论是结伴还是独行，永远行走在路上。年轻的时候，或许我们不懂这些，但这些积攒我们却能很好的保留下来，等到年老的时候我们或许会真正的体会到它的真实、人生的真谛。</p>
-
-<p>每次出游回来，我都很满足，美景要谈，遇到的不顺的事情我也喜欢谈论，这些都会让我觉得整个过程很美满。一个朋友只是在生活的城市走走，可他却喜欢说自己这是在旅行，这是他在体会生活，每一次都会让自己变得更快活、满足。</p>
-
-<p>没有目的，每次只是想出去走走，看看这个纷繁的世界！</p>
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
+<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
 </div>
 
 
@@ -143,12 +141,12 @@
   
 
 
-<time datetime="2014-03-06T23:25:00+08:00" pubdate data-updated="true">Mar 6<span>th</span>, 2014</time>
+<time datetime="2014-05-11T01:00:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
+    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
   
 </span>
 
@@ -182,10 +180,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/24/ceng-xiang-shi/" title="Previous Post: 曾相识">&laquo; 曾相识</a>
+        <a class="basic-alignment left" href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/" title="Previous Post: 西湖创客汇：创客与教育">&laquo; 西湖创客汇：创客与教育</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/03/08/meng-xing-sui-tan/" title="Next Post: 梦醒随谈">梦醒随谈 &raquo;</a>
       
     </p>
   </footer>
@@ -203,7 +199,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -565,8 +561,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/03/06/lu-xing-he-lu-you/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/';
         var disqus_script = 'embed.js';
       
     (function () {
