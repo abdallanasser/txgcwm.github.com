@@ -85,6 +85,63 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+
+<h1>isdigit</h1>
+
+<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
+
+<pre><code>int a = isdigit('1');
+int b = isdigit('a');
+int c = isdigit(3);
+</code></pre>
+
+<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
+
+<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
     
     
@@ -165,6 +222,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/">给简书的几条小建议</a>
       </li>
     
@@ -178,10 +239,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/">西湖创客汇：创客与教育</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/10/tuo/">托</a>
       </li>
     
   </ul>
@@ -204,7 +261,7 @@
 <li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (5)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>

@@ -85,6 +85,57 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-02T00:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
+
+<ul>
+<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不像文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
+<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
+</ul>
+
+
+<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/01/guan-zhu-ni-de-shi-shui/">关注你的是谁</a></h1>
     
     
@@ -401,73 +452,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Octopress添加表格</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-27T15:08:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/27/octopresstian-jia-biao-ge/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式；而Markdown是一种书写格式。正因如此，Markdown的格式化语法仅需解决用纯文本表达的问题。</p>
-
-<p>下面的这个例子是在一篇Markdown文章中添加一个HTML表格：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;table&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;Column1&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;Column2&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>&lt;/table&gt;    </span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -506,6 +490,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/">给简书的几条小建议</a>
       </li>
     
@@ -519,10 +507,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/">西湖创客汇：创客与教育</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/10/tuo/">托</a>
       </li>
     
   </ul>
@@ -545,7 +529,7 @@
 <li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (5)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
