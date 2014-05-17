@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T00:23:55+08:00</updated>
+  <updated>2014-05-17T16:35:03+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress安装Slash主题及恢复]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/"/>
+    <updated>2014-05-17T16:14:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu</id>
+    <content type="html"><![CDATA[<p>输入以下的指令，就能立马体验Slash。
+<code>
+$ cd octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ rake install['slash']
+$ rake generate
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress添加统计]]></title>

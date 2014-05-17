@@ -22,7 +22,6 @@
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -69,9 +68,8 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Home</a></li>
+  <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li> 
 </ul>
 
 </nav>
@@ -402,24 +400,6 @@
   
   
   
-  
-     <!-- Baidu Button BEGIN -->
-	<div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
-	<a class="bds_qzone"></a>
-	<a class="bds_tsina"></a>
-	<a class="bds_tqq"></a>
-	<a class="bds_renren"></a>
-	<a class="bds_t163"></a>
-	<span class="bds_more">More</span>
-	<a class="shareCount"></a>
-	</div>
-	<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0" ></script>
-	<script type="text/javascript" id="bdshell_js"></script>
-	<script type="text/javascript">
-	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-	</script>
-	<!-- Baidu Button END -->
-  
 </div>
 
     
@@ -470,6 +450,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
       </li>
     
@@ -483,10 +467,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/">给简书的几条小建议</a>
       </li>
     
   </ul>
@@ -505,7 +485,7 @@
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
 <li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
 <li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
@@ -718,85 +698,85 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	// hide #back-top first
-	$("#back-top").hide();
-	
-	// fade in #back-top
-	$(function () {
-		$(window).scroll(function () {
-			if ($(this).scrollTop() > 100) {
-				$('#back-top').fadeIn();
-			} else {
-				$('#back-top').fadeOut();
-			}
-		});
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
 
-		// scroll body to 0px on click
-		$('#back-top a').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 800);
-			return false;
-		});
-	});
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
 
 });
 </script>
 
 <style type="text/css">
 #back-top {
-	position: fixed;
-	bottom: 50px;
-	right: 100px;
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
 }
 
 #back-top a {
-	width: 80px;
-	display: block;
-	text-align: center;
-	font: 11px/100% Arial, Helvetica, sans-serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #bbb;
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
 
-	/* transition */
-	-webkit-transition: 1s;
-	-moz-transition: 1s;
-	transition: 1s;
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
 }
 #back-top a:hover {
-	color: #000;
+  color: #000;
 }
 
 /* arrow icon (span tag) */
 #back-top span {
-	width: 80px;
-	height: 80px;
-	display: block;
-	margin-bottom: 7px;
-	background: #ddd url(/images/top.png) no-repeat center center;
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
 
-	/* rounded corners */
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 
-	/* transition */
-	-webkit-transition: 1s;
-	-moz-transition: 1s;
-	transition: 1s;
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
 }
 #back-top a:hover span {
-	background-color: #888;
+  background-color: #888;
 }
 </style>
 
 <p id="back-top">
-	<a href="#top"><span></span></a>
+  <a href="#top"><span></span></a>
 </p>
 
 <p>
-  Copyright &copy; 2014 - 残剑 -
+  Copyright © 2014 - 残剑 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

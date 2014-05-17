@@ -9,8 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="残剑的个人博客">
-  <meta name="keywords" content="Linux，C/C++，Geeker/Maker">
+  <meta name="description" content="假设你坐在汽车内，你会如何计算汽车在高速路上的平均速度？说说方法，请写下闯入你大脑的第一个想法，希望不要太离谱。没有标准，百家争鸣！ 问题背景 之前从家里到工作地的总体花费时间是知道的，但我对汽车的实际速度并没有一个概念。坐在车上有时很想知道某一地到我的目的地还需要多少时间。因不太擅长跟陌生人交流 &hellip;">
+  
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -22,7 +22,6 @@
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
-  <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
@@ -69,9 +68,8 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Home</a></li>
+  <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li> 
 </ul>
 
 </nav>
@@ -79,6 +77,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/19/che-su-de-ji-suan/">车速的计算</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T00:04:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/19/che-su-de-ji-suan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>假设你坐在汽车内，你会如何计算汽车在高速路上的平均速度？说说方法，请写下闯入你大脑的第一个想法，希望不要太离谱。没有标准，百家争鸣！</p>
+
+<h1>问题背景</h1>
+
+<p>之前从家里到工作地的总体花费时间是知道的，但我对汽车的实际速度并没有一个概念。坐在车上有时很想知道某一地到我的目的地还需要多少时间。因不太擅长跟陌生人交流，所以自己想一些办法解决。因为高速路上会有到某地还有多少距离的提示，而且相隔几里路后又会有提示，所以采用了距离差除以时间，然后用还剩的距离除以速度，最后得到我想知道的时间。在不堵车的情况下，这种方法是比较有效的，误差不是很大。</p>
+
+<h1>网友的回复</h1>
+
+<p>djsxut：1、看仪表盘在一定时间的行驶路程，除以行驶时间得到平均速度；2、不怕麻烦的话，多次取样，再计算平均速度；3、视力足够好，数数高速中间的小树苗，基本上两颗小数栽种的距离是一定的。</p>
+
+<p>hellioncu：每次看到指示牌标记的公里数，并记下时间，公里数差/时间差——就是速度。</p>
+
+<p>群雄逐鹿中原：装个GPS导航软件。汽车上或手机上都行。</p>
+
+<p>folklore：hire a beauty girl, and ask her: what is our average speed now？</p>
+
+<p>cokeboL：距离/时间，这还能有啥。</p>
+
+<p>cxytz01：超速行驶，交警叔叔会告诉你。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/19/che-su-de-ji-suan/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -651,56 +710,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T17:43:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>udev的文档介绍：</p>
-
-<ol>
-<li><p>dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。</p></li>
-<li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
-<li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
-</ol>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -739,6 +748,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
       </li>
     
@@ -752,10 +765,6 @@
     
       <li class="post">
         <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/">给简书的几条小建议</a>
       </li>
     
   </ul>
@@ -774,7 +783,7 @@
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
 <li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>Octopress (4)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
 <li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
@@ -986,85 +995,85 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-	// hide #back-top first
-	$("#back-top").hide();
-	
-	// fade in #back-top
-	$(function () {
-		$(window).scroll(function () {
-			if ($(this).scrollTop() > 100) {
-				$('#back-top').fadeIn();
-			} else {
-				$('#back-top').fadeOut();
-			}
-		});
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
 
-		// scroll body to 0px on click
-		$('#back-top a').click(function () {
-			$('body,html').animate({
-				scrollTop: 0
-			}, 800);
-			return false;
-		});
-	});
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
 
 });
 </script>
 
 <style type="text/css">
 #back-top {
-	position: fixed;
-	bottom: 50px;
-	right: 100px;
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
 }
 
 #back-top a {
-	width: 80px;
-	display: block;
-	text-align: center;
-	font: 11px/100% Arial, Helvetica, sans-serif;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #bbb;
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
 
-	/* transition */
-	-webkit-transition: 1s;
-	-moz-transition: 1s;
-	transition: 1s;
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
 }
 #back-top a:hover {
-	color: #000;
+  color: #000;
 }
 
 /* arrow icon (span tag) */
 #back-top span {
-	width: 80px;
-	height: 80px;
-	display: block;
-	margin-bottom: 7px;
-	background: #ddd url(/images/top.png) no-repeat center center;
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
 
-	/* rounded corners */
-	-webkit-border-radius: 15px;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 
-	/* transition */
-	-webkit-transition: 1s;
-	-moz-transition: 1s;
-	transition: 1s;
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
 }
 #back-top a:hover span {
-	background-color: #888;
+  background-color: #888;
 }
 </style>
 
 <p id="back-top">
-	<a href="#top"><span></span></a>
+  <a href="#top"><span></span></a>
 </p>
 
 <p>
-  Copyright &copy; 2014 - 残剑 -
+  Copyright © 2014 - 残剑 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
