@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T16:51:28+08:00</updated>
+  <updated>2014-05-17T17:18:07+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,45 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress的一些设置]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/"/>
+    <updated>2014-05-17T17:13:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/17/octopressde-[?]-xie-she-zhi</id>
+    <content type="html"><![CDATA[<h1>从新电脑上恢复博客内容</h1>
+
+<p>如果电脑重装了系统，或者要在另一台电脑上编写博客，找到博客仓库的<code>url</code>，执行以下的指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
+</span><span class='line'>
+</span><span class='line'>$ cd octopress
+</span><span class='line'>$ git clone (url) _deploy   #克隆master分支，它存放着博客内容。
+</span><span class='line'>
+</span><span class='line'>$ gem install bundler
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ rake install
+</span><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/grunmin/article/details/14127653">octopress博客搭建和个性化配置</a> <br/>
+<a href=""></a> <br/>
+<a href=""></a> <br/>
+<a href=""></a> <br/>
+<a href=""></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress安装Slash主题及恢复]]></title>
@@ -53,7 +92,7 @@
 </span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
 
 
-<p>今天查阅资料最大的收获是知道了<code>Octopress``生成静态文件后直接发布</code>的命令：</p>
+<p>今天查阅资料最大的收获是知道了<code>Octopress生成静态文件后直接发布</code>的命令：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
@@ -1364,90 +1403,6 @@ D2：峨眉-成都</p>
 <p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
 <a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
 <a href="http://stackoverflow.com/questions/9876793/scrapy-spider-not-found-error">Scrapy spider not found error</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[剑问君答：IT模范丈夫]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/"/>
-    <updated>2014-04-27T21:19:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/04/27/jian-wen-jun-da-:itmo-fan-zhang-fu</id>
-    <content type="html"><![CDATA[<p><img src="http://www.zzcp8.com/uploads/allimg/131210/1_12101101313025.jpg" alt="alt text" /></p>
-
-<p>残剑：你是班级里公认的模范好男友，世间多少女子希望得到像你这样的好男人！是你让我相信了校园爱情，那么的纯结与真实。7年的努力终究修成了正果，是否可以谈谈你的感情经历?</p>
-
-<p>爱吓人：我只有一次恋爱，也就是这一次，到现在不知不觉已经七年了。我们从最开始对感情的懵懂，到现在成为一对夫妻，可以说是感情跌宕起伏。我有过开心，有过伤心，有过激动，有过失落，有过幸福，有过悲伤。</p>
-
-<hr />
-
-<p>残剑：在这漫长的爱情路程中，你是如何做的，又有什么样的经验可以提供参考的吗？</p>
-
-<p>爱吓人：我一直坚信一个道理，做任何一件事情都要用心去做，爱一个人也要用心去爱。我谈恋爱的目的就是为了最终能够结婚，能够白头到老，能够在生命的最后能够手牵着手。而且，可能很多人都有我这样的心理，但是最后女朋友和他分手了。我只能说，我是这么做，至于结果我不在乎，也很有可能是我遇对了人。</p>
-
-<!--more-->
-
-
-<hr />
-
-<p>残剑：你对女友无微不至的呵护，让不少女同学倾羡，又引来了多少男子的“憎恨”。显然你对女友是有一种不同寻常的感情存在。你大学时期的“蒸梨”事件让我至今难忘，对你的修饰我又多了“细致”一词。是什么让你觉得需要如此的付出？</p>
-
-<p>爱吓人：其实这个和上一个问题的答复差不多，我这个人就是这样，做人用心对别人，喜欢一个人，用心去喜欢，用心对她好，爱一个人更应该如此。</p>
-
-<hr />
-
-<p>残剑：我对她的映像是——一个有想法、执行力的好强女人。对于你来说，她是一个怎样的女子，如此吸引你？</p>
-
-<p>爱吓人：我觉得她是一个非常善良的女孩，而且不物质，懂得孝敬父母，尊敬长辈；她懂得很多知识，她也让我懂得更多；她是一个很有自己主见的人，看待外物外事都有自己的思想，而不是盲目的接受；她还是一个感染力很强的人，和她接触就的人都会或多或少的带点她的思想等等。</p>
-
-<hr />
-
-<p>残剑：在夜深人静的时候，是否思考过或者问过（听到她的答案是否在傻笑）这样一个问题——她为什么选择了我而不是其他的男人？你自己又是如何看待这些的？</p>
-
-<p>爱吓人：其实追她的人很多，有家庭背景比我好的，有发展前途比我好的，但是她却选择了我，我一开始认为是我长时间追她才让她给我一次机会，可是后来才知道有两个男孩追了她10年，她都没有答应，我才知道，我这时间并不长。后来我在想，应该是我的心打动了她。</p>
-
-<p>其实这个问题让我来回答我不知道怎么回答，因为，我的心里面觉得，是在不管什么时候都能在她身边照顾她的这种心，以及行动感动了她，但是不知道为什么我的潜意识中认为不是这样的，我自己也不知道具体的答案，可能是我太笨了，无法在细节上察觉到她的心里是怎么想的。</p>
-
-<hr />
-
-<p>残剑：刚开始工作，大家都觉得舍弃了专业，但多少搭点边。而你，我觉得那时是根本不搭边且比较杂乱。那时你主要做些什么工作？</p>
-
-<p>爱吓人：来第一家公司，我可以说完全抛开了专业知识，是在手机公司开发网站相关的。</p>
-
-<hr />
-
-<p>残剑：我离开深圳的时候，你还没有离开第一个东家。之后又是在什么时候离开的，对于自己未来的职业道路又做了什么样的选择？</p>
-
-<p>爱吓人：我在第一家公司待了刚满20个月，现在主要就是从事android软件开发。职业道路没有具体的，我暂时想的是做技术最多不超过30岁，之后想着自己弄点什么东西，暂时还没想好。</p>
-
-<hr />
-
-<p>残剑：据我所知，你现在做android方面的开发，主要做的是哪一块的东西？在android这方面，你也是从零开始起步的，期间的经历能够谈谈吗？或者说你是如何一步步熟悉了这些技术的？</p>
-
-<p>爱吓人：现在主要是在从事移动办公客户端的开发。开始我主要是借了一本android方面的书，然后不断地问，后来开始走项目，边做边问，便在网上查资料自学，论坛里面看别人写的东西。最主要几点总结出来就是，多思考，多问，多学，多做事。多问是在自己思考后的前提下，如果遇到问题就问是学不到什么东西的，遇到问题应该先自己冷静下来先思考。</p>
-
-<hr />
-
-<p>残剑：在我和她的谈话中，了解到你学习新技术很快速（她没有这么当面夸你吧？听到这话是不是很兴奋？），可否说说你是如何学习的？</p>
-
-<p>爱吓人：其实也没有，我基本上是学习的时候先看基本知识，然后直接看实例，在实例中巩固基础知识，然后在实例中了解更高深的内容，大致是这样。</p>
-
-<hr />
-
-<p>残剑：可以想象，你现在的工作一定很忙碌，它给你带去了什么？如果不涉及商业的事情，可否顺便谈谈你现在的公司、产品及行业？</p>
-
-<p>爱吓人：让我的经历更加丰富，经验更多，人更成熟。我公司是是移动的一个子公司，主要是接移动的软件外包，以及其它大型企业的软件外包，另外还有自己的东西。我在这个公司主要是做移动客户端，其它的暂时还不是很清楚，进来没多久。</p>
-
-<hr />
-
-<p>残剑：是否还有闲情打游戏、打球呢？还是陪伴着自己的爱人在闲散的时间出去看看世界？</p>
-
-<p>爱吓人：现在已经很久没打游戏了，打球一直想去，但是也很久没去了。偶尔会出去和她一起锻炼一下身体，逛逛街之类的。</p>
-
-<hr />
-
-<p>残剑：现在的你，已不是一个人在奋斗，让我羡慕不已。一个不屈现状的女人会不断的催促你，对于近期的发展有什么打算和想法？</p>
-
-<p>爱吓人：事实上我有现在的发展也是在她的催促之下才有的，没有她，可能我现在还更差劲。这一点是我需要感谢她的。我是在上个月才进入现在的公司，所以短时间内可能在这家公司待着，如果可以的话想在明年回西安，但是不知道可不可能，计划赶不上变化。</p>
 ]]></content>
   </entry>
   
