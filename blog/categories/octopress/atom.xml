@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T18:50:38+08:00</updated>
+  <updated>2014-05-17T20:01:04+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -119,7 +119,198 @@ end
 
 <h1>为博客添加背景图片</h1>
 
-<p>Octopress支持SASS语法，改造Octopress主题基本是通过修改<code>sass/custom</code>下以scss为后缀名的文件来完成，大多数的改造是在<code>_styles.scss</code>这个文件中来实现。</p>
+<p>Octopress支持SASS语法，改造Octopress主题基本是通过修改<code>sass/custom</code>下以scss为后缀名的文件来完成，大多数的改造是在<code>_styles.scss</code>这个文件中来实现。我的配置如下：
+```
+// This File is imported last, and will override other styles in the cascade
+// Add styles here to make changes without digging in too much</p>
+
+<p>/<em> &mdash;&mdash;&ndash; main layout &mdash;&mdash;&ndash; </em>/
+html { background: #262C33 url(&ldquo;/images/bg.png&rdquo;); }</p>
+
+<p>body { font-size: 1.2em; }</p>
+
+<p>body > div { background-image: none; }</p>
+
+<p>body > div > div { background-image: none; }</p>
+
+<p>/<em> &mdash;&mdash;&ndash; header &mdash;&mdash;&ndash; </em>/
+body > header{</p>
+
+<pre><code>background: none;
+padding: 1.6em 0 1em 0
+</code></pre>
+
+<p>}</p>
+
+<p>body > header h1{</p>
+
+<pre><code>font-size: 2.8em;
+padding-left: 20px;
+text-shadow: rgba(0, 0, 0, 0.8) 0 0 8px;
+</code></pre>
+
+<p>}</p>
+
+<p>body > header h2{</p>
+
+<pre><code>font-size: 1em;
+letter-spacing: 1px;
+margin-top: 0em;
+padding-left: 20px;
+</code></pre>
+
+<p>}</p>
+
+<p>body > nav {</p>
+
+<pre><code>padding-top: .15em;
+padding-bottom: .15em;
+</code></pre>
+
+<p>}</p>
+
+<p>body > nav a{</p>
+
+<pre><code>font-size: 1.2em;
+line-height: 1.4em;
+</code></pre>
+
+<p>}</p>
+
+<p>body > nav form .search{</p>
+
+<pre><code>padding: .2em .3em;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> &mdash;&mdash;&ndash; Content &mdash;&mdash;&ndash; </em>/</p>
+
+<h1>content .blog-index article h1 {</h1>
+
+<pre><code>font-size: 2em;
+font-weight: normal;
+</code></pre>
+
+<p>}</p>
+
+<h1>content .blog-index article h1, #content .blog-index article h1 a, article header h1, article header h1 a{</h1>
+
+<pre><code>color: #555555 !important;
+</code></pre>
+
+<p>}</p>
+
+<p>h1 { font-size: 1.8em; }</p>
+
+<p>h1 span{</p>
+
+<pre><code>font-weight: normal;
+color: #E0841B;
+</code></pre>
+
+<p>}</p>
+
+<p>article h2, article h3, article header h1{</p>
+
+<pre><code>font-weight: normal;
+</code></pre>
+
+<p>}</p>
+
+<p>.blog-index article h1 a:hover{ text-decoration: none; }</p>
+
+<p>article p {</p>
+
+<pre><code>text-align:justify;
+margin-bottom: 1em;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> &mdash;&mdash;&ndash; Sidebar &mdash;&mdash;&ndash; </em>/
+aside.sidebar section h1 { letter-spacing: 0.1em; }</p>
+
+<p>aside.sidebar a { text-decoration: none; }</p>
+
+<p>.toggle-sidebar{display: none;}</p>
+
+<p>ul#gh_repos > li > a{</p>
+
+<pre><code>display: block;
+font-weight: bold;
+margin-bottom: 0.4em;
+</code></pre>
+
+<p>}</p>
+
+<p>aside.sidebar{</p>
+
+<pre><code>-moz-border-radius-topright: 0.4em;
+-webkit-border-radius: 0 0.4em 0 0;
+border-radius: 0 0.4em 0 0;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> &mdash;&mdash;&ndash; Footer &mdash;&mdash;&ndash; </em>/
+body > footer{</p>
+
+<pre><code>-moz-border-radius: 0;
+-webkit-border-radius: 0;
+border-radius:0;
+margin-bottom: 0;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> &mdash;&mdash;&ndash; 404 &mdash;&mdash;&ndash; </em>/
+.notfound404 article{</p>
+
+<pre><code>margin-left: 0 !important;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em> &mdash;&mdash;&ndash; Media queries &mdash;&mdash;&ndash; </em>/
+@media only screen and (min-width: 1040px) {</p>
+
+<pre><code>body &gt; nav {
+  -moz-border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  border-radius:0.4em;
+  margin-bottom: 2em;
+}
+
+body &gt; footer{
+    -moz-border-radius-bottomleft: 0.4em;
+    -moz-border-radius-bottomright: 0.4em;
+    -webkit-border-radius: 0 0 0.4em 0.4em;
+    border-radius: 0 0 0.4em 0.4em;
+}
+
+#main{
+    -moz-border-radius-topleft: 0.4em;
+    -moz-border-radius-topright: 0.4em;
+    -webkit-border-radius: 0.4em 0.4em 0 0;
+    border-radius: 0.4em 0.4em 0 0;
+}
+
+#content{
+    -moz-border-radius-topleft: 0.4em;
+    -webkit-border-radius: 0.4em 0 0 0;
+    border-radius: 0.4em 0 0 0;
+}
+
+#content .blog-index a[rel="full-article"]{
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+</code></pre>
+
+<p>}
+```</p>
 
 <p><big>参考文章</big></p>
 
@@ -127,7 +318,8 @@ end
 <a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a> <br/>
 <a href="http://www.cnblogs.com/hswg/archive/2013/01/15/2860952.html">Octopress技巧之设置关键字和描述</a> <br/>
 <a href="http://larrynung.github.io/2013/11/21/octopress-seo-for-octopress-website/">Octopress &ndash; SEO for Octopress website</a> <br/>
-<a href="http://shanewfx.github.io/blog/2012/08/13/improve-blog-theme/">Octopress主题改造</a></p>
+<a href="http://shanewfx.github.io/blog/2012/08/13/improve-blog-theme/">Octopress主题改造</a><br/>
+<a href="http://colors4.us/blog/2012/09/05/octopress-theme-adjusting/">调整octopress主题小结</a></p>
 ]]></content>
   </entry>
   
