@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T18:14:55+08:00</updated>
+  <updated>2014-05-17T18:34:38+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -154,6 +154,10 @@
 </span><span class='line'>  end
 </span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
 
+
+<h1>为博客添加背景图片</h1>
+
+<p>Octopress支持SASS语法，改造Octopress主题基本是通过修改<code>sass/custom</code>下以scss为后缀名的文件来完成，大多数的改造是在<code>_styles.scss</code>这个文件中来实现。</p>
 
 <p><big>参考文章</big></p>
 
