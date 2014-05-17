@@ -182,12 +182,72 @@
 </span><span class='line'>&lt;meta name="keywords" content="Seo, Octopress"&gt;</span></code></pre></td></tr></table></div></figure>
 
 
+<p>在使用<code>rake new_post</code>的时候，我们当然希望在文件的开头加入tags、keywords、description这些选项，那么就需要修改<code>Rakefile</code>文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># usage rake new_post[my-new-post] or rake new_post['my new post'] or rake new_post (defaults to "new-post")
+</span><span class='line'>desc "Begin a new post in #{source_dir}/#{posts_dir}"
+</span><span class='line'>task :new_post, :title do |t, args|
+</span><span class='line'>  if args.title
+</span><span class='line'>    title = args.title
+</span><span class='line'>  else
+</span><span class='line'>    title = get_stdin("Enter a title for your post: ")
+</span><span class='line'>  end
+</span><span class='line'>  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+</span><span class='line'>  mkdir_p "#{source_dir}/#{posts_dir}"
+</span><span class='line'>  filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
+</span><span class='line'>  if File.exist?(filename)
+</span><span class='line'>    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+</span><span class='line'>  end
+</span><span class='line'>  puts "Creating new post: #{filename}"
+</span><span class='line'>  open(filename, 'w') do |post|
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>    post.puts "layout: post"
+</span><span class='line'>    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+</span><span class='line'>    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
+</span><span class='line'>    post.puts "comments: true"
+</span><span class='line'>    post.puts "categories: []"
+</span><span class='line'>  post.puts "tags: []"
+</span><span class='line'>  post.puts "keywords: " 
+</span><span class='line'>  post.puts "description: "
+</span><span class='line'>    post.puts "---"
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
 <p><big>参考文章</big></p>
 
 <p><a href="http://blog.csdn.net/grunmin/article/details/14127653">octopress博客搭建和个性化配置</a> <br/>
 <a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a> <br/>
 <a href="http://www.cnblogs.com/hswg/archive/2013/01/15/2860952.html">Octopress技巧之设置关键字和描述</a> <br/>
-<a href=""></a> <br/>
+<a href="http://larrynung.github.io/2013/11/21/octopress-seo-for-octopress-website/">Octopress &ndash; SEO for Octopress website</a> <br/>
 <a href=""></a></p>
 </div>
 
