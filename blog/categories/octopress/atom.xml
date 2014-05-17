@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T17:18:07+08:00</updated>
+  <updated>2014-05-17T17:33:38+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -32,6 +32,28 @@ $ bundle install
 $ rake install
 $ rake setup_github_pages
 ```</p>
+
+<h1>网站提交到搜索引擎</h1>
+
+<p>博客上写出的文章当然希望有人能看到，而且希望更多的人看到，这就需要让自己的博客可以在搜索引擎里面检索到，那么就需要将个人博客提交到搜索引擎，让它来抓取，所以首先要到各个搜索引擎提交自己的博客地址，<a href="http://urlc.cn/tool/addurl.html">免费收录网站搜索引擎登录口大全&mdash;搜索引擎网站收录地址大全</a>和<a href="http://tool.lusongsong.com/addurl.html">国内外各大免费搜索引擎、导航网址提交入口&mdash;搜索引擎网站收录地址大全</a>这两个地方收录了国内外各大搜索引擎的地址。</p>
+
+<p>提交到搜索引擎了，就能搜索到你的文章，但还需要做的是为你的网站文章添加描述信息、关键字，来帮助用户准确的搜索到。关键字和描述是指网页<code>head</code>部分的元标签<code>meta</code>，是给搜索引擎看的，以此希望用户可以比较容易找到。</p>
+
+<p>首先为每篇文章添加描述和关键字，本文的文件头如下：</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: &ldquo;Octopress的一些设置&rdquo;
+date: 2014-05-17 17:13
+comments: true
+categories: [Octopress]
+tags: [Octopress, 博客恢复, SEO]
+keywords: Seo, Octopress</p>
+
+<h2>description: Octopress的SEO技巧，在新电脑上恢复博客内容。</h2>
+
+<p>```</p>
 
 <p><big>参考文章</big></p>
 

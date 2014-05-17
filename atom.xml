@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T17:18:07+08:00</updated>
+  <updated>2014-05-17T17:33:38+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -40,6 +40,36 @@
 </span><span class='line'>$ bundle install
 </span><span class='line'>$ rake install
 </span><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>网站提交到搜索引擎</h1>
+
+<p>博客上写出的文章当然希望有人能看到，而且希望更多的人看到，这就需要让自己的博客可以在搜索引擎里面检索到，那么就需要将个人博客提交到搜索引擎，让它来抓取，所以首先要到各个搜索引擎提交自己的博客地址，<a href="http://urlc.cn/tool/addurl.html">免费收录网站搜索引擎登录口大全&mdash;搜索引擎网站收录地址大全</a>和<a href="http://tool.lusongsong.com/addurl.html">国内外各大免费搜索引擎、导航网址提交入口&mdash;搜索引擎网站收录地址大全</a>这两个地方收录了国内外各大搜索引擎的地址。</p>
+
+<p>提交到搜索引擎了，就能搜索到你的文章，但还需要做的是为你的网站文章添加描述信息、关键字，来帮助用户准确的搜索到。关键字和描述是指网页<code>head</code>部分的元标签<code>meta</code>，是给搜索引擎看的，以此希望用户可以比较容易找到。</p>
+
+<p>首先为每篇文章添加描述和关键字，本文的文件头如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "Octopress的一些设置"
+</span><span class='line'>date: 2014-05-17 17:13
+</span><span class='line'>comments: true
+</span><span class='line'>categories: [Octopress]
+</span><span class='line'>tags: [Octopress, 博客恢复, SEO]
+</span><span class='line'>keywords: Seo, Octopress
+</span><span class='line'>description: Octopress的SEO技巧，在新电脑上恢复博客内容。
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
 
 
 <p><big>参考文章</big></p>
