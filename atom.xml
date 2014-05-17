@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-17T17:36:32+08:00</updated>
+  <updated>2014-05-17T17:41:15+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -70,6 +70,23 @@
 </span><span class='line'>keywords: Seo, Octopress
 </span><span class='line'>description: Octopress的SEO技巧，在新电脑上恢复博客内容。
 </span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>这样就可以为文章添加关键字和描述，使搜索引擎更容易搜到你的文章。还可以为你的博客首页添加描述和关键字，在<code>source/index.html</code>文件顶部添加即可，方法如上。</p>
+
+<p>如果你没有为文章添加描述，Octopress会自动以文章的前150个字符作为描述，为每一篇文章都添加描述，Octopress模板实现以上功能的代码在<code>source/_includes/head.html</code>中：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>  &lt;meta name="description" content="Octopress的SEO技巧，在新电脑上恢复博客内容。"&gt;
+</span><span class='line'>&lt;meta name="keywords" content="Seo, Octopress"&gt;</span></code></pre></td></tr></table></div></figure>
 
 
 <p><big>参考文章</big></p>
