@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-18T14:17:57+08:00</updated>
+  <updated>2014-05-20T00:40:08+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[托的另一种谋生路]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/20/tuo-de-ling-%5B%3F%5D-chong-mou-sheng-lu/"/>
+    <updated>2014-05-20T00:38:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/20/tuo-de-ling-[?]-chong-mou-sheng-lu</id>
+    <content type="html"><![CDATA[<p>托这种职业我觉得有它存在的意义，至少能够让一些懵懂的少年学习到一些东西。有些有职业素养的托会根据“鱼儿”的实际水平来决定从你这里抽出多少的油水。记得大学的某一年，和班里的几个同学一同去找兼职，可被那些不良的中介（事后我觉得他们就是托）坑了，索性代价不是很大，为此交了30块钱的学费（3块钱一餐的话，也有10餐的哦），可从此以后做事就变得谨慎多了。</p>
+
+<p>一个有良知的托应该更多的了解一些人性及“鱼儿”的需求，尽量做到事后让人不那么痛恨这个行业，毁了自家的饭碗可不是一件好事呀。即便你吹牛也好，至少让受害人享受到了一场“高上大”的交流，说不准还真被你给“钓”上了，我这么想似乎也太邪恶了。</p>
+
+<p>在我之前写的文章中，给托这个职业写了一些建议，朋友看了后就说“她们要是有这种觉悟，就不会来找你了”或者是“要是那样的话，人家就是高级公关了，哪还看得上你”。看来是我小看自己提的那些建议了。其实我的本意并没有朋友想象的那么多，只是希望他们在现有的基础上上一个台阶，或者说是从托这个职业中转型出来，做一个能够真正见光的人。</p>
+
+<!--more-->
+
+
+<p>现在的人越来越不喜欢跟团旅行，自助游的话又对当地的地理环境不了解，这时本地化“导游”就应运而生。这群带外地人进行深度旅游的人他们本身严格来说并不是导游，没有任何的证件，只是对本地的吃、住、行非常了解，加上本身又比较喜欢玩。这样不仅可以让自己从中获取利益，比如推荐一些餐馆、酒店、酒吧之类的，又可以让旅行的人玩得开心，双方都能够满意。如何找到客源？现在这类的平台已经出现了，只要依托于它们，就有源源不断的客人，有游客的时候带他们出去玩，闲的时候可以文艺一下，为平台创造内容，同时也为自己这个品牌作宣传。</p>
+
+<p>以上的一个建议纯属我自己的瞎想，但也是一条可以选择的道路，至少能够让自己变得正大光明。</p>
+
+<p>我个人的情感是讨厌托这个行业，甚至觉得他们比那些乞讨者卑微了好多，乞讨的人们至少是在烈日和风雨中工作，他们的所得完全是在你自愿的前提下，没有欺骗，有时还会向你表示致谢，而托们就和小偷一样，偷偷地把手伸到你的钱袋子里，在虚情假义下无情地把它骗走。</p>
+
+<p>与其花费巨大的时间在研究如何骗一个人，还不如想想其它的出路，谋求一个更好的发展。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[青旅中的那些人]]></title>
@@ -1492,205 +1516,6 @@ D2：峨眉-成都</p>
 <p>这个时代每时每刻都在发生剧烈的变化，还没有准备好，一个潮流可能就已经过去，还在犹豫的时候，另一个潮流也快接近了尾声。是怨这个时代变化太快，还是怨我们自己不能适应这个时代呢？我的答案倾向于后者，这终究是一个弱肉强食的社会，不进步则必将面临消亡。</p>
 
 <p>夜已入深，洗洗睡觉，明天还是同一个太阳，却又是新的一天！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scrapy入门简略教程（一）]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/"/>
-    <updated>2014-04-28T23:04:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-[?]</id>
-    <content type="html"><![CDATA[<p>在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
-
-<ol>
-<li>创建一个新的Scrapy项目；</li>
-<li>定义你将提取的Items；</li>
-<li>写一个蜘蛛抓取网站并提取Items；</li>
-<li>写一个项目管道存储所提取的Items。</li>
-</ol>
-
-
-<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
-
-<h1>创建一个项目</h1>
-
-<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject shiyifang</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
-</span><span class='line'>.
-</span><span class='line'>├── scrapy.cfg
-</span><span class='line'>└── shiyifang
-</span><span class='line'>    ├── __init__.py
-</span><span class='line'>    ├── items.py
-</span><span class='line'>    ├── pipelines.py
-</span><span class='line'>    ├── settings.py
-</span><span class='line'>    └── spiders
-</span><span class='line'>        └── __init__.py
-</span><span class='line'>
-</span><span class='line'>2 directories, 6 files</span></code></pre></td></tr></table></div></figure>
-
-
-<p>关于该目录下文件和文件夹的说明：</p>
-
-<ul>
-<li>scrapy.cfg: 项目的配置文件。</li>
-<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
-<li>shiyifang/items.py: 项目的items文件。</li>
-<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
-<li>shiyifang/settings.py: 项目的settings文件。</li>
-<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
-</ul>
-
-
-<!--more-->
-
-
-<h1>定义Item</h1>
-
-<p>Items包含了将要被抓取的数据，它们就像简单的Python dicts，但对未填充字段提供额外的保护，以防止错误。在shiyifang目录下编辑items.py文件，Item类看起来像如下的样子：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.item import Item, Field
-</span><span class='line'>
-</span><span class='line'>class ShiyifangItem(Item):
-</span><span class='line'>    # define the fields for your item here like:
-</span><span class='line'>    # name = Field()
-</span><span class='line'>    title = Field()
-</span><span class='line'>    link = Field()
-</span><span class='line'>    desc = Field()</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>第一个爬虫</h1>
-
-<p>爬虫是用户自己写的一个类，用于爬取一个或一组域名的数据，需要定义一个初始化的URL列表，要完成如何抓取链接和如何去解析数据等基本的工作。我们在shiyifang/spiders目录下创建一个叫shiyifang_spider.py文件：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.spider import BaseSpider
-</span><span class='line'>
-</span><span class='line'>class ShiyifangSpider(BaseSpider):
-</span><span class='line'>    name = "shiyifang"
-</span><span class='line'>    allowed_domains = ["s.taobao.com"]
-</span><span class='line'>    start_urls = [
-</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
-</span><span class='line'>    ]
-</span><span class='line'>
-</span><span class='line'>    def parse(self, response):
-</span><span class='line'>        filename = response.url.split("/")[-2]
-</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>Crawling</h1>
-
-<p>到项目的顶层目录，执行以下的指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy crawl shiyifang
-</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: shiyifang)
-</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Optional features available: ssl, http11
-</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'shiyifang.spiders', 'SPIDER_MODULES': ['shiyifang.spiders'], 'BOT_NAME': 'shiyifang'}
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled item pipelines: 
-</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Spider opened
-</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
-</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
-</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
-</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Closing spider (finished)
-</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Dumping Scrapy stats:
-</span><span class='line'>  {'downloader/request_bytes': 245,
-</span><span class='line'>   'downloader/request_count': 1,
-</span><span class='line'>   'downloader/request_method_count/GET': 1,
-</span><span class='line'>   'downloader/response_bytes': 34569,
-</span><span class='line'>   'downloader/response_count': 1,
-</span><span class='line'>   'downloader/response_status_count/200': 1,
-</span><span class='line'>   'finish_reason': 'finished',
-</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 28, 15, 1, 36, 232914),
-</span><span class='line'>   'log_count/DEBUG': 7,
-</span><span class='line'>   'log_count/INFO': 3,
-</span><span class='line'>   'response_received_count': 1,
-</span><span class='line'>   'scheduler/dequeued': 1,
-</span><span class='line'>   'scheduler/dequeued/memory': 1,
-</span><span class='line'>   'scheduler/enqueued': 1,
-</span><span class='line'>   'scheduler/enqueued/memory': 1,
-</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 28, 15, 1, 35, 615729)}
-</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>从debug信息可以看出，我们发送的get请求是收到回复的，且是成功的。此时，在当前目录下你会看到一个叫s.taobao.com的文件生成，这就是我们抓取到的网页。</p>
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://doc.scrapy.org/en/latest/intro/tutorial.html">Scrapy Tutorial</a><br/>
-<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a></p>
 ]]></content>
   </entry>
   
