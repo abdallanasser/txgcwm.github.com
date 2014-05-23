@@ -679,12 +679,18 @@
         <lastmod>2014-05-23T00:06:34+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/
+        </loc>
+        <lastmod>2014-05-24T00:24:19+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://txgcwm.github.io/about/</loc>
         <lastmod>2014-05-17T15:39:52+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/blog/archives/</loc>
-        <lastmod>2014-05-23T00:06:34+08:00</lastmod>
+        <lastmod>2014-05-24T00:24:19+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/robots.txt</loc>
@@ -692,7 +698,7 @@
     </url>
     <url>
         <loc>http://txgcwm.github.io/</loc>
-        <lastmod>2014-05-23T00:06:34+08:00</lastmod>
+        <lastmod>2014-05-24T00:24:19+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/404.html</loc>

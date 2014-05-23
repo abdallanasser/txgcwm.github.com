@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>wav文件格式解析 - 残剑</title>
+  <title>Linux桌面系统离你还太远 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是RIFF。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, &hellip;">
+  <meta name="description" content="当XP系统退出历史舞台的时候，众多的Linux爱好者就撰文列举Linux替代XP的种种可能。虽然讲得很有道理，加上我是一个Linux的忠实用户，但我觉得Linux桌面系统拥抱普通大众还为时尚早，在大众心中已有千万的理由。这种等待的时间会很长，可我并不觉得它不可能成为一种替代的方案。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Wav文件格式解析</h1>
+      <h1 class="entry-title">Linux桌面系统离你还太远</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-05-24T00:18:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,206 +105,37 @@
   </header>
 
 
-<div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
+<div class="entry-content"><p><img src="http://img.linux.net.cn/data/attachment/album/201210/19/142402r9r1qaqaandac9qr.jpg" alt="alt text" /></p>
 
-<pre><code>------------------------------------------------
-|             RIFF WAVE Chunk                  |
-|             ID  = 'RIFF'                     |
-|             RiffType = 'WAVE'                |
-------------------------------------------------
-|             Format Chunk                     |
-|             ID = 'fmt '                      |
-------------------------------------------------
-|             Fact Chunk(optional)             |
-|             ID = 'fact'                      |
-------------------------------------------------
-|             Data Chunk                       |
-|             ID = 'data'                      |
-------------------------------------------------
-</code></pre>
+<p>当XP系统退出历史舞台的时候，众多的Linux爱好者就撰文列举Linux替代XP的种种可能。虽然讲得很有道理，加上我是一个Linux的忠实用户，但我觉得Linux桌面系统拥抱普通大众还为时尚早，在大众心中已有千万的理由。这种等待的时间会很长，可我并不觉得它不可能成为一种替代的方案。</p>
 
-<p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
+<p>我使用Ubuntu作为我工作和平时娱乐的系统已快三年，但我并不敢说自己熟悉它，也只是在他人的指引下完成一些东西。相比较开始的阶段，现在的进步主要是对它有了更进一步的了解。起先是看看他人写的东西，经过这些年的折腾，自己才逐渐有了写这方面小文章的能力。</p>
 
-<p>RIFF WAVE Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |  具体内容    |
-----------------------------------
-| ID    |  4 Bytes |   'RIFF'    |
-----------------------------------
-| Size  |  4 Bytes |             |
-----------------------------------
-| Type  |  4 Bytes |   'WAVE'    |
-----------------------------------
-</code></pre>
+<p>就我这几年使用Ubuntu系统的体验来看，谈谈我对它的认识，基于以下几点我觉得它还不适合普通的大众，而且在这条道路上它还需要更加努力。</p>
 
 <!--more-->
 
 
-<p>以<code>FIFF</code>作为标示，然后紧跟着为size字段，该size是整个wav文件大小减去ID和Size所占用的字节数，即FileLen &ndash; 8 = Size。然后是Type字段，为<code>WAVE</code>，表示是wav文件。结构定义如下：</p>
+<h1>软件匮乏</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct RIFF_HEADER
-</span><span class='line'>{
-</span><span class='line'>    char szRiffID[4];  // 'R','I','F','F'
-</span><span class='line'>    DWORD dwRiffSize;
-</span><span class='line'>    char szRiffFormat[4]; // 'W','A','V','E'
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<p>其实在Ubuntu中的应用软件是很多的，很多XP上常用的软件都可以在那里找到替代品，不足的是大部分都是英文的软件，这对于一些人来说学习的成本很高。而一些较专业的软件，这上面可能暂时还找不到替代品。大家习惯使用的一些软件，在这上面也没有，没有哪家公司现在愿意为小众开发相应的应用。我使用QQ也是通过wine的方式，或者干脆用webqq了（说实在的，用户体验并不是那么的美好）。即便是深度的应用商店，也大都是英文版的软件，但可以看到他们很用心地在为国人开发一些基本的应用。游戏也有，可国内的那些大型网游之类的根本不会照顾这个系统。对于国人来说，英语终究是一道坎。</p>
 
+<h1>思想观念</h1>
 
-<p>Format Chunk</p>
+<p>这一点也很难转变，在Linux系统中一切皆是文件，让普通大众去体会根本接受不了。作为一个IT从业人员，在起先学习这个系统的时候也很难接受这个观点，XP中系统盘符的概念一直消退不去，深入了解后才慢慢体会到其中的深意。不过这点并不是最要紧的，毕竟只要图形化的东西做得好，还有用户体验提升了，简单容易操作了（或者是傻瓜化了），用户就会逐渐接受了，不过对于用户来说根本不必去了解这些。就好比人们能够熟练使用Android系统那样。</p>
 
-<pre><code>--------------------------------------------------------------------
-|               |   字节数   |              具体内容                 |
---------------------------------------------------------------------
-| ID            |  4 Bytes  |   'fmt '                             |
---------------------------------------------------------------------
-| Size          |  4 Bytes  | 数值为16或18，18则最后有附加信息         |
---------------------------------------------------------------------
-| FormatTag     |  2 Bytes  | 编码方式，一般为0x0001                  |
---------------------------------------------------------------------
-| Channels      |  2 Bytes  | 声道数目，1--单声道；2--双声道           |
---------------------------------------------------------------------
-| SamplesPerSec |  4 Bytes  | 采样频率                               |
---------------------------------------------------------------------
-| AvgBytesPerSec|  4 Bytes  | 每秒所需字节数                          |
--------------------------------------------------------------------- 
-| BlockAlign    |  2 Bytes  | 数据块对齐单位(每个采样需要的字节数)       |
---------------------------------------------------------------------  
-| BitsPerSample |  2 Bytes  | 每个采样需要的bit数                     |
---------------------------------------------------------------------
-|               |  2 Bytes  | 附加信息（可选，通过Size来判断有无）       |
--------------------------------------------------------------------- 
-</code></pre>
+<h1>错误的解决</h1>
 
-<p>以<code>fmt</code>作为标示。一般情况下Size为16，此时最后附加信息没有；如果为18，则最后多了2个字节的附加信息。主要由一些软件制成的wav格式中含有该2个字节的附加信息。结构定义如下：</p>
+<p>遇到问题了，去搜索解决方法，能够真正解决问题的还是那些英文的博客论坛，国内也有很多，但有些信息很老了或者是从国外的论坛上翻译过来的，一步步操作下去还真未必能够解决，所以这个也需要对Linux系统有一定的了解才能根除一个问题。很多人并不熟悉Linux领域，所以解决Linux上的问题对于他们来说是很大的考验。就拿我个人遇到的一个问题说说，在运行一个软件的时候死活打不开，也不知道到底那里不对劲，在终端上运行它，看了错误才知道是一些库不兼容造成的，我重新安装了对应的版本才让它正常跑起来。如果是普通用户遇到这种问题，肯定会想——之前用得还好好的，突然之间就出现了这种问题，且重装这个应用后还是这样，这个系统真烂。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct WAVE_FORMAT
-</span><span class='line'>{
-</span><span class='line'>    WORD wFormatTag;
-</span><span class='line'>    WORD wChannels;
-</span><span class='line'>    DWORD dwSamplesPerSec;
-</span><span class='line'>    DWORD dwAvgBytesPerSec;
-</span><span class='line'>    WORD wBlockAlign;
-</span><span class='line'>    WORD wBitsPerSample;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<h1>为何又有可能呢</h1>
+
+<p>Ubuntu在做系统融合的事情，让我觉得Linux系统可能走进普通大众的电脑里。如果Ubuntu的移动操作系统能够占据一些市场份额，那么很多大型的公司还是会投入人力开发相应的应用。只要它能够在移动操作系统上运行，再相应的编译一下，就可以在桌面系统上正常运行，这样就极大丰富了Ubuntu的应用商店。</p>
+
+<br></br>
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct FMT_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char  szFmtID[4]; // 'f','m','t',' '
-</span><span class='line'>    DWORD  dwFmtSize;
-</span><span class='line'>    WAVE_FORMAT wavFormat;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Fact Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |  具体内容    |
-----------------------------------
-| ID    |  4 Bytes |   'fact'    |
-----------------------------------
-| Size  |  4 Bytes |   数值为4    |
-----------------------------------
-| data  |  4 Bytes |             |
-----------------------------------
-</code></pre>
-
-<p>Fact Chunk是可选字段，一般当wav文件由某些软件转化而成，则包含该Chunk。结构定义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct FACT_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char  szFactID[4]; // 'f','a','c','t'
-</span><span class='line'>    DWORD  dwFactSize;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Data Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |   具体内容   |
-----------------------------------
-| ID    |  4 Bytes |   'data'    |
-----------------------------------
-| Size  |  4 Bytes |             |
-----------------------------------
-| data  |          |             |
-----------------------------------
-</code></pre>
-
-<p>Data Chunk是真正保存wav数据的地方，以<code>data</code>作为该Chunk的标示。然后是数据的大小。紧接着就是wav数据。根据Format Chunk中的声道数以及采样bit数，wav数据的bit位置可以分成以下几种形式：</p>
-
-<pre><code>---------------------------------------------------------------------
-|   单声道   |    取样1    |    取样2    |    取样3    |    取样4       |
-|           |--------------------------------------------------------
-|  8bit量化 |    声道0    |    声道0    |    声道0    |    声道0        |
----------------------------------------------------------------------
-|   双声道  |          取样1            |           取样2              |
-|           |--------------------------------------------------------
-|  8bit量化 |  声道0(左)  |  声道1(右)  |  声道0(左)  |  声道1(右)       |
----------------------------------------------------------------------
-|           |          取样1            |           取样2             |
-|   单声道  |---------------------------------------------------------
-| 16bit量化 |    声道0    |  声道0      |    声道0    |  声道0          |
-|           | (低位字节)  | (高位字节)  | (低位字节)   |  (高位字节)      |
----------------------------------------------------------------------
-|           |                         取样1                          |
-|   双声道  |---------------------------------------------------------
-| 16bit量化 |  声道0(左)  |  声道0(左)  |  声道1(右)  |  声道1(右)       |
-|           | (低位字节)  | (高位字节)  | (低位字节)  | (高位字节)        |
----------------------------------------------------------------------
-</code></pre>
-
-<p>Data Chunk头结构定义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct DATA_BLOCK
-</span><span class='line'>{
-</span><span class='line'>    char szDataID[4]; // 'd','a','t','a'
-</span><span class='line'>    DWORD dwDataSize;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>wave文件解析及头部格式添加的参考代码请查阅<a href="https://github.com/txgcwm/Linux-C-Examples/tree/master/audio-video/wave">这里</a> 。</p>
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://blog.csdn.net/bluesoal/article/details/932395">wav文件格式分析详解</a><br/>
-<a href="http://ikinglai.blog.51cto.com/6220785/1224616">PCM录音数据转Wav格式（c语言版）</a><br/>
-<a href="http://blog.sina.com.cn/s/blog_717f471b0100uw98.html">wav文件格式分析详解和解析代码</a><br/>
-<a href="http://www.cnblogs.com/cheney23reg/archive/2010/08/08/1795067.html">wave文件(*.wav)格式、PCM数据格式</a><br/>
-<a href="http://blog.csdn.net/xiahouzuoxin/article/details/7875406">读取*.wav音频文件</a><br/>
-<a href="http://hmilyyang.bokee.com/3757847.html">使用Wav文件来封装G.726格式的原始音频数据</a></p>
+<p>Linux系统要进入普通大众的PC还需要走很长的一段路，但我坚信会有那么一天的到来。不要告诉我不可能，Android能做到的，其它一些Linux系统又为何做不到呢？</p>
 </div>
 
 
@@ -327,12 +158,12 @@
   
 
 
-<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+<time datetime="2014-05-24T00:18:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频</a>
+    <a class='category' href='/blog/categories/chan-pin-guan-cha/'>产品观察</a>
   
 </span>
 
@@ -348,10 +179,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/08/hong-yan-jie/" title="Previous Post: 红颜劫">&laquo; 红颜劫</a>
+        <a class="basic-alignment left" href="/blog/2014/05/23/tan-jian-shu-%2Cti-jian-yi/" title="Previous Post: 谈简书，提建议">&laquo; 谈简书，提建议</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/19/liao-jian-shu-tan-xie-zuo/" title="Next Post: 聊简书谈写作">聊简书谈写作 &raquo;</a>
       
     </p>
   </footer>
@@ -369,7 +198,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -731,8 +560,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/';
         var disqus_script = 'embed.js';
       
     (function () {
