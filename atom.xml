@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-05-24T00:24:33+08:00</updated>
+  <updated>2014-05-27T01:48:24+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[静待]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/27/jing-dai/"/>
+    <updated>2014-05-27T01:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/27/jing-dai</id>
+    <content type="html"><![CDATA[<p>从何时起，
+喜欢上了手机Home键的一闪一闪，
+信息来了。</p>
+
+<p>夜已入深，
+未能眠，
+只因静静地等待。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux桌面系统离你还太远]]></title>
@@ -1182,318 +1197,6 @@ D2：峨眉-成都</p>
 <p>暂时只想到了这些，我想我的这些建议还是有些参考意义的，有的话再补充了。虽然你们深入这个行业，对于很多东西比我体会的要深刻，但作为一个潜在的客户，我提出了我自己的一些需求。那位小姑娘现在依然在我的好友圈里，但我想她是不会来看我这篇文章的，不过我还是希望她来看看，这对于她的职业发展道路还是很有帮助的。估计她看了不会太恼火，反而可能会感激我。</p>
 
 <p>针对以上我提到的四点，如果现在正在从事这个行业的你们觉得自己做得足够好的话，可以来找我，至多是金钱上的损失，我愿意玩一下这个游戏，为这个社会的繁荣和这个职业的专业化发展作出自己的贡献。有付出，我也希望自己有所回报，希望和你的交谈中学习到一些东西。当然，按照我对他们这种职业发展道路的设想，她们已经不是简单的“托”了，应该叫“社会化高级导销员”（当我想到这个名词的时候，我的大脑又开始了膨胀，思绪又开始了起飞，心静的时候再码这些文字了）。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress添加二维码展示和返回顶部按钮]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"/>
-    <updated>2014-05-09T22:37:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu</id>
-    <content type="html"><![CDATA[<h1>二维码展示</h1>
-
-<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
-</span><span class='line'>  &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&trade;&lt;/abbr&gt;&lt;/h1&gt;
-</span><span class='line'>  &lt;a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"&gt;&lt;/a&gt;
-</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在侧边栏显示，则将<code>qrcode.html</code>放入<code>source/_includes/custom/asides/</code>中，在<code>_config.yml</code>中<code>default_asides</code>添加<code>custom/asides/qrcode.html</code>即可显示。或者将<code>qrcode.html</code>代码添加到想展示页面的HTML文件中。</p>
-
-<!--more-->
-
-
-<h1>滑动返回顶部按钮</h1>
-
-<p>文章较长的情况，通常希望有一个返回顶部的按钮。如下方法实现了在页面右下方添加一个返回顶部的图片按钮，点击后可以滑动的返回顶部。</p>
-
-<h2>方法一</h2>
-
-<p>首先创建<code>source/javascripts/top.js</code>，实现滑动返回顶部效果，添加如下代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>function goTop(acceleration, time) {
-</span><span class='line'>  acceleration = acceleration || 0.1;
-</span><span class='line'>  time = time || 16;
-</span><span class='line'>
-</span><span class='line'>  var x1 = 0;
-</span><span class='line'>  var y1 = 0;
-</span><span class='line'>  var x2 = 0;
-</span><span class='line'>  var y2 = 0;
-</span><span class='line'>  var x3 = 0;
-</span><span class='line'>  var y3 = 0;
-</span><span class='line'>
-</span><span class='line'>  if (document.documentElement) {
-</span><span class='line'>      x1 = document.documentElement.scrollLeft || 0;
-</span><span class='line'>      y1 = document.documentElement.scrollTop || 0;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  if (document.body) {
-</span><span class='line'>      x2 = document.body.scrollLeft || 0;
-</span><span class='line'>      y2 = document.body.scrollTop || 0;
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  var x3 = window.scrollX || 0;
-</span><span class='line'>  var y3 = window.scrollY || 0;
-</span><span class='line'>
-</span><span class='line'>  var x = Math.max(x1, Math.max(x2, x3));
-</span><span class='line'>  var y = Math.max(y1, Math.max(y2, y3));
-</span><span class='line'>
-</span><span class='line'>  var speed = 1 + acceleration;
-</span><span class='line'>  window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
-</span><span class='line'>
-</span><span class='line'>  if(x &gt; 0 || y &gt; 0) {
-</span><span class='line'>      var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
-</span><span class='line'>      window.setTimeout(invokeFunction, time);
-</span><span class='line'>  }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>接着创建<code>source/_includes/custom/totop.html</code>，设置返回顶部按钮样式和位置，代码如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!--返回顶部开始--&gt;
-</span><span class='line'>&lt;div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;"&gt;
-</span><span class='line'>  &lt;a href="#" onclick="goTop();return false;"&gt;&lt;img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"&gt;&lt;/a&gt;
-</span><span class='line'>&lt;/div&gt;
-</span><span class='line'>&lt;script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"&gt;&lt;/script&gt;
-</span><span class='line'>&lt;!--返回顶部结束--&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
-
-<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>{ % include custom/totop.html % }</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。</p>
-
-<h2>方法二</h2>
-
-<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式。相关的HTML代码很简单，在<code>source/_include/custom/footer.html</code>中添加如下代码：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;&lt;/script&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;script type="text/javascript"&gt;
-</span><span class='line'>$(document).ready(function(){
-</span><span class='line'>
-</span><span class='line'>  // hide #back-top first
-</span><span class='line'>  $("#back-top").hide();
-</span><span class='line'>  
-</span><span class='line'>  // fade in #back-top
-</span><span class='line'>  $(function () {
-</span><span class='line'>      $(window).scroll(function () {
-</span><span class='line'>          if ($(this).scrollTop() &gt; 100) {
-</span><span class='line'>              $('#back-top').fadeIn();
-</span><span class='line'>          } else {
-</span><span class='line'>              $('#back-top').fadeOut();
-</span><span class='line'>          }
-</span><span class='line'>      });
-</span><span class='line'>
-</span><span class='line'>      // scroll body to 0px on click
-</span><span class='line'>      $('#back-top a').click(function () {
-</span><span class='line'>          $('body,html').animate({
-</span><span class='line'>              scrollTop: 0
-</span><span class='line'>          }, 800);
-</span><span class='line'>          return false;
-</span><span class='line'>      });
-</span><span class='line'>  });
-</span><span class='line'>
-</span><span class='line'>});
-</span><span class='line'>&lt;/script&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;style type="text/css"&gt;
-</span><span class='line'>#back-top {
-</span><span class='line'>  position: fixed;
-</span><span class='line'>  bottom: 50px;
-</span><span class='line'>  right: 100px;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>#back-top a {
-</span><span class='line'>  width: 80px;
-</span><span class='line'>  display: block;
-</span><span class='line'>  text-align: center;
-</span><span class='line'>  font: 11px/100% Arial, Helvetica, sans-serif;
-</span><span class='line'>  text-transform: uppercase;
-</span><span class='line'>  text-decoration: none;
-</span><span class='line'>  color: #bbb;
-</span><span class='line'>
-</span><span class='line'>  /* transition */
-</span><span class='line'>  -webkit-transition: 1s;
-</span><span class='line'>  -moz-transition: 1s;
-</span><span class='line'>  transition: 1s;
-</span><span class='line'>}
-</span><span class='line'>#back-top a:hover {
-</span><span class='line'>  color: #000;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* arrow icon (span tag) */
-</span><span class='line'>#back-top span {
-</span><span class='line'>  width: 80px;
-</span><span class='line'>  height: 80px;
-</span><span class='line'>  display: block;
-</span><span class='line'>  margin-bottom: 7px;
-</span><span class='line'>  background: #ddd url(/images/top.png) no-repeat center center;
-</span><span class='line'>
-</span><span class='line'>  /* rounded corners */
-</span><span class='line'>  -webkit-border-radius: 15px;
-</span><span class='line'>  -moz-border-radius: 15px;
-</span><span class='line'>  border-radius: 15px;
-</span><span class='line'>
-</span><span class='line'>  /* transition */
-</span><span class='line'>  -webkit-transition: 1s;
-</span><span class='line'>  -moz-transition: 1s;
-</span><span class='line'>  transition: 1s;
-</span><span class='line'>}
-</span><span class='line'>#back-top a:hover span {
-</span><span class='line'>  background-color: #888;
-</span><span class='line'>}
-</span><span class='line'>&lt;/style&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p id="back-top"&gt;
-</span><span class='line'>  &lt;a href="#top"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt;
-</span><span class='line'>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;
-</span><span class='line'>  Copyright &copy; 2014 - 残剑 -
-</span><span class='line'>  &lt;span class="credit"&gt;Powered by &lt;a href="http://octopress.org"&gt;Octopress&lt;/a&gt;&lt;/span&gt;
-</span><span class='line'>&lt;/p&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>参考文章</h1>
-
-<p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
-<a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
-<a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
-<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a><br/>
-<a href="http://webdesignerwall.com/tutorials/animated-scroll-to-top">Animated Scroll to Top</a></p>
 ]]></content>
   </entry>
   
