@@ -9,9 +9,12 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。 1
+  <meta name="description" content="pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。 1
 2
-3 &hellip;">
+3
+4
+$ pkg-config --libs --cflags opencv
+-I/usr/include/opencv -lopencv_core - &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +82,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/14/pkg-configde-shi-yong/">Pkg-config的使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-14T11:22:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/14/pkg-configde-shi-yong/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pkg-config --libs --cflags opencv
+</span><span class='line'>-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
+</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect 
+</span><span class='line'>-lopencv_contrib -lopencv_legacy -lopencv_flann</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
+
+<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Package opencv was not found in the pkg-config search path.
+</span><span class='line'>Perhaps you should add the directory containing `opencv.pc'
+</span><span class='line'>to the PKG_CONFIG_PATH environment variable
+</span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/14/pkg-configde-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -586,56 +656,6 @@ $ ./rand
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/">Linux下PDF文件的操作与转换</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T11:21:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux中常常涉及到多种文档格式（如doc、txt、html、rtf等等），为了方便文件传递，就可能需要在各种格式之间进行转换。下面介绍几个命令行下的工具，用于将pdf文件转换成其它我们需要的文件格式。</p>
-
-<h1>Pdftk</h1>
-
-<p>如果说PDF是电子纸张，那么pdftk就是电子起钉器、打孔机、粘合剂、解密指环和X光镜片。pdftk是一个简单的工具，可以对PDF文档进行各种日常操作，让你简单而自由地操作PDF。它不需要Acrobat，并且可以运行在Linux,Windows,Mac OS X,FreeBSD和Solaris上。在Debian/Ubuntu中你可以通过apt安装pdftk:</p>
-
-<pre><code>$ sudo aptitude install pdftk
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -674,6 +694,10 @@ $ ./rand
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/29/si-nian/">思念</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/28/%5B%3F%5D-ge-bu-chang-hui-jia-de-ren/">一个不常回家的人</a>
       </li>
     
@@ -687,10 +711,6 @@ $ ./rand
     
       <li class="post">
         <a href="/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/">Linux桌面系统离你还太远</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/23/tan-jian-shu-%2Cti-jian-yi/">谈简书，提建议</a>
       </li>
     
   </ul>
@@ -729,7 +749,7 @@ $ ./rand
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (48)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
-<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (3)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 <li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (5)</a></li>
 
