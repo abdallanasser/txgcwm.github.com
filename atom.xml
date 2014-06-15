@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T15:12:56+08:00</updated>
+  <updated>2014-06-15T15:18:05+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -233,6 +233,12 @@
 </span><span class='line'>            link = site.xpath('a/@href').extract()
 </span><span class='line'>            desc = site.xpath('text()').extract()
 </span><span class='line'>            print title, link, desc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们通过scrapy.selector将Selector类导入及初始化一个Selector实例。现在可以指定我们的XPaths，如在shell中做的那样。我们尝试重新抓取dmoz.org站点，你将会在你的输出平台看到站点的一些信息，输入如下的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl dmoz</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Using our item</h2>
