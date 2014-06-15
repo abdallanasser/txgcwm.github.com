@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T15:18:05+08:00</updated>
+  <updated>2014-06-15T15:30:14+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -117,7 +117,7 @@ Out[5]: [u'Computers', u'Programming', u'Languages', u'Python']
 
 <p>现在我们尝试从网页中提取一些真正的数据。</p>
 
-<p>你可以在控制台输入<code>response.body</code>， 检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
+<p>你可以在控制台输入<code>response.body</code>，检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
 
 <p>检查源代码后，你会发现我们需要的数据在<code>&lt;ul&gt;</code>元素中，事实上是第二个<code>&lt;ul&gt;</code>。</p>
 
@@ -182,7 +182,71 @@ scrapy crawl dmoz
 
 <h2>Using our item</h2>
 
+<p>Item对象是用户自定义的python字典，你可以获取它们每个字段的值(即之前定义的类的属性)，它使用了标准的字典语法，如下所示:
+```</p>
+
+<blockquote><blockquote><blockquote><p>item = DmozItem()
+item[&lsquo;title&rsquo;] = &lsquo;Example title&rsquo;
+item[&lsquo;title&rsquo;]
+&lsquo;Example title&rsquo;
+<code>
+Spiders希望将其抓取的数据存放到`Item`对象中。为了返回我们抓取的数据，Spider的最终代码应当是这样:
+</code>
+from scrapy.spider import Spider
+from scrapy.selector import Selector</p></blockquote></blockquote></blockquote>
+
+<p>from tutorial.items import DmozItem</p>
+
+<p>class DmozSpider(Spider):</p>
+
+<pre><code>name = "dmoz"
+allowed_domains = ["dmoz.org"]
+start_urls = [
+    "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+    "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+]
+
+def parse(self, response):
+    sel = Selector(response)
+    sites = sel.xpath('//ul/li')
+    items = []
+    for site in sites:
+        item = DmozItem()
+        item['title'] = site.xpath('a/text()').extract()
+        item['link'] = site.xpath('a/@href').extract()
+        item['desc'] = site.xpath('text()').extract()
+        items.append(item)
+    return items
+</code></pre>
+
+<p><code>
+再次抓取dmoz.org站点的信息：
+</code>
+[dmoz] DEBUG: Scraped from <200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/></p>
+
+<pre><code> {'desc': [u' - By David Mertz; Addison Wesley. Book in progress, full text, ASCII format. Asks for feedback. [author website, Gnosis Software, Inc.\n],
+  'link': [u'http://gnosis.cx/TPiP/'],
+  'title': [u'Text Processing in Python']}
+</code></pre>
+
+<p>[dmoz] DEBUG: Scraped from <200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/></p>
+
+<pre><code> {'desc': [u' - By Sean McGrath; Prentice Hall PTR, 2000, ISBN 0130211192, has CD-ROM. Methods to build XML applications fast, Python tutorial, DOM and SAX, new Pyxie open source XML processing library. [Prentice Hall PTR]\n'],
+  'link': [u'http://www.informit.com/store/product.aspx?isbn=0130211192'],
+  'title': [u'XML Processing with Python']}
+</code></pre>
+
+<p>```</p>
+
 <h1>Storing the scraped data</h1>
+
+<p>保存信息的最简单的方法是通过Feed exports，命令如下：
+<code>
+scrapy crawl dmoz -o items.json -t json
+</code>
+所有抓取的items将以JSON格式被保存在新生成的items.json 文件中</p>
+
+<p>在像本教程一样的小型项目中，这些已经足够。然而，如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。因为在项目创建的时候，一个专门用于条目管道的占位符文件已经随着items一起被建立，目录在tutorial/pipelines.py。如果你只需要存取这些抓取后的items的话，就不需要去实现任何的条目管道。</p>
 
 <p><big>注：</big>整个Scrapy的入门教程写得比较杂乱，包含了翻译部分和自己写的测试小例。</p>
 

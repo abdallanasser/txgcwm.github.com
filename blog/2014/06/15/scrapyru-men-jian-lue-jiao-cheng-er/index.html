@@ -236,7 +236,7 @@
 
 <p>现在我们尝试从网页中提取一些真正的数据。</p>
 
-<p>你可以在控制台输入<code>response.body</code>， 检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
+<p>你可以在控制台输入<code>response.body</code>，检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
 
 <p>检查源代码后，你会发现我们需要的数据在<code>&lt;ul&gt;</code>元素中，事实上是第二个<code>&lt;ul&gt;</code>。</p>
 
@@ -330,7 +330,101 @@
 
 <h2>Using our item</h2>
 
+<p>Item对象是用户自定义的python字典，你可以获取它们每个字段的值(即之前定义的类的属性)，它使用了标准的字典语法，如下所示:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&gt;&gt;&gt; item = DmozItem()
+</span><span class='line'>&gt;&gt;&gt; item['title'] = 'Example title'
+</span><span class='line'>&gt;&gt;&gt; item['title']
+</span><span class='line'>'Example title'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Spiders希望将其抓取的数据存放到<code>Item</code>对象中。为了返回我们抓取的数据，Spider的最终代码应当是这样:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.spider import Spider
+</span><span class='line'>from scrapy.selector import Selector
+</span><span class='line'>
+</span><span class='line'>from tutorial.items import DmozItem
+</span><span class='line'>
+</span><span class='line'>class DmozSpider(Spider):
+</span><span class='line'>    name = "dmoz"
+</span><span class='line'>    allowed_domains = ["dmoz.org"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+</span><span class='line'>        "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        sel = Selector(response)
+</span><span class='line'>        sites = sel.xpath('//ul/li')
+</span><span class='line'>        items = []
+</span><span class='line'>        for site in sites:
+</span><span class='line'>            item = DmozItem()
+</span><span class='line'>            item['title'] = site.xpath('a/text()').extract()
+</span><span class='line'>            item['link'] = site.xpath('a/@href').extract()
+</span><span class='line'>            item['desc'] = site.xpath('text()').extract()
+</span><span class='line'>            items.append(item)
+</span><span class='line'>        return items</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再次抓取dmoz.org站点的信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[dmoz] DEBUG: Scraped from &lt;200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+</span><span class='line'>     {'desc': [u' - By David Mertz; Addison Wesley. Book in progress, full text, ASCII format. Asks for feedback. [author website, Gnosis Software, Inc.\n],
+</span><span class='line'>      'link': [u'http://gnosis.cx/TPiP/'],
+</span><span class='line'>      'title': [u'Text Processing in Python']}
+</span><span class='line'>[dmoz] DEBUG: Scraped from &lt;200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+</span><span class='line'>     {'desc': [u' - By Sean McGrath; Prentice Hall PTR, 2000, ISBN 0130211192, has CD-ROM. Methods to build XML applications fast, Python tutorial, DOM and SAX, new Pyxie open source XML processing library. [Prentice Hall PTR]\n'],
+</span><span class='line'>      'link': [u'http://www.informit.com/store/product.aspx?isbn=0130211192'],
+</span><span class='line'>      'title': [u'XML Processing with Python']}</span></code></pre></td></tr></table></div></figure>
+
+
 <h1>Storing the scraped data</h1>
+
+<p>保存信息的最简单的方法是通过Feed exports，命令如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl dmoz -o items.json -t json</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所有抓取的items将以JSON格式被保存在新生成的items.json 文件中</p>
+
+<p>在像本教程一样的小型项目中，这些已经足够。然而，如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。因为在项目创建的时候，一个专门用于条目管道的占位符文件已经随着items一起被建立，目录在tutorial/pipelines.py。如果你只需要存取这些抓取后的items的话，就不需要去实现任何的条目管道。</p>
 
 <p><big>注：</big>整个Scrapy的入门教程写得比较杂乱，包含了翻译部分和自己写的测试小例。</p>
 
