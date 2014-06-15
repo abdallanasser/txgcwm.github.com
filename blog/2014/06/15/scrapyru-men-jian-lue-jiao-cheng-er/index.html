@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>残剑</title>
+  <title>Scrapy入门简略教程（二） - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="首先想说的是——你选择了我作为你的合作伙伴，我感到万分的荣幸。对于当代的我们来说，要靠一个人独自去做一件事或者事业真的很难，唯有合作才能创就一番事业，毕竟个人的能力总是有限的。起初我认为凭借个人的力量能够做得很好（的确我依旧这么认为），可是那要花费大量的时间，等到真正完成的时候时机可能已经错过了 &hellip;">
+  <meta name="description" content="What just happened under the hood? Scrapy为爬虫中的start_urls属性中每个URL创建了一个scrapy.http.Request对象 ，并把parse方法作为回调函数指定给爬虫。 这些Request会被调度，执行，scrapy.http. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/page/16">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -75,15 +75,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">致未来的合作伙伴</a></h1>
+      <h1 class="entry-title">Scrapy入门简略教程（二）</h1>
     
     
       <p class="meta">
@@ -99,85 +96,76 @@
   
 
 
-<time datetime="2013-08-03T15:12:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-06-15T13:44:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
         
-         | <a href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><img src="http://trusbe.com/wp-content/uploads/2013/05/%E4%B8%AD%E5%9B%BD%E5%90%88%E4%BC%99%E4%BA%BA-%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C.png"></p>
+<div class="entry-content"><h1>What just happened under the hood?</h1>
 
-<p>首先想说的是——你选择了我作为你的合作伙伴，我感到万分的荣幸。对于当代的我们来说，要靠一个人独自去做一件事或者事业真的很难，唯有合作才能创就一番事业，毕竟个人的能力总是有限的。起初我认为凭借个人的力量能够做得很好（的确我依旧这么认为），可是那要花费大量的时间，等到真正完成的时候时机可能已经错过了。</p>
+<p>Scrapy为爬虫中的<code>start_urls</code>属性中每个URL创建了一个<code>scrapy.http.Request</code>对象 ，并把<code>parse</code>方法作为回调函数指定给爬虫。</p>
 
+<p>这些<code>Request</code>会被调度，执行，<code>scrapy.http.Response</code>对象被返回，结果也被反馈给爬虫，之后通过<code>parse()</code>方法解析。</p>
+
+<h1>Extracting Items</h1>
+
+<h2>Introduction to Selectors</h2>
+
+<p>有很多方法从网站中提取数据。Scrapy使用一种叫做Scrapy Selectors的机制，它基于XPath或者是CSS表达式。如果想了解更多selectors和其它机制，可查阅<a href="http://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors">Selectors documentation</a>。</p>
+
+<p>以下是XPath表达式的例子和它们的含义：</p>
+
+<ul>
+<li><code>/html/head/title</code>: 选择HTML文档<code>&lt;head&gt;</code>元素下面的<code>&lt;title&gt;</code>标签。</li>
+<li><code>/html/head/title/text()</code>: 选择前面提到的<code>&lt;title&gt;</code>元素下面的文本内容。</li>
+<li><code>//td</code>: 选择所有 <code>&lt;td&gt;</code>元素。</li>
+<li><code>//div[@class="mine"]</code>: 选择所有包含<code>class="mine"</code>属性的<code>div</code>标签元素。</li>
+</ul>
+
+
+<p>这只是几个使用XPath的简单例子，但是实际上XPath非常强大。如果你想了解更多XPATH的内容，我们向你推荐这个<a href="http://www.w3schools.com/XPath/default.asp">XPath教程</a>。</p>
+
+<p>为了方便使用XPaths，Scrapy提供XPath<code>Selector</code>类， 有两种方式可以选择，<code>HtmlResponse</code>(HTML数据解析) 和<code>XmlResponse</code>(XML数据解析)。</p>
+
+<p>使用XPath选择器，Scrapy提供了一个<code>Selector</code>类，它实例化一个<code>Htmlresponse</code>或<code>Xmlresponse</code>对象作为第一个参数。</p>
+
+<p>你可以看到selectors作为对象表示在文档结构节点。所以，第一个实例化selectors是与根节点相关联，或整个文档。</p>
+
+<p>Selectors有四种基本方法（具体的使用请查看API文档）：</p>
+
+<ul>
+<li><code>path()</code>：返回selectors列表, 每一个select表示一个xpath参数表达式选择的节点。</li>
+<li><code>css()</code>: 返回selectors列表, 每一个select表示一个CSS参数表达式选择的节点。</li>
+<li><code>extract()</code>：返回一个unicode字符串，该字符串为XPath选择器返回的数据。</li>
+<li><code>re()</code>： 返回unicode字符串列表，字符串作为参数由正则表达式提取出来。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h2>Trying Selectors in the Shell</h2>
+
+<h2>Extracting the data</h2>
+
+<h2>Using our item</h2>
+
+<h1>Storing the scraped data</h1>
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/zhi-wei-lai-de-he-zuo-huo-ban/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/wo-men-wei-shi-yao-bai-liao/">我们为什么败了</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
 
-<time datetime="2013-08-03T14:52:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/wo-men-wei-shi-yao-bai-liao/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://apollo.s.dpool.sina.com.cn/nd/grouphenan/pics/c3/b6/c3b60fcf7612ed5ff4a01fb525f47765.jpg"></p>
-
-<p>当我问出“为之奈何？”时，我已经作出了决定——宣布我们的事业失败。就在昨天晚上正式结束了。原本没有死心，想看看7月26日的状况，可是没有人“买单”了，问题已经很明显，根本没有必要强撑着了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/wo-men-wei-shi-yao-bai-liao/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/tui-jian-%5B%3F%5D-ben-hao-shu-%3C%3Chuo-bi-zhan-zheng-%3E%3E/">推荐一本好书《货币战争》</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -189,314 +177,47 @@
   
 
 
-<time datetime="2013-08-03T14:39:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/tui-jian-%5B%3F%5D-ben-hao-shu-%3C%3Chuo-bi-zhan-zheng-%3E%3E/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://www.cr173.com/up/2010-7/2010719183816.jpg"></p>
-
-<p>如果你酷爱金融或者不想让自己在未来的金融大战中灭亡的话，看一下这本书是绝对没有错的。在本学期我所看过的书中，《货币战争》我认为是很不错的。世纪大战的可能性现在几乎很小，可是有另外的一种战场，那就是金融大战，它的毁坏能力超过了战争。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/tui-jian-%5B%3F%5D-ben-hao-shu-%3C%3Chuo-bi-zhan-zheng-%3E%3E/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2014-06-15T13:44:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/zhong-guo-de-gu-shi-xu-yao-ni-men/">中国的股市需要你们</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
+  
+</span>
 
 
-<time datetime="2013-08-03T14:23:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/zhong-guo-de-gu-shi-xu-yao-ni-men/#disqus_thread">Comments</a>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://img.zjol.com.cn/pic/0/02/41/28/2412894_998960.jpg"></p>
-
-<p>如果你认为炒股是不对的话，那将是一个极大的错误。你们肯定是会反对我的，理由很简单：炒股会影响到学习，我们没有资金，炒股需要学习相关的很多知识&hellip;但我认为你们的理由只对了一部分，不是全部。</p>
-
+      <div class="sharing">
+  
+  
+  
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/zhong-guo-de-gu-shi-xu-yao-ni-men/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
+    
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/">静悄悄的危机正在侵袭中国</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T14:00:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://a3.att.hudong.com/74/68/01300000238080122631688199226.jpg"></p>
-
-<p>作为一个发展迅速的大国，一直是美国打击的对象，它不容得任何的新势力动摇它的霸权地位。80年代的广场协议迫使日本货币升值，还有97年的东南亚金融危机，无不跟美国有关系。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/jing-qiao-qiao-de-wei-ji-zheng-zai-qin-xi-zhong-guo/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+        <a class="basic-alignment left" href="/blog/2014/06/08/da-ge-%2Cbie-pao-ya/" title="Previous Post: 大哥，别跑呀">&laquo; 大哥，别跑呀</a>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/">扩大内需对当前的中国非常有必要</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T13:37:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="center" src="http://i3.cnfolimg.com/money/2_1060062.jpg"></p>
-
-<p>中国当前的消费模式：赚钱，存钱，有了足够的钱之后就是买房，买了房后口袋里的钱几乎就剩下不多了，接下来的问题就要考虑养老问题了，这时候已经到了一定的年龄阶段，过去的激情已经不再存在，一生所赚的钱几乎大部分都花在了这两个方面，其它的消费就是在生活必需品上了，剩下的消费少得可怜！</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/log10de-shi-xian/">Log10的实现</a></h1>
-    
-    
-      <p class="meta">
-        
+    </p>
+  </footer>
+</article>
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/log10de-shi-xian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
-
-<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    register double ret;
-</span><span class='line'>
-</span><span class='line'>       __asm__(
-</span><span class='line'>  "fldlg2\n\t" 
-</span><span class='line'>  "fxch\n\t" 
-</span><span class='line'>  "fyl2x"
-</span><span class='line'>  :"=t"(ret)
-</span><span class='line'>          :"0"(x)
-</span><span class='line'>      );
-</span><span class='line'>   return ret;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/log10de-shi-xian/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">kfifo.c中in和out的溢出问题</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T01:08:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>先上内核循环缓冲结构体的定义：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct kfifo {
-</span><span class='line'>    unsigned char *buffer;        /* the buffer holding the data */
-</span><span class='line'>    unsigned int size;        /* the size of the allocated buffer */
-</span><span class='line'>    unsigned int in;        /* data is added at offset (in % size) */
-</span><span class='line'>    unsigned int out;        /* data is extracted from off. (out % size) */
-</span><span class='line'>    spinlock_t *lock;        /* protects concurrent modifications */
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考 <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a> 。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a> 。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/17/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-    <a class="next" href="/blog/page/15/">Newer &rarr;</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/page/16/index.html"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/page/16/index.html" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -624,7 +345,7 @@
       <a href="http://tonybai.com/">Tony Bai</a>
     </li>        
 	<li>
-      <a href="http://www.roboby.com/">Roboby&#8217;s Home</a>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
     </li>
 	<li>
       <a href="http://www.zhizhihu.com/">丕子</a>
@@ -684,7 +405,7 @@
       <a href="http://www.wypblog.com/">过往记忆</a>
     </li>
 	<li>
-      <a href="http://edsionte.com/techblog/">edsionte&#8217;s Linuxworld|新手区</a>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
     </li>
 	<li>
       <a href="http://basiccoder.com/">basic coder</a>
@@ -705,7 +426,7 @@
       <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
     </li>
 	<li>
-      <a href="http://wangcong.org/blog/">A Geek&#8217;s Page</a>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
     </li>                
 	<li>
       <a href="http://bachiscoding.com/">巴赫在编码</a>
@@ -759,6 +480,7 @@
 
   
 </aside>
+
 
     </div>
   </div>
@@ -856,7 +578,10 @@ $(document).ready(function(){
       var disqus_shortname = 'txgcwm';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
