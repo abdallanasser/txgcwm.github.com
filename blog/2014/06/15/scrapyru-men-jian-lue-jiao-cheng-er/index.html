@@ -416,15 +416,15 @@
 
 <h1>Storing the scraped data</h1>
 
-<p>保存信息的最简单的方法是通过Feed exports，命令如下：</p>
+<p>保存抓取的信息的最简单方法就是使用<a href="http://doc.scrapy.org/en/latest/topics/feed-exports.html#topics-feed-exports">Feed exports</a>，使用如下的命令：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>scrapy crawl dmoz -o items.json -t json</span></code></pre></td></tr></table></div></figure>
 
 
-<p>所有抓取的items将以JSON格式被保存在新生成的items.json 文件中</p>
+<p>所有抓取的items将以JSON格式被保存在新生成的<code>items.json</code>文件中。</p>
 
-<p>在像本教程一样的小型项目中，这些已经足够。然而，如果你想用抓取的items做更复杂的事情，你可以写一个 Item Pipeline(条目管道)。因为在项目创建的时候，一个专门用于条目管道的占位符文件已经随着items一起被建立，目录在tutorial/pipelines.py。如果你只需要存取这些抓取后的items的话，就不需要去实现任何的条目管道。</p>
+<p>在小型的项目中（如这个教程中的例子），这些已经足够。然而，如果你想用抓取的items做更复杂的事情，你可以写一个<a href="http://doc.scrapy.org/en/latest/topics/item-pipeline.html#topics-item-pipeline">Item Pipeline</a>(条目管道)。在项目创建的时候，一个专门用于条目管道的占位符文件随着items一起被建立，在<code>tutorial/pipelines.py</code>中。如果你只需要存取这些抓取后的items的话，就不需要去实现任何的条目管道。</p>
 
 <p><big>注：</big>整个Scrapy的入门教程写得比较杂乱，包含了翻译部分和自己写的测试小例。</p>
 
