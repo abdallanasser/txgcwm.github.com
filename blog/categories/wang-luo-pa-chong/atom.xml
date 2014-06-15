@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:41:58+08:00</updated>
+  <updated>2014-06-15T14:44:13+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -79,7 +79,7 @@
 <a href="http://www.biaodianfu.com/mplementation-of-targeted-crawling-system.html">聚焦爬虫：定向抓取系统的实现方法</a><br/>
 <a href="http://lujiesky.blog.51cto.com/332319/1328176">开源python网络爬虫框架Scrapy</a><br/>
 <a href="http://www.yakergong.net/blog/archives/500">使用scrapy进行大规模抓取(一)</a><br/>
-[Python]网络爬虫（12）：爬虫框架Scrapy的第一个爬虫示例入门教程](<a href="http://blog.csdn.net/pleasecallmewhy/article/details/19642329">http://blog.csdn.net/pleasecallmewhy/article/details/19642329</a>)<br/>
+<a href="http://blog.csdn.net/pleasecallmewhy/article/details/19642329">Python网络爬虫（12）：爬虫框架Scrapy的第一个爬虫示例入门教程</a><br/>
 <a href="http://www.searchtb.com/2011/07/%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%8A%93%E5%8F%96%E9%9B%86%E7%BE%A4.html?spm=0.0.0.0.oD8o9v">快速构建实时抓取集群</a></p>
 ]]></content>
   </entry>
