@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:56:11+08:00</updated>
+  <updated>2014-06-15T15:12:56+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -68,7 +68,7 @@
 <p>要开始shell，必须进入项目顶层目录，然后输入：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span></code></pre></td></tr></table></div></figure>
 
 
 <p>shell会输入以下的类似信息：</p>
@@ -147,11 +147,99 @@
 
 <h2>Extracting the data</h2>
 
+<p>现在我们尝试从网页中提取一些真正的数据。</p>
+
+<p>你可以在控制台输入<code>response.body</code>， 检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
+
+<p>检查源代码后，你会发现我们需要的数据在<code>&lt;ul&gt;</code>元素中，事实上是第二个<code>&lt;ul&gt;</code>。</p>
+
+<p>我们可以通过如下命令选出每个站点中的<code>&lt;li&gt;</code>元素:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sel.xpath('//ul/li')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>站点的描述信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sel.xpath('//ul/li/text()').extract()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>站点的标题：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sel.xpath('//ul/li/a/text()').extract()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>站点的链接：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sel.xpath('//ul/li/a/@href').extract()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>正如我们前面说的那样，每一个<code>.xpath</code>会返回一个selectors的列表，所以我们可以结合<code>.xpath()</code>去挖掘更深的节点。我们将会用到这些特性，所以:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sites = sel.xpath('//ul/li')
+</span><span class='line'>for site in sites:
+</span><span class='line'>    title = site.xpath('a/text()').extract()
+</span><span class='line'>    link = site.xpath('a/@href').extract()
+</span><span class='line'>    desc = site.xpath('text()').extract()
+</span><span class='line'>    print title, link, desc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们把这些代码添加到爬虫中：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.spider import Spider
+</span><span class='line'>from scrapy.selector import Selector
+</span><span class='line'>
+</span><span class='line'>class DmozSpider(Spider):
+</span><span class='line'>    name = "dmoz"
+</span><span class='line'>    allowed_domains = ["dmoz.org"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+</span><span class='line'>        "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        sel = Selector(response)
+</span><span class='line'>        sites = sel.xpath('//ul/li')
+</span><span class='line'>        for site in sites:
+</span><span class='line'>            title = site.xpath('a/text()').extract()
+</span><span class='line'>            link = site.xpath('a/@href').extract()
+</span><span class='line'>            desc = site.xpath('text()').extract()
+</span><span class='line'>            print title, link, desc</span></code></pre></td></tr></table></div></figure>
+
+
 <h2>Using our item</h2>
 
 <h1>Storing the scraped data</h1>
 
-<p><big>注：</big>文章写的比较杂乱，包含了翻译部分和自己写的测试小例。</p>
+<p><big>注：</big>整个Scrapy的入门教程写得比较杂乱，包含了翻译部分和自己写的测试小例。</p>
 
 <p><td></td>
 <big>参考文章</big></p>

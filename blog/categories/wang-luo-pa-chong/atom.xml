@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:56:11+08:00</updated>
+  <updated>2014-06-15T15:12:56+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -67,7 +67,7 @@
 
 <p>要开始shell，必须进入项目顶层目录，然后输入：
 <code>
-$ scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"
+scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"
 </code>
 shell会输入以下的类似信息：
 ```
@@ -115,11 +115,72 @@ Out[5]: [u'Computers', u'Programming', u'Languages', u'Python']
 
 <h2>Extracting the data</h2>
 
+<p>现在我们尝试从网页中提取一些真正的数据。</p>
+
+<p>你可以在控制台输入<code>response.body</code>， 检查源代码中的<code>XPaths</code>是否与预期相同。然而，检查HTML源代码是件很枯燥的事情。为了使事情变得简单，我们使用类似Firebug的Firefox扩展插件。更多信息请查看<a href="http://doc.scrapy.org/en/latest/topics/firebug.html#topics-firebug">Using Firebug for scraping</a>和<a href="http://doc.scrapy.org/en/latest/topics/firefox.html#topics-firefox">Using Firefox for scraping</a>。</p>
+
+<p>检查源代码后，你会发现我们需要的数据在<code>&lt;ul&gt;</code>元素中，事实上是第二个<code>&lt;ul&gt;</code>。</p>
+
+<p>我们可以通过如下命令选出每个站点中的<code>&lt;li&gt;</code>元素:</p>
+
+<p><code>
+sel.xpath('//ul/li')
+</code>
+站点的描述信息：
+<code>
+sel.xpath('//ul/li/text()').extract()
+</code>
+站点的标题：
+<code>
+sel.xpath('//ul/li/a/text()').extract()
+</code>
+站点的链接：
+<code>
+sel.xpath('//ul/li/a/@href').extract()
+</code>
+正如我们前面说的那样，每一个<code>.xpath</code>会返回一个selectors的列表，所以我们可以结合<code>.xpath()</code>去挖掘更深的节点。我们将会用到这些特性，所以:
+```
+sites = sel.xpath(&lsquo;//ul/li&rsquo;)
+for site in sites:</p>
+
+<pre><code>title = site.xpath('a/text()').extract()
+link = site.xpath('a/@href').extract()
+desc = site.xpath('text()').extract()
+print title, link, desc
+</code></pre>
+
+<p><code>
+我们把这些代码添加到爬虫中：
+</code>
+from scrapy.spider import Spider
+from scrapy.selector import Selector</p>
+
+<p>class DmozSpider(Spider):</p>
+
+<pre><code>name = "dmoz"
+allowed_domains = ["dmoz.org"]
+start_urls = [
+    "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+    "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+]
+
+def parse(self, response):
+    sel = Selector(response)
+    sites = sel.xpath('//ul/li')
+    for site in sites:
+        title = site.xpath('a/text()').extract()
+        link = site.xpath('a/@href').extract()
+        desc = site.xpath('text()').extract()
+        print title, link, desc
+</code></pre>
+
+<p>```</p>
+
 <h2>Using our item</h2>
 
 <h1>Storing the scraped data</h1>
 
-<p><big>注：</big>文章写的比较杂乱，包含了翻译部分和自己写的测试小例。</p>
+<p><big>注：</big>整个Scrapy的入门教程写得比较杂乱，包含了翻译部分和自己写的测试小例。</p>
 
 <p><td></td>
 <big>参考文章</big></p>
