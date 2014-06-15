@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:44:13+08:00</updated>
+  <updated>2014-06-15T14:49:49+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -62,6 +62,85 @@
 
 
 <h2>Trying Selectors in the Shell</h2>
+
+<p>为了演示Selectors的用法，我们将用到内建的Scrapy shell，这需要系统已经安装IPython (一个扩展的python交互环境)。</p>
+
+<p>要开始shell，必须进入项目顶层目录，然后输入：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>shell会输入以下的类似信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[ ... Scrapy log here ... ]
+</span><span class='line'>
+</span><span class='line'>2014-01-23 17:11:42-0400 [default] DEBUG: Crawled (200) &lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt; (referer: None)
+</span><span class='line'>[s] Available Scrapy objects:
+</span><span class='line'>[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x3636b50&gt;
+</span><span class='line'>[s]   item       {}
+</span><span class='line'>[s]   request    &lt;GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+</span><span class='line'>[s]   response   &lt;200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/&gt;
+</span><span class='line'>[s]   sel        &lt;Selector xpath=None data=u'&lt;html&gt;\r\n&lt;head&gt;\r\n&lt;meta http-equiv="Conten'&gt;
+</span><span class='line'>[s]   settings   &lt;CrawlerSettings module=None&gt;
+</span><span class='line'>[s]   spider     &lt;Spider 'default' at 0x3cebf50&gt;
+</span><span class='line'>[s] Useful shortcuts:
+</span><span class='line'>[s]   shelp()           Shell help (print this help)
+</span><span class='line'>[s]   fetch(req_or_url) Fetch request (or URL) and update local objects
+</span><span class='line'>[s]   view(response)    View response in a browser
+</span><span class='line'>
+</span><span class='line'>In [1]:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Shell载入后，你将获得回应，这些内容被存储在本地变量 response 中，所以如果你输入response.body 你将会看到response的body部分，或者输入response.headers 来查看它的 header部分。
+Shell也实例化了两种selectors，一个是解析HTML的  hxs 变量，一个是解析 XML 的 xxs 变量。我们来看看里面有什么：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>In [1]: sel.xpath('//title')
+</span><span class='line'>Out[1]: [&lt;Selector xpath='//title' data=u'&lt;title&gt;Open Directory - Computers: Progr'&gt;]
+</span><span class='line'>
+</span><span class='line'>In [2]: sel.xpath('//title').extract()
+</span><span class='line'>Out[2]: [u'&lt;title&gt;Open Directory - Computers: Programming: Languages: Python: Books&lt;/title&gt;']
+</span><span class='line'>
+</span><span class='line'>In [3]: sel.xpath('//title/text()')
+</span><span class='line'>Out[3]: [&lt;Selector xpath='//title/text()' data=u'Open Directory - Computers: Programming:'&gt;]
+</span><span class='line'>
+</span><span class='line'>In [4]: sel.xpath('//title/text()').extract()
+</span><span class='line'>Out[4]: [u'Open Directory - Computers: Programming: Languages: Python: Books']
+</span><span class='line'>
+</span><span class='line'>In [5]: sel.xpath('//title/text()').re('(\w+):')
+</span><span class='line'>Out[5]: [u'Computers', u'Programming', u'Languages', u'Python']</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>Extracting the data</h2>
 

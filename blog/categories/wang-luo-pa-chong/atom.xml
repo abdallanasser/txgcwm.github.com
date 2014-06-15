@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:44:13+08:00</updated>
+  <updated>2014-06-15T14:49:49+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -62,6 +62,53 @@
 
 
 <h2>Trying Selectors in the Shell</h2>
+
+<p>为了演示Selectors的用法，我们将用到内建的Scrapy shell，这需要系统已经安装IPython (一个扩展的python交互环境)。</p>
+
+<p>要开始shell，必须进入项目顶层目录，然后输入：
+<code>
+$ scrapy shell "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/"
+</code>
+shell会输入以下的类似信息：
+```
+[ &hellip; Scrapy log here &hellip; ]</p>
+
+<p>2014-01-23 17:11:42-0400 [default] DEBUG: Crawled (200) <GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/> (referer: None)
+[s] Available Scrapy objects:
+[s]   crawler    &lt;scrapy.crawler.Crawler object at 0x3636b50>
+[s]   item       {}
+[s]   request    <GET http://www.dmoz.org/Computers/Programming/Languages/Python/Books/>
+[s]   response   <200 http://www.dmoz.org/Computers/Programming/Languages/Python/Books/>
+[s]   sel        <Selector xpath=None data=u'<html>\r\n<head>\r\n<meta http-equiv="Conten'>
+[s]   settings   <CrawlerSettings module=None>
+[s]   spider     <Spider 'default' at 0x3cebf50>
+[s] Useful shortcuts:
+[s]   shelp()           Shell help (print this help)
+[s]   fetch(req_or_url) Fetch request (or URL) and update local objects
+[s]   view(response)    View response in a browser</p>
+
+<p>In [1]:
+```</p>
+
+<p>Shell载入后，你将获得回应，这些内容被存储在本地变量 response 中，所以如果你输入response.body 你将会看到response的body部分，或者输入response.headers 来查看它的 header部分。
+Shell也实例化了两种selectors，一个是解析HTML的  hxs 变量，一个是解析 XML 的 xxs 变量。我们来看看里面有什么：</p>
+
+<p>```
+In [1]: sel.xpath(&lsquo;//title&rsquo;)
+Out[1]: [<Selector xpath='//title' data=u'<title>Open Directory &ndash; Computers: Progr'>]</p>
+
+<p>In [2]: sel.xpath(&lsquo;//title&rsquo;).extract()
+Out[2]: [u'<title>Open Directory &ndash; Computers: Programming: Languages: Python: Books</title>&lsquo;]</p>
+
+<p>In [3]: sel.xpath(&lsquo;//title/text()&rsquo;)
+Out[3]: [<Selector xpath='//title/text()' data=u'Open Directory - Computers: Programming:'>]</p>
+
+<p>In [4]: sel.xpath(&lsquo;//title/text()&rsquo;).extract()
+Out[4]: [u'Open Directory &ndash; Computers: Programming: Languages: Python: Books']</p>
+
+<p>In [5]: sel.xpath(&lsquo;//title/text()&rsquo;).re(&lsquo;(\w+):&rsquo;)
+Out[5]: [u'Computers', u'Programming', u'Languages', u'Python']
+```</p>
 
 <h2>Extracting the data</h2>
 
