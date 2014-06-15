@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T14:49:49+08:00</updated>
+  <updated>2014-06-15T14:56:11+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -90,8 +90,11 @@ shell会输入以下的类似信息：
 <p>In [1]:
 ```</p>
 
-<p>Shell载入后，你将获得回应，这些内容被存储在本地变量 response 中，所以如果你输入response.body 你将会看到response的body部分，或者输入response.headers 来查看它的 header部分。
-Shell也实例化了两种selectors，一个是解析HTML的  hxs 变量，一个是解析 XML 的 xxs 变量。我们来看看里面有什么：</p>
+<p>Shell加载完毕后，将获得回应，这些内容被存储在本地变量<code>response</code>中，所以如果你输入<code>response.body</code>将会看到response的body部分，或者输入<code>response.headers</code>来查看它的header部分。</p>
+
+<p>Shell通过变量<code>sel</code>为这个response提前初始化一个selector，这个selector基于response的类型自动选择最佳的解析规则（XML或者HTML）。</p>
+
+<p>我们来看看里面有什么：</p>
 
 <p>```
 In [1]: sel.xpath(&lsquo;//title&rsquo;)
