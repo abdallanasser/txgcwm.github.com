@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-20T22:32:37+08:00</updated>
+  <updated>2014-06-20T22:38:06+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -99,25 +99,25 @@
 <p>```
 [general]</p>
 
-<p>anon-access = none // 未认证的用户没有任何访问权限<br/>
-auth-access = write // 认证的用户有写权限<br/>
-authz-db = authz // 认证文件为conf目录下的authz文件<br/>
+<p>anon-access = none // 未认证的用户没有任何访问权限   <br/>
+auth-access = write // 认证的用户有写权限        <br/>
+authz-db = authz // 认证文件为conf目录下的authz文件    <br/>
 ```</p>
 
 <p>修改/home/test/svn/trunk/conf/authz文件（如果没有则创建），在其中加入：</p>
 
 <p><code>
-[/]       // 访问权限为本资源的根目录以及以下目录  
-test = rw // test用户的访问权限为“读+写”  
+[/]       // 访问权限为本资源的根目录以及以下目录      
+test = rw // test用户的访问权限为“读+写”      
 </code>
 还可以采用以下方法进行认证：</p>
 
 <p>```
-[groups]<br/>
-svn = test,sam // 定义用户组svn包含两个用户：test和sim</p>
+[groups]    <br/>
+svn = test,sam // 定义用户组svn包含两个用户：test和sam</p>
 
-<p>[/]<br/>
-@svn = rw // svn用户组的成员访问权限为“读+写”<br/>
+<p>[/]   <br/>
+@svn = rw // svn用户组的成员访问权限为“读+写”    <br/>
 ```</p>
 
 <br></br>
