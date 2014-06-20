@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-15T15:38:36+08:00</updated>
+  <updated>2014-06-20T22:32:37+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS安装SVN]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/06/20/centosan-zhuang-svn/"/>
+    <updated>2014-06-20T22:07:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/06/20/centosan-zhuang-svn</id>
+    <content type="html"><![CDATA[<h1>安装ssh服务器和subversion服务器</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># yum update  
+</span><span class='line'># yum install openssh-server  
+</span><span class='line'># yum install subversion  </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>创建登陆svn的用户</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># useradd test // 添加test用户  
+</span><span class='line'># groupadd svn // 添加svn用户组  
+</span><span class='line'># usermod -a -G svn test // 将test用户添加到svn用户组  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>另外，如果test用户不存在，则可以用以下语句完成：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># useradd -g svn test  </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>建立用户存储</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># mkdir -p /home/test/svn/trunk  
+</span><span class='line'># svnadmin create /home/test/svn/trunk  </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>为svn用户组赋予权限</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># chown -R root:svn /home/test/svn/trunk  
+</span><span class='line'># chmod -R g+rws /home/test/svn/trunk    /*给svn组赋予读写权限，可以根据需要更改相应权限*/  
+</span><span class='line'># chmod -R o-rwx /home/test/svn/trunk    /*删除其他无关人员的读、写、执行权限，默认情况下可能其他人有读权限*/  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<h1>为成员生成密钥</h1>
+
+<p>生成密钥对：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># ssh-keygen -b 1024 -t rsa -N passwd -f testkey </span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，passwd为密钥关键字（相当于密码），由用户自定义；testkey为密钥文件名，生成之后会产生两个文件（testkey和testkey.pub，前者为密钥，后者为公钥）；rsa指定使用rsa进行加密，如果改成dsa，则使用dsa加密。</p>
+
+<p>创建/home/test/.ssh目录，拷贝公钥并重命名成authorized_keys：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cp testkey.pub /home/test/.ssh/authorized_keys  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意：文件名称必须为authorized_keys。</p>
+
+<h1>更改资源访问权限</h1>
+
+<p>修改/home/test/svn/trunk/conf/svnserve.conf文件，在general中加入以下几行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[general]
+</span><span class='line'>
+</span><span class='line'>anon-access = none // 未认证的用户没有任何访问权限  
+</span><span class='line'>auth-access = write // 认证的用户有写权限  
+</span><span class='line'>authz-db = authz // 认证文件为conf目录下的authz文件  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改/home/test/svn/trunk/conf/authz文件（如果没有则创建），在其中加入：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[/]       // 访问权限为本资源的根目录以及以下目录  
+</span><span class='line'>test = rw // test用户的访问权限为“读+写”  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>还可以采用以下方法进行认证：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[groups]  
+</span><span class='line'>svn = test,sam // 定义用户组svn包含两个用户：test和sim  
+</span><span class='line'>      
+</span><span class='line'>[/]  
+</span><span class='line'>@svn = rw // svn用户组的成员访问权限为“读+写”  </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<br></br>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/wangjingfei/article/details/5424338">CentOS中安装subversion，并使用svn+ssh访问</a><br/>
+<a href="http://blog.163.com/longsu2010@yeah/blog/static/173612348201202114212933/">linux（centos）搭建SVN服务器</a><br/>
+<a href="http://zhumeng8337797.blog.163.com/blog/static/100768914201292641420400/">CentOS Linux搭建SVN Server配置详解</a><br/>
+<a href="http://www.cnblogs.com/ayanmw/archive/2011/12/19/2294054.html">CentOS Linux下配置svn HTTP server</a><br/>
+<a href="http://stackoverflow.com/search?q=svn%3A+E170001+%3A+Authorization+failed">svn: E170001 : Authorization failed</a><br/>
+<a href="http://blog.sina.com.cn/s/blog_4b93170a0100leb2.html">解决svn Authorization failed错误</a><br/>
+<a href="http://blog.csdn.net/laverock/article/details/2195290">ubuntu下架设svn服务器及在windows建立svn+ssh客户端</a><br/>
+<a href="http://bbs.csdn.net/topics/310115750">svn登陆时它出现：Authorization failed</a><br/>
+<a href="http://www.cyberciti.biz/faq/howto-linux-add-user-to-group/">Howto: Linux Add User To Group</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scrapy入门简略教程（二）]]></title>
@@ -849,449 +978,6 @@
 <p>如果相比之前我们可能只是在一些平台上的受众，现在很多人可能更希望参与到其中，一旦平台太大，就不容易满足每个个体的需求，所以这个社会会走向更加精细化的道路，使得每个人都将会有参与的机会。一个个的群体组织就是社群，其实它一直存在着，只是现在的人们对于它的需求更加的强烈。</p>
 
 <p>未来是否可能不会有太多的大明星，一些人只会在自己的那个群体里才是名人，而外界对他却没有多少认知。一个同学曾说“他活在自己的世界里挺好”，未来的人们活在自己独有的世界里又有何不可呢？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress的一些设置]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/"/>
-    <updated>2014-05-17T17:13:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/05/17/octopressde-[?]-xie-she-zhi</id>
-    <content type="html"><![CDATA[<h1>从新电脑上恢复博客内容</h1>
-
-<p>如果电脑重装了系统，或者要在另一台电脑上编写博客，找到博客仓库的<code>url</code>，执行以下的指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
-</span><span class='line'>
-</span><span class='line'>$ cd octopress
-</span><span class='line'>$ git clone (url) _deploy   #克隆master分支，它存放着博客内容。
-</span><span class='line'>
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake install
-</span><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>网站提交到搜索引擎</h1>
-
-<p>博客上写出的文章当然希望有人能看到，而且希望更多的人看到，这就需要让自己的博客可以在搜索引擎里面检索到，那么就需要将个人博客提交到搜索引擎，让它来抓取，所以首先要到各个搜索引擎提交自己的博客地址，<a href="http://urlc.cn/tool/addurl.html">免费收录网站搜索引擎登录口大全&mdash;搜索引擎网站收录地址大全</a>和<a href="http://tool.lusongsong.com/addurl.html">国内外各大免费搜索引擎、导航网址提交入口&mdash;搜索引擎网站收录地址大全</a>这两个地方收录了国内外各大搜索引擎的地址。</p>
-
-<p>提交到搜索引擎后就能搜索到你的文章，但还需要做的是为你的网站文章添加描述信息、关键字，来帮助用户准确的搜索到。关键字和描述是指网页<code>head</code>部分的元标签<code>meta</code>，是给搜索引擎看的，以此希望用户可以比较容易找到。例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;meta name="description" content="残剑是一个关注IT技术的博客"&gt;
-</span><span class='line'>&lt;meta name="keywords" content="IT, 编程, 码农的自嘲"&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>首先为每篇文章添加描述和关键字，本文的文件头如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: "Octopress的一些设置"
-</span><span class='line'>date: 2014-05-17 17:13
-</span><span class='line'>comments: true
-</span><span class='line'>categories: [Octopress]
-</span><span class='line'>tags: [Octopress, 博客恢复, SEO]
-</span><span class='line'>keywords: Seo, Octopress
-</span><span class='line'>description: Octopress的SEO技巧，在新电脑上恢复博客内容。
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>这样就可以为文章添加关键字和描述，使搜索引擎更容易搜到你的文章。还可以为你的博客首页添加描述和关键字，在<code>source/index.html</code>文件顶部添加即可,方法如上。</p>
-
-<p>如果你没有为文章添加描述，Octopress会自动以文章的前150个字符作为描述，为每一篇文章都添加描述，Octopress模板实现以上功能的代码在<code>source/_includes/head.html</code>中：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>  &lt;meta name="description" content="Octopress的SEO技巧，在新电脑上恢复博客内容。"&gt;
-</span><span class='line'>&lt;meta name="keywords" content="Seo, Octopress"&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在使用<code>rake new_post</code>的时候，我们当然希望在文件的开头加入tags、keywords、description这些选项，那么就需要修改<code>Rakefile</code>文件。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># usage rake new_post[my-new-post] or rake new_post['my new post'] or rake new_post (defaults to "new-post")
-</span><span class='line'>desc "Begin a new post in #{source_dir}/#{posts_dir}"
-</span><span class='line'>task :new_post, :title do |t, args|
-</span><span class='line'>  if args.title
-</span><span class='line'>    title = args.title
-</span><span class='line'>  else
-</span><span class='line'>    title = get_stdin("Enter a title for your post: ")
-</span><span class='line'>  end
-</span><span class='line'>  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
-</span><span class='line'>  mkdir_p "#{source_dir}/#{posts_dir}"
-</span><span class='line'>  filename = "#{source_dir}/#{posts_dir}/#{Time.now.strftime('%Y-%m-%d')}-#{title.to_url}.#{new_post_ext}"
-</span><span class='line'>  if File.exist?(filename)
-</span><span class='line'>    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
-</span><span class='line'>  end
-</span><span class='line'>  puts "Creating new post: #{filename}"
-</span><span class='line'>  open(filename, 'w') do |post|
-</span><span class='line'>    post.puts "---"
-</span><span class='line'>    post.puts "layout: post"
-</span><span class='line'>    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
-</span><span class='line'>    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M')}"
-</span><span class='line'>    post.puts "comments: true"
-</span><span class='line'>    post.puts "categories: []"
-</span><span class='line'>  post.puts "tags: []"
-</span><span class='line'>  post.puts "keywords: " 
-</span><span class='line'>  post.puts "description: "
-</span><span class='line'>    post.puts "---"
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>为博客添加背景图片</h1>
-
-<p>Octopress支持SASS语法，改造Octopress主题基本是通过修改<code>sass/custom</code>下以scss为后缀名的文件来完成，大多数的改造是在<code>_styles.scss</code>这个文件中来实现。我的配置如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>// This File is imported last, and will override other styles in the cascade
-</span><span class='line'>// Add styles here to make changes without digging in too much
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>/* ----- main layout ----- */
-</span><span class='line'>html { background: #262C33 url("/images/bg.png"); }
-</span><span class='line'>
-</span><span class='line'>body { font-size: 1.2em; }
-</span><span class='line'>
-</span><span class='line'>body &gt; div { background-image: none; }
-</span><span class='line'>
-</span><span class='line'>body &gt; div &gt; div { background-image: none; }
-</span><span class='line'>
-</span><span class='line'>/* ----- header ----- */
-</span><span class='line'>body &gt; header{
-</span><span class='line'>    background: none;
-</span><span class='line'>    padding: 1.6em 0 1em 0
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>body &gt; header h1{
-</span><span class='line'>    font-size: 2.8em;
-</span><span class='line'>    padding-left: 20px;
-</span><span class='line'>    text-shadow: rgba(0, 0, 0, 0.8) 0 0 8px;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>body &gt; header h2{
-</span><span class='line'>    font-size: 1em;
-</span><span class='line'>    letter-spacing: 1px;
-</span><span class='line'>    margin-top: 0em;
-</span><span class='line'>    padding-left: 20px;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>body &gt; nav {
-</span><span class='line'>    padding-top: .15em;
-</span><span class='line'>    padding-bottom: .15em;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>body &gt; nav a{
-</span><span class='line'>    font-size: 1.2em;
-</span><span class='line'>    line-height: 1.4em;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>body &gt; nav form .search{
-</span><span class='line'>    padding: .2em .3em;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* ----- Content ----- */
-</span><span class='line'>#content .blog-index article h1 {
-</span><span class='line'>    font-size: 2em;
-</span><span class='line'>    font-weight: normal;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>#content .blog-index article h1, #content .blog-index article h1 a, article header h1, article header h1 a{
-</span><span class='line'>    color: #555555 !important;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>h1 { font-size: 1.8em; }
-</span><span class='line'>
-</span><span class='line'>h1 span{
-</span><span class='line'>    font-weight: normal;
-</span><span class='line'>    color: #E0841B;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>article h2, article h3, article header h1{
-</span><span class='line'>    font-weight: normal;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>.blog-index article h1 a:hover{ text-decoration: none; }
-</span><span class='line'>
-</span><span class='line'>article p {
-</span><span class='line'>    text-align:justify;
-</span><span class='line'>    margin-bottom: 1em;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* ----- Sidebar ----- */
-</span><span class='line'>aside.sidebar section h1 { letter-spacing: 0.1em; }
-</span><span class='line'>
-</span><span class='line'>aside.sidebar a { text-decoration: none; }
-</span><span class='line'>
-</span><span class='line'>.toggle-sidebar{display: none;}
-</span><span class='line'>
-</span><span class='line'>ul#gh_repos &gt; li &gt; a{
-</span><span class='line'>    display: block;
-</span><span class='line'>    font-weight: bold;
-</span><span class='line'>    margin-bottom: 0.4em;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>aside.sidebar{
-</span><span class='line'>    -moz-border-radius-topright: 0.4em;
-</span><span class='line'>    -webkit-border-radius: 0 0.4em 0 0;
-</span><span class='line'>    border-radius: 0 0.4em 0 0;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* ----- Footer ----- */
-</span><span class='line'>body &gt; footer{
-</span><span class='line'>    -moz-border-radius: 0;
-</span><span class='line'>    -webkit-border-radius: 0;
-</span><span class='line'>    border-radius:0;
-</span><span class='line'>    margin-bottom: 0;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* ----- 404 ----- */
-</span><span class='line'>.notfound404 article{
-</span><span class='line'>    margin-left: 0 !important;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>/* ----- Media queries ----- */
-</span><span class='line'>@media only screen and (min-width: 1040px) {
-</span><span class='line'> 
-</span><span class='line'>    body &gt; nav {
-</span><span class='line'>      -moz-border-radius: 0.4em;
-</span><span class='line'>      -webkit-border-radius: 0.4em;
-</span><span class='line'>      border-radius:0.4em;
-</span><span class='line'>      margin-bottom: 2em;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    body &gt; footer{
-</span><span class='line'>        -moz-border-radius-bottomleft: 0.4em;
-</span><span class='line'>        -moz-border-radius-bottomright: 0.4em;
-</span><span class='line'>        -webkit-border-radius: 0 0 0.4em 0.4em;
-</span><span class='line'>        border-radius: 0 0 0.4em 0.4em;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    #main{
-</span><span class='line'>        -moz-border-radius-topleft: 0.4em;
-</span><span class='line'>        -moz-border-radius-topright: 0.4em;
-</span><span class='line'>        -webkit-border-radius: 0.4em 0.4em 0 0;
-</span><span class='line'>        border-radius: 0.4em 0.4em 0 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    #content{
-</span><span class='line'>        -moz-border-radius-topleft: 0.4em;
-</span><span class='line'>        -webkit-border-radius: 0.4em 0 0 0;
-</span><span class='line'>        border-radius: 0.4em 0 0 0;
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    #content .blog-index a[rel="full-article"]{
-</span><span class='line'>        -webkit-border-radius: 6px;
-</span><span class='line'>        -moz-border-radius: 6px;
-</span><span class='line'>        border-radius: 6px;
-</span><span class='line'>    }
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://blog.csdn.net/grunmin/article/details/14127653">octopress博客搭建和个性化配置</a> <br/>
-<a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a> <br/>
-<a href="http://www.cnblogs.com/hswg/archive/2013/01/15/2860952.html">Octopress技巧之设置关键字和描述</a> <br/>
-<a href="http://larrynung.github.io/2013/11/21/octopress-seo-for-octopress-website/">Octopress &ndash; SEO for Octopress website</a> <br/>
-<a href="http://shanewfx.github.io/blog/2012/08/13/improve-blog-theme/">Octopress主题改造</a><br/>
-<a href="http://colors4.us/blog/2012/09/05/octopress-theme-adjusting/">调整octopress主题小结</a></p>
 ]]></content>
   </entry>
   
