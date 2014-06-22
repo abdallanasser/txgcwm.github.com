@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 网络爬虫 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/wang-luo-pa-chong/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-22T19:17:05+08:00</updated>
+  <updated>2014-06-22T23:59:16+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -261,7 +261,9 @@ scrapy crawl dmoz -o items.json -t json
 <a href="http://blog.csdn.net/pleasecallmewhy/article/details/19642329">Python网络爬虫（12）：爬虫框架Scrapy的第一个爬虫示例入门教程</a><br/>
 <a href="http://www.searchtb.com/2011/07/%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%AE%9E%E6%97%B6%E6%8A%93%E5%8F%96%E9%9B%86%E7%BE%A4.html?spm=0.0.0.0.oD8o9v">快速构建实时抓取集群</a> <br/>
 <a href="http://www.pythontab.com/html/2013/pythonhexinbiancheng_0814/541.html">python爬虫框架scrapy实例详解</a> <br/>
-<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a></p>
+<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a> <br/>
+<a href="https://github.com/scrapinghub">Scrapinghub</a><br/>
+<a href="http://www.kankanews.com/ICkengine/archives/94817.shtml">使用python，scrapy写（定制）爬虫的经验，资料，杂</a></p>
 ]]></content>
   </entry>
   
