@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-22T11:35:32+08:00</updated>
+  <updated>2014-06-22T18:08:29+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -119,6 +119,14 @@ svn = test,sam // 定义用户组svn包含两个用户：test和sam</p>
 <p>[/]   <br/>
 @svn = rw // svn用户组的成员访问权限为“读+写”    <br/>
 ```</p>
+
+<h1>启动svnserve</h1>
+
+<p>```</p>
+
+<h1>svnserve -d -r /home/test/svn/</h1>
+
+<p>```</p>
 
 <br></br>
 
