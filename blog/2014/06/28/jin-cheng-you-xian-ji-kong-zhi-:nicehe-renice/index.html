@@ -5,11 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>微访谈后期安排 - 残剑</title>
+  <title>进程优先级控制：nice和renice - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="下午正在憨睡，电话铃声想起，这是Horizon同学打过来的电话，不用接我也知道这是喜事，首先要恭喜他终于考上了自己心仪的大学，也预祝他的研究生生活能够更加的完美。此时的我也可以写下这篇文章了，之前没有写是怕影响到他的心境，多一事还不如少一事。 我的每篇文章，Horizon几乎都看过， &hellip;">
+  <meta name="description" content="Linux进程调度的目标： 高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；
+加强交互性能：在系统相当的负载下，也要保证系统的响应时间；
+保证公平和避免饥渴；
+SMP调度：调度程序必须支持多处理系统；
+软实时调度：系统必须有效的调用实时进程， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">微访谈后期安排</h1>
+      <h1 class="entry-title">进程优先级控制：nice和renice</h1>
     
     
       <p class="meta">
@@ -96,7 +100,7 @@
   
 
 
-<time datetime="2014-04-14T23:58:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2014</time>
+<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,31 +109,54 @@
   </header>
 
 
-<div class="entry-content"><p>下午正在憨睡，电话铃声想起，这是Horizon同学打过来的电话，不用接我也知道这是喜事，首先要恭喜他终于考上了自己心仪的大学，也预祝他的研究生生活能够更加的完美。此时的我也可以写下这篇文章了，之前没有写是怕影响到他的心境，多一事还不如少一事。</p>
+<div class="entry-content"><p>Linux进程调度的目标：</p>
 
-<p>我的每篇文章，Horizon几乎都看过，所以我确信这篇文章也不会例外。在这里我会更多的提到他，后续的一些事情我希望能够得到他的帮助和协助，我想他也会乐意帮助我。虽然我知道在这个暑假他不会很空闲，但我还是试图从他那里偷走一些时间。</p>
+<ol>
+<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
+<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
+<li>保证公平和避免饥渴；</li>
+<li>SMP调度：调度程序必须支持多处理系统；</li>
+<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
+</ol>
 
-<p>截至目前为止还有四份微访谈没有完成，其中三份已发出邀请和问题list，另外一份就是Horizon的。我的这次活动跟他的考研安排存在一些冲突（截至到6月初，为的是给他们一个充分的时间。虽说还有足够的时间，但也容易逝去，且行且珍惜吧！），所以迟迟未发出正式的邀请。Horizon是第一位主动要求我对他进行微访谈的，他希望借助他人的视角更多的发现和了解自己。每次和他聊起我的这次活动，都让我觉得很开心，从他那里获取到了支持的力量。</p>
+
+<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
+
+<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>PRI(new) = PRI(old) + nice</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <!--more-->
 
 
-<p>谈谈我对这次微访谈的后期安排，主要有以下几个方面：</p>
+<p>不过要特别留意，如果原本的PRI是50，并不是给予一个<code>nice = 5</code>，就会让PRI变成55，因为PRI是系统动态决定的。所以，虽然nice值可以影响PRI，不过最终的PRI仍是要经过系统分析后才会决定。另外，nice值是有正负的，而既然PRI越小越早被运行，所以当nice值为负值时，那么该进程就会降低PRI值，亦即会被优先处理。此外，必须要留意到：</p>
 
 <ul>
-<li>发布剩余的访谈，在5月初的时候我会再次催稿，之后不再叨扰；</li>
-<li>写微访谈的后记，谈谈个人在这次事件中的经历和想法；</li>
-<li>请horizon帮我把这次的微访谈整理一遍，录到一份pdf文档中，制作出一份初稿；</li>
-<li>征询大伙的意见，把这份文档做得漂亮和丰满一些；</li>
-<li>既然要做，就得做得完美一些，如果有谁愿意，可以为我们的这次文稿写一份序。</li>
+<li>nice值可调整的范围为-20 ~ 19；</li>
+<li>root可随意调整自己或他人进程的Nice值，且范围为-20 ~ 19；</li>
+<li>一般使用者仅可调整自己进程的Nice值，且范围仅为0 ~ 19(避免一般用户抢占系统资源)；</li>
+<li>一般使用者仅可将nice值越调越高，例如本来nice为5，则未来仅能调整到大于5；</li>
+<li>一开始运行程序就立即给予一个特定的nice值，用nice命令，例如<code>nice -n 10 ping www.163.com</code>；</li>
+<li>调整某个已经存在的PID的nice值，用renice命令，例如<code>renice 19 2251</code>或者<code>renice 19 3675 4103</code>（同时调整多个进程的优先级）;</li>
+<li>针对指定用户，把这些用户的进程优先级全部做调整，例如<code>sudo renice 1 -u test</code>或者<code>sudo renice -2 -u test mysql root</code>（调整多个用户的进程优先级）；</li>
+<li>优先级会继承，例如当前bash的优先级是81，nice为1，在bash下产生的所有子进程都会继续父进程的优先级。</li>
 </ul>
 
 
-<p>不是写书，有必要弄得这么正式吗？有，我觉得很有必要。一个人的一生，又有几次完整的做过一件事情呢？我不想给自己留下太多的遗憾，需要给自己的内心一个交待和肯定，这样也不会辜负朋友们对我的支持。</p>
+<br></br>
 
-<p>几天前，我就跟jolie_yu谈起这个想法，她说“这是你的第一部微作品，很有意义”。我也觉得它是件很有意义的事情，但它不属于我个人，我只是一个发起者，它属于所有参与这次微访谈的每一个人。毫无疑问，你们是优秀的，但愿未来的你们会更加出色！</p>
 
-<p>我也清楚，大家都有很好的idea，如果你希望和我谈谈，那么请把你的想法告诉我一声，希望我们能够檫出思想的火花，我觉得思想的交流也是一件很美妙的事情。</p>
+<p><big>参考文章</big></p>
+
+<p><a href="http://www.cnblogs.com/zhaoyl/archive/2012/09/04/2671156.html">Linux进程调度原理</a><br/>
+<a href="http://linzhibin824.blog.163.com/blog/static/7355771020135801151813/">进程优先级控制——nice和renice命令</a> <br/>
+<a href="http://blog.csdn.net/ganglia/article/details/11028199">进程优先级，进程nice值和%nice的解释</a> <br/>
+<a href="http://blog.sina.com.cn/s/blog_53689eaf0101b5xd.html">linux中限制用户进程CPU和内存占用率</a><br/>
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-shell-monitoring/">使用shell脚本对Linux系统和进程资源进行监控</a></p>
 </div>
 
 
@@ -152,12 +179,12 @@
   
 
 
-<time datetime="2014-04-14T23:58:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2014</time>
+<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/wei-fang-tan/'>微访谈</a>
+    <a class='category' href='/blog/categories/shell/'>Shell</a>
   
 </span>
 
@@ -173,10 +200,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/08/jian-wen-jun-da-%3Azhuan-zhu-de-linuxjiang-zhe/" title="Previous Post: 剑问君答：专注的Linux匠者">&laquo; 剑问君答：专注的Linux匠者</a>
+        <a class="basic-alignment left" href="/blog/2014/06/28/gccbian-yi-xuan-xiang/" title="Previous Post: GCC编译选项">&laquo; GCC编译选项</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/17/cbian-yi-jing-gao/" title="Next Post: C编译警告">C编译警告 &raquo;</a>
       
     </p>
   </footer>
@@ -194,7 +219,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -556,8 +581,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
         var disqus_script = 'embed.js';
       
     (function () {

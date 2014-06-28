@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-28T12:41:29+08:00</updated>
+  <updated>2014-06-28T15:03:49+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,59 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[进程优先级控制：nice和renice]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/"/>
+    <updated>2014-06-28T14:41:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-:nicehe-renice</id>
+    <content type="html"><![CDATA[<p>Linux进程调度的目标：</p>
+
+<ol>
+<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
+<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
+<li>保证公平和避免饥渴；</li>
+<li>SMP调度：调度程序必须支持多处理系统；</li>
+<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
+</ol>
+
+
+<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
+
+<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：
+<code>
+PRI(new) = PRI(old) + nice
+</code></p>
+
+<!--more-->
+
+
+<p>不过要特别留意，如果原本的PRI是50，并不是给予一个<code>nice = 5</code>，就会让PRI变成55，因为PRI是系统动态决定的。所以，虽然nice值可以影响PRI，不过最终的PRI仍是要经过系统分析后才会决定。另外，nice值是有正负的，而既然PRI越小越早被运行，所以当nice值为负值时，那么该进程就会降低PRI值，亦即会被优先处理。此外，必须要留意到：</p>
+
+<ul>
+<li>nice值可调整的范围为-20 ~ 19；</li>
+<li>root可随意调整自己或他人进程的Nice值，且范围为-20 ~ 19；</li>
+<li>一般使用者仅可调整自己进程的Nice值，且范围仅为0 ~ 19(避免一般用户抢占系统资源)；</li>
+<li>一般使用者仅可将nice值越调越高，例如本来nice为5，则未来仅能调整到大于5；</li>
+<li>一开始运行程序就立即给予一个特定的nice值，用nice命令，例如<code>nice -n 10 ping www.163.com</code>；</li>
+<li>调整某个已经存在的PID的nice值，用renice命令，例如<code>renice 19 2251</code>或者<code>renice 19 3675 4103</code>（同时调整多个进程的优先级）;</li>
+<li>针对指定用户，把这些用户的进程优先级全部做调整，例如<code>sudo renice 1 -u test</code>或者<code>sudo renice -2 -u test mysql root</code>（调整多个用户的进程优先级）；</li>
+<li>优先级会继承，例如当前bash的优先级是81，nice为1，在bash下产生的所有子进程都会继续父进程的优先级。</li>
+</ul>
+
+
+<br></br>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://www.cnblogs.com/zhaoyl/archive/2012/09/04/2671156.html">Linux进程调度原理</a><br/>
+<a href="http://linzhibin824.blog.163.com/blog/static/7355771020135801151813/">进程优先级控制——nice和renice命令</a> <br/>
+<a href="http://blog.csdn.net/ganglia/article/details/11028199">进程优先级，进程nice值和%nice的解释</a> <br/>
+<a href="http://blog.sina.com.cn/s/blog_53689eaf0101b5xd.html">linux中限制用户进程CPU和内存占用率</a><br/>
+<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-shell-monitoring/">使用shell脚本对Linux系统和进程资源进行监控</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[cp命令]]></title>
@@ -439,59 +492,6 @@ do</p>
 </code></pre>
 
 <p>done
-```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pkg-config的使用]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong/"/>
-    <updated>2013-07-14T11:22:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong</id>
-    <content type="html"><![CDATA[<p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。
-<code>
-$ pkg-config --libs --cflags opencv
--I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
--lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect
--lopencv_contrib -lopencv_legacy -lopencv_flann
-</code>
-以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
-
-<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：
-<code>
-Package opencv was not found in the pkg-config search path.
-Perhaps you should add the directory containing `opencv.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'opencv' found
-</code></p>
-
-<!--more-->
-
-
-<p>设置环境变量PKG_CONFIG_PATH方法如下：
-<code>
-export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH
-</code></p>
-
-<p>查看opencv.pc文件的内容如下：
-```
-$ cat opencv.pc</p>
-
-<h1>Package Information for pkg-config</h1>
-
-<p>prefix=/usr
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-includedir_old=${prefix}/include/opencv
-includedir_new=${prefix}/include</p>
-
-<p>Name: OpenCV
-Description: Open Source Computer Vision Library
-Version: 2.3.1
-Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
--lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib
--lopencv_legacy -lopencv_flann
-Cflags: -I${includedir_old} -I${includedir_new}
 ```</p>
 ]]></content>
   </entry>
