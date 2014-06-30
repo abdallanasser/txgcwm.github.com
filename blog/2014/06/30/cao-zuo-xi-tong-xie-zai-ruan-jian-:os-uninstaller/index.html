@@ -5,25 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>log10的实现 - 残剑</title>
+  <title>操作系统卸载软件：OS-Uninstaller - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？ 在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-double my_log10(double x)
-{ &hellip;">
+  <meta name="description" content="OS-Uninstaller提供了一个图形化的界面，可以清除Windows, MacOS, Ubuntu以及其它的操作系统，可谓是强大又好用。 Ubuntu下通过添加PPA安装，打开终端输入： 1
+$ sudo add-apt-repository ppa:yannubuntu/boot- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -32,7 +19,7 @@ double my_log10(double x)
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -94,7 +81,7 @@ double my_log10(double x)
   
   <header>
     
-      <h1 class="entry-title">Log10的实现</h1>
+      <h1 class="entry-title">操作系统卸载软件：OS-Uninstaller</h1>
     
     
       <p class="meta">
@@ -110,7 +97,7 @@ double my_log10(double x)
   
 
 
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-06-30T21:20:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -119,82 +106,50 @@ double my_log10(double x)
   </header>
 
 
-<div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
+<div class="entry-content"><p>OS-Uninstaller提供了一个图形化的界面，可以清除Windows, MacOS, Ubuntu以及其它的操作系统，可谓是强大又好用。</p>
 
-<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
+<p>Ubuntu下通过添加PPA安装，打开终端输入：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    register double ret;
-</span><span class='line'>
-</span><span class='line'>       __asm__(
-</span><span class='line'>  "fldlg2\n\t" 
-</span><span class='line'>  "fxch\n\t" 
-</span><span class='line'>  "fyl2x"
-</span><span class='line'>  :"=t"(ret)
-</span><span class='line'>          :"0"(x)
-</span><span class='line'>      );
-</span><span class='line'>   return ret;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:yannubuntu/boot-repair</span></code></pre></td></tr></table></div></figure>
 
+
+<p>然后输入以下内容回车:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo sed 's/trusty/saucy/g' -i /etc/apt/sources.list.d/yannubuntu-boot-repair-trusty.list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行以下命令安装:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get update; sudo apt-get install -y os-uninstaller && os-uninstaller</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装完之后，软件会自己启动。</p>
+
+<p>也可以直接下载包含有OS-Uninstaller的镜像刻录使用，点击<a href="http://sourceforge.net/projects/boot-repair-cd/">这里</a>下载。</p>
 
 <!--more-->
 
 
-<p>也查看了glibc的源码，可调用了其它的一些API，对库的依赖比较大，逐步移植的话比较麻烦。代码如下：</p>
+<p>该软件需要安装lvm2，可以在软件中心搜索lvm安装。</p>
+
+<p>启动操作系统卸载（OS-Uninstaller的中文名），打开后会看到正在扫描操作系统界面。中间可能会弹出提示<code>Is there RAID on this computer?</code>，一般选否就可以。扫描完成后软件会列出电脑上所有的操作系统，可以选定自己要卸载的操作系统，然后确定。会看到再确认窗口，下面有很多高级选项，选择默认即可，点击应用。接下来的几步很重要，请务必确认操作正确，以免造成损失。</p>
+
+<p>卸载GRUB：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double __log10 (double x)
-</span><span class='line'>{
-</span><span class='line'>    if (__builtin_expect (islessequal (x, 0.0), 0) && _LIB_VERSION != _IEEE_)
-</span><span class='line'>    {
-</span><span class='line'>        if (x == 0.0)
-</span><span class='line'>        {
-</span><span class='line'>             feraiseexcept (FE_DIVBYZERO);
-</span><span class='line'>             return __kernel_standard (x, x, 18); /* log10(0) */
-</span><span class='line'>        }
-</span><span class='line'>        else
-</span><span class='line'>        {
-</span><span class='line'>            feraiseexcept (FE_INVALID);
-</span><span class='line'>            return __kernel_standard (x, x, 19); /* log10(x&lt;0) */
-</span><span class='line'>        }
-</span><span class='line'>     }
-</span><span class='line'>
-</span><span class='line'>   return  __ieee754_log10 (x);
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo dpkg --configure -a
+</span><span class='line'>$ sudo apt-get install -fy
+</span><span class='line'>$ sudo apt-get install -y --force-yes lvm2
+</span><span class='line'>$ sudo apt-get purge -y --force-yes grub*</span></code></pre></td></tr></table></div></figure>
 
 
-<p>参考 <a href="http://www.cnblogs.com/skyivben/archive/2013/02/15/2912914.html">这里</a> 实现了一个c语言版本的log10快速算法，还不是很完善。</p>
+<p>执行到最后一个指令的时候，出现以下的错误（还未找到解决措施）：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -268,79 +223,189 @@ double my_log10(double x)
 <span class='line-number'>70</span>
 <span class='line-number'>71</span>
 <span class='line-number'>72</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;math.h&gt;
-</span><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>static double Sqrt(double x)
-</span><span class='line'>{
-</span><span class='line'>    if (x &lt; 0)
-</span><span class='line'>        return -1;
-</span><span class='line'>    if (x == 0)
-</span><span class='line'>        return 0;
-</span><span class='line'>    double y = (double)sqrt((double)x);
-</span><span class='line'>
-</span><span class='line'>    return (y + x / y) / 2;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static double NegativeLog(double q)
-</span><span class='line'>{                           
-</span><span class='line'>    int p;
-</span><span class='line'>    double pi2 = 6.283185307179586476925286766559;
-</span><span class='line'>    double eps2 = 0.00000000000001; // 1e-14
-</span><span class='line'>    double eps1;    // 1e-28
-</span><span class='line'>    double r = q, s = q, n = q, q2 = q * q, q1 = q2 * q;
-</span><span class='line'>
-</span><span class='line'>    eps1 = eps2 * eps2;
-</span><span class='line'>
-</span><span class='line'>    for (p = 1; (n *= q1) &gt; eps1; s += n, q1 *= q2)
-</span><span class='line'>        r += (p = !p) ? n : -n;
-</span><span class='line'>
-</span><span class='line'>    double u = 1 - 2 * r, v = 1 + 2 * s, t = u / v;
-</span><span class='line'>    double a = 1, b = Sqrt(1 - t * t * t * t);
-</span><span class='line'>
-</span><span class='line'>    for (; a - b &gt; eps2; b = Sqrt(a * b), a = t)
-</span><span class='line'>        t = (a + b) / 2;
-</span><span class='line'>
-</span><span class='line'>    return pi2 / (a + b) / v / v;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>static double Log(double x)
-</span><span class='line'>{
-</span><span class='line'>    int k = 0;
-</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
-</span><span class='line'>
-</span><span class='line'>    if (x &lt;= 0)
-</span><span class='line'>        return -1;
-</span><span class='line'>    if (x == 1)
-</span><span class='line'>        return 0;
-</span><span class='line'>
-</span><span class='line'>    for (; x &gt; 0.1; k++)
-</span><span class='line'>        x /= 10;
-</span><span class='line'>    for (; x &lt;= 0.01; k--)
-</span><span class='line'>        x *= 10;
-</span><span class='line'>
-</span><span class='line'>    return k * ln10 - NegativeLog(x);
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>double Log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    double ln10 = 2.30258509299404568401799145468;
-</span><span class='line'>
-</span><span class='line'>    return Log(x) / ln10;
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1000), log10(1000));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(1), log10(1));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(8192.1024), log10(8192.1024));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(0.3), log10(0.3));
-</span><span class='line'>    printf(" self Log10: %f\n math log10: %f\n\n", Log10(33.8), log10(33.8));
-</span><span class='line'>
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
+</span><span class='line'>Building dependency tree       
+</span><span class='line'>Reading state information... Done
+</span><span class='line'>Note, selecting 'grub-legacy-doc' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-amd64-bin' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-amd64-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-emu-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'libgruff-ruby' for regex 'grub*'
+</span><span class='line'>Note, selecting 'ruby-gruff' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-firmware-qemu' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub2' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-ia32-bin' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-ia32-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-theme-starfield' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-amd64' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-disk' for regex 'grub*'
+</span><span class='line'>Note, selecting 'longrun' for regex 'grub*'
+</span><span class='line'>Note, selecting 'fgrun' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub2-common' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-imageboot' for regex 'grub*'
+</span><span class='line'>Note, selecting 'libgruff-ruby1.8' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-ia32' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-ia64' for regex 'grub*'
+</span><span class='line'>Note, selecting 'kde-config-grub2' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-pc' for regex 'grub*'
+</span><span class='line'>Note, selecting 'libgruel3.6.1' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub2-splashimages' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-gfxpayload-lists' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi-amd64-signed' for regex 'grub*'
+</span><span class='line'>Note, selecting 'libgruff-ruby-doc' for regex 'grub*'
+</span><span class='line'>Note, selecting 'espresso-grub' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-ipxe' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-coreboot-bin' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-coreboot-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-linuxbios' for regex 'grub*'
+</span><span class='line'>Note, selecting 'wmlongrun' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-splashimages' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-pc-bin' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-pc-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-rescue-pc' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-legacy' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-ieee1275' for regex 'grub*'
+</span><span class='line'>Note, selecting 'congruity' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-ieee1275-bin' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-yeeloong' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-ieee1275-dbg' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grun' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-efi' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-doc' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-invaders' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-emu' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-common' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-coreboot' for regex 'grub*'
+</span><span class='line'>Note, selecting 'sabily-grub-artwork' for regex 'grub*'
+</span><span class='line'>Note, selecting 'grub-legacy-ec2' for regex 'grub*'
+</span><span class='line'>Package 'grub-efi-ia64' is not installed, so not removed
+</span><span class='line'>Package 'grub-yeeloong' is not installed, so not removed
+</span><span class='line'>Package 'grub-legacy' is not installed, so not removed
+</span><span class='line'>Package 'espresso-grub' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-amd64-signed' is not installed, so not removed
+</span><span class='line'>Package 'grub' is not installed, so not removed
+</span><span class='line'>Package 'grub-common' is not installed, so not removed
+</span><span class='line'>Package 'grub-doc' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-amd64' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-amd64-bin' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-amd64-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-ia32' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-ia32-bin' is not installed, so not removed
+</span><span class='line'>Package 'grub-efi-ia32-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub-gfxpayload-lists' is not installed, so not removed
+</span><span class='line'>Package 'grub-legacy-doc' is not installed, so not removed
+</span><span class='line'>Package 'grub-pc-bin' is not installed, so not removed
+</span><span class='line'>Package 'grub-pc-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub2-common' is not installed, so not removed
+</span><span class='line'>Package 'congruity' is not installed, so not removed
+</span><span class='line'>Package 'fgrun' is not installed, so not removed
+</span><span class='line'>Package 'grub-coreboot' is not installed, so not removed
+</span><span class='line'>Package 'grub-coreboot-bin' is not installed, so not removed
+</span><span class='line'>Package 'grub-coreboot-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub-disk' is not installed, so not removed
+</span><span class='line'>Package 'grub-emu' is not installed, so not removed
+</span><span class='line'>Package 'grub-emu-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub-firmware-qemu' is not installed, so not removed
+</span><span class='line'>Package 'grub-ieee1275' is not installed, so not removed
+</span><span class='line'>Package 'grub-ieee1275-bin' is not installed, so not removed
+</span><span class='line'>Package 'grub-ieee1275-dbg' is not installed, so not removed
+</span><span class='line'>Package 'grub-imageboot' is not installed, so not removed
+</span><span class='line'>Package 'grub-invaders' is not installed, so not removed
+</span><span class='line'>Package 'grub-ipxe' is not installed, so not removed
+</span><span class='line'>Package 'grub-linuxbios' is not installed, so not removed
+</span><span class='line'>Package 'grub-rescue-pc' is not installed, so not removed
+</span><span class='line'>Package 'grub-splashimages' is not installed, so not removed
+</span><span class='line'>Package 'grub-theme-starfield' is not installed, so not removed
+</span><span class='line'>Package 'grub2' is not installed, so not removed
+</span><span class='line'>Package 'grub2-splashimages' is not installed, so not removed
+</span><span class='line'>Package 'grun' is not installed, so not removed
+</span><span class='line'>Package 'kde-config-grub2' is not installed, so not removed
+</span><span class='line'>Package 'libgruel3.6.1' is not installed, so not removed
+</span><span class='line'>Package 'libgruff-ruby' is not installed, so not removed
+</span><span class='line'>Package 'libgruff-ruby-doc' is not installed, so not removed
+</span><span class='line'>Package 'libgruff-ruby1.8' is not installed, so not removed
+</span><span class='line'>Package 'longrun' is not installed, so not removed
+</span><span class='line'>Package 'ruby-gruff' is not installed, so not removed
+</span><span class='line'>Package 'sabily-grub-artwork' is not installed, so not removed
+</span><span class='line'>Package 'wmlongrun' is not installed, so not removed
+</span><span class='line'>Package 'grub-legacy-ec2' is not installed, so not removed
+</span><span class='line'>The following packages will be REMOVED:
+</span><span class='line'>  grub-pc*
+</span><span class='line'>0 upgraded, 0 newly installed, 1 to remove and 2 not upgraded.
+</span><span class='line'>After this operation, 558 kB disk space will be freed.
+</span><span class='line'>(Reading database ... 1115878 files and directories currently installed.)
+</span><span class='line'>Removing grub-pc ...
+</span><span class='line'>dpkg: error processing grub-pc (--purge):
+</span><span class='line'> subprocess installed pre-removal script returned error exit status 10
+</span><span class='line'>No apport report written because MaxReports is reached already
+</span><span class='line'>                                                              Errors were encountered while processing:
+</span><span class='line'> grub-pc
+</span><span class='line'>E: Sub-process /usr/bin/dpkg returned an error code (1)</span></code></pre></td></tr></table></div></figure>
 
+
+<p>如果出现选择窗口，可使用Tab键、空格键和回车键以将GRUB安装至希望的磁盘上。</p>
+
+<p>重装GRUB，按照说明操作（空格可以选定安装位置，tab键切换选项，回车确认操作），按前进继续下一步：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install -y --force-yes grub-pc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>至此，已经完成了所有的操作，剩下来的工作就是软件自动删除要删除的系统，成功后会出现提示信息。卸载完成后重启电脑，确实完全删除。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://www.linuxidc.com/Linux/2014-06/103871.htm">OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统</a></p>
 </div>
 
 
@@ -363,12 +428,12 @@ double my_log10(double x)
   
 
 
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-06-30T21:20:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
   
 </span>
 
@@ -384,10 +449,8 @@ double my_log10(double x)
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/" title="Previous Post: kfifo.c中in和out的溢出问题">&laquo; kfifo.c中in和out的溢出问题</a>
+        <a class="basic-alignment left" href="/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/" title="Previous Post: 进程优先级控制：nice和renice">&laquo; 进程优先级控制：nice和renice</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/08/03/kuo-da-nei-xu-dui-dang-qian-de-zhong-guo-fei-chang-you-bi-yao/" title="Next Post: 扩大内需对当前的中国非常有必要">扩大内需对当前的中国非常有必要 &raquo;</a>
       
     </p>
   </footer>
@@ -405,7 +468,7 @@ double my_log10(double x)
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -766,8 +829,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/log10de-shi-xian/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/';
         var disqus_script = 'embed.js';
       
     (function () {
