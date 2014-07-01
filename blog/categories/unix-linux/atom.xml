@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-06-30T22:07:10+08:00</updated>
+  <updated>2014-07-01T23:14:54+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu系统清理缓存、垃圾、多余内核]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/01/ubuntuxi-tong-qing-li-huan-cun-%2C-la-ji-%2C-duo-yu-nei-he/"/>
+    <updated>2014-07-01T22:51:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/01/ubuntuxi-tong-qing-li-huan-cun-,-la-ji-,-duo-yu-nei-he</id>
+    <content type="html"><![CDATA[<p>Linux不会产生无用垃圾文件，但是在升级后它不会自动删除缓存中的文件，比较占系统硬盘资源。</p>
+
+<h1>删除缓存</h1>
+
+<h2>清理升级缓存以及无用包的</h2>
+
+<p><code>
+$ sudo apt-get autoclean              清理旧版本的软件缓存
+$ sudo apt-get clean                  清理所有软件缓存
+$ sudo apt-get autoremove             删除系统不再使用的孤立软件
+</code></p>
+
+<h2>清理opera/firefox的缓存文件</h2>
+
+<p><code>
+$ ls ~/.opera/cache4
+$ ls ~/.mozilla/firefox/*.default/Cache
+</code></p>
+
+<h2>清理Linux下孤立的包</h2>
+
+<p><code>
+$ sudo apt-get install deborphan -y
+</code></p>
+
+<h2>卸载tracker</h2>
+
+<p>tracker不仅会产生大量的cache文件，而且还会影响开机速度，所以在新得立里面删掉就行。</p>
+
+<!--more-->
+
+
+<h1>删除软件</h1>
+
+<p>Ubuntu软件的删除一般用“Ubuntu软件中心”或“新得立”就能搞定，但用命令更快更好。
+<code>
+$ sudo apt-get remove --purge 软件名
+$ sudo apt-get autoremove                删除系统不再使用的孤立软件
+$ sudo apt-get autoclean                 清理旧版本的软件缓存
+$ dpkg -l | grep ^rc | awk '{print $2}' | sudo xargs dpkg -P    清除残余的配置文件保证干净
+</code>
+包管理的临时文件目录为<code>/var/cache/apt/archives</code>,没有下载完的在<code>/var/cache/apt/archives/partial</code>。</p>
+
+<h1>删除多余内核</h1>
+
+<ul>
+<li><p>查看当前Ubuntu系统使用的内核；
+<code>
+$ uname -a
+</code></p></li>
+<li><p>查看所有内核；
+<code>
+$ dpkg --get-selections|grep linux
+</code></p></li>
+<li><p>小心删除不需要的内核；
+<code>
+$ sudo apt-get remove linux-image-2.6.32-22-generic
+</code></p></li>
+</ul>
+
+
+<p><code>linux-image-xxxxxx-generic</code>就是要删除的内核版本，<code>linux-headers-xxxxxx</code>和<code>linux-headers-xxxxxx-generic</code>中间有“xxxxxx”那段的旧内核都能删，一般选内核号较小的删。</p>
+
+<ul>
+<li>清理<code>/usr/src</code>目录，删除已经卸载的内核目录。</li>
+</ul>
+
+
+<br></br>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://my.oschina.net/zhangqingcai/blog/23994">清理Ubuntu系统的缓存、垃圾、多余内核</a> <br/>
+<a href="http://www.2cto.com/os/201304/206100.html">Ubuntu清理boot分区</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[操作系统卸载软件：OS-Uninstaller]]></title>
@@ -447,95 +530,6 @@ $ xelatex filename.tex
 <a href="http://mathslinux.org/?p=58">用 org-mode 写 LaTeX</a> <br/>
 <a href="http://www.oschina.net/question/12_63776">在 Ubuntu 上安装 LaTeX</a> <br/>
 <a href="http://blog.csdn.net/yming0221/article/details/7616846">LaTeX使用&mdash;XeLaTeX入门基础（一）</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[popen和pclose函数]]></title>
-    <link href="http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu/"/>
-    <updated>2013-08-03T22:07:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2013/08/03/popenhe-pclosehan-shu</id>
-    <content type="html"><![CDATA[<p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：
-<code>
-FILE *popen( const char* command, const char* mode )
-</code>
-参数说明</p>
-
-<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
-mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
-
-<!--more-->
-
-
-<p>返回值</p>
-
-<p>如果调用成功，则返回一个读或者写打开文件的指针；如果失败，返回NULL，具体错误要根据errno判断。</p>
-
-<p><code>
-int pclose (FILE* stream)
-</code>
-参数说明</p>
-
-<p>stream： popen返回的文件指针。</p>
-
-<p>返回值</p>
-
-<p>如果调用失败，返回-1。</p>
-
-<p>由于平时接触到usb插拔的事情比较多，现以列举系统中usb设备vid/pid为例。本想从<code>/proc/bus/usb/devices</code>中获取到usb设备的相关信息，可Ubuntu系统下没有<code>/proc/bus/usb/</code>这个目录。至于为什么没有这个目录和如何重新找回这个目录，可以查看 <a href="http://ubuntuforums.org/showthread.php?t=1432598">这里</a> 。所以这里我们使用<code>lsusb</code>去获取usb设备的基本信息。构建<code>int get_device_info(void)</code>函数获取系统中usb设备的vid/pid信息：
-```
-int get_device_info(void)
-{</p>
-
-<pre><code>FILE *fp = NULL;
-char buffer[128];
-char *ptr = NULL;
-int vid, pid;
-
-fp = popen("lsusb", "r");
-if (fp == NULL)
-    return -1;
-
-while (NULL != fgets(buffer, sizeof(buffer), fp)) {
-    ptr = strstr(buffer, "ID");
-    if (ptr) {
-        sscanf(ptr, "ID %04x:%04x", &amp;vid, &amp;pid);
-        printf("%04x:%04x\n", vid, pid);
-    }
-}
-pclose(fp);
-
-return 0;
-</code></pre>
-
-<p>}
-<code>
-编写主函数调用以上的接口，使用`lsusb`查看usb设备及执行测试程序：
-</code>
-$ lsusb
-Bus 001 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-Bus 002 Device 002: ID 8087:0024 Intel Corp. Integrated Rate Matching Hub
-Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-Bus 001 Device 003: ID 1532:0016 Razer USA, Ltd DeathAdder Mouse
-Bus 001 Device 004: ID 058f:b002 Alcor Micro Corp.</p>
-
-<p>$ ./a.out
-8087:0024
-8087:0024
-1d6b:0002
-1d6b:0002
-1532:0016
-058f:b002</p>
-
-<p>```</p>
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://my.oschina.net/renhc/blog/35116">基于管道的popen和pclose函数</a><br/>
-<a href="http://networking.ctocio.com.cn/tips/137/9412137.shtml">Linux popen函数的使用总结</a><br/>
-<a href="http://bbs.chinaunix.net/thread-4087539-1-1.html">关于/proc/iomem中信息解释</a>  <br/>
-<a href="http://tech.watchstor.com/storage-systems-117859.htm">proc文件系统功能总览</a></p>
 ]]></content>
   </entry>
   
