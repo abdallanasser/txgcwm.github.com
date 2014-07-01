@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。 &hellip;">
+  <meta name="description" content="《史记》中有各式各样的人物，司马迁却没有给奇谋之士蒯通单独列传，留下那不平凡的事迹给后人称颂。关于蒯通这个人的事迹，也只能从其他人的列传里了解到他，对于他的谋略以及对天下形势的远见都令人佩服。 如此有才华的人，却为何没有自己的列传，只能出现在他人的列传之中？原因很简单，司马迁写书的时代是大汉王朝 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/">奇谋之士蒯通</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-26T21:52:00+08:00" pubdate data-updated="true">Jul 26<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img class="left" src="http://pic.baike.soso.com/p/20120927/20120927185828-406438040.jpg" width="210" height="248" title="Place Kitten #2" ></p>
+
+<p>《史记》中有各式各样的人物，司马迁却没有给奇谋之士蒯通单独列传，留下那不平凡的事迹给后人称颂。关于蒯通这个人的事迹，也只能从其他人的列传里了解到他，对于他的谋略以及对天下形势的远见都令人佩服。</p>
+
+<p>如此有才华的人，却为何没有自己的列传，只能出现在他人的列传之中？原因很简单，司马迁写书的时代是大汉王朝，而蒯通却在那个朝代犯下了特大的错误。那么这么一个人到底有什么样的才华呢？且让我们看看他的一些事迹。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -469,71 +516,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Linux下c语言获取网络接口IP地址</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T22:34:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux环境下，可以使用以下的代码获取网络的ip地址：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if (gethostname(host, sizeof(host)) &lt; 0) {
-</span><span class='line'>    printf("Can't get hostname\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>if ((hp = gethostbyname(host)) == NULL) {
-</span><span class='line'>    printf("Can't get host address\n");
-</span><span class='line'>    return -1;
-</span><span class='line'>}
-</span><span class='line'>memcpy((char *) &intaddr, (char *) hp-&gt;h_addr_list[0],
-</span><span class='line'>        (size_t) hp-&gt;h_length);</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -572,6 +554,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/01/grubrescuexiu-fu-fang-fa/">Grub Rescue修复方法</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/01/ubuntuxi-tong-qing-li-huan-cun-%2C-la-ji-%2C-duo-yu-nei-he/">Ubuntu系统清理缓存、垃圾、多余内核</a>
       </li>
     
@@ -585,10 +571,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/28/gccbian-yi-xuan-xiang/">GCC编译选项</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/20/centosan-zhuang-svn/">CentOS安装SVN</a>
       </li>
     
   </ul>
@@ -609,7 +591,7 @@
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (6)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
-<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (31)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (32)</a></li>
 <li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (9)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
