@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-01T23:14:54+08:00</updated>
+  <updated>2014-07-01T23:27:26+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -52,7 +52,7 @@ $ sudo apt-get install deborphan -y
 
 <h1>删除软件</h1>
 
-<p>Ubuntu软件的删除一般用“Ubuntu软件中心”或“新得立”就能搞定，但用命令更快更好。
+<p>Ubuntu软件的删除一般用<code>Ubuntu软件中心</code>或<code>新得立</code>就能搞定，但用命令更快更好。
 <code>
 $ sudo apt-get remove --purge 软件名
 $ sudo apt-get autoremove                删除系统不再使用的孤立软件
@@ -70,7 +70,7 @@ $ uname -a
 </code></p></li>
 <li><p>查看所有内核；
 <code>
-$ dpkg --get-selections|grep linux
+$ dpkg --get-selections | grep linux
 </code></p></li>
 <li><p>小心删除不需要的内核；
 <code>
@@ -79,7 +79,7 @@ $ sudo apt-get remove linux-image-2.6.32-22-generic
 </ul>
 
 
-<p><code>linux-image-xxxxxx-generic</code>就是要删除的内核版本，<code>linux-headers-xxxxxx</code>和<code>linux-headers-xxxxxx-generic</code>中间有“xxxxxx”那段的旧内核都能删，一般选内核号较小的删。</p>
+<p><code>linux-image-xxxxxx-generic</code>就是要删除的内核版本，<code>linux-headers-xxxxxx</code>和<code>linux-headers-xxxxxx-generic</code>中间有<code>xxxxxx</code>那段的旧内核都能删，一般选内核号较小的删。</p>
 
 <ul>
 <li>清理<code>/usr/src</code>目录，删除已经卸载的内核目录。</li>

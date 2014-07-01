@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-01T23:14:54+08:00</updated>
+  <updated>2014-07-01T23:27:26+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -55,7 +55,7 @@
 
 <h1>删除软件</h1>
 
-<p>Ubuntu软件的删除一般用“Ubuntu软件中心”或“新得立”就能搞定，但用命令更快更好。</p>
+<p>Ubuntu软件的删除一般用<code>Ubuntu软件中心</code>或<code>新得立</code>就能搞定，但用命令更快更好。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -86,7 +86,7 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ dpkg --get-selections|grep linux</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dpkg --get-selections | grep linux</span></code></pre></td></tr></table></div></figure>
 
 
 <ul>
@@ -98,7 +98,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get remove linux-image-2.6.32-22-generic</span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>linux-image-xxxxxx-generic</code>就是要删除的内核版本，<code>linux-headers-xxxxxx</code>和<code>linux-headers-xxxxxx-generic</code>中间有“xxxxxx”那段的旧内核都能删，一般选内核号较小的删。</p>
+<p><code>linux-image-xxxxxx-generic</code>就是要删除的内核版本，<code>linux-headers-xxxxxx</code>和<code>linux-headers-xxxxxx-generic</code>中间有<code>xxxxxx</code>那段的旧内核都能删，一般选内核号较小的删。</p>
 
 <ul>
 <li>清理<code>/usr/src</code>目录，删除已经卸载的内核目录。</li>
