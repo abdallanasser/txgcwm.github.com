@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-02T00:35:26+08:00</updated>
+  <updated>2014-07-02T22:06:20+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,156 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下批量将md文件转换为html文件]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/"/>
+    <updated>2014-07-02T21:39:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian</id>
+    <content type="html"><![CDATA[<p>要将markdown文件转换成html文件，可以用discount或python-markdown软件包提供的markdown工具。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install discount</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install python-markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用discount提供的markdown工具转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ markdown -o Release-Notes.html Release-Notes.md</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用python-markdown提供的markdown_py工具转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ markdown_py -o html4 Release-Notest.md &gt; Release-Notes.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果要生成PDF，可以用python-pisa提供的xhtml2pdf转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install python-pisa
+</span><span class='line'>$ xhtml2pdf --html Release-Notes.html Release-Notes.pdf</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>也可以在文档目录下放置一个Makefile来自动完成转换过程：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Makefile
+</span><span class='line'>
+</span><span class='line'>MD = markdown
+</span><span class='line'>MDFLAGS = -T
+</span><span class='line'>H2P = xhtml2pdf
+</span><span class='line'>H2PFLAGS = --html
+</span><span class='line'>
+</span><span class='line'>SOURCES := $(wildcard *.md)
+</span><span class='line'>OBJECTS := $(patsubst %.md, %.html, $(wildcard *.md))
+</span><span class='line'>OBJECTS_PDF := $(patsubst %.md, %.pdf, $(wildcard *.md))
+</span><span class='line'>
+</span><span class='line'>all: build
+</span><span class='line'>
+</span><span class='line'>build: html pdf
+</span><span class='line'>
+</span><span class='line'>pdf: $(OBJECTS_PDF)
+</span><span class='line'>
+</span><span class='line'>html: $(OBJECTS)
+</span><span class='line'>
+</span><span class='line'>$(OBJECTS_PDF): %.pdf: %.html
+</span><span class='line'>    $(H2P) $(H2PFLAGS) $&lt; &gt; $@
+</span><span class='line'>
+</span><span class='line'>$(OBJECTS): %.html: %.md
+</span><span class='line'>    $(MD) $(MDFLAGS) -o $@ $&lt;
+</span><span class='line'>
+</span><span class='line'>clean:
+</span><span class='line'>    rm -f $(OBJECTS)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>html输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ make html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pdf输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ make pdf</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果markdown的内容是中文，那么转换出来的html在浏览器中打开就无法自动识别编码，pdf更惨，直接是一堆乱码。这时可以借助markdown对html标记的支持，在markdown文件中加入编码信息。例如我们要将markdown转换为html文件，可以在文件的开头加上meta标记，指明编码格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' *.md</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用以上的方法，转换出来的效果并不理想，所以尝试使用pandoc去转换，在Ubuntu上使用以下指令安装：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get autoremove pandoc
+</span><span class='line'>$ sudo apt-get install cabal-install
+</span><span class='line'>$ cabal update
+</span><span class='line'>$ cabal install pandoc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>html输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pandoc Release-Notest.md -o Release-Notes.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pdf输出：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pandoc Release-Notest.md -o Release-Notes.pdf</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/makenothing/article/details/8450975">Linux下批量将md文件批量转换为html文件</a><br/>
+<a href="http://www.ituring.com.cn/article/10044">如何在Linux下使用Markdown进行文档工作</a> <br/>
+<a href="http://higrid.net/c-art-pandoc_command.htm">利用Pandoc转换markdown和HTML、LaTeX</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Grub Rescue修复方法]]></title>
@@ -1641,28 +1791,6 @@ win7命令行下，则是执行：</p>
 <hr />
 
 <p>提的这些东西，或许简书已经在改进，但作为一个用户，我觉得还是有必要说说我个人的看法和建议。虽然是几句话，但要程序员去实现这些东西却不是一件容易的事情。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[请不要称我为粉丝]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/05/22/qing-bu-yao-cheng-wo-wei-fen-si/"/>
-    <updated>2014-05-22T22:27:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/05/22/qing-bu-yao-cheng-wo-wei-fen-si</id>
-    <content type="html"><![CDATA[<p><img src="http://image.tianjimedia.com/uploadImages/2010/111/31Z9R0178OA8.jpg" alt="alt text" /></p>
-
-<p>粉丝原本是追星族的代名词，这些人可以不辞辛劳，驱车百里甚至是千里去参加某个明星的演唱会，会花大量的资金去购买他们已经听上过千百次歌曲的CD，也会迫不及待地等待那些明星的下一张专辑，他们是某个明星的忠实拥护者，有些甚至已经达到了狂热的地步。那些疯狂的人虽不能被大众所理解，但他们是值得敬重的，因为他们有自己的追求，他们相比一般人更加执着。</p>
-
-<p>一个人喜欢一个人或物到达可以容忍它的缺点，并且在他人面前会极其维护它，能够不舍不弃，那么他才可能称得上是某某的粉丝，否则他只是一个普通的关注者，只不过他付出的时间比一般人多一些。</p>
-
-<!--more-->
-
-
-<p>随着互联网的崛起和小米网络营销模式的成功，“粉丝”一词被广泛应用，时至今日它已被用烂，甚至在人们的口水战中“粉丝”已等同于“脑残”。现在的一些事情变了，只要你对某项事情或个人稍微关注，无形中你就加入了它的粉丝行列，成为了他人炫耀和卖弄的资本。</p>
-
-<p>最近常做的事情就是上简书看文章，或者是玩弄我的Ubuntu系统，但我并不喜欢别人称我是它们的粉丝，我更愿意他们称我是这个平台或者系统的忠实用户。我对它们的喜欢并没有达到热爱的地步，或许有一天我可能会离开简书去类似百度百家、腾讯大家这样的平台，或者换一个操作系统折腾一番。</p>
-
-<p>“粉丝”原本是一个中性词，现在让我听起来有一种贬义的感觉，所以请我不要称我为某某的粉丝。</p>
 ]]></content>
   </entry>
   

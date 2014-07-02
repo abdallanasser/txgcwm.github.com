@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Unix/Linux | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/unix-linux/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-02T00:35:26+08:00</updated>
+  <updated>2014-07-02T22:06:20+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,119 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下批量将md文件转换为html文件]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/"/>
+    <updated>2014-07-02T21:39:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian</id>
+    <content type="html"><![CDATA[<p>要将markdown文件转换成html文件，可以用discount或python-markdown软件包提供的markdown工具。
+<code>
+$ sudo apt-get install discount
+</code>
+或
+<code>
+$ sudo apt-get install python-markdown
+</code></p>
+
+<p>用discount提供的markdown工具转换：
+<code>
+$ markdown -o Release-Notes.html Release-Notes.md
+</code></p>
+
+<p>用python-markdown提供的markdown_py工具转换：
+<code>
+$ markdown_py -o html4 Release-Notest.md &gt; Release-Notes.html
+</code></p>
+
+<p>如果要生成PDF，可以用python-pisa提供的xhtml2pdf转换：
+<code>
+$ sudo apt-get install python-pisa
+$ xhtml2pdf --html Release-Notes.html Release-Notes.pdf
+</code></p>
+
+<!--more-->
+
+
+<p>也可以在文档目录下放置一个Makefile来自动完成转换过程：
+```</p>
+
+<h1>Makefile</h1>
+
+<p>MD = markdown
+MDFLAGS = -T
+H2P = xhtml2pdf
+H2PFLAGS = &mdash;html</p>
+
+<p>SOURCES := $(wildcard <em>.md)
+OBJECTS := $(patsubst %.md, %.html, $(wildcard </em>.md))
+OBJECTS_PDF := $(patsubst %.md, %.pdf, $(wildcard *.md))</p>
+
+<p>all: build</p>
+
+<p>build: html pdf</p>
+
+<p>pdf: $(OBJECTS_PDF)</p>
+
+<p>html: $(OBJECTS)</p>
+
+<p>$(OBJECTS_PDF): %.pdf: %.html</p>
+
+<pre><code>$(H2P) $(H2PFLAGS) $&lt; &gt; $@
+</code></pre>
+
+<p>$(OBJECTS): %.html: %.md</p>
+
+<pre><code>$(MD) $(MDFLAGS) -o $@ $&lt;
+</code></pre>
+
+<p>clean:</p>
+
+<pre><code>rm -f $(OBJECTS)
+</code></pre>
+
+<p>```</p>
+
+<p>html输出：
+<code>
+$ make html
+</code></p>
+
+<p>pdf输出：
+<code>
+$ make pdf
+</code></p>
+
+<p>如果markdown的内容是中文，那么转换出来的html在浏览器中打开就无法自动识别编码，pdf更惨，直接是一堆乱码。这时可以借助markdown对html标记的支持，在markdown文件中加入编码信息。例如我们要将markdown转换为html文件，可以在文件的开头加上meta标记，指明编码格式：
+<code>
+$ sed -i '1i\&lt;meta http-equiv="content-type" content="text/html; charset=UTF-8"&gt;' *.md
+</code></p>
+
+<p>使用以上的方法，转换出来的效果并不理想，所以尝试使用pandoc去转换，在Ubuntu上使用以下指令安装：
+<code>
+$ sudo apt-get autoremove pandoc
+$ sudo apt-get install cabal-install
+$ cabal update
+$ cabal install pandoc
+</code></p>
+
+<p>html输出：
+<code>
+$ pandoc Release-Notest.md -o Release-Notes.html
+</code></p>
+
+<p>pdf输出：
+<code>
+$ pandoc Release-Notest.md -o Release-Notes.pdf
+</code></p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/makenothing/article/details/8450975">Linux下批量将md文件批量转换为html文件</a><br/>
+<a href="http://www.ituring.com.cn/article/10044">如何在Linux下使用Markdown进行文档工作</a> <br/>
+<a href="http://higrid.net/c-art-pandoc_command.htm">利用Pandoc转换markdown和HTML、LaTeX</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Grub Rescue修复方法]]></title>
@@ -551,37 +664,6 @@ svn = test,sam // 定义用户组svn包含两个用户：test和sam</p>
 <a href="http://blog.csdn.net/laverock/article/details/2195290">ubuntu下架设svn服务器及在windows建立svn+ssh客户端</a><br/>
 <a href="http://bbs.csdn.net/topics/310115750">svn登陆时它出现：Authorization failed</a><br/>
 <a href="http://www.cyberciti.biz/faq/howto-linux-add-user-to-group/">Howto: Linux Add User To Group</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu下安装c-ares库]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku/"/>
-    <updated>2014-03-26T22:59:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/03/26/ubuntuxia-an-zhuang-c-aresku</id>
-    <content type="html"><![CDATA[<p>安装c-ares库的三种方法：</p>
-
-<h1>源码安装</h1>
-
-<p>到<a href="http://c-ares.haxx.se/">这里</a>下载源码，然后执行以下指令编译和安装。
-<code>
-$ cd c-ares-1.10.0
-$ ./buildconf
-$ autoconf configure.ac
-$ ./configure
-$ make
-$ sudo make install
-</code></p>
-
-<h1>第三方软件安装</h1>
-
-<p>在新得立搜索c-ares，然后安装相应的库。</p>
-
-<h1>终端安装</h1>
-
-<p><code>
-$ sudo apt-get install libc-ares2 libc-ares-dev
-</code></p>
 ]]></content>
   </entry>
   
