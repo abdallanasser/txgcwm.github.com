@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-02T22:06:20+08:00</updated>
+  <updated>2014-07-09T22:36:51+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,110 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[__FILE__显示全路径的问题]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/"/>
+    <updated>2014-07-09T22:12:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti</id>
+    <content type="html"><![CDATA[<p>在日志中，使用到<code>__FILE__</code>来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（这样的解释不是很准确，有待改进）。</p>
+
+<p>针对这种现象，使用以下的例子作为测试。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>  printf("%s, %d\n", __FILE__, __LINE__);
+</span><span class='line'>
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用源码的全路径编译：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest /srv/example/c/test/filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>/srv/example/c/test/filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了解决以上问题，当然可以改变编译的方式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>可对项目而言，改动一下会牵动很多的东西，那么可以对<code>__FILE__</code>进行一些操作：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>测试代码修改如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;string.h&gt;
+</span><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>  printf("%s, %d\n", __FILENAME__, __LINE__);
+</span><span class='line'>
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>filetest.c, 8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>考虑到以上的操作需要两次执行<code>strrchr</code>，这种方案也被枪毙掉了。最后采取了换行的操作，只是使用脚本去分析log文件时有很大的不便，不能快速定位到哪个文件，毕竟它们显示在不同行上。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux下批量将md文件转换为html文件]]></title>
@@ -1734,63 +1838,6 @@ win7命令行下，则是执行：</p>
 
 
 <p>Linux系统要进入普通大众的PC还需要走很长的一段路，但我坚信会有那么一天的到来。不要告诉我不可能，Android能做到的，其它一些Linux系统又为何做不到呢？</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[谈简书，提建议]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/05/23/tan-jian-shu-%2Cti-jian-yi/"/>
-    <updated>2014-05-23T00:05:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/05/23/tan-jian-shu-,ti-jian-yi</id>
-    <content type="html"><![CDATA[<p>在简书里可以自制专题，我觉得它不是一个新奇的功能，但它是一个微创新，它是对“收藏”功能的改进，只不过它对任何人开放，利于好的内容的分享与传播。现在简书的“专题”功能并没有发挥很好的效用，如果我需要看一个专题的内容，就需要点击“专题”，接着点击“我的订阅”（当然这步是没有必要的，默认的就是这项），最后进入一个自己想看的专题，在需要这般操作的情况下，我往往省略了这个功能，因为不想耗费这个时间，我只希望我能以较快捷的方式查阅到最新的内容。</p>
-
-<ul>
-<li>建议：强化专题的功能，让阅读者能够看到最新的更新。</li>
-</ul>
-
-
-<hr />
-
-<p>聚集到这个平台的人越来越多，所以每天的文章产出量很大，很多优秀的作品就会被埋没，单靠简叔和几个小编辑的力量显然是不够的。就我个人的阅读习惯是，先查阅首页上感兴趣的文章，然后到“最新动态”的“最新文章”里找寻自己喜欢的内容：前者因为每天都在刷，所以不会错过太多的精彩文章，后者因为时间和文章量的问题，常常错过很多。</p>
-
-<ul>
-<li>建议：给一些资深或者是鉴赏水平较高的用户一些特殊的功能，比如我称之为的“推荐上头条”，这样的话就会有千千万万个简叔了，编辑们或许就可以舍弃大量的阅读工作，而从推荐的列别中选择可以上首页的文章。</li>
-</ul>
-
-
-<!--more-->
-
-
-<hr />
-
-<p>曾介绍过一些朋友到这个平台，却发现他们并没有在这里常驻，有的是对写文章不感兴趣，有的是找不到自己喜欢的内容，有的是写了文章没有交流的群体，所以慢慢淡化了他们对这里的感情。</p>
-
-<ul>
-<li>建议：强化平台的搜索功能，让用户能够快速得寻找到自己留下的理由。可以尝试学习Segmentfault的“徽章”功能，虽不能说有非常完美的效果，但它确实在某种程度上能够提升一些用户的粘性。</li>
-</ul>
-
-
-<hr />
-
-<p>对于写作的人也分好多的类别，某一类人就只喜欢某一类型的文章，“专题”这一功能在某些程度上帮助人们找到了同一类交流的人群，却觉得它做得还不够。</p>
-
-<ul>
-<li>建议：给作者一个“派别”的属性，让人们可以容易地找到知音。</li>
-</ul>
-
-
-<hr />
-
-<p>曾经给简书的建议专题投稿，进入到专题页面后，从上拉到下都没有找到（这应该是我自己不够细致），最后还是借助浏览器的搜索功能搜索“简书”（因为我完全没有记住那串长长的专题名，只记住了这两个字）二字找到的。整个操作下来，觉得很麻烦，在专题更多的情况下，这是一件很累人的事情。</p>
-
-<ul>
-<li>建议：在文章页面是否可以加入投稿的功能，只要用户输入一些关键字就可以提示出相应的专题。</li>
-</ul>
-
-
-<hr />
-
-<p>提的这些东西，或许简书已经在改进，但作为一个用户，我觉得还是有必要说说我个人的看法和建议。虽然是几句话，但要程序员去实现这些东西却不是一件容易的事情。</p>
 ]]></content>
   </entry>
   

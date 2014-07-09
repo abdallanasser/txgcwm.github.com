@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>红颜劫 - 残剑</title>
+  <title>__FILE__显示全路径的问题 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="斩断情丝心犹乱，千头万绪仍纠缠。拱手让江山，低眉恋红颜。祸福轮流转，是劫还是缘。天机算不尽，交织悲与欢。古今痴男女，谁能过情关？ ——《后宫甄嬛传》片头曲 红颜劫一曲形象生动地描述了华妃（姓年，大家也应该知道她的出生了）的一生，同时也是年羹尧一生的写照。每每听到此曲，一种伤感在内心油然而生， &hellip;">
+  <meta name="description" content="在日志中，使用到__FILE__来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">红颜劫</h1>
+      <h1 class="entry-title">__FILE__显示全路径的问题</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-02-08T23:05:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2014</time>
+<time datetime="2014-07-09T22:12:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,27 +105,102 @@
   </header>
 
 
-<div class="entry-content"><p><img src="http://img.upload.tom.com/data1/upload/888/663/13329931112606233049.jpg"></p>
+<div class="entry-content"><p>在日志中，使用到<code>__FILE__</code>来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（这样的解释不是很准确，有待改进）。</p>
 
-<p>斩断情丝心犹乱，千头万绪仍纠缠。拱手让江山，低眉恋红颜。祸福轮流转，是劫还是缘。天机算不尽，交织悲与欢。古今痴男女，谁能过情关？</p>
+<p>针对这种现象，使用以下的例子作为测试。</p>
 
-<p align="right">——《后宫甄嬛传》片头曲</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>  printf("%s, %d\n", __FILE__, __LINE__);
+</span><span class='line'>
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
 
 
-<p>红颜劫一曲形象生动地描述了华妃（姓年，大家也应该知道她的出生了）的一生，同时也是年羹尧一生的写照。每每听到此曲，一种伤感在内心油然而生，为她的遭遇惋惜、哀叹。一个只为爱感不择手段的女人，在勾心斗角的深宫中实属难得。</p>
+<p>使用源码的全路径编译：</p>
 
-<p>作为皇室的一员，她不可能不清楚一个失宠被打入冷宫的女人是很难再被皇帝宠幸的。下定决心斩断情丝，可内心还是乱成一团麻，交织在一起，错综复杂根本无法理清，越想越乱，想让自己清净下来，却不能阻挡思绪的不断泉涌。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest /srv/example/c/test/filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>/srv/example/c/test/filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了解决以上问题，当然可以改变编译的方式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+
 
 <!--more-->
 
 
-<p>情愿把江山拱手让给其她人，只想拥有这个男人的爱。或许自己的哥哥可以在一方永久称霸，光耀家族，可这并不是她想要的，她永远站在自己的男人一边，为了这个男人她可以舍弃一切。当雍正皇帝惩治哥哥年羹尧的时候，她也并未悲痛欲绝，只求这个男人不要不爱自己，哪怕丢弃了一分的爱也不舍。虽在寒冷的深宫，看着自己的容颜还是十分怀念当初的美好时光。</p>
+<p>可对项目而言，改动一下会牵动很多的东西，那么可以对<code>__FILE__</code>进行一些操作：</p>
 
-<p>祸福轮流转，是劫还是缘？这是她的自问。她又何尝不清楚自己的遭遇呢！当西北战事吃紧的时候，用得着自己的哥哥年羹尧去平定叛乱，自己的地位也逐渐攀升。战祸平息了，年大将军成了“西北王”，统帅一方，功高震主，雍正皇帝在想着办法削弱他的势力，也逐渐冷淡了自己。等到杀死年羹尧的时候，自己的宠幸也就到了尽头。这些并不是真正的爱情，只是权和利的交换。这些是劫数还是缘分，想想这些问题，浑身都会发凉，只是自己太在乎这份爱，没有在人生得意的时候好好想想这些问题。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)</span></code></pre></td></tr></table></div></figure>
 
-<p>处在深宫，处处藏着杀机，虽然防备着却还是躲不过。哥哥的事情与自己关系不大，却也成为了对手的把柄，甚至将自己推向了死亡。别人的斗争在有些时候也给自己带来了利益，有时又给自己带来了弊端，悲与欢交织在一起，谁又清楚是好是坏呢？</p>
 
-<p>从古至今，所有痴情的男女，又有哪一个能够闯过情关呢？</p>
+<p>测试代码修改如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;string.h&gt;
+</span><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>  printf("%s, %d\n", __FILENAME__, __LINE__);
+</span><span class='line'>
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>filetest.c, 8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>考虑到以上的操作需要两次执行<code>strrchr</code>，这种方案也被枪毙掉了。最后采取了换行的操作，只是使用脚本去分析log文件时有很大的不便，不能快速定位到哪个文件，毕竟它们显示在不同行上。</p>
 </div>
 
 
@@ -148,12 +223,12 @@
   
 
 
-<time datetime="2014-02-08T23:05:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2014</time>
+<time datetime="2014-07-09T22:12:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析</a>
+    <a class='category' href='/blog/categories/c-c/'>C/C++</a>
   
 </span>
 
@@ -169,10 +244,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/07/xie-zai-2014zhi-shi/" title="Previous Post: 写在2014之始">&laquo; 写在2014之始</a>
+        <a class="basic-alignment left" href="/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/" title="Previous Post: Linux下批量将md文件转换为html文件">&laquo; Linux下批量将md文件转换为html文件</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/" title="Next Post: wav文件格式解析">wav文件格式解析 &raquo;</a>
       
     </p>
   </footer>
@@ -190,7 +263,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -551,8 +624,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/02/08/hong-yan-jie/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -9,7 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="很舒适的坐在公交后面的位置上，拿着手机看完了一篇文章，退出了应用看了一下时间是8：19，不到百米的距离就要到站了。正当我暗自庆幸能够很早到公司的时候，传来一个女人A的声音“你偷我东西”。A推了女人B一把，B也不甘示弱，迅速还击，两个女人拳打脚踢，几个乘客也因激烈的战斗而离开自身的座位。 &hellip;">
+  <meta name="description" content="isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。 isdigit 在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如： int a = isdigit('1');
+int &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+
+<h1>isdigit</h1>
+
+<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
+
+<pre><code>int a = isdigit('1');
+int b = isdigit('a');
+int c = isdigit(3);
+</code></pre>
+
+<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
+
+<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -163,6 +221,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/">__FILE__显示全路径的问题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/">Linux下批量将md文件转换为html文件</a>
       </li>
     
@@ -176,10 +238,6 @@
     
       <li class="post">
         <a href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">操作系统卸载软件：OS-Uninstaller</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/">进程优先级控制：nice和renice</a>
       </li>
     
   </ul>
@@ -196,7 +254,7 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
-<li class='category'><a href='/blog/categories/c-c/'>C/C++ (13)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (14)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (6)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
