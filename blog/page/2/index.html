@@ -9,7 +9,13 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="What just happened under the hood? Scrapy为爬虫中的start_urls属性中每个URL创建了一个scrapy.http.Request对象 ，并把parse方法作为回调函数指定给爬虫。 这些Request会被调度，执行，scrapy.http. &hellip;">
+  <meta name="description" content="安装ssh服务器和subversion服务器 1
+2
+3
+# yum update # yum install openssh-server # yum install subversion 创建登陆svn的用户 1
+2
+3
+# useradd test // 添加test用户 # &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +83,93 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/20/centosan-zhuang-svn/">CentOS安装SVN</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-20T22:07:00+08:00" pubdate data-updated="true">Jun 20<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/06/20/centosan-zhuang-svn/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>安装ssh服务器和subversion服务器</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># yum update      
+</span><span class='line'># yum install openssh-server     
+</span><span class='line'># yum install subversion      </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>创建登陆svn的用户</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># useradd test // 添加test用户     
+</span><span class='line'># groupadd svn // 添加svn用户组     
+</span><span class='line'># usermod -a -G svn test // 将test用户添加到svn用户组   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>另外，如果test用户不存在，则可以用以下语句完成：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># useradd -g svn test     </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>建立用户存储</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># mkdir -p /home/test/svn/trunk        
+</span><span class='line'># svnadmin create /home/test/svn/trunk      </span></code></pre></td></tr></table></div></figure>
+
+
+<h1>为svn用户组赋予权限</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># chown -R root:svn /home/test/svn/trunk      
+</span><span class='line'># chmod -R g+rws /home/test/svn/trunk    /*给svn组赋予读写权限，可以根据需要更改相应权限*/     
+</span><span class='line'># chmod -R o-rwx /home/test/svn/trunk    /*删除其他无关人员的读、写、执行权限，默认情况下可能其他人有读权限*/       </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/20/centosan-zhuang-svn/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -447,46 +540,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/29/si-nian/">思念</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-29T00:22:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/29/si-nian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>输入，删除；<br/>
-再输入，又删除；<br/>
-清空，放下！</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -525,6 +578,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/10/robotsbrain-logshu-chu/">RobotsBrain:log输出</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/">__FILE__显示全路径的问题</a>
       </li>
     
@@ -538,10 +595,6 @@
     
       <li class="post">
         <a href="/blog/2014/07/01/ubuntuxi-tong-qing-li-huan-cun-%2C-la-ji-%2C-duo-yu-nei-he/">Ubuntu系统清理缓存、垃圾、多余内核</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">操作系统卸载软件：OS-Uninstaller</a>
       </li>
     
   </ul>
@@ -561,6 +614,7 @@
 <li class='category'><a href='/blog/categories/c-c/'>C/C++ (14)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (6)</a></li>
+<li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
 <li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (9)</a></li>

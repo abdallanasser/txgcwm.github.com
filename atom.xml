@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-09T22:36:51+08:00</updated>
+  <updated>2014-07-10T22:28:13+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RobotsBrain:log输出]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/10/robotsbrain-logshu-chu/"/>
+    <updated>2014-07-10T22:09:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/10/robotsbrain-logshu-chu</id>
+    <content type="html"><![CDATA[<p>在构建一个库的时候，通常会写专门的log输出函数，下面介绍一个简单的实现。根据不同的需求，需要对日志的输出作一个级别限定，便于查阅及跟踪流程。以下是对级别的设置：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>typedef enum log_level_en {
+</span><span class='line'>  RB_LOG_MIN,
+</span><span class='line'>  RB_LOG_DEBUG,
+</span><span class='line'>  RB_LOG_INFO,
+</span><span class='line'>  RB_LOG_NOTICE,
+</span><span class='line'>  RB_LOG_WARNING,
+</span><span class='line'>  RB_LOG_ERROR,
+</span><span class='line'>  RB_LOG_CRIT,
+</span><span class='line'>  RB_LOG_ALERT,
+</span><span class='line'>  RB_LOG_EMERG,
+</span><span class='line'>  RB_LOG_MAX
+</span><span class='line'>}log_level;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>该部分参考内核的级别设定，不同的是数值越低其信息的重要程度越低。</p>
+
+<p>具体的日志输出，我们采用了宏定义的方式，因为考虑到要输出<code>__FUNCTION__</code>等信息，其具体的实现如下所示：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define RB_LOG(level, fmt, args...)  \
+</span><span class='line'>  do {    \
+</span><span class='line'>      if(rb_log_check_level(level) == 0)  \
+</span><span class='line'>          break;  \
+</span><span class='line'>      char rb_log_buf[RB_LOG_BUFFER_LEN] = {0};   \
+</span><span class='line'>      snprintf(rb_log_buf, RB_LOG_BUFFER_LEN, "pid(%d) %s %s(%d)", \
+</span><span class='line'>                  getpid(), __FILE__, __FUNCTION__, __LINE__);    \
+</span><span class='line'>      rb_log_printf(level, rb_log_buf, fmt, ##args);  \
+</span><span class='line'>  } while(0)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>每个级别输出的宏定义如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#define RB_DEBUG(fmt, args...)   RB_LOG(RB_LOG_DEBUG, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_INFO(fmt, args...) RB_LOG(RB_LOG_INFO, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_NOTICE(fmt, args...)   RB_LOG(RB_LOG_NOTICE, fmt, ##args)
+</span><span class='line'>  
+</span><span class='line'>#define RB_WARNING(fmt, args...)  RB_LOG(RB_LOG_WARNING, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_ERROR(fmt, args...)    RB_LOG(RB_LOG_ERROR, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_CRIT(fmt, args...) RB_LOG(RB_LOG_CRIT, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_ALERT(fmt, args...)    RB_LOG(RB_LOG_ALERT, fmt, ##args)
+</span><span class='line'>
+</span><span class='line'>#define RB_EMERG(fmt, args...)    RB_LOG(RB_LOG_EMERG, fmt, ##args)</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>初始化函数，用于设置输出文件的名称和输出级别的设定：如果<code>log_file</code>设置成<code>NULL</code>的话，则直接将信息打印到<code>stderr</code>；<code>level</code>的值设置的越小，它输出的信息越多:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>void rb_log_init(const char *log_file, log_level level);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>释放分配的资源，如果调用了<code>rb_log_init</code>就必须调用以下的接口:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>void rb_log_uninit(void);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>检测是否要打印信息:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>int rb_log_check_level(log_level level);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>日志输出:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>void rb_log_printf(log_level level, const char *prefix, const char *fmt, ...);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当然我们也可以直接调用<code>RB_DEBUG</code>等接口，这样的话，log信息直接输出到<code>stderr</code>。具体的代码及测试用例，请参考<a href="https://github.com/RobotsBrain/robrain/tree/master/src">这里</a>。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[__FILE__显示全路径的问题]]></title>
@@ -1799,45 +1923,6 @@ win7命令行下，则是执行：</p>
 <p>夜入深， <br/>
 未能眠， <br/>
 只因静静地等待。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Linux桌面系统离你还太远]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/"/>
-    <updated>2014-05-24T00:18:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan</id>
-    <content type="html"><![CDATA[<p><img src="http://img.linux.net.cn/data/attachment/album/201210/19/142402r9r1qaqaandac9qr.jpg" alt="alt text" /></p>
-
-<p>当XP系统退出历史舞台的时候，众多的Linux爱好者就撰文列举Linux替代XP的种种可能。虽然讲得很有道理，加上我是一个Linux的忠实用户，但我觉得Linux桌面系统拥抱普通大众还为时尚早，在大众心中已有千万的理由。这种等待的时间会很长，可我并不觉得它不可能成为一种替代的方案。</p>
-
-<p>我使用Ubuntu作为我工作和平时娱乐的系统已快三年，但我并不敢说自己熟悉它，也只是在他人的指引下完成一些东西。相比较开始的阶段，现在的进步主要是对它有了更进一步的了解。起先是看看他人写的东西，经过这些年的折腾，自己才逐渐有了写这方面小文章的能力。</p>
-
-<p>就我这几年使用Ubuntu系统的体验来看，谈谈我对它的认识，基于以下几点我觉得它还不适合普通的大众，而且在这条道路上它还需要更加努力。</p>
-
-<!--more-->
-
-
-<h1>软件匮乏</h1>
-
-<p>其实在Ubuntu中的应用软件是很多的，很多XP上常用的软件都可以在那里找到替代品，不足的是大部分都是英文的软件，这对于一些人来说学习的成本很高。而一些较专业的软件，这上面可能暂时还找不到替代品。大家习惯使用的一些软件，在这上面也没有，没有哪家公司现在愿意为小众开发相应的应用。我使用QQ也是通过wine的方式，或者干脆用webqq了（说实在的，用户体验并不是那么的美好）。即便是深度的应用商店，也大都是英文版的软件，但可以看到他们很用心地在为国人开发一些基本的应用。游戏也有，可国内的那些大型网游之类的根本不会照顾这个系统。对于国人来说，英语终究是一道坎。</p>
-
-<h1>思想观念</h1>
-
-<p>这一点也很难转变，在Linux系统中一切皆是文件，让普通大众去体会根本接受不了。作为一个IT从业人员，在起先学习这个系统的时候也很难接受这个观点，XP中系统盘符的概念一直消退不去，深入了解后才慢慢体会到其中的深意。不过这点并不是最要紧的，毕竟只要图形化的东西做得好，还有用户体验提升了，简单容易操作了（或者是傻瓜化了），用户就会逐渐接受了，不过对于用户来说根本不必去了解这些。就好比人们能够熟练使用Android系统那样。</p>
-
-<h1>错误的解决</h1>
-
-<p>遇到问题了，去搜索解决方法，能够真正解决问题的还是那些英文的博客论坛，国内也有很多，但有些信息很老了或者是从国外的论坛上翻译过来的，一步步操作下去还真未必能够解决，所以这个也需要对Linux系统有一定的了解才能根除一个问题。很多人并不熟悉Linux领域，所以解决Linux上的问题对于他们来说是很大的考验。就拿我个人遇到的一个问题说说，在运行一个软件的时候死活打不开，也不知道到底那里不对劲，在终端上运行它，看了错误才知道是一些库不兼容造成的，我重新安装了对应的版本才让它正常跑起来。如果是普通用户遇到这种问题，肯定会想——之前用得还好好的，突然之间就出现了这种问题，且重装这个应用后还是这样，这个系统真烂。</p>
-
-<h1>为何又有可能呢</h1>
-
-<p>Ubuntu在做系统融合的事情，让我觉得Linux系统可能走进普通大众的电脑里。如果Ubuntu的移动操作系统能够占据一些市场份额，那么很多大型的公司还是会投入人力开发相应的应用。只要它能够在移动操作系统上运行，再相应的编译一下，就可以在桌面系统上正常运行，这样就极大丰富了Ubuntu的应用商店。</p>
-
-<br></br>
-
-
-<p>Linux系统要进入普通大众的PC还需要走很长的一段路，但我坚信会有那么一天的到来。不要告诉我不可能，Android能做到的，其它一些Linux系统又为何做不到呢？</p>
 ]]></content>
   </entry>
   
