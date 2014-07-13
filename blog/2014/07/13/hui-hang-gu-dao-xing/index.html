@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>minilzo无损压缩库测试例子（二） - 残剑</title>
+  <title>徽杭古道行 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。 1
-#include "minilzo.h" 其中，lzo_init()函数包含在以下的头文件中。 1
-#include " &hellip;">
+  <meta name="description" content="按照老妈的话讲就是“吃饱了撑着没事去爬山啊，要是喜欢爬，可以回去爬老家的山嘛，反正现在我们家的天地也空着”，我清楚母亲是不希望我待在家乡的山沟里的，只是她对那种生活看不到希望，一直以来都鼓励我走出去。就我来说，我也并不喜欢那种生活，小时候母亲让我挑一些轻便的东西的时候， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/07/13/hui-hang-gu-dao-xing">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -82,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Minilzo无损压缩库测试例子（二）</h1>
+      <h1 class="entry-title">徽杭古道行</h1>
     
     
       <p class="meta">
@@ -98,7 +96,7 @@
   
 
 
-<time datetime="2013-07-10T23:01:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+<time datetime="2014-07-13T23:55:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -107,184 +105,26 @@
   </header>
 
 
-<div class="entry-content"><p>在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。</p>
+<div class="entry-content"><p><img src="http://www.clvyou.com/d/file/zb/anhui/jx/lyjd/2012-01-16/36d1c0e672d3450cc7a26c1a22db0c22.jpg" alt="alt text" /></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include "minilzo.h"</span></code></pre></td></tr></table></div></figure>
+<p>按照老妈的话讲就是“吃饱了撑着没事去爬山啊，要是喜欢爬，可以回去爬老家的山嘛，反正现在我们家的天地也空着”，我清楚母亲是不希望我待在家乡的山沟里的，只是她对那种生活看不到希望，一直以来都鼓励我走出去。就我来说，我也并不喜欢那种生活，小时候母亲让我挑一些轻便的东西的时候，我总是躲避或者是找各种理由推脱。小时候母亲之所以会那么做，主要还是想让我体验一下农村的艰苦生活，可那时我并不懂得这些。和家乡的很多同龄人相比，我的童年并没有做太多的农活。那时的我喜欢在山林间乱窜，却不愿身上有任何的负担，我清楚那种滋味让人难受。</p>
 
-
-<p>其中，lzo_init()函数包含在以下的头文件中。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include "lzoconf.h"</span></code></pre></td></tr></table></div></figure>
-
-
-<p>lzoconf.h已包含在minilzo.h中，所以在写测试例子时只需包含minilzo.h头文件即可。</p>
-
-<p>将原始数据存放在in中且定义其长度为IN_LEN，压缩后的数据存放在out中且定义其长度为OUT_LEN。因为输入块可能是不可压缩的，所以我们必须提供多一点的输出空间。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#if defined(__LZO_STRICT_16BIT)
-</span><span class='line'>#define IN_LEN      (8*1024u)
-</span><span class='line'>#elif defined(LZO_ARCH_I086) && !defined(LZO_HAVE_MM_HUGE_ARRAY)
-</span><span class='line'>#define IN_LEN      (60*1024u)
-</span><span class='line'>#else
-</span><span class='line'>#define IN_LEN      (128*1024ul)
-</span><span class='line'>#endif
-</span><span class='line'>#define OUT_LEN     (IN_LEN + IN_LEN / 16 + 64 + 3)
-</span><span class='line'>
-</span><span class='line'>static unsigned char __LZO_MMODEL in  [ IN_LEN ];
-</span><span class='line'>static unsigned char __LZO_MMODEL out [ OUT_LEN ];</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>长大后的自己，还是喜欢行走在山林间，时而就有去爬山的冲动。现在不会有人强迫我挑担子，也就淡忘了那种艰辛的滋味。每次爬山，不知疲惫，或许只是为了探寻远去的生活，让自己有所警醒。</p>
 
 <!--more-->
 
 
-<p>压缩需要工作缓冲区，内存分配以‘lzo_align_t’（而不是‘char’）为单元，以确保它对齐。</p>
+<p>坐汽车朝黄山那边方向去，有三次，那里的海拔比杭州这边高很多，如果现在的道路是基于古时道路修建的话，从古徽州府到杭州是很长的一段路，而且路未必好走，那么就需要另辟捷径了，徽杭古道也就应运而生。虽是山路，但它却大大缩短了徽杭来回的时间。在这条道路上，走过了很多的名人，包括红顶商人胡雪岩和新文化运动的倡导者胡适。徽州这个地方出了太多的名人，这跟地理位置也应该有很大的关系——穷则变，变则通，通则达，古时徽杭古道附近的村民会在每年固定的时间无偿地去修理这条古道。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define HEAP_ALLOC(var,size) \
-</span><span class='line'>    lzo_align_t __LZO_MMODEL var [ ((size) + (sizeof(lzo_align_t) - 1)) / \
-</span><span class='line'>                                    sizeof(lzo_align_t) ]
-</span><span class='line'>
-</span><span class='line'>static HEAP_ALLOC(wrkmem, LZO1X_1_MEM_COMPRESS);</span></code></pre></td></tr></table></div></figure>
+<p>去的那天是阴雨天气，我也被同去九华山的小伙伴戏称成“雨神”。我们从浙江段开始爬，好处是上山段比较的短，接着大部分都是下山的道路，而且比较的平缓，这让我们轻松很多，那一天也就我们那个对是那样爬的。全长20多公里，没有负重的情况下，很容易走完。虽是雨天，但迎面而来的其他旅者也是络绎不绝，天气是阻挡不了这群人的热情，这让我觉得这不是一条孤独的道路。</p>
 
+<p>道路是在半山腰中，农家也是零散的建在路边，问了才知道，原来大部分的房子建在了山上，走在路上的我们根本无法看到。因为地理位置的原因，这里并没有多少平坦的地，稍微平整的道路就会被村民平成地，用来种植一些蔬菜和其它一些农作物。山中的人依然保持着他们的淳朴，我们在他们的家里避雨，也是很热情，跟我们谈论这里的旅游，还有社会上琐碎的事情。</p>
 
-<p>Step 1: 初始化lzo库。</p>
+<p>走在这条道路上，我始终有个疑问：在这条车不能进的山路里为何还有这么多人居住着，他们又是靠什么生活的？禁不起这种疑惑，我咨询了路边买东西的一位老年人：“我看这山里人还是很多的嘛，你们是种植什么作物的啊，我看这里也不能种植水稻呀？”他回道：“我们这里就种一些茶叶、玉米，早些时候还种一点水稻，但现在我们不种了，粮食基本到外面买。”种水稻这事是最让我惊奇的，这个大山里竟然也能够做到。从外面买米，要运进来也不是一件容易的事情，和他聊完后，我花费了半个多小时才走到了景区的出口，再走到集市的话估计又要花费更长的时间。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if (lzo_init() != LZO_E_OK)
-</span><span class='line'>{
-</span><span class='line'>    printf("internal error - lzo_init() failed !!!\n");
-</span><span class='line'>    printf("(this usually indicates a compiler bug - try recompiling\n
-</span><span class='line'>                without optimizations, and enable '-DLZO_DEBUG' for diagnostics)\n");
-</span><span class='line'>    return 3;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<p>雨天加上是短途自助出行，没有认识其他的一些小伙伴，只对两个人映像特别深刻：一个是海宁自己开公司搞旅游的老板，这次出行是为了学习搞户外活动的流程，他说“不要拘谨，大家到户外玩本身就是为了放松的”；一个是司机，很幽默，在电话中会跟我们的领队开玩笑，把领导搞得很紧张，不单是这些，当然还有很多让我产生敬畏的亮点。</p>
 
-
-<p>Step 2: 准备将要被压缩的输入块，在这个例子程序中我们只是简单的写入“0”。在实际的应用中，应该写入真正需要压缩的数据。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>in_len = IN_LEN;
-</span><span class='line'>lzo_memset(in,0,in_len);</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Step 3: 使用LZO1X-1将in中的数据压缩到out中。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>r = lzo1x_1_compress(in,in_len,out,&out_len,wrkmem);
-</span><span class='line'>if (r == LZO_E_OK)
-</span><span class='line'>    printf("compressed %lu bytes into %lu bytes\n",
-</span><span class='line'>        (unsigned long) in_len, (unsigned long) out_len);
-</span><span class='line'>else
-</span><span class='line'>{
-</span><span class='line'>    /* this should NEVER happen */
-</span><span class='line'>    printf("internal error - compression failed: %d\n", r);
-</span><span class='line'>    return 2;
-</span><span class='line'>}
-</span><span class='line'>/* check for an incompressible block */
-</span><span class='line'>if (out_len &gt;= in_len)
-</span><span class='line'>{
-</span><span class='line'>    printf("This block contains incompressible data.\n");
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Step 4: 将out中的数据解压缩到in中。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>new_len = in_len;
-</span><span class='line'>r = lzo1x_decompress(out,out_len,in,&new_len,NULL);
-</span><span class='line'>if (r == LZO_E_OK && new_len == in_len)
-</span><span class='line'>    printf("decompressed %lu bytes back into %lu bytes\n",
-</span><span class='line'>        (unsigned long) out_len, (unsigned long) in_len);
-</span><span class='line'>else
-</span><span class='line'>{
-</span><span class='line'>    /* this should NEVER happen */
-</span><span class='line'>    printf("internal error - decompression failed: %d\n", r);
-</span><span class='line'>    return 1;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>minilzo支持多个平台，在编译的时候应该设置编译选项。在Linux系统中，编译该测试例程使用以下指令。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ make gcc
-</span><span class='line'>gcc  -s -Wall -O2 -fomit-frame-pointer -o testmini testmini.c minilzo.c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下为运行结果。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./testmini 
-</span><span class='line'>
-</span><span class='line'>LZO real-time data compression library (v2.06, Aug 12 2011).
-</span><span class='line'>Copyright (C) 1996-2011 Markus Franz Xaver Johannes Oberhumer
-</span><span class='line'>All Rights Reserved.
-</span><span class='line'>
-</span><span class='line'>compressed 131072 bytes into 598 bytes
-</span><span class='line'>decompressed 598 bytes back into 131072 bytes
-</span><span class='line'>
-</span><span class='line'>miniLZO simple compression test passed.</span></code></pre></td></tr></table></div></figure>
-
+<p>有一条道路我并没有游览过，但这并不能成为我的遗憾，我相信自己还会再去一次，下一次我想我会从安徽段开始，去体验一下不同的行程。</p>
 </div>
 
 
@@ -307,12 +147,12 @@
   
 
 
-<time datetime="2013-07-10T23:01:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+<time datetime="2014-07-13T23:55:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/kai-yuan-ku/'>开源库</a>
+    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
   
 </span>
 
@@ -328,10 +168,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/" title="Previous Post: minilzo无损压缩库介绍（一）">&laquo; minilzo无损压缩库介绍（一）</a>
+        <a class="basic-alignment left" href="/blog/2014/07/12/chen-ji-de-sui-yue/" title="Previous Post: 沉寂的岁月">&laquo; 沉寂的岁月</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/" title="Next Post: Base64编码解码算法">Base64编码解码算法 &raquo;</a>
       
     </p>
   </footer>
@@ -349,7 +187,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/07/13/hui-hang-gu-dao-xing/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/07/13/hui-hang-gu-dao-xing/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -711,8 +549,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/07/13/hui-hang-gu-dao-xing/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/07/13/hui-hang-gu-dao-xing/';
         var disqus_script = 'embed.js';
       
     (function () {
