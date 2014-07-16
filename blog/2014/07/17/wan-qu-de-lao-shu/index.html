@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Uboot中TFTP解释 - 残剑</title>
+  <title>弯曲的老树 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用tftp MemoryAddress FileName命令即可， &hellip;">
+  <meta name="description" content="盼着盼着，老两口终于在四十多岁的时候迎来了他们的第一个孩子，而且是一个男孩。对于这两口子来说，这是他们活了半辈子遇到的最幸福的事情。 老两口别提有对这个孩子多宠爱了，抱在手里怕把他摔了，含在口里又怕他化了。农村的生活条件并不是那么的好，但他们以自己最大的能力去宠着这个孩子， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/07/17/wan-qu-de-lao-shu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Uboot中TFTP解释</h1>
+      <h1 class="entry-title">弯曲的老树</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-07-17T00:06:00+08:00" pubdate data-updated="true">Jul 17<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,95 +105,48 @@
   </header>
 
 
-<div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+<div class="entry-content"><p>盼着盼着，老两口终于在四十多岁的时候迎来了他们的第一个孩子，而且是一个男孩。对于这两口子来说，这是他们活了半辈子遇到的最幸福的事情。</p>
 
-<p>使用TFTP传送文件的步骤：</p>
+<p>老两口别提有对这个孩子多宠爱了，抱在手里怕把他摔了，含在口里又怕他化了。农村的生活条件并不是那么的好，但他们以自己最大的能力去宠着这个孩子，从来不让孩子去干一点农活和家务活。孩子有什么需求，他们都尽量满足，即便达不到那个条件，他们也会去创造。老两口过得再苦再累，在他们看来，只要孩子快乐，他们做什么都是值得的，谁让自家只有这么一个宝贝儿子呢。孩子过着小皇帝般的生活，让村里的同龄人都艳羡不已。在小孩看来，这一切也是顺理成章的，毕竟他也只是一个孩子，根本无法体会到生活的艰辛和不易。</p>
 
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
+<p>时间一晃就过去了七、八年，小孩也到了上学的年龄，虽然有老师的教育，但在父母的宠爱下，他还是变得越来越顽皮，一切都以自己为中心。就算他做了很多的错事，父母也从来不会去打他，甚至不会去责骂他。身边的亲戚朋友都提醒他们“再这样下去，会把孩子给惯坏的”，可每次他们总是笑笑，然后回道“现在孩子还小，等到他长大了自然会懂事的”。他们也不是没有听进去别人的话，只是真的舍不得，要打下不了手，要骂也张不开口。</p>
 
+<p>一位邻村的朋友办喜事，碰巧也刚好是周末的日子，两口子商量着让老头带孩子去酒席，当然也把这个消息告诉了孩子。虽然距离那个喜庆的日子还有一段日子，但那孩子也是天天盼着，恨不得那天赶紧的到来。农村的那个年代，没有多少好东西可吃，只有碰上红白事的时候才能让孩子们解解馋，更何况那是喜事。</p>
 
 <!--more-->
 
 
-<h1>客户端状态</h1>
+<p>那天朋友要办喜事的早上，老头子早早的出去忙农活了，因为正餐是在中午，只要在那之前赶到就可以，也不算失礼。小孩也一大早就坐在门口，等待父亲回来带自己去赴晏。等了许久都不见父亲回来，小孩也等得厌烦了，就跑出去和小伙伴们玩了。在他出门的时候，他的母亲也再三嘱托“不要跑太远了，在附近玩就可以了，你父亲一会就回来了”。他也频频点头，告诉母亲自己记住了。可孩子一玩起来，就把什么事情都给忘在了脑后，和一群疯孩子跑到很远的地方去玩了。</p>
 
-<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
+<p>老头子忙完了农活也就回家了，收拾自己行装的同时也叫老婆子出去把自己的儿子叫回来，然后出发。他们问了每一个认识的人，也把能猜到的地方都去找过，可孩子跑得太远，他们根本没有找到。老头子对老婆子说：“这去晚了也不好，别人会误以为我们不给面子的，要不我先去了，下次有喜事再带上我们的儿子吧！”老婆子觉得这样还是不妥：“要不再等等，我出去再找找，如果这次没让他去的话，他会不高兴的。”“时间不早了，我还是先去吧，晚上回来的时候我给他多带点好吃的回来。”老婆子也想不出其它更好的点子，也就应了老头。</p>
 
-<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
+<p>孩子玩累了，自己就回家了，回来之后才想起要去参加喜事，还没来得及喝一口水，就迫不及待地问母亲自己的父亲去哪里了。母亲对他说：“找你找了好久，没有找到，你父亲先去了。”当听到父亲已先去的消息时，小孩瞬时就火冒三丈了，嘴里囔道：“好你个死老头，答应我了却不带我去，我要把他给杀了。”那时，他母亲说什么话，他都听不进去。他母亲说带他去，可他也是死活不去，就是在生着他父亲的气。中饭都没有吃，一个人静静地坐在那里，撅着他的那张小嘴。他的母亲也没有太在意，过去这种情况也是时而有发生的，过不了多久也就自然而然的好了。</p>
 
-<h1>包类型</h1>
+<p>等到晚上的时候，他的父亲回来了，也给他带回来好多好吃的，有些甚至是他从来没有吃过的。可他却一点都没有心动，也没有用眼睛去瞄那些东西一眼，依然独自一人执拗地坐在那里。母亲叫他吃晚饭的时候，他也没有搭理。老两口没有办法，只是特意在厨房留了吃的，觉得孩子饿了自然会去找吃的。</p>
 
-<p>使用TFTP传送的包分为6种类型：</p>
+<p>可事情还是有些不对劲，老婆子准备打理猪菜的时候，却发现菜刀不见了。很显然，在这样破败的家庭，是没有小偷愿意光顾的，菜刀也算不上是值钱的东西。这时，她想起了白天儿子说过的话，慌了。老婆子对自己持家的能力还是很自信的，但出于对自己儿子的信任，她还是把家里的各个角落都找了一遍，确认自己没有把刀子落在什么地方。最终，她还是没有找到，此时的她确信这刀应该是被孩子取走了，要做什么她可能已经猜测到，但作为一个母亲始终不愿意往那个方面去想。</p>
 
-<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
+<p>由于白天的劳作，加上来回的奔波，老头子累了，进房要去休息，老婆子也跟着进去了。她没有说什么，只是让老头子从窗户里出去，到其他人家里住上几天。面对这样无理的要求，老头子当然是不愿意的，但最后还是拗不过老婆子，顺从地从窗户爬出去了。当然老婆子并没有告诉老头子家里丢失菜刀这件事，毕竟这一切也只是他的猜测，没有任何的依据。等到老头子出去的时候，老婆子从床底把冬瓜抱到了床上，然后盖上被子，整出一幅老头在睡觉的场景。一切打点完毕，她也从房里出来了，继续去忙着自己的家务活。</p>
 
-<h1>各种包结构</h1>
+<p>估摸着他的父亲已经睡熟，小孩偷偷潜入了父母的卧室，拿起早已准备好的菜刀，对着床就是一顿狂砍。他的手感受到液体状的东西在流着，似乎知道自己已经把父亲给杀死了，那时的他也开始恐惧了，扔下菜刀，赶忙往外跑。在这个黑暗的夜里，他哪里知道他砍的只是冬瓜啊，他只知道自己杀人了，按照刑法自己是要被枪毙的，此时只有恐惧和他相伴。在隔壁忙活的母亲听到了声音，慌忙感到卧室，紧接着就是出去追自己的孩子，喊了孩子的名字，却没有任何的回应，在这个茫茫的黑夜她哪里知道孩子跑向哪个方向啊。</p>
 
-<p>TFTP协议中各种包的结构：</p>
+<p>没有办法，她先出去把老头子找回来了，然后说出了事情的原委。老头子先是一惊，但这毕竟是自己的亲生骨肉，惊慌之后就是去寻找自己的孩子。在那一刻，经过这样一件事，老两口想的应该是——先把孩子找回来，以后一定要好好教育，不能再这样宠着了。尽管召集了邻居和亲朋好友，但始终没有找到孩子，哪怕是一顶点的消息。</p>
 
-<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
+<p>都说“老来得子多富贵”，可这老两口并没有这么幸运，等了一年、两年&hellip;还是没有等来孩子的任何消息，或许他们的孩子早已离开了这个人世。他们想过再生一个孩子，可他们这个年龄想要生一个又谈何的容易呢！若干年后，老婆子在郁郁寡欢中悄然离开了这个世界。老伴的离去让老头更加的悲痛，没有心情去打理农活，生活过得异常的艰辛，村里的人都不再搭理他了，没有办法，他只能离开这个村子，这个让他伤心的地方，去远方乞讨生活。</p>
 
-<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
+<p>老头子的身体还算硬朗，即便过着这种邋遢的生活，还是没有缠上什么大的毛病。有一天，他来到了一个繁华的都市，蜷缩在一个角落里，绝望地望着天空，显然离开伤心地并没有让他变得快乐一些，反而对过去的以往更加的思念，可这一切都回不去了。这时一个穿着正装的男子在他跟前留下了，开始和他交谈起来：“我有一份活，不知你愿不愿意做？当然，吃住你放心，我会全包了的。”老头想想这乞丐的生活也不是自己愿意的，既然有人要就去吧，思虑过后就同意了。</p>
 
-<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
+<p>年轻人对他很好，带他去剃了头发和胡子，又带他去澡堂洗了澡，还给他买了一些新衣服。到了自己的小别墅，还特意给他一间属于自己的房间。老头子问年轻人需要他做怎样的工作，年轻人把他带到了庭院，对着一棵弯曲的老树说：“这棵树长歪了，看着特别的别扭，你以后的工作就是把他给弄直，但千万不要把它弄死了。”他没有多问，觉得这是城里人的风格，自己努力按照他的吩咐去做就可以了。时间渐渐地过去了，他用尽了所有的办法也不能让那棵弯曲的树变直。年轻人似乎也不着急，在没有完成任务的情况下依然对他很好。年轻人的好让他感受到了温暖，但也让他感到了愧疚，觉得这样吃住着人家不好。</p>
 
-<p>ACK（确认帧）结构：</p>
+<p>老头子也是一个实在的人，有一天憋不住了，说出了心中的疑惑：“先生，我想跟您谈谈，我说了，你可能会开除我，但不说的话，我心里会不安宁。”年轻人似乎知道会有这么一刻的到来，虽然他要出去办一些急切的事情，可他还是停下了自己的脚步，回道：”那好，今天我就不出去了。我好好听听你想说的话！“老头说：”树已经长这么大了，弯曲了根本弄不直啊，如果非要把它弄直了，它可能过不了多久就会死去。要是在它幼苗的时候，发现它的是弯的，及时把它扶正，等到它长大了，就不会弯曲了。这些农村里的人都知道，难道你们城里的人不懂吗？“这个提问可能也是年轻人早已预料到的，他回道：”这个道理虽然大家都懂，但很少人知道它的真正含义。你听了我的故事，就会明白了。“</p>
 
-<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
+<p>刚来到这个城市的时候，年轻人还是一个小孩，与老头相同的是，他也是一个无依无靠的流浪者，在这个繁华的都市他几乎就快饿死了。幸好遇到一对无儿无女的夫妇，见他可怜就把他给收养了。那对夫妇给他最好的教育，一旦小孩犯了错误就会得到校正，逐渐培养了他良好的品德。小孩也算争气，考上了名校，工作后也努力，成了圈内的小名人，很受人爱戴。</p>
 
-<h1>主要函数及作用</h1>
+<p>说着说着，年轻人显得有些激动：”我现在能够拥有这些成就，完全依靠养父养母对我的教育。“还没等老头回话，他接着又说道：”虽然别人羡慕我现在的生活，但又有谁知道我小时候的生活呢！在我很小的时候，父母一直很宠我，即便我犯了再大的错误，他们也从来不会责备我。那时的我就是一棵弯曲的小树苗，没有被及时的扶正。如果不是在某天犯下一个天大的错误，因为恐惧被惩罚而从村里跑出来，那么将来长大的我也会跟这棵弯曲的树一样，让人见了就产生厌恶感。之所以种下这么一棵树，就是为了警醒自己，不要让自己忘记。“说到这里，两人都已泣不成声了。老头子也想起了自己的孩子，更是懊悔不已。年轻人接着说道：”父亲啊，要是你早先能够明白这个道理，当初就不会让我犯下那个天大的错误了。之所以让你做这样一件事，只是想让你更加明白这个道理。“当老头听到”父亲“两个字的时候，哭的更加伤心，没想到眼前这么优秀的年轻人竟然是当初那个被自己娇生惯养的孩子，是高兴，更是悲痛！</p>
 
-<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：</p>
+<p>原来在年轻人伫立在老头面前的那刻起，他已认出那就是自己的亲生父亲，只是他变化太大，老头儿并不认得他。这么多年来，年轻人一直以为自己把父亲杀死了，一直都没敢回到那个生养自己的地方。见到父亲的那一刻，又不愿直接的相认，所以想出了这样一个方法来让他的父亲明白这个简单得不能再简单的道理。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存*/
-</span><span class='line'>static __inline__ void store_block (unsigned block, uchar * src, unsigned len);
-</span><span class='line'>
-</span><span class='line'>/* 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） */
-</span><span class='line'>static void TftpSend (void) ;
-</span><span class='line'>
-</span><span class='line'>/* 处理收到的Tftp包 */
-</span><span class='line'>static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;
-</span><span class='line'>
-</span><span class='line'>/* 超时处理函数 */
-</span><span class='line'>static void TftpTimeout (void);
-</span><span class='line'>
-</span><span class='line'>/* 初始化各个需要的数据 然后开始发送TFTP读请求 */
-</span><span class='line'>void TftpStart (void);</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>流程</h1>
-
-<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
-
-<p>以下是客户端和服务器端通信的流程图：</p>
-
-<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
-
-<p>客户端程序流程：</p>
-
-<ol>
-<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
-<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
-<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
-</ol>
-
+<p>母亲给我讲过很多的故事，这是我能够记住的另外一个故事。写下它，送给天底下所有疼爱自己子女的父母。</p>
 </div>
 
 
@@ -216,12 +169,12 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-07-17T00:06:00+08:00" pubdate data-updated="true">Jul 17<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/wang-luo-ying-yong/'>网络应用</a>
+    <a class='category' href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事</a>
   
 </span>
 
@@ -237,10 +190,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/" title="Previous Post: Linux下c语言获取网络接口IP地址">&laquo; Linux下c语言获取网络接口IP地址</a>
+        <a class="basic-alignment left" href="/blog/2014/07/15/bu-gu-niao-de-you-lai/" title="Previous Post: 布谷鸟的由来">&laquo; 布谷鸟的由来</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/" title="Next Post: 将Emacs配置成一个C/C++的IDE编程环境">将Emacs配置成一个C/C++的IDE编程环境 &raquo;</a>
       
     </p>
   </footer>
@@ -258,7 +209,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/07/17/wan-qu-de-lao-shu/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/07/17/wan-qu-de-lao-shu/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -621,8 +572,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/07/17/wan-qu-de-lao-shu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/07/17/wan-qu-de-lao-shu/';
         var disqus_script = 'embed.js';
       
     (function () {

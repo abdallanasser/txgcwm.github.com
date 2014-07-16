@@ -9,7 +9,9 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在网络上传输大批量数据的时候，网络的传输速度是固定的（比如100 Mb的以太网实际测量的传输速度大概在10 MB/s左右），而想要在固定时间内传输更多容量的数据，最常见的解决方案是——在传输之前通过一定的算法把数据的容量压缩，然后通过网络传输，对端接收到数据之后再通过相应的算法进行解压还原。如果“ &hellip;">
+  <meta name="description" content="在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。 1
+#include "minilzo.h" 其中，lzo_init()函数包含在以下的头文件中。 1
+#include " &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +79,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/">Minilzo无损压缩库测试例子（二）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T23:01:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "minilzo.h"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中，lzo_init()函数包含在以下的头文件中。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include "lzoconf.h"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>lzoconf.h已包含在minilzo.h中，所以在写测试例子时只需包含minilzo.h头文件即可。</p>
+
+<p>将原始数据存放在in中且定义其长度为IN_LEN，压缩后的数据存放在out中且定义其长度为OUT_LEN。因为输入块可能是不可压缩的，所以我们必须提供多一点的输出空间。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#if defined(__LZO_STRICT_16BIT)
+</span><span class='line'>#define IN_LEN      (8*1024u)
+</span><span class='line'>#elif defined(LZO_ARCH_I086) && !defined(LZO_HAVE_MM_HUGE_ARRAY)
+</span><span class='line'>#define IN_LEN      (60*1024u)
+</span><span class='line'>#else
+</span><span class='line'>#define IN_LEN      (128*1024ul)
+</span><span class='line'>#endif
+</span><span class='line'>#define OUT_LEN     (IN_LEN + IN_LEN / 16 + 64 + 3)
+</span><span class='line'>
+</span><span class='line'>static unsigned char __LZO_MMODEL in  [ IN_LEN ];
+</span><span class='line'>static unsigned char __LZO_MMODEL out [ OUT_LEN ];</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/10/minilzowu-sun-ya-suo-ku-ce-shi-li-zi-%28er-%29/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -513,6 +598,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/07/17/wan-qu-de-lao-shu/">弯曲的老树</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/15/bu-gu-niao-de-you-lai/">布谷鸟的由来</a>
       </li>
     
@@ -526,10 +615,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2014/07/12/chen-ji-de-sui-yue/">沉寂的岁月</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/07/10/robotsbrain-logshu-chu/">RobotsBrain: Log输出</a>
       </li>
     
   </ul>
@@ -555,7 +640,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (9)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
-<li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (1)</a></li>
+<li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (2)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
 <li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
