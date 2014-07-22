@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-21T23:26:43+08:00</updated>
+  <updated>2014-07-22T22:49:31+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我想我是想念那座城市了]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/22/wo-xiang-wo-shi-xiang-nian-na-zuo-cheng-shi-liao/"/>
+    <updated>2014-07-22T22:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/22/wo-xiang-wo-shi-xiang-nian-na-zuo-cheng-shi-liao</id>
+    <content type="html"><![CDATA[<p>今天下午因调档的事请老同学帮忙，需要她的地址信息，那地址是多么的熟悉，距离我原本住的地方就几分钟的路程。那一瞬间我都有杀回鹏城的冲动，可惜至少目前我是回不去了，正如朋友说的那样——你已经过了说走就能走的年龄，很多事情需要考虑机会成本了。</p>
+
+<p>再过一个月，离开深圳已快三年了，真的是转眼间的事情，想想时间的流逝就让人后怕。说要回家搞大规模养殖的飞哥至今还在那里坚持着，这也是我和他聊天时经常调侃的话题，还真希望他赶紧回到四川，以后我应该还会经常去那里，那里的景色实在是太美了。平姐（是街舞男孩啦）是最早离开的，也是比较有魄力的一位，自己当起了老板，我想他现在应该做得很不错了。清哥和亮哥两人分别到了以前老东家的两个竞争对手那里，虽然累，但他们也做得是有声有色，我们还时常联系着。媛姐在去年也步入了婚姻的殿堂，是一个开朗而又喜欢玩的女孩，她应该还替我们守候着老东家吧？洋洋在悄无声息中离开了，回到了故乡的省城工作。涛哥是最早当父亲的，这出乎我的意料，虽然也是沉默寡言，但内心深处也是一个不安分的人。华志，那个我们部门中最搞笑的一个，也回到了自己的故乡，现在没有怎么联系了。看着一个个走了，我也静悄悄地走了。一部分比我们低一届的同事也有联系，不一一而论了，他们离开后也应该做得不错。那些一起走近老东家的小伙伴，是我遇到的最真诚的朋友，我们是那么的清纯，彼此都很快接纳了对方，所以我们至今保持着联系。</p>
+
+<p>大学里的同班同学爱吓人、东方如杨、索南极、夜七夕、阿磊，都奔赴了广东这个大省份，少部分走了，大部分留下了。一起去东部华侨城玩过，还玩了很刺激的项目，回来的时候坐在公交上把我们个个冻得不行。那次是我毕业后的第一次旅游，还碰到了同乡人（当时几个走在我后面的妹子用家乡话在聊天说“在这里要是碰到我们江山的，我就&hellip;”，可惜她没有说出以身相许承诺之类的话，不过我还是回头用家乡话和她们打了声招呼），让我记忆深刻。</p>
+
+<!--more-->
+
+
+<p>虽说人已离去，却还是关注着它，这几年在深圳的创客活动异常火爆，而且有非常多的活动，看着都让我羡慕不已。当然还有很多新起的创业公司，让人更多的感受到的是朝气。跟朋友讨论问题的时候，时而探讨一些公司的问题，她告诉我“这些是大公司的通病”，但我觉得这些问题在一线城市会好些，毕竟它们不努力改变就会面临着死亡，所以创新也大部分出现在那些繁华的大都市，一切都太快，它们不得不变。那里的年轻人更有朝气，更有梦想，他们追随着自己的内心，不甘默默地等着自己老去，没有房子和车子又如何，奋斗之后终究会拥有一切。</p>
+
+<p>我想我是想念那座城市了，想念那里的人、那里的事，所有关于那里的一切。但我不后悔我当初离开那里的决定，不离开可能就不会有现在的自己。无论是出差、旅游，还是长期在那里工作，我想我会再次回到那里，去回味逝去的岁月！</p>
+
+<p>深圳，还有深圳的朋友们，请等着我，我会回来的&hellip;</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[古堡之吻：淳朴的爱情]]></title>
@@ -1539,141 +1561,6 @@ win7命令行下，则是执行：</p>
 <li>-mregparm=num：当传递整数参数时，控制所使用寄存器的个数。</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CentOS安装SVN]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/06/20/centosan-zhuang-svn/"/>
-    <updated>2014-06-20T22:07:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/06/20/centosan-zhuang-svn</id>
-    <content type="html"><![CDATA[<h1>安装ssh服务器和subversion服务器</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># yum update      
-</span><span class='line'># yum install openssh-server     
-</span><span class='line'># yum install subversion      </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>创建登陆svn的用户</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># useradd test // 添加test用户     
-</span><span class='line'># groupadd svn // 添加svn用户组     
-</span><span class='line'># usermod -a -G svn test // 将test用户添加到svn用户组   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>另外，如果test用户不存在，则可以用以下语句完成：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># useradd -g svn test     </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>建立用户存储</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># mkdir -p /home/test/svn/trunk        
-</span><span class='line'># svnadmin create /home/test/svn/trunk      </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>为svn用户组赋予权限</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># chown -R root:svn /home/test/svn/trunk      
-</span><span class='line'># chmod -R g+rws /home/test/svn/trunk    /*给svn组赋予读写权限，可以根据需要更改相应权限*/     
-</span><span class='line'># chmod -R o-rwx /home/test/svn/trunk    /*删除其他无关人员的读、写、执行权限，默认情况下可能其他人有读权限*/       </span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<h1>为成员生成密钥</h1>
-
-<p>生成密钥对：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># ssh-keygen -b 1024 -t rsa -N passwd -f testkey    </span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中，passwd为密钥关键字（相当于密码），由用户自定义；testkey为密钥文件名，生成之后会产生两个文件（testkey和testkey.pub，前者为密钥，后者为公钥）；rsa指定使用rsa进行加密，如果改成dsa，则使用dsa加密。</p>
-
-<p>创建/home/test/.ssh目录，拷贝公钥并重命名成authorized_keys：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># cp testkey.pub /home/test/.ssh/authorized_keys     </span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意：文件名称必须为authorized_keys。</p>
-
-<h1>更改资源访问权限</h1>
-
-<p>修改/home/test/svn/trunk/conf/svnserve.conf文件，在general中加入以下几行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[general]    
-</span><span class='line'>
-</span><span class='line'>anon-access = none // 未认证的用户没有任何访问权限     
-</span><span class='line'>auth-access = write // 认证的用户有写权限          
-</span><span class='line'>authz-db = authz // 认证文件为conf目录下的authz文件      </span></code></pre></td></tr></table></div></figure>
-
-
-<p>修改/home/test/svn/trunk/conf/authz文件（如果没有则创建），在其中加入：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[/]       // 访问权限为本资源的根目录以及以下目录      
-</span><span class='line'>test = rw // test用户的访问权限为“读+写”      </span></code></pre></td></tr></table></div></figure>
-
-
-<p>还可以采用以下方法进行认证：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[groups]      
-</span><span class='line'>svn = test,sam // 定义用户组svn包含两个用户：test和sam     
-</span><span class='line'>      
-</span><span class='line'>[/]     
-</span><span class='line'>@svn = rw // svn用户组的成员访问权限为“读+写”      </span></code></pre></td></tr></table></div></figure>
-
-
-<h1>启动svnserve</h1>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># svnserve -d -r /home/test/svn/</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<br></br>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://blog.csdn.net/wangjingfei/article/details/5424338">CentOS中安装subversion，并使用svn+ssh访问</a><br/>
-<a href="http://blog.163.com/longsu2010@yeah/blog/static/173612348201202114212933/">linux（centos）搭建SVN服务器</a><br/>
-<a href="http://zhumeng8337797.blog.163.com/blog/static/100768914201292641420400/">CentOS Linux搭建SVN Server配置详解</a><br/>
-<a href="http://www.cnblogs.com/ayanmw/archive/2011/12/19/2294054.html">CentOS Linux下配置svn HTTP server</a><br/>
-<a href="http://stackoverflow.com/search?q=svn%3A+E170001+%3A+Authorization+failed">svn: E170001 : Authorization failed</a><br/>
-<a href="http://blog.sina.com.cn/s/blog_4b93170a0100leb2.html">解决svn Authorization failed错误</a><br/>
-<a href="http://blog.csdn.net/laverock/article/details/2195290">ubuntu下架设svn服务器及在windows建立svn+ssh客户端</a><br/>
-<a href="http://bbs.csdn.net/topics/310115750">svn登陆时它出现：Authorization failed</a><br/>
-<a href="http://www.cyberciti.biz/faq/howto-linux-add-user-to-group/">Howto: Linux Add User To Group</a></p>
 ]]></content>
   </entry>
   
