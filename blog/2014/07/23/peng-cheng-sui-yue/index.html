@@ -5,15 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>进程优先级控制：nice和renice - 残剑</title>
+  <title>鹏城岁月 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Linux进程调度的目标： 高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；
-加强交互性能：在系统相当的负载下，也要保证系统的响应时间；
-保证公平和避免饥渴；
-SMP调度：调度程序必须支持多处理系统；
-软实时调度：系统必须有效的调用实时进程， &hellip;">
+  <meta name="description" content="2010年三月中旬的时候，和学校的同学一同坐上了火车，前往深圳开始我的实习生活。在老东家的实习生活是快乐，不仅学习到了学校不曾接触过的东西，还认识了一群小伙伴。那些场景虽然随着时间的推移而模糊，偶尔想起也会让我很开心。期间也随同部门的人出去活动过，体验了一下新的生活方式。第一次发到工资的时候， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +18,7 @@ SMP调度：调度程序必须支持多处理系统；
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/07/23/peng-cheng-sui-yue">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -84,7 +80,7 @@ SMP调度：调度程序必须支持多处理系统；
   
   <header>
     
-      <h1 class="entry-title">进程优先级控制：nice和renice</h1>
+      <h1 class="entry-title">鹏城岁月</h1>
     
     
       <p class="meta">
@@ -100,7 +96,7 @@ SMP调度：调度程序必须支持多处理系统；
   
 
 
-<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
+<time datetime="2014-07-23T22:59:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,54 +105,22 @@ SMP调度：调度程序必须支持多处理系统；
   </header>
 
 
-<div class="entry-content"><p>Linux进程调度的目标：</p>
+<div class="entry-content"><p>2010年三月中旬的时候，和学校的同学一同坐上了火车，前往深圳开始我的实习生活。在老东家的实习生活是快乐，不仅学习到了学校不曾接触过的东西，还认识了一群小伙伴。那些场景虽然随着时间的推移而模糊，偶尔想起也会让我很开心。期间也随同部门的人出去活动过，体验了一下新的生活方式。第一次发到工资的时候，更是让我喜悦无比。时间不是太长，三个多月，接着就是回校参加毕业答辩，一切收拾妥当，和同学们道别后，就是滚蛋了。</p>
 
-<ol>
-<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
-<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
-<li>保证公平和避免饥渴；</li>
-<li>SMP调度：调度程序必须支持多处理系统；</li>
-<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
-</ol>
+<p>从初到深圳，到离开，大概在那里待了16个月，不长的时间却留下了太多的记忆。曾醉过，是和飞哥（中学时期的同学）、伟哥在一起喝酒，出丑了，但头脑是清醒的，清楚自己想要一些什么。住的地方叫粤海门村，那里的饭馆我们几乎都吃过了。在深圳的餐馆，你进去了他们就会上一打壶水和一个盘子，那盘子是专门给你洗碗后倒水的，去过不少地方却没有遇见过类似的服务，这一举动是深圳餐馆做得最贴心的。在那些店家里，最常看到的就是财神的灵位了，这也是广东人所特有的。</p>
 
-
-<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
-
-<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>PRI(new) = PRI(old) + nice</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>和同事到深大摘过荔枝，不是为了满足口欲，更多的是享受那种乐趣。深圳的很多公园都是免费的，也种了很多的荔枝树，可我从来没有去摘过，那些地方要趁早，去晚了就只能看见光秃秃的树了。当然还有很多的芒果树，可惜它们大都都是长在高枝上，没有辅助的工具也很难采摘到。</p>
 
 <!--more-->
 
 
-<p>不过要特别留意，如果原本的PRI是50，并不是给予一个<code>nice = 5</code>，就会让PRI变成55，因为PRI是系统动态决定的。所以，虽然nice值可以影响PRI，不过最终的PRI仍是要经过系统分析后才会决定。另外，nice值是有正负的，而既然PRI越小越早被运行，所以当nice值为负值时，那么该进程就会降低PRI值，亦即会被优先处理。此外，必须要留意到：</p>
+<p>饭后如果没有直接回到住处的话，就会在科技园转转，看看来来往往的行人，时而也仰望一下星空。实在没心情在宿舍上网的话，就跑到飞哥（前同事）的宿舍串门，开开玩笑，扯扯蛋，更多的时候会扯到我们的老东家。负面情绪真的不是好东西，老东家一直笼罩在某种诅咒之下，其实老东家还是很不错的，只是某些方面的制度让人经常吐槽。走廊上也会看到两个人趴在那里聊写什么，那是我和波哥（大学同学兼同事）在谈论股票和人生理想。</p>
 
-<ul>
-<li>nice值可调整的范围为-20 ~ 19；</li>
-<li>root可随意调整自己或他人进程的Nice值，且范围为-20 ~ 19；</li>
-<li>一般使用者仅可调整自己进程的Nice值，且范围仅为0 ~ 19(避免一般用户抢占系统资源)；</li>
-<li>一般使用者仅可将nice值越调越高，例如本来nice为5，则未来仅能调整到大于5；</li>
-<li>一开始运行程序就立即给予一个特定的nice值，用nice命令，例如<code>nice -n 10 ping www.163.com</code>；</li>
-<li>调整某个已经存在的PID的nice值，用renice命令，例如<code>renice 19 2251</code>或者<code>renice 19 3675 4103</code>（同时调整多个进程的优先级）;</li>
-<li>针对指定用户，把这些用户的进程优先级全部做调整，例如<code>sudo renice 1 -u test</code>或者<code>sudo renice -2 -u test mysql root</code>（调整多个用户的进程优先级）；</li>
-<li>优先级会继承，例如当前bash的优先级是81，nice为1，在bash下产生的所有子进程都会继续父进程的优先级。</li>
-</ul>
+<p>周末没事的时候，会跑到南山区的图书馆，去看看书，头脑一发热，就会买上基本，所以至今摆在我窗台上的书还有好多没有阅读完，可又舍不得把它们给送人了。《我的团长我的团》里的一位老先生曾说——我这一生唯有老婆和书不可借人，爱书的人应该如此，视其为自己的生命。有几张电影票，却只去看过一次（还是和几个老同学一起去的），临走才好不容易把电影票送出去了。</p>
 
+<p>南方的一大特点是潮湿，深圳在这点上比江浙地区更明显，这也是我最不喜欢的一点了。曾经住的宿舍里，我的柜子里爬满了蟑螂，它们幸运的是遇到了我，我从未试图去消灭它们，而是和它们和平相处了。直到我离开的时候，它们在柜子里还是生活得好好的。</p>
 
-<br></br>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://www.cnblogs.com/zhaoyl/archive/2012/09/04/2671156.html">Linux进程调度原理</a><br/>
-<a href="http://linzhibin824.blog.163.com/blog/static/7355771020135801151813/">进程优先级控制——nice和renice命令</a> <br/>
-<a href="http://blog.csdn.net/ganglia/article/details/11028199">进程优先级，进程nice值和%nice的解释</a> <br/>
-<a href="http://blog.sina.com.cn/s/blog_53689eaf0101b5xd.html">linux中限制用户进程CPU和内存占用率</a><br/>
-<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-shell-monitoring/">使用shell脚本对Linux系统和进程资源进行监控</a></p>
+<p>给老东家交完学费后，就算正式离职了。临走的时候，跟那些同事开玩笑说：“你们今年的奖金不用愁了，走得几个加起来足够公司支付你们的奖金了。”我没有丝毫的后悔，因为那是我应该交的学费，从那之后我会得到的更多。对现在的自己没有百分百的满意，但至少我给自己打了60分，这也是一种安慰！</p>
 </div>
 
 
@@ -179,12 +143,12 @@ SMP调度：调度程序必须支持多处理系统；
   
 
 
-<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
+<time datetime="2014-07-23T22:59:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/shell/'>Shell</a>
+    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
   
 </span>
 
@@ -200,10 +164,8 @@ SMP调度：调度程序必须支持多处理系统；
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/28/gccbian-yi-xuan-xiang/" title="Previous Post: GCC编译选项">&laquo; GCC编译选项</a>
+        <a class="basic-alignment left" href="/blog/2014/07/22/wo-xiang-wo-shi-xiang-nian-na-zuo-cheng-shi-liao/" title="Previous Post: 我想我是想念那座城市了">&laquo; 我想我是想念那座城市了</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/" title="Next Post: 操作系统卸载软件：OS-Uninstaller">操作系统卸载软件：OS-Uninstaller &raquo;</a>
       
     </p>
   </footer>
@@ -221,7 +183,7 @@ SMP调度：调度程序必须支持多处理系统；
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/07/23/peng-cheng-sui-yue/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/07/23/peng-cheng-sui-yue/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -584,8 +546,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/07/23/peng-cheng-sui-yue/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/07/23/peng-cheng-sui-yue/';
         var disqus_script = 'embed.js';
       
     (function () {
