@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-23T23:03:35+08:00</updated>
+  <updated>2014-07-24T22:48:25+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的老东家]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/24/wo-de-lao-dong-jia/"/>
+    <updated>2014-07-24T22:46:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/24/wo-de-lao-dong-jia</id>
+    <content type="html"><![CDATA[<p>提起老东家，最多的是感激，是它把我带入了这个行业，没有它我不知道我现在会从事哪个行业。在圈子里大家虽然说开发没有前途的行业，但我觉得它还是很适合我的，我的沉默寡言就说明我适合这个工作，多少次出去旅游，看我一眼，很多人就能判断出我是从事IT行业的，做开发的人的特征太明显了，沉默寡言还带着羞涩。</p>
+
+<p>老东家如果仅是把我带入开发这个行业，显然不会让我对它一直心怀感激的，更多的是让我学习到了一些良好的工作态度和做事方法，现在身上有的特质和它是密不可分的。</p>
+
+<p>坊间虽然有对公司的人和事有不好的传言，但这些也不足以在我们内心留下坏的影响。就我们部门而言，成员都是友善的，可能这也是做IT的人的一个特质。那些存在的勾心斗角我不用理会，只关心那些好的事物。华志在工作上给予了我很大的帮助，某些解决不了的问题总会咨询他的帮助。钊哥是我们部门的牛人，系统上不懂的问题都会去问他，当然其它部门的人遇到不明了的问题也会来咨询他。还有一个和我同名的部门老人，他对他们的组员（华志、清哥、飞哥，当然俊伟已经非常强大了，无需多大了影响了）的影响比较大，大家对他的评论都比较高，虽然对我的影响不大，但他却在某种程度上激发了我的斗志。我和亮哥被分配到了同一个组，专门处理碟片相关的事情，媛姐也属于我们这个组，但她主要负责UI方面的事情，所以她是自己管着自己（后来她虽归属钊哥管理，但钊哥又是一个不管事的人，所以她还是一个独立体）。几个新人的学习也总是互相帮助，那时我和亮哥觉得我们从事的模块没有前途，就在一起学习Linux，我们从这个开源的系统中收获了很多。</p>
+
+<!--more-->
+
+
+<p>老东家对新人的培训很全面，不仅有专门的导师带领，还有专门的课程，这些课程是非常有意义的，大多跟实际的工作相关，能让一个新人很快了解到整个系统架构。新人也有机会在大众面前讲述自己学习的模块，如果讲得不是很到位，会得到及时的修正。每个小组也有属于自己的课程，一些资深的人员会指点我们遇到的问题和指出我们的不足。整个部门对整年的学习也有相应的课程安排，部门里也会组织大家在一起学习、讨论。每周的周二晚上，深圳、成都、台湾三地会通过视频远程授课，讲述一些前沿技术或学习一些工具。每个月的最后一周的周六早上也有课程，那时讲的东西的面就比较的广，之前觉得那些没有什么，现在想象那些东西还是很有用的，尽管在当时不用，但至少让人了解了那些东西，不至于在以后用到手足无措。每个兴趣小组在每周固定的时间也会按时地举办活动。每个月的生日party也是让人非常的尽兴，集体的活动总是让人那么的开心。</p>
+
+<p>从老东家走出去的人对它的整体影响都还是不错的，只有一个制度除外（作为一个有些感恩的人，我不应该黑它，就留在内心不表了）。曾立志要在那里待到自己的合同结束，做一个有诚信的人，但想想自己三年后出去不知道做什么了，最终还是放弃了自己的誓言，去寻找那个适合自己方向的发展道路。如今还清晰地记得离开公司的时刻，走在宽大的马路上，望着蓝天和白云，内心是无比的敞亮。</p>
+
+<p>轻轻地我走了，正如我轻轻地来；我轻轻的招手，作别西天的云彩。悄悄的我走了，正如我悄悄的来；我挥一挥衣袖，不带走一片云彩。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[鹏城岁月]]></title>
@@ -1348,62 +1370,6 @@ win7命令行下，则是执行：</p>
 <p><big>参考文章</big></p>
 
 <p><a href="http://www.linuxidc.com/Linux/2014-06/103871.htm">OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[进程优先级控制：nice和renice]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/"/>
-    <updated>2014-06-28T14:41:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-:nicehe-renice</id>
-    <content type="html"><![CDATA[<p>Linux进程调度的目标：</p>
-
-<ol>
-<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
-<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
-<li>保证公平和避免饥渴；</li>
-<li>SMP调度：调度程序必须支持多处理系统；</li>
-<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
-</ol>
-
-
-<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
-
-<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>PRI(new) = PRI(old) + nice</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>不过要特别留意，如果原本的PRI是50，并不是给予一个<code>nice = 5</code>，就会让PRI变成55，因为PRI是系统动态决定的。所以，虽然nice值可以影响PRI，不过最终的PRI仍是要经过系统分析后才会决定。另外，nice值是有正负的，而既然PRI越小越早被运行，所以当nice值为负值时，那么该进程就会降低PRI值，亦即会被优先处理。此外，必须要留意到：</p>
-
-<ul>
-<li>nice值可调整的范围为-20 ~ 19；</li>
-<li>root可随意调整自己或他人进程的Nice值，且范围为-20 ~ 19；</li>
-<li>一般使用者仅可调整自己进程的Nice值，且范围仅为0 ~ 19(避免一般用户抢占系统资源)；</li>
-<li>一般使用者仅可将nice值越调越高，例如本来nice为5，则未来仅能调整到大于5；</li>
-<li>一开始运行程序就立即给予一个特定的nice值，用nice命令，例如<code>nice -n 10 ping www.163.com</code>；</li>
-<li>调整某个已经存在的PID的nice值，用renice命令，例如<code>renice 19 2251</code>或者<code>renice 19 3675 4103</code>（同时调整多个进程的优先级）;</li>
-<li>针对指定用户，把这些用户的进程优先级全部做调整，例如<code>sudo renice 1 -u test</code>或者<code>sudo renice -2 -u test mysql root</code>（调整多个用户的进程优先级）；</li>
-<li>优先级会继承，例如当前bash的优先级是81，nice为1，在bash下产生的所有子进程都会继续父进程的优先级。</li>
-</ul>
-
-
-<br></br>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://www.cnblogs.com/zhaoyl/archive/2012/09/04/2671156.html">Linux进程调度原理</a><br/>
-<a href="http://linzhibin824.blog.163.com/blog/static/7355771020135801151813/">进程优先级控制——nice和renice命令</a> <br/>
-<a href="http://blog.csdn.net/ganglia/article/details/11028199">进程优先级，进程nice值和%nice的解释</a> <br/>
-<a href="http://blog.sina.com.cn/s/blog_53689eaf0101b5xd.html">linux中限制用户进程CPU和内存占用率</a><br/>
-<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-shell-monitoring/">使用shell脚本对Linux系统和进程资源进行监控</a></p>
 ]]></content>
   </entry>
   
