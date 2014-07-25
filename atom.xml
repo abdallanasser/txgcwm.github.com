@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-24T22:48:25+08:00</updated>
+  <updated>2014-07-25T22:26:32+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[这是病，得治]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/25/zhe-shi-bing-%2Cde-zhi/"/>
+    <updated>2014-07-25T22:24:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/25/zhe-shi-bing-,de-zhi</id>
+    <content type="html"><![CDATA[<p>进入老东家的时候，我们部门的新人被要求使用公司的UI设计工具设计一个自己想象中的界面，然后实现一些简单的功能。我的想法是——在DVD系统中把桌面搬进去，就好比我们经常见到的XP系统那样，觉得未来的一切电子设备就会形同PC，这个想法至今没有变过，所以见到Ubuntu移动操作系统的概念的时候我会兴奋不已。当然做得很简单，一张桌面背景，其上放上一些图标，点击图标后能够进入相应的界面，同时实现返回的功能。我做得不是最好的，是几个新人中排在最后的（不能太直白地说是最后一名了，哈哈&hellip;），但我自始至终觉得自己的理念是正确的。</p>
+
+<p>那时部门做的是新产品，业界称它为BD，所以很多东西都是新，大部门里很多老人对那些东西了解的也只是极少的，对UI工具熟悉的也就只有三个（他们用那个工具都开发过相应的功能）。我们这批新人通过那个项目的训练，都变得熟悉起来，后续QA团队报的一些UI方面的bug都交给了我们处理。处理UI方面的问题看似是很低级的，但看看那些精妙的代码设计还是让人受益匪浅的。看是一回事，做又是另外一回事，现在想设计同样的一个东西还是很有难度。</p>
+
+<p>部门里的一些老人对于新的东西也是缺乏尝试的乐情，所以他们很少主动去学习UI设计方面的东西，这些也是新人能够在部门里崛起的机会。不只在老东家是那样的情况，很多大公司也是如此，一旦适应了某种工作方式，就不愿意去改变。曾跟@语文书 探讨大公司的问题，她说“大公司都是这样，所以有很多不甘如此的高管会出来创业，有很多的员工才会离开那些平淡的岗位”。想想也是，要是那些大公司都保留不断改变并加以实行的态度，那么那些小公司是没有多少机会的。我不清楚自己会不会因为工作时间变久，也适应了当前的工作模式而不去改变，这是我对自己的担心，希望自己不要成为那样的“老人”。</p>
+
+<!--more-->
+
+
+<p>记得有一次发邮件，忘记了添加信件的主题，结果被主管教育了一下，从此记下了这件事，不是因为他的批评，而是做事需要的一种态度，需要细致而不能太随意。曾经为了解决一个bug而改变了执行的流程，台湾的同仁发现后，告诉我那样更改不对，可以找找更合适的处理方法，那时的自己很愧疚，解决问题的时候没有考虑的太多，或许我解决了一个问题，可能引进的是更多的问题。</p>
+
+<p>那些细小的问题并不是我最担心的，最怕自己发现一些问题后采取沉默的态度而不去尝试改变。如果有一天我成为了那样的人，我会鄙视、看不起自己。我视那种行为是一种“病”，如果不治，面临的可能就是“死亡”的威胁，要想应对新人的挑战，最好的防御武器就是改变。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的老东家]]></title>
@@ -1062,314 +1082,6 @@ win7命令行下，则是执行：</p>
 
 <p><a href="http://my.oschina.net/zhangqingcai/blog/23994">清理Ubuntu系统的缓存、垃圾、多余内核</a> <br/>
 <a href="http://www.2cto.com/os/201304/206100.html">Ubuntu清理boot分区</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[操作系统卸载软件：OS-Uninstaller]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/"/>
-    <updated>2014-06-30T21:20:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-:os-uninstaller</id>
-    <content type="html"><![CDATA[<p>OS-Uninstaller提供了一个图形化的界面，可以清除Windows, MacOS, Ubuntu以及其它的操作系统，可谓是强大又好用。</p>
-
-<p>Ubuntu下通过添加PPA安装，打开终端输入：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:yannubuntu/boot-repair</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后输入以下内容回车:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo sed 's/trusty/saucy/g' -i /etc/apt/sources.list.d/yannubuntu-boot-repair-trusty.list</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行以下命令安装:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get update; sudo apt-get install -y os-uninstaller && os-uninstaller</span></code></pre></td></tr></table></div></figure>
-
-
-<p>安装完之后，软件会自己启动。</p>
-
-<p>也可以直接下载包含有OS-Uninstaller的镜像刻录使用，点击<a href="http://sourceforge.net/projects/boot-repair-cd/">这里</a>下载。</p>
-
-<!--more-->
-
-
-<p>该软件需要安装lvm2，可以在软件中心搜索lvm安装。</p>
-
-<p>启动操作系统卸载（OS-Uninstaller的中文名），打开后会看到正在扫描操作系统界面。中间可能会弹出提示<code>Is there RAID on this computer?</code>，一般选否就可以。扫描完成后软件会列出电脑上所有的操作系统，可以选定自己要卸载的操作系统，然后确定。会看到再确认窗口，下面有很多高级选项，选择默认即可，点击应用。接下来的几步很重要，请务必确认操作正确，以免造成损失。</p>
-
-<p>卸载GRUB：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo dpkg --configure -a
-</span><span class='line'>$ sudo apt-get install -fy
-</span><span class='line'>$ sudo apt-get install -y --force-yes lvm2
-</span><span class='line'>$ sudo apt-get purge -y --force-yes grub*</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行到最后一个指令的时候，出现以下的错误（还未找到解决措施）：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Reading package lists... Done
-</span><span class='line'>Building dependency tree       
-</span><span class='line'>Reading state information... Done
-</span><span class='line'>Note, selecting 'grub-legacy-doc' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-amd64-bin' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-amd64-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-emu-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'libgruff-ruby' for regex 'grub*'
-</span><span class='line'>Note, selecting 'ruby-gruff' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-firmware-qemu' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub2' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-ia32-bin' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-ia32-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-theme-starfield' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-amd64' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-disk' for regex 'grub*'
-</span><span class='line'>Note, selecting 'longrun' for regex 'grub*'
-</span><span class='line'>Note, selecting 'fgrun' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub2-common' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-imageboot' for regex 'grub*'
-</span><span class='line'>Note, selecting 'libgruff-ruby1.8' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-ia32' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-ia64' for regex 'grub*'
-</span><span class='line'>Note, selecting 'kde-config-grub2' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-pc' for regex 'grub*'
-</span><span class='line'>Note, selecting 'libgruel3.6.1' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub2-splashimages' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-gfxpayload-lists' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi-amd64-signed' for regex 'grub*'
-</span><span class='line'>Note, selecting 'libgruff-ruby-doc' for regex 'grub*'
-</span><span class='line'>Note, selecting 'espresso-grub' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-ipxe' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-coreboot-bin' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-coreboot-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-linuxbios' for regex 'grub*'
-</span><span class='line'>Note, selecting 'wmlongrun' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-splashimages' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-pc-bin' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-pc-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-rescue-pc' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-legacy' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-ieee1275' for regex 'grub*'
-</span><span class='line'>Note, selecting 'congruity' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-ieee1275-bin' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-yeeloong' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-ieee1275-dbg' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grun' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-efi' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-doc' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-invaders' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-emu' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-common' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-coreboot' for regex 'grub*'
-</span><span class='line'>Note, selecting 'sabily-grub-artwork' for regex 'grub*'
-</span><span class='line'>Note, selecting 'grub-legacy-ec2' for regex 'grub*'
-</span><span class='line'>Package 'grub-efi-ia64' is not installed, so not removed
-</span><span class='line'>Package 'grub-yeeloong' is not installed, so not removed
-</span><span class='line'>Package 'grub-legacy' is not installed, so not removed
-</span><span class='line'>Package 'espresso-grub' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-amd64-signed' is not installed, so not removed
-</span><span class='line'>Package 'grub' is not installed, so not removed
-</span><span class='line'>Package 'grub-common' is not installed, so not removed
-</span><span class='line'>Package 'grub-doc' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-amd64' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-amd64-bin' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-amd64-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-ia32' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-ia32-bin' is not installed, so not removed
-</span><span class='line'>Package 'grub-efi-ia32-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub-gfxpayload-lists' is not installed, so not removed
-</span><span class='line'>Package 'grub-legacy-doc' is not installed, so not removed
-</span><span class='line'>Package 'grub-pc-bin' is not installed, so not removed
-</span><span class='line'>Package 'grub-pc-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub2-common' is not installed, so not removed
-</span><span class='line'>Package 'congruity' is not installed, so not removed
-</span><span class='line'>Package 'fgrun' is not installed, so not removed
-</span><span class='line'>Package 'grub-coreboot' is not installed, so not removed
-</span><span class='line'>Package 'grub-coreboot-bin' is not installed, so not removed
-</span><span class='line'>Package 'grub-coreboot-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub-disk' is not installed, so not removed
-</span><span class='line'>Package 'grub-emu' is not installed, so not removed
-</span><span class='line'>Package 'grub-emu-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub-firmware-qemu' is not installed, so not removed
-</span><span class='line'>Package 'grub-ieee1275' is not installed, so not removed
-</span><span class='line'>Package 'grub-ieee1275-bin' is not installed, so not removed
-</span><span class='line'>Package 'grub-ieee1275-dbg' is not installed, so not removed
-</span><span class='line'>Package 'grub-imageboot' is not installed, so not removed
-</span><span class='line'>Package 'grub-invaders' is not installed, so not removed
-</span><span class='line'>Package 'grub-ipxe' is not installed, so not removed
-</span><span class='line'>Package 'grub-linuxbios' is not installed, so not removed
-</span><span class='line'>Package 'grub-rescue-pc' is not installed, so not removed
-</span><span class='line'>Package 'grub-splashimages' is not installed, so not removed
-</span><span class='line'>Package 'grub-theme-starfield' is not installed, so not removed
-</span><span class='line'>Package 'grub2' is not installed, so not removed
-</span><span class='line'>Package 'grub2-splashimages' is not installed, so not removed
-</span><span class='line'>Package 'grun' is not installed, so not removed
-</span><span class='line'>Package 'kde-config-grub2' is not installed, so not removed
-</span><span class='line'>Package 'libgruel3.6.1' is not installed, so not removed
-</span><span class='line'>Package 'libgruff-ruby' is not installed, so not removed
-</span><span class='line'>Package 'libgruff-ruby-doc' is not installed, so not removed
-</span><span class='line'>Package 'libgruff-ruby1.8' is not installed, so not removed
-</span><span class='line'>Package 'longrun' is not installed, so not removed
-</span><span class='line'>Package 'ruby-gruff' is not installed, so not removed
-</span><span class='line'>Package 'sabily-grub-artwork' is not installed, so not removed
-</span><span class='line'>Package 'wmlongrun' is not installed, so not removed
-</span><span class='line'>Package 'grub-legacy-ec2' is not installed, so not removed
-</span><span class='line'>The following packages will be REMOVED:
-</span><span class='line'>  grub-pc*
-</span><span class='line'>0 upgraded, 0 newly installed, 1 to remove and 2 not upgraded.
-</span><span class='line'>After this operation, 558 kB disk space will be freed.
-</span><span class='line'>(Reading database ... 1115878 files and directories currently installed.)
-</span><span class='line'>Removing grub-pc ...
-</span><span class='line'>dpkg: error processing grub-pc (--purge):
-</span><span class='line'> subprocess installed pre-removal script returned error exit status 10
-</span><span class='line'>No apport report written because MaxReports is reached already
-</span><span class='line'>                                                              Errors were encountered while processing:
-</span><span class='line'> grub-pc
-</span><span class='line'>E: Sub-process /usr/bin/dpkg returned an error code (1)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果出现选择窗口，可使用Tab键、空格键和回车键以将GRUB安装至希望的磁盘上。</p>
-
-<p>重装GRUB，按照说明操作（空格可以选定安装位置，tab键切换选项，回车确认操作），按前进继续下一步：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install -y --force-yes grub-pc</span></code></pre></td></tr></table></div></figure>
-
-
-<p>至此，已经完成了所有的操作，剩下来的工作就是软件自动删除要删除的系统，成功后会出现提示信息。卸载完成后重启电脑，确实完全删除。</p>
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://www.linuxidc.com/Linux/2014-06/103871.htm">OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统</a></p>
 ]]></content>
   </entry>
   
