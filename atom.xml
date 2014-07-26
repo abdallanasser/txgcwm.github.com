@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-26T13:49:40+08:00</updated>
+  <updated>2014-07-26T22:36:29+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我也不知道人生的真谛是什么]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/26/wo-ye-bu-zhi-dao-ren-sheng-de-zhen-di-shi-shi-yao/"/>
+    <updated>2014-07-26T22:28:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/26/wo-ye-bu-zhi-dao-ren-sheng-de-zhen-di-shi-shi-yao</id>
+    <content type="html"><![CDATA[<p>在电影院看韩寒的处女作《后会无期》，表弟给我发来了文章《为什么这么多人认为到西藏旅游就能找到人生真谛？》的链接。我没有去看文章，直接回复了“找不到”。事后觉得这个回复不是很妥当，毕竟还是有人在进藏的途中经历了磨难，从而悟出了自己的人生，但这不一定非得去西藏才能做到，通过其它的途径也能到达同样的效果。</p>
+
+<p>对于多数人而言，进藏只是一种游历而非感悟人生悟真谛，我真不相信就凭在那短暂的逗留时间能够悟出对人生有意义的东西，最多是给人们带去不同的感悟。在那里的时光让我感受最多的是部分藏民的蛮横无理，很多行为根本跟文明不搭边。当然还是有好的一面的，就我去过的寺庙，从没有见过劝捐的现象，捐多捐少完全出自个人的意愿，那里还准备了给信徒找零的地方（没人看管，自己兑换）。相比内地，在这方面做得实在太差了，在凤凰古城一个天黑夜高的晚上我曾被劝捐，我的诚意最大限度是100块，可看到老秃驴（佛祖缺钱吗？缺的是人们的诚意）不满的表情，搞得我很不爽。从西藏回来后，内心默默地对自己说——以后不再给内地的任何寺庙捐一分钱。</p>
+
+<p>我曾问进藏的朋友一个问题：”徒步搭车进藏，你是怎么做到的？“</p>
+
+<p>他说：”我没有想那么多，中间也有过畏缩，但内心一直告诫自己再难也要尽力去做，最后到了拉萨。在西藏也没怎么玩，随即就坐火车回来了。“</p>
+
+<p>其实去西藏也不是一件神奇的事情，有些人只是去体验一下不同的生活，做一件挑战自己的事，并不是很多人宣扬的那样——去寻找人生的真谛。如果真能那么容易地找到人生的真谛，那这个社会不会像现在这样，而应该更加的美好。</p>
+
+<!--more-->
+
+
+<p>之后表弟又给我回复道：”什么是人生真谛？我感觉我出去玩也是走走看看，走久了，反而内心有些不安。回来之后做自己该做的事才找到归属感。“</p>
+
+<p>什么是人生真谛？这个问题我还真回答不了，我也不知道它到底是什么，我也在寻找的道路上。虽是奔三的人了，但依旧走在迷茫的道路上。出去玩、看，并不是一件简单的事情，更多的是需要用心去体会不同地方的人和事，然后让自己的想法沉淀下来。很欣慰的是表弟找到属于自己的归属感，而我恰恰把这件东西给丢失了，现在又在努力地寻找它。</p>
+
+<p>“旅行者2号”试图通过骑摩托车环游中国来改变同学对他的看法，最后却发现根本没有人在意自己，但他还是幸运的，终有那么一个人在意他，那人就是他后来的妻子（可惜还是在一次骑行中离他而去，去了另外一个世界）。他说一个人蜷缩在一个地方永远不知道外面的世界是怎样的。深以为然，虽然有快捷的网络，但从那些地方了解到的是别人修饰过的，或者说是别人愿意和希望让你看到的东西，很多真实的东西已经被掩盖，只有亲身体会才能找到真正的答案。</p>
+
+<p>那，人生的真谛到底是什么，真的是朋友们经常说的平凡吗？我至今还没有悟到这些，希望在未来的某一天我也能够找到它。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[无病呻吟]]></title>
@@ -823,182 +851,6 @@
 <p><a href="http://blog.csdn.net/makenothing/article/details/8450975">Linux下批量将md文件批量转换为html文件</a><br/>
 <a href="http://www.ituring.com.cn/article/10044">如何在Linux下使用Markdown进行文档工作</a> <br/>
 <a href="http://higrid.net/c-art-pandoc_command.htm">利用Pandoc转换markdown和HTML、LaTeX</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Grub Rescue修复方法]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/07/01/grubrescuexiu-fu-fang-fa/"/>
-    <updated>2014-07-01T23:46:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/07/01/grubrescuexiu-fu-fang-fa</id>
-    <content type="html"><![CDATA[<p>在笔记本电脑上安装了两个Linux系统，有一个几乎不用，所以决定把它给删除了，在网上看到<a href="http://www.linuxidc.com/Linux/2014-06/103871.htm">OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统</a>一文可以操作成功，就决定试试了。本着学习的态度，边操作边作笔记，把它记录在了<a href="http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">这里</a>。可天公并不眷恋我这个爱折腾的孩子，操作并没有成功，开机显示如下信息：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>GRUB loading
-</span><span class='line'>
-</span><span class='line'>error:unknow filesystem
-</span><span class='line'>
-</span><span class='line'>grub rescue&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>下面几种操作会导致这种问题：</p>
-
-<ul>
-<li>想删除Ubuntu，于是直接在Windows下删除/格式化了Ubuntu所在的分区。</li>
-<li>调整磁盘，利用工具合并/分割/调整/删除分区，使磁盘分区数目发生了变化。</li>
-<li>重新安装系统，把Linux安装到了新分区，原有分区已经格式化，但是没有重新安装grub2。</li>
-<li>用Ubuntu备份工具/衍生版制造工具等，把主分区恢复成了8.X的老版本，结果老版本的grub是grub1,于是把grub2破坏掉了。</li>
-</ul>
-
-
-<p>总归是由于操作者不知道grub2分为两部分，一部分（一般情况下）写在了mbr上，另一部分写在了某个分区的<code>/boot/grub</code>目录（如果<code>/boot</code>单独分区，则直接写在对应分区的<code>/grub</code>目录）里面。由于上述操作，致使grub2的mbr里面的那一部分找不到<code>/grub</code>目录里面的那一部分了（或者另一部分已经删除了）。</p>
-
-<h1>彻底删除grub2，让这个提示不再出现</h1>
-
-<p>适用于已经不想再使用Ubuntu，要转回Windows的人。只要有Windows启动盘（非Ghost），用它启动，至选择安装位置，不用真正安装，退出重启就可以。或者用它启动到故障修复台，运行fixboot或者fixmbr都可以。
-win7命令行下，则是执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>BootRec.exe /fixmbr</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>/fixmbr</code>修复mbr，<code>/FixBoot</code>修复启动扇区，<code>/ScanOs</code>检测已安装的win7，<code>/RebuildBcd</code>重建bcd。</p>
-
-<!--more-->
-
-
-<h1>重新安装、修复grub2</h1>
-
-<h2>先使用<code>ls</code>命令，找到Ubuntu安装在哪个分区</h2>
-
-<p>在grub rescue>下输入以下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls</span></code></pre></td></tr></table></div></figure>
-
-
-<p>会罗列所有的磁盘分区信息，比如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(hd0,1),(hd0,5),(hd0,3),(hd0,2)</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>依次调用如下命令： X表示各个分区号码</h2>
-
-<p>如果<code>/boot</code>没有单独分区，用以下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls (hd0,X)/boot/grub</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果<code>/boot</code>单独分区，则用下列命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls （hd0,X)/grub</span></code></pre></td></tr></table></div></figure>
-
-
-<p>正常情况下，会列出来几百个文件，很多文件的扩展名是<code>.mod</code>、<code>.lst</code>和<code>.img</code>，还有一个文件是<code>grub.cfg</code>。假设找到（hd0,5）时，显示了文件夹中的文件，则表示Linux安装在这个分区。</p>
-
-<h2>如果找到了正确的grub目录，则设法临时性将grub的两部分关联起来</h2>
-
-<p>以下是<code>/boot</code>没有单独分区的命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grub rescue&gt;set root=(hd0,5)
-</span><span class='line'>grub rescue&gt;set prefix=(hd0,5)/boot/grub
-</span><span class='line'>grub rescue&gt;insmod /boot/grub/normal.mod</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以下是<code>/boot</code>单独分区的命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grub rescue&gt;set root=(hd0,5)
-</span><span class='line'>grub rescue&gt;set prefix=(hd0,5)/grub
-</span><span class='line'>grub rescue&gt;insmod /grub/normal.mod</span></code></pre></td></tr></table></div></figure>
-
-
-<p>为了显示出丢失的grub菜单，需要调用如下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>grub rescue&gt;normal</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果重启后问题依旧存在，则需要进入Linux中对grub进行修复。启动起来，进入Ubuntu之后，在终端执行：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo update-grub
-</span><span class='line'>$ sudo grub-install /dev/sda</span></code></pre></td></tr></table></div></figure>
-
-
-<p>sda是硬盘号码，千万不要指定分区号码，例如sda1，sda5等都不对。</p>
-
-<h2>如果找不到正确的/grub目录，则尝试寻找是否有linux核心文件，则依次在<code>grub rescue&gt;</code>下调用如下命令： X表示各个分区号码</h2>
-
-<p>如果<code>/boot</code>没有单独分区：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls (hd0,X)/boot</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果<code>/boot</code>单独分区：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ls （hd0,X)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>找名字类似<code>vmlinuz-3.0.0-12-generic</code>这样的文件，这是Linux核心文件，如果找到，记下(hd0,X)中的X值。假设找到（hd0,5）时，显示了文件夹中的文件。</p>
-
-<p>然后用live cd或者live usb启动，在live cd的Ubuntu终端中依次输入以下命令（sda5中的5必须改成上面记录下来数值）：</p>
-
-<p>如果<code>/boot</code>没有单独分区：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mount /dev/sda5 /mnt
-</span><span class='line'>sudo grub-install --boot-directory=/mnt/boot /dev/sda</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果<code>/boot</code>单独分区：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mount /dev/sda5 /mnt
-</span><span class='line'>sudo grub-install --boot-directory=/mnt /dev/sda</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后重新启动即可。</p>
-
-<p>以上这两句命令也可以解决“安装Ubuntu时grub安装位置不对，没有将grub安装到/dev/sda，造成启动时不出现Ubuntu启动项直接进入Windows”的问题，不过需要自行确定sda5中的5改成什么数字。</p>
-
-<h2>如果连Linux核心文件都没有，那么就得彻底重新安装</h2>
-
-<br></br>  
-
-
-<p>找到了grub分区的目录，却找不到<code>normal.mod</code>这个文件，所以最后直接借助U盘里的Linux系统来完成修复了。面对这种状况的时候，最坏的打算就是重新安装系统了，可惜的就是那些辛辛苦苦收集的资料了。不过谁让自己瞎折腾的呢？这一切代价都需要自己去承担。不过索性有强大的网络，让我找到了解决的措施，在此感谢那些无私奉献的Linux爱好者辛勤的付出，是他们的存在才让生活更美好！</p>
-
-<br></br> 
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://www.2cto.com/os/201111/112327.html">Grub Rescue修复方法</a> <br/>
-<a href="http://blog.sina.com.cn/s/blog_4d6c45250100wxnq.html">grub rescue修复方法</a> <br/>
-<a href="http://www.cnblogs.com/samcn/archive/2011/03/30/1999615.html">Ubuntu启动问题以及Grub Rescue修复方法</a> <br/>
-<a href="http://blog.csdn.net/jikiwh/article/details/5497900">Grub Rescue来修复Grub 问题</a> <br/>
-<a href="http://blog.csdn.net/tody_guo/article/details/7537454">grub rescue模式下启动并修复</a> <br/>
-<a href="http://tech.ccidnet.com/art/738/20100803/2140203_1.html">Ubuntu Grub Rescue几种修复方法</a> <br/>
-<a href="http://blog.csdn.net/miromelo/article/details/6132702">grub rescue修复</a> <br/>
-<a href="http://openwares.net/linux/grub_rescue_unkown_filesystem.html">grub rescue 模式下引导修复</a></p>
 ]]></content>
   </entry>
   
