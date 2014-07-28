@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-07-27T14:58:48+08:00</updated>
+  <updated>2014-07-28T22:11:50+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[《创客——新工业革命》：一个全新的时代]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/07/28/%3C%3Cchuang-ke-xin-gong-ye-ge-ming-%3E%3E-%3A%5B%3F%5D-ge-quan-xin-de-shi-dai/"/>
+    <updated>2014-07-28T21:04:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/07/28/<<chuang-ke-xin-gong-ye-ge-ming->>-:[?]-ge-quan-xin-de-shi-dai</id>
+    <content type="html"><![CDATA[<p><img src="http://www.albuquerque-minimakerfaire.com/wp-content/uploads/2014/01/Maker-Faire-Eight-Year-Growth-Slide.001.jpg" alt="chuang ke" /></p>
+
+<p>创客一群一直存在于大众之中，但近些年受到的关注度才逐渐变大。以前很多产品的产生仅仅是因为自身的乐趣， 受限于资源的限制根本不能大规模的推广。正如《创客——新工业革命》一书的作者安德森的外祖，发明了新型喷灌系统，但因没有厂房为自己的设计生产产品，只能将自己的专利卖给厂商，从中获取微博的专利费。</p>
+
+<p>可作者外祖父的事情已是几十年的事情了，现今的一切都变了，知识变得容易获取，元器件也变得更廉价，且不用惧怕因自己没有厂房而不能生产设计好的产品，就连那些厂商也愿意接受小额订单了。老罗曾在锤子手机的发布会上，表示了对雷军的感谢：“是他让那些大的制造商看到了我们小厂商的实力，他迈出了一小步，却让我们这些后来者走的道路变得不那么坎坷。”（这不是原话，&hellip;o(∩∩)o&hellip;哈哈）富士康都能够那样做了，其它的小厂商也毕竟不会固执地坚守着“大额订单”的原则，在这个瞬息万变的年代，没有谁愿意错过任何的机会，更何况他们已有了太多太多的教训。</p>
+
+<p>作者也提出了对未来10年的一个发展方向：</p>
+
+<blockquote><p>20年的创新史可以用两句话概括：过去的10年，人们在找寻通过互联网创造、发明以及合作的新方式；未来的10年，人们将把这些经验应用于现实世界中。</p></blockquote>
+
+<p>提炼一下就是：在未来的若干年里，人们将会用互联网思维（虽然被很多人用烂了，但我觉得它本身是不容置疑的）尝试去改变原有的东西。互联网的发展是虚拟经济，到一定程度后终究要回到实体，而最好的方法就是把它们结合在一起，给人类的生活带来更多的便利。</p>
+
+<!--more-->
+
+
+<p>新型工具（例如3D打印机、数控机器、激光切割机、3D扫描仪，等等）在普通大众中的普及，让创造变得更加容易。互联网不仅能够让人找到所需的各种资料（大部分可以在开源社区中寻找，那里的人们都非常愿意帮助其他人），还能认识一些志同道合的伙伴，大家协同工作完成一些共同的作品。当然，在线下已有很多创客组织（国内的三大创客组织：上海新车间、深圳柴火创客空间和北京创客空间）已筹建起来。硬件平台的开源，也让一部分纯软件的开发者更加容易融入到创造的团体中。众筹方式（为一个创意投资，不期望获得投资回报，而是期待获得产品本身）的出现，让很大一批有创意的创客没有了资金的后顾之忧。</p>
+
+<p>创客制造出来的商品一般情况下就是满足了小众群体（不排除一些优秀的设计会普及到大众市场），这样的话，他们的制造（可能就是几百、几千件）可能会回到本土生产，考虑到时间和运输等成本。中国在小众市场上会很快失去竞争力，但在大批量生产上短期内还是能够保住优势。但不可否认的是，这个时代已有了巨大的变化，我们不得不更多的思考我们未来的出路。</p>
+
+<p>创客不会击败那些大型的公司（要倒闭也是它们自己zuo死的），但给这个社会带来了更多的活力和创新，给人们带来了更多有创意的产品，提升人们的生活品质。不要怀疑，我们已身处这个全新的时代。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[魔镜：挑战传统的镜子]]></title>
@@ -651,110 +679,6 @@
 
 
 <p>当然我们也可以直接调用<code>RB_DEBUG</code>等接口，这样的话，log信息直接输出到<code>stderr</code>。具体的代码及测试用例，请参考<a href="https://github.com/RobotsBrain/robrain/tree/master/src">这里</a>。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[__FILE__显示全路径的问题]]></title>
-    <link href="http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/"/>
-    <updated>2014-07-09T22:12:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti</id>
-    <content type="html"><![CDATA[<p>在日志中，使用到<code>__FILE__</code>来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（这样的解释不是很准确，有待改进）。</p>
-
-<p>针对这种现象，使用以下的例子作为测试。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>  printf("%s, %d\n", __FILE__, __LINE__);
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使用源码的全路径编译：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest /srv/example/c/test/filetest.c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行结果：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
-</span><span class='line'>/srv/example/c/test/filetest.c, 5</span></code></pre></td></tr></table></div></figure>
-
-
-<p>为了解决以上问题，当然可以改变编译的方式：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest filetest.c</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行结果：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
-</span><span class='line'>filetest.c, 5</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>可对项目而言，改动一下会牵动很多的东西，那么可以对<code>__FILE__</code>进行一些操作：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>测试代码修改如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;string.h&gt;
-</span><span class='line'>#include &lt;stdio.h&gt;
-</span><span class='line'>
-</span><span class='line'>#define __FILENAME__ (strrchr(__FILE__, '/') ? (strrchr(__FILE__, '/') + 1):__FILE__)
-</span><span class='line'>
-</span><span class='line'>int main(int argc, char **argv)
-</span><span class='line'>{
-</span><span class='line'>  printf("%s, %d\n", __FILENAME__, __LINE__);
-</span><span class='line'>
-</span><span class='line'>  return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<p>执行结果：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
-</span><span class='line'>filetest.c, 8</span></code></pre></td></tr></table></div></figure>
-
-
-<p>考虑到以上的操作需要两次执行<code>strrchr</code>，这种方案也被枪毙掉了。最后采取了换行的操作，只是使用脚本去分析log文件时有很大的不便，不能快速定位到哪个文件，毕竟它们显示在不同行上。</p>
 ]]></content>
   </entry>
   
