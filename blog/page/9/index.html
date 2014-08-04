@@ -9,7 +9,11 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="我一向很少使用电子书方面的阅读软件，在多看上下载了好几本电子书，却也一直没看，五一回家的路上就随便翻翻。下载的内容也都是一些电子期刊（极客公园、ifanr、知乎周刊、36Kr等）的精华版本，里面聚集了一些小编们认为好的，但对于我来说并不喜欢每一篇他们精心挑选的文章。 我有一个毛病， &hellip;">
+  <meta name="description" content="二维码展示 在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击这里。 1
+2
+3
+4
+&lt;section&gt; &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +81,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/">Octopress添加二维码展示和返回顶部按钮</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-09T22:37:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>二维码展示</h1>
+
+<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&trade;&lt;/abbr&gt;&lt;/h1&gt;
+</span><span class='line'>  &lt;a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在侧边栏显示，则将<code>qrcode.html</code>放入<code>source/_includes/custom/asides/</code>中，在<code>_config.yml</code>中<code>default_asides</code>添加<code>custom/asides/qrcode.html</code>即可显示。或者将<code>qrcode.html</code>代码添加到想展示页面的HTML文件中。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -462,81 +523,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">运行Scrapy项目出错：KeyError: &#8216;Spider Not Found: Tutorial&#8217;</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-27T22:40:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
-</span><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
-</span><span class='line'>    execute()
-</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
-</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
-</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
-</span><span class='line'>    func(*a, **kw)
-</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
-</span><span class='line'>    cmd.run(args, opts)
-</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
-</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
-</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
-</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
-</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/10/">&larr; Older</a>
@@ -575,6 +561,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D/">318孽情史一</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/03/liang-wei-yu-wen-lao-shi/">两位语文老师</a>
       </li>
     
@@ -588,10 +578,6 @@
     
       <li class="post">
         <a href="/blog/2014/07/31/cheng-shi-de-bian-yuan-ren-%3Ajin-cheng-de-xin-%5B%3F%5D-dai/">城市的边缘人：进城的新一代</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/07/30/cheng-shi-de-bian-yuan-ren-%3Ana-xie-min-gong/">城市的边缘人：那些民工</a>
       </li>
     
   </ul>
@@ -624,7 +610,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (2)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
-<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (20)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (21)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (2)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>

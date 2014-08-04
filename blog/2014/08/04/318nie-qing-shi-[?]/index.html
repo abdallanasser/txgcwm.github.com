@@ -5,30 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu12.10安装Scrapy - 残剑</title>
+  <title>318孽情史一 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="根据官网Ubuntu packages上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-$ scrapy startproject tutorial Traceback ( &hellip;">
+  <meta name="description" content="离开拉萨前几天的一个傍晚，我们三拨人（我、北京的两位姑娘、司机和另外一位东北女）约在我住的青年旅社碰到，主要是彼此熟悉一下，然后给司机预付部分定金，这就算我们几个上了同一条船了。那天应该是师傅刚到拉萨，和他同来的东北女是他的客户，这次也要随同我们一起回成都。虽说那时的天气还很热， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -37,7 +18,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -99,7 +80,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Ubuntu12.10安装Scrapy</h1>
+      <h1 class="entry-title">318孽情史一</h1>
     
     
       <p class="meta">
@@ -115,7 +96,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-08-04T23:46:00+08:00" pubdate data-updated="true">Aug 4<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -124,204 +105,28 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   </header>
 
 
-<div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+<div class="entry-content"><p>离开拉萨前几天的一个傍晚，我们三拨人（我、北京的两位姑娘、司机和另外一位东北女）约在我住的青年旅社碰到，主要是彼此熟悉一下，然后给司机预付部分定金，这就算我们几个上了同一条船了。那天应该是师傅刚到拉萨，和他同来的东北女是他的客户，这次也要随同我们一起回成都。虽说那时的天气还很热，但那位东北女却穿得比我们任何人都少，而且还是穿着低胸的衣服，能够明显地看到她的乳沟，当她摘下墨镜挂在衣服上的时候，那条沟就更加的明显了。那个女人长相算得上中等，她的穿着让她变得更加性感，她属于很多男人看了之后都会性动的那种。我多看了几眼也就没有再看，因为我觉得我根本不是她的菜，看了也没有好处，反而会让自己伤神。东北女有一个很好听的名字，但我并不喜欢用她的名字称呼她，具体原因在后面我会提及，下文中我将会用M称呼她。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject tutorial  
-</span><span class='line'>Traceback (most recent call last):  
-</span><span class='line'>  File "/usr/bin/scrapy", line 4, in &lt;module&gt;  
-</span><span class='line'>    execute()  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 121, in execute  
-</span><span class='line'>    cmds = _get_commands_dict(settings, inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 45, in _get_commands_dict
-</span><span class='line'>    cmds = _get_commands_from_module('scrapy.commands', inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 28, in _get_commands_from_module  
-</span><span class='line'>    for cmd in _iter_command_classes(module):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 19, in _iter_command_classes  
-</span><span class='line'>    for module in walk_modules(module_name):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/utils/misc.py", line 66, in walk_modules
-</span><span class='line'>    submod = __import__(fullpath, {}, {}, [''])  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py", line 13, in &lt;module&gt;
-</span><span class='line'>    from w3lib.form import encode_multipart  
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/w3lib/form.py", line 2, in &lt;module&gt;
-</span><span class='line'>    if six.PY2:  
-</span><span class='line'>AttributeError: 'module' object has no attribute 'PY2'  </span></code></pre></td></tr></table></div></figure>
+<h1>八一镇</h1>
 
+<p>上路的第一天早上，司机先“接”M，然后去接两个北京女孩，最后来接我，我按照约定的时间在旅社的问口等待，可他们来我这里晚了些。北京女孩悄悄跟我说，其实去接她们的时候已经比预定的时间晚了一些。那我的第一映像就是司机动作慢了，但经过后期的观察和相处，我发现司机每天还是起得很早的（他在318这条线上已经跑了好几年了），所以断定是M起得晚了。</p>
+
+<p>行至一程，黄黄的枫叶落了一地，很是漂亮，M让司机停车，因为她要拍照，司机自然就停了，毕竟我们是上帝嘛。她在路边摆了各种姿势，让司机帮她拍照，师傅也挺配合的，她不满意了，还继续为她拍。大家彼此都不太熟悉，所以在第一天大伙儿都没有聊得太多，M和司机聊得比较多，他们早就熟识了，比我们早几天吧，M是搭司机的车从成都到拉萨的。从他们的交谈来看，我似乎觉得他们已相识很久，那时有这样一种感觉——旅行能够让陌生人走得更近，因为彼此都褪去了包裹着的“外衣”。</p>
 
 <!--more-->
 
 
-<p>从网上找到了一个答案，需要利用pip去安装。</p>
+<p>路途不是那么的艰难，所以第一天的时间还是比较充裕的，我们较早就到了八一镇，在司机的安排下住到了一间宾馆里。我们要了三间标准间（因为已经没有三人间了），我和司机一间，北京的两个妹子一间，M单独一间，北京的两个妹子对M说：“你单独住一间的话，房费就得你一个人付了。”</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install Scrapy  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): w3lib&gt;=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Downloading six-1.4.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: six   
-</span><span class='line'>  Found existing installation: six 1.1.0   
-</span><span class='line'>    Uninstalling six:   
-</span><span class='line'>Exception:   
-</span><span class='line'>Traceback (most recent call last):   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 104, in main  
-</span><span class='line'>    status = self.run(options, args)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/commands/install.py", line 250, in run   
-</span><span class='line'>    requirement_set.install(install_options, global_options)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1129, in install   
-</span><span class='line'>    requirement.uninstall(auto_confirm=True)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 486, in uninstall   
-</span><span class='line'>    paths_to_remove.remove(auto_confirm)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1431, in remove   
-</span><span class='line'>    renames(path, new_path)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/util.py", line 263, in renames   
-</span><span class='line'>    shutil.move(old, new)   
-</span><span class='line'>  File "/usr/lib/python2.7/shutil.py", line 302, in move   
-</span><span class='line'>    os.unlink(src)   
-</span><span class='line'>OSError: [Errno 13] Permission denied: '/usr/share/pyshared/six-1.1.0.egg-info'   
-</span><span class='line'>
-</span><span class='line'>Storing complete log in /home/txgcwm/.pip/pip.log   </span></code></pre></td></tr></table></div></figure>
+<p>M表示了自己的不同意：“怎么是这样子的？我们之前上来的时候都是均摊的。”</p>
 
+<p>她们三个为此争执了一下，最后M还是同意了她们的提议，回复道：“好的。既然这样，从明天开始我们就定一个三人间吧，我跟他们两个男的睡一个房间。”</p>
 
-<p>借助新得立把six给卸载掉，然后重新安装。</p>
+<p>在外旅行，尤其是行走在环境不是太好的318线上，男女同住一个房间是很正常的事情，我并不诧异，但从她的话里，能感觉到她的不满了。这件小事也为之后的不愉快埋下了伏笔，当然大家都没有把这种不愉悦写在脸上，而是记在了心里。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo pip install Scrapy  
-</span><span class='line'>Downloading/unpacking Scrapy   
-</span><span class='line'>  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded   
-</span><span class='line'>  Running setup.py egg_info for package Scrapy   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking w3lib&gt;=1.2 (from Scrapy)   
-</span><span class='line'>  Downloading w3lib-1.5.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package w3lib   
-</span><span class='line'>    
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking cssselect&gt;=0.9 (from Scrapy)   
-</span><span class='line'>  Downloading cssselect-0.9.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: Scrapy, w3lib, cssselect, six   
-</span><span class='line'>  Running setup.py install for Scrapy    
-</span><span class='line'>    changing mode of build/scripts-2.7/scrapy from 644 to 755   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>    changing mode of /usr/local/bin/scrapy to 755   
-</span><span class='line'>  Running setup.py install for w3lib   
-</span><span class='line'>    
-</span><span class='line'>  Running setup.py install for cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>  Running setup.py install for six   
-</span><span class='line'>    
-</span><span class='line'>Successfully installed Scrapy w3lib cssselect six   
-</span><span class='line'>Cleaning up...   </span></code></pre></td></tr></table></div></figure>
+<p>办完手续，我们各自进了自己的房间，收拾之后就一起出去吃了晚饭，没有什么特别的事情发生，一切都是那么的平淡。吃完饭回到旅馆也比较晚了，所以没有其它的活动，大家也回住处了。司机把我一个人留在了房间，去了隔壁M的房里，毕竟我们不熟，加上我又是属于不善言谈的人，所以他自然而然去找他的“老”朋友了。原以为他很快就会回来，想等到他回来的时候再去洗澡，怕把他锁在门外面（毕竟身上还是带着一些现金的，门半开着不是一件安全的事情），可迟迟未见他回来。等到我洗完澡，躺在床上开始写我的日记后，他推开房门回来了。司机的洗刷动作很快，不一会儿就上床睡觉了，而我默默地在那里写着游记。</p>
 
-
-<p>创立一个项目。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy startproject tutorial   </span></code></pre></td></tr></table></div></figure>
-
+<p>写完日记，整理好东西，没有多想什么，就躺下休息了。第一天就这么过去了，平常的不能再平常了，我想等大家熟悉后这一切会变得好一些的。</p>
 </div>
 
 
@@ -344,12 +149,12 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-08-04T23:46:00+08:00" pubdate data-updated="true">Aug 4<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
+    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
   
 </span>
 
@@ -365,10 +170,8 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/10/xie-wen-zhang-na-dian-shi-%28san-%29/" title="Previous Post: 写文章那点事（三）">&laquo; 写文章那点事（三）</a>
+        <a class="basic-alignment left" href="/blog/2014/08/03/liang-wei-yu-wen-lao-shi/" title="Previous Post: 两位语文老师">&laquo; 两位语文老师</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/20/jian-wen-jun-da-%3Aqian-ru-shi-ae/" title="Next Post: 剑问君答：嵌入式AE">剑问君答：嵌入式AE &raquo;</a>
       
     </p>
   </footer>
@@ -386,7 +189,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -750,8 +553,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/08/04/318nie-qing-shi-%5B%3F%5D/';
         var disqus_script = 'embed.js';
       
     (function () {
