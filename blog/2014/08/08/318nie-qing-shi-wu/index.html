@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Uboot中TFTP解释 - 残剑</title>
+  <title>318孽情史（五） - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用tftp MemoryAddress FileName命令即可， &hellip;">
+  <meta name="description" content="稻城 早早的起，匆匆吃了面，就让司机把我们载去购票处了，M没有去，她已经去过了，那会估计还躺在床上睡觉。进亚丁的旅游区是要坐专门的景区汽车的，所以司机送我们到目的地后就回去了。 那一整天就我、N和P三个在一起玩，具体内容此处省略三千字&hellip;分成两拨在玩，我想我们那一天都是玩得十分开心的， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/08/08/318nie-qing-shi-wu">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">Uboot中TFTP解释</h1>
+      <h1 class="entry-title">318孽情史（五）</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-08-08T23:21:00+08:00" pubdate data-updated="true">Aug 8<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,95 +105,34 @@
   </header>
 
 
-<div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+<div class="entry-content"><h1>稻城</h1>
 
-<p>使用TFTP传送文件的步骤：</p>
+<p>早早的起，匆匆吃了面，就让司机把我们载去购票处了，M没有去，她已经去过了，那会估计还躺在床上睡觉。进亚丁的旅游区是要坐专门的景区汽车的，所以司机送我们到目的地后就回去了。</p>
 
-<ol>
-<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
-<li>调用TftpStart 函数开始文件传送。</li>
-</ol>
+<p>那一整天就我、N和P三个在一起玩，具体内容此处省略三千字&hellip;分成两拨在玩，我想我们那一天都是玩得十分开心的，谁也不会打扰到谁。</p>
 
+<p>出景区前早早给司机打了电话，让他们在门口等我们。我们等了一会，他们也来了，接下来去的是稻城，一路上没有多说什么，我们连续徒步了7个小时左右，都已虚脱了。反而是M很兴奋，她也休整了一天了，大谈特谈她当初游玩亚丁时的场景，不过最让她兴奋的是我们即将入住的套房，她的那种喜悦真的是没有丝毫的掩饰，很真实。</p>
+
+<p>我们三入住套房，北京的那两位女孩住一起。放下东西，没怎么收拾，就奔向了宾馆的食堂点菜，中午没吃什么东西，现在的我们已经饿得不成样了。这次旅行的缺憾是除了奔波外我们没有任何的活动，吃完就躲到各自的小屋里了。见到之后，我才知道，原来套房是由一个标间、一个大床房、一个小客厅和卫生间组成的，难怪这会让M如此兴奋。司机一开始就没有进入标间，而是在我没有在的某个时刻已经进入了那个大床房，而我在客厅的时间里也没见到司机从那里出来，反而M出来收拾了她的东西。</p>
+
+<p>看电视，给手机充电，写日记，然后独自一人回到那个标间睡两张床，不会有什么顾虑，我在睡觉的时候可以随意转身了。</p>
 
 <!--more-->
 
 
-<h1>客户端状态</h1>
+<h1>新都桥</h1>
 
-<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
+<p>在去新都桥的路上，我明确跟N和P说，要是租不到三人间，那我就一人独自到外面住了，她们也表示了谅解。果然，去了那里已没有三人间，因为这件事情只有我、M和司机三人清楚，所以N建议道：“宾馆一般会给司机留房的（这就是他们的潜规则吧），可以让他们几个司机住一间嘛。”听了N的话后，坐在沙发上的M和站着的司机相视一笑，我清楚我需要做什么了，很爽快（因为可以给我节省一小部分资金）地回复道：“算了，我到附近的宾馆住一晚吧。”司机也没有阻拦，我住在那宾馆也不能给他带去多少的分成，还是他自己的性福重要一些。</p>
 
-<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
+<p>新都桥是一个很有吸引力的地方，来这里拍风景的游客很多，所以我能够很容易地找到一家宾馆。晚饭没有和他们一起吃，那时的自己有点不愉快。晚上躺在床上的时候，和N在微信上聊了很多，知道她们在那晚才知道M和司机搞在了一起，知道P很反感这样的旅途，那晚有太多的东西需要去思考，第二天我们就要各奔东西了。</p>
 
-<h1>包类型</h1>
+<h1>成都</h1>
 
-<p>使用TFTP传送的包分为6种类型：</p>
+<p>在路上，我们谈论了感情和出轨的问题，M的话让我惊呆了：“要是我老公做了对不起我的事，我把他给废了。”听毕，我在风中真的凌乱了，觉得她先管好自己才是最重要的。司机看了看微信，然后说道：“我靠，我老婆昨天竟然穿学生服勾引我。”我始终觉得哪里有些不对劲，最后我的判断是——M、司机和他的老婆这几个人都是一伙的。</p>
 
-<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
+<p>雅安是司机的老家，到那时，我们就开玩笑地对他说：“反正时间还早，我们去你家看看吧，你女儿也快生日了，我们买点礼物过去。”M也喃喃着要去看看，司机只是笑而不语，大家都懂的。</p>
 
-<h1>各种包结构</h1>
-
-<p>TFTP协议中各种包的结构：</p>
-
-<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
-
-<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
-
-<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
-
-<p>ACK（确认帧）结构：</p>
-
-<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
-
-<h1>主要函数及作用</h1>
-
-<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存*/
-</span><span class='line'>static __inline__ void store_block (unsigned block, uchar * src, unsigned len);
-</span><span class='line'>
-</span><span class='line'>/* 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） */
-</span><span class='line'>static void TftpSend (void) ;
-</span><span class='line'>
-</span><span class='line'>/* 处理收到的Tftp包 */
-</span><span class='line'>static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;
-</span><span class='line'>
-</span><span class='line'>/* 超时处理函数 */
-</span><span class='line'>static void TftpTimeout (void);
-</span><span class='line'>
-</span><span class='line'>/* 初始化各个需要的数据 然后开始发送TFTP读请求 */
-</span><span class='line'>void TftpStart (void);</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>流程</h1>
-
-<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
-
-<p>以下是客户端和服务器端通信的流程图：</p>
-
-<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
-
-<p>客户端程序流程：</p>
-
-<ol>
-<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
-<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
-<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
-</ol>
-
+<p>在这一晚，M的丈夫坐的飞机抵达成都，不过好像会晚点，航空公司为他们争取了短暂的缠绵时间。因司机的车牌被限号了，他把我们送到了一个可以搭出租车的地方，这一趟旅程就算彻底结束了。原本我想让大伙拍个合影，可N和P已经没有了这种心情，所以我就留下了一个小小的遗憾。</p>
 </div>
 
 
@@ -216,12 +155,12 @@
   
 
 
-<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+<time datetime="2014-08-08T23:21:00+08:00" pubdate data-updated="true">Aug 8<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/wang-luo-ying-yong/'>网络应用</a>
+    <a class='category' href='/blog/categories/lu-xing-san-ji/'>旅行散记</a>
   
 </span>
 
@@ -237,10 +176,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/" title="Previous Post: Linux下c语言获取网络接口IP地址">&laquo; Linux下c语言获取网络接口IP地址</a>
+        <a class="basic-alignment left" href="/blog/2014/08/07/318nie-qing-shi-si/" title="Previous Post: 318孽情史（四）">&laquo; 318孽情史（四）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/" title="Next Post: 将Emacs配置成一个C/C++的IDE编程环境">将Emacs配置成一个C/C++的IDE编程环境 &raquo;</a>
       
     </p>
   </footer>
@@ -258,7 +195,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/08/08/318nie-qing-shi-wu/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/08/08/318nie-qing-shi-wu/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -622,8 +559,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/08/08/318nie-qing-shi-wu/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/08/08/318nie-qing-shi-wu/';
         var disqus_script = 'embed.js';
       
     (function () {
