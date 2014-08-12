@@ -9,23 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="运行Scrapy抓取网上数据的时候，出现了以下的错误： 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-$ sudo scrapy crawl tutorial
-Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
+  <meta name="description" content="开发语言：Python 爬虫框架：Scrapy 数据库：PostgreSQL 基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我博客的 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -93,6 +77,57 @@ Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/">关于爬虫开发的选择</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T23:45:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>开发语言：Python <br/>
+爬虫框架：Scrapy <br/>
+数据库：PostgreSQL</p>
+
+<p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
+
+<p>引用一下jolie_yu对我的一句回复：</p>
+
+<blockquote><p>骚年，别急，缘分说到就到。显出你的个性，她会找到方向，走进你的世界。</p></blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -485,80 +520,6 @@ Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/17/cbian-yi-jing-gao/">C编译警告</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/17/cbian-yi-jing-gao/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。</p>
-
-<p>在整个的清理过程中，主要发现以下几类警告信息：</p>
-
-<ul>
-<li>类在构建时，变量初始化的次序颠倒；</li>
-<li>有无符号数在作比较；</li>
-<li>宏定义不正确；</li>
-<li>定义了没有使用的变量，如果有很多条件宏定义的时候，这个处理要细致一些；</li>
-<li>结构体和数组的初始化方式不正确，其实是错误的方式，却也只是警告；</li>
-<li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
-</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); 
-</span><span class='line'>    //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
-</span><span class='line'>    
-</span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
-</span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>函数的形参定义了，在函数体内却没有使用到。</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/17/cbian-yi-jing-gao/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -597,6 +558,10 @@ Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/12/xiao-bai-cai-qu-na-liao/">小白菜去哪了</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/11/zai-yu-xiao-bai-cai/">再遇小白菜</a>
       </li>
     
@@ -610,10 +575,6 @@ Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
     
       <li class="post">
         <a href="/blog/2014/08/09/318nie-qing-shi-%3Anru-shi-shuo/">318孽情史：N和P如是说</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/08/318nie-qing-shi-wu/">318孽情史（五）</a>
       </li>
     
   </ul>
@@ -649,7 +610,7 @@ Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (26)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (2)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
-<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (2)</a></li>
+<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (3)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (57)</a></li>

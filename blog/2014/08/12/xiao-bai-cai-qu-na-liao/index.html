@@ -5,18 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>kfifo.c中in和out的溢出问题 - 残剑</title>
+  <title>小白菜去哪了 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="先上内核循环缓冲结构体的定义： 1
-2
-3
-4
-5
-6
-7
-struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned int size; /* the size of the allocated &hellip;">
+  <meta name="description" content="不是一般女子 行至河边的长椅处，她停下了脚步，转身对我说：“我们就坐在这儿聊吧。”随即她就坐下了。这出乎我的意料，原本打算找一个浪漫的地方，营造一个良好的交流氛围，稍晚就可以带她去我的住处了。就在她说话的那刻，我还在幻想着这些事情。 “咦，不要像一个犯错的孩子那样站着嘛。”她拍拍她左侧的椅子：“ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +18,7 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/08/12/xiao-bai-cai-qu-na-liao">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -87,7 +80,7 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   
   <header>
     
-      <h1 class="entry-title">kfifo.c中in和out的溢出问题</h1>
+      <h1 class="entry-title">小白菜去哪了</h1>
     
     
       <p class="meta">
@@ -103,7 +96,7 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   
 
 
-<time datetime="2013-08-03T01:08:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-08-12T22:34:00+08:00" pubdate data-updated="true">Aug 12<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -112,107 +105,68 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   </header>
 
 
-<div class="entry-content"><p>先上内核循环缓冲结构体的定义：</p>
+<div class="entry-content"><h1>不是一般女子</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct kfifo {
-</span><span class='line'>    unsigned char *buffer;        /* the buffer holding the data */
-</span><span class='line'>    unsigned int size;        /* the size of the allocated buffer */
-</span><span class='line'>    unsigned int in;        /* data is added at offset (in % size) */
-</span><span class='line'>    unsigned int out;        /* data is extracted from off. (out % size) */
-</span><span class='line'>    spinlock_t *lock;        /* protects concurrent modifications */
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
+<p>行至河边的长椅处，她停下了脚步，转身对我说：“我们就坐在这儿聊吧。”随即她就坐下了。这出乎我的意料，原本打算找一个浪漫的地方，营造一个良好的交流氛围，稍晚就可以带她去我的住处了。就在她说话的那刻，我还在幻想着这些事情。</p>
 
+<p>“咦，不要像一个犯错的孩子那样站着嘛。”她拍拍她左侧的椅子：“坐这里吧！”</p>
 
-<p>如果对“Linux内核中的循环缓冲区”不是很了解的话，可以先参考 <a href="http://www.kerneltravel.net/jiaoliu/kern-kfifo.html">这里</a> 。内核中有关kfifo.c和kfifo.h两个文件的源码以及该问题的具体情况，可以查看 <a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">这里</a> 。</p>
+<p>听到“犯错”两个字，此时此刻的我确实在犯一件错事，我大脑中尽是浮现邪恶的想法。我不断地询问自己，这么多次来探寻她的下落，难道就是为了男女的那种欢乐情吗？很多时候，我自己都很矛盾：我是一个禽兽，还是一个追逐爱的人？我不能回答这个问题，可能需要等到我真正懂得爱的时候才会明白这个问题的答案。</p>
+
+<p>我朝椅子走近了一些，然后木然地坐下。她不在的日子里，我万分思念她，可当她真的坐在我面前的时候，我却不知道如何开口，我绞尽脑汁地想着那晚还没有聊完的话题。终于有了一个突破口：“上次我都没有告诉你我的名字呢！既然能够这么巧合地碰到，我觉得你没有理由再次拒绝我的这个请求了。”</p>
+
+<p>我提了提嗓子，强而有力地一字一字念道：“S-A-M。”接着又合在一起念了一遍。我的这种声音都让我自己开始厌恶自己，我不觉得这是自我介绍，反而是一种炫耀，就好比站在高处俯视他人一般，强烈的优越感占满了那副臭躯体。</p>
 
 <!--more-->
 
 
-<p>对于结构体内的in和out两个变量，内核是作如下处理的:1、在读入数据时增加in；2、在取出数据时增加out；3、当检测到两个相等的时候将它们复位归0。1和2不作讨论和分析，针对第3点的处理，内核代码如下：</p>
+<p>“Sam，这个英文名使用的很普遍哦。不过我觉得Willy（骨瘦如柴的乡村男孩，善良天真，有音乐天份，但有点迟顿）这个名字比较适合你。”说完，她用小手掩住了她的小嘴，微微地笑了，没有嘲笑的韵味在里面，听着很甜美。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>static inline unsigned int kfifo_get(struct kfifo *fifo,
-</span><span class='line'>                                     unsigned char *buffer, unsigned int len)
-</span><span class='line'>{
-</span><span class='line'>    unsigned long flags;
-</span><span class='line'>    unsigned int ret;
-</span><span class='line'>
-</span><span class='line'>    spin_lock_irqsave(fifo-&gt;lock, flags);
-</span><span class='line'>    ret = __kfifo_get(fifo, buffer, len);
-</span><span class='line'>
-</span><span class='line'>    /*
-</span><span class='line'>     * optimization: if the FIFO is empty, set the indices to 0
-</span><span class='line'>     * so we don't wrap the next time
-</span><span class='line'>     */
-</span><span class='line'>    if (fifo-&gt;in == fifo-&gt;out)
-</span><span class='line'>        fifo-&gt;in = fifo-&gt;out = 0;
-</span><span class='line'>
-</span><span class='line'>    spin_unlock_irqrestore(fifo-&gt;lock, flags);
-</span><span class='line'>
-</span><span class='line'>    return ret;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+<p>英文单词从她的嘴里说出来很流畅，我觉得她的发音很纯正。说几个英文名并不是一件很稀奇的事，可能她的客户里面恰好有叫这些名字的人。毕竟人总是好奇的，我还是想亲自测验一下她的英文水平：“It is a great pleasure for me to join you here on this pleasant evening！”</p>
 
+<p>“Me too！”</p>
 
-<p>问题：当数据写入速度大于读取速度的时候，in和out的值将永远不会相等，也就是说buffer永远是有数据的，这样的话in和out都存在超出自身数值表示范围，从而导致错误？</p>
+<p>我立马又转回到了母语，怕自己再说下去就露馅了：“你的英文说得真好听！”</p>
 
-<p>针对这个问题，不知大家有什么好的建议？</p>
+<h1>撞枪口了</h1>
 
-<h2>网友felix021的回复</h2>
+<p>我的双手伸开，然后微缩，呈龙抓手妆，掌心对准自己的胸部，摆出一副大胸的样子，装成她那位朋友的样子，而且抖着我的那双手做出上下抖动的起伏感，对着她说：“刚才那位是你的‘小姐妹’啊？”</p>
 
-<p>之前看错了你的问题。</p>
+<p>她显然不是很高兴，但还是很礼貌：“她叫小雅，不是我的‘小姐妹’，是我的朋友。”</p>
 
-<p>从源码的实现上来说，in和out的确是有可能会出现溢出，但是出现的情况非常极端：每次读取数据的时候都比当前缓冲区中的数据还少、而且这种情况持续直到写入的数据超过4GB。通常应该是不会遇到的；鉴于墨菲定律可能带来的恶果，的确还是得考虑一下。</p>
+<p>从她脸上的表情来看，我是觉察到了她的不高兴了，知道自己刚才的行为和‘小姐妹’一词冒犯了她，所以我尝试着从另外一方面着手：“不过我觉得她的名字和她本人不太像啊，倒是觉得小蛮这个名字挺适合她的。那会要不是你及时赶到，我估计要被她打趴了，一个十足的女汉字，估计没有男人敢招惹她。”</p>
 
-<p>不过可以再想想，溢出了就真的会导致程序出错吗？</p>
+<p>她的表情好多了，扑哧一声笑了出来：“今天她心情不好，所以我陪她出来购物，散散心，然后请她吃个饭。你又在这个时候刚好撞上了她，只能说你的运气不是很好了。”</p>
 
-<p>回头再仔细看看 __kfifo_put()里面的代码，在写入的时候是这样实现的：</p>
+<p>“我觉得我今天挺幸运的，至少我在这里再次遇到了你。”</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>/* first put the data starting from fifo-&gt;in to buffer end */
-</span><span class='line'>l = min(len, fifo-&gt;size - (fifo-&gt;in & (fifo-&gt;size - 1)));
-</span><span class='line'>memcpy(fifo-&gt;buffer + (fifo-&gt;in & (fifo-&gt;size - 1)), buffer, l);</span></code></pre></td></tr></table></div></figure>
+<p>“她的父母想生一个男娃，可上天一直不眷恋他们，接连生了好几个女儿，到一定年龄也就不能生了，她是最小的那个，所以一直被当作男孩子来养了，久而久之连她自己也觉得自己是男孩了。家里照顾地好，加上她自己也经常锻炼，所以她的身体比一般的男孩子都好。你这身板，她一个人对付三、四个都没有问题的。”</p>
 
+<p>“我们从小一起上学，放羊，打猪草，是发小，一直都很好。她对别人都很凶，唯独对我很温和，也经常替我教训那些欺负我的男孩子。我问她为什么要对我这么好，她说她下辈子做男人一定要娶我。我又说，你下辈子娶我也不需要这辈子就对我好啊。她说，不行，我怕这辈子轮回的时候你忘了我，所以我这辈子要对你格外好，这样你才能永远记住我，这辈子虽然不能娶你，但我还是要对你好。”</p>
 
-<p>注意<code>(fifo-&gt;in &amp; (fifo-&gt;size - 1)</code>这里用了<code>&amp;</code>符号，而不是直接<code>%fifo-&gt;size</code>，也就是说，初始化的时候size必然得设置成2的n次方（这个限制在内核里很合理，因为内核分配的空间通常是2的倍数，比如一个page）。</p>
+<p>说起这个她的这个妹子的时候，她是满脸的幸福，连我也感受到了这种幸福。</p>
 
-<p>在像x86这种溢出跟取模操作等价的处理器上，对于当前的写入操作实际上“正好”没有风险。同样的，由于in/out都是 unsigned int，在后续的 kfifo_get/kfifo_len 里面<code>in - out</code>(比如说<code>2 - 4294967295</code>，你可以试试)，结果仍然“正好”是正确的。</p>
+<h1>烟</h1>
 
-<p>结论就是，它居然真的没有风险（前提是在溢出、无符号整数减法操作与x86处理器类似的CPU上）。</p>
+<p>我掏出了烟，想象到电影中‘大上海的舞女依靠在门栏上叼着一根烟’的场景，递了一根到她的面前：“你抽吗，来一根？”</p>
 
-<p>不得不说，内核源码的开发者真吝啬啊，多写一个赋值操作都不舍得。</p>
+<p>“我不抽的。”</p>
 
-<h2>参考文章</h2>
+<p>既然她拒绝了，我就没有强求，自己点了一根，开始大口地吸起来。</p>
 
-<p><a href="http://segmentfault.com/q/1010000000249362">内核kfifo.c中in和out的问题</a> <br/>
-<a href="http://bbs.chinaunix.net/thread-4088139-1-1.html">内核中kfifo.c相关的问题</a></p>
+<p>“我的父亲吸了一辈子烟，最后还真的就被烟给吸走了。医院给他的肺拍出的黑黑的照片，他自己都看着恶心。所以，一直以来我都很讨厌吸烟。不为自己着想，至少也得为自己的家人考虑一下啊！”</p>
+
+<p>正准备猛吸一口的时候，我被‘吸走了’三个字给震住了，准确地说应该是被吓住了，这比任何对死亡的描述都让我恐惧，会让我想起这么一个场景：有一个巨大烟团的骷髅头张大着嘴巴，向我奔来，准备把我吸走，我无论怎么跑也逃脱不了。我把吸了半根的烟扔在了地上，狠狠地踩了踩。</p>
+
+<h1>短暂的离开</h1>
+
+<p>“我听旅馆的老板说，你离开这个小镇有一段时间了？”</p>
+
+<p>“是的，离开了几个月，回家处理了一点事情。”</p>
+
+<hr />
+
+<p>欲知后事如何，且听下回分解。</p>
 </div>
 
 
@@ -235,12 +189,12 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   
 
 
-<time datetime="2013-08-03T01:08:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+<time datetime="2014-08-12T22:34:00+08:00" pubdate data-updated="true">Aug 12<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/nei-he-qu-dong/'>内核/驱动</a>
+    <a class='category' href='/blog/categories/ling-yi-za-shuo/'>灵异杂说</a>
   
 </span>
 
@@ -256,10 +210,8 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/" title="Previous Post: Linux管道的实现机制">&laquo; Linux管道的实现机制</a>
+        <a class="basic-alignment left" href="/blog/2014/08/11/zai-yu-xiao-bai-cai/" title="Previous Post: 再遇小白菜">&laquo; 再遇小白菜</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/08/03/log10de-shi-xian/" title="Next Post: log10的实现">log10的实现 &raquo;</a>
       
     </p>
   </footer>
@@ -277,7 +229,7 @@ struct kfifo { unsigned char *buffer; /* the buffer holding the data */ unsigned
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/08/12/xiao-bai-cai-qu-na-liao/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/08/12/xiao-bai-cai-qu-na-liao/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -642,8 +594,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/08/03/kfifo-dot-czhong-inhe-outde-yi-chu-wen-ti/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/08/12/xiao-bai-cai-qu-na-liao/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/08/12/xiao-bai-cai-qu-na-liao/';
         var disqus_script = 'embed.js';
       
     (function () {
