@@ -9,11 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Linux进程调度的目标： 高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；
-加强交互性能：在系统相当的负载下，也要保证系统的响应时间；
-保证公平和避免饥渴；
-SMP调度：调度程序必须支持多处理系统；
-软实时调度：系统必须有效的调用实时进程， &hellip;">
+  <meta name="description" content="OS-Uninstaller提供了一个图形化的界面，可以清除Windows, MacOS, Ubuntu以及其它的操作系统，可谓是强大又好用。 Ubuntu下通过添加PPA安装，打开终端输入： 1
+$ sudo add-apt-repository ppa:yannubuntu/boot- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +78,71 @@ SMP调度：调度程序必须支持多处理系统；
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">操作系统卸载软件：OS-Uninstaller</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-30T21:20:00+08:00" pubdate data-updated="true">Jun 30<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>OS-Uninstaller提供了一个图形化的界面，可以清除Windows, MacOS, Ubuntu以及其它的操作系统，可谓是强大又好用。</p>
+
+<p>Ubuntu下通过添加PPA安装，打开终端输入：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:yannubuntu/boot-repair</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后输入以下内容回车:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo sed 's/trusty/saucy/g' -i /etc/apt/sources.list.d/yannubuntu-boot-repair-trusty.list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行以下命令安装:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get update; sudo apt-get install -y os-uninstaller && os-uninstaller</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装完之后，软件会自己启动。</p>
+
+<p>也可以直接下载包含有OS-Uninstaller的镜像刻录使用，点击<a href="http://sourceforge.net/projects/boot-repair-cd/">这里</a>下载。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -559,53 +621,6 @@ SMP调度：调度程序必须支持多处理系统；
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/06/wo-men-zai-wei-zi-ji-yin-liu/">我们在为自己引流</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-06T23:53:00+08:00" pubdate data-updated="true">Jun 6<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/06/06/wo-men-zai-wei-zi-ji-yin-liu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://www.fzxy.edu.cn/picture/41/1004151621299175.jpg" alt="alt text" /></p>
-
-<p>“今日头条”完成了C轮一亿美金的融资（估值据称已超过5亿美元），引发了一时引来传统媒体和门户网站争先关注，我想更多的是恐惧和危机感。“今日头条”主要做的就是聚合其它传统媒体和门户网站的内容聚合，这必然牵扯到版权的归属问题。虽然有原文链接，但这对内容源来说伤害还是很大的，它们没有因此而得到更多的流量，哪个人在阅读了新闻之后还有心思再跳到其它的页面再次查看一遍。</p>
-
-<p>且不论“今日头条”的是非，谈谈自己的阅读体验和引流的观察。一个网站在互联网的海洋中生存都如此的艰辛，我们这群默默无闻的生产者就更不易了。其实我们的目的很单纯，并没有想从自己的内容或者作品处获得任何的回报，只是希望更多的用户能够阅读到我们的文字，进而能够和志同道合的人沟通。当生产出好的内容的时候，又有被抄袭的可能，让我们最痛恨的行为是转载之后不标明出处。一个人若能把网上好的内容聚集到一起，即便这些都不是他们自己出产的，也可能获得很高的人气，往往那些真正的生产者却没有任何的人气。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/06/wo-men-zai-wei-zi-ji-yin-liu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -644,6 +659,10 @@ SMP调度：调度程序必须支持多处理系统；
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/13/xiao-ya-de-shang-xin-shi/">小雅的伤心事</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/12/xiao-bai-cai-qu-na-liao/">小白菜去哪了</a>
       </li>
     
@@ -657,10 +676,6 @@ SMP调度：调度程序必须支持多处理系统；
     
       <li class="post">
         <a href="/blog/2014/08/10/xiao-bai-cai/">小白菜</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/09/318nie-qing-shi-%3Anru-shi-shuo/">318孽情史：N和P如是说</a>
       </li>
     
   </ul>
@@ -696,7 +711,7 @@ SMP调度：调度程序必须支持多处理系统；
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (26)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (2)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
-<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (3)</a></li>
+<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (57)</a></li>
