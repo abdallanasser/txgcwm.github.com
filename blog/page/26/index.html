@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="udev的文档介绍： dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。 &hellip;">
+  <meta name="description" content="在网络上传输大批量数据的时候，网络的传输速度是固定的（比如100 Mb的以太网实际测量的传输速度大概在10 MB/s左右），而想要在固定时间内传输更多容量的数据，最常见的解决方案是——在传输之前通过一定的算法把数据的容量压缩，然后通过网络传输，对端接收到数据之后再通过相应的算法进行解压还原。如果“ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,77 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/">Minilzo无损压缩库介绍（一）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T23:32:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在网络上传输大批量数据的时候，网络的传输速度是固定的（比如100 Mb的以太网实际测量的传输速度大概在10 MB/s左右），而想要在固定时间内传输更多容量的数据，最常见的解决方案是——在传输之前通过一定的算法把数据的容量压缩，然后通过网络传输，对端接收到数据之后再通过相应的算法进行解压还原。如果“压缩的时间 + 压缩后数据的传输时间 + 解压缩的时间 &lt; 未压缩数据的传输时间”，就相当于提高了单位时间内的传输能力，拓宽了网络传输的带宽。</p>
+
+<h1>minilzo库使用介绍</h1>
+
+<p>lzo是一个开源的无损压缩c语言库，其优点是压缩/解压缩比较迅速且占用内存小等特点。具体可查看 <a href="http://www.oberhumer.com/opensource/lzo/">这里</a>，提供了比较全的lzo库和一个minilzo库。minilzo库提供了1个c文件和3个头文件，解压后的目录树如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>minilzo-2.06$ tree
+</span><span class='line'>.
+</span><span class='line'>├── COPYING
+</span><span class='line'>├── lzoconf.h
+</span><span class='line'>├── lzodefs.h
+</span><span class='line'>├── Makefile
+</span><span class='line'>├── minilzo.c
+</span><span class='line'>├── minilzo.h
+</span><span class='line'>├── README.LZO
+</span><span class='line'>└── testmini.c</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/minilzowu-sun-ya-suo-ku-jie-shao-%28%5B%3F%5D-%29/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -442,6 +513,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/14/chui-xiang-de-hao-jiao/">吹响的号角</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/13/xiao-ya-de-shang-xin-shi/">小雅的伤心事</a>
       </li>
     
@@ -455,10 +530,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2014/08/10/xiu-chun-dao-%3Alou-yi-ren-sheng/">绣春刀：蝼蚁人生</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/10/xiao-bai-cai/">小白菜</a>
       </li>
     
   </ul>
@@ -497,7 +568,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (57)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (58)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (1)</a></li>
