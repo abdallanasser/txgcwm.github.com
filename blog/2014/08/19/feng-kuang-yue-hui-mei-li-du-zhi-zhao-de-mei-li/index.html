@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>C编译警告 - 残剑</title>
+  <title>疯狂约会美丽都:执着的魅力 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。 &hellip;">
+  <meta name="description" content="除了旁白需要推动剧情的发展外，整部动画片主人翁只说了几句，却不影响人们的观看，我想这就是它的魅力所在。虽是昨天观影的，可一些场景依然在我的脑海中放映。 动画中多处场景采用了夸张的手法，却不会让人产生反感，这或许就是动画在表现手法上的独特之处。 布鲁诺 我都不知道它是从哪里来的一条狗， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">C编译警告</h1>
+      <h1 class="entry-title">疯狂约会美丽都:执着的魅力</h1>
     
     
       <p class="meta">
@@ -96,7 +96,7 @@
   
 
 
-<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
+<time datetime="2014-08-19T23:01:00+08:00" pubdate data-updated="true">Aug 19<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,117 +105,56 @@
   </header>
 
 
-<div class="entry-content"><p>编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。</p>
+<div class="entry-content"><p><img src="http://i2.listal.com/image/733601/936full-the-triplets-of-belleville-screenshot.jpg" alt="cha bin" /></p>
 
-<p>在整个的清理过程中，主要发现以下几类警告信息：</p>
+<p>除了旁白需要推动剧情的发展外，整部动画片主人翁只说了几句，却不影响人们的观看，我想这就是它的魅力所在。虽是昨天观影的，可一些场景依然在我的脑海中放映。</p>
 
-<ul>
-<li>类在构建时，变量初始化的次序颠倒；</li>
-<li>有无符号数在作比较；</li>
-<li>宏定义不正确；</li>
-<li>定义了没有使用的变量，如果有很多条件宏定义的时候，这个处理要细致一些；</li>
-<li>结构体和数组的初始化方式不正确，其实是错误的方式，却也只是警告；</li>
-<li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；</li>
-</ul>
+<p>动画中多处场景采用了夸张的手法，却不会让人产生反感，这或许就是动画在表现手法上的独特之处。</p>
 
+<h1>布鲁诺</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
-</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); 
-</span><span class='line'>    //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
-</span><span class='line'>    
-</span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
-</span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>
+<p>我都不知道它是从哪里来的一条狗，可它终究是幸福的，找到了一个呵护它的家庭，把它养得肥肥的。它在睡觉的时候，甚至可以爬到主人（包括婆婆和查宾）的床上。</p>
 
+<p>随着时代的变迁，铁路就建在了他们家的旁边，每次经过都会有巨响。当火车来的时候，它会对着火车不停地吼叫，即便在饥饿的情况，也是如此，我想它是替它的主人向这个社会表示不满。</p>
 
-<ul>
-<li>函数的形参定义了，在函数体内却没有使用到。</li>
-</ul>
-
+<p>虽然它不会得到任何的回复，火车停留的瞬间，也没有任何人会理会它，但它的那种坚持是值得赞扬的。</p>
 
 <!--more-->
 
 
-<p>针对最后一点警告信息，可以有以下的方式处理：</p>
+<h1>苏沙</h1>
+
+<p>查宾的婆婆，对自己的这个孙子呵护有加，会尽自己最大的努力去满足孙子的需求。看到孙子开心的笑，她就知足。可能是因为查宾的父母走得早，她更加爱惜这个孙子，发现自己的报纸总是少些的时候，也不会发火或询问。</p>
+
+<p>在无意中，发现了孙子收集的剪报，于是就给查宾买了一辆自行车，院子里的欢乐场面让人难以忘怀。等到小查宾长大了，婆婆就陪着她练习，即便体力不是那么的知足，还是在坚持。调理查宾的身体、修车、做饭、照顾查宾的休息，她做了所有能做的事情。查宾训练很累，但我觉得婆婆更累，不过她的内心是无比知足的。</p>
+
+<p>查宾失踪了，婆婆不放弃一丝的线索，不停寻找孙子的下落，从法国追到了美国。在身无分文的情况下，还是坚持着，甚至作了长期追寻的准备。</p>
+
+<p>在和黑手党争斗，也没有一丝的畏惧，心中只有一个心愿，就是保护好自己的孙子。面临黑手党老大的追踪时，毅然从车子上下来，把希望留给查宾，自己作最后的博弈。</p>
+
+<h1>查宾</h1>
+
+<p>他是一个孤儿，又有自闭症，所以跟一般的孩子很不一样，甚至也不会跟唯一的亲人婆婆交流，只是活在了自己的世界里。</p>
+
+<p>他的父母可能是自行车手，墙上的照片也可能是唯一的遗物，这或许就是他喜欢上骑行的理由。</p>
+
+<p>在他坚持不懈地努力和充分的准备下，他终于可以去参加环法骑行大赛了，可碰上了黑手党的操控，他被神秘的带走了，进入黑市骑车。</p>
+
+<p>从他的眼神中可以看出，即便是在黑市虚拟骑车，他也是快乐无比。他们成功逃离的时候，他都不曾知道危险的存在，而是紧紧地盯着屏幕在骑行。他和婆婆间以哨声保持着一种无声的交流。</p>
+
+<p>影片最后，查宾还是说话了，他最终还是从自己的世界中走了出来。</p>
+
+<h1>结局</h1>
+
+<p>故事的结局是完美，可整个观影的过程并不让我轻松，因为坚持做着一件事是极度痛苦的，也是让人敬畏的。</p>
+
+<p>部分东西还不是太明白：</p>
 
 <ul>
-<li>去除没有使用的形参；</li>
-<li>使用<code>(void)x</code>的方式；</li>
+<li>奶奶为何是长短脚？</li>
+<li>黑衣党那些手下人为何如此的怪异？</li>
 </ul>
 
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define UNUSED(x) (void)x 
-</span><span class='line'>void SomeFunction(int param1, int param2) 
-</span><span class='line'>{ 
-</span><span class='line'>    UNUSED(param2); 
-</span><span class='line'>    //UNUSED(param2)语句不产生任何目标代码，消除对未使用变量的警告，并明确文件不要使用变量的代码。
-</span><span class='line'>    //do stuff with param1 
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>对没使用的参数使用<code>para=para</code>方式；</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>int SomeFunction(int param1, int param2)
-</span><span class='line'>{
-</span><span class='line'>    param2=param2;    //添加该行
-</span><span class='line'>    //do stuff with param1 
-</span><span class='line'>    return 0;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>使用<code>gcc</code>的<code>__attribute__((unused))</code>功能项；</li>
-</ul>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#ifdef UNUSED
-</span><span class='line'>#elif defined(__GNUC__)
-</span><span class='line'># define UNUSED(x) UNUSED_ ## x __attribute__((unused))
-</span><span class='line'>#elif defined(__LCLINT__)
-</span><span class='line'># define UNUSED(x) /*@unused@*/ x
-</span><span class='line'>#else
-</span><span class='line'># define UNUSED(x) x
-</span><span class='line'>#endif
-</span><span class='line'>
-</span><span class='line'>void dcc_mon_siginfo_handler(int UNUSED(whatsig)) </span></code></pre></td></tr></table></div></figure>
-
-
-<p>所有的warning信息去除之后，整个代码的编译过程就清晰了很多。大伙并不是没有察觉到这些警告的重要性，只是已经习惯了自己的方式，而漠视了这一切，殊不知细看的话这里面还是存在还多的错误。世间百态任它如何，我要坚守自己的风格，还自己一个清净的世界。</p>
-
-<p><big>参考文章</big> <br/>
-<a href="http://bbs.csdn.net/topics/340049876">如何消除gcc编译警告 warning: &ldquo;unused parameter xxxx&rdquo;</a><br/>
-<a href="http://sourcefrog.net/weblog/software/languages/C/unused.html">UNUSED in gcc</a></p>
 </div>
 
 
@@ -238,12 +177,12 @@
   
 
 
-<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
+<time datetime="2014-08-19T23:01:00+08:00" pubdate data-updated="true">Aug 19<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>
+    <a class='category' href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析</a>
   
 </span>
 
@@ -259,10 +198,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/" title="Previous Post: 微访谈后期安排">&laquo; 微访谈后期安排</a>
+        <a class="basic-alignment left" href="/blog/2014/08/18/fen-chang/" title="Previous Post: 坟场">&laquo; 坟场</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/19/hang-zhou-chuang-ke-fen-xiang-hui/" title="Next Post: 杭州创客分享会">杭州创客分享会 &raquo;</a>
       
     </p>
   </footer>
@@ -280,7 +217,7 @@
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -645,8 +582,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/04/17/cbian-yi-jing-gao/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li/';
         var disqus_script = 'embed.js';
       
     (function () {

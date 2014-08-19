@@ -9,9 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="要将markdown文件转换成html文件，可以用discount或python-markdown软件包提供的markdown工具。 1
-$ sudo apt-get install discount 或 1
-$ sudo apt-get install python-markdown &hellip;">
+  <meta name="description" content="在日志中，使用到__FILE__来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +77,99 @@ $ sudo apt-get install python-markdown &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/">__FILE__显示全路径的问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-09T22:12:00+08:00" pubdate data-updated="true">Jul 9<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在日志中，使用到<code>__FILE__</code>来显示源码的文件名，可它显示了绝对路径，这样使得整个log看起来很长，主要log都显示在了右边，让人看着很是不舒服。查找了半天才知道这是编译造成的，由于编译目录和源码目录不同，所以在实际编译的时候使用的是源码的绝对路径，以致打印出来就是绝对路径了（这样的解释不是很准确，有待改进）。</p>
+
+<p>针对这种现象，使用以下的例子作为测试。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;stdio.h&gt;
+</span><span class='line'>
+</span><span class='line'>int main(int argc, char **argv)
+</span><span class='line'>{
+</span><span class='line'>  printf("%s, %d\n", __FILE__, __LINE__);
+</span><span class='line'>
+</span><span class='line'>  return 0;
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用源码的全路径编译：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest /srv/example/c/test/filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>/srv/example/c/test/filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>为了解决以上问题，当然可以改变编译的方式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ gcc -o filetest filetest.c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行结果：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ./filetest 
+</span><span class='line'>filetest.c, 5</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/09/file-xian-shi-quan-lu-jing-de-wen-ti/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -622,87 +713,6 @@ win7命令行下，则是执行：</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/">Scrapy入门简略教程（二）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-15T13:44:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>What just happened under the hood?</h1>
-
-<p>Scrapy为爬虫中的<code>start_urls</code>属性中每个URL创建了一个<code>scrapy.http.Request</code>对象 ，并把<code>parse</code>方法作为回调函数指定给爬虫。</p>
-
-<p>这些<code>Request</code>会被调度，执行，<code>scrapy.http.Response</code>对象被返回，结果也被反馈给爬虫，之后通过<code>parse()</code>方法解析。</p>
-
-<h1>Extracting Items</h1>
-
-<h2>Introduction to Selectors</h2>
-
-<p>有很多方法从网站中提取数据。Scrapy使用一种叫做Scrapy Selectors的机制，它基于XPath或者是CSS表达式。如果想了解更多selectors和其它机制，可查阅<a href="http://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors">Selectors documentation</a>。</p>
-
-<p>以下是XPath表达式的例子和它们的含义：</p>
-
-<ul>
-<li><code>/html/head/title</code>: 选择HTML文档<code>&lt;head&gt;</code>元素下面的<code>&lt;title&gt;</code>标签。</li>
-<li><code>/html/head/title/text()</code>: 选择前面提到的<code>&lt;title&gt;</code>元素下面的文本内容。</li>
-<li><code>//td</code>: 选择所有 <code>&lt;td&gt;</code>元素。</li>
-<li><code>//div[@class="mine"]</code>: 选择所有包含<code>class="mine"</code>属性的<code>div</code>标签元素。</li>
-</ul>
-
-
-<p>这只是几个使用XPath的简单例子，但是实际上XPath非常强大。如果你想了解更多XPATH的内容，我们向你推荐这个<a href="http://www.w3schools.com/XPath/default.asp">XPath教程</a>。</p>
-
-<p>为了方便使用XPaths，Scrapy提供XPath<code>Selector</code>类， 有两种方式可以选择，<code>HtmlResponse</code>(HTML数据解析) 和<code>XmlResponse</code>(XML数据解析)。</p>
-
-<p>使用XPath选择器，Scrapy提供了一个<code>Selector</code>类，它实例化一个<code>Htmlresponse</code>或<code>Xmlresponse</code>对象作为第一个参数。</p>
-
-<p>你可以看到selectors作为对象表示在文档结构节点。所以，第一个实例化selectors是与根节点相关联，或整个文档。</p>
-
-<p>Selectors有四种基本方法（具体的使用请查看API文档）：</p>
-
-<ul>
-<li><code>path()</code>：返回selectors列表, 每一个select表示一个xpath参数表达式选择的节点。</li>
-<li><code>css()</code>: 返回selectors列表, 每一个select表示一个CSS参数表达式选择的节点。</li>
-<li><code>extract()</code>：返回一个unicode字符串，该字符串为XPath选择器返回的数据。</li>
-<li><code>re()</code>： 返回unicode字符串列表，字符串作为参数由正则表达式提取出来。</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -741,6 +751,10 @@ win7命令行下，则是执行：</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/19/feng-kuang-yue-hui-mei-li-du-zhi-zhao-de-mei-li/">疯狂约会美丽都:执着的魅力</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/18/fen-chang/">坟场</a>
       </li>
     
@@ -754,10 +768,6 @@ win7命令行下，则是执行：</p>
     
       <li class="post">
         <a href="/blog/2014/08/13/xiao-ya-de-shang-xin-shi/">小雅的伤心事</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/12/xiao-bai-cai-qu-na-liao/">小白菜去哪了</a>
       </li>
     
   </ul>
@@ -786,7 +796,7 @@ win7命令行下，则是执行：</p>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (9)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (10)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (2)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
