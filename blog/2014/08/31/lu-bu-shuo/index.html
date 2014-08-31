@@ -5,30 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu12.10安装Scrapy - 残剑</title>
+  <title>吕布说 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="根据官网Ubuntu packages上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-$ scrapy startproject tutorial Traceback ( &hellip;">
+  <meta name="description" content="关于吕布的一些介绍，摘自这里。 效力董卓 吕布因其勇武在并州任职，并州刺史丁原担任骑都尉，在河内驻扎，任命吕布为主簿，对他很亲近。汉灵帝死后，丁原接到何进的徵召，率领军队到洛阳，密谋诛杀宦官，被任命为执金吾。适逢何进为宦官所杀，董卓入京，诱吕布杀丁原，进而吞并丁原的军队，并任命吕布为骑都尉， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -37,7 +18,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/08/31/lu-bu-shuo">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -99,7 +80,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Ubuntu12.10安装Scrapy</h1>
+      <h1 class="entry-title">吕布说</h1>
     
     
       <p class="meta">
@@ -115,7 +96,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-08-31T20:24:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -124,204 +105,44 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   </header>
 
 
-<div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+<div class="entry-content"><p><img src="http://a4.att.hudong.com/76/03/19300001392461132392039247514.jpg" alt="lv bu" /></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject tutorial  
-</span><span class='line'>Traceback (most recent call last):  
-</span><span class='line'>  File "/usr/bin/scrapy", line 4, in &lt;module&gt;  
-</span><span class='line'>    execute()  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 121, in execute  
-</span><span class='line'>    cmds = _get_commands_dict(settings, inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 45, in _get_commands_dict
-</span><span class='line'>    cmds = _get_commands_from_module('scrapy.commands', inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 28, in _get_commands_from_module  
-</span><span class='line'>    for cmd in _iter_command_classes(module):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 19, in _iter_command_classes  
-</span><span class='line'>    for module in walk_modules(module_name):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/utils/misc.py", line 66, in walk_modules
-</span><span class='line'>    submod = __import__(fullpath, {}, {}, [''])  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py", line 13, in &lt;module&gt;
-</span><span class='line'>    from w3lib.form import encode_multipart  
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/w3lib/form.py", line 2, in &lt;module&gt;
-</span><span class='line'>    if six.PY2:  
-</span><span class='line'>AttributeError: 'module' object has no attribute 'PY2'  </span></code></pre></td></tr></table></div></figure>
+<p>关于吕布的一些介绍，摘自<a href="http://baike.baidu.com/subview/3973/5850475.htm">这里</a>。</p>
 
+<blockquote><h1>效力董卓</h1>
+
+<p>吕布因其勇武在并州任职，并州刺史丁原担任骑都尉，在河内驻扎，任命吕布为主簿，对他很亲近。汉灵帝死后，丁原接到何进的徵召，率领军队到洛阳，密谋诛杀宦官，被任命为执金吾。适逢何进为宦官所杀，董卓入京，诱吕布杀丁原，进而吞并丁原的军队，并任命吕布为骑都尉，同他发誓结为父子，对他十分欣赏信任。吕布善长骑射，膂力过人，被称为“飞将”，不久又被董卓提拔为中郎将，封都亭侯。</p>
+
+<p>关东军起兵讨董时，吕布亦曾参战，却与将领胡轸不和而被孙坚所败，最后董卓挟天子迁都长安。董卓自知自己凶暴，为人所恶，所以时常要吕布作自己的侍卫及守中阁；不过，董卓性格又十分猜疑，曾因小许失意而向吕布掷出手戟，又吕布与董卓的婢女有染，恐怕事情被董卓发觉，所以心中十分不安。之前，由于王允因为吕布是并州的壮士，对他以厚礼相待。自从吕布怀恨董卓后，他去见了王允，述说了董卓差点杀他的经过。王允此时正和士孙瑞、杨瓒等密谋除掉董卓，因此便让吕布作内应。吕布有些犹豫，说:“奈何是父子，怎么好下手呢？”王允说：“将军姓吕，本来就非亲生骨肉，如今你保全自己的性命还来不及，还说什么父子！”于是吕布答应了王允，成功刺杀董卓，任职奋武将军，假节，仪比三司，进封温侯，与王允同掌朝政。</p></blockquote>
 
 <!--more-->
 
 
-<p>从网上找到了一个答案，需要利用pip去安装。</p>
+<blockquote><h1>投靠各方</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install Scrapy  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): w3lib&gt;=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Downloading six-1.4.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: six   
-</span><span class='line'>  Found existing installation: six 1.1.0   
-</span><span class='line'>    Uninstalling six:   
-</span><span class='line'>Exception:   
-</span><span class='line'>Traceback (most recent call last):   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 104, in main  
-</span><span class='line'>    status = self.run(options, args)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/commands/install.py", line 250, in run   
-</span><span class='line'>    requirement_set.install(install_options, global_options)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1129, in install   
-</span><span class='line'>    requirement.uninstall(auto_confirm=True)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 486, in uninstall   
-</span><span class='line'>    paths_to_remove.remove(auto_confirm)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1431, in remove   
-</span><span class='line'>    renames(path, new_path)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/util.py", line 263, in renames   
-</span><span class='line'>    shutil.move(old, new)   
-</span><span class='line'>  File "/usr/lib/python2.7/shutil.py", line 302, in move   
-</span><span class='line'>    os.unlink(src)   
-</span><span class='line'>OSError: [Errno 13] Permission denied: '/usr/share/pyshared/six-1.1.0.egg-info'   
-</span><span class='line'>
-</span><span class='line'>Storing complete log in /home/txgcwm/.pip/pip.log   </span></code></pre></td></tr></table></div></figure>
+<p>董卓死后两个月，其旧部属李傕和郭汜等本想解散部队，归隐田野，途中遇贾诩献计，召集旧部，攻入京城，吕布守城八日，因城内叟兵叛变，吕布战败，于是率兵百余骑兵，带着董卓的首级杀出武关。在此期间，吕布曾在城北与郭汜单挑决胜负，吕布以矛刺中郭汜，郭汜被左右军队所救，双方遂各自罢兵。</p>
+
+<p>吕布先投靠袁术，但因袁术不满他自恃有功而十分骄恣、恣兵抄掠，所以被拒绝，于是吕布改投袁绍。在袁绍处，与其联手在常山会战张燕，黑山军有一万多精兵、几千骑兵。吕布经常骑着能够腾跃城墙、飞跨壕沟、名叫赤兔的良马，与手下猛将成廉、魏越等几十个人骑马冲击张燕的军阵，有时一天去三四次，每次都砍了黑山军的首级回来。连续作战十多天，终于打败了张燕的军队。吕布仗恃自己的战功，再次向袁绍要求增加军队，袁绍不答应，而吕布手下的将士也时时抢劫、掠夺，袁绍开始疑恨他。吕布感觉不安，就请求回洛阳。袁绍同意他的要求，以天子名义任命吕布领司隶校尉，派甲士送吕布而暗中要除掉他。吕布怀疑袁绍打自己的主意，就派人在营帐中弹着筝，自己悄悄逃了出去。半夜那些甲士出动，乱刀砍吕布的床，认为他已经死了，第二天袁绍却得到吕布还活着的消息，于是下令关闭城门，吕布得以逃到河内，与张杨联合。袁绍担心吕布对自己不利，再次派兵追杀吕布，那些士兵都害怕他，追上了也没有一人敢逼近。途中经过陈留，太守张邈派人迎接吕布，对他大加款待，临分手时两人握住对方手臂发誓结好。</p></blockquote>
+
+<br></br>
 
 
-<p>借助新得立把six给卸载掉，然后重新安装。</p>
+<p>关于冯玉祥的一些介绍，摘自<a href="http://baike.baidu.com/view/20746.htm">这里</a>。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo pip install Scrapy  
-</span><span class='line'>Downloading/unpacking Scrapy   
-</span><span class='line'>  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded   
-</span><span class='line'>  Running setup.py egg_info for package Scrapy   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking w3lib&gt;=1.2 (from Scrapy)   
-</span><span class='line'>  Downloading w3lib-1.5.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package w3lib   
-</span><span class='line'>    
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking cssselect&gt;=0.9 (from Scrapy)   
-</span><span class='line'>  Downloading cssselect-0.9.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: Scrapy, w3lib, cssselect, six   
-</span><span class='line'>  Running setup.py install for Scrapy    
-</span><span class='line'>    changing mode of build/scripts-2.7/scrapy from 644 to 755   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>    changing mode of /usr/local/bin/scrapy to 755   
-</span><span class='line'>  Running setup.py install for w3lib   
-</span><span class='line'>    
-</span><span class='line'>  Running setup.py install for cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>  Running setup.py install for six   
-</span><span class='line'>    
-</span><span class='line'>Successfully installed Scrapy w3lib cssselect six   
-</span><span class='line'>Cleaning up...   </span></code></pre></td></tr></table></div></figure>
+<blockquote><h1>倒戈将军</h1>
 
+<p>冯玉祥一生倒戈三次（另亦有8次的说法，下文有介绍），有“倒戈将军”之称！毛泽东谥其为“伪君子”。林彪庐山批判彭德怀时，就把彭德怀归入冯玉祥一类的野心家阴谋家伪君子之列。从侧面可看出共产党骨子里对魏延式人物冯玉祥的评价不高。</p>
 
-<p>创立一个项目。</p>
+<p>对于冯玉祥的倒戈次数，已经有很多历史学家和研究者进行更正，冯玉祥一生倒戈的次数准确的应该是八次，依次为：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy startproject tutorial   </span></code></pre></td></tr></table></div></figure>
-
+<p>第一次 滦州起义 倒清朝
+第二次 护国运动 倒袁世凯
+第三次 武穴停兵 倒段祺瑞
+第四次 北京政变 倒吴佩孚
+第五次 拉郭松龄 倒张作霖
+第六次 五原誓师 倒北洋
+第七次 国共分裂 倒共产党
+第八次 中原大战 倒蒋介石</p></blockquote>
 </div>
 
 
@@ -344,12 +165,12 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-08-31T20:24:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
+    <a class='category' href='/blog/categories/bo-gu-tong-jin/'>博古通今</a>
   
 </span>
 
@@ -365,10 +186,8 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/10/xie-wen-zhang-na-dian-shi-%28san-%29/" title="Previous Post: 写文章那点事（三）">&laquo; 写文章那点事（三）</a>
+        <a class="basic-alignment left" href="/blog/2014/08/31/xiao-shi-dai/" title="Previous Post: 小时代">&laquo; 小时代</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/20/jian-wen-jun-da-%3Aqian-ru-shi-ae/" title="Next Post: 剑问君答：嵌入式AE">剑问君答：嵌入式AE &raquo;</a>
       
     </p>
   </footer>
@@ -386,7 +205,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/08/31/lu-bu-shuo/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/08/31/lu-bu-shuo/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -751,8 +570,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/08/31/lu-bu-shuo/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/08/31/lu-bu-shuo/';
         var disqus_script = 'embed.js';
       
     (function () {
