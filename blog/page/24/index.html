@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content=" 仔细看了看自己的QQ好友，总数将近300多人，可实际会去交谈的大约50人以内。我们彼此生活在自己的小圈子里，即便开始了一段交谈，双方都会担心彼此之间的话题噶然而止，以致陷入尴尬的境地，所以我们索性不开始一段交流。 ">
+  <meta name="description" content="在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为： 限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,57 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Linux管道的实现机制</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-02T00:24:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在Linux中，管道是一种使用非常频繁的通信机制。从本质上说，管道也是一种文件，但它又和一般的文件有所不同，管道可以克服使用文件进行通信的两个问题，具体表现为：</p>
+
+<ul>
+<li><p>限制管道的大小。实际上，管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不像文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞，等待某些数据被读取，以便腾出足够的空间供write()调用写。</p></li>
+<li><p>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</p></li>
+</ul>
+
+
+<p>注意：从管道读数据是一次性操作，数据一旦被读，它就从管道中被抛弃，释放空间以便写更多的数据。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/02/linuxguan-dao-de-shi-xian-ji-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -399,73 +450,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Octopress添加表格</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-27T15:08:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/27/octopresstian-jia-biao-ge/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式；而Markdown是一种书写格式。正因如此，Markdown的格式化语法仅需解决用纯文本表达的问题。</p>
-
-<p>下面的这个例子是在一篇Markdown文章中添加一个HTML表格：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;table&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;Column1&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;Column2&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>    &lt;tr&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
-</span><span class='line'>    &lt;/tr&gt;
-</span><span class='line'>&lt;/table&gt;    </span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/25/">&larr; Older</a>
@@ -504,6 +488,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/14/tan-tan-jin-tian-de-mi-shi-tao-tuo/">谈谈今天的密室逃脱</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/13/he-bei-jing-liang-wei-mei-nu-de-318lu-cheng/">和北京两位美女的318旅程</a>
       </li>
     
@@ -517,10 +505,6 @@
     
       <li class="post">
         <a href="/blog/2014/08/31/xiao-shi-dai/">小时代</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/28/ye-tan-luo-zhi-xiang/">也谈“罗质翔”</a>
       </li>
     
   </ul>
@@ -559,7 +543,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (7)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (61)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (62)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (1)</a></li>
