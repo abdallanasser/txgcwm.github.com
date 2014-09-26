@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>内核中关于isdigit和min（max）的实现 - 残剑</title>
+  <title>十年后的你 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。 isdigit 在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如： int a = isdigit('1');
-int &hellip;">
+  <meta name="description" content="残剑亲启： 我甚至不知道十年后的你是否还活在这个世上，我听说做IT这行的人一般都不愁自己的老年生活会过得很悲苦，因为他们会早早地离世，但我还是要给你写一封信，希望你有机会能够看到。哦，对了，那时的你也只有三十八岁，正是年轻气盛的时候，为家庭和事业打拼着。 记得在初中的时候，我就跟你深入地交流过， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ int &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/09/27/shi-nian-hou-de-ni">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -81,7 +80,7 @@ int &hellip;">
   
   <header>
     
-      <h1 class="entry-title">内核中关于isdigit和min（max）的实现</h1>
+      <h1 class="entry-title">十年后的你</h1>
     
     
       <p class="meta">
@@ -97,7 +96,7 @@ int &hellip;">
   
 
 
-<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2014-09-27T01:36:00+08:00" pubdate data-updated="true">Sep 27<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -106,116 +105,46 @@ int &hellip;">
   </header>
 
 
-<div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
+<div class="entry-content"><p>残剑亲启：</p>
 
-<h1>isdigit</h1>
+<p>我甚至不知道十年后的你是否还活在这个世上，我听说做IT这行的人一般都不愁自己的老年生活会过得很悲苦，因为他们会早早地离世，但我还是要给你写一封信，希望你有机会能够看到。哦，对了，那时的你也只有三十八岁，正是年轻气盛的时候，为家庭和事业打拼着。</p>
 
-<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
+<hr />
 
-<pre><code>int a = isdigit('1');
-int b = isdigit('a');
-int c = isdigit(3);
-</code></pre>
+<p>记得在初中的时候，我就跟你深入地交流过，你说你要找一个长发飘飘的姑娘，如今你是否已把她娶为人妻？我清楚，长发的标准也只是你的一个喜好，你更在乎的是一个女人独特的品性，只要是她喜欢的，你都会尊重她的选择。夫人和你一同看这封信的时候，她是否会“扑哧”一笑呢？我想答案是肯定的。以你的眼光，你的夫人也将会是一个开朗、大度的人。</p>
 
-<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
-
-<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
-</code></pre>
+<p>关于爱情方面，想必你会好好经营的，现在的我也要好好努力，为你打下一个坚实的基础。如果那时的你还是单身（不过，我觉得你的运气不会那么差），那就是现在的我不够努力了（不要埋怨我，你也十分清楚我的性格的），但也请你不要着急（有些事情急是没有用的）、气馁（省下你的力气去追求妹子吧），时刻铭记“高傲地孤独着，只为等待某个人的出现”，机会总会在不经意间出现，而你所需要做的就是及早做好准备。</p>
 
 <!--more-->
 
 
-<p>Linux内核中isdigit的实现，其代码如下所示：</p>
+<p>估计那时你的孩子也很大了，你不会强迫他/她去参加各种各样的学习班吧？多少人毁了自己孩子美好的童年，希望那时的你不是其中的一员。有时间的时候，务必要带孩子去体验一下你儿时的生活，放羊、爬山、爬树、捉鱼、抓知了、偷人家的果子等事情都要去做一遍。可以让他/她顽皮，但绝对不能宠着他/她，如果你没有做得很好，你就该好好反省一下了。尊重孩子选择的权利，然后在一旁做正确的引导，我也希望孩子在未来会感激你，而不是抱怨你。</p>
 
-<pre><code>#define _U 0x01 /* upper */
-#define _L 0x02 /* lower */
-#define _D 0x04 /* digit */
-#define _C 0x08 /* cntrl */
-#define _P 0x10 /* punct */
-#define _S 0x20 /* white space (space/lf/tab) */
-#define _X 0x40 /* hex digit */
-#define _SP 0x80 /* hard space (0x20) */
+<hr />
 
-extern unsigned char _ctype[];
+<p>这一两年，我发现我的改变还是挺大的，不再像从前那样宅在家里，不时地会出去走走，闲散的时间会看看书，写写文章，偶尔会做做运动，这些东西你还保持着吗？</p>
 
-#define isdigit(c) ((_ctype+1)[c]&amp;(_D))
+<p>都过了十年了，神州大地是否已经走过？不要光顾着自己，带着自己的家人一同出行，才是人生中最美妙的事情。我很羡慕那时的你，毕竟你有了自己的爱人和孩子，瞧瞧现在的我，只能和那群基友一起出去玩。看是次要的目的，重要的是需要领会不同地方的风情，让自己有所收获。现在的我，都迫不及待的想看看你写的游记了。</p>
 
-unsigned char _ctype[] = {0x00, /* EOF */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 0-7 */
- _C,_C|_S,_C|_S,_C|_S,_C|_S,_C|_S,_C,_C, /* 8-15 */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 16-23 */
- _C,_C,_C,_C,_C,_C,_C,_C, /* 24-31 */
- _S|_SP,_P,_P,_P,_P,_P,_P,_P, /* 32-39 */
- _P,_P,_P,_P,_P,_P,_P,_P, /* 40-47 */
- _D,_D,_D,_D,_D,_D,_D,_D, /* 48-55 */
- _D,_D,_P,_P,_P,_P,_P,_P, /* 56-63 */
- _P,_U|_X,_U|_X,_U|_X,_U|_X,_U|_X,_U|_X,_U, /* 64-71 */
- _U,_U,_U,_U,_U,_U,_U,_U, /* 72-79 */
- _U,_U,_U,_U,_U,_U,_U,_U, /* 80-87 */
- _U,_U,_U,_P,_P,_P,_P,_P, /* 88-95 */
- _P,_L|_X,_L|_X,_L|_X,_L|_X,_L|_X,_L|_X,_L, /* 96-103 */
- _L,_L,_L,_L,_L,_L,_L,_L, /* 104-111 */
- _L,_L,_L,_L,_L,_L,_L,_L, /* 112-119 */
- _L,_L,_L,_P,_P,_P,_P,_C, /* 120-127 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 128-143 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 144-159 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 160-175 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 176-191 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 192-207 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 208-223 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0, /* 224-239 */
- 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; /* 240-255 */
-</code></pre>
+<p>书又买了一大堆了吧？我现在买的一些书，你是否在这十年的时间里都没有翻阅过？不用你讲，我也猜到了答案。不要给我任何的解释，我不希望那时的你还会为自己的懒惰找各种看似合理的借口。你可不要学我现在的样子，别人一下就能看出我是一个没有学识的人，让书中的知识给你带去灵感和优雅。</p>
 
-<p>字符&#8217;0&#8217;~&lsquo;9&#8217;对应的ASCII码为48~57，映射到上面的<em>ctype数组，相应的位置全是</em>D，<em>D&amp;</em>D则为真，其它的字符则判断为false。对不同种类的字符进行了分类，并使用唯一的二进制来进行标识，使用&amp;和|保证了不同类别的字符不会同时满足两种分类的条件。</p>
+<p>这几年慢慢开始写文章了，而且坚持了下来，一个文理不同的人能够做这么一件事情实属不易，所以你也要像我现在这样，把这件事坚持下来。虽然你的文字水平不怎么好，但我还是希望你能够多写写。</p>
 
-<h1>min和max</h1>
+<hr />
 
-<p>实现min和max这两个函数，可以有三种形式：1）定义宏；2）定义函数； 3）定义inline函数。以定义宏举例，一般都是以下形式：</p>
+<p>现在的我是一个幻想儿，那时的你也应该如此，我坚信一个人的品行是很难改变的。爱幻想其实也不是一件错误的事情，不过那时的你也算不小了，可不能像我现在这样光想不做。人还是需要理想的，万一实现了呢？</p>
 
-<pre><code>#define min(x,y) ((x)&gt;(y)?(y):(x))
-#define max(x,y) ((x)&gt;(y)?(x):(y))
-</code></pre>
+<p>除了爱情，最让我操心的事情就是你的事业了。人活一辈子，总是要做一些有价值的事情，并不奢望太多，至少要做到问心无愧。我现在要为以后的你改掉一个坏毛病，那就是少说多做。</p>
 
-<p>但是上面的写法是有副作用的。比如输入：</p>
+<hr />
 
-<pre><code>minval = min(x++, y);
-</code></pre>
+<p>我无法想象十年后的你是一个什么样子，最后只想问一个问题，你对自己这十年所做的一切都满意吗？</p>
 
-<p>替换宏之后，代码变成：</p>
+<br></br>
 
-<pre><code>minval = ((x++)&gt;(y)? (y):(x++))
-</code></pre>
 
-<p>可以看出，如果x是最小值，那么它加了两次，很明显是不对的。</p>
-
-<p>Linux内核实现min和max宏：</p>
-
-<pre><code>/*
- * min()/max() macros that also do
- * strict type-checking.. See the
- * "unnecessary" pointer comparison.
- */
- #define min(x, y) ({ \
-         typeof(x) _min1 = (x); \
-         typeof(y) _min2 = (y); \
-         (void) (&amp;_min1 == &amp;_min2); \
-         _min1 &lt; _min2 ? _min1 : _min2; })
-
- #define max(x, y) ({ \
-         typeof(x) _max1 = (x); \
-         typeof(y) _max2 = (y); \
-         (void) (&amp;_max1 == &amp;_max2); \
-         _max1 &gt; _max2 ? _max1 : _max2; })
-</code></pre>
-
-<p>1、typeof(x)的用途：得到x的类型信息，比如typeof(10) 为int， typeof(1.0)为double。</p>
-
-<p>2、({})的用途：一句语句，({ 和 })之间可以有很多表达式，它的值为最后一个表达式的值。</p>
-
-<p>3、(void)(&amp;<em>x == &amp;</em>y);这一句的作用：判断<em>x和</em>y的类型是否一样。如果是不同的类型，编译器会报“warning: comparison of distinct pointer types lacks a cast”的警告信息。</p>
-
-<p>其实，内核的宏定义就是先引入和x及y同样类型的两个临时变量，然后对临时变量进行求最大值或者最小值。</p>
+<p>残剑   书于蒋村兴达苑
+2014年9月27日1时22分</p>
 </div>
 
 
@@ -238,12 +167,12 @@ unsigned char _ctype[] = {0x00, /* EOF */
   
 
 
-<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+<time datetime="2014-09-27T01:36:00+08:00" pubdate data-updated="true">Sep 27<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/c-c/'>C/C++</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+    <a class='category' href='/blog/categories/qing-gan-tian-di/'>情感天地</a>
   
 </span>
 
@@ -259,10 +188,8 @@ unsigned char _ctype[] = {0x00, /* EOF */
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/19/gong-jiao-xiao-shi/" title="Previous Post: 公交小事">&laquo; 公交小事</a>
+        <a class="basic-alignment left" href="/blog/2014/09/20/bing-shu-tiao-zhan-%3Awo-du-shu-zhen-de-bu-duo/" title="Previous Post: 冰书挑战：我读书真的不多">&laquo; 冰书挑战：我读书真的不多</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/07/linuxxia-pdfwen-jian-de-cao-zuo-yu-zhuan-huan/" title="Next Post: Linux下PDF文件的操作与转换">Linux下PDF文件的操作与转换 &raquo;</a>
       
     </p>
   </footer>
@@ -280,7 +207,7 @@ unsigned char _ctype[] = {0x00, /* EOF */
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/09/27/shi-nian-hou-de-ni/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/09/27/shi-nian-hou-de-ni/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -645,8 +572,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/09/27/shi-nian-hou-de-ni/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/09/27/shi-nian-hou-de-ni/';
         var disqus_script = 'embed.js';
       
     (function () {
