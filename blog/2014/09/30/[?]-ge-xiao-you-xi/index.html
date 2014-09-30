@@ -5,15 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>进程优先级控制：nice和renice - 残剑</title>
+  <title>一个小游戏 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Linux进程调度的目标： 高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；
-加强交互性能：在系统相当的负载下，也要保证系统的响应时间；
-保证公平和避免饥渴；
-SMP调度：调度程序必须支持多处理系统；
-软实时调度：系统必须有效的调用实时进程， &hellip;">
+  <meta name="description" content="活动参与者：凡是预订并购买大江山猕猴桃的人员都是活动的参与者，此次团购仅限于公司内部。 活动奖品：幸运者（即获奖者）将额外得到一箱猕猴桃。 活动流程：
+&ndash; 购买后向组织者索取自己的编号；
+&ndash; 和其他购买的人员交换编号，获取到新的编号后还可以继续和其他人交换， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +20,7 @@ SMP调度：调度程序必须支持多处理系统；
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/09/30/%5B%3F%5D-ge-xiao-you-xi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -84,7 +82,7 @@ SMP调度：调度程序必须支持多处理系统；
   
   <header>
     
-      <h1 class="entry-title">进程优先级控制：nice和renice</h1>
+      <h1 class="entry-title">一个小游戏</h1>
     
     
       <p class="meta">
@@ -100,7 +98,7 @@ SMP调度：调度程序必须支持多处理系统；
   
 
 
-<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
+<time datetime="2014-09-30T23:54:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -109,54 +107,31 @@ SMP调度：调度程序必须支持多处理系统；
   </header>
 
 
-<div class="entry-content"><p>Linux进程调度的目标：</p>
+<div class="entry-content"><p><img src="http://www.cxyfgy.com/uploadpic/mall_product/2013/9/10/3a4d4ebb-6fb8-4bd2-b3b6-c9ea8ed16bba_%E5%BE%90%E9%A6%99%E7%8C%95%E7%8C%B4%E6%A1%83800-3.jpg" alt="徐香猕猴桃" /></p>
 
-<ol>
-<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
-<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
-<li>保证公平和避免饥渴；</li>
-<li>SMP调度：调度程序必须支持多处理系统；</li>
-<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
-</ol>
+<p>活动参与者：凡是预订并购买大江山猕猴桃的人员都是活动的参与者，此次团购仅限于公司内部。</p>
 
+<p>活动奖品：幸运者（即获奖者）将额外得到一箱猕猴桃。</p>
 
-<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
-
-<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>PRI(new) = PRI(old) + nice</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>活动流程：
+&ndash; 购买后向组织者索取自己的编号；
+&ndash; 和其他购买的人员交换编号，获取到新的编号后还可以继续和其他人交换，交换的次数不作限定；
+&ndash; 售完后，组织者将抽取出幸运编号；
+&ndash; 拥有幸运编号的童鞋可以持该号码到组织者处领取奖品。</p>
 
 <!--more-->
 
 
-<p>不过要特别留意，如果原本的PRI是50，并不是给予一个<code>nice = 5</code>，就会让PRI变成55，因为PRI是系统动态决定的。所以，虽然nice值可以影响PRI，不过最终的PRI仍是要经过系统分析后才会决定。另外，nice值是有正负的，而既然PRI越小越早被运行，所以当nice值为负值时，那么该进程就会降低PRI值，亦即会被优先处理。此外，必须要留意到：</p>
+<p>活动规则：
+&ndash; 幸运者不能持有第一次获取到的编号到组织者处领取奖品；
+&ndash; 在抽出幸运号后，若是还没有交换过编号，仍然有机会和其他人交换编号，长时间没有行动的话将视为弃权行为，组织者会重新抽取幸运号；
+&ndash; 幸运者需向所有曾经拥有过该幸运号的同仁均分这箱猕猴桃，若没有按照规则做，组织者有权索回奖品，并重新抽取幸运号。</p>
 
-<ul>
-<li>nice值可调整的范围为-20 ~ 19；</li>
-<li>root可随意调整自己或他人进程的Nice值，且范围为-20 ~ 19；</li>
-<li>一般使用者仅可调整自己进程的Nice值，且范围仅为0 ~ 19(避免一般用户抢占系统资源)；</li>
-<li>一般使用者仅可将nice值越调越高，例如本来nice为5，则未来仅能调整到大于5；</li>
-<li>一开始运行程序就立即给予一个特定的nice值，用nice命令，例如<code>nice -n 10 ping www.163.com</code>；</li>
-<li>调整某个已经存在的PID的nice值，用renice命令，例如<code>renice 19 2251</code>或者<code>renice 19 3675 4103</code>（同时调整多个进程的优先级）;</li>
-<li>针对指定用户，把这些用户的进程优先级全部做调整，例如<code>sudo renice 1 -u test</code>或者<code>sudo renice -2 -u test mysql root</code>（调整多个用户的进程优先级）；</li>
-<li>优先级会继承，例如当前bash的优先级是81，nice为1，在bash下产生的所有子进程都会继续父进程的优先级。</li>
-</ul>
+<p>能够获取到奖品的人当然是幸运的，但这个幸运源自曾经拥有该编号的同仁们，是他们把幸运传递到了你的身边，请带着一颗感恩的心和他们一同分享收获的喜悦。</p>
 
+<p>之所以会考虑这么一个活动，是出于对公司感恩周的回应。</p>
 
-<br></br>
-
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://www.cnblogs.com/zhaoyl/archive/2012/09/04/2671156.html">Linux进程调度原理</a><br/>
-<a href="http://linzhibin824.blog.163.com/blog/static/7355771020135801151813/">进程优先级控制——nice和renice命令</a> <br/>
-<a href="http://blog.csdn.net/ganglia/article/details/11028199">进程优先级，进程nice值和%nice的解释</a> <br/>
-<a href="http://blog.sina.com.cn/s/blog_53689eaf0101b5xd.html">linux中限制用户进程CPU和内存占用率</a><br/>
-<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-shell-monitoring/">使用shell脚本对Linux系统和进程资源进行监控</a></p>
+<p>该活动的所有解释权归@残剑 所有，不明之处可向他咨询。谢谢大家的合作，祝各位同仁玩得开心！</p>
 </div>
 
 
@@ -179,12 +154,12 @@ SMP调度：调度程序必须支持多处理系统；
   
 
 
-<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
+<time datetime="2014-09-30T23:54:00+08:00" pubdate data-updated="true">Sep 30<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/shell/'>Shell</a>
+    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
   
 </span>
 
@@ -200,10 +175,8 @@ SMP调度：调度程序必须支持多处理系统；
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/28/gccbian-yi-xuan-xiang/" title="Previous Post: GCC编译选项">&laquo; GCC编译选项</a>
+        <a class="basic-alignment left" href="/blog/2014/09/27/shi-nian-hou-de-ni/" title="Previous Post: 十年后的你">&laquo; 十年后的你</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/" title="Next Post: 操作系统卸载软件：OS-Uninstaller">操作系统卸载软件：OS-Uninstaller &raquo;</a>
       
     </p>
   </footer>
@@ -221,7 +194,7 @@ SMP调度：调度程序必须支持多处理系统；
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/09/30/%5B%3F%5D-ge-xiao-you-xi/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/09/30/%5B%3F%5D-ge-xiao-you-xi/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -586,8 +559,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/09/30/%5B%3F%5D-ge-xiao-you-xi/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/09/30/%5B%3F%5D-ge-xiao-you-xi/';
         var disqus_script = 'embed.js';
       
     (function () {
