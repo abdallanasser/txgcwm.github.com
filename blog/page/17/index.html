@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="斩断情丝心犹乱，千头万绪仍纠缠。拱手让江山，低眉恋红颜。祸福轮流转，是劫还是缘。天机算不尽，交织悲与欢。古今痴男女，谁能过情关？ ——《后宫甄嬛传》片头曲 红颜劫一曲形象生动地描述了华妃（姓年，大家也应该知道她的出生了）的一生，同时也是年羹尧一生的写照。每每听到此曲，一种伤感在内心油然而生， &hellip;">
+  <meta name="description" content="WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是RIFF。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/">Wav文件格式解析</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
+
+<pre><code>------------------------------------------------
+|             RIFF WAVE Chunk                  |
+|             ID  = 'RIFF'                     |
+|             RiffType = 'WAVE'                |
+------------------------------------------------
+|             Format Chunk                     |
+|             ID = 'fmt '                      |
+------------------------------------------------
+|             Fact Chunk(optional)             |
+|             ID = 'fact'                      |
+------------------------------------------------
+|             Data Chunk                       |
+|             ID = 'data'                      |
+------------------------------------------------
+</code></pre>
+
+<p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
+
+<p>RIFF WAVE Chunk</p>
+
+<pre><code>----------------------------------
+|       | 所占字节数 |  具体内容    |
+----------------------------------
+| ID    |  4 Bytes |   'RIFF'    |
+----------------------------------
+| Size  |  4 Bytes |             |
+----------------------------------
+| Type  |  4 Bytes |   'WAVE'    |
+----------------------------------
+</code></pre>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -426,57 +500,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/04/2013%3Awo-suo-kan-dao-de-ke-ji-he-qi-ye/">2013：我所看到的科技和企业</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-04T02:24:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/01/04/2013%3Awo-suo-kan-dao-de-ke-ji-he-qi-ye/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://pic.58.com/58bbs/img/n_13974126208772.jpg"></p>
-
-<p>我们每天看到的可能是风平浪静，但在整个社会或者公司的内部则是波涛汹涌。过去的一年关注了很多的东西，里面的部分信息是比较有价值的，作一个记录把它保存下来，给自己查看也分享给朋友们。以下是我对这些事物的一个粗略盘点。</p>
-
-<h1>信息分类</h1>
-
-<p>年初的时候，喜欢上看《非你莫属》这个节目，58同城（也就是那个神奇的网站）的老姚经常在上面，他的那双小眼睛比较有特色，所以印象深刻，也引起了我对他以及这个企业的关注。虽然我知道很多人在使用这个网站，但我用的还真不是很多（可以说几乎没用吧），因为我的需求基本可以通过其它的一些途径满足。</p>
-
-<p>58跑到美帝国成功上市了，这是个很好的消息，至少对信息分类网站这个行业来说。当我知道这是老姚第二次在纽交所敲响钟声的时候，顿时觉得这个男人很不一般。我们看到了成功的表象，又有谁知道背后的故事呢？有些东西只能凭直觉去猜测，事情的真相或许要等到他们老去的时候才会浮出水面，或者是永远埋藏在当事人的心里。58最后一轮融资的时候，老姚向某机构借钱（数目不小，或许对于他来说也只是个小数目吧）跟投，其中的缘由大家可以去猜测。至少这是我第一听到最后一轮创始人借钱跟投的。它成功上市我还是很替它高兴的，为此还专门在微信里宣传了一下，尽管我知道我的传播对它的发展并没有太大的意义。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/01/04/2013%3Awo-suo-kan-dao-de-ke-ji-he-qi-ye/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/18/">&larr; Older</a>
@@ -515,6 +538,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/07/qin-ai-de-%2Cda-jia-du-yao-hao-hao-de/">亲爱的，大家都要好好的</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/10/07/wo-guan-you-xia-ke/">我观游侠客</a>
       </li>
     
@@ -528,10 +555,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/27/shi-nian-hou-de-ni/">十年后的你</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/09/20/bing-shu-tiao-zhan-%3Awo-du-shu-zhen-de-bu-duo/">冰书挑战：我读书真的不多</a>
       </li>
     
   </ul>
@@ -560,7 +583,7 @@
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (11)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (12)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (3)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
