@@ -5,30 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu12.10安装Scrapy - 残剑</title>
+  <title>记三次猕猴桃团购 - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="根据官网Ubuntu packages上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-$ scrapy startproject tutorial Traceback ( &hellip;">
+  <meta name="description" content="刚开始是没有兴趣，因为觉得无利可图，累人还烦心。后来，做着做着就上瘾了，虽然依然是无利可图，可它带给了我其它的乐趣。在公司内部组织了三次猕猴桃团购，比我的预期效果要好，关键在于华仔提供的猕猴桃比较优质。如果做了就让这事过去了，那就是不是我了。 华仔在老家考察了行情，在他们公司的平台要销售猕猴桃， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -37,7 +18,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -99,7 +80,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Ubuntu12.10安装Scrapy</h1>
+      <h1 class="entry-title">记三次猕猴桃团购</h1>
     
     
       <p class="meta">
@@ -115,7 +96,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-10-25T22:28:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -124,203 +105,53 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   </header>
 
 
-<div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+<div class="entry-content"><p>刚开始是没有兴趣，因为觉得无利可图，累人还烦心。后来，做着做着就上瘾了，虽然依然是无利可图，可它带给了我其它的乐趣。在公司内部组织了三次猕猴桃团购，比我的预期效果要好，关键在于华仔提供的猕猴桃比较优质。如果做了就让这事过去了，那就是不是我了。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject tutorial  
-</span><span class='line'>Traceback (most recent call last):  
-</span><span class='line'>  File "/usr/bin/scrapy", line 4, in &lt;module&gt;  
-</span><span class='line'>    execute()  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 121, in execute  
-</span><span class='line'>    cmds = _get_commands_dict(settings, inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 45, in _get_commands_dict
-</span><span class='line'>    cmds = _get_commands_from_module('scrapy.commands', inproject)  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 28, in _get_commands_from_module  
-</span><span class='line'>    for cmd in _iter_command_classes(module):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 19, in _iter_command_classes  
-</span><span class='line'>    for module in walk_modules(module_name):  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/utils/misc.py", line 66, in walk_modules
-</span><span class='line'>    submod = __import__(fullpath, {}, {}, [''])  
-</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py", line 13, in &lt;module&gt;
-</span><span class='line'>    from w3lib.form import encode_multipart  
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/w3lib/form.py", line 2, in &lt;module&gt;
-</span><span class='line'>    if six.PY2:  
-</span><span class='line'>AttributeError: 'module' object has no attribute 'PY2'  </span></code></pre></td></tr></table></div></figure>
+<p>华仔在老家考察了行情，在他们公司的平台要销售猕猴桃，因为之前吃过的缘故，所以就准备买一些送给老朋友，顺便自己也尝尝。原本打算订5箱，华仔保障它的口感后，我就预订了10箱。华仔也神速，很快就给我发货了。说实在的，10箱是一个比较大的数目了，根本没有那么多的老友可以送，剩下很多箱就分给了身边的同事。刚分了不久，就有同事咨询我是哪里购买的了，我也把华仔的联系方式告诉了她们。在当天吃晚饭的时候，一个同事建议我组织团购，我直接给拒绝了，可她后来告诉我会有美女来订购，瞬间激发了我的热情。主要还是后面咨询的同事越来越多，我实在不好拒绝她们的那种热情。</p>
 
+<p>对于在公司内部做团购，我是不了解的，所以咨询了其它的同事，她教我学其它的帖子发帖就可以了。我学着在论坛里发了帖子，可觉得作为一个新世纪的人，总是要夹杂一些情怀的嘛，加上这次我也不打算真正卖猕猴桃，所以就加入了对家乡的宣传语，主打旅游牌。初次发帖，对家乡景点的宣传是比较有效的方式，偌大的一个公司必然有很多人是喜欢旅行的，在阅读购买的宣传广告，同时又能阅读其它的东西，这多少让人消除了一些想法。我不清楚我这一招对猕猴桃的销售是否有直接的影响，但它在其它方面起到了很好的效果。不知道结果会如何，所以不会抱太大的希望，只要努力去做就可以了。为了能够吸引到眼球，我使用了最土的方法，在帖子题目的前面加上了“此帖必火”这几个字，虽然没有什么情怀，可我坚信它是有效果的。</p>
 
 <!--more-->
 
 
-<p>从网上找到了一个答案，需要利用pip去安装。</p>
+<p>第一次的销量还是可以的，很多同事买了后，就立马开了，分给其他的同事品尝，很快又有同事加我skype，咨询是否有多余的猕猴桃卖，我只能遗憾的告诉他们只有预订才会有。我清楚这次猕猴桃的扩散更加广泛了，公司所有楼层的人几乎都知道了，关键是江山的徐香猕猴桃真的很好吃。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install Scrapy  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): w3lib&gt;=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)  
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Downloading six-1.4.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: six   
-</span><span class='line'>  Found existing installation: six 1.1.0   
-</span><span class='line'>    Uninstalling six:   
-</span><span class='line'>Exception:   
-</span><span class='line'>Traceback (most recent call last):   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 104, in main  
-</span><span class='line'>    status = self.run(options, args)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/commands/install.py", line 250, in run   
-</span><span class='line'>    requirement_set.install(install_options, global_options)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1129, in install   
-</span><span class='line'>    requirement.uninstall(auto_confirm=True)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 486, in uninstall   
-</span><span class='line'>    paths_to_remove.remove(auto_confirm)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1431, in remove   
-</span><span class='line'>    renames(path, new_path)   
-</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/pip/util.py", line 263, in renames   
-</span><span class='line'>    shutil.move(old, new)   
-</span><span class='line'>  File "/usr/lib/python2.7/shutil.py", line 302, in move   
-</span><span class='line'>    os.unlink(src)   
-</span><span class='line'>OSError: [Errno 13] Permission denied: '/usr/share/pyshared/six-1.1.0.egg-info'   
-</span><span class='line'>
-</span><span class='line'>Storing complete log in /home/txgcwm/.pip/pip.log   </span></code></pre></td></tr></table></div></figure>
+<p>知道的人越多，对于后续的销售越好办，加上十一黄金周马上来临，这么好吃的猕猴桃当然可以买来送人，这是很实惠的。我没有在上一个帖子上推，而是重新开了帖子，标题主打的是十一。在帖子里，也加入了公司妹子对我们的猕猴桃的评价，当然不是死板的那种。公司内部的论坛，很少人会经常去，为了有推广的效果，给上次买过的同仁都发了通知邮件。这次购买的人比较的多，有少部分的人真的是买来送人的，整体的量比上一次多了20多箱。</p>
+
+<p>第一次的时候，有同事买了后立马分了半箱，这事我知道了，在这次购买的时候就特意送给了她一箱，我坚信她还会把这些猕猴桃分给其他的同事的。我会如何去做？当然要保密一下，想想我的做法都觉得自己有些扯。</p>
+
+<p>经过前两次的团购，迅速培养了一批支持者，这些同仁特别喜欢吃猕猴桃，节日过后就立马问我什么时候有团购了。我想停下来，可又不想看到他们失望的表情，最后还是决定做下去，直到我真的疲惫了。</p>
+
+<p>第三次团购的口号是“美白”，订购猕猴桃的大部分是女性朋友，加上十一在外面蹦达了比较久，一箱猕猴桃不会有太大的效果，但在人的心理上总是有效果的。为了配合营销，我设计了两个活动，写完后我发给了身边的一个同事看，她直白的告诉我这是没有效果的，其实我心里也明白，我问可能是想得到心里的一些安慰。想象到它所能起的效果，可是我还是存有一丝的侥幸心理，不到黄河不死心呀！帖子发出后，那位同时看了我帖子的状况后，对我说道：“看吧，我们公司的人还是很实在的。”我笑了，我也明白了一些。也不能说完全没有效果，我还是看到一些效果的，虽然增长的猕猴桃销售不足以抵消活动的成本，但这些实践也值得了。活动一的小奖落在了自己所在的部门，当然这不是我最想看到的现象，但必须遵循游戏的规则。所幸的是，活动二的奖品落在了其它的部门。</p>
+
+<p>这次的活动还是比较被动的，没有让同事们都主动参与到其中，做得不够好，需要思考改进的方法。设计的活动也比较有逻辑，这让很多人难以参与到其中。不过，我每次也尝试去征询同事对活动的意见，这让我收获很多。我知道很多东西要付出代价，可愿意尝试所有可行的方法，我的存在就是为了创造更多的激情。</p>
+
+<p>我们部门的老大见到我，对我说：“咦，你卖猕猴桃，怎么我们部门的人都不知道？你的宣传不到位呀。你可以发邮件给他们嘛。你的猕猴桃也确实好吃，又不是品质差的。”其实，我反倒觉得这是我做得比较好的地方，我让潜在的客户知道我在销售这么一件商品，而不去骚扰其他的人。</p>
+
+<p>三次团购活动就这么结束了，后面还会有，如何做是一个值得思考的问题，要做就要做得有特色。在这个移动互联网时代，要做得好就必须有亮点，让更多的人参与到其中。感谢公司创造的人口红利，让团购一事变得简单！</p>
+
+<p>从三次团购中观察到的：</p>
+
+<ul>
+<li>购买猕猴桃的大部分是女性，男同胞购买也只是买回去给小孩吃；</li>
+<li>猕猴桃真的是好东西，不用我宣传，那些购买的同仁比我了解的还要多；</li>
+<li>IT圈的人的交际都比较窄；</li>
+<li>很少人会因为活动而作冲动的消费，大家都不愿去相信不确定性因素；</li>
+<li>猕猴桃不好保存，所以一次购买的量会很少。</li>
+</ul>
 
 
-<p>借助新得立把six给卸载掉，然后重新安装。</p>
+<p>需要思考的问题：</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo pip install Scrapy  
-</span><span class='line'>Downloading/unpacking Scrapy   
-</span><span class='line'>  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded   
-</span><span class='line'>  Running setup.py egg_info for package Scrapy   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): Twisted&gt;=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking w3lib&gt;=1.2 (from Scrapy)   
-</span><span class='line'>  Downloading w3lib-1.5.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package w3lib   
-</span><span class='line'>    
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Requirement already satisfied (use --upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy)   
-</span><span class='line'>Downloading/unpacking cssselect&gt;=0.9 (from Scrapy)   
-</span><span class='line'>  Downloading cssselect-0.9.1.tar.gz   
-</span><span class='line'>  Running setup.py egg_info for package cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>Downloading/unpacking six&gt;=1.4.1 (from w3lib&gt;=1.2-&gt;Scrapy)   
-</span><span class='line'>  Running setup.py egg_info for package six   
-</span><span class='line'>    
-</span><span class='line'>Installing collected packages: Scrapy, w3lib, cssselect, six   
-</span><span class='line'>  Running setup.py install for Scrapy    
-</span><span class='line'>    changing mode of build/scripts-2.7/scrapy from 644 to 755   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/build'   
-</span><span class='line'>    changing mode of /usr/local/bin/scrapy to 755   
-</span><span class='line'>  Running setup.py install for w3lib   
-</span><span class='line'>    
-</span><span class='line'>  Running setup.py install for cssselect   
-</span><span class='line'>    
-</span><span class='line'>    no previously-included directories found matching 'docs/_build'   
-</span><span class='line'>  Running setup.py install for six   
-</span><span class='line'>    
-</span><span class='line'>Successfully installed Scrapy w3lib cssselect six   
-</span><span class='line'>Cleaning up...   </span></code></pre></td></tr></table></div></figure>
-
-
-<p>创立一个项目。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy startproject tutorial   </span></code></pre></td></tr></table></div></figure>
+<ul>
+<li>如何更好的让那些不怎么买水果的男同胞也尝试订购？</li>
+<li>怎样才能让那些购买一次的客户继续订购？</li>
+<li>如何营销才不会让那些客户反感？</li>
+<li>如何做才能让客户参与到其中？</li>
+<li>活动是否必需，又该如何去做？</li>
+<li>什么样的人群才是我们的目标客户？</li>
+<li>如何才能做到不走低价策略？</li>
+</ul>
 
 </div>
 
@@ -344,12 +175,12 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
 
 
-<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+<time datetime="2014-10-25T22:28:00+08:00" pubdate data-updated="true">Oct 25<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/wang-luo-pa-chong/'>网络爬虫</a>
+    <a class='category' href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后</a>
   
 </span>
 
@@ -365,10 +196,8 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/10/xie-wen-zhang-na-dian-shi-%28san-%29/" title="Previous Post: 写文章那点事（三）">&laquo; 写文章那点事（三）</a>
+        <a class="basic-alignment left" href="/blog/2014/10/25/zai-ti-shi-wen/" title="Previous Post: 再提十问">&laquo; 再提十问</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/20/jian-wen-jun-da-%3Aqian-ru-shi-ae/" title="Next Post: 剑问君答：嵌入式AE">剑问君答：嵌入式AE &raquo;</a>
       
     </p>
   </footer>
@@ -386,7 +215,7 @@ $ scrapy startproject tutorial Traceback ( &hellip;">
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -751,8 +580,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/';
         var disqus_script = 'embed.js';
       
     (function () {

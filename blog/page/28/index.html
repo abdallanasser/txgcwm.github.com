@@ -9,7 +9,10 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用sudo apt-get install emacs来安装Emaces。 Emacs的基本操作和组合键 模式键定义 &hellip;">
+  <meta name="description" content="Octopress有自带的分类，详情请见 官方文档 。_config.yml中配置项如下： 1
+2
+category_dir: blog/categories
+category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rails &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +80,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Octopress添加中文标签功能</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-21T11:02:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopress有自带的分类，详情请见 <a href="http://octopress.org/docs/plugins/category-generator/">官方文档</a> 。<code>_config.yml</code>中配置项如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>category_dir: blog/categories
+</span><span class='line'>category_title_prefix: "Category: "</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后添加类似<code>categories: [Ruby&amp;Rails]</code>或<code>categories: [Ruby&amp;Rails，C/C++]</code>的分类标签配置到每个<code>_posts/*.markdown</code>文件头中，示例如下:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "Octopress添加中文标签功能"
+</span><span class='line'>date: 2013-07-21 11:02
+</span><span class='line'>comments: true
+</span><span class='line'>categories: [Ruby&Rails,Octopress]
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -533,73 +603,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/14/pkg-configde-shi-yong/">Pkg-config的使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-14T11:22:00+08:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/14/pkg-configde-shi-yong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pkg-config --libs --cflags opencv
-</span><span class='line'>-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml 
-</span><span class='line'>-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect 
-</span><span class='line'>-lopencv_contrib -lopencv_legacy -lopencv_flann</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
-
-<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Package opencv was not found in the pkg-config search path.
-</span><span class='line'>Perhaps you should add the directory containing `opencv.pc'
-</span><span class='line'>to the PKG_CONFIG_PATH environment variable
-</span><span class='line'>No package 'opencv' found</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/14/pkg-configde-shi-yong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/29/">&larr; Older</a>
@@ -638,6 +641,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/">记三次猕猴桃团购</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/10/25/zai-ti-shi-wen/">再提十问</a>
       </li>
     
@@ -651,10 +658,6 @@
     
       <li class="post">
         <a href="/blog/2014/10/19/zai-liao-liao-you-xia-ke/">再聊聊游侠客</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/16/dian-zan-he-ying-xiao/">点赞和营销</a>
       </li>
     
   </ul>
@@ -693,7 +696,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (7)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (70)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (71)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
