@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="和上次一样，这次也没有让我看到我特别想看的东西，具体是什么我谈不上，只希望看到一些我不曾见过的。这次在一个小学举办活动，校方也很配合，在校门口的led显示屏上作了特别的说明。从这次的分享中，我最大的收获是现在的学校越来越注重科技在实际生活中的学习，据说很多下城区的小学都开设了相应的课程， &hellip;">
+  <meta name="description" content="Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个google_analytics_tracking_id，添加到_config.yml中对应位置，并对网站进行验证即可，这样就可以通过Google &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/11/octopresstian-jia-tong-ji/">Octopress添加统计</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T01:00:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/11/octopresstian-jia-tong-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
+
+<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
+
+<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
+
+<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
+<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -418,51 +467,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/29/ye-jian-xian-tan/">夜间闲谈</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-29T01:01:00+08:00" pubdate data-updated="true">Apr 29<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/29/ye-jian-xian-tan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>看过很多的东西未必能够真正的吸收，但终究有那么一些东西融入了你的血液，永远不会忘记。龙兄初中时，在一次期末考试的作文（是满分）中用到了“醉翁之意不在酒，在乎山水之间也”，这让我知道了阅读的意义，需要活学活用；我家门前有两棵树，一棵是杏树，另一棵还是杏树，这让我只知道写作可以以一种幽默的方式出现；我和父亲走在车来车往的马路上，没有半句的言语，父亲把我从路边侧拉到了他的内测，然后继续前行，其实世间最微小的动作才是最感人动听的故事。</p>
-
-<p>最近发现简书上的文字越来越精彩，开始畏惧写作，总担心自己是班门弄斧。如果我们是程序员，同时又有一些写作的爱好，我们时常会这样调侃自己：我们跟作家比写程序，跟程序员比写作，这样我们始终是最优秀的。其实这个时代已经过去，很多东西已经没有了明显的界限：他的职业可能是一个程序员，但他可能更像一个作家；一个以码字为生的人，却在和程序死嗑着。现在很多的程序员都出了非技术类的书籍，而且都还不错。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/29/ye-jian-xian-tan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/15/">&larr; Older</a>
@@ -501,6 +505,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/04/wo-xiang-qing-ni-men-he-ka-pei/">我想请你们喝咖啡</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/03/jiu-gu-niang-%3Achu-shi/">九姑娘：初识</a>
       </li>
     
@@ -514,10 +522,6 @@
     
       <li class="post">
         <a href="/blog/2014/10/25/ji-san-ci-mi-hou-tao-tuan-gou/">记三次猕猴桃团购</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/10/25/zai-ti-shi-wen/">再提十问</a>
       </li>
     
   </ul>
@@ -556,7 +560,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (8)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (71)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (72)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
