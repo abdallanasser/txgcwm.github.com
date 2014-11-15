@@ -9,7 +9,26 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="从别人的文字里获取知识固然便捷，但成长毕竟有限，只有成为内容的提供者才会让你受益匪浅，所以一味的获取还不如给予。从我个人的体会来看，写作的好处是大于弊端的，而且这个弊端只是我个人的造诣没有达到那种高度造成的。 当我在写某个主题的时候，我往往会想起一些往事，那时我就顺便把它记录下来。 &hellip;">
+  <meta name="description" content="根据官网Ubuntu packages上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+$ scrapy startproject tutorial Traceback ( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +96,89 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/">Ubuntu12.10安装Scrapy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T15:59:00+08:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject tutorial  
+</span><span class='line'>Traceback (most recent call last):  
+</span><span class='line'>  File "/usr/bin/scrapy", line 4, in &lt;module&gt;  
+</span><span class='line'>    execute()  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 121, in execute  
+</span><span class='line'>    cmds = _get_commands_dict(settings, inproject)  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 45, in _get_commands_dict
+</span><span class='line'>    cmds = _get_commands_from_module('scrapy.commands', inproject)  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 28, in _get_commands_from_module  
+</span><span class='line'>    for cmd in _iter_command_classes(module):  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/cmdline.py", line 19, in _iter_command_classes  
+</span><span class='line'>    for module in walk_modules(module_name):  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/utils/misc.py", line 66, in walk_modules
+</span><span class='line'>    submod = __import__(fullpath, {}, {}, [''])  
+</span><span class='line'>  File "/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py", line 13, in &lt;module&gt;
+</span><span class='line'>    from w3lib.form import encode_multipart  
+</span><span class='line'>  File "/usr/lib/python2.7/dist-packages/w3lib/form.py", line 2, in &lt;module&gt;
+</span><span class='line'>    if six.PY2:  
+</span><span class='line'>AttributeError: 'module' object has no attribute 'PY2'  </span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -405,51 +507,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/09/21/song-tao/">松桃</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-21T21:38:00+08:00" pubdate data-updated="true">Sep 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/09/21/song-tao/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>退了房，一个人也没有什么意思，所以我就送表弟他们去汽车站。原本打算在汽车站附近找些玩的地方消磨一下时间，等待姨夫开车过来接我，可压根就没有什么可消遣的地方。表弟告诉我这里有去姨夫那里的汽车，与其等待，还不如自己坐车过去，所以也就买了票坐车去松桃。</p>
-
-<p>在姨夫家待了三天多的时间，因为临近中秋的原因待的比较长，否则可能很早就离开了（对一个地方没有持续的新鲜感）。前段时间走路、爬山比较多，右脚膝盖一直疼痛着，在松桃也没有多走走，趁着这段时间有网络，就把前面几天的游览经历写了写，以免时间久了会忘记。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/09/21/song-tao/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/22/">&larr; Older</a>
@@ -488,6 +545,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/15/15ri-za-shuo/">15日杂说</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/11/can-jian-de-bao-li-you-shi-yao/">残剑的包里有什么</a>
       </li>
     
@@ -501,10 +562,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/08/ipcameraying-yong-chang-jing/">IpCamera应用场景</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/04/wo-xiang-qing-ni-men-he-ka-pei/">我想请你们喝咖啡</a>
       </li>
     
   </ul>
@@ -543,7 +600,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (8)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (75)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (76)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
