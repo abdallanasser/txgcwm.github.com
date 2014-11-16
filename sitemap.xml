@@ -1107,12 +1107,18 @@
         <lastmod>2014-11-15T23:55:52+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://txgcwm.github.io/blog/2014/11/16/guan-san-guo-yan-yi-zhi-san-fen-gui-jin/
+        </loc>
+        <lastmod>2014-11-16T23:41:59+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://txgcwm.github.io/about/</loc>
         <lastmod>2014-05-17T15:39:52+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/blog/archives/</loc>
-        <lastmod>2014-11-15T23:55:52+08:00</lastmod>
+        <lastmod>2014-11-16T23:41:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/robots.txt</loc>
@@ -1120,7 +1126,7 @@
     </url>
     <url>
         <loc>http://txgcwm.github.io/</loc>
-        <lastmod>2014-11-15T23:55:52+08:00</lastmod>
+        <lastmod>2014-11-16T23:41:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://txgcwm.github.io/404.html</loc>

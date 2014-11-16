@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="自己都没有为沉寂一个月找到一个合适的理由，或许这只是一个对自己小小的许诺，它的意义可能就是如此。过去小小的一段日子里因为没有发布什么信息而不用去关注朋友回复的信息，其实个体的存在根本不会有多少人会在意你，即便有那么一天你悄悄的离开了这个世界，除非你那天已经强大到足够让人去回忆。 &hellip;">
+  <meta name="description" content="按照老妈的话讲就是“吃饱了撑着没事去爬山啊，要是喜欢爬，可以回去爬老家的山嘛，反正现在我们家的天地也空着”，我清楚母亲是不希望我待在家乡的山沟里的，只是她对那种生活看不到希望，一直以来都鼓励我走出去。就我来说，我也并不喜欢那种生活，小时候母亲让我挑一些轻便的东西的时候， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/13/hui-hang-gu-dao-xing/">徽杭古道行</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-13T23:55:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/13/hui-hang-gu-dao-xing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.clvyou.com/d/file/zb/anhui/jx/lyjd/2012-01-16/36d1c0e672d3450cc7a26c1a22db0c22.jpg" alt="alt text" /></p>
+
+<p>按照老妈的话讲就是“吃饱了撑着没事去爬山啊，要是喜欢爬，可以回去爬老家的山嘛，反正现在我们家的天地也空着”，我清楚母亲是不希望我待在家乡的山沟里的，只是她对那种生活看不到希望，一直以来都鼓励我走出去。就我来说，我也并不喜欢那种生活，小时候母亲让我挑一些轻便的东西的时候，我总是躲避或者是找各种理由推脱。小时候母亲之所以会那么做，主要还是想让我体验一下农村的艰苦生活，可那时我并不懂得这些。和家乡的很多同龄人相比，我的童年并没有做太多的农活。那时的我喜欢在山林间乱窜，却不愿身上有任何的负担，我清楚那种滋味让人难受。</p>
+
+<p>长大后的自己，还是喜欢行走在山林间，时而就有去爬山的冲动。现在不会有人强迫我挑担子，也就淡忘了那种艰辛的滋味。每次爬山，不知疲惫，或许只是为了探寻远去的生活，让自己有所警醒。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/13/hui-hang-gu-dao-xing/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -638,68 +685,6 @@ win7命令行下，则是执行：</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/">进程优先级控制：nice和renice</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-28T14:41:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Linux进程调度的目标：</p>
-
-<ol>
-<li>高效性：高效意味着在相同的时间下要完成更多的任务，调度程序会被频繁的执行，所以调度程序要尽可能的高效；</li>
-<li>加强交互性能：在系统相当的负载下，也要保证系统的响应时间；</li>
-<li>保证公平和避免饥渴；</li>
-<li>SMP调度：调度程序必须支持多处理系统；</li>
-<li>软实时调度：系统必须有效的调用实时进程，但不保证一定满足其要求。</li>
-</ol>
-
-
-<p>Linux给予进程一个优先运行序 (priority, PRI)， 这个PRI值越低代表优先级越高。不过这个PRI值是由核心动态调整的，使用者无法直接调整PRI值。</p>
-
-<p>由于PRI是核心动态调整的，使用者无权去干涉。如果想要调整进程的优先运行序，就要透过Nice值了。一般来说， PRI与NI的相关性如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>PRI(new) = PRI(old) + nice</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/28/jin-cheng-you-xian-ji-kong-zhi-%3Anicehe-renice/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/11/">&larr; Older</a>
@@ -738,6 +723,10 @@ win7命令行下，则是执行：</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/16/guan-san-guo-yan-yi-zhi-san-fen-gui-jin/">观三国演义之三分归晋</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/15/15ri-za-shuo/">15日杂说</a>
       </li>
     
@@ -751,10 +740,6 @@ win7命令行下，则是执行：</p>
     
       <li class="post">
         <a href="/blog/2014/11/09/ru-he-zhuang-ber-you-bu-shi-you-ya-di-pa-shan/">如何装B而又不失优雅地爬山</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/08/ipcameraying-yong-chang-jing/">IpCamera应用场景</a>
       </li>
     
   </ul>
@@ -783,7 +768,7 @@ win7命令行下，则是执行：</p>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (12)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (13)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (3)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
