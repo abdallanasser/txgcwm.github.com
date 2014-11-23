@@ -9,7 +9,9 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在笔记本电脑上安装了两个Linux系统，有一个几乎不用，所以决定把它给删除了，在网上看到OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统一文可以操作成功，就决定试试了。本着学习的态度，边操作边作笔记，把它记录在了这里。可天公并不眷恋我这个爱折腾的孩子，操作并没有成功， &hellip;">
+  <meta name="description" content="要将markdown文件转换成html文件，可以用discount或python-markdown软件包提供的markdown工具。 1
+$ sudo apt-get install discount 或 1
+$ sudo apt-get install python-markdown &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +79,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/">Linux下批量将md文件转换为html文件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-02T21:39:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>要将markdown文件转换成html文件，可以用discount或python-markdown软件包提供的markdown工具。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install discount</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install python-markdown</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用discount提供的markdown工具转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ markdown -o Release-Notes.html Release-Notes.md</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用python-markdown提供的markdown_py工具转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ markdown_py -o html4 Release-Notest.md &gt; Release-Notes.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果要生成PDF，可以用python-pisa提供的xhtml2pdf转换：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install python-pisa
+</span><span class='line'>$ xhtml2pdf --html Release-Notes.html Release-Notes.pdf</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/02/linuxxia-pi-liang-jiang-mdwen-jian-zhuan-huan-wei-htmlwen-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -626,55 +703,6 @@ win7命令行下，则是执行：</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/08/da-ge-%2Cbie-pao-ya/">大哥，别跑呀</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-08T18:46:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/06/08/da-ge-%2Cbie-pao-ya/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>经常性刷空间和朋友圈，200M的流量总不够用，下午抽空去更换套餐。可移动厅内的人员实在太多，要等到自己还需好一会儿，遂走到外面的走栏处玩游戏。一个比我稍微年长的人在马路边晃悠，我也没太在意，或许他和我一样想在外面静静地等待。</p>
-
-<p>等到周遭人比较少的时候，那位大哥走到了自行车旁，摆弄着它，正当他的手深入口袋准备掏工具的时候，我开口说话了：“大哥，你确信这辆自行车是你的吗？我的车子也刚好停在这个位置诶！”</p>
-
-<p>没等我话说完，那位大哥撒腿就跑。</p>
-
-<p>“大哥，你别跑呀，我并没有恶意，我只想告诉你这辆自行车确实是我的，你真的是搞错了。”</p>
-
-<br></br>
-
-
-<p>注：窃车一事纯属瞎编，仅供娱乐！</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -713,6 +741,10 @@ win7命令行下，则是执行：</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/23/ji-mo-fang-50kmda-xing-tu-bu-huo-dong/">记磨房50KM大型徒步活动</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/23/you-guan-lu-xing-de-yi-wen/">有关旅行的疑问</a>
       </li>
     
@@ -726,10 +758,6 @@ win7命令行下，则是执行：</p>
     
       <li class="post">
         <a href="/blog/2014/11/16/guan-san-guo-yan-yi-zhi-san-fen-gui-jin/">观三国演义之三分归晋</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/15/15ri-za-shuo/">15日杂说</a>
       </li>
     
   </ul>
@@ -762,7 +790,7 @@ win7命令行下，则是执行：</p>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (3)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
-<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (29)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (30)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (3)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (8)</a></li>
