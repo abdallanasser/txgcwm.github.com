@@ -9,15 +9,9 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下： 1
+  <meta name="description" content="很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。 1
 2
-3
-4
-5
-6
-7
-8
-'A', 'B', 'C &hellip;">
+3 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +79,123 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/">Linux下删除文本文件中的所有空行</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-13T22:20:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>TEMP_F="del.lines.$$"
+</span><span class='line'>
+</span><span class='line'>usage()
+</span><span class='line'>{
+</span><span class='line'>  echo "Usage: $0 filename [filename...]"
+</span><span class='line'>  exit -1
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>if [ $# -eq 0 ] ; then
+</span><span class='line'>  usage
+</span><span class='line'>fi
+</span><span class='line'>
+</span><span class='line'>while [ $# -gt 0 ]
+</span><span class='line'>do
+</span><span class='line'>  FILE_NAME=$1
+</span><span class='line'>
+</span><span class='line'>  case $1 in 
+</span><span class='line'>      --help)
+</span><span class='line'>          usage
+</span><span class='line'>      ;;
+</span><span class='line'>
+</span><span class='line'>      *)
+</span><span class='line'>          if [ -f $1 ] ; then
+</span><span class='line'>              sed '/^$/d' $FILE_NAME &gt; $TEMP_F
+</span><span class='line'>              mv $TEMP_F $FILE_NAME
+</span><span class='line'>          else
+</span><span class='line'>              echo "$0 can not find this file: $1"
+</span><span class='line'>          fi      
+</span><span class='line'>      ;;
+</span><span class='line'>  esac
+</span><span class='line'>
+</span><span class='line'>  shift
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -525,63 +636,6 @@ $ ./rand
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">内核中关于isdigit和min（max）的实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T10:41:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>isdigit、min、max等函数或宏定义是我们平时最常使用的，但往往没有更多的去思考它们的效率及其副作用。下面让我们来看看，内核是如何实现它们的。</p>
-
-<h1>isdigit</h1>
-
-<p>在标准C中，isdigit函数可以用来判断字符是否为0~9之间的数字。比如：</p>
-
-<pre><code>int a = isdigit('1');
-int b = isdigit('a');
-int c = isdigit(3);
-</code></pre>
-
-<p>可以使用宏定义去实现这个简单的函数，如下所示：</p>
-
-<pre><code>#define isdigit(c) ((c) &gt;= '0' &amp;&amp; (c) &lt;= '9')
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/nei-he-zhong-guan-yu-isdigithe-min%28max%29de-shi-xian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/32/">&larr; Older</a>
@@ -620,6 +674,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/24/ren-lian-shi-bie-de-ling-lei-gong-neng/">人脸识别的另类功能</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/23/ji-mo-fang-50kmda-xing-tu-bu-huo-dong/">记磨房50KM大型徒步活动</a>
       </li>
     
@@ -633,10 +691,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2014/11/18/guo-fan-ye-xu-yao-zhuan-xing/">果贩也需要转型</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/16/guan-san-guo-yan-yi-zhi-san-fen-gui-jin/">观三国演义之三分归晋</a>
       </li>
     
   </ul>
@@ -659,7 +713,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (17)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (18)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (5)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>

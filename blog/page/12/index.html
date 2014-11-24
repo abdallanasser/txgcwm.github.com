@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="经常性刷空间和朋友圈，200M的流量总不够用，下午抽空去更换套餐。可移动厅内的人员实在太多，要等到自己还需好一会儿，遂走到外面的走栏处玩游戏。一个比我稍微年长的人在马路边晃悠，我也没太在意，或许他和我一样想在外面静静地等待。 等到周遭人比较少的时候，那位大哥走到了自行车旁，摆弄着它， &hellip;">
+  <meta name="description" content="What just happened under the hood? Scrapy为爬虫中的start_urls属性中每个URL创建了一个scrapy.http.Request对象 ，并把parse方法作为回调函数指定给爬虫。 这些Request会被调度，执行，scrapy.http. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,87 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/">Scrapy入门简略教程（二）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-15T13:44:00+08:00" pubdate data-updated="true">Jun 15<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>What just happened under the hood?</h1>
+
+<p>Scrapy为爬虫中的<code>start_urls</code>属性中每个URL创建了一个<code>scrapy.http.Request</code>对象 ，并把<code>parse</code>方法作为回调函数指定给爬虫。</p>
+
+<p>这些<code>Request</code>会被调度，执行，<code>scrapy.http.Response</code>对象被返回，结果也被反馈给爬虫，之后通过<code>parse()</code>方法解析。</p>
+
+<h1>Extracting Items</h1>
+
+<h2>Introduction to Selectors</h2>
+
+<p>有很多方法从网站中提取数据。Scrapy使用一种叫做Scrapy Selectors的机制，它基于XPath或者是CSS表达式。如果想了解更多selectors和其它机制，可查阅<a href="http://doc.scrapy.org/en/latest/topics/selectors.html#topics-selectors">Selectors documentation</a>。</p>
+
+<p>以下是XPath表达式的例子和它们的含义：</p>
+
+<ul>
+<li><code>/html/head/title</code>: 选择HTML文档<code>&lt;head&gt;</code>元素下面的<code>&lt;title&gt;</code>标签。</li>
+<li><code>/html/head/title/text()</code>: 选择前面提到的<code>&lt;title&gt;</code>元素下面的文本内容。</li>
+<li><code>//td</code>: 选择所有 <code>&lt;td&gt;</code>元素。</li>
+<li><code>//div[@class="mine"]</code>: 选择所有包含<code>class="mine"</code>属性的<code>div</code>标签元素。</li>
+</ul>
+
+
+<p>这只是几个使用XPath的简单例子，但是实际上XPath非常强大。如果你想了解更多XPATH的内容，我们向你推荐这个<a href="http://www.w3schools.com/XPath/default.asp">XPath教程</a>。</p>
+
+<p>为了方便使用XPaths，Scrapy提供XPath<code>Selector</code>类， 有两种方式可以选择，<code>HtmlResponse</code>(HTML数据解析) 和<code>XmlResponse</code>(XML数据解析)。</p>
+
+<p>使用XPath选择器，Scrapy提供了一个<code>Selector</code>类，它实例化一个<code>Htmlresponse</code>或<code>Xmlresponse</code>对象作为第一个参数。</p>
+
+<p>你可以看到selectors作为对象表示在文档结构节点。所以，第一个实例化selectors是与根节点相关联，或整个文档。</p>
+
+<p>Selectors有四种基本方法（具体的使用请查看API文档）：</p>
+
+<ul>
+<li><code>path()</code>：返回selectors列表, 每一个select表示一个xpath参数表达式选择的节点。</li>
+<li><code>css()</code>: 返回selectors列表, 每一个select表示一个CSS参数表达式选择的节点。</li>
+<li><code>extract()</code>：返回一个unicode字符串，该字符串为XPath选择器返回的数据。</li>
+<li><code>re()</code>： 返回unicode字符串列表，字符串作为参数由正则表达式提取出来。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/15/scrapyru-men-jian-lue-jiao-cheng-er/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -406,53 +487,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/28/%5B%3F%5D-ge-bu-chang-hui-jia-de-ren/">一个不常回家的人</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-28T23:24:00+08:00" pubdate data-updated="true">May 28<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/28/%5B%3F%5D-ge-bu-chang-hui-jia-de-ren/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://ww2.sinaimg.cn/large/e8886fd4jw1eciujibdi8j218g0x7tt2.jpg" alt="alt text" /></p>
-
-<p>和他相识已经很久，可以说从小玩到大，即便在这个忙碌的世界里，我们也时常在交流。他给我的映像就是内向、谨慎、宅、节俭、不恋家、理想主义者。刚进入一个陌生团体的时候，他可能一言不发，是一个很好的倾听者。等到彼此熟悉之后，他会异常的活跃，甚至可能超乎一些朋友的想象，某些时刻一句不经意的话会引得朋友们捧腹大笑。</p>
-
-<p>不少人都有恋家的情结，从他身上我却发现不了半点的端倪。记得高三报志愿那年，不知是否是他的头脑发热，一个劲地想跑到西藏或者新疆那边去上学，最后在家人的劝说下，他到了西北的一个城市去上了大学。头一年他很安分，暑假的时候跑回家了，之后的两年暑期他都没有回去，即便他和一些朋友在学校里只是上上网。从他的叙述里，我也了解到，即时和同学们在一起，对于一个不玩游戏的人来说他也时常觉得孤寂和烦闷，可他始终选择待在校园那个狭小的世界里。我也知道他在暑假的那段时间也尝试做一些事情，可都没有达到他想象中的成功，所以他也不愿提起。大学四年的十一黄金假期，也从未听他提起要回家过，或许他是为了省下一笔路资或者是不愿大老远的来回奔波。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/28/%5B%3F%5D-ge-bu-chang-hui-jia-de-ren/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/13/">&larr; Older</a>
@@ -491,6 +525,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/11/24/ren-lian-shi-bie-de-ling-lei-gong-neng/">人脸识别的另类功能</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/11/23/ji-mo-fang-50kmda-xing-tu-bu-huo-dong/">记磨房50KM大型徒步活动</a>
       </li>
     
@@ -504,10 +542,6 @@
     
       <li class="post">
         <a href="/blog/2014/11/18/guo-fan-ye-xu-yao-zhuan-xing/">果贩也需要转型</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/16/guan-san-guo-yan-yi-zhi-san-fen-gui-jin/">观三国演义之三分归晋</a>
       </li>
     
   </ul>
@@ -530,7 +564,7 @@
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (17)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (18)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (5)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>
