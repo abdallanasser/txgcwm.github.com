@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="喜欢晚上下班回来的那段路程，骑着车，然后无尽地遐想，每一次都会对自己说“慢一点，再慢一点”。毕竟只是一个人，完全不必考虑家里有人在焦急地等待，只要我过得好，一切就都好了。这是最能让我放松的时刻了，一切都停了下来，无需拼命地向前奔跑，慢一点的节奏会让人变得更加的愉悦。无论多晚回家，我似乎都没有怨言， &hellip;">
+  <meta name="description" content="只能感叹时间的飞逝，去年的源创会还清晰地记得，至今还为因飞哥的离去（抽奖中了，可惜他不在，只能怨我太傻，没有去冒领）而未能领到开发板pcDuino（价值400多块大洋呀）而伤感不已，如今它又一次来到了杭城，只不过比过去两次来的时间要早些。 作为一个伪码农，当然要表达出那种积极性了， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/19/yuan-chuang-hui/">源创会</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-19T22:00:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/19/yuan-chuang-hui/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>只能感叹时间的飞逝，去年的源创会还清晰地记得，至今还为因飞哥的离去（抽奖中了，可惜他不在，只能怨我太傻，没有去冒领）而未能领到开发板pcDuino（价值400多块大洋呀）而伤感不已，如今它又一次来到了杭城，只不过比过去两次来的时间要早些。</p>
+
+<p>作为一个伪码农，当然要表达出那种积极性了，毅然绝然报名参加了。下午两点正式开始，从城西赶到滨江，大汗淋漓，最可恶的是在滨江等某路公交等了半个多小时，决定放弃这路公交而另寻它路的时候，它却悠然地从远处开过来了。人生亦是如此，当你决定放弃的时候，那希望的曙光就在远方，关键在于能否多坚持那么一小会儿。</p>
+
+<p>顺利抵达网易的会场后，已迟到40多分钟，厅内座无虚席，很多人都坐在了地上，我也只能坐在门口，然后装出一幅很认真听讲的样子。当然第一个演讲主题我什么也没听到，回来补了一下，才知道讲的是云，也无所谓了，对我来说这些很茫然。OpenStack这个开源框架处理的是大数据业务，实际中也没有接触过，权且先把它留在心里吧。</p>
+
+<p>Tengine的主讲人上台的时候，主持人使用了这么一句话——我发现杭州的程序猿都比较文艺啊，那时的场景只是觉得搞笑。那为阿里的开发人员长得特别的瘦，从他穿着七分裤露出的小腿看更能见证出他的瘦小，留着一头小长发，加上一小撮胡子，说是文艺恰如其事。不过还是主持人毫无掩饰地表露自己的心声，让人觉得有一分的可爱，当他话音刚落的时候，身边的哥们就笑着对我说：”这是褒还是贬呀，哈哈&hellip;”</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/19/yuan-chuang-hui/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -411,135 +460,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/10/robotsbrain-logshu-chu/">RobotsBrain: Log输出</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-07-10T22:09:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/07/10/robotsbrain-logshu-chu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在构建一个库的时候，通常会写专门的log输出函数，下面介绍一个简单的实现。根据不同的需求，需要对日志的输出作一个级别限定，便于查阅及跟踪流程。以下是对级别的设置：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>typedef enum log_level_en {
-</span><span class='line'>  RB_LOG_MIN,
-</span><span class='line'>  RB_LOG_DEBUG,
-</span><span class='line'>  RB_LOG_INFO,
-</span><span class='line'>  RB_LOG_NOTICE,
-</span><span class='line'>  RB_LOG_WARNING,
-</span><span class='line'>  RB_LOG_ERROR,
-</span><span class='line'>  RB_LOG_CRIT,
-</span><span class='line'>  RB_LOG_ALERT,
-</span><span class='line'>  RB_LOG_EMERG,
-</span><span class='line'>  RB_LOG_MAX
-</span><span class='line'>}log_level;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>该部分参考内核的级别设定，不同的是数值越低其信息的重要程度越低。</p>
-
-<p>具体的日志输出，我们采用了宏定义的方式，因为考虑到要输出<code>__FUNCTION__</code>等信息，其具体的实现如下所示：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define RB_LOG(level, fmt, args...)  \
-</span><span class='line'>  do {    \
-</span><span class='line'>      if(rb_log_check_level(level) == 0)  \
-</span><span class='line'>          break;  \
-</span><span class='line'>      char rb_log_buf[RB_LOG_BUFFER_LEN] = {0};   \
-</span><span class='line'>      snprintf(rb_log_buf, RB_LOG_BUFFER_LEN, "pid(%d) %s %s(%d)", \
-</span><span class='line'>                  getpid(), __FILE__, __FUNCTION__, __LINE__);    \
-</span><span class='line'>      rb_log_printf(level, rb_log_buf, fmt, ##args);  \
-</span><span class='line'>  } while(0)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>每个级别输出的宏定义如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#define RB_DEBUG(fmt, args...)   RB_LOG(RB_LOG_DEBUG, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_INFO(fmt, args...) RB_LOG(RB_LOG_INFO, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_NOTICE(fmt, args...)   RB_LOG(RB_LOG_NOTICE, fmt, ##args)
-</span><span class='line'>  
-</span><span class='line'>#define RB_WARNING(fmt, args...)  RB_LOG(RB_LOG_WARNING, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_ERROR(fmt, args...)    RB_LOG(RB_LOG_ERROR, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_CRIT(fmt, args...) RB_LOG(RB_LOG_CRIT, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_ALERT(fmt, args...)    RB_LOG(RB_LOG_ALERT, fmt, ##args)
-</span><span class='line'>
-</span><span class='line'>#define RB_EMERG(fmt, args...)    RB_LOG(RB_LOG_EMERG, fmt, ##args)</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/07/10/robotsbrain-logshu-chu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/12/">&larr; Older</a>
@@ -578,6 +498,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/30/wo-dao-di-xiang-zuo-shi-yao/">我到底想做什么</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/29/wo-suo-ren-shi-de-ta/">我所认识的他</a>
       </li>
     
@@ -591,10 +515,6 @@
     
       <li class="post">
         <a href="/blog/2014/12/22/si-bda-zhan-he-lie-bian-chuang-ye/">撕B大战和裂变创业</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/11/30/90hou-chuang-ye-zhe-long-zhong-deng-chang-liao/">90后创业者隆重登场了</a>
       </li>
     
   </ul>
@@ -633,7 +553,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (8)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (80)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (81)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
