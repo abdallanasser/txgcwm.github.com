@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2014-12-31T22:40:32+08:00</updated>
+  <updated>2015-01-01T00:09:53+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -532,7 +532,7 @@ $(document).ready(function(){
 
 
 <p>
-  Copyright &copy; 2014 - 残剑 -
+  Copyright &copy; 2015 - 残剑 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
