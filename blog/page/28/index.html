@@ -9,7 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="我们有很多很多的想法，但又有谁扪心问过之后，可以坚信的说“我不仅想到了，而且做到了”。不得不承认，我完全没有做到，在某种意义上说，我就是一个失败者。大学的三年里，没有留下太多的回忆！借老大的一句话来描述我此时的心情以及三年的感触——三年过去了，你已经站在了我需要仰望的地方。 &hellip;">
+  <meta name="description" content="标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义： 1
+FILE *popen( &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,58 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/03/popenhe-pclosehan-shu/">Popen和pclose函数</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T22:07:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/03/popenhe-pclosehan-shu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>标准I/O函数库提供了popen函数，它启动一个子进程去执行一个shell命令行。popen函数还创建一个管道用于父子进程间通信。父进程要么从管道读信息，要么向管道写信息，至于是读还是写取决于父进程调用popen时传递的参数。以下给出popen、pclose的定义：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>FILE *popen( const char* command, const char* mode )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参数说明</p>
+
+<p>command： 是一个指向以NULL结束的shell命令字符串的指针。这行命令将被传到bin/sh并使用-c标志，shell将执行这个命令。<br/>
+mode： 只能是读或者写中的一种，得到的返回值(标准I/O流)也具有和type相应的只读或只写类型。如果type是“r”则文件指针连接到command的标准输出;如果type是“w”则文件指针连接到command的标准输入。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/03/popenhe-pclosehan-shu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -395,79 +448,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/log10de-shi-xian/">Log10的实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-03T01:46:00+08:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-         | <a href="/blog/2013/08/03/log10de-shi-xian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在项目中要使用到log10计算，可所用系统的标准库里并没有移植该功能，需要自己实现。请问，采用什么算法实现该功能？</p>
-
-<p>在网上找了一个例子，但不确定能否在嵌入式的一些平台使用。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>double my_log10(double x)
-</span><span class='line'>{
-</span><span class='line'>    register double ret;
-</span><span class='line'>
-</span><span class='line'>       __asm__(
-</span><span class='line'>  "fldlg2\n\t" 
-</span><span class='line'>  "fxch\n\t" 
-</span><span class='line'>  "fyl2x"
-</span><span class='line'>  :"=t"(ret)
-</span><span class='line'>          :"0"(x)
-</span><span class='line'>      );
-</span><span class='line'>   return ret;
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/log10de-shi-xian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/29/">&larr; Older</a>
@@ -506,6 +486,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/12/31/zai-jian-%2C2014/">再见，2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/12/30/wo-dao-di-xiang-zuo-shi-yao/">我到底想做什么</a>
       </li>
     
@@ -519,10 +503,6 @@
     
       <li class="post">
         <a href="/blog/2014/12/25/jia-xiang-de-feng-mi/">家乡的蜂蜜</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/12/22/si-bda-zhan-he-lie-bian-chuang-ye/">撕B大战和裂变创业</a>
       </li>
     
   </ul>
@@ -561,7 +541,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (8)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (81)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (82)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
