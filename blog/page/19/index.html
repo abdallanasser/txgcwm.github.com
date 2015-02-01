@@ -9,7 +9,23 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="残剑：你是班级里公认的模范好男友，世间多少女子希望得到像你这样的好男人！是你让我相信了校园爱情，那么的纯结与真实。7年的努力终究修成了正果，是否可以谈谈你的感情经历? 爱吓人：我只有一次恋爱，也就是这一次，到现在不知不觉已经七年了。我们从最开始对感情的懵懂，到现在成为一对夫妻， &hellip;">
+  <meta name="description" content="运行Scrapy抓取网上数据的时候，出现了以下的错误： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+$ sudo scrapy crawl tutorial
+Traceback (most recent call last): File "/usr/local/bin/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +93,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">运行Scrapy项目出错：KeyError: &#8216;Spider Not Found: Tutorial&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T22:40:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
+</span><span class='line'>    execute()
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
+</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
+</span><span class='line'>    func(*a, **kw)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
+</span><span class='line'>    cmd.run(args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
+</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
+</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
+</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -468,53 +559,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/">微访谈后期安排</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-14T23:58:00+08:00" pubdate data-updated="true">Apr 14<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>下午正在憨睡，电话铃声想起，这是Horizon同学打过来的电话，不用接我也知道这是喜事，首先要恭喜他终于考上了自己心仪的大学，也预祝他的研究生生活能够更加的完美。此时的我也可以写下这篇文章了，之前没有写是怕影响到他的心境，多一事还不如少一事。</p>
-
-<p>我的每篇文章，Horizon几乎都看过，所以我确信这篇文章也不会例外。在这里我会更多的提到他，后续的一些事情我希望能够得到他的帮助和协助，我想他也会乐意帮助我。虽然我知道在这个暑假他不会很空闲，但我还是试图从他那里偷走一些时间。</p>
-
-<p>截至目前为止还有四份微访谈没有完成，其中三份已发出邀请和问题list，另外一份就是Horizon的。我的这次活动跟他的考研安排存在一些冲突（截至到6月初，为的是给他们一个充分的时间。虽说还有足够的时间，但也容易逝去，且行且珍惜吧！），所以迟迟未发出正式的邀请。Horizon是第一位主动要求我对他进行微访谈的，他希望借助他人的视角更多的发现和了解自己。每次和他聊起我的这次活动，都让我觉得很开心，从他那里获取到了支持的力量。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/14/wei-fang-tan-hou-qi-an-pai/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -553,6 +597,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/02/02/hu-wai-jiao-hui-liao-wo-na-xie/">户外教会了我那些</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/02/01/lu-xing-shi-jian-zong-shi-you-de/">旅行时间总是有的</a>
       </li>
     
@@ -566,10 +614,6 @@
     
       <li class="post">
         <a href="/blog/2015/01/17/xing-wu-yue-gu-dao-%2Cguan-zhe-xi-tian-chi/">行吴越古道，观浙西天池</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/01/06/gao-bie-de-qian-ye/">告别的前夜</a>
       </li>
     
   </ul>
@@ -602,7 +646,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
-<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (33)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (34)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (3)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (10)</a></li>
