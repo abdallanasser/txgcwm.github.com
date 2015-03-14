@@ -9,10 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Octopress有自带的分类，详情请见 官方文档 。_config.yml中配置项如下： 1
-2
-category_dir: blog/categories
-category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rails &hellip;">
+  <meta name="description" content="Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。 软件安装 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +77,63 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/">Ubuntu下安装SublimeText2及其插件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-23T22:33:00+08:00" pubdate data-updated="true">Jul 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。</p>
+
+<h1>软件安装</h1>
+
+<p>Ubuntu下安装Sublime Text 2有两种方式：指令安装和直接下载安装。</p>
+
+<h2>指令安装</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:webupd8team/sublime-text-2
+</span><span class='line'>$ sudo apt-get update
+</span><span class='line'>$ sudo apt-get install sublime-text-2</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -522,87 +576,6 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/15/lian-zhan/">链栈</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-15T21:49:00+08:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/15/lian-zhan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>栈是限制在表的一端进行插入和删除运算的线性表。通常称插入、删除的这一端为栈顶，另一端称为栈底；当表中没有元素时称为空栈；栈为后进先出的线性表，简称为LIFO表；栈的修改是按后进先出的原则进行；每次删除的总是当前栈中最新的元素（即最后插入的元素），而最先插入的被放在栈的底部，要到最后才能删除。</p>
-
-<h1>链栈结点</h1>
-
-<p>出栈与入栈是栈的最主要操作，当无法预见栈所需大小时，往往需要采用链栈的方式。在链栈中，不需要像单链表一样需要头结点。链栈的结构如下图所示：</p>
-
-<p><img src="/images/2013/7/lian-zhan/stacknode.png" alt=" stacknode " /></p>
-
-<p>可将其结构定义为：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>typedef char SElemType
-</span><span class='line'>
-</span><span class='line'>typedef struct StackNode
-</span><span class='line'>{
-</span><span class='line'>    SElemType data;//根据实际需要定义数据类型
-</span><span class='line'>    struct StackNode *next;
-</span><span class='line'>}StackNode,*LinkStackPtr;
-</span><span class='line'>
-</span><span class='line'>typedef struct LinkStack
-</span><span class='line'>{
-</span><span class='line'>    LinkStackPtr top;//指向栈链顶部
-</span><span class='line'>    int count;//用以判断栈是否为空，可初始化为0
-</span><span class='line'>}LinkStack;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/15/lian-zhan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/34/">&larr; Older</a>
@@ -641,6 +614,10 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/14/cong-cong-na-xie-nian-%3Ata-men-huan-shi-mei-you-zai-%5B%3F%5D-qi/">匆匆那些年：他们还是没有在一起</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/14/sheng-huo-zhong-de-xiao-hua/">生活中的笑话</a>
       </li>
     
@@ -654,10 +631,6 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
     
       <li class="post">
         <a href="/blog/2015/02/28/wu-mu-sheng-bu-feng-shi/">武穆生不逢世</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/02/26/da-pai/">打牌</a>
       </li>
     
   </ul>
@@ -693,7 +666,7 @@ category_title_prefix: "Category: " 然后添加类似categories: [Ruby&amp;Rail
 <li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (35)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (3)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
-<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (12)</a></li>
+<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (13)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (86)</a></li>
