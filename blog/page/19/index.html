@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="临近下班的前一小时，一个妹子加了我，无论她通过怎样的途径加的我，作为一个正常的雄性来说都是非常乐意接受的。自认为女人缘很差的我来说，面对这种事情更是喜出望外，喜悦之情难以言表，干脆利落地加了她。 当你一个加另外一个人的时候，一般情况是加的人对被加的人会比较熟识，换句话说， &hellip;">
+  <meta name="description" content="和上次一样，这次也没有让我看到我特别想看的东西，具体是什么我谈不上，只希望看到一些我不曾见过的。这次在一个小学举办活动，校方也很配合，在校门口的led显示屏上作了特别的说明。从这次的分享中，我最大的收获是现在的学校越来越注重科技在实际生活中的学习，据说很多下城区的小学都开设了相应的课程， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/">西湖创客汇：创客与教育</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-10T19:47:00+08:00" pubdate data-updated="true">May 10<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://makeforkids.com/wp/wp-content/uploads/2014/01/20140120_cwi_10.jpg" alt="alt text" /></p>
+
+<p>和上次一样，这次也没有让我看到我特别想看的东西，具体是什么我谈不上，只希望看到一些我不曾见过的。这次在一个小学举办活动，校方也很配合，在校门口的led显示屏上作了特别的说明。从这次的分享中，我最大的收获是现在的学校越来越注重科技在实际生活中的学习，据说很多下城区的小学都开设了相应的课程，未来很多东西可能会有更大的推广。</p>
+
+<p>到会的主要有以下几类人员：学生，家长，教师，杭州创客的早期人员，还有就是我这种有一点兴趣的人员（估计也就几个吧）。有很多创客人员同时也是以家长的身份出现，我想他们也希望在孩子早期培养他们的兴趣。从现场来看，这些孩子在这之前还是了解了一些东西的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -416,107 +463,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/">Scrapy入门简略教程（一）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-28T23:04:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
-
-<ol>
-<li>创建一个新的Scrapy项目；</li>
-<li>定义你将提取的Items；</li>
-<li>写一个蜘蛛抓取网站并提取Items；</li>
-<li>写一个项目管道存储所提取的Items。</li>
-</ol>
-
-
-<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
-
-<h1>创建一个项目</h1>
-
-<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject shiyifang</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
-</span><span class='line'>.
-</span><span class='line'>├── scrapy.cfg
-</span><span class='line'>└── shiyifang
-</span><span class='line'>    ├── __init__.py
-</span><span class='line'>    ├── items.py
-</span><span class='line'>    ├── pipelines.py
-</span><span class='line'>    ├── settings.py
-</span><span class='line'>    └── spiders
-</span><span class='line'>        └── __init__.py
-</span><span class='line'>
-</span><span class='line'>2 directories, 6 files</span></code></pre></td></tr></table></div></figure>
-
-
-<p>关于该目录下文件和文件夹的说明：</p>
-
-<ul>
-<li>scrapy.cfg: 项目的配置文件。</li>
-<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
-<li>shiyifang/items.py: 项目的items文件。</li>
-<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
-<li>shiyifang/settings.py: 项目的settings文件。</li>
-<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
-</ul>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/20/">&larr; Older</a>
@@ -555,6 +501,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/18/can-jian-fei-xue/">残剑飞雪</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/15/he-ze-er-yu/">涸泽而渔</a>
       </li>
     
@@ -568,10 +518,6 @@
     
       <li class="post">
         <a href="/blog/2015/03/04/bu-ke-diao-jie-mai/">不可掉价卖</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/03/chuan-hong-xie-de-xiao-nu-hai/">穿红鞋的小女孩</a>
       </li>
     
   </ul>
@@ -600,7 +546,7 @@
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (13)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (14)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
