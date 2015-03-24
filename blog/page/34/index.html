@@ -9,19 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在Linux环境下，可以使用以下的代码获取网络的ip地址： 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-if (gethostname(host, sizeof(host)) &lt; 0) { printf("Can't get hostname\n"); return -1;
-}
-if ((hp &hellip;">
+  <meta name="description" content="TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用tftp MemoryAddress FileName命令即可， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -89,6 +77,57 @@ if ((hp &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Uboot中TFTP解释</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T22:45:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/19/ubootzhong-tftpjie-shi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+
+<p>使用TFTP传送文件的步骤：</p>
+
+<ol>
+<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
+<li>调用TftpStart 函数开始文件传送。</li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/19/ubootzhong-tftpjie-shi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -621,69 +660,6 @@ if ((hp &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-11T23:09:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-</span><span class='line'>'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-</span><span class='line'>'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-</span><span class='line'>'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-</span><span class='line'>'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-</span><span class='line'>'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-</span><span class='line'>'w', 'x', 'y', 'z', '0', '1', '2', '3',
-</span><span class='line'>'4', '5', '6', '7', '8', '9', '+', '/',</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果被加密的字符串每3个一组，还剩1或2个字符，使用特殊字符&#8221;=&ldquo;补齐。例如编码只有2个字符“me”，m的ascii是109，e的是101，用二进制表示分别是01101101、01100101，连接起来就是0110110101100101，再按6位分为一组：011011、010110、010100（不足6位补0），ascii分别是27、22、 20，即Base64值为bWU，不足4字用＝补齐，因此bWU＝就me的Base64值。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/35/">&larr; Older</a>
@@ -722,6 +698,10 @@ if ((hp &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/24/zai-zhe-ge-chun-tian-wo-men-%5B%3F%5D-qi-yue-hui/">在这个春天我们一起约会</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/24/mai-mai-wu-ren-yi/">买卖无仁义</a>
       </li>
     
@@ -735,10 +715,6 @@ if ((hp &hellip;">
     
       <li class="post">
         <a href="/blog/2015/03/15/he-ze-er-yu/">涸泽而渔</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/14/cong-cong-na-xie-nian-%3Ata-men-huan-shi-mei-you-zai-%5B%3F%5D-qi/">匆匆那些年：他们还是没有在一起</a>
       </li>
     
   </ul>
@@ -777,7 +753,7 @@ if ((hp &hellip;">
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (14)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (86)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (87)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (4)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
