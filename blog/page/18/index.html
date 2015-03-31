@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在简书里可以自制专题，我觉得它不是一个新奇的功能，但它是一个微创新，它是对“收藏”功能的改进，只不过它对任何人开放，利于好的内容的分享与传播。现在简书的“专题”功能并没有发挥很好的效用，如果我需要看一个专题的内容，就需要点击“专题”，接着点击“我的订阅”（当然这步是没有必要的，默认的就是这项）， &hellip;">
+  <meta name="description" content="当XP系统退出历史舞台的时候，众多的Linux爱好者就撰文列举Linux替代XP的种种可能。虽然讲得很有道理，加上我是一个Linux的忠实用户，但我觉得Linux桌面系统拥抱普通大众还为时尚早，在大众心中已有千万的理由。这种等待的时间会很长，可我并不觉得它不可能成为一种替代的方案。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/">Linux桌面系统离你还太远</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-24T00:18:00+08:00" pubdate data-updated="true">May 24<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://img.linux.net.cn/data/attachment/album/201210/19/142402r9r1qaqaandac9qr.jpg" alt="alt text" /></p>
+
+<p>当XP系统退出历史舞台的时候，众多的Linux爱好者就撰文列举Linux替代XP的种种可能。虽然讲得很有道理，加上我是一个Linux的忠实用户，但我觉得Linux桌面系统拥抱普通大众还为时尚早，在大众心中已有千万的理由。这种等待的时间会很长，可我并不觉得它不可能成为一种替代的方案。</p>
+
+<p>我使用Ubuntu作为我工作和平时娱乐的系统已快三年，但我并不敢说自己熟悉它，也只是在他人的指引下完成一些东西。相比较开始的阶段，现在的进步主要是对它有了更进一步的了解。起先是看看他人写的东西，经过这些年的折腾，自己才逐渐有了写这方面小文章的能力。</p>
+
+<p>就我这几年使用Ubuntu系统的体验来看，谈谈我对它的认识，基于以下几点我觉得它还不适合普通的大众，而且在这条道路上它还需要更加努力。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/24/linuxzhuo-mian-xi-tong-chi-ni-huan-tai-yuan/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -429,109 +478,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/">Octopress的一些设置</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-17T17:13:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1>从新电脑上恢复博客内容</h1>
-
-<p>如果电脑重装了系统，或者要在另一台电脑上编写博客，找到博客仓库的<code>url</code>，执行以下的指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
-</span><span class='line'>
-</span><span class='line'>$ cd octopress
-</span><span class='line'>$ git clone (url) _deploy   #克隆master分支，它存放着博客内容。
-</span><span class='line'>
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ rake install
-</span><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
-
-
-<h1>网站提交到搜索引擎</h1>
-
-<p>博客上写出的文章当然希望有人能看到，而且希望更多的人看到，这就需要让自己的博客可以在搜索引擎里面检索到，那么就需要将个人博客提交到搜索引擎，让它来抓取，所以首先要到各个搜索引擎提交自己的博客地址，<a href="http://urlc.cn/tool/addurl.html">免费收录网站搜索引擎登录口大全&mdash;搜索引擎网站收录地址大全</a>和<a href="http://tool.lusongsong.com/addurl.html">国内外各大免费搜索引擎、导航网址提交入口&mdash;搜索引擎网站收录地址大全</a>这两个地方收录了国内外各大搜索引擎的地址。</p>
-
-<p>提交到搜索引擎后就能搜索到你的文章，但还需要做的是为你的网站文章添加描述信息、关键字，来帮助用户准确的搜索到。关键字和描述是指网页<code>head</code>部分的元标签<code>meta</code>，是给搜索引擎看的，以此希望用户可以比较容易找到。例如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;meta name="description" content="残剑是一个关注IT技术的博客"&gt;
-</span><span class='line'>&lt;meta name="keywords" content="IT, 编程, 码农的自嘲"&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>首先为每篇文章添加描述和关键字，本文的文件头如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>---
-</span><span class='line'>layout: post
-</span><span class='line'>title: "Octopress的一些设置"
-</span><span class='line'>date: 2014-05-17 17:13
-</span><span class='line'>comments: true
-</span><span class='line'>categories: [Octopress]
-</span><span class='line'>tags: [Octopress, 博客恢复, SEO]
-</span><span class='line'>keywords: Seo, Octopress
-</span><span class='line'>description: Octopress的SEO技巧，在新电脑上恢复博客内容。
-</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/19/">&larr; Older</a>
@@ -570,6 +516,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/03/31/liao-liao-wo-zai-jian-shu-chuang-jian-de-zhuan-ti/">聊聊我在简书创建的专题</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/03/28/%5B%3F%5D-sheng-de-xiang-shou/">一生的相守</a>
       </li>
     
@@ -583,10 +533,6 @@
     
       <li class="post">
         <a href="/blog/2015/03/26/da-zhang-fu-dang-ru-shi/">大丈夫当如是</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/03/24/yu-jian-ni/">遇见你</a>
       </li>
     
   </ul>
@@ -625,7 +571,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (14)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (88)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (89)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (6)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
