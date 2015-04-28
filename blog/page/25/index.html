@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="下午正在憨睡，电话铃声想起，这是Horizon同学打过来的电话，不用接我也知道这是喜事，首先要恭喜他终于考上了自己心仪的大学，也预祝他的研究生生活能够更加的完美。此时的我也可以写下这篇文章了，之前没有写是怕影响到他的心境，多一事还不如少一事。 我的每篇文章，Horizon几乎都看过， &hellip;">
+  <meta name="description" content="编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/17/cbian-yi-jing-gao/">C编译警告</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-17T00:00:00+08:00" pubdate data-updated="true">Apr 17<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/17/cbian-yi-jing-gao/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>编译的时候，一看到warning信息就心烦，尤其在遇到错误的时候还得在一大堆信息中去查找error。公司的代码在编译时有一大堆的warning信息，我觉得它们可恶透了，在心情好的时候就慢慢地把它们给修改了。遇到警告的信息，我一般不太会使用编译选项把它们给避免了，因为这可能隐藏掉一些潜在的错误。</p>
+
+<p>在整个的清理过程中，主要发现以下几类警告信息：</p>
+
+<ul>
+<li>类在构建时，变量初始化的次序颠倒；</li>
+<li>有无符号数在作比较；</li>
+<li>宏定义不正确；</li>
+<li>定义了没有使用的变量，如果有很多条件宏定义的时候，这个处理要细致一些；</li>
+<li>结构体和数组的初始化方式不正确，其实是错误的方式，却也只是警告；</li>
+<li>不小心书写代码引发的警告，有些其实也是错误，不过编译器不能识别出来，例如以下列举的例子；</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if(ptr != NULL);  // 分号错误的添加
+</span><span class='line'>    printf("[%s, %d] address: %p \n", __FUNCTION__, __LINE__, ptr); 
+</span><span class='line'>    //当然这里在程序运行时，如果ptr为NULL会引发段错误。若是其它的一些操作，可能一下子根本查不出错误的所在。
+</span><span class='line'>    
+</span><span class='line'>if(a=1)  //实际上代码的本意是想表达if(a==1)，这样写是潜在的错误，其它的逻辑根本执行不到。
+</span><span class='line'>    /*do something*/</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>函数的形参定义了，在函数体内却没有使用到。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/17/cbian-yi-jing-gao/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -456,53 +530,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/16/16ri-za-tan/">16日杂谈</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-16T12:46:00+08:00" pubdate data-updated="true">Mar 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/16/16ri-za-tan/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在这个移动互联的大数据时代，几乎没有个人隐私，我也没必要隐藏什么了，所以有了这么一个决定：空间中的私密日记总计20篇，现将其中的19篇全部公开。这些文章大部分是在大学期间写的，回过头看看还是有一种成就感的。空间中还有大量的转载文章，是时候把它们腾挪一个地方了。</p>
-
-<p>起先还在考虑是否要把转载的文章备份到其它的地方，可发现自己这么多年都没有再去关照过它们，最后一狠心就把它们全部删除了。那些文章更多的是鸡汤，喝多了始终没有好处，删除了也不会可惜，但还是要感谢它们陪伴我走过了那些无知而又天真的岁月。目前空间中只保留了一篇其他人（刚哥，一个拥有文艺气息的青年，是我大学四年的舍友）写的文章，其余是个人努力码字的结果。</p>
-
-<p>现在的我变得越来越讨厌无止境的转载（适当的调剂我还是认同的），那简直是在“污染”空间的资讯。别人的行为我无力去改变 ，那就从自己做起，努力写一些属于自己的东西。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/03/16/16ri-za-tan/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/26/">&larr; Older</a>
@@ -541,6 +568,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/04/28/wu-yi-da-lai-ji-niu-tou-shan/">武义大莱及牛头山</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/04/22/liu-bei-de-chuang-ye-shi/">刘备的创业史</a>
       </li>
     
@@ -554,10 +585,6 @@
     
       <li class="post">
         <a href="/blog/2015/04/14/shu-zi-bei-hou-shi-xie-lei-shi/">数字背后是血泪史</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/04/12/mo-wu-hu-lian-%2Cta-men-zheng-zai-gai-bian-zhe-ge-shi-jie-er/">万物互联，他们正在改变这个世界（二）</a>
       </li>
     
   </ul>
@@ -592,7 +619,7 @@
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
-<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (38)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (39)</a></li>
 <li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (5)</a></li>
 <li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (15)</a></li>
