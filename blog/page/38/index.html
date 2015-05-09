@@ -9,10 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令sudo apt-get install astyle安装，也可以到 这里 下载源码后自己编译安装。 下面介绍一下astyle的简单使用。例如有以下的源码： 1
-2
-3
-#include &lt &hellip;">
+  <meta name="description" content="netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +77,53 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Linux下iptables防火墙原理及使用</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
+
+<h1>iptables传输数据包的过程</h1>
+
+<p><img src="/images/2013/7/iptables/flow.png" alt=" flow " /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -490,57 +534,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Ubuntu下编译vlc-android源代码</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-19T21:18:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在编译源码前，需要先安装Android的SDK、NDK以及一些必需的软件，具体安装方法这里就不再详述了，网上可以找到很多相应的文章。安装软件可以执行以下指令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-get install  apache-ant(or ant)  autoconf automake autopoint  libtool  gawk (or nawk)
-</span><span class='line'>gcc  g++  pkg-config  cmake  patch subversion git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ant工具在最后编译android源码生成apk文件会用到，所以需要安装。如果手动安装了ant，需要在环境变量中配置好ant的 path，或者在编译前执行命令<code>export PATH=$PATH:/xxx/ant/bin</code>，保证可以在执行编译的命令行中执行ant命令即可。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/19/ubuntuxia-bian-yi-vlc-androidyuan-dai-ma/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/39/">&larr; Older</a>
@@ -579,6 +572,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/09/ru-he-cheng-wei-%5B%3F%5D-ge-you-xiu-de-sha-shou/">如何成为一个优秀的杀手</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/07/shi-yong-guo-de-lu-you-ying-yong/">使用过的旅游应用</a>
       </li>
     
@@ -592,10 +589,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/03/bo-%5B%3F%5D-ge-lu-xing-fen-xiang-she-qu-de-gou-si/">驳《一个旅行分享社区的构思》</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/03/da-ming-shan-hou-shan-chuan-yue/">大明山后山穿越</a>
       </li>
     
   </ul>
@@ -636,7 +629,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (15)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (99)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (100)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (7)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>

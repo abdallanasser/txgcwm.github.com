@@ -9,14 +9,16 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="输入以下的指令，就能立马体验Slash。 1
+  <meta name="description" content="从新电脑上恢复博客内容 如果电脑重装了系统，或者要在另一台电脑上编写博客，找到博客仓库的url，执行以下的指令： 1
 2
 3
 4
-$ cd octopress
-$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
-$ rake install['slash']
-$ &hellip;">
+5
+6
+7
+8
+9
+$ git clone -b source (url) octopress #把source 克隆到本地octopress目录上 $ cd &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +86,109 @@ $ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/">Octopress的一些设置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-17T17:13:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>从新电脑上恢复博客内容</h1>
+
+<p>如果电脑重装了系统，或者要在另一台电脑上编写博客，找到博客仓库的<code>url</code>，执行以下的指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
+</span><span class='line'>
+</span><span class='line'>$ cd octopress
+</span><span class='line'>$ git clone (url) _deploy   #克隆master分支，它存放着博客内容。
+</span><span class='line'>
+</span><span class='line'>$ gem install bundler
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ rake install
+</span><span class='line'>$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>网站提交到搜索引擎</h1>
+
+<p>博客上写出的文章当然希望有人能看到，而且希望更多的人看到，这就需要让自己的博客可以在搜索引擎里面检索到，那么就需要将个人博客提交到搜索引擎，让它来抓取，所以首先要到各个搜索引擎提交自己的博客地址，<a href="http://urlc.cn/tool/addurl.html">免费收录网站搜索引擎登录口大全&mdash;搜索引擎网站收录地址大全</a>和<a href="http://tool.lusongsong.com/addurl.html">国内外各大免费搜索引擎、导航网址提交入口&mdash;搜索引擎网站收录地址大全</a>这两个地方收录了国内外各大搜索引擎的地址。</p>
+
+<p>提交到搜索引擎后就能搜索到你的文章，但还需要做的是为你的网站文章添加描述信息、关键字，来帮助用户准确的搜索到。关键字和描述是指网页<code>head</code>部分的元标签<code>meta</code>，是给搜索引擎看的，以此希望用户可以比较容易找到。例如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;meta name="description" content="残剑是一个关注IT技术的博客"&gt;
+</span><span class='line'>&lt;meta name="keywords" content="IT, 编程, 码农的自嘲"&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>首先为每篇文章添加描述和关键字，本文的文件头如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>---
+</span><span class='line'>layout: post
+</span><span class='line'>title: "Octopress的一些设置"
+</span><span class='line'>date: 2014-05-17 17:13
+</span><span class='line'>comments: true
+</span><span class='line'>categories: [Octopress]
+</span><span class='line'>tags: [Octopress, 博客恢复, SEO]
+</span><span class='line'>keywords: Seo, Octopress
+</span><span class='line'>description: Octopress的SEO技巧，在新电脑上恢复博客内容。
+</span><span class='line'>---</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/17/octopressde-%5B%3F%5D-xie-she-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -454,55 +559,6 @@ D6：回成都</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/11/octopresstian-jia-tong-ji/">Octopress添加统计</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-11T01:00:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/11/octopresstian-jia-tong-ji/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
-
-<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
-
-<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
-
-<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
-
-<p><big>参考文章</big></p>
-
-<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
-<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/24/">&larr; Older</a>
@@ -541,6 +597,10 @@ D6：回成都</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/09/ru-he-cheng-wei-%5B%3F%5D-ge-you-xiu-de-sha-shou/">如何成为一个优秀的杀手</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/07/shi-yong-guo-de-lu-you-ying-yong/">使用过的旅游应用</a>
       </li>
     
@@ -554,10 +614,6 @@ D6：回成都</p>
     
       <li class="post">
         <a href="/blog/2015/05/03/bo-%5B%3F%5D-ge-lu-xing-fen-xiang-she-qu-de-gou-si/">驳《一个旅行分享社区的构思》</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/03/da-ming-shan-hou-shan-chuan-yue/">大明山后山穿越</a>
       </li>
     
   </ul>
@@ -598,7 +654,7 @@ D6：回成都</p>
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (15)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (99)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (100)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (7)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
