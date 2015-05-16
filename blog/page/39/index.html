@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用tftp MemoryAddress FileName命令即可， &hellip;">
+  <meta name="description" content="在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用sudo apt-get install emacs来安装Emaces。 Emacs的基本操作和组合键 模式键定义 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-20T14:47:00+08:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用<code>sudo apt-get install emacs</code>来安装Emaces。</p>
+
+<h1>Emacs的基本操作和组合键</h1>
+
+<h2>模式键定义</h2>
+
+<p>四个模式键：C&mdash;-Ctrl；M&mdash;-Alt；s&mdash;-Super(Win)；S&mdash;-Shift</p>
+
+<p>比如：</p>
+
+<p>C-x：表示按下ctrl键，然后按下x键。</p>
+
+<p>C-x c C-c：表示按下ctrl，然后按下x键，松开后再按下c键。</p>
+
+<p>C-x k：表示按下ctrl，同时按下x和k键。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -543,123 +600,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/">Linux下删除文本文件中的所有空行</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-13T22:20:00+08:00" pubdate data-updated="true">Jul 13<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>很多情况下文本文件中会出现许多空行，这些都是我们不想要的。大多时候我们会选择手工删除，这样显然太麻烦，况且当文件行数很多的时候，其麻烦程度是不能忍受的。所以需要一个工具，可以达到删除所有空行的目的，并且最好还能一次处理多个文件。以下是Linux下的一个脚本文件，支持一次处理多个文件。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>TEMP_F="del.lines.$$"
-</span><span class='line'>
-</span><span class='line'>usage()
-</span><span class='line'>{
-</span><span class='line'>  echo "Usage: $0 filename [filename...]"
-</span><span class='line'>  exit -1
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>if [ $# -eq 0 ] ; then
-</span><span class='line'>  usage
-</span><span class='line'>fi
-</span><span class='line'>
-</span><span class='line'>while [ $# -gt 0 ]
-</span><span class='line'>do
-</span><span class='line'>  FILE_NAME=$1
-</span><span class='line'>
-</span><span class='line'>  case $1 in 
-</span><span class='line'>      --help)
-</span><span class='line'>          usage
-</span><span class='line'>      ;;
-</span><span class='line'>
-</span><span class='line'>      *)
-</span><span class='line'>          if [ -f $1 ] ; then
-</span><span class='line'>              sed '/^$/d' $FILE_NAME &gt; $TEMP_F
-</span><span class='line'>              mv $TEMP_F $FILE_NAME
-</span><span class='line'>          else
-</span><span class='line'>              echo "$0 can not find this file: $1"
-</span><span class='line'>          fi      
-</span><span class='line'>      ;;
-</span><span class='line'>  esac
-</span><span class='line'>
-</span><span class='line'>  shift
-</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/13/linuxxia-shan-chu-wen-ben-wen-jian-zhong-de-suo-you-kong-xing/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/40/">&larr; Older</a>
@@ -698,6 +638,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/17/bu-yao-zhong-xie-dan-ke-yi-zhong-gou/">不要重写但可以重构</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/">孩子，我们来聊聊那些不幸的家庭</a>
       </li>
     
@@ -711,10 +655,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/07/shi-yong-guo-de-lu-you-ying-yong/">使用过的旅游应用</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/06/huo-dong-yao-yu-le-zhi-shang/">活动要娱乐至上</a>
       </li>
     
   </ul>
@@ -755,7 +695,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (15)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (101)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (102)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (7)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
