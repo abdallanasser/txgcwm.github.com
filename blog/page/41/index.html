@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="辗转相除法又名欧几里德算法（Euclidean algorithm），用于求两个正整数的最大公因子的算法。它是已知最古老的算法，可追溯至公元前300年。它首次出现于欧几里德的《几何原本》中，而在中国则可以追溯至东汉出现的《九章算术》。 设两数为a、b(b&lt;a)，求它们的最大公约数的步骤如下： &hellip;">
+  <meta name="description" content="udev的文档介绍： dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,56 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-07T17:43:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>udev的文档介绍：</p>
+
+<ol>
+<li><p>dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。</p></li>
+<li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
+<li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
+</ol>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -392,6 +442,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/26/lan-mei-zi-chuan/">蓝莓自传</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/25/mo-wu-sheng-chang-%3Aji-de-fang-shi/">万物生长：鸡的方式</a>
       </li>
     
@@ -405,10 +459,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2015/05/17/bu-yao-zhong-xie-dan-ke-yi-zhong-gou/">不要重写但可以重构</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/">孩子，我们来聊聊那些不幸的家庭</a>
       </li>
     
   </ul>
@@ -431,7 +481,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (24)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (25)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (11)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (4)</a></li>

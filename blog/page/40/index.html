@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。 初始化事件 首先完成对libenvent的事件初始化和事件驱动模型的选择。 &hellip;">
+  <meta name="description" content="假设你坐在汽车内，你会如何计算汽车在高速路上的平均速度？说说方法，请写下闯入你大脑的第一个想法，希望不要太离谱。没有标准，百家争鸣！ 问题背景 之前从家里到工作地的总体花费时间是知道的，但我对汽车的实际速度并没有一个概念。坐在车上有时很想知道某一地到我的目的地还需要多少时间。因不太擅长跟陌生人交流 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,67 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/19/che-su-de-ji-suan/">车速的计算</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-19T00:04:00+08:00" pubdate data-updated="true">Jul 19<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/19/che-su-de-ji-suan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>假设你坐在汽车内，你会如何计算汽车在高速路上的平均速度？说说方法，请写下闯入你大脑的第一个想法，希望不要太离谱。没有标准，百家争鸣！</p>
+
+<h1>问题背景</h1>
+
+<p>之前从家里到工作地的总体花费时间是知道的，但我对汽车的实际速度并没有一个概念。坐在车上有时很想知道某一地到我的目的地还需要多少时间。因不太擅长跟陌生人交流，所以自己想一些办法解决。因为高速路上会有到某地还有多少距离的提示，而且相隔几里路后又会有提示，所以采用了距离差除以时间，然后用还剩的距离除以速度，最后得到我想知道的时间。在不堵车的情况下，这种方法是比较有效的，误差不是很大。</p>
+
+<h1>网友的回复</h1>
+
+<p>djsxut：1、看仪表盘在一定时间的行驶路程，除以行驶时间得到平均速度；2、不怕麻烦的话，多次取样，再计算平均速度；3、视力足够好，数数高速中间的小树苗，基本上两颗小数栽种的距离是一定的。</p>
+
+<p>hellioncu：每次看到指示牌标记的公里数，并记下时间，公里数差/时间差——就是速度。</p>
+
+<p>群雄逐鹿中原：装个GPS导航软件。汽车上或手机上都行。</p>
+
+<p>folklore：hire a beauty girl, and ask her: what is our average speed now？</p>
+
+<p>cokeboL：距离/时间，这还能有啥。</p>
+
+<p>cxytz01：超速行驶，交警叔叔会告诉你。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/19/che-su-de-ji-suan/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -649,56 +710,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">PF_NETLINK应用实例:NETLINK_KOBJECT_UEVENT的实现</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-07T17:43:00+08:00" pubdate data-updated="true">Jul 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>udev的文档介绍：</p>
-
-<ol>
-<li><p>dynamic replacement for /dev。作为devfs的替代者，传统的devfs不能动态分配major和minor的值，而major和minor非常有限，很快就会用完了。udev能够像DHCP动态分配IP地址一样去动态分配major和minor。</p></li>
-<li><p>device naming。提供设备命名持久化的机制。传统设备命名方式不具直观性，像/dev/hda1这样的名字肯定没有boot_disk这样的名字直观。udev能够像DNS解析域名一样去给设备指定一个有意义的名称。</p></li>
-<li><p>API to access info about current system devices 。提供了一组易用的API去操作sysfs，避免重复实现同样的代码。</p></li>
-</ol>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/07/pf-netlinkying-yong-shi-li-netlink-kobject-ueventde-shi-xian/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/41/">&larr; Older</a>
@@ -737,6 +748,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/05/26/lan-mei-zi-chuan/">蓝莓自传</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/25/mo-wu-sheng-chang-%3Aji-de-fang-shi/">万物生长：鸡的方式</a>
       </li>
     
@@ -750,10 +765,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/17/bu-yao-zhong-xie-dan-ke-yi-zhong-gou/">不要重写但可以重构</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/">孩子，我们来聊聊那些不幸的家庭</a>
       </li>
     
   </ul>
@@ -776,7 +787,7 @@
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (24)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (25)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (11)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (4)</a></li>
