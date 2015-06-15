@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MAC OS X札记 | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/mac-os-xzha-ji/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2015-06-16T00:58:45+08:00</updated>
+  <updated>2015-06-16T01:04:08+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,52 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MAC OS X系统显示和隐藏文件]]></title>
+    <link href="http://txgcwm.github.io/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian/"/>
+    <updated>2015-06-16T01:02:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian</id>
+    <content type="html"><![CDATA[<p>苹果Mac OS X操作系统下，隐藏文件是否显示有很多种设置方法，最简单的要算在Mac终端输入命令。</p>
+
+<p>显示Mac隐藏文件的命令：
+<code>
+defaults write com.apple.finder AppleShowAllFiles -bool true
+</code></p>
+
+<p>隐藏Mac隐藏文件的命令：
+<code>
+defaults write com.apple.finder AppleShowAllFiles -bool false
+</code></p>
+
+<p>或者</p>
+
+<p>显示Mac隐藏文件的命令：
+<code>
+defaults write com.apple.finder AppleShowAllFiles  YES
+</code></p>
+
+<p>隐藏Mac隐藏文件的命令：
+<code>
+defaults write com.apple.finder AppleShowAllFiles  NO
+</code></p>
+
+<!--more-->
+
+
+<p>输完单击Enter键，退出终端，重新启动Finder就可以。</p>
+
+<p>重启Finder：
+<code>
+鼠标单击窗口左上角的苹果标志--&gt;强制退出--&gt;Finder--&gt;重新启动
+</code></p>
+
+<p>但是对于熟悉Unix的码农来说，直接输入以下命令就好。
+<code>
+$ ls -a
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MAC OS X系统目录结构]]></title>
