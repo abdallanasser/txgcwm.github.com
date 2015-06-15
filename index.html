@@ -9,7 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="父亲：“孩子啊，你现在也上班了，给你买辆车吧！” 儿子：“还是算了吧，等我赚了钱了自己买辆。” 父亲心里暗喜，为孩子有这样的志气而高兴，遂又补充道：“这次买车算我借你的，到时你赚到钱了再还我。” 儿子又推辞了一下，几个回合之后，父亲胜利了，儿子同意了父亲的建议。 在当天，儿子在他的空间留言道： &hellip;">
+  <meta name="description" content="Mac OS X已经是被认证的Unix系统，所以其目录结构基本符合Unix系统目录结构。但是有很多目录在Finder中并看不到，这是因为这些目录的被设置了隐藏属性，我们可以在终端窗口中利用unix命令查看。 unix传统目录 /bin 传统unix命令的存放目录，如ls、rm、mv等。
+/sbin &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +78,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou/">MAC OS X系统目录结构</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-16T00:15:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Mac OS X已经是被认证的Unix系统，所以其目录结构基本符合Unix系统目录结构。但是有很多目录在Finder中并看不到，这是因为这些目录的被设置了隐藏属性，我们可以在终端窗口中利用unix命令查看。</p>
+
+<h1>unix传统目录</h1>
+
+<ul>
+<li>/bin 传统unix命令的存放目录，如ls、rm、mv等。</li>
+<li>/sbin 传统unix管理类命令存放目录，如fdisk、ifconfig等等。</li>
+<li>/usr 第三方程序安装目录，包含/usr/bin、/usr/sbin、/usr/lib等目录，其中/usr/lib目录中存放了共享库（动态链接库）。</li>
+<li>/etc 标准unix系统配置文件存放目录，如用户密码文件/etc/passwd，此目录实际为指向/private/etc的链接。</li>
+<li>/dev 设备文件存放目录，如代表硬盘的/dev/disk0。</li>
+<li>/tmp 临时文件存放目录，其权限为所有人任意读写，此目录实际为指向/private/tmp的链接。</li>
+<li>/var 存放经常变化的文件，如日志文件，此目录实际为指向/private/var的链接。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -431,53 +488,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/12/you-ya-di-sha-si-%5B%3F%5D-ge-rui-zhi-de-ping-min/">优雅地杀死一个睿智的平民</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-12T23:10:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/12/you-ya-di-sha-si-%5B%3F%5D-ge-rui-zhi-de-ping-min/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://www.loveoo.com/kill/8.gif" alt="杀手的进阶" /></p>
-
-<p>在“杀人游戏”中，总是能够碰到一些睿智的平民，在前一两轮中通过观察、分析和判断总能猜测到哪些人是杀手，他们尝试引导其它一些平民玩家杀死杀手，很多时候也常被杀手误以为是警察。</p>
-
-<p>相比那些争议大且又不是杀手身份的玩家，这些玩家是比较难对付的，因为他们分析的大部分是正确的，听他们讲解的那一刻，杀手甚至会觉得自己的身份已经暴露在那些人的眼前了。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/05/12/you-ya-di-sha-si-%5B%3F%5D-ge-rui-zhi-de-ping-min/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -514,6 +524,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou/">MAC OS X系统目录结构</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/05/31/fu-yu-zi-de-gu-shi/">父与子的故事</a>
       </li>
     
@@ -527,10 +541,6 @@
     
       <li class="post">
         <a href="/blog/2015/05/24/cao-cao-heng-sao-bei-fang/">曹操横扫北方</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/05/20/liu-yue-de-yue-ding-%2Cna-shi-wo-men-de-ai-qing/">六月的约定，那是我们的爱情</a>
       </li>
     
   </ul>
@@ -549,6 +559,7 @@
     <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
 <li class='category'><a href='/blog/categories/c-c/'>C/C++ (14)</a></li>
 <li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/mac-os-xzha-ji/'>MAC OS X札记 (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>Octopress (6)</a></li>
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (8)</a></li>
