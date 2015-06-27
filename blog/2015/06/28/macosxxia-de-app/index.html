@@ -5,19 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>How to resolve "error opening terminal Linux" - 残剑</title>
+  <title>Mac OS X下的App - 残剑</title>
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Linux环境下，编译嵌入式系统时会用到make menuconfig或make config命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息： 1
-2
-3
-4
-5
-6
-7
-error opening terminal Linux
-error &hellip;">
+  <meta name="description" content="基本常识 平常接触的大部分 App其实是一个文件夹结构，只不过Mac OS X 让它看起来是一个单独的文件而已。通过右键点击一个 App，在菜单中选择 Show Contents，则可以浏览 App 的内部结构。 _CodeSignature、CodeResources，一般为 Mac App &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +18,7 @@ error &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux">
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2015/06/28/macosxxia-de-app">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
@@ -88,7 +80,7 @@ error &hellip;">
   
   <header>
     
-      <h1 class="entry-title">How to Resolve "Error Opening Terminal Linux"</h1>
+      <h1 class="entry-title">Mac OS X下的App</h1>
     
     
       <p class="meta">
@@ -104,7 +96,7 @@ error &hellip;">
   
 
 
-<time datetime="2013-07-24T18:33:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+<time datetime="2015-06-28T00:16:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2015</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -113,70 +105,64 @@ error &hellip;">
   </header>
 
 
-<div class="entry-content"><p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：</p>
+<div class="entry-content"><h1>基本常识</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>error opening terminal Linux
-</span><span class='line'>error opening terminal xterm
-</span><span class='line'>error opening terminal vt100
-</span><span class='line'>error opening terminal vt102
-</span><span class='line'>error opening terminal unknown
-</span><span class='line'>error opening terminal cgywin
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+<p>平常接触的大部分 App其实是一个文件夹结构，只不过Mac OS X 让它看起来是一个单独的文件而已。通过右键点击一个 App，在菜单中选择 Show Contents，则可以浏览 App 的内部结构。</p>
+
+<ul>
+<li><p>_CodeSignature、CodeResources，一般为 Mac App Store 上架程序所包含，里面含有数字签名，以防止非法篡改。</p></li>
+<li><p>Frameworks，一般放置了此程序所使用的第三方 Framework (使用的 Apple Framework 都包含在你的系统里)，那些支持 Growl 提醒的程序，在这个文件夹下必然包含一个 Growl Framework。某种程度上，可以理解为 Windows 程序中的 dll 动态链接库。</p></li>
+<li><p>Info.plist，包含了一个程序的基本信息（比如最低系统版本要求、版本号、Copyright等等标识），也可能包含程序的类型信息（比如这个文件如果含有一个 LSUIElement 并且值为 TRUE 的片段，则这个程序在执行后，不会在 Dock 上显示图标或图标下有表示此程序正在运行的小亮点。当然，通过修改一个程序的 plist，添加 LSUIElement，则可以让一个程序运行时不在 Dock 上显示图标）。plist 是一个标准的 XML 文档，可以用任何文本编辑器修改。MacOS 文件夹则是包含了此应用程序的真正可执行文件（类似 Windows 下的 exe 文件），当然一些程序可能包含不只一个可执行文件。PkgInfo 是一个可选的8个字节长度的文件，可保存程序类型和创建者签名（当然这些可以写在 Info.plist 中），这个文件通常包含四字节的程序类型信息（通常为 APPL）和四个字节的签名信息（比如 System Preferences.app 的 PkgInfo 就是 APPLsprf）。</p></li>
+<li><p>Resources，顾名思义，就是资源文件，包含图标、图片、语言包以及其它各种文件，这个没有严格的限制。</p></li>
+</ul>
 
 
 <!--more-->
 
 
-<p>可以按照以下两步解决问题：</p>
+<h1>安装方式</h1>
 
-<ol>
-<li>首先要确定ncurses库是否已经正确安装。在Debian或Ubuntu上，可以用<code>dpkg -l | grep ncurses</code>查看ncurses库是否已安装。</li>
-<li>如果ncurses已经安装了，需要查看TERM和TERMINFO两个环境变量是否已经设置正确。如果没有设置正确，需要设置为正确的值。</li>
-</ol>
+<p>安装方式常见的有：一、拖拽一个 App 文件到 Applications 文件夹完成安装；二、后缀为 .pkg 文件是通过 Mac OS X Installer 解开 pkg 文件，按照 pkg 文件中的 BOM 文件的指令将 pkg 文件中的内容安装到系统不同的位置上去；三、.mpkg 格式的安装文件和 .pkg 安装文件过程类似，只不过 .mpkg 指向的是一组 .pkg 文件的组合而已；四、通过 MacPorts 的终端安装。</p>
 
+<h1>App 的卸载</h1>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
-</span><span class='line'>$ echo $TERMINFO</span></code></pre></td></tr></table></div></figure>
+<p>安装程序之前，要仔细阅读程序提供者的资料或者 App 的说明文档，这些文档中，一般都会含有如何卸载 App 的指南。很多程序（比如 Adobe Creative Suite，Microsoft Office）都会带有相应的卸载程序。XCode 这类，则会提供一个终端命令。</p>
 
+<p>通过 Google 搜索，一般都可以找到如何卸载程序的方法。关键字很简单 Mac OS X ****(应用程序名) Uninstall / Remove，一般都会找到你想要的答案。</p>
 
-<p>关于TERMINFO, 应设置为terminfo的路径，比如/usr/share/terminfo或者/lib/terminfo。查看terminfo的存储位置用以下指令：</p>
+<p>通过第三方的卸载软件，比如 Clean My Mac、AppZapper (光枪)，都可以做到准完美卸载。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ whereis terminfo
-</span><span class='line'>terminfo: /etc/terminfo /lib/terminfo /usr/share/terminfo /usr/share/man/man5/terminfo.5.gz</span></code></pre></td></tr></table></div></figure>
+<p>通过手动使用终端 find 命令，或者系统内置的 spotlight 搜索应用程序名，找到相关文件删除进行卸载。注意观察一个 App 的运行方式，记住一些 App 常用的路径名称，可以帮助你完美卸载一个程序。</p>
 
+<h1>Mac OS X App 常用的文件夹</h1>
 
-<p>查看terminfo目录下是否保存了终端信息文件：其中通常分为a, b, c, d&hellip;z这些字母目录，每个目录中包含了以该字母开头的term信息。比如vt100放在&#8221;v&#8221;目录中。我们需要的term必须在对应的目录中存在term信息。确定这些信息后，就可以设置TERM和TERMINFO信息：</p>
+<p>/Applications，这个不必多说，99% 的应用程序在下载后都会有一个直接提示让你拖拽 App 到 /Applications 文件夹。其实这个不是强制的位置，大部分 App 可以在任何权限适合的文件夹下运行。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ export TERM=vt100
-</span><span class='line'>$ export TERMINFO=/usr/share/terminfo</span></code></pre></td></tr></table></div></figure>
+<p>~/Library/，用来存放用户偏好设置、App 偏好设置、缓存、App 数据文件等。</p>
 
+<p>~/Library/Preferences/，这个文件夹下是各个程序的偏好设置文件和数据记录文件。卸载一个 App 时，这里一般都会有一个以上的相关 plist 文件，这些 plist 文件一般以 com.<strong><em>(应用程序提供商).</em></strong>(应用程序名称).plist 的格式出现，所以按照应用程序名称或者提供商名称，可以很容易的找到应用程序遗留文件。</p>
 
-<p>上面的设置必须保证/usr/share/terminfo中存在term信息，且/usr/share/terminfo/v/vt100是存在的。关于TERM的设置，有可能需要设置成Linux，vt100-putty等不同的TERM。Linux通常用于Linux控制台，vt100-putty顾名思义是使用putty远程登录的vt100终端。</p>
+<p>~/Library/LaunchAgents/ ，此文件夹一般存放一些应用程序的附加程序（比如 Folx 能够感知 Safari 下载动作，1Password 能够感知登录输入密码动作），都是靠这里的 plist 文件来配置。</p>
 
-<p>以下是在Ubuntu12.10环境下，解决了此问题后TERM和TERMINFO两个环境变量的值。</p>
+<p>~Library/Application\ Support/，一般用来存放跟应用程序相关的支持数据、应用程序的附加程序（比如 Helper 程序、插件等等）、应用程序的备份文件 （比如 MacJournal 的所有日志备份文件等），一般都是跟应用程序（或者开发商）同名的文件夹。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo $TERM
-</span><span class='line'>xterm
-</span><span class='line'>$ echo $TERMINFO
-</span><span class='line'>/lib/terminfo/</span></code></pre></td></tr></table></div></figure>
+<p>~Library/Internet\ Plug-Ins/，用来放置与 Safari 有关的 App 插件。</p>
 
+<p>~/Library/Contextual\ Menu\ Items/，用来放置一个 App向系统添加上下文菜单（右键菜单）。</p>
+
+<p>~/Library/Input\ Methods/， 是此用户安装的输入法程序。</p>
+
+<p>~/Library/PreferencePanes/，所有第三方的系统偏好设置安装在这里。</p>
+
+<p>~/Library/Services/，很多程序会向右键或者服务菜单添加项目，则它们会把菜单项拷贝到这里。</p>
+
+<p>~/Library/Widgets/，安装过的 Dashboard Widget 小应用都会在这里找到。</p>
+
+<p>~/Library/Receipts/，很多应用程序在安装后会在这里留下 Receipt 存根或者 BOM 文件，对于帮助完整卸载 App 很有帮助。一部分 ~/Library 下介绍过的文件夹在 /Library 下都能够找到相对应的目录，区别在于 /Library表示全局级别的配置，换句话说，同样的配置从 ~/Library 拷贝到 /Library 相应的文件夹下则会影响这个 App 在所有用户中的运行状态、运行方式。当然，/Library 下有 ~/Library 下不存在的文件夹，也需要注意：/Library/LaunchDaemons 文件夹的作用与/Library/LaunchAgents/ （~/Library/LaunchAgents/）类似，只不过LaunchAgents 一般代表了有用户界面的后台自动运行程序，而 Daemons 则代表了那些没有用户界面的后台运行程序。但一定要注意，/Library 下的所有更改将会波及所有用户，必须非常小心，否则会造成难以预料的后果。</p>
+
+<p>/System/Library，是系统级别应用程序配置、数据的所在地，除非特别明白每一个项目的作用，否则不要进行任何修改，一旦误操作，将会对系统产生致命后果。</p>
+
+<p>大部分符合 Apple 应用程序规范的 App，基本都会在上述文件夹中的某一些内部留下痕迹，所以只要牢记这些文件夹以及每个文件夹的作用，手工完全清除 App 是非常方便且安全的。</p>
 </div>
 
 
@@ -199,12 +185,12 @@ error &hellip;">
   
 
 
-<time datetime="2013-07-24T18:33:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+<time datetime="2015-06-28T00:16:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2015</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发</a>
+    <a class='category' href='/blog/categories/mac-os-xzha-ji/'>MAC OS X札记</a>
   
 </span>
 
@@ -220,10 +206,8 @@ error &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/23/ubuntuxia-an-zhuang-sublimetext2ji-qi-cha-jian/" title="Previous Post: Ubuntu下安装SublimeText2及其插件">&laquo; Ubuntu下安装SublimeText2及其插件</a>
+        <a class="basic-alignment left" href="/blog/2015/06/28/mian-dui-ai-qing-yao-shen-zhong/" title="Previous Post: 面对爱情要慎重">&laquo; 面对爱情要慎重</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/07/24/astylege-shi-hua-dai-ma/" title="Next Post: astyle格式化代码">astyle格式化代码 &raquo;</a>
       
     </p>
   </footer>
@@ -241,7 +225,7 @@ error &hellip;">
   
     <section>
 	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
-	<a href="http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/" alt="post-qrcode"></a>
+	<a href="http://txgcwm.github.io/blog/2015/06/28/macosxxia-de-app/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2015/06/28/macosxxia-de-app/" alt="post-qrcode"></a>
 </section>
 
 <section>
@@ -609,8 +593,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/';
-        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/';
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2015/06/28/macosxxia-de-app/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2015/06/28/macosxxia-de-app/';
         var disqus_script = 'embed.js';
       
     (function () {
