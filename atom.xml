@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2015-06-28T14:10:04+08:00</updated>
+  <updated>2015-07-11T01:08:12+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,472 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux shell图形界面dialog]]></title>
+    <link href="http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/"/>
+    <updated>2015-07-11T01:03:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog</id>
+    <content type="html"><![CDATA[<p><code>Liunx</code>下的<code>dialog</code>是一个可以创建对话框的工具，每个对话框提供的输出有两种形式：1、将所有输出到<code>stderr</code>，不显示到屏幕；2、使用退出状态码，<code>OK</code>为0，<code>NO</code>为1，<code>ESC</code>为255。</p>
+
+<h1>通用选项（<code>common options</code>）</h1>
+
+<p>这个选项用来设置<code>dialog box</code>的背景、颜色和标题等。</p>
+
+<p><code>--title &lt;title&gt;</code>：指定将在对话框的上方显示的标题字符串。 <br/>
+<code>--colors</code>：解读嵌入式<code>\ Z</code>的对话框中的特殊文本序列，序列由下面的字符<code>0-7</code>, <code>b</code>，<code>B</code>, <code>u</code>, <code>U</code>等组成，恢复正常的设置使用<code>\Zn</code>。            <br/>
+<code>--no-shadow</code>：禁止阴影出现在每个对话框的底部。 <br/>
+<code>--shadow</code>：出现阴影效果。  <br/>
+<code>--insecure</code>：输入部件的密码时，使用星号来代表每个字符。   <br/>
+<code>--no-cancel</code>：设置在输入框、菜单和复选框中不显示<code>cancel</code>项。 <br/>
+<code>--clear</code>：完成清屏操作，在框体显示结束后，清除框体，这个参数只能单独使用，不能和别的参数联合使用。 <br/>
+<code>--ok-label &lt;str&gt;</code>：覆盖使用<code>OK</code>按钮标签，换做其它字符。<br/>
+<code>--cancel-label &lt;str&gt;</code>：功能同上。<br/>
+<code>--backtitle &lt;backtitle&gt;</code>：指定的<code>backtitle</code>字符串显示在背景顶端。  <br/>
+<code>--begin &lt;y&gt; &lt;x&gt;</code>：指定对话框左上角在屏幕上的坐标。  <br/>
+<code>--timeout &lt;secs&gt;</code>：超时（返回的错误代码），如果用户在指定的时间内没有给出相应动作，就按超时处理。 <br/>
+<code>--defaultno</code>：使的是默认值<code>yes/no</code>，使用<code>no</code>。 <br/>
+<code>--sleep &lt;secs&gt;</code> <br/>
+<code>--stderr</code>：以标准错误方式输出。 <br/>
+<code>--stdout</code>：以标准方式输出。 <br/>
+<code>--default-item &lt;str&gt;</code>：设置在一份清单、表格或菜单中的默认项目，通常在框中的第一项是默认的。</p>
+
+<!--more-->
+
+
+<h1>窗体类型：</h1>
+
+<p>常见的对话框控件选项如下所示：</p>
+
+<p><code>--calendar</code>：提供了一个日历，让你可以选择日期。 <br/>
+<code>--checklist</code>：允许你显示一个选项列表，每个选项都可以被单独的选择(复选框)。 <br/>
+<code>--from</code>：允许建立一个带标签的文本字段，并要求填写。 <br/>
+<code>--fselect</code>：提供一个路径，让你选择浏览的文件。 <br/>
+<code>--gauge</code>：显示一个表，呈现出完成的百分比，就是显示出进度。 <br/>
+<code>--infobox</code>：显示消息后，（没有等待响应）对话框立刻返回，但不清除屏幕(信息框)。 <br/>
+<code>--inputbox</code>：让用户输入文本(输入框)。 <br/>
+<code>--inputmenu</code>：提供一个可供用户编辑的菜单（可编辑的菜单框）。 <br/>
+<code>--menu</code>：显示一个列表供用户选择(菜单框)。 <br/>
+<code>--msgbox</code>：显示一条消息，并要求用户选择一个确定按钮(消息框)。 <br/>
+<code>--pause</code>：显示一个表格用来显示一个指定的暂停期的状态。 <br/>
+<code>--passwordbox</code>：显示一个输入框，它隐藏文本。       <br/>
+<code>--passwordfrom</code>：显示一个来源于标签并且隐藏的文本字段。 <br/>
+<code>--radiolist</code>：提供一个菜单项目组，只有一个项目，可以选择(单选框)。 <br/>
+<code>--tailbox</code>：在一个滚动窗口文件中使用<code>tail</code>命令来显示文本。   <br/>
+<code>--tailboxbg</code>：跟<code>tailbox</code>类似，但是在<code>background</code>模式下操作。 <br/>
+<code>--textbox</code>：在带有滚动条的文本框中显示文件的内容(文本框)。 <br/>
+<code>--timebox</code>：提供一个窗口，选择小时、分钟、秒。 <br/>
+<code>--yesno</code>：提供一个带有<code>yes</code>和<code>no</code>按钮的简单信息框(是/否框)。</p>
+
+<h1>命令示例</h1>
+
+<h2>消息框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --msgbox text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title TESTING --msgbox "this is a test" 10 20</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>yesno框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --yesno text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "yes/no" --no-shadow --yesno "Delete the file /tmp/canjian.txt?" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>输入框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --inputbox text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Input your name" --inputbox "Please input your name:" 10 30  2&gt; /tmp/name.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里的<code>2&gt;</code>是将错误信息输出重定向到<code>/tmp/name.txt</code>文件中。</p>
+
+<h2>密码框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --passwordbox text height width [init]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Password" --passwordbox "Please give a password for the new user:" 10 35</span></code></pre></td></tr></table></div></figure>
+
+
+<p>密码暴露出来不安全，所以通常我们会加上一个安全选项<code>--insecure</code>，将每个字符用<code>*</code>来显示。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Password" --insecure --passwordbox "Please give a password for the new user:" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>文本框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --textbox file height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "The fstab" --textbox /etc/fstab 17 40</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>菜单框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --menu text height width menu-height tag1 item1 tag2 item2 …</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Pick a choice" --menu "Choose one" 12 35 5 1 "say hello to everyone" 2 "thanks for your support" 3 "exit"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Fselect框(文件选框)</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --fselect filepath height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Pick one file" --fselect /root/ 7 40</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>复选框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --checklist "Test" height width menu-height tag1 item1 tag2 item2 …</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --backtitle "Checklist" --checklist "Test" 20 50 10 Memory Memory_Size 1 Dsik Disk_Size 2</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>显示日历</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --calendar "Date" height width day month year</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<p>显示当前日期</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Calendar" --calendar "Date" 5 50</span></code></pre></td></tr></table></div></figure>
+
+
+<p>显示指定日期</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Calendar" --calendar "Date" 5 50 1 2 2013</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>进度框架</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --gauge text height width  [&lt;percent&gt;]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<p>固定进度显示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "installation pro" --gauge "installation" 10 30 10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+实时动度进度</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ for i in {1..100} ;do echo $i;done | dialog --title "installation pro" --gauge "installation" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编辑一个gauge.sh的脚本，内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash  
+</span><span class='line'>
+</span><span class='line'>declare -i PERCENT=0
+</span><span class='line'>(
+</span><span class='line'>    for I in /etc/*;
+</span><span class='line'>    do
+</span><span class='line'>        if [ $PERCENT -le 100 ];then
+</span><span class='line'>            cp -r $I /tmp/test 2&gt; /dev/null
+</span><span class='line'>            echo "XXX" 
+</span><span class='line'>            echo "Copy the file $I ..." 
+</span><span class='line'>            echo "XXX" 
+</span><span class='line'>            echo $PERCENT  
+</span><span class='line'>        fi
+</span><span class='line'>        
+</span><span class='line'>        let PERCENT+=1
+</span><span class='line'>        sleep 0.1
+</span><span class='line'>    done
+</span><span class='line'>) | dialog --title "coping" --gauge "starting to copy files..." 6 50 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>from框架(表单)</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --form text height width formheight [ label y x item y x flen ilen ] ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中：<code>flen</code>表示<code>field length</code>，定义了选定字段中显示的长度；<code>ilen</code>表示<code>input-length</code>, 定义了在外地输入的数据允许的长度。使用<code>up/down</code>（或<code>ctrl/ N</code>，<code>ctrl/ P</code>）在使用领域之间移动，使用<code>tab</code>键在窗口之间切换。</p>
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Add a user" --form "Please input the infomation of new user:" 12 40 4 \
+</span><span class='line'>  "Username:" 1  1 "" 1  15  15  0 \
+</span><span class='line'>  "Full name:" 2  1 "" 2  15  15  0 \
+</span><span class='line'>  "Home Dir:" 3  1 "" 3  15  15  0 \
+</span><span class='line'>  "Shell:"    4   1 "" 4  15  15  0</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>综合应用示例</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>
+</span><span class='line'>yesno() 
+</span><span class='line'>{
+</span><span class='line'>  dialog --title "First screen" --backtitle "Test Program" --clear --yesno \
+</span><span class='line'>      "Start this test program or not ? \nThis decesion have to make by you." 16 51
+</span><span class='line'>
+</span><span class='line'>  # yes is 0, no is 1 , esc is 255
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      exit 1;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  username;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>username() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.username
+</span><span class='line'>  dialog --title "Second screen" --backtitle "Test Program" --clear --inputbox \
+</span><span class='line'>      "Please input your username (default: hello) " 16 51 "hello" 2&gt;/tmp/test.username
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      yesno;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  password;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>password() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.password
+</span><span class='line'>  dialog  --insecure --title "Third screen" --backtitle "Test Program" --clear --passwordbox \
+</span><span class='line'>      "Please input your password (default: 123456) " 16 51 "123456" 2&gt;/tmp/test.password
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      username;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  occupation;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>occupation() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.occupation
+</span><span class='line'>  dialog --title "Forth screen" --backtitle "Test Program" --clear --menu \
+</span><span class='line'>      "Please choose your occupation: (default: IT)" 16 51 3 \
+</span><span class='line'>      IT "The worst occupation" \
+</span><span class='line'>      CEO "The best occupation" \
+</span><span class='line'>      Teacher "Not the best or worst"  2&gt;/tmp/test.occupation
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      password;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  finish;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>finish() 
+</span><span class='line'>{
+</span><span class='line'>  dialog --title "Fifth screen" --backtitle "Test Program" --clear --msgbox \
+</span><span class='line'>      "Congratulations! The test program has finished!\n Username: $(cat /tmp/test.username)\n Password: $(cat /tmp/test.password)\n Occupation: $(cat /tmp/test.occupation)" 16 51
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      occupation
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>yesno;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<br></br>
+
+
+<p><a href="http://blog.csdn.net/shenwanjiang111/article/details/42047901">Linux下的dialog工具使用方法</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[爱和婚姻]]></title>
@@ -661,54 +1127,6 @@
 <p>这是我们的向导，我称之为“蛇皮袋大仙”，他那包里装了“捆妖绳”，在攀岩的时候用来拉我们上去。</p>
 
 <p>每一次旅行都是全新的体验，总能留下太多美好的记忆，时不时也能从他人那里获取到新的技能，这也应该是旅行的意义吧！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[盘点跟过的户外组织]]></title>
-    <link href="http://txgcwm.github.io/blog/2015/05/03/pan-dian-gen-guo-de-hu-wai-zu-zhi/"/>
-    <updated>2015-05-03T21:09:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2015/05/03/pan-dian-gen-guo-de-hu-wai-zu-zhi</id>
-    <content type="html"><![CDATA[<p>从13年开始，到现在为止，跟过的户外组织有不少，每个的体验也有好有坏，不管如何，总给我留下了很深的映像。</p>
-
-<h1>游侠客</h1>
-
-<p>这是我第一个跟过的户外组织，那是去婺源，当时没有什么感受，因为没有其它的组织可以对比。后来跟得多了，有了对比，就觉得它做得确实是很好。在人比较多的情况下，一般都会有两个领队，一前一后，整个队伍都照顾到了，我所遇到两个领队独自跑前面的情况很少。车上的互动活动也做得不错，总能活跃车上的气氛，让人不会觉得旅途很无趣。当然了，到目的地后也安排得很到位。</p>
-
-<p>参加过其它的组织，有领队黑游侠客这个组织，但我觉得没有必要，现在信息这么发达，人们总是会知道真相的，黑别人反而对自己的组织没有任何好处，只能说气量不够。如果要商业竞争，那么得拿实力说话。</p>
-
-<p>在我所有跟随过的户外组织中，个人认为游侠客是做得最好的，没有之一。</p>
-
-<!--more-->
-
-
-<h1>行天下</h1>
-
-<p>这个组织只跟随过一次（那次是园区举办的相亲会，去湘湖烧烤），但领队的风格却是很让我喜欢的，因为他们比较二，玩起游戏来很好玩。也曾去看过他们的网站，觉得还是很不错的。</p>
-
-<h1>磨房</h1>
-
-<p>只参加过他们组织的环西湖群山免费活动，就是跟随大组织在徒步，对他们活动组织的风格没有多少了解，猜测应该不错，因为身边的很多朋友经常参加他们的活动，好评也很多。不过对他们的销售风格不是太认同，上次结束后，他们在最终的签到场地卖冲锋衣，觉得他们做买卖还是欠缺点，大多数人怎么可能临时作出一个买卖的决定呢！</p>
-
-<h1>携程</h1>
-
-<p>那次去黄山，好像是从这个网站报名的，这是属于传统的组织了，但我对它的映像没有一点好感，它做的工作只是简单地组织人员，然后把我们扔到了一辆很多团队组织起来的车上，最后交给当地的导游。那次是一次比较不愉快的旅行。</p>
-
-<h1>溪山行</h1>
-
-<p>这个组织嘛，只能说组织里领队的个人能力比较强，一个比较大的团队就只有一个领队带着，看他忙前忙后的，真让我佩服，不过我并不认同这样的做法，因为对队员来说体验也不是太好。当时，觉得这个组织不是太好，后来跟了很多的组织之后，才发现它并不算差的了。</p>
-
-<p>还有一点，就是觉得这个组织是价格屠夫，同样的路线往往会比游侠客便宜很多。</p>
-
-<h1>牧野</h1>
-
-<p>这个也只跟过一次，就是前不久去婺源，整体的质量觉得还有待提高。刚好那次路上堵车，很多人叫喊着要下车，而领队却不能控制整个局面，甚至是没有任何的作为，更搞的是司机竟然有权利（领队还没有吱声的情况下）开车门把人放下去。</p>
-
-<h1>公司的户外</h1>
-
-<p>由于参加人员的不一致性，这个是最难组织的，所以相对来说会缺乏刺激性。</p>
-
-<p>它们在不停地进步，但愿以后会有更好的体验！</p>
 ]]></content>
   </entry>
   

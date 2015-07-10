@@ -1,0 +1,1018 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux shell图形界面dialog - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="Liunx下的dialog是一个可以创建对话框的工具，每个对话框提供的输出有两种形式：1、将所有输出到stderr，不显示到屏幕；2、使用退出状态码，OK为0，NO为1，ESC为255。 通用选项（common options） 这个选项用来设置dialog box的背景、颜色和标题等。 -- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux Shell图形界面dialog</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-11T01:03:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2015</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><code>Liunx</code>下的<code>dialog</code>是一个可以创建对话框的工具，每个对话框提供的输出有两种形式：1、将所有输出到<code>stderr</code>，不显示到屏幕；2、使用退出状态码，<code>OK</code>为0，<code>NO</code>为1，<code>ESC</code>为255。</p>
+
+<h1>通用选项（<code>common options</code>）</h1>
+
+<p>这个选项用来设置<code>dialog box</code>的背景、颜色和标题等。</p>
+
+<p><code>--title &lt;title&gt;</code>：指定将在对话框的上方显示的标题字符串。 <br/>
+<code>--colors</code>：解读嵌入式<code>\ Z</code>的对话框中的特殊文本序列，序列由下面的字符<code>0-7</code>, <code>b</code>，<code>B</code>, <code>u</code>, <code>U</code>等组成，恢复正常的设置使用<code>\Zn</code>。            <br/>
+<code>--no-shadow</code>：禁止阴影出现在每个对话框的底部。 <br/>
+<code>--shadow</code>：出现阴影效果。  <br/>
+<code>--insecure</code>：输入部件的密码时，使用星号来代表每个字符。   <br/>
+<code>--no-cancel</code>：设置在输入框、菜单和复选框中不显示<code>cancel</code>项。 <br/>
+<code>--clear</code>：完成清屏操作，在框体显示结束后，清除框体，这个参数只能单独使用，不能和别的参数联合使用。 <br/>
+<code>--ok-label &lt;str&gt;</code>：覆盖使用<code>OK</code>按钮标签，换做其它字符。<br/>
+<code>--cancel-label &lt;str&gt;</code>：功能同上。<br/>
+<code>--backtitle &lt;backtitle&gt;</code>：指定的<code>backtitle</code>字符串显示在背景顶端。  <br/>
+<code>--begin &lt;y&gt; &lt;x&gt;</code>：指定对话框左上角在屏幕上的坐标。  <br/>
+<code>--timeout &lt;secs&gt;</code>：超时（返回的错误代码），如果用户在指定的时间内没有给出相应动作，就按超时处理。 <br/>
+<code>--defaultno</code>：使的是默认值<code>yes/no</code>，使用<code>no</code>。 <br/>
+<code>--sleep &lt;secs&gt;</code> <br/>
+<code>--stderr</code>：以标准错误方式输出。 <br/>
+<code>--stdout</code>：以标准方式输出。 <br/>
+<code>--default-item &lt;str&gt;</code>：设置在一份清单、表格或菜单中的默认项目，通常在框中的第一项是默认的。</p>
+
+<!--more-->
+
+
+<h1>窗体类型：</h1>
+
+<p>常见的对话框控件选项如下所示：</p>
+
+<p><code>--calendar</code>：提供了一个日历，让你可以选择日期。 <br/>
+<code>--checklist</code>：允许你显示一个选项列表，每个选项都可以被单独的选择(复选框)。 <br/>
+<code>--from</code>：允许建立一个带标签的文本字段，并要求填写。 <br/>
+<code>--fselect</code>：提供一个路径，让你选择浏览的文件。 <br/>
+<code>--gauge</code>：显示一个表，呈现出完成的百分比，就是显示出进度。 <br/>
+<code>--infobox</code>：显示消息后，（没有等待响应）对话框立刻返回，但不清除屏幕(信息框)。 <br/>
+<code>--inputbox</code>：让用户输入文本(输入框)。 <br/>
+<code>--inputmenu</code>：提供一个可供用户编辑的菜单（可编辑的菜单框）。 <br/>
+<code>--menu</code>：显示一个列表供用户选择(菜单框)。 <br/>
+<code>--msgbox</code>：显示一条消息，并要求用户选择一个确定按钮(消息框)。 <br/>
+<code>--pause</code>：显示一个表格用来显示一个指定的暂停期的状态。 <br/>
+<code>--passwordbox</code>：显示一个输入框，它隐藏文本。       <br/>
+<code>--passwordfrom</code>：显示一个来源于标签并且隐藏的文本字段。 <br/>
+<code>--radiolist</code>：提供一个菜单项目组，只有一个项目，可以选择(单选框)。 <br/>
+<code>--tailbox</code>：在一个滚动窗口文件中使用<code>tail</code>命令来显示文本。   <br/>
+<code>--tailboxbg</code>：跟<code>tailbox</code>类似，但是在<code>background</code>模式下操作。 <br/>
+<code>--textbox</code>：在带有滚动条的文本框中显示文件的内容(文本框)。 <br/>
+<code>--timebox</code>：提供一个窗口，选择小时、分钟、秒。 <br/>
+<code>--yesno</code>：提供一个带有<code>yes</code>和<code>no</code>按钮的简单信息框(是/否框)。</p>
+
+<h1>命令示例</h1>
+
+<h2>消息框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --msgbox text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title TESTING --msgbox "this is a test" 10 20</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>yesno框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --yesno text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "yes/no" --no-shadow --yesno "Delete the file /tmp/canjian.txt?" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>输入框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --inputbox text height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Input your name" --inputbox "Please input your name:" 10 30  2&gt; /tmp/name.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里的<code>2&gt;</code>是将错误信息输出重定向到<code>/tmp/name.txt</code>文件中。</p>
+
+<h2>密码框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --passwordbox text height width [init]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Password" --passwordbox "Please give a password for the new user:" 10 35</span></code></pre></td></tr></table></div></figure>
+
+
+<p>密码暴露出来不安全，所以通常我们会加上一个安全选项<code>--insecure</code>，将每个字符用<code>*</code>来显示。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Password" --insecure --passwordbox "Please give a password for the new user:" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>文本框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --textbox file height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "The fstab" --textbox /etc/fstab 17 40</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>菜单框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --menu text height width menu-height tag1 item1 tag2 item2 …</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Pick a choice" --menu "Choose one" 12 35 5 1 "say hello to everyone" 2 "thanks for your support" 3 "exit"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Fselect框(文件选框)</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --fselect filepath height width</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Pick one file" --fselect /root/ 7 40</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>复选框</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --checklist "Test" height width menu-height tag1 item1 tag2 item2 …</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --backtitle "Checklist" --checklist "Test" 20 50 10 Memory Memory_Size 1 Dsik Disk_Size 2</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>显示日历</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --calendar "Date" height width day month year</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<p>显示当前日期</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Calendar" --calendar "Date" 5 50</span></code></pre></td></tr></table></div></figure>
+
+
+<p>显示指定日期</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Calendar" --calendar "Date" 5 50 1 2 2013</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>进度框架</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --gauge text height width  [&lt;percent&gt;]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>例子：</p>
+
+<p>固定进度显示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "installation pro" --gauge "installation" 10 30 10</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+实时动度进度</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ for i in {1..100} ;do echo $i;done | dialog --title "installation pro" --gauge "installation" 10 30</span></code></pre></td></tr></table></div></figure>
+
+
+<p>编辑一个gauge.sh的脚本，内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash  
+</span><span class='line'>
+</span><span class='line'>declare -i PERCENT=0
+</span><span class='line'>(
+</span><span class='line'>    for I in /etc/*;
+</span><span class='line'>    do
+</span><span class='line'>        if [ $PERCENT -le 100 ];then
+</span><span class='line'>            cp -r $I /tmp/test 2&gt; /dev/null
+</span><span class='line'>            echo "XXX" 
+</span><span class='line'>            echo "Copy the file $I ..." 
+</span><span class='line'>            echo "XXX" 
+</span><span class='line'>            echo $PERCENT  
+</span><span class='line'>        fi
+</span><span class='line'>        
+</span><span class='line'>        let PERCENT+=1
+</span><span class='line'>        sleep 0.1
+</span><span class='line'>    done
+</span><span class='line'>) | dialog --title "coping" --gauge "starting to copy files..." 6 50 0</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>from框架(表单)</h2>
+
+<p>格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>dialog --form text height width formheight [ label y x item y x flen ilen ] ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中：<code>flen</code>表示<code>field length</code>，定义了选定字段中显示的长度；<code>ilen</code>表示<code>input-length</code>, 定义了在外地输入的数据允许的长度。使用<code>up/down</code>（或<code>ctrl/ N</code>，<code>ctrl/ P</code>）在使用领域之间移动，使用<code>tab</code>键在窗口之间切换。</p>
+
+<p>例子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ dialog --title "Add a user" --form "Please input the infomation of new user:" 12 40 4 \
+</span><span class='line'>  "Username:" 1  1 "" 1  15  15  0 \
+</span><span class='line'>  "Full name:" 2  1 "" 2  15  15  0 \
+</span><span class='line'>  "Home Dir:" 3  1 "" 3  15  15  0 \
+</span><span class='line'>  "Shell:"    4   1 "" 4  15  15  0</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>综合应用示例</h1>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>
+</span><span class='line'>yesno() 
+</span><span class='line'>{
+</span><span class='line'>  dialog --title "First screen" --backtitle "Test Program" --clear --yesno \
+</span><span class='line'>      "Start this test program or not ? \nThis decesion have to make by you." 16 51
+</span><span class='line'>
+</span><span class='line'>  # yes is 0, no is 1 , esc is 255
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      exit 1;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  username;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>username() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.username
+</span><span class='line'>  dialog --title "Second screen" --backtitle "Test Program" --clear --inputbox \
+</span><span class='line'>      "Please input your username (default: hello) " 16 51 "hello" 2&gt;/tmp/test.username
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      yesno;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  password;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>password() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.password
+</span><span class='line'>  dialog  --insecure --title "Third screen" --backtitle "Test Program" --clear --passwordbox \
+</span><span class='line'>      "Please input your password (default: 123456) " 16 51 "123456" 2&gt;/tmp/test.password
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      username;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  occupation;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>occupation() 
+</span><span class='line'>{
+</span><span class='line'>  cat /dev/null &gt;/tmp/test.occupation
+</span><span class='line'>  dialog --title "Forth screen" --backtitle "Test Program" --clear --menu \
+</span><span class='line'>      "Please choose your occupation: (default: IT)" 16 51 3 \
+</span><span class='line'>      IT "The worst occupation" \
+</span><span class='line'>      CEO "The best occupation" \
+</span><span class='line'>      Teacher "Not the best or worst"  2&gt;/tmp/test.occupation
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      password;
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>
+</span><span class='line'>  finish;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>finish() 
+</span><span class='line'>{
+</span><span class='line'>  dialog --title "Fifth screen" --backtitle "Test Program" --clear --msgbox \
+</span><span class='line'>      "Congratulations! The test program has finished!\n Username: $(cat /tmp/test.username)\n Password: $(cat /tmp/test.password)\n Occupation: $(cat /tmp/test.occupation)" 16 51
+</span><span class='line'>
+</span><span class='line'>  result=$?
+</span><span class='line'>  if [ $result -eq 1 ] ; then
+</span><span class='line'>      occupation
+</span><span class='line'>  elif [ $result -eq 255 ]; then
+</span><span class='line'>      exit 255;
+</span><span class='line'>  fi
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>yesno;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<br></br>
+
+
+<p><a href="http://blog.csdn.net/shenwanjiang111/article/details/42047901">Linux下的dialog工具使用方法</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-11T01:03:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2015</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>Shell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/06/28/ai-he-hun-yin/" title="Previous Post: 爱和婚姻">&laquo; 爱和婚姻</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/">Linux Shell图形界面dialog</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/28/ai-he-hun-yin/">爱和婚姻</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/28/macosxxia-de-app/">Mac OS X下的App</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/28/mian-dui-ai-qing-yao-shen-zhong/">面对爱情要慎重</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian/">MAC OS X系统显示和隐藏文件</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (14)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/mac-os-xzha-ji/'>MAC OS X札记 (3)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (6)</a></li>
+<li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (9)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (25)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (11)</a></li>
+<li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (4)</a></li>
+<li class='category'><a href='/blog/categories/zhe-si/'>哲思 (4)</a></li>
+<li class='category'><a href='/blog/categories/jia-shu/'>家书 (3)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (15)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (40)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (5)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (16)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (102)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (9)</a></li>
+<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (19)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
