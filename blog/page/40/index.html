@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如man read，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数， &hellip;">
+  <meta name="description" content="Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式； &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Octopress添加表格</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-27T15:08:00+08:00" pubdate data-updated="true">Jul 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/27/octopresstian-jia-biao-ge/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式；而Markdown是一种书写格式。正因如此，Markdown的格式化语法仅需解决用纯文本表达的问题。</p>
+
+<p>下面的这个例子是在一篇Markdown文章中添加一个HTML表格：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;table&gt;
+</span><span class='line'>    &lt;tr&gt;
+</span><span class='line'>        &lt;td&gt;Column1&lt;/td&gt;
+</span><span class='line'>        &lt;td&gt;Column2&lt;/td&gt;
+</span><span class='line'>    &lt;/tr&gt;
+</span><span class='line'>    &lt;tr&gt;
+</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
+</span><span class='line'>        &lt;td&gt;foo&lt;/td&gt;
+</span><span class='line'>    &lt;/tr&gt;
+</span><span class='line'>&lt;/table&gt;    </span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/27/octopresstian-jia-biao-ge/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -528,63 +595,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">将Emacs配置成一个C/C++的IDE编程环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-20T14:47:00+08:00" pubdate data-updated="true">Jul 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在Linux环境下编程，首先要选择开发工具，大部分程序员都是使用VIM和EMACS这两大神器。虽说它们只是编辑器，但由于其超强的可定制性，已成为广大linux工作者的首选。使用<code>sudo apt-get install emacs</code>来安装Emaces。</p>
-
-<h1>Emacs的基本操作和组合键</h1>
-
-<h2>模式键定义</h2>
-
-<p>四个模式键：C&mdash;-Ctrl；M&mdash;-Alt；s&mdash;-Super(Win)；S&mdash;-Shift</p>
-
-<p>比如：</p>
-
-<p>C-x：表示按下ctrl键，然后按下x键。</p>
-
-<p>C-x c C-c：表示按下ctrl，然后按下x键，松开后再按下c键。</p>
-
-<p>C-x k：表示按下ctrl，同时按下x和k键。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/20/jiang-emacspei-zhi-cheng-%5B%3F%5D-ge-c-slash-c-plus-plus-de-idebian-cheng-huan-jing/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/41/">&larr; Older</a>
@@ -623,6 +633,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/07/30/30ri-xian-yu/">30日闲语</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/27/ni-ye-ke-yi-yong-you-dan/">你也可以拥有蛋</a>
       </li>
     
@@ -636,10 +650,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/11/tai-feng-ye-shi-bu-mian-ye/">台风夜是不眠夜</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/">Linux Shell图形界面dialog</a>
       </li>
     
   </ul>
@@ -681,7 +691,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (16)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (103)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (104)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (10)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (3)</a></li>
