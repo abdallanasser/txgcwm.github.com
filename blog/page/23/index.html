@@ -9,13 +9,14 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="安装ssh服务器和subversion服务器 1
+  <meta name="description" content="GCC的使用方法： 1
 2
 3
-# yum update # yum install openssh-server # yum install subversion 创建登陆svn的用户 1
-2
-3
-# useradd test // 添加test用户 # &hellip;">
+4
+5
+6
+7
+gcc [-c│-S│-E] [-std=standard] [-g] [-pg] [-Olevel] [-Wwarn...] [-pedantic] [-Idir...] [-Ldir...] [-Dmacro[=defn]...] [- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +84,108 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/28/gccbian-yi-xuan-xiang/">GCC编译选项</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-28T11:28:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/06/28/gccbian-yi-xuan-xiang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>GCC的使用方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gcc [-c│-S│-E] [-std=standard]
+</span><span class='line'>    [-g] [-pg] [-Olevel]
+</span><span class='line'>    [-Wwarn...] [-pedantic]
+</span><span class='line'>    [-Idir...] [-Ldir...]
+</span><span class='line'>    [-Dmacro[=defn]...] [-Umacro]
+</span><span class='line'>    [-foption...] [-mmachine-option...]
+</span><span class='line'>    [-o outfile] infile...</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<h1>常用选项</h1>
+
+<ul>
+<li>&mdash;help</li>
+<li>&mdash;target-help：显示gcc帮助说明，是显示目标机器特定的命令行选项。</li>
+<li>&mdash;version：显示gcc版本号和版权信息 。</li>
+<li>-o outfile：输出到指定的文件。</li>
+<li>-x language：指明使用的编程语言，允许的语言包括：c、c++、assembler、none，none意味着恢复默认行为，即根据文件的扩展名猜测源文件的语言。</li>
+<li>-v：打印较多信息，显示编译器调用的程序。</li>
+<li>&ndash;###：与-v类似，但选项被引号括住，并且不执行命令。</li>
+<li>-E：仅作预处理，不进行编译、汇编和链接。</li>
+<li>-S：仅编译到汇编语言，不进行汇编和链接。</li>
+<li>-c：编译、汇编到目标代码，不进行链接。</li>
+<li>-pipe：使用管道代替临时文件。</li>
+<li>-combine：将多个源文件一次性传递给汇编器。</li>
+</ul>
+
+
+<hr />
+
+<h1>其它选项</h1>
+
+<ul>
+<li>-l library/-llibrary：进行链接时搜索名为library的库。</li>
+<li>-Idir：把dir加入到搜索头文件的路径列表中。</li>
+<li>-Ldir：把dir加入到搜索库文件的路径列表中。</li>
+<li>-Dname：预定义一个名为name的宏，值为1。</li>
+<li>-Dname=definition：预定义名为name，值为definition的宏。</li>
+<li>-ggdb</li>
+<li>-ggdblevel：为调试器gdb生成调试信息，level可以为1～3，默认值为2。</li>
+<li>-g</li>
+<li>-glevel：生成操作系统本地格式的调试信息，-g和-ggdb并不太相同，-g会生成gdb之外的信息，level取值同上。</li>
+<li>-s：去除可执行文件中的符号表和重定位信息，用于减小可执行文件的大小。</li>
+<li>-M：告诉预处理器输出一个适合make的规则，用于描述各目标文件的依赖关系。对于每个源文件，预处理器输出一个make规则，该规则的目标项(target)是源文件对应的目标文件名，依赖项(dependency)是源文件中#include引用的所有文件。生成的规则可以是单行，但如果太长，就用\换行符续成多行。规则显示在标准输出，不产生预处理过的C程序。</li>
+<li>-C：告诉预处理器不要丢弃注释，配合-E选项使用。</li>
+<li>-P：告诉预处理器不要产生#line命令，配合-E选项使用。</li>
+<li>-static：在支持动态链接的系统上，阻止连接共享库。</li>
+<li>-nostdlib：不连接系统标准启动文件和标准库文件，只把指定的文件传递给连接器。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/06/28/gccbian-yi-xuan-xiang/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -493,53 +596,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/29/ta-ji-jiang-chi-qu/">她即将离去</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-29T23:16:00+08:00" pubdate data-updated="true">May 29<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/05/29/ta-ji-jiang-chi-qu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://www.netbian.com/d/file/20130720/75bfb3cf7bf3d81a023aace1b9adbd14.jpg" alt="alt text" /></p>
-
-<p>职场上人来人往是一件很平常的事情，对于工作了这么多年的我来说也应该早已看透，可我始终做不到这点，当一个熟悉的人离开的时候我总是有着一种强烈的伤感。我是一个理想主义者，所以总期许着能够和一些人一辈子共事，如果可以，那将是一件很美好的事情。</p>
-
-<p>来到新东家将近快半年了，这也是我认识她的时间，所以对她的了解也不是很深。虽然我们同属一个大项目组，但我们并没有太多的交集，我做的项目并非由她负责测试。这半年的时间也是我逐渐融合入这个大家庭的时间，现在对周遭的人和事都已熟悉，正式和他们打成一片的时候，可她却要离开了，去到一个我曾经离开的地方，明天过后她就成为了我的前同事。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/05/29/ta-ji-jiang-chi-qu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/24/">&larr; Older</a>
@@ -578,6 +634,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/06/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-shao-nian-ying-xiong/">《秦时明月》之少年英雄</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/07/30/wu-jin-de-si-nian/">无尽的思念</a>
       </li>
     
@@ -591,10 +651,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/25/%3C%3Cqiao-bu-si-chuan-%3E%3E-%3Ayou-qian-cai-neng-ren-xing/">《乔布斯传》：有钱才能任性</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/20/kong-cheng/">空城</a>
       </li>
     
   </ul>
@@ -626,7 +682,7 @@
 <li class='category'><a href='/blog/categories/jia-shu/'>家书 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (15)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (16)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
