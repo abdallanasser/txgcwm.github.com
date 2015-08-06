@@ -9,9 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="什么是爱？
-不是文质彬彬， 而是直让人有耍流氓的冲动， 却带有一分的斯文。 什么是婚姻？ 不是爱情的坟墓， 而是一辈子的长厢厮守， 带着一生无怨无悔的承诺。
-">
+  <meta name="description" content="Liunx下的dialog是一个可以创建对话框的工具，每个对话框提供的输出有两种形式：1、将所有输出到stderr，不显示到屏幕；2、使用退出状态码，OK为0，NO为1，ESC为255。 通用选项（common options） 这个选项用来设置dialog box的背景、颜色和标题等。 -- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +77,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/">Linux Shell图形界面dialog</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-07-11T01:03:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><code>Liunx</code>下的<code>dialog</code>是一个可以创建对话框的工具，每个对话框提供的输出有两种形式：1、将所有输出到<code>stderr</code>，不显示到屏幕；2、使用退出状态码，<code>OK</code>为0，<code>NO</code>为1，<code>ESC</code>为255。</p>
+
+<h1>通用选项（<code>common options</code>）</h1>
+
+<p>这个选项用来设置<code>dialog box</code>的背景、颜色和标题等。</p>
+
+<p><code>--title &lt;title&gt;</code>：指定将在对话框的上方显示的标题字符串。 <br/>
+<code>--colors</code>：解读嵌入式<code>\ Z</code>的对话框中的特殊文本序列，序列由下面的字符<code>0-7</code>, <code>b</code>，<code>B</code>, <code>u</code>, <code>U</code>等组成，恢复正常的设置使用<code>\Zn</code>。            <br/>
+<code>--no-shadow</code>：禁止阴影出现在每个对话框的底部。 <br/>
+<code>--shadow</code>：出现阴影效果。  <br/>
+<code>--insecure</code>：输入部件的密码时，使用星号来代表每个字符。   <br/>
+<code>--no-cancel</code>：设置在输入框、菜单和复选框中不显示<code>cancel</code>项。 <br/>
+<code>--clear</code>：完成清屏操作，在框体显示结束后，清除框体，这个参数只能单独使用，不能和别的参数联合使用。 <br/>
+<code>--ok-label &lt;str&gt;</code>：覆盖使用<code>OK</code>按钮标签，换做其它字符。<br/>
+<code>--cancel-label &lt;str&gt;</code>：功能同上。<br/>
+<code>--backtitle &lt;backtitle&gt;</code>：指定的<code>backtitle</code>字符串显示在背景顶端。  <br/>
+<code>--begin &lt;y&gt; &lt;x&gt;</code>：指定对话框左上角在屏幕上的坐标。  <br/>
+<code>--timeout &lt;secs&gt;</code>：超时（返回的错误代码），如果用户在指定的时间内没有给出相应动作，就按超时处理。 <br/>
+<code>--defaultno</code>：使的是默认值<code>yes/no</code>，使用<code>no</code>。 <br/>
+<code>--sleep &lt;secs&gt;</code> <br/>
+<code>--stderr</code>：以标准错误方式输出。 <br/>
+<code>--stdout</code>：以标准方式输出。 <br/>
+<code>--default-item &lt;str&gt;</code>：设置在一份清单、表格或菜单中的默认项目，通常在框中的第一项是默认的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/07/11/linux-shelltu-xing-jie-mian-dialog/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -451,65 +514,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/25/mo-wu-sheng-chang-%3Aji-de-fang-shi/">万物生长：鸡的方式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-25T00:15:00+08:00" pubdate data-updated="true">May 25<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/25/mo-wu-sheng-chang-%3Aji-de-fang-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://news.xdkb.net/img/attachement/jpg/site2/20150421/7427ea669ddb169ffd4917.jpg" alt="万物生长" /></p>
-
-<p>大学的时候，大家睡不着，就开始了夜聊，一哥们讲了一个段子，印象一直深刻。</p>
-
-<blockquote><p>几个小姐在火车站接客，来了一趟火车，她们就涌向那些男士，职业地问道：“先生，要住宿吗？全套服务。”</p>
-
-<p>A：“15块钱就可以了。”</p>
-
-<p>B有些不甘示弱，也插入抢生意：“我10块钱。”</p>
-
-<p>A：“5块钱成交，如何？”</p>
-
-<p>当然了，那些被问的男士都没有答应下这么生意，很快人群也就散了。B有些生气，对A吼道：“你也不能这么掉价啊，哪有这么抢生意的，你真够贱的，5快钱就卖了。”</p>
-
-<p>A心平气和地回复道：“虽说只有5块钱，但它足可以支付我一顿饭钱，至少我不会被饿死。现在这么萧条，还要顾及其它的吗？”</p>
-
-<p>听了这话，B当然是无言以对了。</p></blockquote>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/05/25/mo-wu-sheng-chang-%3Aji-de-fang-shi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -548,6 +552,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/08/07/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-jian-zhu-gao-shou/">《秦时明月》之剑术高手</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/08/06/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-shao-nian-ying-xiong/">《秦时明月》之少年英雄</a>
       </li>
     
@@ -561,10 +569,6 @@
     
       <li class="post">
         <a href="/blog/2015/07/27/ni-ye-ke-yi-yong-you-dan/">你也可以拥有蛋</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/07/25/%3C%3Cqiao-bu-si-chuan-%3E%3E-%3Ayou-qian-cai-neng-ren-xing/">《乔布斯传》：有钱才能任性</a>
       </li>
     
   </ul>
@@ -596,7 +600,7 @@
 <li class='category'><a href='/blog/categories/jia-shu/'>家书 (3)</a></li>
 <li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
 <li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
-<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (16)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (17)</a></li>
 <li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
 <li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (4)</a></li>
 <li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
