@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2015-08-07T00:59:00+08:00</updated>
+  <updated>2015-08-10T23:34:15+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[《秦时明月》之机关能手]]></title>
+    <link href="http://txgcwm.github.io/blog/2015/08/10/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-ji-guan-neng-shou/"/>
+    <updated>2015-08-10T23:30:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2015/08/10/<<qin-shi-ming-yue->>-zhi-ji-guan-neng-shou</id>
+    <content type="html"><![CDATA[<p><img src="http://a4.att.hudong.com/70/82/01200000026687136353824249313.jpg" alt="班大师" /></p>
+
+<p>墨家讲求的是非攻兼爱，加上初代巨子出身贫寒，所以比较在意的是民生，发明的器械很多用于民事，即便有攻击力也主要侧重于防守。</p>
+
+<p>班大师，墨家统领中地位最高者之一，非攻机关术专家，以善于发明各种机关而闻名，实际上在机关术上有着天人一般的精湛技艺。老头头发雪白，一双深邃的眼睛洞悉世事，面对新任的墨家巨子天明总有些无奈，但还是细心教导。</p>
+
+<!--more-->
+
+
+<p><img src="http://images.rednet.cn/articleimage/2014/07/10/1514311063.jpg" alt="公输仇" /></p>
+
+<p>公输仇，鲁班的后代，霸道机关术的新一代掌门人，精通机关术，并且把机关杀伤力的进攻部份极度强化。对祖师爷曾经在决斗中败给墨家的一事始终耿耿于怀，联合卫庄带领的流沙组织，帮助秦国成功攻陷墨家机关城。他的眼神也始终透露着邪恶，似乎也看透了一切，做事也谨慎，算得上是老谋深算的狠角色。</p>
+
+<p><img src="http://upload-images.jianshu.io/upload_images/15016-5f61ab09e7b15dae.png?imageMogr2/auto-orient/strip|imageView2/2/w/1240" alt="机关能手.png" /></p>
+
+<p>他们有着很多的共同点：精通机关术，并且痴迷于此；有一支机械臂；熟知对手。一正一邪，一攻一守，完美诠释了双方的特长。虽不是主角，但只要他们同时出现，总是能够惊起一些波澜！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[《秦时明月》之剑术高手]]></title>
@@ -1096,34 +1120,6 @@
 至今念念不忘。 <br/>
 六月， <br/>
 我们相约百步淘。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[不要重写但可以重构]]></title>
-    <link href="http://txgcwm.github.io/blog/2015/05/17/bu-yao-zhong-xie-dan-ke-yi-zhong-gou/"/>
-    <updated>2015-05-17T00:16:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2015/05/17/bu-yao-zhong-xie-dan-ke-yi-zhong-gou</id>
-    <content type="html"><![CDATA[<p><img src="http://www.xdism.com/uploadfile/2013/0610/20130610065447327.jpg" alt="大象" /></p>
-
-<p>不久前在朋友圈有一篇关于不要重写代码的文章很火，大体意思是这样：即便原有的代码看上去很不友好，也不要尝试轻易去重写代码，因为它经过了长期的测试及修补，已经运行得很稳定，要重写的话很多逻辑可能被忽略掉，可能也要犯曾经碰到的所有错误，需要更多的人力去测试。</p>
-
-<p>阅读之后，深有体会，即便是代码的书写者也未必对其中的逻辑全部了解，要让他们重写也是一件很难的事情，而且成本会很高，还不如在原来的基础上进行修改。</p>
-
-<!--more-->
-
-
-<p>虽然重写是一件成本很大的事情，但我们可以不停地重构，逐步优化，最终会让代码变得完美。或者我们可以尝试如下的步骤去完善那些复杂的代码。</p>
-
-<h1>提取可复用的代码</h1>
-
-<p>不同的实现有时需要一些相类似的代码，拷贝然后稍加修改是一件极其容易的事情，但一旦某个地方出错了，其它地方可能被遗忘掉。即便是小部分的逻辑，要是增加一些控制变量，把一些代码集中到一个函数中，那么修改了一个错误就可以修改全部潜在的错误，达到事半功倍的效果。</p>
-
-<h1>肢解独立的功能</h1>
-
-<p>有些逻辑业务可以独立出来管理，阅读起来更加便利，逻辑也会变得有条理，调试起来也方便，出现问题了只需要到相应的模块查看。</p>
-
-<p>重构后的代码可能需要花费更多的时间去了解其架构，但它却提升了代码的健壮性。</p>
 ]]></content>
   </entry>
   
