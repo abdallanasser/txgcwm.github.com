@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="老大是一个不太让人特别注意到的人，这应该跟他悄无声息的作风有关。毕业那会也不知道他是什么时候离开的，我也忘记自己是否送过他，可能我是属于中间走的那一波，而老大又可能是最后的时刻才离开。毕业前我们最后一次见面是什么时间和我们说过什么，我已不曾记得。 最近见到老大，是去年我去西藏旅行的那次， &hellip;">
+  <meta name="description" content="实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,79 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/rtpxie-yi-jian-shu/">RTP协议简述</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T21:32:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/26/rtpxie-yi-jian-shu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTCP协议或者RTSP协议）。因为RTP自身具有Time stamp，所以在ffmpeg中被用做一种formate.</p>
+
+<p>RTP协议格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    0                   1                   2                   3    
+</span><span class='line'>    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |V=2|P|X|  CC   |M|     PT      |       sequence number         |    
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |                           timestamp                           |   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |           synchronization source (SSRC) identifier            |   
+</span><span class='line'>   +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+   
+</span><span class='line'>   |            contributing source (CSRC) identifiers             |   
+</span><span class='line'>   |                             ....                              |  
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/rtpxie-yi-jian-shu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -442,53 +515,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/07/yu-qian-ji/">于谦祭</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-07T12:52:00+08:00" pubdate data-updated="true">Apr 7<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/07/yu-qian-ji/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Hangzhou_Yu_Qian_Mu_20120520-07.jpg/800px-Hangzhou_Yu_Qian_Mu_20120520-07.jpg" alt="alt text" /></p>
-
-<p>岳飞、于谦、张苍水三人并称“西湖三杰”，他们都是民族的英雄，为此而奋斗了一生。岳飞的事迹大家多多少少总能说上一些，而另外两位对于不读历史的人来说就不太了解了。张苍水是明末清初的抗清英雄，这就是我对他仅有的一点了解。以上两位暂且不论，今日只谈于谦。</p>
-
-<p>最早知道这位诗人是通过语文书中的《石灰吟》（千锤万凿出深山，烈火焚烧若等闲。粉骨碎身浑不怕，要留清白在人间。），“要留清白在人间”时刻在我的耳旁萦绕，要做到这点谈何容易，他却做到了，用自己的实际行动诠释了自己的志向。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/04/07/yu-qian-ji/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/30/">&larr; Older</a>
@@ -527,6 +553,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/09/20/mi-hou-tao-ke-fu-zhuan-yong-tie/">猕猴桃客服专用帖</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/09/20/dong-zhou-dao-cai-pu-tao/">东洲岛采葡萄</a>
       </li>
     
@@ -540,10 +570,6 @@
     
       <li class="post">
         <a href="/blog/2015/08/10/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-ji-guan-neng-shou/">《秦时明月》之机关能手</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/08/07/%3C%3Cqin-shi-ming-yue-%3E%3E-zhi-jian-zhu-gao-shou/">《秦时明月》之剑术高手</a>
       </li>
     
   </ul>
@@ -567,7 +593,7 @@
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (9)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (29)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (11)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (4)</a></li>
