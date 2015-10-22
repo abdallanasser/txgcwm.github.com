@@ -4,7 +4,7 @@
   <title><![CDATA[残剑]]></title>
   <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2015-10-13T23:20:21+08:00</updated>
+  <updated>2015-10-23T00:13:27+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[静妃和梅宗主那说不清的关系]]></title>
+    <link href="http://txgcwm.github.io/blog/2015/10/23/jing-fei-he-mei-zong-zhu-na-shuo-bu-qing-de-guan-xi/"/>
+    <updated>2015-10-23T00:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2015/10/23/jing-fei-he-mei-zong-zhu-na-shuo-bu-qing-de-guan-xi</id>
+    <content type="html"><![CDATA[<p><img src="http://lady.shangdu.com/d/file/entertainment/star/star_television/2015-10-12/5ac2cf4a69e14796becb1da74aaf6d4e.jpg" alt="关爱" /></p>
+
+<p>一部《琅琊榜》火了，可以说是非常出色的权谋剧。整部电视剧中，最难以让人理解的是静妃的一举一动。个中详情请慢慢听我道来。</p>
+
+<p>梁侯（能以国号加封，定是有非同寻常的功劳）有出使三国围攻军营游说的功绩（最后梁国大军各个击破，解决了围困），可能他姐姐因此当上了皇后。为了更好的联姻，梁帝也随后取了林家的女儿。</p>
+
+<!--more-->
+
+
+<p>在靖王的回忆中，他一直都是称呼林殊为“小殊”的，而霓凰郡主、言豫津等人却是称呼“殊哥哥”。从年龄上看，毫无疑问靖王比林殊大。所以，宸妃进宫不久后，静妃作为一个医官也快入宫了，并且受到了皇帝的宠幸。整部剧看，静妃和梁帝都是属于有城府的人，而靖王却是非常耿直的，可以判断靖王不是他两的孩子，更有可能是静妃和元帅林燮（作为一个军人，他的性格应该是豪爽、耿直那类的）的儿子。</p>
+
+<p>静妃因被林燮救而到了林家，单是从林殊和靖王两个人的年龄来看，静妃应该没有和晋阳长公主接触的机会，静妃先进了宫，而晋阳长公主之后才下嫁到了林家。即便关系再好，在古代的层级社会里，静妃以当时的身份也只会称“公主”，所以知道公主名讳的可能性不大。假如公主早就嫁到林府，而静妃有很多时间和她接触的话，那只能证明晋阳长公主是不育的（建立同盟关系，梁帝不可能推迟那么久嫁自己的妹妹，再说祁王那会也应该很大了）。</p>
+
+<p>静妃因看到了一本书的备注，就可以肯定地确认（做糕点两份，还专门避讳了）梅长苏的真实身份了，只能说明一点，那个名字应该就是她自己的名字了。根据梅宗主的描述，他是避讳母亲的名讳才少了笔划。可以判断，林殊应该是静妃和林元帅的私生子。性格上也很符合，他们都属于阴柔的，憋得住气。</p>
+
+<p>当静妃第一次遇到梅宗主的时候，就热泪不止，完全忽视了站在身边的儿子，这应该是一个母亲对儿子的愧疚之情才会做出如此不符合身份的事情。不止如此，件件事情都能显示出十足的母爱。</p>
+
+<p>死了林燮和林殊，却把靖王推上了皇帝的宝座。梁帝处心积虑地维护自己的位置，最后赢的还是林家。若是没有梅龄的那个冤案，祁王或许可以登上皇位，天下则还是梁帝他们家的天下。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[青岛记忆]]></title>
@@ -1086,57 +1112,6 @@
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -a</span></code></pre></td></tr></table></div></figure>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MAC OS X系统目录结构]]></title>
-    <link href="http://txgcwm.github.io/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou/"/>
-    <updated>2015-06-16T00:15:00+08:00</updated>
-    <id>http://txgcwm.github.io/blog/2015/06/16/macosxxi-tong-mu-lu-jie-gou</id>
-    <content type="html"><![CDATA[<p>Mac OS X已经是被认证的Unix系统，所以其目录结构基本符合Unix系统目录结构。但是有很多目录在Finder中并看不到，这是因为这些目录的被设置了隐藏属性，我们可以在终端窗口中利用unix命令查看。</p>
-
-<h1>unix传统目录</h1>
-
-<ul>
-<li>/bin 传统unix命令的存放目录，如ls、rm、mv等。</li>
-<li>/sbin 传统unix管理类命令存放目录，如fdisk、ifconfig等等。</li>
-<li>/usr 第三方程序安装目录，包含/usr/bin、/usr/sbin、/usr/lib等目录，其中/usr/lib目录中存放了共享库（动态链接库）。</li>
-<li>/etc 标准unix系统配置文件存放目录，如用户密码文件/etc/passwd，此目录实际为指向/private/etc的链接。</li>
-<li>/dev 设备文件存放目录，如代表硬盘的/dev/disk0。</li>
-<li>/tmp 临时文件存放目录，其权限为所有人任意读写，此目录实际为指向/private/tmp的链接。</li>
-<li>/var 存放经常变化的文件，如日志文件，此目录实际为指向/private/var的链接。</li>
-</ul>
-
-
-<!--more-->
-
-
-<h1>OS X特有的目录</h1>
-
-<p>OS X系统中，除了标准的unix目录外，还增加了特有的目录。</p>
-
-<ul>
-<li>/Applications 应用程序目录，默认所有的GUI应用程序都安装在这里。</li>
-<li>/Library 系统的数据文件、帮助文件、文档等等。</li>
-<li>/Network 网络节点存放目录。</li>
-<li>/System 只包含一个名为Library的目录，这个子目录中存放了系统的绝大部分组件，如各种framework以及内核模块和字体文件等等。</li>
-<li>/Users 存放用户的个人资料和配置，每个用户有自己的单独目录。</li>
-<li>/Volumes 文件系统挂载点存放目录。</li>
-<li>/cores 内核转储文件存放目录，当一个进程崩溃时，如果系统允许则会产生转储文件。</li>
-<li>/private 里面的子目录存放了/tmp、/var、/etc等链接目录的目标目录。</li>
-</ul>
-
-
-<h1>用户资料存放位置</h1>
-
-<p>对于普通OS X用户来说，对系统目录树结构的理解与否并不影响正常使用系统，以至于OS X把很多目录都故意隐藏，让普通用户通过Finder不能看到。用户真正关心的是把自己的资料存放到哪里更加方便和安全。</p>
-
-<p>Windows用户通常会把个人资料存放在非系统盘的其它分区中，因为Windows系统一旦死掉，C盘的内容很可能就找不回来了。Mac OS X的用户则不用担心这个问题，OS X发生崩溃和不能启动的概率实在是太低了，就算是系统出现问题，由于用户目录和系统目录是彼此独立的，所以也容易找回。所以通常情况下，用户直接把资料存放在自己的用户目录中，OS X也建议用户这么做，并且已经为用户准备好了常用的子目录。</p>
-
-<p>应用程序、文档、下载、音乐、电影、图片、公共，对于普通用户来说这些子目录也就够用了，当然如果你觉得不够，可以自己随便添加。</p>
-
-<p>从Windows过来的用户，如果还想保持原来的习惯，把用户文件和系统文件存放在不同的分区中，那么就需要利用“磁盘工具”重新分区，把系统分区调整小一些，留出空间建立一个新的HFS+分区，使用的时候把这个分区挂载到系统目录树上。</p>
 ]]></content>
   </entry>
   
