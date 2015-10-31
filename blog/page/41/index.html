@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在一个公司里，我们是否应该提建议，又该如何去提？对于我来说是一个很难的问题，时常提一些建议却得不到对方的理解，甚至别人根本不屑听你讲的东西。慢慢地，也就没有了那个心情，让一切顺其发展。其实我也尝试着想让自己更好地去处理这件事情，也提了问题去询问网友，可得出的结果趋于一致性。 &hellip;">
+  <meta name="description" content="文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,55 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/">Linux的硬链接与软链接</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T23:37:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。下图展示了程序通过文件名获取文件内容的过程。</p>
+
+<p><img src="/images/2013/7/link/file.png" alt=" file " /></p>
+
+<p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
+
+<p><img src="/images/2013/7/link/access.png" alt=" access " /></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -494,53 +543,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Linux下iptables防火墙原理及使用</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
-
-<h1>iptables传输数据包的过程</h1>
-
-<p><img src="/images/2013/7/iptables/flow.png" alt=" flow " /></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/42/">&larr; Older</a>
@@ -579,6 +581,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/10/31/sha-xian-yu-di-tui/">沙县遇地推</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/10/31/liao-liao-mi-hou-tao-tuan-gou/">聊聊猕猴桃团购</a>
       </li>
     
@@ -592,10 +598,6 @@
     
       <li class="post">
         <a href="/blog/2015/10/13/qing-dao-ji-yi/">青岛记忆</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/09/20/mi-hou-tao-ke-fu-zhuan-yong-tie/">猕猴桃客服专用帖</a>
       </li>
     
   </ul>
@@ -619,7 +621,7 @@
 <li class='category'><a href='/blog/categories/robotsbrain/'>RobotsBrain (1)</a></li>
 <li class='category'><a href='/blog/categories/shell/'>Shell (9)</a></li>
 <li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (33)</a></li>
-<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (30)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (31)</a></li>
 <li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
 <li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (11)</a></li>
 <li class='category'><a href='/blog/categories/ting-lai-de-gu-shi/'>听来的故事 (4)</a></li>
