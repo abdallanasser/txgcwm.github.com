@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | 残剑]]></title>
   <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://txgcwm.github.io/"/>
-  <updated>2015-11-28T21:38:49+08:00</updated>
+  <updated>2015-12-02T22:37:04+08:00</updated>
   <id>http://txgcwm.github.io/</id>
   <author>
     <name><![CDATA[残剑]]></name>
@@ -66,9 +66,9 @@ keywords: Seo, Octopress</p>
 
 <p>如果你没有为文章添加描述，Octopress会自动以文章的前150个字符作为描述，为每一篇文章都添加描述，Octopress模板实现以上功能的代码在<code>source/_includes/head.html</code>中：
 <code>
-
-  &lt;meta name="description" content="Category: Octopress"&gt;
-
+{% capture description %}{% if page.description %}{{ page.description }}{% else %}{{ content | raw_content }}{% endif %}{% endcapture %}
+  &lt;meta name="description" content="{{ description | strip_html | condense_spaces | truncate:150 }}"&gt;
+{% if page.keywords %}&lt;meta name="keywords" content="{{ page.keywords }}"&gt;{% endif %}
 </code></p>
 
 <p>在使用<code>rake new_post</code>的时候，我们当然希望在文件的开头加入tags、keywords、description这些选项，那么就需要修改<code>Rakefile</code>文件。
@@ -397,7 +397,7 @@ $ rake gen_deploy
 <section></p>
 
 <pre><code>&lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&amp;trade;&lt;/abbr&gt;&lt;/h1&gt;
-&lt;a href="http://txgcwm.github.ioblog/categories/octopress/atom.xml"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&amp;cht=qr&amp;chld=|0&amp;chco=165B94&amp;chl=http://txgcwm.github.ioblog/categories/octopress/atom.xml" alt="post-qrcode"&gt;&lt;/a&gt;
+&lt;a href="{{ site.url }}{{ page.url }}"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&amp;cht=qr&amp;chld=|0&amp;chco=165B94&amp;chl={{ site.url }}{{ page.url }}" alt="post-qrcode"&gt;&lt;/a&gt;
 </code></pre>
 
 <p></section>
@@ -532,7 +532,7 @@ $(document).ready(function(){
 
 
 <p>
-  Copyright &copy; 2015 - 残剑 -
+  Copyright &copy; {{ site.time | date: "%Y" }} - {{ site.author }} -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
