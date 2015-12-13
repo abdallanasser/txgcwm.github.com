@@ -9,9 +9,15 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="在minilzo无损压缩库中提供了一个测试例子（文件名为testmini.c），对该示例作一个分析。如果我们要使用该库中的四个基本函数，首先必须包含以下的头文件。 1
-#include "minilzo.h" 其中，lzo_init()函数包含在以下的头文件中。 1
-#include " &hellip;">
+  <meta name="description" content="Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下： 1
+2
+3
+4
+5
+6
+7
+8
+'A', 'B', 'C &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +85,69 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Base64编码解码算法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-11T23:09:00+08:00" pubdate data-updated="true">Jul 11<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Base64使用ascii码子集的64个字符，即大小写的26个英文字母，0～9，＋，/。编码基于3个字符，每个字符用8位二进制表示，一共24位，再分为4四组，每组6位表示一个Base64值（例如0就是A，27就是b）。Base64值如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+</span><span class='line'>'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+</span><span class='line'>'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+</span><span class='line'>'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+</span><span class='line'>'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+</span><span class='line'>'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+</span><span class='line'>'w', 'x', 'y', 'z', '0', '1', '2', '3',
+</span><span class='line'>'4', '5', '6', '7', '8', '9', '+', '/',</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果被加密的字符串每3个一组，还剩1或2个字符，使用特殊字符&#8221;=&ldquo;补齐。例如编码只有2个字符“me”，m的ascii是109，e的是101，用二进制表示分别是01101101、01100101，连接起来就是0110110101100101，再按6位分为一组：011011、010110、010100（不足6位补0），ascii分别是27、22、 20，即Base64值为bWU，不足4字用＝补齐，因此bWU＝就me的Base64值。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/11/base64bian-ma-jie-ma-suan-fa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -513,56 +582,9 @@ int c = isdigit(3);
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/19/gong-jiao-xiao-shi/">公交小事</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-19T16:05:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/05/19/gong-jiao-xiao-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img class="right" src="http://www.sxgov.cn/shuozhou/shuozhou_content/attachement/jpg/site2/20120421/50e549b0c31210fc608301.jpg" width="400" height="567" title="Place Kitten #3" ></p>
-
-<p>很舒适的坐在公交后面的位置上，拿着手机看完了一篇文章，退出了应用看了一下时间是8：19，不到百米的距离就要到站了。正当我暗自庆幸能够很早到公司的时候，传来一个女人A的声音“你偷我东西”。A推了女人B一把，B也不甘示弱，迅速还击，两个女人拳打脚踢，几个乘客也因激烈的战斗而离开自身的座位。现在我才明白比男人的战争更恐怖的是女人间的战争。</p>
-
-<p>司机见此状况，将车子停在了路的一旁，开始调解。司机问A有没有东西被偷，是否要报警，A和B都同意报警，司机和B都打电话报了警。司机接着又补充道“警察未来之前谁也不准离开”，这个做法全国的公交应该都这样吧，个人不是反对而是赞成。</p>
-
-<p>在这间隙，A诉说着她事件：她站在靠下车门的地方，B站在另一测，另外一个女人C站在她的同一侧，她刚好在B和C的中间，她本能的感觉到有手深入她的手提包在偷她的东西，她怀疑B和C在合谋偷她的东西。接着发生了前面提到的那一幕。A也补充到她上车的时候手提包的拉链是拉紧的。B也解释道没有偷A的东西，同时也不认识C。由于当时是低着头看手机，加上距离比较的远，我并不清楚事情到底是否有偷窃的事情。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/19/gong-jiao-xiao-shi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/46/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -598,6 +620,10 @@ int c = isdigit(3);
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/13/chuang-ye-wei-jian-zhai-yao/">《创业维艰》摘要</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/06/ke-xiao-de-nian-chu-ji-hua/">可笑的年初计划</a>
       </li>
     
@@ -611,10 +637,6 @@ int c = isdigit(3);
     
       <li class="post">
         <a href="/blog/2015/12/06/tan-tan-guan-yu-pei-xun-he-dao-shi/">谈谈关于培训和导师</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/02/cheng-xu-yuan-xiu-lian-zhi-dao-cong-xiao-gong-dao-zhuan-jia-zhai-yao/">《程序员修炼之道——从小工到专家》摘要</a>
       </li>
     
   </ul>
@@ -659,7 +681,7 @@ int c = isdigit(3);
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (111)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
-<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (5)</a></li>
+<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (6)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 <li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (19)</a></li>
 
