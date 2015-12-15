@@ -9,7 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="孩子： 没想到你的父亲会跟你谈论感情的事情吧？这很正常，我们之间又有什么是不可以谈论的呢！你作为我的儿子，我当然希望你知道得多一点，那样以后你面对生活的时候就会从容不迫了。 从别人那里，我总是能够听到一些不幸的婚姻事件，导致这种不幸并不是单方造成的，肯定是男女双方身上都出现了一些问题。 &hellip;">
+  <meta name="description" content="基本常识 平常接触的大部分 App其实是一个文件夹结构，只不过Mac OS X 让它看起来是一个单独的文件而已。通过右键点击一个 App，在菜单中选择 Show Contents，则可以浏览 App 的内部结构。 _CodeSignature、CodeResources，一般为 Mac App &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/28/macosxxia-de-app/">Mac OS X下的App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-28T00:16:00+08:00" pubdate data-updated="true">Jun 28<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/06/28/macosxxia-de-app/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h1>基本常识</h1>
+
+<p>平常接触的大部分 App其实是一个文件夹结构，只不过Mac OS X 让它看起来是一个单独的文件而已。通过右键点击一个 App，在菜单中选择 Show Contents，则可以浏览 App 的内部结构。</p>
+
+<ul>
+<li><p>_CodeSignature、CodeResources，一般为 Mac App Store 上架程序所包含，里面含有数字签名，以防止非法篡改。</p></li>
+<li><p>Frameworks，一般放置了此程序所使用的第三方 Framework (使用的 Apple Framework 都包含在你的系统里)，那些支持 Growl 提醒的程序，在这个文件夹下必然包含一个 Growl Framework。某种程度上，可以理解为 Windows 程序中的 dll 动态链接库。</p></li>
+<li><p>Info.plist，包含了一个程序的基本信息（比如最低系统版本要求、版本号、Copyright等等标识），也可能包含程序的类型信息（比如这个文件如果含有一个 LSUIElement 并且值为 TRUE 的片段，则这个程序在执行后，不会在 Dock 上显示图标或图标下有表示此程序正在运行的小亮点。当然，通过修改一个程序的 plist，添加 LSUIElement，则可以让一个程序运行时不在 Dock 上显示图标）。plist 是一个标准的 XML 文档，可以用任何文本编辑器修改。MacOS 文件夹则是包含了此应用程序的真正可执行文件（类似 Windows 下的 exe 文件），当然一些程序可能包含不只一个可执行文件。PkgInfo 是一个可选的8个字节长度的文件，可保存程序类型和创建者签名（当然这些可以写在 Info.plist 中），这个文件通常包含四字节的程序类型信息（通常为 APPL）和四个字节的签名信息（比如 System Preferences.app 的 PkgInfo 就是 APPLsprf）。</p></li>
+<li><p>Resources，顾名思义，就是资源文件，包含图标、图片、语言包以及其它各种文件，这个没有严格的限制。</p></li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/06/28/macosxxia-de-app/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -456,55 +509,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/20/liu-yue-de-yue-ding-%2Cna-shi-wo-men-de-ai-qing/">六月的约定，那是我们的爱情</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-20T00:13:00+08:00" pubdate data-updated="true">May 20<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/20/liu-yue-de-yue-ding-%2Cna-shi-wo-men-de-ai-qing/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我是谁？ <br/>
-这，  <br/>
-无关紧要。</p>
-
-<p>谁才是真正的主角？ <br/>
-毋庸置疑， <br/>
-非你莫属！</p>
-
-<p>曾经的约定， <br/>
-至今念念不忘。 <br/>
-六月， <br/>
-我们相约百步淘。</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -543,6 +547,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/15/lian-meng-zhai-yao/">联盟摘要</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/13/yue-du-shu-dan/">阅读书单</a>
       </li>
     
@@ -556,10 +564,6 @@
     
       <li class="post">
         <a href="/blog/2015/12/06/wo-men-xu-yao-geng-duo-de-shu-ji/">我们需要更多的书籍</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/06/bi-ye-yi-wu-zai/">毕业已五载</a>
       </li>
     
   </ul>
@@ -604,7 +608,7 @@
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (111)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
-<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (7)</a></li>
+<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (8)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 <li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (19)</a></li>
 
