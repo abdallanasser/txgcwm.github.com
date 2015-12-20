@@ -9,7 +9,15 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Sublime Text 2是一个轻量、简洁、高效、跨平台的编辑器，方便的配色以及兼容vim快捷键等各种优点博得了很多前端开发人员的喜爱。Sublime Text 2基本上是共享软件，免费版和收费版基本无区别，只是偶尔会弹框让你去购买，这个基本不影响使用。 软件安装 &hellip;">
+  <meta name="description" content="Linux环境下，编译嵌入式系统时会用到make menuconfig或make config命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息： 1
+2
+3
+4
+5
+6
+7
+error opening terminal Linux
+error &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +85,65 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">How to Resolve &#8220;Error Opening Terminal Linux&#8221;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-24T18:33:00+08:00" pubdate data-updated="true">Jul 24<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Linux环境下，编译嵌入式系统时会用到<code>make menuconfig</code>或<code>make config</code>命令，这些命令通常会使用ncurses库，如果ncurses库没有安装设置正确，可能出现如下的错误信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>error opening terminal Linux
+</span><span class='line'>error opening terminal xterm
+</span><span class='line'>error opening terminal vt100
+</span><span class='line'>error opening terminal vt102
+</span><span class='line'>error opening terminal unknown
+</span><span class='line'>error opening terminal cgywin
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/07/24/how-to-resolve-error-opening-terminal-linux/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -487,95 +554,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">使用libevent编写Linux服务</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-18T19:01:00+08:00" pubdate data-updated="true">Jul 18<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>libevent是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制，著名分布式缓存软件memcached也使用到了该库。</p>
-
-<h1>初始化事件</h1>
-
-<p>首先完成对libenvent的事件初始化和事件驱动模型的选择。在使用多线程的情况下，一般我们需获取所返回的事件根基。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>main_base = event_init();</span></code></pre></td></tr></table></div></figure>
-
-
-<p>event_init函数返回的是一个event_base对象，该对象包括了事件处理过程中的一些全局变量，其结构为：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>struct event_base {
-</span><span class='line'>    const struct eventop *evsel;
-</span><span class='line'>    void *evbase;
-</span><span class='line'>    int event_count;        /* counts number of total events */
-</span><span class='line'>    int event_count_active; /* counts number of active events */
-</span><span class='line'>    int event_gotterm;      /* Set to terminate loop */
-</span><span class='line'>    int event_break;        /* Set to terminate loop immediately */
-</span><span class='line'>    /* active event management */
-</span><span class='line'>    struct event_list **activequeues;
-</span><span class='line'>    int nactivequeues;
-</span><span class='line'>    /* signal handling info */
-</span><span class='line'>    struct evsignal_info sig;
-</span><span class='line'>    struct event_list eventqueue;
-</span><span class='line'>    struct timeval event_tv;
-</span><span class='line'>    struct min_heap timeheap;
-</span><span class='line'>    struct timeval tv_cache;
-</span><span class='line'>};</span></code></pre></td></tr></table></div></figure>
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/18/shi-yong-libeventbian-xie-linuxfu-wu/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/45/">&larr; Older</a>
@@ -614,6 +592,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/20/li-yong-ren-mai-xin-xi/">利用人脉信息</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/20/luo-mo/">落寞</a>
       </li>
     
@@ -627,10 +609,6 @@
     
       <li class="post">
         <a href="/blog/2015/12/13/chuang-ye-wei-jian-zhai-yao/">《创业维艰》摘要</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/06/ke-xiao-de-nian-chu-ji-hua/">可笑的年初计划</a>
       </li>
     
   </ul>
@@ -672,7 +650,7 @@
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (16)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (112)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (113)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (8)</a></li>
