@@ -9,12 +9,7 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Linux不会产生无用垃圾文件，但是在升级后它不会自动删除缓存中的文件，比较占系统硬盘资源。 删除缓存 清理升级缓存以及无用包的 1
-2
-3
-$ sudo apt-get autoclean 清理旧版本的软件缓存
-$ sudo apt-get clean 清理所有软件缓存
-$ sudo apt- &hellip;">
+  <meta name="description" content="在笔记本电脑上安装了两个Linux系统，有一个几乎不用，所以决定把它给删除了，在网上看到OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统一文可以操作成功，就决定试试了。本着学习的态度，边操作边作笔记，把它记录在了这里。可天公并不眷恋我这个爱折腾的孩子，操作并没有成功， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -82,6 +77,84 @@ $ sudo apt- &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/01/grubrescuexiu-fu-fang-fa/">Grub Rescue修复方法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-01T23:46:00+08:00" pubdate data-updated="true">Jul 1<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/07/01/grubrescuexiu-fu-fang-fa/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在笔记本电脑上安装了两个Linux系统，有一个几乎不用，所以决定把它给删除了，在网上看到<a href="http://www.linuxidc.com/Linux/2014-06/103871.htm">OS-Uninstaller（操作系统卸载）——轻松删除电脑中多余的操作系统</a>一文可以操作成功，就决定试试了。本着学习的态度，边操作边作笔记，把它记录在了<a href="http://txgcwm.github.io/blog/2014/06/30/cao-zuo-xi-tong-xie-zai-ruan-jian-%3Aos-uninstaller/">这里</a>。可天公并不眷恋我这个爱折腾的孩子，操作并没有成功，开机显示如下信息：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>GRUB loading
+</span><span class='line'>
+</span><span class='line'>error:unknow filesystem
+</span><span class='line'>
+</span><span class='line'>grub rescue&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面几种操作会导致这种问题：</p>
+
+<ul>
+<li>想删除Ubuntu，于是直接在Windows下删除/格式化了Ubuntu所在的分区。</li>
+<li>调整磁盘，利用工具合并/分割/调整/删除分区，使磁盘分区数目发生了变化。</li>
+<li>重新安装系统，把Linux安装到了新分区，原有分区已经格式化，但是没有重新安装grub2。</li>
+<li>用Ubuntu备份工具/衍生版制造工具等，把主分区恢复成了8.X的老版本，结果老版本的grub是grub1,于是把grub2破坏掉了。</li>
+</ul>
+
+
+<p>总归是由于操作者不知道grub2分为两部分，一部分（一般情况下）写在了mbr上，另一部分写在了某个分区的<code>/boot/grub</code>目录（如果<code>/boot</code>单独分区，则直接写在对应分区的<code>/grub</code>目录）里面。由于上述操作，致使grub2的mbr里面的那一部分找不到<code>/grub</code>目录里面的那一部分了（或者另一部分已经删除了）。</p>
+
+<h1>彻底删除grub2，让这个提示不再出现</h1>
+
+<p>适用于已经不想再使用Ubuntu，要转回Windows的人。只要有Windows启动盘（非Ghost），用它启动，至选择安装位置，不用真正安装，退出重启就可以。或者用它启动到故障修复台，运行fixboot或者fixmbr都可以。
+win7命令行下，则是执行：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>BootRec.exe /fixmbr</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>/fixmbr</code>修复mbr，<code>/FixBoot</code>修复启动扇区，<code>/ScanOs</code>检测已安装的win7，<code>/RebuildBcd</code>重建bcd。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/07/01/grubrescuexiu-fu-fang-fa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -602,55 +675,6 @@ $ sudo apt- &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/06/08/you-%5B%3F%5D-chong-ai-jiao-zuo-fang-shou/">有一种爱叫做放手</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-08T11:09:00+08:00" pubdate data-updated="true">Jun 8<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/06/08/you-%5B%3F%5D-chong-ai-jiao-zuo-fang-shou/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://img.1ting.com/Node/Amu/i/1.jpg" alt="alt text" /></p>
-
-<p>那些女同事经常问我是什么星座的，当我告诉她们我是射手座的时候，马上就被扣上了“花心”的大帽子，然后给我列举他们身边的碰到的那些射手男。就我个人而言，我不太喜欢这个贬义词，它是对感情的不负责，对爱情的亵渎，而我自始至终不觉得自己是那样的人。</p>
-
-<p>谈得来，就专注如一，否则立马停止一段没有结果的感情（只有单方的独恋，那只是一种情，而不是爱情，爱情需要双方的付出）而不再打扰她的生活，这就是我的爱情观。每个人都希望自己能够找到情投意合的另外一半，我也不例外。堂姐不久前把我11年写的一条说说“有一种单身只为等待某个人的出现”发给我，再次看到这话的一瞬间，我会心地笑了，为自己没有因为年龄的增长和家人的催促而改变自己的初心。</p>
-
-<p>同事要给我介绍女朋友，问我是否有一些特定的要求，我告诉她们“其实我没有什么特别的要求，只想找一个能够和自己谈得来的”，她们立马惊讶地回道“这不是没有要求啦，是很高的要求了”，然后关于“介绍女朋友”的事情就不了了之了。所以，我至今单着，一直等待那个正在等待我的人出现，然后轰轰烈烈、义无返顾地去爱一次。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/06/08/you-%5B%3F%5D-chong-ai-jiao-zuo-fang-shou/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/27/">&larr; Older</a>
@@ -689,6 +713,10 @@ $ sudo apt- &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/12/30/gai-dui-2015shuo-zai-jian-liao/">该对2015说再见了</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/20/du-shu-she-gou-xiang/">读书社构想</a>
       </li>
     
@@ -702,10 +730,6 @@ $ sudo apt- &hellip;">
     
       <li class="post">
         <a href="/blog/2015/12/20/luo-mo/">落寞</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/15/lian-meng-zhai-yao/">联盟摘要</a>
       </li>
     
   </ul>
@@ -747,7 +771,7 @@ $ sudo apt- &hellip;">
 <li class='category'><a href='/blog/categories/ling-yi-za-shuo/'>灵异杂说 (16)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
 <li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (4)</a></li>
-<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (113)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (114)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
 <li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (10)</a></li>
