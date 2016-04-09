@@ -9,8 +9,8 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="Mac OS X已经是被认证的Unix系统，所以其目录结构基本符合Unix系统目录结构。但是有很多目录在Finder中并看不到，这是因为这些目录的被设置了隐藏属性，我们可以在终端窗口中利用unix命令查看。 unix传统目录 /bin 传统unix命令的存放目录，如ls、rm、mv等。
-/sbin &hellip;">
+  <meta name="description" content="苹果Mac OS X操作系统下，隐藏文件是否显示有很多种设置方法，最简单的要算在Mac终端输入命令。 显示Mac隐藏文件的命令： 1
+defaults write com.apple.finder AppleShowAllFiles -bool true 隐藏Mac隐藏文件的命令： 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,75 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian/">MAC OS X系统显示和隐藏文件</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-06-16T01:02:00+08:00" pubdate data-updated="true">Jun 16<span>th</span>, 2015</time>
+        
+         | <a href="/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>苹果Mac OS X操作系统下，隐藏文件是否显示有很多种设置方法，最简单的要算在Mac终端输入命令。</p>
+
+<p>显示Mac隐藏文件的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>defaults write com.apple.finder AppleShowAllFiles -bool true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>隐藏Mac隐藏文件的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>defaults write com.apple.finder AppleShowAllFiles -bool false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或者</p>
+
+<p>显示Mac隐藏文件的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>defaults write com.apple.finder AppleShowAllFiles  YES</span></code></pre></td></tr></table></div></figure>
+
+
+<p>隐藏Mac隐藏文件的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>defaults write com.apple.finder AppleShowAllFiles  NO</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/06/16/macosxxi-tong-xian-shi-he-yin-cang-wen-jian/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -437,57 +506,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/">孩子，我们来聊聊那些不幸的家庭</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-13T22:45:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2015</time>
-        
-         | <a href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>孩子：</p>
-
-<p>写给你第一份家书后，一直酝酿着写第二封，可一直拖着，迟迟没有动笔，今天收到了两份相亲的信息，让我突然间想起了这件事。</p>
-
-<p>我的一位同事在我写给你的家书中评论道“坏女人毁三代”，你的父亲，也就是我，深以为然，在农村生活的我见过太多不幸的家庭。当然一个不融洽的家庭的产生，不能把责任完全归到女人身上，但她们却也有很大的责任。</p>
-
-<p>随着社会的进步，这些事情可能变得越来越少，但我还是要给你讲讲，不然等你长大你会觉得这个世界就是你理解的那样。</p>
-
-<p>老一代和我们这一代是有很大隔阂的，因为教育程度不一样，这样导致婆媳间的沟通不会很畅通，甚至很多媳妇会看不起自己的婆婆。对于丈夫想做的事情，媳妇可能会阻止。对于年老的父母，给他们每顿一餐饭就够了吗？显然不够，他们还需要一些关怀。在农村，当一些老人不能劳作的时候，他们也好像失去了活着的尊严，甚至有老人死了，有些家庭都不愿埋葬。你不要笑，这些都是发生在你父亲身边的真事。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/05/13/hai-zi-%2Cwo-men-lai-liao-liao-na-xie-bu-xing-de-jia-ting/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/7/">&larr; Older</a>
@@ -526,6 +544,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/09/du-ming-zhao-li-shi-you-gan/">读明朝历史有感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/30/gai-dui-2015shuo-zai-jian-liao/">该对2015说再见了</a>
       </li>
     
@@ -539,10 +561,6 @@
     
       <li class="post">
         <a href="/blog/2015/12/20/li-yong-ren-mai-xin-xi/">利用人脉信息</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/20/luo-mo/">落寞</a>
       </li>
     
   </ul>
@@ -587,7 +605,7 @@
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (114)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
-<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (10)</a></li>
+<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (11)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 <li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (19)</a></li>
 

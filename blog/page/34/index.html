@@ -9,7 +9,18 @@
   <meta name="author" content="残剑">
 
   
-  <meta name="description" content="距离我的目的地还剩10多分钟路程的时候，看到了一个卖牦牛酸奶的小摊位，有几个旅客坐在那里喝着。老板是一个阿姨，是内地人，见到的第一眼没有特别的感觉，只把她当作一个普普通通的摊主。对于一个除了只吃米饭而不喜欢吃其它东西的我，酸奶并不能引起我多大的兴趣，但既然来到了这里，不想错失这么一次机会， &hellip;">
+  <meta name="description" content="1
+struct hostent *gethostbyname(const char *name); gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+#include &lt;netdb.h& &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +88,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Gethostbyname和hostent结构体详解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-11T22:43:00+08:00" pubdate data-updated="true">Mar 11<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>struct hostent *gethostbyname(const char *name);</span></code></pre></td></tr></table></div></figure>
+
+
+<p>gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#include &lt;netdb.h&gt;
+</span><span class='line'>
+</span><span class='line'>struct hostent {
+</span><span class='line'>  char  *h_name;            /* official name of host */
+</span><span class='line'>  char **h_aliases;         /* alias list */
+</span><span class='line'>  int    h_addrtype;        /* host address type */
+</span><span class='line'>  int    h_length;          /* length of address */
+</span><span class='line'>  char **h_addr_list;       /* list of addresses */
+</span><span class='line'>}
+</span><span class='line'>#define h_addr h_addr_list[0]  /* for backward compatibility */</span></code></pre></td></tr></table></div></figure>
+
+
+<p>除了服务器的ip地址外，这个结构体还包含了更多服务器的信息，有：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>char *h_name
+</span><span class='line'>
+</span><span class='line'>This is the “official” name of the host. </span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>char **h_aliases
+</span><span class='line'>
+</span><span class='line'>These are alternative names for the host, represented as a null-terminated vector of strings. </span></code></pre></td></tr></table></div></figure>
+
+
+<p>主机的可选名字，以NULL作为结束标记。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -420,80 +520,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/">Wav文件格式解析</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-16T21:54:00+08:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>WAVE文件是多媒体中使用的声波文件格式之一，以RIFF格式为标准。RIFF是英文Resource Interchange File Format的缩写，每个WAVE文件的头四个字节便是<code>RIFF</code>。WAVE文件是由若干个Chunk组成的，按照在文件中的出现位置包括：RIFF WAVE Chunk, Format Chunk, Fact Chunk(可选), Data Chunk。具体见下图：</p>
-
-<pre><code>------------------------------------------------
-|             RIFF WAVE Chunk                  |
-|             ID  = 'RIFF'                     |
-|             RiffType = 'WAVE'                |
-------------------------------------------------
-|             Format Chunk                     |
-|             ID = 'fmt '                      |
-------------------------------------------------
-|             Fact Chunk(optional)             |
-|             ID = 'fact'                      |
-------------------------------------------------
-|             Data Chunk                       |
-|             ID = 'data'                      |
-------------------------------------------------
-</code></pre>
-
-<p>其中除了Fact Chunk外，其它三个Chunk是必须的。每个Chunk有各自的ID，位于Chunk最开始位置，作为标示（均为4个字节），并且紧跟在ID后面的是Chunk大小（去除ID和Size所占的字节数后剩下的其它字节数目），4个字节表示，低字节表示数值低位，高字节表示数值高位。</p>
-
-<p>RIFF WAVE Chunk</p>
-
-<pre><code>----------------------------------
-|       | 所占字节数 |  具体内容    |
-----------------------------------
-| ID    |  4 Bytes |   'RIFF'    |
-----------------------------------
-| Size  |  4 Bytes |             |
-----------------------------------
-| Type  |  4 Bytes |   'WAVE'    |
-----------------------------------
-</code></pre>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/02/16/wavwen-jian-ge-shi-jie-xi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/35/">&larr; Older</a>
@@ -532,6 +558,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2016/04/09/du-ming-zhao-li-shi-you-gan/">读明朝历史有感</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/12/30/gai-dui-2015shuo-zai-jian-liao/">该对2015说再见了</a>
       </li>
     
@@ -545,10 +575,6 @@
     
       <li class="post">
         <a href="/blog/2015/12/20/li-yong-ren-mai-xin-xi/">利用人脉信息</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/12/20/luo-mo/">落寞</a>
       </li>
     
   </ul>
@@ -593,7 +619,7 @@
 <li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (114)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
 <li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (11)</a></li>
-<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (10)</a></li>
+<li class='category'><a href='/blog/categories/du-shu-zha-ji/'>读书札记 (11)</a></li>
 <li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
 <li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (19)</a></li>
 
