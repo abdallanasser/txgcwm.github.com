@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-17T16:51:28+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu12.10安装Scrapy]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy/"/>
+    <updated>2013-11-13T15:59:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/11/13/ubuntu12-dot-10an-zhuang-scrapy</id>
+    <content type="html"><![CDATA[<p>根据官网<a href="http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu">Ubuntu packages</a>上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。</p>
+
+<p>```
+$ scrapy startproject tutorial<br/>
+Traceback (most recent call last):<br/>
+  File &ldquo;/usr/bin/scrapy&rdquo;, line 4, in <module></p>
+
+<pre><code>execute()  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 121, in execute</p>
+
+<pre><code>cmds = _get_commands_dict(settings, inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 45, in _get_commands_dict</p>
+
+<pre><code>cmds = _get_commands_from_module('scrapy.commands', inproject)  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 28, in _get_commands_from_module</p>
+
+<pre><code>for cmd in _iter_command_classes(module):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/cmdline.py&rdquo;, line 19, in _iter_command_classes</p>
+
+<pre><code>for module in walk_modules(module_name):  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/utils/misc.py&rdquo;, line 66, in walk_modules</p>
+
+<pre><code>submod = __import__(fullpath, {}, {}, [''])  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/pymodules/python2.7/scrapy/commands/deploy.py&rdquo;, line 13, in <module></p>
+
+<pre><code>from w3lib.form import encode_multipart  
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/w3lib/form.py&rdquo;, line 2, in <module></p>
+
+<pre><code>if six.PY2:  
+</code></pre>
+
+<p>AttributeError: &lsquo;module&rsquo; object has no attribute &lsquo;PY2'<br/>
+```</p>
+
+<!--more-->
+
+
+<p>从网上找到了一个答案，需要利用pip去安装。</p>
+
+<p>```
+$ pip install Scrapy<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Scrapy in   /usr/lib/pymodules/python2.7 <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=8.0 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): w3lib>=1.2 in   /usr/lib/python2.7/dist-packages (from Scrapy)<br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in   /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Downloading six-1.4.1.tar.gz <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: six <br/>
+  Found existing installation: six 1.1.0</p>
+
+<pre><code>Uninstalling six:   
+</code></pre>
+
+<p>Exception: <br/>
+Traceback (most recent call last): <br/>
+  File &ldquo;/usr/lib/python2.7/dist-packages/pip/basecommand.py&rdquo;, line 104, in main</p>
+
+<pre><code>status = self.run(options, args)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/commands/install.py&rdquo;, line 250, in run</p>
+
+<pre><code>requirement_set.install(install_options, global_options)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1129, in install</p>
+
+<pre><code>requirement.uninstall(auto_confirm=True)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 486, in uninstall</p>
+
+<pre><code>paths_to_remove.remove(auto_confirm)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/req.py&rdquo;, line 1431, in remove</p>
+
+<pre><code>renames(path, new_path)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/dist-packages/pip/util.py&rdquo;, line 263, in renames</p>
+
+<pre><code>shutil.move(old, new)   
+</code></pre>
+
+<p>  File &ldquo;/usr/lib/python2.7/shutil.py&rdquo;, line 302, in move</p>
+
+<pre><code>os.unlink(src)   
+</code></pre>
+
+<p>OSError: [Errno 13] Permission denied: &lsquo;/usr/share/pyshared/six-1.1.0.egg-info&rsquo;</p>
+
+<p>Storing complete log in /home/txgcwm/.pip/pip.log <br/>
+```</p>
+
+<p>借助新得立把six给卸载掉，然后重新安装。</p>
+
+<p>```
+$ sudo pip install Scrapy<br/>
+Downloading/unpacking Scrapy <br/>
+  Downloading Scrapy-0.20.0.tar.gz (745Kb): 745Kb downloaded <br/>
+  Running setup.py egg_info for package Scrapy</p>
+
+<pre><code>no previously-included directories found matching 'docs/build'   
+</code></pre>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): Twisted>=10.0.0 in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking w3lib>=1.2 (from Scrapy) <br/>
+  Downloading w3lib-1.5.tar.gz <br/>
+  Running setup.py egg_info for package w3lib</p>
+
+<p>Requirement already satisfied (use &mdash;upgrade to upgrade): queuelib in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): lxml in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Requirement already satisfied (use &mdash;upgrade to upgrade): pyOpenSSL in    /usr/lib/python2.7/dist-packages (from Scrapy) <br/>
+Downloading/unpacking cssselect>=0.9 (from Scrapy) <br/>
+  Downloading cssselect-0.9.1.tar.gz <br/>
+  Running setup.py egg_info for package cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>Downloading/unpacking six>=1.4.1 (from w3lib>=1.2->Scrapy) <br/>
+  Running setup.py egg_info for package six</p>
+
+<p>Installing collected packages: Scrapy, w3lib, cssselect, six <br/>
+  Running setup.py install for Scrapy</p>
+
+<pre><code>changing mode of build/scripts-2.7/scrapy from 644 to 755   
+
+no previously-included directories found matching 'docs/build'   
+changing mode of /usr/local/bin/scrapy to 755   
+</code></pre>
+
+<p>  Running setup.py install for w3lib</p>
+
+<p>  Running setup.py install for cssselect</p>
+
+<pre><code>no previously-included directories found matching 'docs/_build'   
+</code></pre>
+
+<p>  Running setup.py install for six</p>
+
+<p>Successfully installed Scrapy w3lib cssselect six <br/>
+Cleaning up&hellip; <br/>
+```</p>
+
+<p>创立一个项目。</p>
+
+<p><code>
+$ sudo scrapy startproject tutorial   
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

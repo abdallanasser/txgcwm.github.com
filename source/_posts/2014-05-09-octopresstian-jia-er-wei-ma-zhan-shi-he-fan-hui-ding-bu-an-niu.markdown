@@ -75,15 +75,11 @@ function goTop(acceleration, time) {
 
 然后还需要将返回顶部的图片放入`source/images`，命名为`top.png`，或修改`totop.html`中的图片路径。
 
-最后还需要在`source/_layouts/default.html`中添加`custom/totop.html`（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来），代码如下：
-```
-<nav role="navigation">{% include navigation.html %}</nav>
-{% include custom/totop.html %}
-```
+最后还需要在`source/_layouts/default.html`中添加`{ % include custom/totop.html % }`（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。
 
 ##方法二
 
-对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式，代码如下：
+对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式。相关的HTML代码很简单，在`source/_include/custom/footer.html`中添加如下代码：
 
 ```
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>

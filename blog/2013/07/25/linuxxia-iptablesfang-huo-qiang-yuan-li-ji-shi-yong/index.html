@@ -1,0 +1,870 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux下iptables防火墙原理及使用 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux下iptables防火墙原理及使用</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>netfilter/iptables（简称为iptables）组成Linux平台下的包过滤防火墙，与大多数的Linux软件一样，这个包过滤防火墙是免费的，它可以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换（NAT）等功能。iptables和netfilter的关系是一个很容易让人搞不清的问题：很多人知道iptables却不知道netfilter，其实iptables（位于/sbin目录下）只是Linux防火墙的管理工具而已，真正实现防火墙功能的是netfilter（它是Linux内核中实现包过滤的内部结构）。</p>
+
+<h1>iptables传输数据包的过程</h1>
+
+<p><img src="/images/2013/7/iptables/flow.png" alt=" flow " /></p>
+
+<!--more-->
+
+
+<ol>
+<li>当一个数据包进入网卡时，它首先进入PREROUTING链，内核根据数据包目的ip地址判断是否需要转送出去。</li>
+<li>如果数据包就是进入本机的，它就会沿着上图所指方向向下移动，到达INPUT链。数据包到了INPUT链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过OUTPUT链，然后到达POSTROUTING链输出。</li>
+<li>如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过FORWARD链，然后到达POSTROUTING链输出。</li>
+</ol>
+
+
+<h1>规则表和规则链</h1>
+
+<p>iptables采用“表”和“链”的分层结构。表（tables）提供特定的功能，iptables内置了4个表，即Filter表、Nat表、Mangle表和Raw表，分别用于实现包过滤、网络地址转换、包重构(修改)和数据跟踪处理。链（chains）是数据包传播的路径，每一条链其实就是众多规则中的一个检查清单，每一条链中可以有一条或数条规则。当一个数据包到达一个链时，iptables就会从链中第一条规则开始检查，看该数据包是否满足规则所定义的条件。如果满足，系统就会根据该条规则所定义的方法处理该数据包，否则iptables将继续检查下一条规则。如果该数据包不符合链中任一条规则，iptables就会根据该链预先定义的默认策略来处理数据包。</p>
+
+<p><img src="/images/2013/7/iptables/table.png" alt=" table " /></p>
+
+<h2>规则表</h2>
+
+<p>iptables有4个规则表，其之间的优先顺序为Raw&mdash;-Mangle&mdash;-Nat&mdash;-Filter。</p>
+
+<ol>
+<li><p>Filter表有三个链：INPUT、FORWARD、OUTPUT</p>
+
+<p> 作用：过滤数据包<br/>
+ 内核模块：iptables_filter</p></li>
+<li><p>Nat表有三个链：PREROUTING、POSTROUTING、OUTPUT</p>
+
+<p> 作用：用于网络地址转换（IP、端口） <br/>
+ 内核模块：iptable_nat</p></li>
+<li><p>Mangle表有五个链：PREROUTING、POSTROUTING、INPUT、OUTPUT、FORWARD</p>
+
+<p> 作用：修改数据包的服务类型、TTL、并且可以配置路由实现QOS   <br/>
+ 内核模块：iptable_mangle</p></li>
+<li><p>Raw表有两个链：OUTPUT、PREROUTING</p>
+
+<p> 作用：决定数据包是否被状态跟踪机制处理<br/>
+ 内核模块：iptable_raw</p></li>
+</ol>
+
+
+<h2>规则链</h2>
+
+<ol>
+<li>INPUT——进来的数据包应用此规则链中的策略。</li>
+<li>OUTPUT——外出的数据包应用此规则链中的策略。</li>
+<li>FORWARD——转发数据包时应用此规则链中的策略。</li>
+<li>PREROUTING——对数据包作路由选择前应用此链中的规则，所有的数据包进来的时侯都先由这个链处理。</li>
+<li>POSTROUTING——对数据包作路由选择后应用此链中的规则，所有的数据包出来的时侯都先由这个链处理。</li>
+</ol>
+
+
+<p>规则链之间的优先顺序分三种情况：</p>
+
+<ol>
+<li><p>入站数据流向</p>
+
+<p> 从外界到达防火墙的数据包，先被PREROUTING规则链处理（是否修改数据包地址等），之后会进行路由选择（判断该数据包应该发往何处），如果数据包的目标主机是防火墙本机（比如说Internet用户访问防火墙主机中的web服务器的数据包），那么内核将其传给INPUT链进行处理（决定是否允许通过等），通过以后再交给系统上层的应用程序（比如Apache服务器）进行响应。</p></li>
+<li><p>转发数据流向</p>
+
+<p> 来自外界的数据包到达防火墙后，首先被PREROUTING规则链处理，之后会进行路由选择，如果数据包的目标地址是其它外部地址（比如局域网用户通过网关访问QQ站点的数据包），则内核将其传递给FORWARD链进行处理（是否转发或拦截），然后再交给POSTROUTING规则链（是否修改数据包的地址等）进行处理。</p></li>
+<li><p>出站数据流向</p>
+
+<p> 防火墙本机向外部地址发送的数据包（比如在防火墙主机中测试公网DNS服务器时），首先被OUTPUT规则链处理，之后进行路由选择，然后传递给POSTROUTING规则链（是否修改数据包的地址等）进行处理。</p></li>
+</ol>
+
+
+<h1>管理和设置iptables规则</h1>
+
+<p>规则（rules）其实就是网络管理员预定义的条件，规则一般的定义为“如果数据包头符合这样的条件，就这样处理这个数据包”。规则存储在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输协议（如TCP、UDP、ICMP）和服务类型（如HTTP、FTP和SMTP）等。当数据包与规则匹配时，iptables就根据规则所定义的方法来处理这些数据包，如放行（accept）、拒绝（reject）和丢弃（drop）等。配置防火墙的主要工作就是添加、修改和删除这些规则。</p>
+
+<p><img src="/images/2013/7/iptables/cmd.png" alt=" cmd " /></p>
+
+<p><img src="/images/2013/7/iptables/filter.png" alt=" filter " /></p>
+
+<h2>iptables的基本语法格式</h2>
+
+<p>iptables [-t 表名] 命令选项 ［链名］ ［条件匹配］ ［-j 目标动作或跳转］</p>
+
+<p>说明：表名、链名用于指定iptables命令所操作的表和链，命令选项用于指定管理iptables规则的方式（比如插入、增加、删除、查看等）；条件匹配用于指定对符合什么样条件的数据包进行处理；目标动作或跳转用于指定数据包的处理方式（比如允许通过、拒绝、丢弃、跳转给其它链处理）。</p>
+
+<p>iptables命令的管理控制选项：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-A 在指定链的末尾添加（append）一条新的规则 
+</span><span class='line'>-D 删除（delete）指定链中的某一条规则，可以按规则序号和内容删除 
+</span><span class='line'>-I 在指定链中插入（insert）一条新的规则，默认在第一行添加 
+</span><span class='line'>-R 修改、替换（replace）指定链中的某一条规则，可以按规则序号和内容替换 
+</span><span class='line'>-L 列出（list）指定链中所有的规则进行查看
+</span><span class='line'>-E 重命名用户定义的链，不改变链本身 
+</span><span class='line'>-F 清空（flush） 
+</span><span class='line'>-N 新建（new-chain）一条用户自己定义的规则链 
+</span><span class='line'>-X 删除指定表中用户自定义的规则链（delete-chain） 
+</span><span class='line'>-P 设置指定链的默认策略（policy）
+</span><span class='line'>-Z 将所有表的所有链的字节和数据包计数器清零 
+</span><span class='line'>-n 使用数字形式（numeric）显示输出结果 
+</span><span class='line'>-v 查看规则表详细信息（verbose）的信息 
+</span><span class='line'>-V 查看版本(version) 
+</span><span class='line'>-h 获取帮助（help）</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>防火墙处理数据包的四种方式</h2>
+
+<ol>
+<li>ACCEPT：允许数据包通过。</li>
+<li>DROP：直接丢弃数据包，不给任何回应信息</li>
+<li>REJECT：拒绝数据包通过，必要时会给数据发送端一个响应的信息。</li>
+<li>LOG：在/var/log/messages文件中记录日志信息，然后将数据包传递给下一条规则。</li>
+</ol>
+
+
+<h2>防火墙规则的保存与恢复</h2>
+
+<p>iptables-save把规则保存到文件中（生成保存规则的文件名为/etc/sysconfig/iptables），再由rc.d目录下的脚本（/etc/rc.d/init.d/iptables）自动装载。使用<code>iptables-save &gt; /etc/sysconfig/iptables</code>命令来保存规则，也可以用<code>service iptables save</code>指令把规则自动保存起来。当计算机启动时，rc.d下的脚本将用命令<code>iptables-restore</code>调用这个文件，从而就自动恢复了规则。</p>
+
+<h2>防火墙常用策略</h2>
+
+<ul>
+<li>拒绝进入防火墙的所有ICMP协议数据包</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -I INPUT -p icmp -j REJECT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>允许防火墙转发除ICMP协议以外的所有数据包，使用“！”可以将条件取反。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -p ! icmp -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>拒绝转发来自192.168.1.10主机的数据，允许转发来自192.168.0.0/24网段的数据。要把拒绝的放在前面，不然就不起作用了。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -s 192.168.1.11 -j REJECT
+</span><span class='line'>$ iptables -A FORWARD -s 192.168.0.0/24 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>丢弃从外网接口（eth1）进入防火墙本机的源地址为私网地址的数据包。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A INPUT -i eth1 -s 192.168.0.0/16 -j DROP
+</span><span class='line'>$ iptables -A INPUT -i eth1 -s 172.16.0.0/12 -j DROP
+</span><span class='line'>$ iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>封堵网段（192.168.1.0/24），两小时后解封。这个策略可以借助crond计划任务来完成。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -I INPUT -s 10.20.30.0/24 -j DROP
+</span><span class='line'>$ iptables -I FORWARD -s 10.20.30.0/24 -j DROP
+</span><span class='line'>$ at now 2 hours at&gt; iptables -D INPUT 1 at&gt; iptables -D FORWARD 1
+</span><span class='line'>
+</span><span class='line'>[1]   Stopped     at now 2 hours</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>只允许管理员从202.13.0.0/16网段使用SSH远程登录防火墙主机。比较适合对设备进行远程管理时使用，比如位于分公司中的SQL服务器需要被总公司的管理员管理时。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A INPUT -p tcp --dport 22 -s 202.13.0.0/16 -j ACCEPT
+</span><span class='line'>$ iptables -A INPUT -p tcp --dport 22 -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>允许本机开放从TCP端口20-1024提供的应用服务。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A INPUT -p tcp --dport 20:1024 -j ACCEPT
+</span><span class='line'>$ iptables -A OUTPUT -p tcp --sport 20:1024 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>允许转发来自192.168.0.0/24局域网段的DNS解析请求数据包。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -s 192.168.0.0/24 -p udp --dport 53 -j ACCEPT
+</span><span class='line'>$ iptables -A FORWARD -d 192.168.0.0/24 -p udp --sport 53 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>禁止其他主机ping防火墙主机，但是允许从防火墙上ping其他主机</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -I INPUT -p icmp --icmp-type Echo-Request -j DROP
+</span><span class='line'>$ iptables -I INPUT -p icmp --icmp-type Echo-Reply -j ACCEPT
+</span><span class='line'>$ iptables -I INPUT -p icmp --icmp-type destination-Unreachable -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>禁止转发来自MAC地址为00：0C：29：27：55：3F的主机的数据包。iptables中使用“-m 模块关键字”的形式调用显示匹配。这里用“-m mac &mdash;mac-source”来表示数据包的源MAC地址。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -m mac --mac-source 00:0c:29:27:55:3F -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>允许防火墙本机对外开放TCP端口20、21、25、110以及被动模式FTP端口1250-1280，这里用“-m multiport &mdash;dport”来指定目的端口及范围。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A INPUT -p tcp -m multiport --dport 20,21,25,110,1250:1280 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>禁止转发源IP地址为192.168.1.20-192.168.1.99的TCP数据包。此处用“-m iprange &mdash;src-range”指定IP范围。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -p tcp -m iprange --src-range 192.168.1.20-192.168.1.99 -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>禁止转发与正常TCP连接无关的非&mdash;syn请求数据包。“-m state”表示数据包的连接状态，“NEW”表示与任何连接无关。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A FORWARD -m state --state NEW -p tcp ! --syn -j DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>拒绝访问防火墙的新数据包，但允许响应连接或与已有连接相关的数据包。“ESTABLISHED”表示已经响应请求或者已经建立连接的数据包，“RELATED”表示与已建立的连接有相关性的，比如FTP数据连接等。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -A INPUT -p tcp -m state --state NEW -j DROP
+</span><span class='line'>$ iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>只开放本机的web服务（80）、FTP(20、21、20450-20480)，放行外部主机发住服务器其它端口的应答数据包，将其他入站数据包均予以丢弃处理。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ iptables -I INPUT -p tcp -m multiport --dport 20,21,80 -j ACCEPT
+</span><span class='line'>$ iptables -I INPUT -p tcp --dport 20450:20480 -j ACCEPT
+</span><span class='line'>$ iptables -I INPUT -p tcp -m state --state ESTABLISHED -j ACCEPT
+</span><span class='line'>$ iptables -P INPUT DROP</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>参考文章</h1>
+
+<ul>
+<li><a href="http://netfilter.org/">netfilter</a></li>
+<li><a href="http://man.chinaunix.net/network/iptables-tutorial-cn-1.1.19.html">Iptables 指南 1.1.19</a>　</li>
+<li><a href="http://blog.csdn.net/thmono/archive/2010/04/08/5462043.aspx">iptable 笔记</a></li>
+<li><a href="http://netsecurity.51cto.com/art/200512/14457.htm">网络安全频道</a></li>
+<li><a href="http://blog.sina.com.cn/s/blog_40ba724c0100jz12.html">iptables_2</a></li>
+<li><a href="http://qiliuping.blog.163.com/blog/static/1023829320105245337799/">netfilter/iptables全攻略</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-25T23:36:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>, <a class='category' href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/24/astylege-shi-hua-dai-ma/" title="Previous Post: astyle格式化代码">&laquo; astyle格式化代码</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/26/qi-mou-zhi-shi-kuai-tong/" title="Next Post: 奇谋之士蒯通">奇谋之士蒯通 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/xiu-che-ji/">修车记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (43)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (4)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/25/linuxxia-iptablesfang-huo-qiang-yuan-li-ji-shi-yong/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[残剑]]></title>
+  <link href="http://txgcwm.github.io/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-17T16:51:28+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress安装Slash主题及恢复]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/"/>
+    <updated>2014-05-17T16:14:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu</id>
+    <content type="html"><![CDATA[<p>输入以下的指令，就能立马体验Slash。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd octopress
+</span><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'>$ rake install['slash']
+</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装完之后，我就后悔了，虽然主题看起来更好看，可没有之前使用的那般便利，幸好我没有直接将它上传到<code>github</code>上，只是执行<code>rake preview</code>指令提前在本机上运行了一下。不过还是有遗憾的，一些配置因安装新的主题被覆盖了，所以在安装之前提前备份是非常有必要的工作。</p>
+
+<p>新的主题安装在<code>.themes</code>目录下，可以看到新安装的主题，也能看到<code>Octopress</code>默认的主题<code>classic</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls .themes/
+</span><span class='line'>classic  slash</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>既然不喜欢，就得恢复到原来的主题，使用以下的指令即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake install['classic']
+</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>今天查阅资料最大的收获是知道了<code>Octopress``生成静态文件后直接发布</code>的命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://zespia.tw/Octopress-Theme-Slash/index_tw.html">Octopress-Theme-Slash</a><br/>
+<a href="http://fancyoung.com/blog/octopress-study/">技术博客利器——Octopress</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[微访谈后记]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/17/wei-fang-tan-hou-ji/"/>
+    <updated>2014-05-17T00:22:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/17/wei-fang-tan-hou-ji</id>
+    <content type="html"><![CDATA[<p>从去年7月末提出这个想法，到昨天最后一篇访谈的发布，历时将近10个月，这也差不多是自己预期的那样，只是把它当作一件有趣的事情在做，不想把自己和访谈者逼得太急。虽比不上媒体的工作者的专业性，却也是我和朋友们的精心之作，没一份问题单我都根据每个人不同的经历和性格去设计，朋友们也是根据自身的实际情况认真书写。</p>
+
+<p>当初的想法就是很简单，只想通过问答的方式记录朋友们在过去的努力和工作经历。当然我更希望大家展现其拼搏的那一面，人一旦涉世深了，就会对生活失去激情、放弃梦想，进而随波逐流，这些是我最不愿意看到的场景，所以我更希望更大家带来一些星星之火。我知道所做的一切很微博，但只要有一小部分人通过这些文字能够感知到倔强的力量，那我就心满意足了。</p>
+
+<p>我也知道每个人生活在自己的圈子里，对于这些拼搏、新奇的人物经历并不会有大的兴趣，但我还是注意到有些朋友一直关注着，这些默默的关注也是我持续做这件事情的动力。当看到他人留言或者赞的时候，我都兴奋不已，每个访谈者写下的文章都值得赞颂千遍。</p>
+
+<p>这期的访谈总共发出15份正式的邀请：最终收到12份稿件，均已发布，总计将近4万字；另外的3份中有一份明确表示不会回复，两份在沉默中消失。大部分是IT从业者（这个跟我本身的职业有关），当然也有人事、市场、学生等身份的朋友。从收到的数据看，我是非常满意的，因为我觉得发出邀请时的判断大体是正确的。最让我欣慰的是，这些受访的朋友在有空闲时间的时候会尽量早的把稿件写好发送给我。在这整个的过程中，我的工作是相对轻松的，只需要调整和检查一下，然后就可以发布了。</p>
+
+<!--more-->
+
+
+<p>访谈发布几篇之后，接到了一个朋友的电话，他告诉我他从我的文章中找到了灵感。他们公司要征文，他不知采用何种方式书写好，看到我的文章后觉得可以对公司中的大牛进行访谈。我不知他是否进行了这样的尝试，但我始终很高兴，因为自己做的一些事情能够给他人带去想法和价值。</p>
+
+<p>对于每个受访者我都了解，从他们的身上都能够让我学习到东西，我认同他们的价值观。每时每刻我都希望能够和他们保持一种永久的沟通桥梁，或许更多的是精神层面的支撑。通过他们对自我的认知，我作为一个旁观者也更加了解了他们，这些东西可能就是我们彼此能够成为朋友的最本质的原因吧。</p>
+
+<p>最想说的一句话是：答应了别人的事情一定要做到，即便做不到也需要得到对方的谅解。曾经问一些受访的朋友是否愿意加入我的这个活动，他们“爽快”地答应了，事后我才知道他们只是把这件事当作儿戏。对于别人答应我的事情，我一般比较执着（因为我相信大家能够办到），在相应的时间段内会催促，当然我不会隔三差五地去催，会跟对方约定好一个时间，时间一到我就去催。当然第一次约定的时间内没有完成的话，我会再次约定一个时间，等到第二次还没有给我一个答复的话，那么我也就不会再打扰对方了，完全不值得为不可能的事情耗费太多的精力。</p>
+
+<p>如果继续进行下去，我想还可以采访更多的朋友，阅读更多精彩的人生故事，可我目前的想法只想点到为止，腾出时间去做其它的一些更有意义的事情。就如我开始探讨这个想法一样，或许在未来的时间还会做，但至少这一两年内不会，我需要等待自己和他人的成长。</p>
+
+<p>不努力的人永远只会艳羡他人的生活，却看不到他人努力的付出。与君共勉，希望未来的我们会更加的优秀，当回望现在的自己的时候会发出会心的一笑！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[剑问君答：行者无疆]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/"/>
+    <updated>2014-05-15T22:43:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/15/jian-wen-jun-da-:xing-zhe-wu-jiang</id>
+    <content type="html"><![CDATA[<p><img src="http://www.tibet.cn/holiday/xhwl/201304/W020130427591588415431.jpg" alt="alt text" /></p>
+
+<p>残剑：放下工作出去旅行，对于很多人是一件很难抉择的事情，多少次想说走就走，结果都成了泡影。旅行重要的不是时间和金钱，而是一颗向往自由和追求的心。你为什么会选择在8月多的时候出去走走？</p>
+
+<p>小沫：杭州的8月，酷暑难耐，燥热的天气，心更加的浮躁，与其让自己沉沦，不如“掏空”自己的心。我没有宏图大志，没有家族企业，甚至没有清晰的职业发展道路，那我唯独可以过好当前的生活，随心所动。</p>
+
+<hr />
+
+<p>残剑：旅行不在于计划，重要的是追随自己内心的向往和追求。每到一处，那都是别样的风情，都值得赞颂千遍。这次旅行去了哪些地方，游玩了哪些有特色的景点，能否按照游玩的先后顺序罗列一下？</p>
+
+<p>小沫：对于自然风光来说，我更在意的是在路上的人和事，自然固然美，但路上的人更具魅力。回来这么久了，自然风景或许还有些记忆，看到照片很是惊叹，但是追寻在路上的脚步，给我更多的是欢乐，和会心的微笑。如果真要罗列出来，我只能按省份来了：</p>
+
+<p>四川（6天）</p>
+
+<p>D1：成都-都江堰（宿） <br/>
+D2：都江堰-汶川-长江黄河分水岭-红原-月亮湾-黄河九曲-郎木寺（宿） <br/>
+D3：郎木寺-扎尕那-花湖-若尔盖（宿） <br/>
+D4：若尔盖-松潘-黄龙-九寨沟（宿） <br/>
+D5：九寨沟（宿） <br/>
+D6：回成都</p>
+
+<!--more-->
+
+
+<p>成都是天府之国，一个来了就不想走的地方，吸引我们的是美食和美女，还有那里的生活节奏。刚到成都，也是旅行的第一站，第一次住青年旅舍，给我太深的印象了。我认识了新的世界，新的观念，新的生活方式。也听到很多新的名词，也是属于旅行者的！心胸傥荡，做真正的自己，大家零距离的交往，这就是第一天在青旅体验到的。</p>
+
+<p>黄河九曲的日落太美了，十八道蜿蜒的河流，把晚霞的美诠释的那么透彻，加上五彩的经幡和神圣的寺庙，仿佛要洗尽人们内心的垢尘。</p>
+
+<p>四川郎木寺和甘肃郎木寺就一路之隔，甘肃郎木寺也是全国唯一开放天葬的地方。</p>
+
+<p>扎尕那一个世外桃源，没有出名的景色，但给人非常宁静和亲和的地方，所有的东西都未经雕刻，与生俱来的和谐，让人忘却烦恼的地方。</p>
+
+<p>九寨归来不看水，确实九寨沟碧绿的流水正如它的传说，是女神在凡间留下的绿丝带所幻化成的，多么的期盼能在九寨沟拍摄婚纱。</p>
+
+<p>峨眉、乐山</p>
+
+<p>D1：成都-乐山-峨眉（宿） <br/>
+D2：峨眉-成都</p>
+
+<p>最让人期待的是峨眉山的云海，当时央视为了拍摄云海，足足等了3个月才拍摄到完美的云海，其次是普贤菩萨的金身，因云雾的关系，若隐若现很是灵妙。</p>
+
+<p>四川-兰州-西宁</p>
+
+<p>兰州是唯一一个黄河贯穿的城市，是黄河孕育了这个城市， 在中山桥上呈现的是黄河落日流的景色。兰州的小吃真心点赞，还有广场舞非常的优雅！</p>
+
+<p>西宁-敦煌</p>
+
+<p>南宁胡吃海喝之后，就开始下个旅途了。那个小吃城，就是种类多，真没兰州拉面好吃，牦牛酸奶那就图个新鲜，不过味道也过的去。</p>
+
+<p>D1：西宁-塔尔寺-拉及山-日月山-倒淌河-青海湖-刚察（宿） <br/>
+塔尔寺是宗喀巴大师的诞生地，青海最大的藏传寺庙，依山而建气势相当可观。青海湖过去油菜花已经凋谢，但远处看去海天一线给人心涌澎湃，没有油菜花的点缀，依然抵挡不了青海湖的魅力。</p>
+
+<p>D2：刚察-默勒草原-大冬树山垭口-冰沟-卓尔山-阿柔大寺-张掖（宿） <br/>
+这条路让我一天经历了“春夏秋冬”四个季节，卓尔山不在我们行程内，无意发现它却是最美的。</p>
+
+<p>D3：七彩丹霞—嘉峪关-悬臂长城-天下第一墩-敦煌（宿） <br/>
+这条路的精华是丹霞，你知道凌晨4点多逃票进去看日出是多么美妙的事情，这兴奋已经超出它的自然美。</p>
+
+<p>D4：敦煌-莫高窟 <br/>
+听讲解员一说，让你每时每刻都在纠结和矛盾，一是惊叹前人的艺术精妙，二是因为你每踩的一块砖都有好几百年甚至是上千年的历史，让你存在负罪感。</p>
+
+<p>D5：敦煌-雅丹魔鬼城-黑山-玉门关-阳关  <br/>
+魔鬼城玩的太赶，确实是个遗憾，黑山是我们给它取的名字，山脚下尽是百年前留下的生物化石，放眼望去，那是绝美的水墨山水画。阳光葡萄我是真心爱呀，超大超喜欢。</p>
+
+<p>D6：鸣沙山 <br/>
+这几天的行程中，鸣沙山最为兴奋，就是因为逃票，太刺激了，此时此景历历在目！</p>
+
+<p>敦煌-格尔木-西藏</p>
+
+<p>在敦煌遇到了新的驴友，所以走在路上，只要你真城，友善就永远不会孤单。</p>
+
+<p>在格尔木想到马上能到圣城拉萨，那是无比的心悦，火车穿越可可西里时，车窗外白茫茫的一片发现几只灵越跳动的身影，才知道是藏羚羊。洁白无暇的可可西里，没有人烟的打扰，除了大美真，我真的不能则么形容了，能亲身感受中国最美的铁路真太幸运了。</p>
+
+<p>拉萨</p>
+
+<p>到拉萨了，到了，终于到了，圆了一个梦！到青旅时脸已经抽搐了，因为一路笑过来的，也不知道为什么，就是高兴。</p>
+
+<p>放下行李直奔布达拉宫，网上太多赞美布达拉宫的言辞，我只想说收了我吧，神奇的布达拉宫。广场上的锅庄舞让我忘却旅途的疲惫，一遍又一遍的跟着TiTa，人与人之间心灵的桥梁，不分地位，只为共舞一曲。</p>
+
+<p>因为前一天太过兴奋，悲剧的高反发生了，喉咙痛、感冒，不敢洗澡，就去光明茶馆喝喝酥油茶，这里最能体会到藏族人民的生活乐趣，在大昭寺广场晒晒太阳，看着虔诚的朝拜者，坚定的信仰。</p>
+
+<p>在拉萨三天，努力恢复身体，努力瞎逛，在青旅听旅行者的故事这是我最喜欢干的事，他们热意倾诉路上的事，每个人都有自己的精彩，有些事不可能全部经历过，但听闻过也足以让你兴奋许久，那些故事，那些人，我一直在回味。</p>
+
+<p>拉萨-樟木</p>
+
+<p>再次启程！！！</p>
+
+<p>羊湖，三大圣湖之一，美的让人心醉。卡若拉冰川，万年冰川遗迹，记载着流年的变迁。</p>
+
+<p>日喀则（宿）  <br/>
+扎什伦布寺可以与布达拉宫相媲美的藏传佛教，是藏传佛教格鲁派的四大寺之一。</p>
+
+<p>经过无数的青稞田野，留下N个在青稞丛中撒欢和跃窜的瞬间，当珠峰映入眼帘时，一路的颠簸和困乏已经完全消失，开心、喜悦、激动油然而生。</p>
+
+<p>住珠峰大本营的时候，毡房外面能听到大家在谈天说地，大吐旅途精彩片段。欢歌载舞的身影，在珠峰星空下越发的动人。仿佛聊了很长很长时间，夜深了，珠峰的夜晚非常的宁静，但身边小伙伴的呼吸声非常急促，不由得担心起来。真的非常幸运，天气特别的好，珠峰主峰掀开了她神秘的面纱。</p>
+
+<p>樟木（宿） <br/>
+樟木，江南气息特别浓，这里尼泊尔人比中国人还多，更有趣的汽车，更多彩的画面，更诗意的山水。</p>
+
+<p>樟木-拉萨 <br/>
+送小伙伴们出国，我们两个没护照的就回程了（宿日喀则）。在青旅休整一天，顺便在留言墙上登搭车返走滇藏线的告示，寻找同行的小伙伴。so easy！召集的如此之快，我们都还没合照宣誓呢，就匆匆踏上了我们新的旅程。</p>
+
+<p>搭车走318线</p>
+
+<p>快乐的318之旅，快乐的搭车徒步，一路有惊喜，有故事，有绝望，但更多的是爱！2013的中秋是在西藏林芝部队里过的，特殊日子特殊的意义，指导员的教导，太值得回味！</p>
+
+<p>香格里拉-丽江-泸沽湖-西昌-攀枝花-昆明-广西-广州-中山-厦门-莆田-杭州</p>
+
+<p>…………</p>
+
+<hr />
+
+<p>残剑：这一路的风景太美，多少让你不舍，或许都有可能让你产生停留在那里的念头。游玩了这么多的景点，花了你多少的时间，你是如何安排的，还是随心而玩？</p>
+
+<p>小沫：这趟出去花了2个半月。绝大多数时间都是随心玩的，不想约束太多，有时碰到有意思的人就结伴同行。</p>
+
+<hr />
+
+<p>残剑：长时间的出行，想必也需要花费大量的资金。我短短一个月的出行就花费了一万多，自我感觉这是节省的了。你两个多月的旅行，大概花了多少的费用？</p>
+
+<p>小沫：1.3W左右。</p>
+
+<hr />
+
+<p>残剑：总的来说，在花费上你比较的节省，有什么高招可以传授一下吗？</p>
+
+<p>小沫：能逃票的绝不买票，拼吃，拼住！在路上不用太顾面子，因为大家都想做最真实的自己。 景点里的东西基本上不买，住青旅比住酒店更实惠，更有价值。</p>
+
+<hr />
+
+<p>残剑：万事具备，只欠东风，开始旅行之前，是否有做详细的攻略，还是这只是一次说走就走、走到哪玩到哪的旅行？</p>
+
+<p>小沫：其实出去之前都没听说过这些地方，开始计划只是去九寨沟，一路上听驴友讲的旅行故事，太多的新词、太多的精彩不断侵蚀着我，让我着迷。</p>
+
+<hr />
+
+<p>残剑：318线让多少人向往它的神秘，又让多少人恐惧它的险峻。每天有很多的不幸在这条路上上演，却永远阻止不了人们对它的迷恋。在决定徒步搭车走318线路的时候，那时是一种怎样的心情，是否有过恐惧和退缩？</p>
+
+<p>小沫：决定搭车返走318时，或许因为新的方式踏足318朝圣的路，让我感到更多的是兴奋，或许比较幸运没有遇到太多的困难，并未有恐惧和放弃的念头。确实在很长一段时间里未搭到车让我很沮丧，但小伙伴的陪同给我坚持的动力，当很长时间的等待，看到一辆车缓缓停在你跟前，你会幸福到想哭。</p>
+
+<hr />
+
+<p>残剑：出门在外是一件不容易、不简单的事情，总有一些事情出乎我们的预料，或许有些事情会很棘手。一路上是否有遇到比较难处理的事情，你们又如何去克服的？</p>
+
+<p>小沫：一个人在路上遇到的状况比较多，会强迫你去思考，去解决。另外只要友善点，驴友不会吝啬给你帮助。</p>
+
+<hr />
+
+<p>残剑：一路上可以碰到很多的骑行者和徒步者，这是一道别致的风景，让人百看不厌。有妹子同行，旅途是不是特别的愉悦，有一些惊天动地的故事吗？</p>
+
+<p>小沫：是呀！在路上有很多未知和期待。这次在路上找到了自己喜欢的女孩，虽然不能在一起，但还是感觉很幸福。路上的事很多，很精彩！</p>
+
+<hr />
+
+<p>残剑：看到你的旅行轨迹，让我对这些神秘的地方多了很多的向往，多少次想跟随你的脚步去那些没有去过的地方走走。你去过的地方我很多都没有去过，哪些地方是比较值得一去的呢？</p>
+
+<p>小沫：其实在第二个问题里差不多都讲过了。四川的扎尕那、九曲、九寨沟；青海的青海湖；甘肃的莫高窟和鸣沙山；西藏其实很多地方都值得一去，拉萨、羊湖、樟木、纳木错、林芝……云南的丽江、泸沽湖、九乡、普者黑，更想的是去苗寨；厦门的环岛路……</p>
+
+<hr />
+
+<p>残剑：一个人的旅行不是一件很容易的事情，它考验一个人独立生存的能力。对于一个人的旅行，你有什么建议或者是看法吗？</p>
+
+<p>小沫： 一个人在路上不乏伙伴，不需要太过于担心，只要你把自己交友的大门敞开，很多人愿意踏入进来，但凡事需多留个心眼，不能完全过于相信别人，别人不是你，抉择不能完全适用自己。在路上一些习俗应特别注意，千万不能对别人的习俗指指点点，特别在藏族人群中，拍照有时会带来不必要的麻烦。管好自己的言行，低调做人，真诚友善。</p>
+
+<hr />
+
+<p>残剑：旅行者除了风景外，肯定会遇到糟糕的天气、拥挤的道路、不通情理的“野蛮人”等等状况，我想你遇到所有的一切对你来说都是一种收获和体验。除了欣赏到美景外，有什么其它的收获吗？</p>
+
+<p>小沫：这两个半月，碰到的景色自然很多很美，但是我更喜欢在路上的感觉和路上遇见的人，流传的故事。带回来的是满满的故事，更准确的说是经历。我们不可能所有事都亲身体验，但有些经历亲耳听闻便足以让你佩服。享受旅行的那段时间，彼此尊重，卸下伪装，做回自己，结交单纯的友谊，结伴同行，用双脚丈量神圣的青春轨迹。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[修车记]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/14/xiu-che-ji/"/>
+    <updated>2014-05-14T23:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/14/xiu-che-ji</id>
+    <content type="html"><![CDATA[<p><img src="http://pic-hzrb.hangzhou.com.cn/0/11/26/40/11264010_687000.jpg" alt="alt text" /></p>
+
+<p>从车库把自行车推出，却没有那种顺畅感，细看才知道前轮的车胎瘪了，被一颗钉子深深的扎入。虽然已是很晚，却也没有那么的忧虑，大不了就推着自行车回家，或者半路上把它抬上公交车。没有抱怨是因为觉得祸福相依，说不定就是这种时间差可以让我避免一场灾难。</p>
+
+<p>原本以为将就着骑就可以凑合着，可实在骑不了，又怕把它骑坏了，只能下车推。自己还是不死心，就咨询同事附近是否有修车的地方，很幸运，在我们公司那条路的尽头有那么一家，不确信现在是否还开门，但总觉得自己需要去看看。要是店铺的们开着，后面的两天我就不用坐公交上班了。</p>
+
+<p>到那家店铺有一段距离，走在路上难免不把这事想象一番：钉子直直地插入了车胎，这不太像是骑车路上扎进去的，是不是那些保安伙同外面的人做的“好事”呢？这样他们就可以从中分利。</p>
+
+<p>店面很小，也就只平米，在外面坐着几个人聊天，我在那里停下，战战兢兢地问他们是否补胎。那些人指着隔壁的烟酒店铺，把修车主叫了出来，这是一个面部黝黑的中年男人，第一印象只有这些。他见了我，说道：“前胎坏了呀？”我不确信他是否看了我的车子，所以我坚定了我在路上的那种猜想。</p>
+
+<p>“嗯，是的，被一个钉子扎破了。”</p>
+
+<!--more-->
+
+
+<p>他坐在一条小椅子上，叫我把车子放下，我立马警觉地问道：“修一下车胎要多少钱啊？”先服务后付费被宰的事情不是没有遇到过，我怕自己再次碰上，宁愿推着车子回家，我也不希望自己任人宰割。</p>
+
+<p>“没有修过车胎吧，这都不知道多少钱。”显然，他是看出我对这方面的了解程度了。我的心又沉了下来，毕竟他已经开始修理我的车子，被宰是难免的事情了。</p>
+
+<p>我故作镇定的说道：“车子没有坏过，所以从来没有补过胎。”我开始骑自行车才不久，又怎么会知道这个的行价呢。想想就算了吧，下次一定要先了解一下这些东西。</p>
+
+<p>一个来修电动车的人想把车子停在他的门外，老板没有同意，反问那人道：“要是车子被偷了，这个责任由谁承担啊？”</p>
+
+<p>“这么晚才下班呀，还是你们读书人好，比较的轻松。”我背着一个包，又显得有些淳朴，所以他这般猜测我的身份。</p>
+
+<p>“老板，你不也还没有下班嘛。”说这话的时候，我内心还暗自高兴，因为他，我就可以把自己的车子修理好。</p>
+
+<p>“我们是为了混口饭吃，不得不这么晚。我们做的事情根本不能和你们大学生比。一个初中生能做什么，就只是做做这种别人不太愿意干的活了。”</p>
+
+<p>没有哪个人会满足自己的现状，我如是说道：“我们也需要加班的，有时甚至比这个时间还晚。还是你们自己当老板好呀，说不定哪天就发了。”</p>
+
+<p>“那不一样的，你们夏天有空调，我们就只能晒着了。老板对待一个大学生和一个初中生还是有很大的差别的。你说经常会加班到很晚，但要是你自己做了老板，肯定也希望你的员工多点时间去做事。”</p>
+
+<p>很快他就把我的车胎给补好了，我再次问他要多少钱，他说3块钱。当他提到这个钱数的时候，我觉得他比我想象的少很多，他要是向我要10块我也不会觉得贵。付了钱，我向他表示致谢，这完全出于真心。从一开始就是我把人想象的太坏，直到付钱的时候才舒心了。</p>
+
+<p>社会或许会有很多阴暗的东西存在，但还有很多质朴和善良的人存在着。他们活得很艰辛，但他们永远保留了内心的纯真。是我自己的思想被这个世界冲洗的肮脏，去发现这个世界美丽的一面是我需要去做的，那样才会让自己变得更加的快乐！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[未来的IPCamera该这么玩]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/"/>
+    <updated>2014-05-13T23:58:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan</id>
+    <content type="html"><![CDATA[<p><img src="http://mashable.com/wp-content/uploads/2013/10/Activity-Thumbnails-Timeline.png" alt="alt text" /></p>
+
+<p>我不清楚Dropcom是不是IPCamera这个行业的鼻祖，但我知道很多类似的产品以它为参考。随着它在世界上火爆登场，各大传统的厂商也不敢示弱，相继跟进，争夺这个他们自己也看不到盈利点的市场。小度i耳目凭借着干爹雄厚的资金实力，为了抢占市场的先机，几乎以全亏的买卖给部分幼儿园铺设网络监控摄像头。不得不说，巨头真他妈有钱。</p>
+
+<p>在我看来，这个市场还处于前期的培育期，这一阶段根本不可能创造利益。尤其在中国，可能只有极少部分的人愿意为此买单。在一般人看来，它的功能无非就是录制视频，跟传统的监控并没有很大的差别。但它确实存在一个巨大的市场（在我的想象中它将会是巨大的，可能会颠覆现在的一种生活方式），只是它需要一些时间去引爆。它的崛起需要经历一些阶段，按照现在科技的发展速度，它不会是缓慢的，可能在一两年内就会走上一个新的台阶，直到它不能给人们带来更多的想象空间。</p>
+
+<!--more-->
+
+
+<p>如大家看到的那样，现在的IPCamera功能相当的简单，在远程的你可以借助它看到家里的一些状况，可以看看自己宝贵的子女或者心爱的宠物。闲的时候也可以利用它和家里的人聊上两句。虽然它不能百分百的确保家里不被小偷眷顾，但它通过人脸的识别技术可以给你发送一些警报信息，起到预防的作用。它在某些瞬间也可以帮你抓拍到一些有趣的动作或场景，这时你就可以把它们分享给自己的朋友。有时一个搞笑的动作在你觉得有必要记录留念的时候，它可能已经错失，此时的IPCamera就起到了它独有的作用了，当然这个功能传统的也能做到，但它更便利的是可以让你在手机端进行编辑，然后快速的分享到自己的社交网络中。</p>
+
+<p>如果仅仅只有现在的功能，它是完全没有多大市场的，可能就不久的将来就会凋零。正如我昨天文章说的那样，服务商会对语音作一些分析，然后根据你的习惯和爱好为你提供一些便利服务。未来这个小小的东西可能会引入更多的传感器，预报你室内的温度，调节你的灯光，控制你的家电等等，你能想到的很多事情它都可以为你效劳。当你对它进行一些设置的时候，它或许会在早上的时候叫你起床，给你预报当天的天气，给你读一段美文或者是讲述一些新闻概要，不同与传统的广播的就是你可以定制一切自己喜欢的东西。随着中国老龄化的大时代的带来，在子女都忙于工作的情况下，它可以陪伴你的父母聊天，当然前提是服务端要做得足够的强大。</p>
+
+<p>做到以上的程度，它已经很强大了，可这还不够，它还将成为未来机器人的眼睛，这时的它可以在你的屋内走动，可以帮你做更多的事情。可能不仅仅是眼睛那么简单，完全可以成为一个独立的大脑了。这时，它完完全全就是你家的忠实保姆了，从此再也不用担心自己的男人会和年轻的保姆在偷情了。它自己可以去不断的学习，而且你也可以到专门的地方去下载一些资料让它去学习，每个人可以定制自己喜欢的那个独属的机器人。</p>
+
+<p>难以想象它会发展成怎样，估计它会超出我想象很多，人类的想象永远没有一个尽头，我不担心自己会看不到它爆炸式发展的那一天。等到它到来的那天我不会惊奇，因为我感知了它到来的脚步！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[给简书的几条小建议]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/"/>
+    <updated>2014-05-12T23:55:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi</id>
+    <content type="html"><![CDATA[<p>最近使用简书时的个人体会，仅供参考。</p>
+
+<p>1、在个人主页也添加回到顶部的功能，每次看自己以往写过的文章需要不停往下拉，可想回去的时候又需要不停地往上拉或者去按Home键，使用起来总觉得不便；</p>
+
+<p>2、写文章的时候，当鼠标点击到标题栏时，“无标题文章”这几个字最好自己自动消失，既然点击到那里当然是要更新一个新的标题了，需要手动去清除太麻烦了；</p>
+
+<p>3、点击“发布文章”后会跳到相应的确定页面，也太繁琐，还不如直接进入文章的浏览页面。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[语音的可利用价值]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/12/yu-yin-de-ke-li-yong-jie-zhi/"/>
+    <updated>2014-05-12T21:08:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/12/yu-yin-de-ke-li-yong-jie-zhi</id>
+    <content type="html"><![CDATA[<p><img src="http://www.zhengzhouqiyeqq.com/upfile/2011112693437441.jpg" alt="alt text" /></p>
+
+<p>搜狗输入法有个语音输入的功能，说话完毕后可以转换成文字，看到一则关于对该功能的宣传是“让你的女神惊奇你为何有如此神速的输入速度”，它极大地便利了人们的输入，对于我农村的上一辈人或者“懒人”来说是一个很不错的功能。没有采用语音的直接传送，可能基于以下的原因：一、由于口音的缘故，听者未必能够全部听清；二、在某些情况下为了更明确的表达自己的意思，让阅读者阅读后能够立即明了。总之，它可以避免重复说一遍的麻烦。</p>
+
+<p>微信因语音交流的便利而流行，细心的朋友可以发现对语音到操作有一项“转换为文字”的功能，可能对于大部分人来说这项功能也没有多大的用处，真的听不清楚的话，就请对方重新说一次。可要是“女神发过来的语音你没有听明白”这种情况发生，我们难道第一反应是请女神重新说一边吗？要是真直接这么做了，女神肯定觉得你没有在乎人家，连别人细微的变化你都听不出来。我想一般的情况是这样操作的：a、多听几遍，然后综合之前的记录加以判断；b、要是第一种方法都不能解决，那么把那段语音转换成文字也是一个不错的选择，虽然它的准确率目前还不是很高，但它至少帮你增加了理解的可能性；c、实在没有其它路子了，也就只能请女神再说一次了。</p>
+
+<p>以上提到的两个功能，它给用户带来了极大的方便，给企业带来了用户的粘性（其它的商业价值暂时还未察觉）。</p>
+
+<!--more-->
+
+
+<p>还有这么两个现象：一、在你浏览一些博客（建立在一些门户网站或论坛上，例如新浪、网易）文章的时候，在侧栏会出现你曾经浏览过的产品；二、在QQ即时聊天时，它会给你的一些文字加上超级链接（当然这些不是你自己添加的），点击的话就进入到相应的页面。这两种方式都可能为广告商带来可能性的流量，进而达成交易。以下的一些思考，是作为我这个理性消费者的一些见解：对于前者，很多情况下已购买了需要的商品，这些广告相对来说是滞后的；后者的话，一些文字只是表述的一部分，对于那些东西也是未必需求的。所以很多情况下，并不会无聊到去点击它们。</p>
+
+<p>时下IPCamera比较火爆，例如Dropcam、百度i耳目，它们都有提供语音的功能。在不侵犯隐私的前提下，觉得这部分语音存在着潜在的商业价值，可以对它的语义进行一些分析。在普通的这种远程交谈中，它所涉及的一些商品可能就是他们未来潜在的消费，这相对那些网页上的侧栏信息有价值的多。比如以下的一些情况：有婴儿的啼哭声，那么这家必然就需要一些儿童用品了（什么他们家是用母乳喂养的，不要跟我开玩笑了）；时不时能够听到宠物的叫声，那他们就需要一些宠物的用品（狗粮之类的总需要的吧，难不成让它们吃米饭之类的，和平时代的宠物比人过得好多了）。所有这些信息的搜集，可以把它们出售给第三方（似乎我的这种想法太不厚道了，可亲们，移动互联网时代没有隐私可言啊），可以让商家更精准地找到自己的客户，如果那些用户同时使用了商家的App，那么他们就能够得到更加准确的信息。</p>
+
+<p>现在的IPCamera还只是一个监控的功能，在我的想象中它可能成为机器人的一部分（机器人的眼睛）。未来它可以承担和人交流的功能（Qrobot由腾讯公司、中科院深圳先进技术研究院和深圳市中科睿成智能科技有限公司联合研发，正在这条道路上探索），但这些需要大量语义的储备。我们可以考虑这样一个场景：</p>
+
+<p>“孩子，你作业完成了，我们就出去吃肯德基，怎么样？”</p>
+
+<p>“主人，你们出去了，那我怎么办？一个人好孤独的，不过你们要是给我带点xxx回来，我就原谅你们把我一个人留在家里的‘罪行’。”</p>
+
+<p>“xxx是什么呀？我都没听说过。”</p>
+
+<p>“哈哈，不知道了吧，没有我的消息灵通吧。xxx就是xxx店最近推出的一个新品啦，就在xxx路附近哦！口感不错，很辣、很劲爆，说得我都快流口水了。”</p>
+
+<p>“主人，要去吗？如果要去的话，我立马去找找消费券哦，或者我提前预订一下！”</p>
+
+<p>“好的啦，就听你一次。”</p>
+
+<p>对于提到的xxx店、xxx新品就是在帮助商家进行广告宣传，而“很辣”可能就刚好满足了家庭某一成员的口味（广告的效应变得精准），加上给了具体的地址，那这样一次消费就极有可能达成。</p>
+
+<p>可能我想到的只是冰山一角（或许是我个人在这里瞎扯蛋），它也可能存在其它巨大的商业价值。看到这里，不知各位看官又想到了什么呢？其实，我很期待听到不同的声音！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加统计]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/"/>
+    <updated>2014-05-11T01:00:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji</id>
+    <content type="html"><![CDATA[<p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
+
+<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
+
+<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
+
+<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
+<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[西湖创客汇：创客与教育]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/10/xi-hu-chuang-ke-hui-%3Achuang-ke-yu-jiao-yu/"/>
+    <updated>2014-05-10T19:47:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/10/xi-hu-chuang-ke-hui-:chuang-ke-yu-jiao-yu</id>
+    <content type="html"><![CDATA[<p><img src="http://makeforkids.com/wp/wp-content/uploads/2014/01/20140120_cwi_10.jpg" alt="alt text" /></p>
+
+<p>和上次一样，这次也没有让我看到我特别想看的东西，具体是什么我谈不上，只希望看到一些我不曾见过的。这次在一个小学举办活动，校方也很配合，在校门口的led显示屏上作了特别的说明。从这次的分享中，我最大的收获是现在的学校越来越注重科技在实际生活中的学习，据说很多下城区的小学都开设了相应的课程，未来很多东西可能会有更大的推广。</p>
+
+<p>到会的主要有以下几类人员：学生，家长，教师，杭州创客的早期人员，还有就是我这种有一点兴趣的人员（估计也就几个吧）。有很多创客人员同时也是以家长的身份出现，我想他们也希望在孩子早期培养他们的兴趣。从现场来看，这些孩子在这之前还是了解了一些东西的。</p>
+
+<!--more-->
+
+
+<p>杭州创客的创始人sheldon首先作演讲，但他讲述了太多创客相关的东西，虽说没有偏离主题太多，可这些东西并不适合当时的场合，学生和家长并不买单，学生在折腾着电脑，父母们坐在下面打瞌睡。我想我们要达到宣扬的目的，但也要视情况而定，否则创客也变得俗套了。关于内容的选取，我想还是需要好好整理和考虑的。</p>
+
+<p>进入到学生实操阶段，并不是每个人能够理解Scratch软件的操作（操作一些空间，但也是需要有编程思想的逻辑思考），当然里面也不乏聪明的小家伙。走到他们的身后去看他们的操作，心里默默地说“要是让我去操作，我也得好好研究一下这个软件，才能上手去做一些自己的作品”。这个软件我想后续还需要更多的改进，让学生感觉到这不是在学习而是在娱乐，这样它的功效才能真正达到。</p>
+
+<p>四、五年级的学生还是太小，这些东西的学习还不适合普遍的推广，或许可以先让它在一部分对科技及DIY感兴趣的孩子那里慢慢培养。无论怎样，一切兴趣为先！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[托]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/10/tuo/"/>
+    <updated>2014-05-10T12:18:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/10/tuo</id>
+    <content type="html"><![CDATA[<p><img src="http://img01.cztv.com/201405/05/8e8ef321377b36a0fa8fc8be2d693393.jpg" alt="alt text" /></p>
+
+<p>临近下班的前一小时，一个妹子加了我，无论她通过怎样的途径加的我，作为一个正常的雄性来说都是非常乐意接受的。自认为女人缘很差的我来说，面对这种事情更是喜出望外，喜悦之情难以言表，干脆利落地加了她。</p>
+
+<p>当你一个加另外一个人的时候，一般情况是加的人对被加的人会比较熟识，换句话说，他开始挑起一段对话的可能性比较的大。可她并没有这么做，反而是我有这么一种迫切的心理，想去立马了解一些状况。不得不承认，是我先挑起了话题。这一点她做得很正确，谁先说谁就处于下风，这点她很清楚，我想这也是她长期的实战总结出来的经验。</p>
+
+<p>当然一切谈话都很俗套，她告诉我是从同城信息中随意加的我，或许以后会成为朋友，对于这样的回复我当然也不会有什么戒心，互联网的今天发生这种事情属于再平常不过了，我没有必要那么保守的去对待。我讨厌“户口调查”式的谈话，所以我让她自己去空间了解我。对于陌生人来说，开始一段交流之前去彼此的空间了解对方也是一件正常的动作，应该说是首先必要去做的一件事情。我也毫不例外，去光顾了她的空间，除了几张艳丽的照片，外加一些不痛不痒的说说，其它没有任何关于她这个人性情方面的信息。这对于一个头脑发育正常的人来说，多少都懂得其中的缘由了。过了一小会儿，我去查看自己的空间，从最近浏览的信息来看，她并没有来看过我的空间。所有信息一综合，基本的判断就很明确了。</p>
+
+<!--more-->
+
+
+<p>原本一切就可以停止了，或者我完全可以不必去浪费一些时间去应付，可我觉得这也是一场很好玩的游戏，通过一些交流可以去了解不同行业的人。说了不久，她就急切提到一起去玩，当我问及在她无趣、伤感的时候为何不去找朋友玩时，她的答案在我这里几乎站不住边。有时一个人确实需要向陌生人倾诉自己的内心，我又给她找了一个合适的理由。</p>
+
+<p>她给我打电话，问我是否有确切的时间可以到她那里去，我告诉她需要忙一会才能下班，从她的语气中我显然听出了她的不耐烦。没说多久，她在没有任何招呼的情况下就挂了我的电话。和她短短的交谈时间里，她没有给我留下好的映像，声音更是谈不上甜美。</p>
+
+<p>回到座位上，我把那句最著名的“too young，too simple”发给了她，可她并不明白这句话的意思，我也只能在电脑旁笑笑了。虽然觉得自己的内心还没有长大，可我也是走在奔三路子上的人了，对于信息的判断总不至于差到让人随意欺骗的程度，她显得对我没有足够的重视或者是把IT男当成了低智商人群。</p>
+
+<p>许久她在qq上没有给我回复信息，我猜她一定在寻找她的潜在客户，没有多余的时间搭理我。过了不久，她给我回复了，让我忙完之后再联系她。外面下着雨，也还有其它一些事情需要处理，对于这事也就点到为止了。如果还有空闲的时间，我真心想把这个游戏完下去，然后跟她深入地交流一下职业心得。</p>
+
+<p>整个过程很短暂，却也让我看出了她们这个职业很多地方的不足，我想她们有必要去提高一下。以下是我针对她们这个职业的思考，有一些是中肯的建议，希望她们在自己的职业道路上有一个大的跃进。</p>
+
+<ul>
+<li><p>努力提高自身的文化素养，提升自己的品味，做到能够和各行各业的人顺畅交流，这点对于她们这个行业的人来说是很重要的，至少不会让她们很快落出马脚；</p></li>
+<li><p>扩大业务面，不要局限于自己生活的周边，多找一些那些有需求的酒吧、餐馆，总是让别人到你住的周边去，人们总是能够很快察觉出端倪的；</p></li>
+<li><p>不要把自己的业务当作快餐，要有“做长线，钓大鱼”的准备，当然可能职业上需要你快速地达成单子，但这也只是短期利益；</p></li>
+<li><p>有时间的话，可以去学习一下电话客服、销售、营销之类的课程，即便不能完成交易，那也能让潜在的客户给你一个好评，或许有一天你们真的就有可能成为朋友了。</p></li>
+</ul>
+
+
+<p>暂时只想到了这些，我想我的这些建议还是有些参考意义的，有的话再补充了。虽然你们深入这个行业，对于很多东西比我体会的要深刻，但作为一个潜在的客户，我提出了我自己的一些需求。那位小姑娘现在依然在我的好友圈里，但我想她是不会来看我这篇文章的，不过我还是希望她来看看，这对于她的职业发展道路还是很有帮助的。估计她看了不会太恼火，反而可能会感激我。</p>
+
+<p>针对以上我提到的四点，如果现在正在从事这个行业的你们觉得自己做得足够好的话，可以来找我，至多是金钱上的损失，我愿意玩一下这个游戏，为这个社会的繁荣和这个职业的专业化发展作出自己的贡献。有付出，我也希望自己有所回报，希望和你的交谈中学习到一些东西。当然，按照我对他们这种职业发展道路的设想，她们已经不是简单的“托”了，应该叫“社会化高级导销员”（当我想到这个名词的时候，我的大脑又开始了膨胀，思绪又开始了起飞，心静的时候再码这些文字了）。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加二维码展示和返回顶部按钮]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"/>
+    <updated>2014-05-09T22:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu</id>
+    <content type="html"><![CDATA[<h1>二维码展示</h1>
+
+<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&trade;&lt;/abbr&gt;&lt;/h1&gt;
+</span><span class='line'>  &lt;a href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/" alt="post-qrcode"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在侧边栏显示，则将<code>qrcode.html</code>放入<code>source/_includes/custom/asides/</code>中，在<code>_config.yml</code>中<code>default_asides</code>添加<code>custom/asides/qrcode.html</code>即可显示。或者将<code>qrcode.html</code>代码添加到想展示页面的HTML文件中。</p>
+
+<!--more-->
+
+
+<h1>滑动返回顶部按钮</h1>
+
+<p>文章较长的情况，通常希望有一个返回顶部的按钮。如下方法实现了在页面右下方添加一个返回顶部的图片按钮，点击后可以滑动的返回顶部。</p>
+
+<h2>方法一</h2>
+
+<p>首先创建<code>source/javascripts/top.js</code>，实现滑动返回顶部效果，添加如下代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>function goTop(acceleration, time) {
+</span><span class='line'>  acceleration = acceleration || 0.1;
+</span><span class='line'>  time = time || 16;
+</span><span class='line'>
+</span><span class='line'>  var x1 = 0;
+</span><span class='line'>  var y1 = 0;
+</span><span class='line'>  var x2 = 0;
+</span><span class='line'>  var y2 = 0;
+</span><span class='line'>  var x3 = 0;
+</span><span class='line'>  var y3 = 0;
+</span><span class='line'>
+</span><span class='line'>  if (document.documentElement) {
+</span><span class='line'>      x1 = document.documentElement.scrollLeft || 0;
+</span><span class='line'>      y1 = document.documentElement.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  if (document.body) {
+</span><span class='line'>      x2 = document.body.scrollLeft || 0;
+</span><span class='line'>      y2 = document.body.scrollTop || 0;
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  var x3 = window.scrollX || 0;
+</span><span class='line'>  var y3 = window.scrollY || 0;
+</span><span class='line'>
+</span><span class='line'>  var x = Math.max(x1, Math.max(x2, x3));
+</span><span class='line'>  var y = Math.max(y1, Math.max(y2, y3));
+</span><span class='line'>
+</span><span class='line'>  var speed = 1 + acceleration;
+</span><span class='line'>  window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
+</span><span class='line'>
+</span><span class='line'>  if(x &gt; 0 || y &gt; 0) {
+</span><span class='line'>      var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
+</span><span class='line'>      window.setTimeout(invokeFunction, time);
+</span><span class='line'>  }
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>接着创建<code>source/_includes/custom/totop.html</code>，设置返回顶部按钮样式和位置，代码如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!--返回顶部开始--&gt;
+</span><span class='line'>&lt;div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;"&gt;
+</span><span class='line'>  &lt;a href="#" onclick="goTop();return false;"&gt;&lt;img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/div&gt;
+</span><span class='line'>&lt;script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"&gt;&lt;/script&gt;
+</span><span class='line'>&lt;!--返回顶部结束--&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
+
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>{ % include custom/totop.html % }</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。</p>
+
+<h2>方法二</h2>
+
+<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式。相关的HTML代码很简单，在<code>source/_include/custom/footer.html</code>中添加如下代码：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"&gt;&lt;/script&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;script type="text/javascript"&gt;
+</span><span class='line'>$(document).ready(function(){
+</span><span class='line'>
+</span><span class='line'>  // hide #back-top first
+</span><span class='line'>  $("#back-top").hide();
+</span><span class='line'>  
+</span><span class='line'>  // fade in #back-top
+</span><span class='line'>  $(function () {
+</span><span class='line'>      $(window).scroll(function () {
+</span><span class='line'>          if ($(this).scrollTop() &gt; 100) {
+</span><span class='line'>              $('#back-top').fadeIn();
+</span><span class='line'>          } else {
+</span><span class='line'>              $('#back-top').fadeOut();
+</span><span class='line'>          }
+</span><span class='line'>      });
+</span><span class='line'>
+</span><span class='line'>      // scroll body to 0px on click
+</span><span class='line'>      $('#back-top a').click(function () {
+</span><span class='line'>          $('body,html').animate({
+</span><span class='line'>              scrollTop: 0
+</span><span class='line'>          }, 800);
+</span><span class='line'>          return false;
+</span><span class='line'>      });
+</span><span class='line'>  });
+</span><span class='line'>
+</span><span class='line'>});
+</span><span class='line'>&lt;/script&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;style type="text/css"&gt;
+</span><span class='line'>#back-top {
+</span><span class='line'>  position: fixed;
+</span><span class='line'>  bottom: 50px;
+</span><span class='line'>  right: 100px;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>#back-top a {
+</span><span class='line'>  width: 80px;
+</span><span class='line'>  display: block;
+</span><span class='line'>  text-align: center;
+</span><span class='line'>  font: 11px/100% Arial, Helvetica, sans-serif;
+</span><span class='line'>  text-transform: uppercase;
+</span><span class='line'>  text-decoration: none;
+</span><span class='line'>  color: #bbb;
+</span><span class='line'>
+</span><span class='line'>  /* transition */
+</span><span class='line'>  -webkit-transition: 1s;
+</span><span class='line'>  -moz-transition: 1s;
+</span><span class='line'>  transition: 1s;
+</span><span class='line'>}
+</span><span class='line'>#back-top a:hover {
+</span><span class='line'>  color: #000;
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>/* arrow icon (span tag) */
+</span><span class='line'>#back-top span {
+</span><span class='line'>  width: 80px;
+</span><span class='line'>  height: 80px;
+</span><span class='line'>  display: block;
+</span><span class='line'>  margin-bottom: 7px;
+</span><span class='line'>  background: #ddd url(/images/top.png) no-repeat center center;
+</span><span class='line'>
+</span><span class='line'>  /* rounded corners */
+</span><span class='line'>  -webkit-border-radius: 15px;
+</span><span class='line'>  -moz-border-radius: 15px;
+</span><span class='line'>  border-radius: 15px;
+</span><span class='line'>
+</span><span class='line'>  /* transition */
+</span><span class='line'>  -webkit-transition: 1s;
+</span><span class='line'>  -moz-transition: 1s;
+</span><span class='line'>  transition: 1s;
+</span><span class='line'>}
+</span><span class='line'>#back-top a:hover span {
+</span><span class='line'>  background-color: #888;
+</span><span class='line'>}
+</span><span class='line'>&lt;/style&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p id="back-top"&gt;
+</span><span class='line'>  &lt;a href="#top"&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt;
+</span><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span><span class='line'>  Copyright &copy; 2014 - 残剑 -
+</span><span class='line'>  &lt;span class="credit"&gt;Powered by &lt;a href="http://octopress.org"&gt;Octopress&lt;/a&gt;&lt;/span&gt;
+</span><span class='line'>&lt;/p&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>参考文章</h1>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
+<a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
+<a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a><br/>
+<a href="http://webdesignerwall.com/tutorials/animated-scroll-to-top">Animated Scroll to Top</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[电子书阅读软件的UGC]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/06/dian-zi-shu-yue-du-ruan-jian-de-ugc/"/>
+    <updated>2014-05-06T01:10:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/06/dian-zi-shu-yue-du-ruan-jian-de-ugc</id>
+    <content type="html"><![CDATA[<p><img src="http://leiphone.qiniudn.com/uploads/08-3/-1/08-33-11-72.jpg" alt="alt text" /></p>
+
+<p>我一向很少使用电子书方面的阅读软件，在多看上下载了好几本电子书，却也一直没看，五一回家的路上就随便翻翻。下载的内容也都是一些电子期刊（极客公园、ifanr、知乎周刊、36Kr等）的精华版本，里面聚集了一些小编们认为好的，但对于我来说并不喜欢每一篇他们精心挑选的文章。</p>
+
+<p>我有一个毛病，就是看完了就想把它给删除了，我不愿它们占据我几K的空间。碰到一些好的段落，借助它们的复制粘贴功能可以保存到记事本里，但对于好的文章我却没有找到对应的功能（知道的朋友可以告诉我一声，要我整篇复制的话，我可没有那个耐性）。</p>
+
+<!--more-->
+
+
+<p>我想是否可以设计这样一个功能：添加一个选项，可以把自己喜欢的文章保存起来，集结在自己的专属文集里。虽然这是不起眼的功能，可我觉得它有以下的几个好处：</p>
+
+<ul>
+<li><p>需要使用该功能的用户需要注册（对于我来说，一个软件没有吸引我的东西，我是不会去注册的，而这样的功能恰是我需要的。虽然在不注册的情况下，软件照样可以肆无忌惮的收集你的个人资料，但注册后的效果就如同你给它颁发了结婚证一样，它可以以合法的理由强奸你）；</p></li>
+<li><p>一个喜欢收藏好文章的人，他必然有自己的品味，他会筛选出很多好的内容，整理成一个个文集，加上每个人都有展示的欲望，软件开发商可以鼓励这批用户把他们收集的内容show出来，这就是UGC了，这样阅读软件本身也就有了内容，这也不牵扯到侵权，因为这些都是用户的行为；</p></li>
+<li><p>这些文集的内容是精华中的精华，它会留住原有的用户，也会更好的吸引其他的读者。</p></li>
+</ul>
+
+
+<p>顺便也谈谈简书开放的“专题”功能，在我看来它其实就是传统的收藏功能（一些细心的人会为自己收藏的内容分类，其他的人也就只是简单的收藏，估计后续也不会怎么看），但简书的这个功能却有一个小的创新点，它是对外开放的，你创建的文集别人也能够看到，随着平台的壮大，它其实为内容的筛选起到了弥补的作用（如果单靠几个小编在折腾，就会错过很多优质的内容）。</p>
+
+<p>创新无需太大，一些微创新或许就能牵动很多人的心。苦逼的码农们，赶紧行动吧，我等待这个功能等得很着急呀！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[剑问君答：Horizon的回顾]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/05/jian-wen-jun-da-%3Ahorizonde-hui-gu/"/>
+    <updated>2014-05-05T01:09:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/05/jian-wen-jun-da-:horizonde-hui-gu</id>
+    <content type="html"><![CDATA[<p><img src="http://img.zhuokearts.com/auction/3673/670.jpg" alt="alt text" /></p>
+
+<p>残剑：在当今这个社会，西医相对吃香，在当初选专业的时候，你为何偏偏选择了中医？</p>
+
+<p>Horizon：其实你也清楚，我一开始是想去考军校的，可惜高考成绩差了这么一点，结果没上。后来想考南昌航空航天大学，运气又差了点。有人建议我学医（不知道该学什么，有点懵了），而我当时真心不喜欢医生（受电视节目的影响），这时候想到那些老中医看病时的情景，觉得中医大夫对待病人好，脑子一热，就选择了中医。来到大学之后，才发现现实离我的想象差距太大了。不过既然学了，也没啥好后悔的，况且我现在对待医学充满了兴趣。</p>
+
+<hr />
+
+<p>残剑：医学的东西需要看大量的典籍与病例，在我看来它是异常枯燥乏味的，我想你在学习之初也有这样的体会。后来是如何让自己喜欢或者适应了这种学习，是否也从中发现了一些乐趣？</p>
+
+<p>Horizon：学习中医确实要看很多书籍，这对于刚刚接触中医的我来说，确实有很大难度，加上很多老师都说，学好中医需要精通阴阳五行八卦之类的，搞得我很是郁闷，加上我古文功底不是很好，越发觉得中医难学。不过凭着高中时的那种学习状态，课本掌握的还行，所以成绩也算不错，这也是我当时唯一的自豪了。也是机缘巧合，大三时遇到了好几个志同道合的同学，受他们的影响，我随后花狠功夫背了几本中医典籍，这算是敲开了学习中医的大门，加上阅读了几本中医书籍，自认为找到了学习方法，所以大三后期，虽然成绩下降了（时间花在看那些书籍上了），但学中医的信心是找到了。后来又结识了一个学长，他给我的影响相当之大，后来的学医之路因为他而翻开了一个新的篇章。应该说，大三前学中医，只是把他当成专业，但是大三之后，也就是那学长开导我之后，学习中医渐渐成为了一种乐趣，这种乐趣随后有增无减，视野也从原来的中医转到了西医。目前对于我来说，中医和西医已无太多的差别，要做的便是不断汲取新的知识，弥补自己的不足。这种过程既快乐也痛苦，痛苦的是要把知识点给背下来（医学要背的东西太多了），而快乐就在于掌握了这些知识并不断学习新的知识，快乐远比痛苦来的多!</p>
+
+<!--more-->
+
+
+<hr />
+
+<p>残剑：从五年的学习经历中，你又如何看待中医在国内的发展的？是否真的有一天它会变得越来越边缘化？</p>
+
+<p>Horizon：这个问题很难回答，说实话，中医目前发展确实不怎么样，虽然国家有许多对中医扶持的政策，但似乎也没有什么明显的作用，这次去北京复试，更加验证了我之前的想法。虽然中医目前整体没什么起色，但是，在中医界还是有很多牛人在支撑着，也就是这些人，让我看到了今后中医发展的动力。作为一个学生，我目前的责任就是向这些前辈学习，踏踏实实做学问，把功底打扎实，其它什么的，暂时还没有能力去改变，就不去考虑。</p>
+
+<hr />
+
+<p>残剑：不管是农村还是城市，在求医无望的时候总喜欢去找一些偏方尝试，你又如何看待偏方，是否这些偏方有理论作为依据？</p>
+
+<p>Horizon：当然有依据了，疑难杂症大多都是因为诊断不明确，其实只要诊断清楚了，很多疾病的治疗方法也就清楚了（当然也有很多病即使诊断清楚了，也没方法治疗，这也是医学很无奈的地方）。你说的偏方也是这个道理，说它偏，只是限于目前的条件无法对它有深入的认识，一旦认识清楚，也就不存在什么偏方了。</p>
+
+<hr />
+
+<p>残剑：医学也逐渐向互联网化的方向发展，对于这样一个新的事物，是否好好去考虑过它们？它们又让你产生了怎样的想象？</p>
+
+<p>Horizon：大一的时候还没怎么接触，但是从大三开始，我已经通过互联网获取了大量的知识，可叹的是目前仍有大量中医院校的学生不知道运用互联网获取信息。从互联网上获取知识是医学发展的必然趋势，简单来说，医学生需要的大量文献资料就离不开互联网，更别说上网络课程以及运用网络进行交流了。</p>
+
+<p>至于想象，说实话，目前我对于互联网的运用也只是当中的一小部分，还没什么特别的想法。</p>
+
+<hr />
+
+<p>残剑：大学期间，你曾经组织同学在早晨的时候学习英语，这件事持续了多久？在这段时间，除了让自己的英语水平有所提高，其它让你体会最深的是什么？</p>
+
+<p>Horizon：这件事是因为我在大一暑假参加一个叫“精华园”的学习班，这个持续八天的课程对我之后的大学生涯影响很大！课程结束后，和我一起参加培训的两位女同学产生了办个英语晨读班的想法（其实也是那个授课老师对我们的要求）。创班之初教材都有，需要的只是自己把口语练好以及招生。在招生这一环节，我们就遇到了很大的挫折，都萌发了退意，但感谢当中一个女生对我发的狠话，让我坚持了下来，也要感谢当时几个学员以及班里同学对我们三个人的支持，如果没有他们的支持，真的很难办下去，在此向他们说声谢谢！</p>
+
+<p>自己之前就认真的学习过英语口语，自认为练的还不错，所以在晨读这段时间（一个月），难的不是读英语，反而是如何团结我招来的这些学员，让他们信任我们三个。这点其实相当难，现在想想都觉得困难十足，好在他们信任我们几个，这让我们成功的坚持了下来。在此想说的另一件事也与此相关，那时我在班里担任学习委员，由于处理班里一些事情不是很恰当，班里同学对我有些意见，这让我感到压力很大。在此向班里的同学表示歉意！现在想想，做这些事收获最大的一条，就是要以诚待人！</p>
+
+<hr />
+
+<p>残剑：除了组织英语的学习，是否还做过一些其它有意义，或者说让你难忘的事情？</p>
+
+<p>Horizon：追一个女孩子，这件事真心非常有意义，可惜没追到。如果不算大学期间，其实我觉得我至今做过的非常有意义的事情，就是写日记。这个习惯还是向老哥学来的，不过貌似你现在也没写了。日记从初二开始写，一开始只是记录自己的日常生活，后来逐渐写了一些感想，有时没什么东西可写就一句话：今天天气不错，其他没什么特别的。现在想想，其实日记里头也没记录什么太多的东西，但毕竟是坚持下来了，这也算是我除了吃喝拉撒外一件比较有价值的事情吧！</p>
+
+<hr />
+
+<p>残剑：每次谈起你的大学生活，你都告诉我你遇到了很多贵人。那他们都是一些怎样的人？他们给你带来了怎样的帮助？从他们的身上，你又学习到了什么，有什么特别的体会吗？</p>
+
+<p>Horizon：说起贵人，大学里真得感谢他们，要是在那个阶段没有遇见他们，很难说我现在会是一个什么状态。首先应该谈到的，就是专业上的几个贵人，现在他们都成了我的好朋友。记得当时正处于专业学习上的迷茫期，那时多亏了他们的指引，这才让我走出了当时的误区，使我在专业的学习上有了新的视野。第二个贵人，就是我之前追的那个女孩子。我认识这个女孩有两年了，在这期间，虽然直接或是间接的表白都被拒绝了，内心也因此遭受了多次创伤，但正是在与她交往的这两年时间里，我对自己有了很多新的认识，并且因为她，我培养了很多新的爱好，非常感谢她！这个女孩子拥有的不仅仅是知识，更多的是一种智慧，我喜欢她这一点。虽然做不成情侣，但成为好朋友也是值得的！</p>
+
+<hr />
+
+<p>残剑：你学习小提琴，应该是一个偶然的机会吧？学习之余，怎么突然对此有了兴趣？</p>
+
+<p>Horizon：学习小提琴其实是我一直以来的梦想。高中时受同桌的影响，爱上了神秘园的曲子，加上同桌是个非常有气质的男生，擅长拉小提琴，所以那时开始，小提琴就是我的一个梦。但你也知道，学小提琴不是一件容易的事情，需要的不仅仅是时间，而且得投入很多money，囊中羞涩呀。也很偶然，大三暑假通过一个好朋友，结识了学校图书馆的一位老师，开始是想跟老师学口琴的，但在他的怂恿之下，便开始跟随老师学习小提琴，一同学习的还有一女生。老师非常愿意教我们，没收过我们学费，而且，这个女生人很好，也是由于有了她的陪伴，我才把小提琴坚持了下来(小提琴太难了，拉得不好声音就像锯木头)。我们学习过程持续了一年，后来由于实习的原因，才不得不中断。小提琴其实自己拉得并不好(练的时间太少了)，一开始挺郁闷的，但后来也就想开了，音乐这种东西，自己能够体会到她的美妙就好(就是委屈了别人了，哈哈)，没必要考虑太多。</p>
+
+<hr />
+
+<p>残剑：医学类考研与其它学科有很大的不同，是否可以简单的描述一下？考研的那段日子肯定是异常乏味、忙碌的，你是如何度过那些岁月的？</p>
+
+<p>Horizon：说起不同，我对其它学科的考研不熟悉。不过有一点是我们中医专业的特点——记忆。谁的记性好，谁就有拿高分的资本。</p>
+
+<p>考研期间确实乏味，有时候甚至是苦闷的，所以当时也有自己的一套调节方法。简单的谈一下吧。首先就是有了一个好的团队。考研期间一帮志同道合的朋友给了我很大的支持。因为有了他们的陪伴，所以考研过程虽苦，但亦是苦中有乐。还记得那段日子，大家有时突然没状态看书，我们就一起去住的地方做饭、做蛋糕吃。现在想想，当时的生活还是非常有趣的，非常感谢这帮朋友！另一方面，是自己继续练琴。由于考研又回到了学校，所以自己和一块练琴的女生又找到了老师，老师人很好，知道我们要考研，所以每周要求我们跟他学习两次，每次练琴时我俩只是专心的练琴，不去考虑考研的事情，所以在精神方面得到了很大的放松。第三个方法就是跑步。其实这个跑步的习惯也是这个老师推荐的，老师喜欢锻炼，所以建议我们每周跑个三四次，每次跑半个小时，加上当时一个好友的强烈推荐，我便开始尝试了。开始几次确实有些难度，自己体能不行。但是经过了一段时间的适应，自己逐渐喜欢上了跑步。此时，跑步已不仅仅是简单的锻炼，更多的是一种精神上的磨练。在跑步的过程中，许多在考研期间中产生的杂念都会消失，特别是在跑完步之后，冲个热水澡，那感觉更是妙不可言。锻炼之后再去看书，非但不会疲倦，相反，学习状态特别好。与我一块练琴的姑娘也有跑步这个习惯，最后考试她也取得了一个非常优秀的成绩，考上了自己理想的专业。强烈推荐一下这个方法！</p>
+
+<hr />
+
+<p>残剑：虽说现已成年，独立生活是一个人的必要能力，但对未知的东西多少会让人产生一些恐惧。一个人还没上京复试前是一个怎样的心情？初到北京的时候，是否遇到了一些困难，又如何顺利地处理了？</p>
+
+<p>Horizon：去北京之前，通过几个学长学姐，我大致了解了复试的过程，加上已经有一帮同学先去北京了，所以对于即将来临的北京之旅，我在生活方面不是很担心，主要担心的就是复试。</p>
+
+<p>唯一遇到的困难，是我在复试之前去找导师没找到，结果我这个一直以来建议同学提前去找导师的家伙自己却没找导师，真是莫大的讽刺。</p>
+
+<hr />
+
+<p>残剑：考试不易，复试也不简单。在这整个复试的环节，遇到了一些怎样的曲折？</p>
+
+<p>Horizon：由于我所考的北京中医药大学比较注重复试（复试占50%），所以我复试准备的比较早，但到了北京之后，才发现这边高手如云，自己太菜了。我们复试分成了好几个环节，首先是专业笔试，而这个又占复试的50%，所以复试成绩很大程度上取决于这次笔试，可惜考试过程中还是有一些题目不会写，考得我很纠结。接下来的面试，更是受到了摧残，面试完之后，其中一个老师当面告诉我书没看好，当时就有种要挂的感觉。最后的操作考的也一般。在那复试的5天当中，身心备受摧残，每天想的最多的一件事就是没考上怎么办。不过最后多亏毛爷爷仙灵（复试完之后去主席纪念堂拜访了主席），自己终于上了，而且复试排名也往前推了几名。这次复试给我最大的启示，就是复试考的不是你有多优秀，而是你如何少犯错。当然了，如果你足够牛逼，这另当别论。</p>
+
+<hr />
+
+<p>残剑：是否考虑过自己以后的研究生生活，那将会是一个怎样的全新生活？有向往，是否会有一些具体的打算？</p>
+
+<p>Horizon：其实这个问题早在考研之前就已经考虑好了。自己学医近五年，虽然书没少看，但是面对病人，自己所掌握的知识仍是相当有限。自己当初打算考研，就是想在研究生期间充实自己，尽量多的掌握临床知识与临床技能。所以研究生生活对我来说，主要还是学习！</p>
+
+<p>据学姐说，我们研究生生活安排的会比较紧凑，主要就是在医院里“上班”，所以在教室里上课的时间很有限。因此我对自己的要求就是自学。自学之余多认识一帮志同道合的朋友，多交流。独学而无友，则孤陋而寡闻。自学为主，交流为辅，这是我对将来生活的安排。</p>
+
+<hr />
+
+<p>残剑：如果哪一天不看书，你内心会觉得不安。你又是如何看待读书这件事的？这些年，主要看哪一类的书籍，是否有一些好的书目推荐？</p>
+
+<p>Horizon：记得我前段时间还曾与你讨论过这个问题，老哥你给我的回答与我出奇的一致&mdash;自己内心的满足感。有些人喜欢看书就像有些人喜欢赚钱、权利一样，追求的都是内心的那份满足感，只是满足的途径不同而已。我现在的看法又稍有些改变，觉得读书是给予人智慧的一件事，不仅仅是知识。当然了，人要获得智慧，读书也只是一种实现途径。书看的多可以很博学，但不一定有智慧，所以你曾说过，有时候书看的多了，对一个人来说可能并不是一件好事。对于目前的我来说，阅读是一件放松身心的事情，加上由于还未深入接触这个社会，所以我还是想通过读书先增长自己的知识，希望有朝一日将知识化为智慧。</p>
+
+<p>我目前看的主要还是专业书（医学，你懂的），但尽量保持一周一本的非专业阅读（说起来就惭愧）。所看的书籍内容不限，多是一些朋友推荐或是名家的书籍，小说看的多些，不过有些看过都忘了。要推荐的话，有本书非常值得一看：《路西法效应》。这是一本社会心理学的著作，主要论述的就是环境、情景力量是如何影响一个好人，让他变恶的。论题看似简单，但通过作者的实验研究，你可以看到情景、系统对我们的影响有多深。非常值得一阅！</p>
+
+<hr />
+
+<p>残剑：在我看来，你比大部分同龄人成熟，能够克制自己，也更明确自己的方向。但成熟和理智有时并不是一件很好的事情，某些时候或许会让自己很痛苦，在这种情况下你是如何调节自己的情绪的？</p>
+
+<p>Horizon：话说我觉得自己还很幼稚。不过对于目前的我来说，的确是有了自己的方向，知道该去做什么。至于你说的痛苦，貌似还没有，唯一就是大学毕业了还没有谈过女朋友，让我稍感遗憾。</p>
+
+<hr />
+
+<p>残剑：你依然保存着学生的那份纯真，在你的内心，恋爱和婚姻观又是如何？</p>
+
+<p>Horizon：你说的这份纯真，我想也就是为什么有的朋友说我适合做朋友，但是不适合做男朋友的原因了。不过说实话，我挺喜欢现在这种感觉的。也许终有一天，我会丢掉这份纯真。谈起恋爱观，我就想起了你那个大学同学，一生只谈一次恋爱，是我所向往的。但是这种概率太低，一个班里也就只有几个好哥们，更何况是谈女朋友，所以我对此也不抱什么期望。还是要谈到那个女孩子，因为她，我觉得真真意义上的男女朋友，是要相互促进、共同进步的，如果恋爱的双方一旦某一方丢掉了自我，没有同步，结果也就可想而知。谈到婚姻观，我不相信永恒的爱情，爱情终有一天会转变为亲情，悲观了一点。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[独自旅行不易]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/30/du-zi-lu-xing-bu-yi/"/>
+    <updated>2014-04-30T23:35:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/30/du-zi-lu-xing-bu-yi</id>
+    <content type="html"><![CDATA[<p><img src="http://www.itoobz.com/uploads/allimg/1309/19-130926194459.jpg" alt="alt text" /></p>
+
+<p>看到一个朋友想独自出去旅行的文章，里面讲述了她那颗向往自由的心，还有就是父母的反对，可能也因此没有随心而动。去年的时候，一个人独自背上包，游走了西南的几个省市，体会最深的是：一个的人的旅行并不是一件简单的事情，吃、住、行都要靠自己去处理。</p>
+
+<p>前十多天还好，毕竟有表弟、姨夫、阿姨及同学的照顾，后面到的一些地方完全没有熟悉的人。在凤凰古城要和表弟分别的时候，心里有一种说不出的失落感，因为此后真的就是一个人在陌生的地方行走。</p>
+
+<!--more-->
+
+
+<p>初到拉萨的时候，幸好在火车上认识了一个蒙古族的小伙伴，一个即将毕业的大学生，我们一起找住的，一起游玩，彼此有了一个照应。那次我们看完西藏大学里学生们跳的锅庄，步行回住的地方，因区域相对偏僻，所以路上行人寥寥无几。一个小孩追着我两要一块钱，要得不多，但对于这种无理的索取，我还是很厌恶的，加上我们是两个大男人在走着，我是坚决的不给。我的小伙伴拗不过那个小孩，加上那小孩跟了我们很久，他掏出钱给了，小孩也愉悦地离开了。事后他跟我说：“不要看只有一个小孩，可能后面还有几双大人的眼睛在盯着呢！在这个地方花点小钱，买个平安也好”。他说的，我又何尝没有想到过。如果是我一个人在黑夜中行走，又加上这种坚定的想法，我不敢想象那夜会发生些什么。在他离开之后，我一个人在黑夜的时候也就没有去过什么偏僻的地方，要出去也是往人多的地方挤，所以在拉萨我已非常熟悉北京路了。</p>
+
+<p>那个小伙伴走了，独自一人去了景点，但也是草草了事，毕竟要在黑夜之前找到一个可以安全容身的地方。回到拉萨市中心，下了公交车，见到两个拿着包包的男士在问路。我知道他们也是出来旅行的，就主动上去和他们搭讪，希望能够和他们结伴而行。虽然他们同意和我一同去寻找住所，从他们的言谈举止中可以看出，他们一点也不信任我。就体态而言，他们中的任何一个都可以把我轻易地击倒。把他们带到一个青年旅社，我看到了其他人寻求同行伙伴的信息时，我放弃了当初和他们同行的想法，被人如此的戒备是我心里不太愿意承受的一件事情。一人在外，有时你的真诚根本换取不到他人的信任。</p>
+
+<p>之后在拉萨的几天，我是孤独的，因为真的没有任何的依靠和互助。一个人报团去一些陌生的地方游玩，幸运的是没有遇到一些心怀叵测的坏人。在拉萨的路上或者其它的景点，碰到不久前的一些团友，我们都是友好的打招呼，问玩过的景点，还有后续的安排，我们都在尝试了解彼此，探寻是否有再一次一同出行的机会。</p>
+
+<p>拉萨的消费很高，我只能找一些小巷子里的餐馆去吃饭。一次把寒碜的菜发到了朋友圈，姐夫让我把银行账户发给他，他要给我打钱，我只好告诉他我这只是在调侃这边的物价。母亲不知从哪里知道了我独自入藏的消息，几次三番打电话给我，让我疯几天后立马回杭州。这些就是家人的关怀，无论走多远，他们依然关怀着你的一切，让你的内心不再孤独。家永远是最好的港湾，是你最好的依托。</p>
+
+<p>世上还是有纯真的人，至少在我的旅途中碰到的大部分是这样的人，他们有戒备，但不会拒绝你的真心。反走318线是和北京的两位姐姐拼车的，一路上她们都很照顾我，或许是我的坦诚和纯真赢得了她们。坐在车上，累了就会睡着，不经意的时候就会把脑袋搭到她们的肩膀上，她们没说，我也没提，但彼此心里都明白。出门在外，更多的是谅解和包容。成都，我们最终的目的地，也是我和她们分别的地方，一路走来，我们彼此了解，那时更多的是不舍，因为不知何时才能再相见，一切只能成为一种期待。</p>
+
+<p>一个人，没有依靠，会让自己的内心安静下来，然后思考去处理自己即将面临的事情，这个过程就是一种成长。没有走前，或许会考虑很多，但真正面临问题了，处理后你就会觉得不过如此。与其在畏惧，不如勇敢的走出去，追随一下内心真正的想法。虽然独自旅行不易，但我还是鼓励有想法的人多出去走走，万水千山到过了，你才能真切地体会到它们的美丽。</p>
+
+<p>我在西藏旅行的时候，你告诉我你很喜欢《蓝莲花》这首歌，我听了也很有感触，今天我想以我的这种方式回送给你，希望你能够突破那层阻碍，找到你内心深处的那朵蓝莲花！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[向上滚动功能]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/29/xiang-shang-gun-dong-gong-neng/"/>
+    <updated>2014-04-29T23:53:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/29/xiang-shang-gun-dong-gong-neng</id>
+    <content type="html"><![CDATA[<p>使用微博、内涵段子和网易云阅读的时候，总是有两个问题困扰着我：一、什么时候才能够阅读完毕（这种情况一般是在没有心情阅读太多信息的时候会有），到达我上一次阅读过的地方；二、如果有新的更新，我想看到它们，我就得费劲地往上拉。</p>
+
+<p>所以产品经理们是否可以考虑以下的功能：一、刷新后定格到较新但不是排在第一条的信息处，继续阅读的话需要向上滚动而不是向下；二、增加一个回到顶部的功能。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[夜间闲谈]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/29/ye-jian-xian-tan/"/>
+    <updated>2014-04-29T01:01:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/29/ye-jian-xian-tan</id>
+    <content type="html"><![CDATA[<p>看过很多的东西未必能够真正的吸收，但终究有那么一些东西融入了你的血液，永远不会忘记。龙兄初中时，在一次期末考试的作文（是满分）中用到了“醉翁之意不在酒，在乎山水之间也”，这让我知道了阅读的意义，需要活学活用；我家门前有两棵树，一棵是杏树，另一棵还是杏树，这让我只知道写作可以以一种幽默的方式出现；我和父亲走在车来车往的马路上，没有半句的言语，父亲把我从路边侧拉到了他的内测，然后继续前行，其实世间最微小的动作才是最感人动听的故事。</p>
+
+<p>最近发现简书上的文字越来越精彩，开始畏惧写作，总担心自己是班门弄斧。如果我们是程序员，同时又有一些写作的爱好，我们时常会这样调侃自己：我们跟作家比写程序，跟程序员比写作，这样我们始终是最优秀的。其实这个时代已经过去，很多东西已经没有了明显的界限：他的职业可能是一个程序员，但他可能更像一个作家；一个以码字为生的人，却在和程序死嗑着。现在很多的程序员都出了非技术类的书籍，而且都还不错。</p>
+
+<!--more-->
+
+
+<p>这个时代每时每刻都在发生剧烈的变化，还没有准备好，一个潮流可能就已经过去，还在犹豫的时候，另一个潮流也快接近了尾声。是怨这个时代变化太快，还是怨我们自己不能适应这个时代呢？我的答案倾向于后者，这终究是一个弱肉强食的社会，不进步则必将面临消亡。</p>
+
+<p>夜已入深，洗洗睡觉，明天还是同一个太阳，却又是新的一天！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Scrapy入门简略教程（一）]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/"/>
+    <updated>2014-04-28T23:04:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-[?]</id>
+    <content type="html"><![CDATA[<p>在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
+
+<ol>
+<li>创建一个新的Scrapy项目；</li>
+<li>定义你将提取的Items；</li>
+<li>写一个蜘蛛抓取网站并提取Items；</li>
+<li>写一个项目管道存储所提取的Items。</li>
+</ol>
+
+
+<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
+
+<h1>创建一个项目</h1>
+
+<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject shiyifang</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
+</span><span class='line'>.
+</span><span class='line'>├── scrapy.cfg
+</span><span class='line'>└── shiyifang
+</span><span class='line'>    ├── __init__.py
+</span><span class='line'>    ├── items.py
+</span><span class='line'>    ├── pipelines.py
+</span><span class='line'>    ├── settings.py
+</span><span class='line'>    └── spiders
+</span><span class='line'>        └── __init__.py
+</span><span class='line'>
+</span><span class='line'>2 directories, 6 files</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于该目录下文件和文件夹的说明：</p>
+
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
+<li>shiyifang/items.py: 项目的items文件。</li>
+<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
+<li>shiyifang/settings.py: 项目的settings文件。</li>
+<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
+</ul>
+
+
+<!--more-->
+
+
+<h1>定义Item</h1>
+
+<p>Items包含了将要被抓取的数据，它们就像简单的Python dicts，但对未填充字段提供额外的保护，以防止错误。在shiyifang目录下编辑items.py文件，Item类看起来像如下的样子：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.item import Item, Field
+</span><span class='line'>
+</span><span class='line'>class ShiyifangItem(Item):
+</span><span class='line'>    # define the fields for your item here like:
+</span><span class='line'>    # name = Field()
+</span><span class='line'>    title = Field()
+</span><span class='line'>    link = Field()
+</span><span class='line'>    desc = Field()</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>第一个爬虫</h1>
+
+<p>爬虫是用户自己写的一个类，用于爬取一个或一组域名的数据，需要定义一个初始化的URL列表，要完成如何抓取链接和如何去解析数据等基本的工作。我们在shiyifang/spiders目录下创建一个叫shiyifang_spider.py文件：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from scrapy.spider import BaseSpider
+</span><span class='line'>
+</span><span class='line'>class ShiyifangSpider(BaseSpider):
+</span><span class='line'>    name = "shiyifang"
+</span><span class='line'>    allowed_domains = ["s.taobao.com"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        filename = response.url.split("/")[-2]
+</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>Crawling</h1>
+
+<p>到项目的顶层目录，执行以下的指令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy crawl shiyifang
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: shiyifang)
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+</span><span class='line'>2014-04-28 23:01:34+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'shiyifang.spiders', 'SPIDER_MODULES': ['shiyifang.spiders'], 'BOT_NAME': 'shiyifang'}
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Enabled item pipelines: 
+</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Spider opened
+</span><span class='line'>2014-04-28 23:01:35+0800 [shiyifang] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+</span><span class='line'>2014-04-28 23:01:35+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Closing spider (finished)
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Dumping Scrapy stats:
+</span><span class='line'>  {'downloader/request_bytes': 245,
+</span><span class='line'>   'downloader/request_count': 1,
+</span><span class='line'>   'downloader/request_method_count/GET': 1,
+</span><span class='line'>   'downloader/response_bytes': 34569,
+</span><span class='line'>   'downloader/response_count': 1,
+</span><span class='line'>   'downloader/response_status_count/200': 1,
+</span><span class='line'>   'finish_reason': 'finished',
+</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 28, 15, 1, 36, 232914),
+</span><span class='line'>   'log_count/DEBUG': 7,
+</span><span class='line'>   'log_count/INFO': 3,
+</span><span class='line'>   'response_received_count': 1,
+</span><span class='line'>   'scheduler/dequeued': 1,
+</span><span class='line'>   'scheduler/dequeued/memory': 1,
+</span><span class='line'>   'scheduler/enqueued': 1,
+</span><span class='line'>   'scheduler/enqueued/memory': 1,
+</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 28, 15, 1, 35, 615729)}
+</span><span class='line'>2014-04-28 23:01:36+0800 [shiyifang] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>从debug信息可以看出，我们发送的get请求是收到回复的，且是成功的。此时，在当前目录下你会看到一个叫s.taobao.com的文件生成，这就是我们抓取到的网页。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://doc.scrapy.org/en/latest/intro/tutorial.html">Scrapy Tutorial</a><br/>
+<a href="http://blog.pluskid.org/?p=366">Scrapy 轻松定制网络爬虫</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于爬虫开发的选择]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/"/>
+    <updated>2014-04-27T23:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze</id>
+    <content type="html"><![CDATA[<p>开发语言：Python <br/>
+爬虫框架：Scrapy <br/>
+数据库：PostgreSQL</p>
+
+<p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
+
+<p>引用一下jolie_yu对我的一句回复：</p>
+
+<blockquote><p>骚年，别急，缘分说到就到。显出你的个性，她会找到方向，走进你的世界。</p></blockquote>
+
+<!--more-->
+
+
+<p>对于志同道合的朋友不是靠去培养的，而是你们原本就属于同一路人，有共同的兴趣和想法，在机缘巧合的情况下你们走到了一起。为何迟迟没有聚到一起呢？或许是我们散发的光芒还不足以照亮他们寻找到我们，所以我们还需要做得更多、更好。</p>
+
+<p>更应该到一些专业的论坛发表我的想法，不太适合在QQ空间发表这些，我也清楚地明白这一点，但我看重它的强社交属性，我们了解彼此更多一些，这些花费是时间成本。至今没有一点共鸣，但我还是会静静地等待，直到那些人的出现，不需要太多，哪怕只有那么一个。</p>
+
+<p>且行，且看，且等待，世间不变的是一个人的初心！</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[运行Scrapy项目出错：KeyError: 'Spider not found: tutorial']]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/"/>
+    <updated>2014-04-27T22:40:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo</id>
+    <content type="html"><![CDATA[<p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
+</span><span class='line'>    execute()
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
+</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
+</span><span class='line'>    func(*a, **kw)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
+</span><span class='line'>    cmd.run(args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
+</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
+</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
+</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>查看<code>tutorial/spiders/dmoz_spider.py</code>文件中的内容如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat tutorial/spiders/dmoz_spider.py
+</span><span class='line'>from scrapy.spider import BaseSpider
+</span><span class='line'>
+</span><span class='line'>class DmozSpider(BaseSpider):
+</span><span class='line'>    name = "dmoz"
+</span><span class='line'>    allowed_domains = ["s.taobao.com"]
+</span><span class='line'>    start_urls = [
+</span><span class='line'>        "http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83"
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    def parse(self, response):
+</span><span class='line'>        filename = response.url.split("/")[-2]
+</span><span class='line'>        open(filename, 'wb').write(response.body)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>name = "dmoz"</code>中的<code>dmoz</code>才是crawler的名字。修改crawler的名字后，正常运行如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl dmoz
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] INFO: Scrapy 0.20.0 started (bot: tutorial)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Optional features available: ssl, http11
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Overridden settings: {'NEWSPIDER_MODULE': 'tutorial.spiders', 'SPIDER_MODULES': ['tutorial.spiders'], 'BOT_NAME': 'tutorial'}
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Enabled item pipelines: 
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Spider opened
+</span><span class='line'>2014-04-27 22:50:09+0800 [dmoz] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Telnet console listening on 0.0.0.0:6023
+</span><span class='line'>2014-04-27 22:50:09+0800 [scrapy] DEBUG: Web service listening on 0.0.0.0:6080
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] DEBUG: Crawled (200) &lt;GET http://s.taobao.com/search?q=%E6%A0%B8%E6%A1%83&gt; (referer: None)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Closing spider (finished)
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Dumping Scrapy stats:
+</span><span class='line'>  {'downloader/request_bytes': 245,
+</span><span class='line'>   'downloader/request_count': 1,
+</span><span class='line'>   'downloader/request_method_count/GET': 1,
+</span><span class='line'>   'downloader/response_bytes': 35012,
+</span><span class='line'>   'downloader/response_count': 1,
+</span><span class='line'>   'downloader/response_status_count/200': 1,
+</span><span class='line'>   'finish_reason': 'finished',
+</span><span class='line'>   'finish_time': datetime.datetime(2014, 4, 27, 14, 50, 10, 637578),
+</span><span class='line'>   'log_count/DEBUG': 7,
+</span><span class='line'>   'log_count/INFO': 3,
+</span><span class='line'>   'response_received_count': 1,
+</span><span class='line'>   'scheduler/dequeued': 1,
+</span><span class='line'>   'scheduler/dequeued/memory': 1,
+</span><span class='line'>   'scheduler/enqueued': 1,
+</span><span class='line'>   'scheduler/enqueued/memory': 1,
+</span><span class='line'>   'start_time': datetime.datetime(2014, 4, 27, 14, 50, 9, 940145)}
+</span><span class='line'>2014-04-27 22:50:10+0800 [dmoz] INFO: Spider closed (finished)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><big>参考文章：</big></p>
+
+<p><a href="http://www.crifan.com/python_run_scrapy_keyerror_spider_not_found/">运行Scrapy项目结果出错：KeyError: ‘Spider not found: manta’</a><br/>
+<a href="http://www.crifan.com/try_scrapy_tutorial/">折腾Scrapy的Tutorial</a><br/>
+<a href="http://stackoverflow.com/questions/9876793/scrapy-spider-not-found-error">Scrapy spider not found error</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[剑问君答：IT模范丈夫]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/"/>
+    <updated>2014-04-27T21:19:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/04/27/jian-wen-jun-da-:itmo-fan-zhang-fu</id>
+    <content type="html"><![CDATA[<p><img src="http://www.zzcp8.com/uploads/allimg/131210/1_12101101313025.jpg" alt="alt text" /></p>
+
+<p>残剑：你是班级里公认的模范好男友，世间多少女子希望得到像你这样的好男人！是你让我相信了校园爱情，那么的纯结与真实。7年的努力终究修成了正果，是否可以谈谈你的感情经历?</p>
+
+<p>爱吓人：我只有一次恋爱，也就是这一次，到现在不知不觉已经七年了。我们从最开始对感情的懵懂，到现在成为一对夫妻，可以说是感情跌宕起伏。我有过开心，有过伤心，有过激动，有过失落，有过幸福，有过悲伤。</p>
+
+<hr />
+
+<p>残剑：在这漫长的爱情路程中，你是如何做的，又有什么样的经验可以提供参考的吗？</p>
+
+<p>爱吓人：我一直坚信一个道理，做任何一件事情都要用心去做，爱一个人也要用心去爱。我谈恋爱的目的就是为了最终能够结婚，能够白头到老，能够在生命的最后能够手牵着手。而且，可能很多人都有我这样的心理，但是最后女朋友和他分手了。我只能说，我是这么做，至于结果我不在乎，也很有可能是我遇对了人。</p>
+
+<!--more-->
+
+
+<hr />
+
+<p>残剑：你对女友无微不至的呵护，让不少女同学倾羡，又引来了多少男子的“憎恨”。显然你对女友是有一种不同寻常的感情存在。你大学时期的“蒸梨”事件让我至今难忘，对你的修饰我又多了“细致”一词。是什么让你觉得需要如此的付出？</p>
+
+<p>爱吓人：其实这个和上一个问题的答复差不多，我这个人就是这样，做人用心对别人，喜欢一个人，用心去喜欢，用心对她好，爱一个人更应该如此。</p>
+
+<hr />
+
+<p>残剑：我对她的映像是——一个有想法、执行力的好强女人。对于你来说，她是一个怎样的女子，如此吸引你？</p>
+
+<p>爱吓人：我觉得她是一个非常善良的女孩，而且不物质，懂得孝敬父母，尊敬长辈；她懂得很多知识，她也让我懂得更多；她是一个很有自己主见的人，看待外物外事都有自己的思想，而不是盲目的接受；她还是一个感染力很强的人，和她接触就的人都会或多或少的带点她的思想等等。</p>
+
+<hr />
+
+<p>残剑：在夜深人静的时候，是否思考过或者问过（听到她的答案是否在傻笑）这样一个问题——她为什么选择了我而不是其他的男人？你自己又是如何看待这些的？</p>
+
+<p>爱吓人：其实追她的人很多，有家庭背景比我好的，有发展前途比我好的，但是她却选择了我，我一开始认为是我长时间追她才让她给我一次机会，可是后来才知道有两个男孩追了她10年，她都没有答应，我才知道，我这时间并不长。后来我在想，应该是我的心打动了她。</p>
+
+<p>其实这个问题让我来回答我不知道怎么回答，因为，我的心里面觉得，是在不管什么时候都能在她身边照顾她的这种心，以及行动感动了她，但是不知道为什么我的潜意识中认为不是这样的，我自己也不知道具体的答案，可能是我太笨了，无法在细节上察觉到她的心里是怎么想的。</p>
+
+<hr />
+
+<p>残剑：刚开始工作，大家都觉得舍弃了专业，但多少搭点边。而你，我觉得那时是根本不搭边且比较杂乱。那时你主要做些什么工作？</p>
+
+<p>爱吓人：来第一家公司，我可以说完全抛开了专业知识，是在手机公司开发网站相关的。</p>
+
+<hr />
+
+<p>残剑：我离开深圳的时候，你还没有离开第一个东家。之后又是在什么时候离开的，对于自己未来的职业道路又做了什么样的选择？</p>
+
+<p>爱吓人：我在第一家公司待了刚满20个月，现在主要就是从事android软件开发。职业道路没有具体的，我暂时想的是做技术最多不超过30岁，之后想着自己弄点什么东西，暂时还没想好。</p>
+
+<hr />
+
+<p>残剑：据我所知，你现在做android方面的开发，主要做的是哪一块的东西？在android这方面，你也是从零开始起步的，期间的经历能够谈谈吗？或者说你是如何一步步熟悉了这些技术的？</p>
+
+<p>爱吓人：现在主要是在从事移动办公客户端的开发。开始我主要是借了一本android方面的书，然后不断地问，后来开始走项目，边做边问，便在网上查资料自学，论坛里面看别人写的东西。最主要几点总结出来就是，多思考，多问，多学，多做事。多问是在自己思考后的前提下，如果遇到问题就问是学不到什么东西的，遇到问题应该先自己冷静下来先思考。</p>
+
+<hr />
+
+<p>残剑：在我和她的谈话中，了解到你学习新技术很快速（她没有这么当面夸你吧？听到这话是不是很兴奋？），可否说说你是如何学习的？</p>
+
+<p>爱吓人：其实也没有，我基本上是学习的时候先看基本知识，然后直接看实例，在实例中巩固基础知识，然后在实例中了解更高深的内容，大致是这样。</p>
+
+<hr />
+
+<p>残剑：可以想象，你现在的工作一定很忙碌，它给你带去了什么？如果不涉及商业的事情，可否顺便谈谈你现在的公司、产品及行业？</p>
+
+<p>爱吓人：让我的经历更加丰富，经验更多，人更成熟。我公司是是移动的一个子公司，主要是接移动的软件外包，以及其它大型企业的软件外包，另外还有自己的东西。我在这个公司主要是做移动客户端，其它的暂时还不是很清楚，进来没多久。</p>
+
+<hr />
+
+<p>残剑：是否还有闲情打游戏、打球呢？还是陪伴着自己的爱人在闲散的时间出去看看世界？</p>
+
+<p>爱吓人：现在已经很久没打游戏了，打球一直想去，但是也很久没去了。偶尔会出去和她一起锻炼一下身体，逛逛街之类的。</p>
+
+<hr />
+
+<p>残剑：现在的你，已不是一个人在奋斗，让我羡慕不已。一个不屈现状的女人会不断的催促你，对于近期的发展有什么打算和想法？</p>
+
+<p>爱吓人：事实上我有现在的发展也是在她的催促之下才有的，没有她，可能我现在还更差劲。这一点是我需要感谢她的。我是在上个月才进入现在的公司，所以短时间内可能在这家公司待着，如果可以的话想在明年回西安，但是不知道可不可能，计划赶不上变化。</p>
+]]></content>
+  </entry>
+  
+</feed>

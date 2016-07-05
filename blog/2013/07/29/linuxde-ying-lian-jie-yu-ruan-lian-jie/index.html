@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Linux的硬链接与软链接 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Linux的硬链接与软链接</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T23:37:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。下图展示了程序通过文件名获取文件内容的过程。</p>
+
+<p><img src="/images/2013/7/link/file.png" alt=" file " /></p>
+
+<p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
+
+<p><img src="/images/2013/7/link/access.png" alt=" access " /></p>
+
+<!--more-->
+
+
+<h1>硬链接</h1>
+
+<p>硬链接可由命令link或ln创建。如下是对文件oldfile创建硬链接。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>link oldfile newfile 
+</span><span class='line'>ln oldfile newfile </span></code></pre></td></tr></table></div></figure>
+
+
+<p>由于硬链接是有着相同inode号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
+
+<ul>
+<li>文件有相同的inode及data block；</li>
+<li>只能对已存在的文件进行创建；</li>
+<li>不能交叉文件系统进行硬链接的创建；</li>
+<li>不能对目录进行创建，只可对文件创建；</li>
+<li>删除一个硬链接文件并不影响其它有相同inode号的文件。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -li
+</span><span class='line'>total 0
+</span><span class='line'>
+</span><span class='line'>// 只能对已存在的文件创建硬连接
+</span><span class='line'>$ link old.file hard.link
+</span><span class='line'>link: cannot create link `hard.link' to `old.file': No such file or directory
+</span><span class='line'>
+</span><span class='line'>$ echo "This is an original file" &gt; old.file
+</span><span class='line'>$ cat old.file
+</span><span class='line'>This is an original file
+</span><span class='line'>$ stat old.file
+</span><span class='line'>  File: `old.file'
+</span><span class='line'>  Size: 25            Blocks: 8          IO Block: 4096   regular file
+</span><span class='line'>Device: 807h/2055d    Inode: 796901      Links: 1
+</span><span class='line'>Access: (0664/-rw-rw-r--)  Uid: ( 1000/  txgcwm)   Gid: ( 1000/  txgcwm)
+</span><span class='line'>Access: 2013-07-29 23:57:49.435157205 +0800
+</span><span class='line'>Modify: 2013-07-29 23:57:27.295157688 +0800
+</span><span class='line'>Change: 2013-07-29 23:57:27.295157688 +0800
+</span><span class='line'> Birth: -
+</span><span class='line'> 
+</span><span class='line'>// 文件有相同的inode号以及data block
+</span><span class='line'>$ link old.file hard.link | ls -li
+</span><span class='line'>total 8
+</span><span class='line'>796901 -rw-rw-r-- 2 txgcwm txgcwm 25 Jul 29 23:57 hard.link
+</span><span class='line'>796901 -rw-rw-r-- 2 txgcwm txgcwm 25 Jul 29 23:57 old.file
+</span><span class='line'>
+</span><span class='line'>// 不能交叉文件系统
+</span><span class='line'>$ sudo ln /dev/input/event5 /root/bfile.txt
+</span><span class='line'>[sudo] password for txgcwm: 
+</span><span class='line'>ln: failed to create hard link `/root/bfile.txt' =&gt; `/dev/input/event5': Invalid cross-device link
+</span><span class='line'>
+</span><span class='line'>// 不能对目录进行创建硬连接
+</span><span class='line'>$ mkdir -p old.dir/test
+</span><span class='line'>$ ln old.dir/ hardlink.dir
+</span><span class='line'>ln: `old.dir/': hard link not allowed for directory</span></code></pre></td></tr></table></div></figure>
+
+
+<p>文件old.file与hard.link有着相同的inode号（796901）及文件权限，inode是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当inode存在且链接计数器（link count）不为0时。inode号仅在各文件系统下是唯一的，当Linux挂载多个文件系统后将出现inode号重复的现象，因此硬链接创建时不可跨文件系统。设备文件目录/dev使用的文件系统是devtmpfs，而/home（与根目录/一致）使用的是磁盘文件系统ext4。以下使用命令df查看当前系统中挂载的文件系统类型、各文件系统inode使用情况及文件系统挂载点。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo df -i --print-type
+</span><span class='line'>Filesystem     Type      Inodes  IUsed   IFree IUse% Mounted on
+</span><span class='line'>/dev/sda5      ext4     1250928  63404 1187524    6% /
+</span><span class='line'>udev           devtmpfs  211313    603  210710    1% /dev
+</span><span class='line'>tmpfs          tmpfs     215180    566  214614    1% /run
+</span><span class='line'>none           tmpfs     215180      3  215177    1% /run/lock
+</span><span class='line'>none           tmpfs     215180      9  215171    1% /run/shm
+</span><span class='line'>none           tmpfs     215180     23  215157    1% /run/user
+</span><span class='line'>/dev/sda6      ext4       62464    355   62109    1% /boot
+</span><span class='line'>/dev/sda7      ext4     1250928  91579 1159349    8% /home
+</span><span class='line'>/dev/sda11     ext4     2501856 336584 2165272   14% /srv
+</span><span class='line'>/dev/sda12     ext4     1875968 144226 1731742    8% /opt
+</span><span class='line'>/dev/sda8      ext4      249984    132  249852    1% /tmp
+</span><span class='line'>/dev/sda9      ext4     1250928 584616  666312   47% /usr
+</span><span class='line'>/dev/sda10     ext4      249984  24565  225419   10% /var
+</span><span class='line'>
+</span><span class='line'>$ sudo find / -inum 1114
+</span><span class='line'>/lib/modules/3.5.0-25-generic/kernel/drivers/hwmon/mcp3021.ko
+</span><span class='line'>/sys/devices/LNXSYSTM:00/device:00/PNP0A08:00/device:02/PNP0C02:00/power/autosuspend_delay_ms</span></code></pre></td></tr></table></div></figure>
+
+
+<p>值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的inode号可知其实这两目录就是两个硬链接（注意目录/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo ls -aliF /lost+found
+</span><span class='line'>total 20
+</span><span class='line'>11 drwx------  2 root root 16384 Nov 11  2012 ./
+</span><span class='line'> 2 drwxr-xr-x 23 root root  4096 Jul  7 13:47 ../
+</span><span class='line'> 
+</span><span class='line'>$ sudo stat /lost+found/
+</span><span class='line'>  File: `/lost+found/'
+</span><span class='line'>  Size: 16384         Blocks: 32         IO Block: 4096   directory
+</span><span class='line'>Device: 805h/2053d    Inode: 11          Links: 2
+</span><span class='line'>Access: (0700/drwx------)  Uid: (    0/    root)   Gid: (    0/    root)
+</span><span class='line'>Access: 2013-07-30 00:10:47.479140197 +0800
+</span><span class='line'>Modify: 2012-11-11 00:50:27.000000000 +0800
+</span><span class='line'>Change: 2012-11-11 00:50:27.000000000 +0800
+</span><span class='line'> Birth: -</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>软链接</h1>
+
+<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的inode号以及用户数据块。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+
+<ul>
+<li>软链接有自己的文件属性及权限等；</li>
+<li>可对不存在的文件或目录创建软链接；</li>
+<li>软链接可交叉文件系统；</li>
+<li>软链接可对文件或目录创建；</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -li
+</span><span class='line'>total 0
+</span><span class='line'>
+</span><span class='line'>// 可对不存在的文件创建软链接
+</span><span class='line'>$ ln -s old.file soft.link
+</span><span class='line'>$ ls -liF
+</span><span class='line'>total 0
+</span><span class='line'>796810 lrwxrwxrwx 1 txgcwm txgcwm 8 Jul 30 00:25 soft.link -&gt; old.file
+</span><span class='line'>
+</span><span class='line'>// 由于被指向的文件不存在，此时的软链接 soft.link 就是死链接
+</span><span class='line'>$ cat soft.link
+</span><span class='line'>cat: soft.link: No such file or directory
+</span><span class='line'>
+</span><span class='line'>// 创建被指向的文件 old.file，soft.link 恢复成正常的软链接
+</span><span class='line'>$ echo "This is an original file_A" &gt;&gt; old.file
+</span><span class='line'>$ cat soft.link
+</span><span class='line'>This is an original file_A
+</span><span class='line'>
+</span><span class='line'>// 对不存在的目录创建软链接
+</span><span class='line'>$ ln -s old.dir soft.link.dir
+</span><span class='line'>$ mkdir -p old.dir/test
+</span><span class='line'>$ tree . -F --inodes
+</span><span class='line'>.
+</span><span class='line'>├── [ 796834]  old.dir/
+</span><span class='line'>│   └── [ 796851]  test/
+</span><span class='line'>├── [ 796830]  old.file
+</span><span class='line'>├── [ 796830]  soft.link -&gt; old.file
+</span><span class='line'>└── [ 796834]  soft.link.dir -&gt; old.dir/
+</span><span class='line'>
+</span><span class='line'>3 directories, 2 files</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>参考文章</h1>
+
+<p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">理解Linux的硬链接与软链接</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-29T23:37:00+08:00" pubdate data-updated="true">Jul 29<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/shell/'>Shell</a>, <a class='category' href='/blog/categories/unix-linux/'>Unix/Linux</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/29/guan-yu-ti-jian-yi/" title="Previous Post: 关于提建议">&laquo; 关于提建议</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/31/liao-liao-ce-shi/" title="Next Post: 聊聊测试">聊聊测试 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/xiu-che-ji/">修车记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (43)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (4)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

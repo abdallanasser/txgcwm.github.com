@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Shell | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/shell/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-17T16:51:28+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[cp命令]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/30/cpming-ling/"/>
+    <updated>2014-03-30T09:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/30/cpming-ling</id>
+    <content type="html"><![CDATA[<p>该命令的功能是将给出的文件或目录拷贝到另一文件或目录中，同MS-DOS下的copy命令一样，功能十分强大。</p>
+
+<p>语法:
+<code>
+cp [选项] 源文件或目录 目标文件或目录
+</code></p>
+
+<p>说明:该命令把指定的源文件复制到目标文件或把多个源文件复制到目标目录中。</p>
+
+<p>该命令的各选项含义如下：
+<code>
+-a      该选项通常在拷贝目录时使用。它保留链接、文件属性，并递归地拷贝目录，其作用等于dpR选项的组合。
+-d      拷贝时保留链接。
+-f      删除已经存在的目标文件而不提示。
+-i      和f选项相反，在覆盖目标文件之前将给出提示要求用户确认。回答y时目标文件将被覆盖，是交互式拷贝。
+-p      此时cp除复制源文件的内容外，还将把其修改时间和访问权限也复制到新文件中。
+-r      若给出的源文件是一目录文件，此时cp将递归复制该目录下所有的子目录和文件。此时目标文件必须是一个目录名。
+-l      不作拷贝，只是链接文件。
+</code>
+需要说明的是，为防止用户在不经意的情况下用cp命令破坏另一个文件，如用户指定的目标文件名已存在，用cp命令拷贝文件后，这个文件就会被新源文件覆盖，因此，建议用户在使用cp命令拷贝文件时，最好使用i选项。</p>
+
+<!--more-->
+
+
+<p>例子:
+<code>
+cp -i file1 file2    将文档file1复制成file2，-i为提示确认。
+cp file1 dir1        将文档file1复制到目录dir1下，文件名仍为file1。
+cp /tmp/file1 .      将目录/tmp下的文档file1复制到当前目录下，文档名仍为file1。
+cp /tmp/file1 file2  将目录/tmp下的文档file1复制到当前目录下，文档名为file2
+cp -r dir1 dir2      (recursive copy)复制整个目录。若目录dir2存在，则将目录dir1及其所有文档和子目录复制
+到目录dir2下，新目录名称为dir1。若目录dir2不存在，则将dir1及其所有文档和子目录复制为目录dir2。
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux的硬链接与软链接]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie/"/>
+    <updated>2013-07-29T23:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/29/linuxde-ying-lian-jie-yu-ruan-lian-jie</id>
+    <content type="html"><![CDATA[<p>文件有文件名与数据，这在Linux上被分成两个部分：用户数据(user data)与元数据(metadata)。用户数据，即文件数据块 (data block)，数据块是记录文件真实内容的地方；而元数据则是文件的附加属性，如文件大小、创建时间、所有者等信息。在Linux中，元数据中的inode号（inode是文件元数据的一部分但其并不包含文件名，inode号即索引节点号）才是文件的唯一标识而非文件名。文件名仅是为了方便人们的记忆和使用，系统或程序通过inode号寻找正确的文件数据块。下图展示了程序通过文件名获取文件内容的过程。</p>
+
+<p><img src="/images/2013/7/link/file.png" alt=" file " /></p>
+
+<p>为解决文件的共享使用，Linux系统引入了两种链接：硬链接(hard link)与软链接（又称符号链接，即soft link或symbolic link）。链接为Linux系统解决了文件的共享使用，还带来了隐藏文件路径、增加权限安全及节省存储等好处。若一个inode号对应多个文件名，则称这些文件为硬链接。换言之，硬链接就是同一个文件使用了多个别名。</p>
+
+<p><img src="/images/2013/7/link/access.png" alt=" access " /></p>
+
+<!--more-->
+
+
+<h1>硬链接</h1>
+
+<p>硬链接可由命令link或ln创建。如下是对文件oldfile创建硬链接。
+<code>
+link oldfile newfile
+ln oldfile newfile
+</code>
+由于硬链接是有着相同inode号仅文件名不同的文件，因此硬链接存在以下几点特性：</p>
+
+<ul>
+<li>文件有相同的inode及data block；</li>
+<li>只能对已存在的文件进行创建；</li>
+<li>不能交叉文件系统进行硬链接的创建；</li>
+<li>不能对目录进行创建，只可对文件创建；</li>
+<li>删除一个硬链接文件并不影响其它有相同inode号的文件。
+```
+$ ls -li
+total 0</li>
+</ul>
+
+
+<p>// 只能对已存在的文件创建硬连接
+$ link old.file hard.link
+link: cannot create link <code>hard.link' to</code>old.file': No such file or directory</p>
+
+<p>$ echo &ldquo;This is an original file&rdquo; > old.file
+$ cat old.file
+This is an original file
+$ stat old.file
+  File: `old.file'
+  Size: 25          Blocks: 8          IO Block: 4096   regular file
+Device: 807h/2055d  Inode: 796901      Links: 1
+Access: (0664/-rw-rw-r&mdash;)  Uid: ( 1000/  txgcwm)   Gid: ( 1000/  txgcwm)
+Access: 2013-07-29 23:57:49.435157205 +0800
+Modify: 2013-07-29 23:57:27.295157688 +0800
+Change: 2013-07-29 23:57:27.295157688 +0800
+ Birth: &ndash;</p>
+
+<p>// 文件有相同的inode号以及data block
+$ link old.file hard.link | ls -li
+total 8
+796901 -rw-rw-r&mdash; 2 txgcwm txgcwm 25 Jul 29 23:57 hard.link
+796901 -rw-rw-r&mdash; 2 txgcwm txgcwm 25 Jul 29 23:57 old.file</p>
+
+<p>// 不能交叉文件系统
+$ sudo ln /dev/input/event5 /root/bfile.txt
+[sudo] password for txgcwm:
+ln: failed to create hard link <code>/root/bfile.txt' =&gt;</code>/dev/input/event5': Invalid cross-device link</p>
+
+<p>// 不能对目录进行创建硬连接
+$ mkdir -p old.dir/test
+$ ln old.dir/ hardlink.dir
+ln: `old.dir/&lsquo;: hard link not allowed for directory
+<code>
+文件old.file与hard.link有着相同的inode号（796901）及文件权限，inode是随着文件的存在而存在，因此只有当文件存在时才可创建硬链接，即当inode存在且链接计数器（link count）不为0时。inode号仅在各文件系统下是唯一的，当Linux挂载多个文件系统后将出现inode号重复的现象，因此硬链接创建时不可跨文件系统。设备文件目录/dev使用的文件系统是devtmpfs，而/home（与根目录/一致）使用的是磁盘文件系统ext4。以下使用命令df查看当前系统中挂载的文件系统类型、各文件系统inode使用情况及文件系统挂载点。
+</code>
+$ sudo df -i &mdash;print-type
+Filesystem     Type      Inodes  IUsed   IFree IUse% Mounted on
+/dev/sda5      ext4     1250928  63404 1187524    6% /
+udev           devtmpfs  211313    603  210710    1% /dev
+tmpfs          tmpfs     215180    566  214614    1% /run
+none           tmpfs     215180      3  215177    1% /run/lock
+none           tmpfs     215180      9  215171    1% /run/shm
+none           tmpfs     215180     23  215157    1% /run/user
+/dev/sda6      ext4       62464    355   62109    1% /boot
+/dev/sda7      ext4     1250928  91579 1159349    8% /home
+/dev/sda11     ext4     2501856 336584 2165272   14% /srv
+/dev/sda12     ext4     1875968 144226 1731742    8% /opt
+/dev/sda8      ext4      249984    132  249852    1% /tmp
+/dev/sda9      ext4     1250928 584616  666312   47% /usr
+/dev/sda10     ext4      249984  24565  225419   10% /var</p>
+
+<p>$ sudo find / -inum 1114
+/lib/modules/3.5.0-25-generic/kernel/drivers/hwmon/mcp3021.ko
+/sys/devices/LNXSYSTM:00/device:00/PNP0A08:00/device:02/PNP0C02:00/power/autosuspend_delay_ms
+<code>
+值得一提的是，Linux系统存在inode号被用完但磁盘空间还有剩余的情况。硬链接不能对目录创建是受限于文件系统的设计。现Linux文件系统中的目录均隐藏了两个特殊的目录：当前目录（.）与父目录（..）。查看这两个特殊目录的inode号可知其实这两目录就是两个硬链接（注意目录/lost+found/的inode号）。若系统允许对目录创建硬链接，则会产生目录环。
+</code>
+$ sudo ls -aliF /lost+found
+total 20
+11 drwx&mdash;&mdash;&mdash;  2 root root 16384 Nov 11  2012 ./
+ 2 drwxr-xr-x 23 root root  4096 Jul  7 13:47 ../</p>
+
+<p>$ sudo stat /lost+found/
+  File: `/lost+found/&lsquo;
+  Size: 16384       Blocks: 32         IO Block: 4096   directory
+Device: 805h/2053d  Inode: 11          Links: 2
+Access: (0700/drwx&mdash;&mdash;&mdash;)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2013-07-30 00:10:47.479140197 +0800
+Modify: 2012-11-11 00:50:27.000000000 +0800
+Change: 2012-11-11 00:50:27.000000000 +0800
+ Birth: &ndash;
+```</p>
+
+<h1>软链接</h1>
+
+<p>软链接与硬链接不同，若文件用户数据块中存放的内容是另一文件的路径名的指向，则该文件就是软连接。软链接就是一个普通文件，只是数据块内容有点特殊。软链接有着自己的inode号以及用户数据块。因此软链接的创建与使用没有类似硬链接的诸多限制：</p>
+
+<ul>
+<li>软链接有自己的文件属性及权限等；</li>
+<li>可对不存在的文件或目录创建软链接；</li>
+<li>软链接可交叉文件系统；</li>
+<li>软链接可对文件或目录创建；</li>
+<li>创建软链接时，链接计数 i_nlink 不会增加；</li>
+<li>删除软链接并不影响被指向的文件，但若被指向的原文件被删除，则相关软连接被称为死链接（即 dangling link，若被指向路径文件被重新创建，死链接可恢复为正常的软链接）。
+```
+$ ls -li
+total 0</li>
+</ul>
+
+
+<p>// 可对不存在的文件创建软链接
+$ ln -s old.file soft.link
+$ ls -liF
+total 0
+796810 lrwxrwxrwx 1 txgcwm txgcwm 8 Jul 30 00:25 soft.link &ndash;> old.file</p>
+
+<p>// 由于被指向的文件不存在，此时的软链接 soft.link 就是死链接
+$ cat soft.link
+cat: soft.link: No such file or directory</p>
+
+<p>// 创建被指向的文件 old.file，soft.link 恢复成正常的软链接
+$ echo &ldquo;This is an original file_A&rdquo; >> old.file
+$ cat soft.link
+This is an original file_A</p>
+
+<p>// 对不存在的目录创建软链接
+$ ln -s old.dir soft.link.dir
+$ mkdir -p old.dir/test
+$ tree . -F &mdash;inodes
+.
+├── [ 796834]  old.dir/
+│   └── [ 796851]  test/
+├── [ 796830]  old.file
+├── [ 796830]  soft.link &ndash;> old.file
+└── [ 796834]  soft.link.dir &ndash;> old.dir/</p>
+
+<p>3 directories, 2 files
+```</p>
+
+<h1>参考文章</h1>
+
+<p><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">理解Linux的硬链接与软链接</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux操作系统下的MAN命令]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling/"/>
+    <updated>2013-07-27T13:27:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/27/linuxcao-zuo-xi-tong-xia-de-manming-ling</id>
+    <content type="html"><![CDATA[<p>Unix/Linux下的man命令可以查询常用的命令和函数。可是只知道用“man 函数名”来查询会遇到很多问题，比如<code>man read</code>，想看的是ANSI C中stdio的read函数原型和说明，出来的却是BASH命令的说明。这是怎么回事呢？原来read本身是man命令的一个参数，这样就会以为你要使用read的功能，而不是查看read函数。那么要怎样查看read函数呢?可以使用<code>man 2 read</code>或者是<code>man 3 read</code>查看。</p>
+
+<h1>分卷号</h1>
+
+<p>以上指令的中间数字是什么意思呢？是man的分卷号，所有的手册页都属于一个特定的分卷号，用一个字符来表示。Linux下最通用的分卷号及其名称和说明如下表所示。</p>
+
+<table>
+<thead>
+<tr>
+<th>分卷号         </th>
+<th>名称 </th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td> 用户命令     </td>
+<td> 可由任何人启动  </td>
+</tr>
+<tr>
+<td>2</td>
+<td> 系统调用     </td>
+<td> 由内核提供的函数  </td>
+</tr>
+<tr>
+<td>3</td>
+<td> 例程        </td>
+<td> 库函数    </td>
+</tr>
+<tr>
+<td>4</td>
+<td> 设备        </td>
+<td> /dev目录下的特殊文件   </td>
+</tr>
+<tr>
+<td>5</td>
+<td> 文件格式描述  </td>
+<td> 例如/etc/passwd   </td>
+</tr>
+<tr>
+<td>6</td>
+<td> 游戏        </td>
+<td> 略  </td>
+</tr>
+<tr>
+<td>7</td>
+<td> 杂项        </td>
+<td> 例如宏命令包、惯例等  </td>
+</tr>
+<tr>
+<td>8</td>
+<td> 系统管理员工具</td>
+<td> 只能由root启动  </td>
+</tr>
+<tr>
+<td>9</td>
+<td> 其他（Linux特定的）</td>
+<td> 用来存放内核例行程序的文档  </td>
+</tr>
+<tr>
+<td>n</td>
+<td> 新文档           </td>
+<td> 可能要移到更适合的领域  </td>
+</tr>
+<tr>
+<td>o</td>
+<td> 老文档           </td>
+<td> 可能会在一段期限内保留  </td>
+</tr>
+<tr>
+<td>l</td>
+<td> 本地文档          </td>
+<td> 与特定系统有关的  </td>
+</tr>
+</tbody>
+</table>
+
+
+<!--more-->
+
+
+<br></br>
+
+
+<h1>常用参数和用法</h1>
+
+<ul>
+<li>打开所有领域内的同名帮助，例如man fam，首先会进入一个fam(1M)的命令版fam帮助，再按q键就会进入FAM(3X)，库函数版的帮助。
+<code>
+$ man -a cmd
+</code></li>
+<li>显示所有cmd的所有手册文件的路径，如<code>man -aw fam</code>指令。
+<code>
+$ man -aw cmd
+</code></li>
+<li>直接指定特定领域内搜索手册页，如<code>man 3 fam</code>直接进入库函数版的帮助。
+<code>
+$ man 领域代号 cmd
+</code></li>
+<li>指定手册文件的搜索路径，如<code>man -M /home/mysql/man mysql</code>显示的就是你安装的mysql的帮助，而不是系统自带的旧版mysql的帮助。
+<code>
+$ man -M cmd
+</code></li>
+<li>把man手册信息输出到文本文件。
+<code>
+$ man cmd | col -b &gt; cmd.txt
+</code></li>
+<li>查看特定语言版本的手册页，显示特定语言manpage文件的路径。
+<code>
+$ LANG=语言代号
+$ man -w cmd
+</code></li>
+</ul>
+
+
+<p>例如要查看mplayer的中文man路径：
+<code>
+$ LANG=en_US.UTF-8
+$ man -w mplayer
+/usr/share/man/zh/man1/mplayer.1.gz
+</code></p>
+
+<h1>配置文件/etc/man.config</h1>
+
+<p>如果不想每次<code>man cmd</code>都要用<code>-M</code>指定路径，那么可以通过修改配置文件，添加内容如：</p>
+
+<pre><code>MANPATH /home/mysql/man
+</code></pre>
+
+<p>man在各领域的搜索次序可以通过修改以下设置：</p>
+
+<pre><code>MANSECT 1:8:2:3:4:5:6:7:9:tcl:n:l:p:o
+</code></pre>
+
+<p>不过，一般不推荐修改man的配置文件。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[astyle格式化代码]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma/"/>
+    <updated>2013-07-24T18:36:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/24/astylege-shi-hua-dai-ma</id>
+    <content type="html"><![CDATA[<p>astyle是一个开源工具，它可以方便的将代码格式化成自己想要的样式而不必人工修改。可以在终端下输入指令<code>sudo apt-get install astyle</code>安装，也可以到 <a href="http://astyle.sourceforge.net/">这里</a> 下载源码后自己编译安装。</p>
+
+<p>下面介绍一下astyle的简单使用。例如有以下的源码：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{int i;printf(&ldquo;Just a test!\n&rdquo;);for(i=0;i&lt;10;++i)printf(&ldquo;%d\n&rdquo;,i);}return 0;}
+```</p>
+
+<!--more-->
+
+
+<p>然后在终端下输入以下指令：
+<code>
+$ astyle test1.c
+</code>
+效果如下：
+```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>int i;
+printf("Just a test!\n");
+for(i=0; i&lt;10; ++i) {
+    printf("%d\n",i);
+}
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>当然也可以加上一些选项，例如“astyle &mdash;style=bsd test1.c”，“ astyle &mdash;style=gnu test1.c”等等。</p>
+
+<p>在vim中的命令模式下，可以使用下面的某一种方式来格式化代码。
+<code>
+%!astyle (simple case - astyle default mode is C/C++)
+</code>
+或者
+<code>
+%!astyle --mode=c --style=ansi -s2 (ansi C++ style, use two spaces per indent level)
+</code>
+或者
+<code>
+1,40!astyle --mode=c --style=ansi (ansi C++ style, filter only lines 1-40)
+</code></p>
+
+<p>在格式化完代码后，会生成一个后缀为orig的文件，格式化完成之后将它们删除。为方便使用，可以把它写成一个脚本，代码如下：
+```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>for f in $(find . -name &lsquo;<em>.c&rsquo; -or -name &lsquo;</em>.cpp&rsquo; -or -name &lsquo;*.h&rsquo; -type f)
+do</p>
+
+<pre><code>astyle $f
+</code></pre>
+
+<p>done</p>
+
+<h1>after formate the code,we need to rm &lsquo;*.orig&rsquo; files</h1>
+
+<p>for f in $(find . -name &lsquo;*.orig&rsquo; -type f)
+do</p>
+
+<pre><code>rm $f
+</code></pre>
+
+<p>done
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[pkg-config的使用]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong/"/>
+    <updated>2013-07-14T11:22:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/14/pkg-configde-shi-yong</id>
+    <content type="html"><![CDATA[<p>pkg-config是向用户和应用程序提供相应库的路径、版本号等信息的程序。比如使用pkg-config查看gcc的CFLAGS参数。
+<code>
+$ pkg-config --libs --cflags opencv
+-I/usr/include/opencv  -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
+-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect
+-lopencv_contrib -lopencv_legacy -lopencv_flann
+</code>
+以上就是我们用gcc编译连接时CFLAGS的参数。因此当我们需要编译连接某个库时，只需要把上面那行加入gcc的参数里面即可。这也是configure的作用，它会检查你需要的包，产生相应的信息。</p>
+
+<p>pkg-config从包名为xxx.pc这个文件中查找相应的信息。缺省情况下，首先在prefix/lib/pkgconfig/（在linux上其路径为/usr/lib/pkconfig/）中查找相关包（比如opencv）对应的文件（opencv.pc）。若是没有找到，它也会到PKG_CONFIG_PATH这个环境变量所指定的路径下去找。若是还没有找到，它就会报错，例如：
+<code>
+Package opencv was not found in the pkg-config search path.
+Perhaps you should add the directory containing `opencv.pc'
+to the PKG_CONFIG_PATH environment variable
+No package 'opencv' found
+</code></p>
+
+<!--more-->
+
+
+<p>设置环境变量PKG_CONFIG_PATH方法如下：
+<code>
+export PKG_CONFIG_PATH=/cv/lib:$PKG_CONFIG_PATH
+</code></p>
+
+<p>查看opencv.pc文件的内容如下：
+```
+$ cat opencv.pc</p>
+
+<h1>Package Information for pkg-config</h1>
+
+<p>prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir_old=${prefix}/include/opencv
+includedir_new=${prefix}/include</p>
+
+<p>Name: OpenCV
+Description: Open Source Computer Vision Library
+Version: 2.3.1
+Libs: -L${libdir} -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml
+-lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_contrib
+-lopencv_legacy -lopencv_flann
+Cflags: -I${includedir_old} -I${includedir_new}
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

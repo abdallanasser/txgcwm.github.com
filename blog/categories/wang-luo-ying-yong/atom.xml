@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 网络应用 | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/wang-luo-ying-yong/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-17T16:51:28+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[域名解析库]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku/"/>
+    <updated>2014-03-15T10:59:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/15/adnsyu-ming-jie-xi-ku</id>
+    <content type="html"><![CDATA[<h1>一个问题</h1>
+
+<p>在实际的开发中遇到了不能域名解析的情况，在网上搜集了大量的资料，发现有网友遇到了和我一样的状况，所以把查找的资料汇总一下，作个记录。以下信息摘自<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">这里</a>：</p>
+
+<blockquote><p>I&rsquo;m using libcurl 7.29.0 on Android with c-ares 1.9.1.</p>
+
+<p>I&rsquo;ve been noticing a bug on a Samsung Galaxy S3 &amp; Samsung Galaxy Note 2 (and possibly other devices too) when the bearer switches from wifi to 3G where I can no longer connect to a host.</p>
+
+<p>If I undefine USE_ARES (build without c-ares) then this issue is gone, but I would like to keep c-ares for performance.</p>
+
+<p>Some other (useful?) info: <br/>
+1) Switching back to the original bearer will allow a connection again <br/>
+2) I tried performing a curl_global_cleanup() and curl_global_init(CURL_GLOBAL_ALL) during the switch, but it didn&rsquo;t seem to help.</p>
+
+<p>If anyone knows of anything that I can do to continue to use c-ares I would greatly appreciate it!</p></blockquote>
+
+<!--more-->
+
+
+<h1>Android NDK 编译c-ares</h1>
+
+<p>```
+export NDK=/tmp/android-ndk-r8b</p>
+
+<h1>Create the standalone toolchain</h1>
+
+<p>$NDK/build/tools/make-standalone-toolchain.sh \
+&mdash;platform=android-9 \
+&mdash;install-dir=/tmp/my-android-toolchain</p>
+
+<p>export PATH=/tmp/my-android-toolchain/bin:$PATH
+export SYSROOT=/tmp/my-android-toolchain/sysroot
+export CC=&ldquo;arm-linux-androideabi-gcc &mdash;sysroot $SYSROOT&rdquo;</p>
+
+<h1>Download the latest release</h1>
+
+<p>curl -O <a href="http://c-ares.haxx.se/download/c-ares-1.9.1.tar.gz">http://c-ares.haxx.se/download/c-ares-1.9.1.tar.gz</a>
+tar xvfz c-ares-1.9.1.tar.gz</p>
+
+<h1>Configure</h1>
+
+<p>cd c-ares-1.9.1 &amp;&amp; mkdir build
+./configure &mdash;prefix=$(pwd)/build \
+&mdash;host=arm-linux \
+&mdash;disable-shared \
+CFLAGS=&ldquo;-march=armv7-a&rdquo;</p>
+
+<h1>Build and install</h1>
+
+<p>make &amp;&amp; make install
+```</p>
+
+<h1>adns接口介绍及示例</h1>
+
+<p>adns是一个开源的dns解析库，官方文档点击<a href="http://www.chiark.greenend.org.uk/~ian/adns/">这里</a>。</p>
+
+<p>初始化
+<code>
+adns_state   adns;
+adns_query   query;
+adns_answer   *answer;
+</code>
+函数原型：
+<code>
+int adns_init(adns_state *newstate_r, adns_initflags flags, FILE *diagfile /*0=&gt;stderr*/);
+</code>
+举例：
+<code>
+adns_init(&amp;adns, adns_if_noenv, 0);
+</code></p>
+
+<p>提交待解析的域名 <br/>
+函数原型：
+```
+int adns_submit(adns_state ads,</p>
+
+<pre><code>            const char *owner, 
+            adns_rrtype type, 
+            adns_queryflags flags, 
+            void *context, 
+            adns_query *query_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_submit(adns, argv[1], adns_r_a, (adns_queryflags) 0, NULL, &amp;query);
+```</p>
+
+<p>检测是否有域名已检测完成 <br/>
+函数原型：
+```
+int adns_check(adns_state ads,</p>
+
+<pre><code>       adns_query *query_io,
+       adns_answer **answer_r,
+       void **context_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_check(adns, &amp;query, &amp;answer, NULL);
+```</p>
+
+<p>函数原型：
+```
+int adns_wait(adns_state ads,</p>
+
+<pre><code>      adns_query *query_io,
+      adns_answer **answer_r,
+      void **context_r);
+</code></pre>
+
+<p><code>
+举例：
+</code>
+adns_wait(adns, &amp;query, &amp;answer, NULL);
+```</p>
+
+<p>检测是否已完成所有提交的域名的解析 <br/>
+函数原型：
+<code>
+void adns_finish(adns_state ads);
+</code>
+举例：
+<code>
+adns_finish(adns);
+</code></p>
+
+<p>示例代码<code>testdns.c</code>（解析IPv4地址可使用adns v1.2或adns v1.4，解析IPv6地址使用adns v1.6）：</p>
+
+<p>```</p>
+
+<h1>include &lt;sys/errno.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<h1>include &lt;stdlib.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdio.h></h1>
+
+<h1>include &ldquo;adns.h&rdquo;</h1>
+
+<p>int test_dns(char *host) <br/>
+{</p>
+
+<pre><code>int tryCount = -1; 
+int adns_cname = 0;
+adns_state ads; 
+adns_initflags flags;  
+adns_query quer = NULL;  
+flags = adns_if_nosigpipe | adns_if_noerrprint; 
+
+adns_init(&amp;ads, flags, NULL); 
+adns_submit(ads, host, (adns_rrtype) adns_r_a, (adns_queryflags) 0, NULL, &amp;quer);  
+
+while(tryCount &lt; 32) { 
+    tryCount += 1; 
+
+    adns_answer *ans; 
+    int res = adns_check(ads, &amp;quer, &amp;ans, NULL); 
+    if(res == 0) {       
+        if (ans-&gt;status == adns_s_prohibitedcname) { 
+            char cname[128]; 
+            strncpy(cname, ans-&gt;cname, 127); 
+            cname[strlen(ans-&gt;cname)] = '\0';       
+            adns_query quer = NULL; 
+            adns_submit(ads, cname, (adns_rrtype) adns_r_addr, (adns_queryflags) 0, 
+                        NULL, &amp;quer);       
+            adns_cname = 1; 
+        } else { 
+        #if 1
+            //resolve IPv4 address                 
+            if(adns_cname) 
+                printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
+                        inet_ntoa(ans-&gt;rrs.addr-&gt;addr.inet.sin_addr) : "no"); 
+           else 
+                printf("ip: %s\n", ans-&gt;status == adns_s_ok ? 
+                        inet_ntoa(*(ans-&gt;rrs.inaddr)) : "no");             
+        #else
+            //resolve IPv6 address
+            if(adns_cname){
+                if(ans-&gt;status == adns_s_ok){
+                    char buf[INET6_ADDRSTRLEN];
+                    inet_ntop(AF_INET6, &amp;ans-&gt;rrs.addr-&gt;addr.inet6.sin6_addr, 
+                                buf, sizeof(buf));
+                    printf("ip: %s\n", buf);
+                }
+                else{
+                     printf("no\n");
+                 }
+             }
+             else{
+                 if(ans-&gt;status == adns_s_ok){
+                     char buf[INET6_ADDRSTRLEN];
+                     inet_ntop(AF_INET6, ans-&gt;rrs.in6addr, buf, sizeof(buf));
+                     printf("ip: %s\n", buf);
+                 }
+                 else{
+                      printf("no\n");
+                 }
+            }
+        #endif
+             adns_finish(ads); 
+             break; 
+        }                   
+    }        
+    else if (res == ESRCH || res == EAGAIN) { 
+        sleep(1); 
+    } else { 
+        printf("host(%s) is err!\n", host); 
+    } 
+}   
+
+return 0; 
+</code></pre>
+
+<p>}</p>
+
+<p>int main(int argc, char *argv[]) {</p>
+
+<pre><code>char host[128]; 
+
+while(1) { 
+    scanf("%s", host); 
+
+    if(strlen(host) == 3 &amp;&amp; strcmp(host, "eof")) 
+        break; 
+
+    test_dns(host); 
+} 
+
+return 0; 
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Makefile
+```
+CFLAGS = -g
+TARGETS = libadns.a
+LIBOBJS = types.o event.o query.o reply.o general.o setup.o \</p>
+
+<pre><code>        parse.o poll.o check.o 
+</code></pre>
+
+<p>all: testdns</p>
+
+<p>testdns: testdns.c libadns.a
+libadns.a: $(LIBOBJS)</p>
+
+<pre><code>$(AR) cq $@ $(LIBOBJS)
+</code></pre>
+
+<p>clean:</p>
+
+<pre><code>rm -f $(LIBOBJS) libadns.a *~ config.status 
+</code></pre>
+
+<p>distclean: clean</p>
+
+<pre><code>rm -f config.h .depend   
+</code></pre>
+
+<p>$(LIBOBJS): adns.h internal.h config.h
+<code>``
+下载adns-1.2的源码，然后解压，到</code>adns-1.2/<code>目录下执行</code>./configure<code>，进入到</code>src/<code>目录并加入以上的</code>testdns.c<code>、</code>Makefile<code>两个文件，</code>make`编译后就得到了我们需要的测试程序。</p>
+
+<p><big>参考链接：</big><br/>
+<a href="http://comments.gmane.org/gmane.comp.web.curl.library/39150">libcurl + c-ares on Android</a> <br/>
+<a href="http://blog.chinaunix.net/uid-20535334-id-3757613.html">Android NDK 编译c-ares</a> <br/>
+<a href="http://c-ares.haxx.se/">c-ares</a> <br/>
+<a href="http://www.cnblogs.com/sunada2005/p/3232600.html">adns解析库——域名解析实例(C++、linux)</a> <br/>
+<a href="http://www.chiark.greenend.org.uk/~ian/adns/">GNU adns</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[gethostbyname和hostent结构体详解]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie/"/>
+    <updated>2014-03-11T22:43:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/03/11/gethostbynamehe-hostentjie-gou-ti-xiang-jie</id>
+    <content type="html"><![CDATA[<p><code>
+struct hostent *gethostbyname(const char *name);
+</code>
+gethostbyname函数根据域名解析出服务器的ip地址，它返回一个结构体struct hostent：
+```</p>
+
+<h1>include &lt;netdb.h></h1>
+
+<p>struct hostent {</p>
+
+<pre><code>char  *h_name;            /* official name of host */
+char **h_aliases;         /* alias list */
+int    h_addrtype;        /* host address type */
+int    h_length;          /* length of address */
+char **h_addr_list;       /* list of addresses */
+</code></pre>
+
+<p>}</p>
+
+<h1>define h_addr h_addr_list[0]  /<em> for backward compatibility </em>/</h1>
+
+<p>```</p>
+
+<p>除了服务器的ip地址外，这个结构体还包含了更多服务器的信息，有：
+```
+char *h_name</p>
+
+<p>This is the “official” name of the host.
+<code>
+</code>
+char **h_aliases</p>
+
+<p>These are alternative names for the host, represented as a null-terminated vector of strings.
+```
+主机的可选名字，以NULL作为结束标记。</p>
+
+<!--more-->
+
+
+<p>```
+int h_addrtype</p>
+
+<p>This is the host address type; in practice, its value is always either AF_INET or AF_INET6, with the latter being used for IPv6 hosts. In principle other kinds of addresses could be represented in the database as well as Internet addresses; if this were done, you might find a value in this field other than AF_INET or AF_INET6. See Socket Addresses.
+<code>
+</code>
+int h_length</p>
+
+<p>This is the length, in bytes, of each address.
+<code>
+ip地址的长度，ipv4对应4个字节。
+</code>
+char **h_addr_list</p>
+
+<p>This is the vector of addresses for the host. (Recall that the host might be connected to multiple networks and have different addresses on each one.) The vector is terminated by a null pointer.
+<code>
+一般主机可以有多个ip地址，比如www.163.com就有121.14.228.43和121.11.151.72两个ip，h_addr_list就用来保存多个ip地址。
+</code>
+char *h_addr</p>
+
+<p>This is a synonym for h_addr_list[0]; in other words, it is the first host address.
+```
+即为h_addr_list[0]，表示第一个地址，这个符号其实是兼容老系统而存在的。</p>
+
+<p>写一个程序来获取主机的详细信息：</p>
+
+<p>```</p>
+
+<h1>include &lt;stdio.h></h1>
+
+<h1>include &lt;string.h></h1>
+
+<h1>include &lt;stdlib.h></h1>
+
+<h1>include &lt;sys/types.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>include &lt;netdb.h></h1>
+
+<h1>include &lt;netinet/in.h></h1>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<h1>include &lt;sys/socket.h></h1>
+
+<h1>define SERVPORT 80</h1>
+
+<p>int main(int argc, char **argv)
+{</p>
+
+<pre><code>int i, sockfd;
+struct hostent *host;
+struct sockaddr_in serv_addr;
+
+if ((host = gethostbyname(argv[1])) == NULL) {
+    printf("gethostbyname error\n");
+    exit(0);
+}
+
+printf("official name: %s\n\n", host-&gt;h_name);
+printf("address length: %d bytes\n\n", host-&gt;h_length);
+
+printf("host name alias: \n");
+for (i = 0; host-&gt;h_aliases[i]; i++) {
+    printf("%s\n", host-&gt;h_aliases[i]);
+}
+printf("\naddress list: \n");
+
+for (i = 0; host-&gt;h_addr_list[i]; i++) {
+    if ((sockfd = socket(AF_INET, SOCK_STREAM,0)) == -1) {
+        printf("socket error\n");
+        exit(0);
+    }
+    // 先清零，然后用struct sockaddr_in来填值
+    bzero(&amp;serv_addr, sizeof(serv_addr));
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(SERVPORT);
+    /* h_addr_list[i]指向in_addr类型 */
+    serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);
+    const char *ip = inet_ntoa(serv_addr.sin_addr);
+    printf("connect to %s  ", ip);
+
+    // 系统调用的时候，把sockaddr_in转换成sockaddr
+    if (connect(sockfd, (struct sockaddr *)&amp;serv_addr, \
+                sizeof(struct sockaddr)) == -1) {
+        printf("error\n");
+        exit(0);
+    }
+    printf("success\n");
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>这个程序首先调用gethostbyname得到服务器的各种信息，其中就包含它拥有的ip地址，保存在h_addr_list中，然后对于h_addr_list中的每个ip地址，都调用connect连接其80端口。h_addr_list保存的ip地址类型是char *，struct sockaddr_in中sin_addr的类型是struct in_addr，而程序中却直接把h_addr_list[i]强制转换成struct in_addr *
+<code>
+serv_addr.sin_addr = *((struct in_addr *)host-&gt;h_addr_list[i]);
+</code>
+这是没有问题的，因为h_addr_list保存的并不是真正的字符串，而是指向struct in_addr类型的指针。</p>
+
+<p>另外，struct in_addr用来表示ip地址，本质上是一个long类型，刚好4个字节。然后我们调用inet_ntoa把它转换成可读性更强的dots-and-number字符串。关于ip地址和dots-and-number字符串之间的转换有4个函数：</p>
+
+<p>```</p>
+
+<h1>include &lt;arpa/inet.h></h1>
+
+<p>/<em> network to ascii </em>/
+char *inet_ntoa(struct in_addr in);</p>
+
+<p>/<em> ascii to network </em>/
+int inet_aton(const char <em>cp, struct in_addr </em>inp);</p>
+
+<p>const char <em>inet_ntop(int af, const void </em>src, char *dst, socklen_t size);</p>
+
+<p>int inet_pton(int af, const char <em>src, void </em>dst);  /<em> presentation format to network </em>/
+```
+inet_ntoa和inet_aton不支持ipv6, 据说迟早要废除，不过目前来说，很多系统都可以看见这两个函数。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Uboot中TFTP解释]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi/"/>
+    <updated>2013-07-19T22:45:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/ubootzhong-tftpjie-shi</id>
+    <content type="html"><![CDATA[<p>TFTP在Uboot中用于发送较小的文件，使用UDP协议，发送使用69端口，每次发送的最大分组为512 bytes，发送双方采用超时重传机制，数据传输模式为octet模式（二进制模式）。发送文件时使用<code>tftp MemoryAddress FileName</code>命令即可，其中MemoryAddress为放入文件的内存首地址，FileName为传送文件的文件名。</p>
+
+<p>使用TFTP传送文件的步骤：</p>
+
+<ol>
+<li>使用时已经初始化以下变量：NetOurIP（本机IP地址，定义在Net.c文件）、NetServerIP（TFTP服务器的IP地址，定义在Net.c文件）、BootFile（需要传送文件的文件名，定于在tftp.c）、NetOurGatewayIP（本机的网关地址）、NetOurSubnetMask（本机子网掩码）。</li>
+<li>调用TftpStart 函数开始文件传送。</li>
+</ol>
+
+
+<!--more-->
+
+
+<h1>客户端状态</h1>
+
+<p>TFTP使用一个变量TftpState来描述TFTP客户端可能的5种状态：</p>
+
+<p><img src="/images/2013/7/tftp/states.png" alt=" states " /></p>
+
+<h1>包类型</h1>
+
+<p>使用TFTP传送的包分为6种类型：</p>
+
+<p><img src="/images/2013/7/tftp/types.png" alt=" types " /></p>
+
+<h1>各种包结构</h1>
+
+<p>TFTP协议中各种包的结构：</p>
+
+<p><img src="/images/2013/7/tftp/pack_struct.png" alt=" pack_struct " /></p>
+
+<p>Uboot中客户端发送的包的包括RRQ和ACK。RRQ（请求读的包）包的结构:</p>
+
+<p><img src="/images/2013/7/tftp/rrq.png" alt=" rrq " /></p>
+
+<p>ACK（确认帧）结构：</p>
+
+<p><img src="/images/2013/7/tftp/ack.png" alt=" ack " /></p>
+
+<h1>主要函数及作用</h1>
+
+<p>Uboot中与tftp协议有关的文件有tftp.c与tftp.h文件，主要函数包括：
+```
+/<em> 根据预先设定的地址load_addr决定将首地址为src，长度为len的block个数据块写入flash 或写入内存</em>/
+static <strong>inline</strong> void store_block (unsigned block, uchar * src, unsigned len);</p>
+
+<p>/<em> 根据TftpState变量的不同值发送不同的 Tftp包 （使用UDP协议发送） </em>/
+static void TftpSend (void) ;</p>
+
+<p>/<em> 处理收到的Tftp包 </em>/
+static void TftpHandler (uchar * pkt, unsigned dest, unsigned src, unsigned len) ;</p>
+
+<p>/<em> 超时处理函数 </em>/
+static void TftpTimeout (void);</p>
+
+<p>/<em> 初始化各个需要的数据 然后开始发送TFTP读请求 </em>/
+void TftpStart (void);
+```</p>
+
+<h1>流程</h1>
+
+<p>TFTP总体流程：首先客户端发出读写请求，如果服务器批准此请求，则打开连接并接收第一个数据包。客户端收到数据包后发回确认，而服务器发出下一个数据包以前必须得到客户对上一个数据包的确认。如果数据包在传输过程中丢失，服务器方会在超时后重新传输最后一个未被确认的数据包。发送的数据包一般为512字节，如果一个数据包小于 512 字节，则表示这个包是最后一个包，如果发送的数据正好是 512 的整数倍，发送完后再发一个空包。</p>
+
+<p>以下是客户端和服务器端通信的流程图：</p>
+
+<p><img src="/images/2013/7/tftp/flow.png" alt=" flow " /></p>
+
+<p>客户端程序流程：</p>
+
+<ol>
+<li>客户端设定NetOurIP 、NetServerIP、BootFile 变量的值。</li>
+<li>调用TftpStart函数完成如下6步工作：（1）若BootFile为空则使用默认文件名，否则使用BootFile为传送的文件名。（2）比较客户端和服务器的子网地址，判断两者是否在同一个子网内。（3）设定超时处理函数为TftpTimeout 。（4）设置处理接收到的TFTP包的函数为TftpHandler。（5）初始化服务器端口、本机端口、超时次数为0、初始状态为RRQ。（6）调用TftpSend函数发送TFTP读取请求。</li>
+<li>TftpSend函数根据TftpState发送不同的包，同时根据包的类型和当前客户端的状态（TftpState）处理接收到的包。</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux下c语言获取网络接口IP地址]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi/"/>
+    <updated>2013-07-19T22:34:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/19/linuxxia-cyu-yan-huo-qu-wang-luo-jie-kou-ipdi-zhi</id>
+    <content type="html"><![CDATA[<p>在Linux环境下，可以使用以下的代码获取网络的ip地址：
+```</p>
+
+<pre><code>if (gethostname(host, sizeof(host)) &lt; 0) {
+    printf("Can't get hostname\n");
+    return -1;
+}
+if ((hp = gethostbyname(host)) == NULL) {
+    printf("Can't get host address\n");
+    return -1;
+}
+memcpy((char *) &amp;intaddr, (char *) hp-&gt;h_addr_list[0],
+        (size_t) hp-&gt;h_length);
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>在嵌入式系统中，使用goahead的时候， 以上代码是获取不到正确ip地址的，我们可以结合以下两个接口函数去获取需要的ip地址：
+```</p>
+
+<pre><code>#include &lt;sys/socket.h&gt;
+#include &lt;sys/ioctl.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;net/if.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdio.h&gt;
+
+
+static int getIfaceName(char *iface_name, int len)
+{
+    int r = -1;
+    int flgs, ref, use, metric, mtu, win, ir;
+    unsigned long int d, g, m;    
+    char devname[20];
+    FILE *fp = NULL;
+
+    if((fp = fopen("/proc/net/route", "r")) == NULL) {
+        perror("fopen error!\n");
+        return -1;
+    }
+
+    if (fscanf(fp, "%*[^\n]\n") &lt; 0) {
+        fclose(fp);
+        return -1;
+    }
+
+    while (1) {
+        r = fscanf(fp, "%19s%lx%lx%X%d%d%d%lx%d%d%d\n",
+                 devname, &amp;d, &amp;g, &amp;flgs, &amp;ref, &amp;use,
+                 &amp;metric, &amp;m, &amp;mtu, &amp;win, &amp;ir);
+        if (r != 11) {
+            if ((r &lt; 0) &amp;&amp; feof(fp)) {
+                break;
+            }
+            continue;
+        }
+
+        strncpy(iface_name, devname, len);
+        fclose(fp);
+        return 0;
+    }
+
+    fclose(fp);
+
+    return -1;
+}
+
+static int getIpAddress(char *iface_name, char *ip_addr, int len)
+{
+    int sockfd = -1;
+    struct ifreq ifr;
+    struct sockaddr_in *addr = NULL;
+
+    memset(&amp;ifr, 0, sizeof(struct ifreq));
+    strcpy(ifr.ifr_name, iface_name);
+    addr = (struct sockaddr_in *)&amp;ifr.ifr_addr;
+    addr-&gt;sin_family = AF_INET;
+
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0) {
+        perror("create socket error!\n");
+        return -1;
+    }
+
+    if (ioctl(sockfd, SIOCGIFADDR, &amp;ifr) == 0) {
+        strncpy(ip_addr, inet_ntoa(addr-&gt;sin_addr), len);
+        close(sockfd);
+        return 0;
+    }
+
+    close(sockfd);
+
+    return -1;
+}
+
+int main(int argc, char** argv)
+{
+    struct in_addr    intaddr;
+    char iface_name[20];
+
+    if(getIfaceName(iface_name, sizeof(iface_name)) &lt; 0) {
+        printf("get interface name error!\n");
+        return -1;
+    }
+
+    if(getIpAddress(iface_name, (char *) &amp;intaddr, 15) &lt; 0) {
+        printf("get interface ip address error!\n");
+        return -1;
+    }
+
+    printf("address:%s\n",(char *) &amp;intaddr);
+
+    return 0;
+}
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

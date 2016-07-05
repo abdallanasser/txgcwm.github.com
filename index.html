@@ -1,0 +1,898 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="输入以下的指令，就能立马体验Slash。 1
+2
+3
+4
+$ cd octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ rake install['slash']
+$ &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-17T16:14:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>输入以下的指令，就能立马体验Slash。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd octopress
+</span><span class='line'>$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+</span><span class='line'>$ rake install['slash']
+</span><span class='line'>$ rake generate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装完之后，我就后悔了，虽然主题看起来更好看，可没有之前使用的那般便利，幸好我没有直接将它上传到<code>github</code>上，只是执行<code>rake preview</code>指令提前在本机上运行了一下。不过还是有遗憾的，一些配置因安装新的主题被覆盖了，所以在安装之前提前备份是非常有必要的工作。</p>
+
+<p>新的主题安装在<code>.themes</code>目录下，可以看到新安装的主题，也能看到<code>Octopress</code>默认的主题<code>classic</code>。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls .themes/
+</span><span class='line'>classic  slash</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-17T00:22:00+08:00" pubdate data-updated="true">May 17<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>从去年7月末提出这个想法，到昨天最后一篇访谈的发布，历时将近10个月，这也差不多是自己预期的那样，只是把它当作一件有趣的事情在做，不想把自己和访谈者逼得太急。虽比不上媒体的工作者的专业性，却也是我和朋友们的精心之作，没一份问题单我都根据每个人不同的经历和性格去设计，朋友们也是根据自身的实际情况认真书写。</p>
+
+<p>当初的想法就是很简单，只想通过问答的方式记录朋友们在过去的努力和工作经历。当然我更希望大家展现其拼搏的那一面，人一旦涉世深了，就会对生活失去激情、放弃梦想，进而随波逐流，这些是我最不愿意看到的场景，所以我更希望更大家带来一些星星之火。我知道所做的一切很微博，但只要有一小部分人通过这些文字能够感知到倔强的力量，那我就心满意足了。</p>
+
+<p>我也知道每个人生活在自己的圈子里，对于这些拼搏、新奇的人物经历并不会有大的兴趣，但我还是注意到有些朋友一直关注着，这些默默的关注也是我持续做这件事情的动力。当看到他人留言或者赞的时候，我都兴奋不已，每个访谈者写下的文章都值得赞颂千遍。</p>
+
+<p>这期的访谈总共发出15份正式的邀请：最终收到12份稿件，均已发布，总计将近4万字；另外的3份中有一份明确表示不会回复，两份在沉默中消失。大部分是IT从业者（这个跟我本身的职业有关），当然也有人事、市场、学生等身份的朋友。从收到的数据看，我是非常满意的，因为我觉得发出邀请时的判断大体是正确的。最让我欣慰的是，这些受访的朋友在有空闲时间的时候会尽量早的把稿件写好发送给我。在这整个的过程中，我的工作是相对轻松的，只需要调整和检查一下，然后就可以发布了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/17/wei-fang-tan-hou-ji/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-15T22:43:00+08:00" pubdate data-updated="true">May 15<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.tibet.cn/holiday/xhwl/201304/W020130427591588415431.jpg" alt="alt text" /></p>
+
+<p>残剑：放下工作出去旅行，对于很多人是一件很难抉择的事情，多少次想说走就走，结果都成了泡影。旅行重要的不是时间和金钱，而是一颗向往自由和追求的心。你为什么会选择在8月多的时候出去走走？</p>
+
+<p>小沫：杭州的8月，酷暑难耐，燥热的天气，心更加的浮躁，与其让自己沉沦，不如“掏空”自己的心。我没有宏图大志，没有家族企业，甚至没有清晰的职业发展道路，那我唯独可以过好当前的生活，随心所动。</p>
+
+<hr />
+
+<p>残剑：旅行不在于计划，重要的是追随自己内心的向往和追求。每到一处，那都是别样的风情，都值得赞颂千遍。这次旅行去了哪些地方，游玩了哪些有特色的景点，能否按照游玩的先后顺序罗列一下？</p>
+
+<p>小沫：对于自然风光来说，我更在意的是在路上的人和事，自然固然美，但路上的人更具魅力。回来这么久了，自然风景或许还有些记忆，看到照片很是惊叹，但是追寻在路上的脚步，给我更多的是欢乐，和会心的微笑。如果真要罗列出来，我只能按省份来了：</p>
+
+<p>四川（6天）</p>
+
+<p>D1：成都-都江堰（宿） <br/>
+D2：都江堰-汶川-长江黄河分水岭-红原-月亮湾-黄河九曲-郎木寺（宿） <br/>
+D3：郎木寺-扎尕那-花湖-若尔盖（宿） <br/>
+D4：若尔盖-松潘-黄龙-九寨沟（宿） <br/>
+D5：九寨沟（宿） <br/>
+D6：回成都</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/14/xiu-che-ji/">修车记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-14T23:01:00+08:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/14/xiu-che-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://pic-hzrb.hangzhou.com.cn/0/11/26/40/11264010_687000.jpg" alt="alt text" /></p>
+
+<p>从车库把自行车推出，却没有那种顺畅感，细看才知道前轮的车胎瘪了，被一颗钉子深深的扎入。虽然已是很晚，却也没有那么的忧虑，大不了就推着自行车回家，或者半路上把它抬上公交车。没有抱怨是因为觉得祸福相依，说不定就是这种时间差可以让我避免一场灾难。</p>
+
+<p>原本以为将就着骑就可以凑合着，可实在骑不了，又怕把它骑坏了，只能下车推。自己还是不死心，就咨询同事附近是否有修车的地方，很幸运，在我们公司那条路的尽头有那么一家，不确信现在是否还开门，但总觉得自己需要去看看。要是店铺的们开着，后面的两天我就不用坐公交上班了。</p>
+
+<p>到那家店铺有一段距离，走在路上难免不把这事想象一番：钉子直直地插入了车胎，这不太像是骑车路上扎进去的，是不是那些保安伙同外面的人做的“好事”呢？这样他们就可以从中分利。</p>
+
+<p>店面很小，也就只平米，在外面坐着几个人聊天，我在那里停下，战战兢兢地问他们是否补胎。那些人指着隔壁的烟酒店铺，把修车主叫了出来，这是一个面部黝黑的中年男人，第一印象只有这些。他见了我，说道：“前胎坏了呀？”我不确信他是否看了我的车子，所以我坚定了我在路上的那种猜想。</p>
+
+<p>“嗯，是的，被一个钉子扎破了。”</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/14/xiu-che-ji/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-13T23:58:00+08:00" pubdate data-updated="true">May 13<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://mashable.com/wp-content/uploads/2013/10/Activity-Thumbnails-Timeline.png" alt="alt text" /></p>
+
+<p>我不清楚Dropcom是不是IPCamera这个行业的鼻祖，但我知道很多类似的产品以它为参考。随着它在世界上火爆登场，各大传统的厂商也不敢示弱，相继跟进，争夺这个他们自己也看不到盈利点的市场。小度i耳目凭借着干爹雄厚的资金实力，为了抢占市场的先机，几乎以全亏的买卖给部分幼儿园铺设网络监控摄像头。不得不说，巨头真他妈有钱。</p>
+
+<p>在我看来，这个市场还处于前期的培育期，这一阶段根本不可能创造利益。尤其在中国，可能只有极少部分的人愿意为此买单。在一般人看来，它的功能无非就是录制视频，跟传统的监控并没有很大的差别。但它确实存在一个巨大的市场（在我的想象中它将会是巨大的，可能会颠覆现在的一种生活方式），只是它需要一些时间去引爆。它的崛起需要经历一些阶段，按照现在科技的发展速度，它不会是缓慢的，可能在一两年内就会走上一个新的台阶，直到它不能给人们带来更多的想象空间。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/">给简书的几条小建议</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T23:55:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/12/gei-jian-shu-de-ji-tiao-xiao-jian-yi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近使用简书时的个人体会，仅供参考。</p>
+
+<p>1、在个人主页也添加回到顶部的功能，每次看自己以往写过的文章需要不停往下拉，可想回去的时候又需要不停地往上拉或者去按Home键，使用起来总觉得不便；</p>
+
+<p>2、写文章的时候，当鼠标点击到标题栏时，“无标题文章”这几个字最好自己自动消失，既然点击到那里当然是要更新一个新的标题了，需要手动去清除太麻烦了；</p>
+
+<p>3、点击“发布文章”后会跳到相应的确定页面，也太繁琐，还不如直接进入文章的浏览页面。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/12/yu-yin-de-ke-li-yong-jie-zhi/">语音的可利用价值</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-12T21:08:00+08:00" pubdate data-updated="true">May 12<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/12/yu-yin-de-ke-li-yong-jie-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.zhengzhouqiyeqq.com/upfile/2011112693437441.jpg" alt="alt text" /></p>
+
+<p>搜狗输入法有个语音输入的功能，说话完毕后可以转换成文字，看到一则关于对该功能的宣传是“让你的女神惊奇你为何有如此神速的输入速度”，它极大地便利了人们的输入，对于我农村的上一辈人或者“懒人”来说是一个很不错的功能。没有采用语音的直接传送，可能基于以下的原因：一、由于口音的缘故，听者未必能够全部听清；二、在某些情况下为了更明确的表达自己的意思，让阅读者阅读后能够立即明了。总之，它可以避免重复说一遍的麻烦。</p>
+
+<p>微信因语音交流的便利而流行，细心的朋友可以发现对语音到操作有一项“转换为文字”的功能，可能对于大部分人来说这项功能也没有多大的用处，真的听不清楚的话，就请对方重新说一次。可要是“女神发过来的语音你没有听明白”这种情况发生，我们难道第一反应是请女神重新说一边吗？要是真直接这么做了，女神肯定觉得你没有在乎人家，连别人细微的变化你都听不出来。我想一般的情况是这样操作的：a、多听几遍，然后综合之前的记录加以判断；b、要是第一种方法都不能解决，那么把那段语音转换成文字也是一个不错的选择，虽然它的准确率目前还不是很高，但它至少帮你增加了理解的可能性；c、实在没有其它路子了，也就只能请女神再说一次了。</p>
+
+<p>以上提到的两个功能，它给用户带来了极大的方便，给企业带来了用户的粘性（其它的商业价值暂时还未察觉）。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/05/12/yu-yin-de-ke-li-yong-jie-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/11/octopresstian-jia-tong-ji/">Octopress添加统计</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-11T01:00:00+08:00" pubdate data-updated="true">May 11<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/05/11/octopresstian-jia-tong-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
+
+<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
+
+<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
+
+<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
+<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/index.html"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/index.html" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/xiu-che-ji/">修车记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (43)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (4)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby&#8217;s Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte&#8217;s Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek&#8217;s Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | 残剑]]></title>
+  <link href="http://txgcwm.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://txgcwm.github.io/"/>
+  <updated>2014-05-17T16:51:28+08:00</updated>
+  <id>http://txgcwm.github.io/</id>
+  <author>
+    <name><![CDATA[残剑]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress安装Slash主题及恢复]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/"/>
+    <updated>2014-05-17T16:14:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu</id>
+    <content type="html"><![CDATA[<p>输入以下的指令，就能立马体验Slash。
+<code>
+$ cd octopress
+$ git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+$ rake install['slash']
+$ rake generate
+</code></p>
+
+<p>安装完之后，我就后悔了，虽然主题看起来更好看，可没有之前使用的那般便利，幸好我没有直接将它上传到<code>github</code>上，只是执行<code>rake preview</code>指令提前在本机上运行了一下。不过还是有遗憾的，一些配置因安装新的主题被覆盖了，所以在安装之前提前备份是非常有必要的工作。</p>
+
+<p>新的主题安装在<code>.themes</code>目录下，可以看到新安装的主题，也能看到<code>Octopress</code>默认的主题<code>classic</code>。
+<code>
+$ ls .themes/
+classic  slash
+</code></p>
+
+<!--more-->
+
+
+<p>既然不喜欢，就得恢复到原来的主题，使用以下的指令即可。
+<code>
+$ rake install['classic']
+$ rake generate
+</code></p>
+
+<p>今天查阅资料最大的收获是知道了<code>Octopress``生成静态文件后直接发布</code>的命令：
+<code>
+$ rake gen_deploy
+</code></p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://zespia.tw/Octopress-Theme-Slash/index_tw.html">Octopress-Theme-Slash</a><br/>
+<a href="http://fancyoung.com/blog/octopress-study/">技术博客利器——Octopress</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加统计]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji/"/>
+    <updated>2014-05-11T01:00:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/11/octopresstian-jia-tong-ji</id>
+    <content type="html"><![CDATA[<p>Octopress模板里面默认带了Google Analytics工具，只需要注册Google Analytics， 获得一个<code>google_analytics_tracking_id</code>，添加到<code>_config.yml</code>中对应位置，并对网站进行验证即可，这样就可以通过Google Analytics分析网站的流量了，而且可以使用Google站长工具对网站进行更全面的分析，进行SEO。</p>
+
+<p>对自己的网站进行验证，只需将网站提供的用于验证的代码添加到<code>source/_includes/head.html</code>的<code>head</code>标签之间（注意：如果该文件已有<code>{ % include google_analytics.html % }</code>这句，那么这步就不需要了），网站部署到网上后，过几分钟即可验证通过，其它需要验证的也同样操作。</p>
+
+<p>除了Google的统计工具，还有就是国内使用很广的CNZZ了，注册后添加并验证你的网站就可以添加统计代码了，选好自己喜欢的样式获得代码，可添加到<code>source/_includes/custom/footer.html</code>中，即可查看每天博客的流量，进行相应的优化了。</p>
+
+<p>百度站长工具和百度统计的使用方法和CNZZ类似 ，统计代码也可以添加到<code>source/_includes/custom/footer.html</code>中。</p>
+
+<p><big>参考文章</big></p>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727927">Octopress添加统计与SEO</a><br/>
+<a href="http://blog.dofa.org/blog/2014/03/10/add-statistics-for-octopress/">使用Google Analytics统计工具</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加二维码展示和返回顶部按钮]]></title>
+    <link href="http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu/"/>
+    <updated>2014-05-09T22:37:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2014/05/09/octopresstian-jia-er-wei-ma-zhan-shi-he-fan-hui-ding-bu-an-niu</id>
+    <content type="html"><![CDATA[<h1>二维码展示</h1>
+
+<p>在关于页面或边栏可以展示个人博客的二维码，方便移动终端扫描访问，插件主页点击<a href="https://github.com/sailor79/Octopress-dynamic-QR-Code-aside">这里</a>。
+```
+<section></p>
+
+<pre><code>&lt;h1&gt;QR-Code&lt;abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image."&gt;&amp;trade;&lt;/abbr&gt;&lt;/h1&gt;
+&lt;a href="http://txgcwm.github.ioblog/categories/octopress/atom.xml"&gt;&lt;img src="http://chart.apis.google.com/chart?chs=180x180&amp;cht=qr&amp;chld=|0&amp;chco=165B94&amp;chl=http://txgcwm.github.ioblog/categories/octopress/atom.xml" alt="post-qrcode"&gt;&lt;/a&gt;
+</code></pre>
+
+<p></section>
+<code>``
+在侧边栏显示，则将</code>qrcode.html<code>放入</code>source/<em>includes/custom/asides/<code>中，在</code></em>config.yml<code>中</code>default_asides<code>添加</code>custom/asides/qrcode.html<code>即可显示。或者将</code>qrcode.html`代码添加到想展示页面的HTML文件中。</p>
+
+<!--more-->
+
+
+<h1>滑动返回顶部按钮</h1>
+
+<p>文章较长的情况，通常希望有一个返回顶部的按钮。如下方法实现了在页面右下方添加一个返回顶部的图片按钮，点击后可以滑动的返回顶部。</p>
+
+<h2>方法一</h2>
+
+<p>首先创建<code>source/javascripts/top.js</code>，实现滑动返回顶部效果，添加如下代码：
+```
+function goTop(acceleration, time) {</p>
+
+<pre><code>acceleration = acceleration || 0.1;
+time = time || 16;
+
+var x1 = 0;
+var y1 = 0;
+var x2 = 0;
+var y2 = 0;
+var x3 = 0;
+var y3 = 0;
+
+if (document.documentElement) {
+    x1 = document.documentElement.scrollLeft || 0;
+    y1 = document.documentElement.scrollTop || 0;
+}
+
+if (document.body) {
+    x2 = document.body.scrollLeft || 0;
+    y2 = document.body.scrollTop || 0;
+}
+
+var x3 = window.scrollX || 0;
+var y3 = window.scrollY || 0;
+
+var x = Math.max(x1, Math.max(x2, x3));
+var y = Math.max(y1, Math.max(y2, y3));
+
+var speed = 1 + acceleration;
+window.scrollTo(Math.floor(x / speed), Math.floor(y / speed));
+
+if(x &gt; 0 || y &gt; 0) {
+    var invokeFunction = "goTop(" + acceleration + ", " + time + ")";
+    window.setTimeout(invokeFunction, time);
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>接着创建<code>source/_includes/custom/totop.html</code>，设置返回顶部按钮样式和位置，代码如下：
+```</p>
+
+<!--返回顶部开始-->
+
+
+<div id="full" style="width:0px; height:0px; position:fixed; right:180px; bottom:150px; z-index:100; text-align:center; background-color:transparent; cursor:pointer;">
+    <a href="#" onclick="goTop();return false;"><img src="http://txgcwm.github.io/images/top.png" border=0 alt="返回顶部"></a>
+</div>
+
+
+<script src="http://txgcwm.github.io/javascripts/top.js" type="text/javascript"></script>
+
+
+<!--返回顶部结束-->
+
+
+<p>```</p>
+
+<p>然后还需要将返回顶部的图片放入<code>source/images</code>，命名为<code>top.png</code>，或修改<code>totop.html</code>中的图片路径。</p>
+
+<p>最后还需要在<code>source/_layouts/default.html</code>中添加<code>{ % include custom/totop.html % }</code>（这个在很多教程里都没有提到，对于一个不懂前端的人摸索了好久才整出来）。</p>
+
+<h2>方法二</h2>
+
+<p>对于方式一，滑动按钮一直存在着，在顶部的时候看着也不爽，所以使用了另外的一种方式。相关的HTML代码很简单，在<code>source/_include/custom/footer.html</code>中添加如下代码：</p>
+
+<p>```</p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    // hide #back-top first
+    $("#back-top").hide();
+    
+    // fade in #back-top
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#back-top').fadeIn();
+            } else {
+                $('#back-top').fadeOut();
+            }
+        });
+
+        // scroll body to 0px on click
+        $('#back-top a').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+
+});
+</script>
+
+
+
+
+
+
+
+
+<p id="back-top">
+    <a href="#top"><span></span></a>
+</p>
+
+
+
+
+<p>
+  Copyright &copy; 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+<p>```</p>
+
+<h1>参考文章</h1>
+
+<p><a href="http://blog.csdn.net/lcliliil/article/details/13727007">Octopress主题样式修改</a><br/>
+<a href="http://www.neoease.com/javascript-go-top/">用 JavaScript 实现变速回到顶部</a><br/>
+<a href="http://www.neoease.com/fixed-go-top-button-to-browser-window-with-jquery/">jQuery 跟随浏览器窗口的回到顶部按钮</a><br/>
+<a href="http://ibillxia.github.io/blog/2013/06/30/add-a-back-to-top-button-on-ur-octpress-blog/">给Octpress博客添加返回顶部按钮</a><br/>
+<a href="http://webdesignerwall.com/tutorials/animated-scroll-to-top">Animated Scroll to Top</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加表格]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/27/octopresstian-jia-biao-ge/"/>
+    <updated>2013-07-27T15:08:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/27/octopresstian-jia-biao-ge</id>
+    <content type="html"><![CDATA[<p>Markdown语法为“方便在网上读文章、写文章、修改文章更容易”这一目标而生。它不是HTML的替代品，也不是为了终结HTML。它的语法非常简单，只相当于HTML标签的一个非常非常小的子集。它并非是为了更容易输入HTML标签而创造一种新语法。HTML是一种适合发表的格式；而Markdown是一种书写格式。正因如此，Markdown的格式化语法仅需解决用纯文本表达的问题。</p>
+
+<p>下面的这个例子是在一篇Markdown文章中添加一个HTML表格：
+```</p>
+
+<table>
+    <tr>
+        <td>Column1</td>
+        <td>Column2</td>
+    </tr>
+    <tr>
+        <td>foo</td>
+        <td>foo</td>
+    </tr>
+</table>
+
+
+<p>  <br/>
+```</p>
+
+<!--more-->
+
+
+
+
+<table>
+    <tr>
+        <td>Column1</td>
+        <td>Column2</td>
+    </tr>
+    <tr>
+        <td>foo</td>
+        <td>foo</td>
+    </tr>
+</table>
+
+
+<p></p>
+
+<p>也可以使用markdown的扩展语法添加一个表格：</p>
+
+<p><code>
+Column1     | Column2      
+----------- | ------------
+foo         | foo
+</code></p>
+
+<p>但使用html语法做一个表格很麻烦，而且看起来也不是很美观。使用markdown语法做出来的表格却没有边框。所以需要重新做一些设定，以下为设置和更改的方法。</p>
+
+<p>Step 1. 在source/stylesheets/目录下增加data-table.css文件，添加如下内容：
+```
+* + table {</p>
+
+<pre><code>border-style:solid;
+border-width:1px;
+border-color:#e7e3e7;
+</code></pre>
+
+<p>}</p>
+
+<ul>
+<li><ul>
+<li>table th, * + table td {
+border-style:dashed;
+border-width:1px;
+border-color:#e7e3e7;
+padding-left: 3px;
+padding-right: 3px;
+}</li>
+</ul>
+</li>
+<li><ul>
+<li>table th {
+border-style:solid;
+font-weight:bold;
+background: url(&ldquo;/images/noise.png?1330434582&rdquo;) repeat scroll left top #F7F3F7;
+}</li>
+</ul>
+</li>
+<li><ul>
+<li>table th[align=&ldquo;left&rdquo;], * + table td[align=&ldquo;left&rdquo;] {
+text-align:left;
+}</li>
+</ul>
+</li>
+<li><ul>
+<li>table th[align=&ldquo;right&rdquo;], * + table td[align=&ldquo;right&rdquo;] {
+text-align:right;
+}</li>
+</ul>
+</li>
+<li><ul>
+<li>table th[align=&ldquo;center&rdquo;], * + table td[align=&ldquo;center&rdquo;] {
+text-align:center;
+}
+```</li>
+</ul>
+</li>
+</ul>
+
+
+<p>Step 2. 添加link到head.html中，在source/_includes/head.html文件中插入如下语句：
+<code>
+&lt;link href="http://txgcwm.github.io/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" /&gt;
+</code></p>
+
+<p>重新设定后，表格样式如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>Column1     </th>
+<th> Column2      </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>foo         </td>
+<td> foo</td>
+</tr>
+</tbody>
+</table>
+
+
+<br></br>
+
+
+<p><big>参考文章:</big> <br/>
+<a href="http://samwize.com/2012/09/24/octopress-table-stylesheet/">Octopress Table Stylesheet</a><br/>
+<a href="http://jhjguxin.github.io/blog/2012/04/24/markdownyu-fa/">Markdown语法</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress添加中文标签功能]]></title>
+    <link href="http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng/"/>
+    <updated>2013-07-21T11:02:00+08:00</updated>
+    <id>http://txgcwm.github.io/blog/2013/07/21/octopresstian-jia-zhong-wen-biao-qian-gong-neng</id>
+    <content type="html"><![CDATA[<p>Octopress有自带的分类，详情请见 <a href="http://octopress.org/docs/plugins/category-generator/">官方文档</a> 。<code>_config.yml</code>中配置项如下：
+<code>
+category_dir: blog/categories
+category_title_prefix: "Category: "
+</code>
+然后添加类似<code>categories: [Ruby&amp;Rails]</code>或<code>categories: [Ruby&amp;Rails，C/C++]</code>的分类标签配置到每个<code>_posts/*.markdown</code>文件头中，示例如下:</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: &ldquo;Octopress添加中文标签功能&rdquo;
+date: 2013-07-21 11:02
+comments: true</p>
+
+<h2>categories: [Ruby&amp;Rails,Octopress]</h2>
+
+<p>```</p>
+
+<!--more-->
+
+
+<h1>添加分类侧边栏并支持中文</h1>
+
+<p>尽管Octopress有自带的分类，但它并不支持中文，如果你在文章中定义了中文分类，那么点击的时候会链接到404页面。事实上，这个分类功能是通过plugins/category_generator.rb来实现，所以只要对该文件进行适当的修改和作一些其它的配置就可以提供中文分类的支持。</p>
+
+<ul>
+<li>category_generator.rb的修改我直接使用 <a href="https://github.com/denjones/denjones.github.com/blob/source/plugins/category_generator.rb">这个</a> 文件作了替换，然后作一些细微的修改。</li>
+</ul>
+
+
+<p>SPRabbit(超科学兔耳中队)的 <a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">修改方法</a> 是重新定义分类标签在文章中的格式，例如用<code>中文分类标签名{英文别名}</code>这样的格式来定义标签。于是在文章中显示的是中文分类，但实际链接到英文别名上。这种方法虽然定义标签麻烦些，但可定制性强。</p>
+
+<p>由于书写很麻烦，所以很不喜欢以上重新定义标签的方式，在 <a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">这里</a> 找到了另外一种更改方式。它同样是修改category_generator.rb文件来达到目的，利用了stringex包的to_url函数将中文分类标签的链接名和category_dir下的目录名都转换成相应的拼音，这样无论在本地还是GitHub上都没有问题。事实上，Octopress系统在利用rake new_[post|page]命令创建含有中文名的文章时也采用了这样的技巧。</p>
+
+<p>找到<code>def write_category_indexes</code>中定义category目录的部分：
+<code>
+self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase), category)
+</code>
+将其修改为：
+<code>
+self.write_category_index(File.join(dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase), category)
+</code>
+再找到<code>def category_links(categories)</code>中定义中文分类网页标签的部分：
+<code>
+"&lt;a class='category' href='http://txgcwm.github.io/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase}/'&gt;#{item}&lt;/a&gt;"
+</code>
+将其修改为：
+<code>
+"&lt;a class='category' href='http://txgcwm.github.io/#{dir}/#{item.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase}/'&gt;#{item}&lt;/a&gt;"
+</code>
+注意，上面两处的修改就是在相应的地方加上to_url函数进行地址的转换。如果不想折腾的话，你也可以直接到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/plugins/category_generator.rb">这里</a> 下载我更改后的category_generator.rb插件。</p>
+
+<ul>
+<li>在plugins目录中创建category_list_tag.rb文件，文件内容如下：
+```
+require &lsquo;stringex&rsquo;</li>
+</ul>
+
+
+<p>module Jekyll
+  class CategoryListTag &lt; Liquid::Tag</p>
+
+<pre><code>def render(context)
+  html = ""
+  categories = context.registers[:site].categories.keys
+  category_dir = context.registers[:site].config['category_dir']
+  categories.sort.each do |category|
+    posts_in_category = context.registers[:site].categories[category].size  
+    category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)
+    html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://txgcwm.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+  end
+  html
+end
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>Liquid::Template.register_tag(&lsquo;category_list&rsquo;, Jekyll::CategoryListTag)
+<code>
+在实际使用（rake generate/rake preview）的时候，若blog整体采用了非ascii码的编码格式（比如utf-8）就会出现类似这样的错误：
+</code>
+Liquid error: incompatible encoding regexp match (ascii-8bit regexp with utf-8 string)
+<code>
+其实是由于插件文件plugins/category_list_tag.rb本身是ascii编码所致:
+</code>
+$ chardet category_list_tag.rb
+category_list_tag.rb: ascii (confidence: 1.00)
+```
+category_list_tag.rb中很多地方用到了ruby的正则表达式，而ruby的正则表达式在匹配的时候，默认是按照“代码源文件”的编码格式(在这里是ascii)进行匹配的，而如果blog是utf-8编码的话就会出现上述错误。有两种解决办法：</p>
+
+<ol>
+<li>将category_list_tag.rb转成utf-8格式。</li>
+<li>更改category_list_tag.rb中所有的正则表达式声明，加上<code>u</code>选项（<code>u</code>的意思就是以utf-8编码格式来进行匹配）。例如，若原正则表达式是<code>/regexp/</code>, 则改成<code>/regexp/u</code>。</li>
+</ol>
+
+
+<p>在我实际处理问题的时候采用了第二种方法，category_list_tag.rb文件中的更改网上大多采用以下的方式：
+<code>
+category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').to_url.downcase)
+</code>
+更改成如下形式（只是简单增加了<code>u</code>选项）：
+<code>
+category_url = File.join(category_dir, category.gsub(/_|\P{Word}/u, '-').gsub(/-{2,}/u, '-').to_url.downcase)
+</code></p>
+
+<ul>
+<li><p>添加source/_includes/custom/asides/category_list.html文件，内容可到 <a href="https://github.com/txgcwm/txgcwm.github.com/blob/source/source/_includes/custom/asides/category_list.html">这里</a> 查看。</p></li>
+<li><p>修改_config.yml文件，在default_asides项中添加custom/asides/category_list.html，值之间以逗号隔开。
+<code>
+default_asides: [asides/recent_posts.html, custom/asides/category_list.html]
+</code></p></li>
+</ul>
+
+
+<p><code>_posts/*.markdown</code>文件头中添加categories标签示例：</p>
+
+<h2>```</h2>
+
+<p>layout: post
+title: &ldquo;使用libevent编写Linux服务&rdquo;
+date: 2013-07-18 19:01
+comments: true</p>
+
+<h2>categories: [C/C++, 开源库, Unix/Linux]</h2>
+
+<p>```</p>
+
+<p>到此为止，Octopress中添加分类侧边栏并使其支持中文的修改设置已经完毕。</p>
+
+<h1>参考文章</h1>
+
+<ul>
+<li><a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">Octopress博客设置</a></li>
+<li><a href="http://ikeepu.com/bar/10393365">Octopress博客分类添加中文支持</a></li>
+<li><a href="http://khaos.github.io/blog/2012/12/06/using-chinese-category-tags-in-octopress/">Octopress易筋经，中文分类标签</a></li>
+<li><a href="http://blog.sprabbit.com/blog/2012/03/23/octopress/">关于在64位 Windows 7 中部署中文化的Octopress</a></li>
+<li><a href="http://pfmiles.github.io/blog/liquid-error-about-regexp-match-when-using-octopress-tagcloud/">Liquid Error About Regexp Match When Using Octopress-tagcloud</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务： 创建一个新的Scrapy项目；
+定义你将提取的Items；
+写一个蜘蛛抓取网站并提取Items；
+写一个项目管道存储所提取的Items。 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/page/3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/">Scrapy入门简略教程（一）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-28T23:04:00+08:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>在本教程中，将假设Scrapy已经安装在你的系统上。如果不是，请参见官方的安装指南。我将使用我自己的例子来介绍，主要完成以下任务：</p>
+
+<ol>
+<li>创建一个新的Scrapy项目；</li>
+<li>定义你将提取的Items；</li>
+<li>写一个蜘蛛抓取网站并提取Items；</li>
+<li>写一个项目管道存储所提取的Items。</li>
+</ol>
+
+
+<p>Scrapy是用Python编写的，如果不了解的话，需要去学习一下，从项目上入手的话，应该学起来比较的快。</p>
+
+<h1>创建一个项目</h1>
+
+<p>在开始之前，需要在你的目录下创建一个项目，执行以下命令即可：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ scrapy startproject shiyifang</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在当前的目录下就会生成一个叫<code>shiyifang</code>的文件夹，它包含以下一些文件和目录：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tree
+</span><span class='line'>.
+</span><span class='line'>├── scrapy.cfg
+</span><span class='line'>└── shiyifang
+</span><span class='line'>    ├── __init__.py
+</span><span class='line'>    ├── items.py
+</span><span class='line'>    ├── pipelines.py
+</span><span class='line'>    ├── settings.py
+</span><span class='line'>    └── spiders
+</span><span class='line'>        └── __init__.py
+</span><span class='line'>
+</span><span class='line'>2 directories, 6 files</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关于该目录下文件和文件夹的说明：</p>
+
+<ul>
+<li>scrapy.cfg: 项目的配置文件。</li>
+<li>shiyifang/: 项目的python模块，后续会将代码放入这个目录。</li>
+<li>shiyifang/items.py: 项目的items文件。</li>
+<li>shiyifang/pipelines.py: 项目的pipelines文件。</li>
+<li>shiyifang/settings.py: 项目的settings文件。</li>
+<li>shiyifang/spiders/: 存放爬虫程序的目录。</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/28/scrapyru-men-jian-lue-jiao-cheng-%5B%3F%5D/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/">关于爬虫开发的选择</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T23:45:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>开发语言：Python <br/>
+爬虫框架：Scrapy <br/>
+数据库：PostgreSQL</p>
+
+<p>基于Scrapy爬虫框架，参考官方的教程，很容易写一个爬取淘宝页面的爬虫，但要完善成一个成熟的爬虫却不是一件容易的事情。我这边使用的开发系统是Ubuntu12.10，期间遇到了一些问题，如果有兴趣去尝试，可以参考我<a href="http://txgcwm.github.io/">博客</a>的“网络爬虫”部分。</p>
+
+<p>引用一下jolie_yu对我的一句回复：</p>
+
+<blockquote><p>骚年，别急，缘分说到就到。显出你的个性，她会找到方向，走进你的世界。</p></blockquote>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/27/guan-yu-pa-chong-kai-fa-de-xuan-ze/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">运行Scrapy项目出错：KeyError: &#8216;Spider Not Found: Tutorial&#8217;</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T22:40:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>运行Scrapy抓取网上数据的时候，出现了以下的错误：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo scrapy crawl tutorial
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/usr/local/bin/scrapy", line 4, in &lt;module&gt;
+</span><span class='line'>    execute()
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 143, in execute
+</span><span class='line'>    _run_print_help(parser, _run_command, cmd, args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 89, in _run_print_help
+</span><span class='line'>    func(*a, **kw)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/cmdline.py", line 150, in _run_command
+</span><span class='line'>    cmd.run(args, opts)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/commands/crawl.py", line 48, in run
+</span><span class='line'>    spider = crawler.spiders.create(spname, **opts.spargs)
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/scrapy/spidermanager.py", line 44, in create
+</span><span class='line'>    raise KeyError("Spider not found: %s" % spider_name)
+</span><span class='line'>KeyError: 'Spider not found: tutorial'</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/27/yun-xing-scrapyxiang-mu-chu-cuo/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/">剑问君答：IT模范丈夫</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-27T21:19:00+08:00" pubdate data-updated="true">Apr 27<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://www.zzcp8.com/uploads/allimg/131210/1_12101101313025.jpg" alt="alt text" /></p>
+
+<p>残剑：你是班级里公认的模范好男友，世间多少女子希望得到像你这样的好男人！是你让我相信了校园爱情，那么的纯结与真实。7年的努力终究修成了正果，是否可以谈谈你的感情经历?</p>
+
+<p>爱吓人：我只有一次恋爱，也就是这一次，到现在不知不觉已经七年了。我们从最开始对感情的懵懂，到现在成为一对夫妻，可以说是感情跌宕起伏。我有过开心，有过伤心，有过激动，有过失落，有过幸福，有过悲伤。</p>
+
+<hr />
+
+<p>残剑：在这漫长的爱情路程中，你是如何做的，又有什么样的经验可以提供参考的吗？</p>
+
+<p>爱吓人：我一直坚信一个道理，做任何一件事情都要用心去做，爱一个人也要用心去爱。我谈恋爱的目的就是为了最终能够结婚，能够白头到老，能够在生命的最后能够手牵着手。而且，可能很多人都有我这样的心理，但是最后女朋友和他分手了。我只能说，我是这么做，至于结果我不在乎，也很有可能是我遇对了人。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/27/jian-wen-jun-da-%3Aitmo-fan-zhang-fu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/rtpxie-yi-jian-shu/">RTP协议简述</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T21:32:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/26/rtpxie-yi-jian-shu/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>实时传送协议（Real-time Transport Protocol，或简写RTP，也可以写成RTTP）是一个网络传输协议，它是由IETF的多媒体传输工作小组1996年在RFC 1889中公布的。RTP协议详细说明了在互联网上传递音频和视频的标准数据包格式。它一开始被设计为一个多播协议，但后来被用在很多单播应用中。RTP协议常用于流媒体系统（配合RTCP协议或者RTSP协议）。因为RTP自身具有Time stamp，所以在ffmpeg中被用做一种formate.</p>
+
+<p>RTP协议格式：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    0                   1                   2                   3    
+</span><span class='line'>    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |V=2|P|X|  CC   |M|     PT      |       sequence number         |    
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |                           timestamp                           |   
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+   
+</span><span class='line'>   |           synchronization source (SSRC) identifier            |   
+</span><span class='line'>   +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+   
+</span><span class='line'>   |            contributing source (CSRC) identifiers             |   
+</span><span class='line'>   |                             ....                              |  
+</span><span class='line'>   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+  </span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/rtpxie-yi-jian-shu/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/">逍遥的晏老大（二）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T19:00:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://pic1.win4000.com/wallpaper/f/50ab3375db63d.jpg" alt="alt text" /></p>
+
+<p>老大是一个不太让人特别注意到的人，这应该跟他悄无声息的作风有关。毕业那会也不知道他是什么时候离开的，我也忘记自己是否送过他，可能我是属于中间走的那一波，而老大又可能是最后的时刻才离开。毕业前我们最后一次见面是什么时间和我们说过什么，我已不曾记得。</p>
+
+<p>最近见到老大，是去年我去西藏旅行的那次，是我们毕业三年后。提前买了从成都进藏的火车票，停留在成都的时间当然就想到去老大那里借宿。去成都也是临时打算的，所以只是提前了几天告诉老大我要到他那里去。那时也巧，到他那里刚好是中秋假期的最后一天，老大在下午的时候从自己家里赶到租的地方。按照老大的指示找到了去他那里的公交车（成都的道路很宽敞，我很喜欢），下车不久后也见到了来接我的老大。没有一丝的惊奇，因为三年来老大的样子并没有多少的改变，和当初的少年没有差异。也只有老大，在这样一个纷繁的社会里完全保留了真实的自己。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-er/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-%5B%3F%5D/">逍遥的晏老大（一）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-26T00:04:00+08:00" pubdate data-updated="true">Apr 26<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-%5B%3F%5D/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://pic1.win4000.com/wallpaper/f/50ab3375db63d.jpg" alt="alt text" /></p>
+
+<p>大学的时候，对门住着的是我们班的晏老大、耿老二和李老三，其他三位是隔壁班的。在新校区的三年里，其他的三个床位进进出出，不是很稳定，只有他们三个没有挪动过。之所以他被称为老大，听闻是有一个小故事的。初到校园，新生按照那种习俗，喜欢给宿舍的同学们排排号。当其他人在争老大之位不休的时候，老大沉默不言。突然之间，他说了那么一句——你们都不要争了，这里我年龄最大，我就是老大了。虽不是原话，但那时的他表述的很清楚，加上他冷不丁的幽默，他们宿舍的人就同意了他的辈份。</p>
+
+<p>老大是四川人，和我所见过的四川小伙一样，有着南方人共有的特性，很瘦小，说着带有四川口音的普通话。有时我们并未明白老大想表述什么，想细听他的话语时，他却嘎然而止了，可能他对自己的普通话也不是很自信。老大的话不多，但每次开口都是带着幽默感，当然最要的是要配合他那带有四川口音的普通话。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/26/xiao-yao-de-yan-lao-da-%5B%3F%5D/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/">一个业余小项目的想法</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-21T23:54:00+08:00" pubdate data-updated="true">Apr 21<span>st</span>, 2014</time>
+        
+         | <a href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://ww3.sinaimg.cn/large/9e450f31jw1e52she521fj21b90sqdq4.jpg" alt="alt text" /></p>
+
+<p>一直以来都非常喜欢电商导购这样的平台，它好比是电商平台的寄生虫，与它们相互依存。截至目前为止，主要收集了以下一些电商导购网站：“美丽说”、“蘑菇街”、“口袋购物”、“爱图购”、“欢乐淘”、“穿衣助手”、“逛”、“什么值得买”、“3.5千克”、“贝壳网”、“LC风格网”、“我爱搜罗网”、“时尚顾问”、“果库”。当然，还有其它更多、更优秀的类似平台，只是我还未发掘。</p>
+
+<p>鉴于自己是嵌入式方面出身，想要跻身到互联网这个行业中去，有点难度，所以想在业余时间折腾这些东西。最近对它的向往与追求愈发的强烈，昨夜半夜醒来的时候就把这个想法发信息告诉了我的两位朋友。对于她们的肯定和支持，我的内心感到很欣慰，毕竟这世上能够懂你的人很少，而你又恰好遇到了。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/04/21/%5B%3F%5D-ge-ye-yu-xiao-xiang-mu-de-xiang-fa/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/blog/page/3/index.html"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/page/3/index.html" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/xiu-che-ji/">修车记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (43)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (4)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby&#8217;s Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte&#8217;s Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek&#8217;s Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

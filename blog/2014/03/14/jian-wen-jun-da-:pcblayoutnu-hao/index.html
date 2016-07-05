@@ -1,0 +1,636 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>剑问君答：PCB layout女豪 - 残剑</title>
+  <meta name="author" content="残剑">
+
+  
+  <meta name="description" content="残剑：毕业那会儿，如果你选择待在家乡的城市，也可以谋求一份好的工作，然后舒适的生活。而你决定背上行李，同朋友们一同来到深圳这个大城市寻求机会，是什么原因促使你做这样一个决定？ 东方如杨：如果我现在生活在我们那个小城里，小城都有很多故事，但生活大体是很明确的：一份政府部门的工作， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://txgcwm.github.io/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="残剑" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-50842363-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">残剑</a></h1>
+  
+    <h2>Stop walking today and you'll have to run tomorrow!</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:txgcwm.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">剑问君答：PCB Layout女豪</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-14T01:04:00+08:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><img src="http://static.open-open.com/news/uploadImg/20131107/20131107194506_945.jpg" alt="alt text" /></p>
+
+<p>残剑：毕业那会儿，如果你选择待在家乡的城市，也可以谋求一份好的工作，然后舒适的生活。而你决定背上行李，同朋友们一同来到深圳这个大城市寻求机会，是什么原因促使你做这样一个决定？</p>
+
+<p>东方如杨：如果我现在生活在我们那个小城里，小城都有很多故事，但生活大体是很明确的：一份政府部门的工作，有很多可自由支配的时间，没有什么太大外在的压力。当初毕业也倒不是冲着深圳的“冒险家的天堂”名头来的，只是觉得自己所知、所学、所见太少，也不想依靠家里关系才能开展生活，想到跟我生活环境不一样的地方去开拓下眼界。以前总觉得人生当如披荆斩棘，针针见血才是精彩，现在觉得你心里面有什么样的生活，你就会有什么样的生活，生活不在别处，在自己心里。</p>
+
+<hr />
+
+<p>残剑：据我所知，工作之前你根本没有接触过PCB layout，对元器件也知道的不多，你是如何一步步熟悉起来，达到工作所需的要求？</p>
+
+<p>东方如杨：PCB Layout是属于硬件范畴的，理论知识不缺乏，本专业基本知识而已，无非就是根据客户需求，搭建不同电路罢了。主要就是熟悉怎么操作软件，看了很多资料，懂了基本操作，做上一个项目，在项目中发现问题，总结问题，基本就没有什么难的了，多实践就好了。</p>
+
+<!--more-->
+
+
+<hr />
+
+<p>残剑：PCB layout是一个大的概念，你在具体的工作中主要做些什么工作？</p>
+
+<p>东方如杨：PCB Layout就是绘制印刷电路板，完成电子元器件之间的线路连接和功能实现。包括电路原理图的设计，跟布板，做好印刷资料发给制板厂。在你离开深圳不久，我离职玩了半年，然后到一个刚成立的创业公司，所做的工作不止上面的，还包括手机成本核算，跟工厂确定PCB生产工艺一些事情。</p>
+
+<hr />
+
+<p>残剑：除了工作，在深圳这几年，还做过一些其它让自己觉得自豪的事情吗？事情无关大小，只要它突破了原有的自己就好。</p>
+
+<p>东方如杨：工作了几年，我觉得比较满意的是，自己心态比之前好了不少。不会随大流去追求一些什么，不再纠结在乎一些身外之物，从而降低生活质量跟幸福度。我觉得最好的生活就是家庭和睦，家人跟自己身体健康，每天有开心的小事。</p>
+
+<hr />
+
+<p>残剑：从和你的交谈中，也能看出你并不是十分喜欢自己现有的工作。我们不能假设之前的抉择，但我们可以勾画未来的生活。对于未来自己的一个职业方向，有什么考虑和想法吗？</p>
+
+<p>东方如杨：当初文理分科的是时候，之所以选择理科就是因为自己理科太差，人很多时候不就是自己折磨自己么。毕业了，就业的时候，选的这个行业也是怕辜负了自己所学专业，现在几年下来，尝试过了，发现自己不是真心喜欢，兴趣不在这儿，也不想继续自我折磨了。未来的职业还说不好，我是个想法多，执行力差的人，还有严重的拖延症，多谋而无一断，我鄙视自己，但我想未来我会按照自己的兴趣走，至少不会继续做研发方面工作了。</p>
+
+<hr />
+
+<p>残剑：上次你告诉我深圳也在建立自贸区，很多人认为自贸区之类的政策是给资金雄厚的个人或企业而准备的，但我认为机会总是给有准备和有想法的人。虽然我们没有雄厚的资金、超凡的能力，但我们可以想象这片天空的发展，对于一个普通的个体你认为会有怎样的机会呢？</p>
+
+<p>东方如杨：我赞同，机会是给有想法的人准备的。在这个时代，不缺资金，缺的是好的想法。只要有不一样的想法，秉承正确的价值观，做自己想做的事情，不去盲目迎合市场，不管在哪里，什么时候，都能有一席之地。我感觉自贸区就像是河对面一座金山，很多装备好的先掘到金，进场很多人在找方位掘金，而我作为一个普通的观望者，摆摆渡，划船送他们去对岸，可能比找不到方位的掘金者还靠谱些。具体能在自贸区做些什么，我也没想好，要不这会儿我会用事实告诉你。</p>
+
+<hr />
+
+<p>残剑：你对科技也是十分关注的，有看到或者听到什么好玩、有趣的东西和大家分享一下吗？是否有好好的体验一下现在的移动互联生活？</p>
+
+<p>东方如杨：我现在用的一个软件叫Duolingo，语言学习类软件，我觉得不错，考虑了用户感受，也不功利，没有广告推送，游戏式的学习，能让人坚持学。</p>
+
+<hr />
+
+<p>残剑：电商导购虽然会遭受巨头的打压，但我觉得它的未来还是很有前途的，毕竟那些电商平台不能满足所有客户的需求。当我提到这个事物的时候，在你的大脑中又产生了怎样的想法呢？</p>
+
+<p>东方如杨：我想到了微信，当初是交由QQ聊天所在事业部做的，但当时事业部负责人觉得QQ聊天已经很成熟了，微信功能跟QQ大同小异，不看好，就外发给广州研究院去做，后来微信成功了，深圳这边原本负责这个的人后悔莫及，据说因为对这款产品定位不成功，引咎辞职。这阶段腾讯靠微信在互联网乱战中出力不少，腾讯将推出微信网络信用卡，跟阿里的支付宝网络信用卡又扯上了。</p>
+
+<hr />
+
+<p>残剑：不光是科技，生活的各个方面，你有什么样的遐想？或者说，在你的头脑中，你认为未来的生活又会是怎样一幅场景？</p>
+
+<p>东方如杨：在儒勒·凡尔纳的《海底两万里》里面首次提到潜艇，过了很多年，发明了潜艇应用与军事战争中（我小时候记得就是这样，不知道准确不）。那些出现在科幻片中的，或许不久后就应用在我们的生活中。说到未来生活，想起了我初中的政治老师的话：在未来，劳动是有能力的人的特权，你们这些懒人到了共产主义，想劳动都没门儿。让共产主义， 让乌托邦快些来到吧，哈哈哈，扯远了。</p>
+
+<hr />
+
+<p>残剑：跟你聊天的时候，总是说要去做某件事，可从未真正执行过，自己的意志力很差。很多事情贵在坚持，对于这方面你有怎样的看法？我知道你阅读的书籍很多，可以说说其中的一些示例，也可以谈谈普通生活中最平凡的例子。</p>
+
+<p>东方如杨：我有严重的拖延症，说的多，做的少，这是坏习惯，得改。什么时候，真的开始了，最困难的就过去了。要不，三五年过去，还在原地踏步。这些年，看的书越多，越感觉自己浅薄，懂的少，厉害的人太多。从前觉得一些很牛逼的人现在看来不过尔尔，反倒是被一些人的生活智慧跟想法感动到，觉得不是凡人。越来越多的人在商业中注入佛法精神，我觉得有意思。推荐几档节目：《东吴相对论》、《国学堂》、《冬曦好讲究》、《伯凡非常道》、《开卷八分钟》。</p>
+
+<hr />
+
+<p>残剑：我缺乏面对生活的勇气，离开了这个冒险家的城市。生活了这么久，你对它是一个怎样的映像，又有什么样的看法呢？</p>
+
+<p>东方如杨：深圳生活节奏快，生活压力大，气候温暖潮湿，绿化好。一个地方待久习惯了，反而对其他地方不适应，还是觉得看个人，自己心里有什么样的生活，就会过上什么样的生活。</p>
+
+<hr />
+
+<p>残剑：实际的生活告诉我要现实点，真怕自己的棱角被这个残酷的社会磨平，从而失去对梦想的追求。对于生活，你又是一个怎样的态度呢？</p>
+
+<p>东方如杨：我希望是不管遇到什么，都能乐观对待，但我是一个容易想太多人，所以纠结过很多次，我们要生活，必须现实，不要盲从就好，房子，车子，有那么重要吗？为了这些，降低生活质量就不值了，当然土豪例外。人生这么短，又充满着各种意外，及时开心，尽快享受生活。被现实改变，是肯定的，但我觉得，我会慢慢开始，尊崇自己的兴趣，不那么强迫自己去补自己的短板，按自己心意走。</p>
+
+<hr />
+
+<p>残剑：每年都能看到你在空间中更新那些出去旅行的照片，就我个人而言，我比较看来中国未来的旅游市场。你出去是认知一个新的世界，欣赏风景，陶冶情操，还是有一些自己独特的想法？</p>
+
+<p>东方如杨：我很少放照片吧，哈哈哈。我现在的想法是多带父母出去走走，他们年纪大了，我怕以后遗憾。我想带他们去其他地方走走，让他们看看这个地球其他地方，跟我们不一样的人，他们的风景，他们的生活。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">残剑</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-14T01:04:00+08:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/wei-fang-tan/'>微访谈</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/11/ubuntuxia-de-yin-shi-pin-gong-ju/" title="Previous Post: Ubuntu下的音视频工具">&laquo; Ubuntu下的音视频工具</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/15/adnsyu-ming-jie-xi-ku/" title="Next Post: 域名解析库">域名解析库 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+	<h1>QR-Code<abbr title="The word 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED. It applies only for the word 'QR Code', not for image.">&trade;</abbr></h1>
+	<a href="http://txgcwm.github.io/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/"><img src="http://chart.apis.google.com/chart?chs=180x180&cht=qr&chld=|0&chco=165B94&chl=http://txgcwm.github.io/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/" alt="post-qrcode"></a>
+</section>
+
+<section>
+	<h1>新浪微博</h1>
+	<ul id="weibo">
+		<li>
+		<iframe
+			width="100%"
+			height="750"
+			class="share_self"
+			frameborder="0"
+			scrolling="no"    
+			src="http://widget.weibo.com/weiboshow/index.php?width=0&height=750&&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=1&isFans=1&uid=3647512137&verifier=77f2c556&dpc=1">
+		</iframe>
+		</li>
+	</ul>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/octopressan-zhuang-slashzhu-ti-ji-hui-fu/">Octopress安装Slash主题及恢复</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/17/wei-fang-tan-hou-ji/">微访谈后记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/15/jian-wen-jun-da-%3Axing-zhe-wu-jiang/">剑问君答：行者无疆</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/xiu-che-ji/">修车记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/13/wei-lai-de-ipcameragai-zhe-yao-wan/">未来的IPCamera该这么玩</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section id="comment_sidebar">
+<h1>Recent Comments</h1>
+
+<script type="text/javascript" src="http://txgcwm.disqus.com/recent_comments_widget.js?num_items=5&hide_avatars=0&avatar_size=32&excerpt_length=20"></script><a href="http://disqus.com/">Powered by Disqus</a>
+
+</section>
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>Android (1)</a></li>
+<li class='category'><a href='/blog/categories/c-c/'>C/C++ (12)</a></li>
+<li class='category'><a href='/blog/categories/ide/'>IDE (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>Octopress (5)</a></li>
+<li class='category'><a href='/blog/categories/python/'>Python (1)</a></li>
+<li class='category'><a href='/blog/categories/shell/'>Shell (7)</a></li>
+<li class='category'><a href='/blog/categories/unix-linux/'>Unix/Linux (28)</a></li>
+<li class='category'><a href='/blog/categories/chan-pin-guan-cha/'>产品观察 (6)</a></li>
+<li class='category'><a href='/blog/categories/nei-he-qu-dong/'>内核/驱动 (1)</a></li>
+<li class='category'><a href='/blog/categories/bo-gu-tong-jin/'>博古通今 (4)</a></li>
+<li class='category'><a href='/blog/categories/qian-ru-shi-kai-fa/'>嵌入式开发 (1)</a></li>
+<li class='category'><a href='/blog/categories/kai-yuan-ku/'>开源库 (5)</a></li>
+<li class='category'><a href='/blog/categories/ying-shi-qu-shang-xi/'>影视曲赏析 (5)</a></li>
+<li class='category'><a href='/blog/categories/wei-fang-tan/'>微访谈 (15)</a></li>
+<li class='category'><a href='/blog/categories/qing-gan-tian-di/'>情感天地 (1)</a></li>
+<li class='category'><a href='/blog/categories/shu-ju-jie-gou-suan-fa/'>数据结构算法 (3)</a></li>
+<li class='category'><a href='/blog/categories/lu-xing-san-ji/'>旅行散记 (17)</a></li>
+<li class='category'><a href='/blog/categories/sha-long-ji-yao/'>沙龙纪要 (1)</a></li>
+<li class='category'><a href='/blog/categories/liu-mei-ti-yin-shi-pin/'>流媒体/音视频 (3)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-ying-yong/'>网络应用 (4)</a></li>
+<li class='category'><a href='/blog/categories/wang-luo-pa-chong/'>网络爬虫 (3)</a></li>
+<li class='category'><a href='/blog/categories/cha-yu-jiu-hou/'>茶余酒后 (43)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-fang/'>试衣坊 (2)</a></li>
+<li class='category'><a href='/blog/categories/shi-yi-ren-sheng/'>诗意人生 (2)</a></li>
+<li class='category'><a href='/blog/categories/lu-you-qi-fang-huo-qiang/'>路由器/防火墙 (1)</a></li>
+<li class='category'><a href='/blog/categories/shen-bian-de-gu-shi/'>身边的故事 (4)</a></li>
+
+  </ul>
+</section>
+<section>
+	<h1>技术博客</h1>
+  	<ul>
+    <li>
+      <a href="http://coolshell.cn/">酷壳</a>
+    </li>
+    <li>
+      <a href="http://mindhacks.cn/">刘未鹏</a>
+    </li>
+    <li>
+      <a href="http://blog.codingnow.com/">云风</a>
+    </li>
+    <li>
+      <a href="http://www.cnblogs.com/Solstice/">陈硕</a>
+    </li>
+	<li>
+      <a href="http://rdc.taobao.com/blog/cs/">淘宝核心系统团队博客</a>
+    </li>
+	<li>
+      <a href="http://www.searchtb.com/">搜索技术博客－淘宝</a>
+    </li>
+	<li>
+      <a href="http://www.matrix67.com/blog/">matrix67</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/v_JULY_v">结构之法 算法之道</a>
+    </li>
+    <li>
+      <a href="http://ioutlier.com/">Life As An Outlier</a>
+    </li>
+	<li>
+      <a href="http://www.diguage.com/">地瓜哥</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/huangminqiang201209">生命不息，奋斗不止</a>
+    </li>
+	<li>
+      <a href="http://blog.csdn.net/tianmo2010">tianmo2010的专栏</a>
+    </li>                          
+	<li>
+      <a href="http://tonybai.com/">Tony Bai</a>
+    </li>        
+	<li>
+      <a href="http://www.roboby.com/">Roboby's Home</a>
+    </li>
+	<li>
+      <a href="http://www.zhizhihu.com/">丕子</a>
+    </li>
+	<li>
+      <a href="http://www.wuzesheng.com/">小武哥的博客</a>
+    </li>
+	<li>
+      <a href="http://imtx.me">Tualatrix</a>
+    </li>         
+	<li>
+      <a href="http://taosay.net/">道哥的黑板报</a>
+    </li>
+	<li>
+      <a href="http://news.dbanotes.net/news">小道消息</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/ma6174/">ma6174</a>
+    </li>                          
+	<li>
+      <a href="http://www.ofgeek.com/">极客所有</a>
+    </li>
+	<li>
+      <a href="http://web2hack.org/">Web2.0 Hacking</a>
+    </li>
+	<li>
+      <a href="http://www.yqshare.com/">记忆碎片</a>
+    </li>                
+  	<li>
+      <a href="http://www.hiadmin.org/">Smart Testing</a>
+    </li>
+	<li>
+      <a href="http://wmnmtm.blog.163.com/blog/#m=0">加菲猫</a>
+    </li>
+	<li>
+      <a href="http://www.debugfs.com/">DeBugFs</a>
+    </li>                                                                                 
+	<li>
+      <a href="http://www.sinosky.org/">SinoSky</a>
+    </li>
+	<li>
+      <a href="http://www.isdiary.com/">冬不落</a>
+    </li>
+	<li>
+      <a href="http://www.2fz1.com/">二分之一</a>
+    </li>         
+	<li>
+      <a href="http://chuanliang.wordpress.com/">出家如初,成佛有余</a>
+    </li>
+	<li>
+      <a href="http://xiaoxia.org/">Xiaoxia[PG]</a>
+    </li>
+	<li>
+      <a href="http://www.cnblogs.com/h4ckF1y/">天黑再动手</a>
+    </li>             
+	<li>
+      <a href="http://www.wypblog.com/">过往记忆</a>
+    </li>
+	<li>
+      <a href="http://edsionte.com/techblog/">edsionte's Linuxworld|新手区</a>
+    </li>
+	<li>
+      <a href="http://basiccoder.com/">basic coder</a>
+    </li>          
+	<li>
+      <a href="http://www.vpsee.com/">vpsee</a>
+    </li>
+	<li>
+      <a href="http://magnatecha.com/">Magna Techa</a>
+    </li>
+	<li>
+      <a href="http://www.linksprite.com/cnblog/">LinkSprite中文博客</a>
+    </li>
+ 	<li>
+      <a href="http://zwmin.com/">斑纹小鱼</a>
+    </li>
+	<li>
+      <a href="http://www.cvchina.info/">增强视觉 | 计算机视觉 增强现实</a>
+    </li>
+	<li>
+      <a href="http://wangcong.org/blog/">A Geek's Page</a>
+    </li>                
+	<li>
+      <a href="http://bachiscoding.com/">巴赫在编码</a>
+    </li>
+	<li>
+      <a href="http://www.pyshell.com/">PyShell</a>
+    </li>
+	<li>
+      <a href="http://blog.wgzhao.com/">Linux|系统管理|WEB开发</a>
+    </li>
+	<li>
+      <a href="http://www.icnote.com/">博爱老头的草屋</a>
+    </li>
+	<li>
+      <a href="http://daodao.org/">盗盗</a>
+    </li>
+	<li>
+      <a href="http://jixiuf.github.io/index.html">一个人的狂欢</a>
+    </li>
+	<li>
+      <a href="http://emacser.com/">Emacs中文网</a>
+    </li>
+	<li>
+      <a href="http://www.zhangjunjie.net/">张俊杰·软件设计 – 与软件的灵魂共舞</a>
+    </li>                                                             
+	<li>
+      <a href="http://blog.boluotou.com/">菠萝头说</a>
+    </li>
+	<li>
+      <a href="http://blog.log4d.com/">Log4D</a>
+    </li>
+	<li>
+      <a href="http://dinever.com/">dinever</a>
+    </li>
+	<li>
+      <a href="http://ecvip.org/">黄海均的博客</a>
+    </li>
+  </ul>
+</section>
+<section>
+	<h1>License</h1>
+	<a><img left src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" style="border-width:0" alt="Creative Commons License"></a>
+	<br>
+	Except where otherwise noted, content on this site is licensed under a
+	<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" rel="license">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>. 
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  // hide #back-top first
+  $("#back-top").hide();
+  
+  // fade in #back-top
+  $(function () {
+      $(window).scroll(function () {
+          if ($(this).scrollTop() > 100) {
+              $('#back-top').fadeIn();
+          } else {
+              $('#back-top').fadeOut();
+          }
+      });
+
+      // scroll body to 0px on click
+      $('#back-top a').click(function () {
+          $('body,html').animate({
+              scrollTop: 0
+          }, 800);
+          return false;
+      });
+  });
+
+});
+</script>
+
+<style type="text/css">
+#back-top {
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+
+#back-top a {
+  width: 80px;
+  display: block;
+  text-align: center;
+  font: 11px/100% Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #bbb;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover {
+  color: #000;
+}
+
+/* arrow icon (span tag) */
+#back-top span {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-bottom: 7px;
+  background: #ddd url(/images/top.png) no-repeat center center;
+
+  /* rounded corners */
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+
+  /* transition */
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  transition: 1s;
+}
+#back-top a:hover span {
+  background-color: #888;
+}
+</style>
+
+<p id="back-top">
+  <a href="#top"><span></span></a>
+</p>
+
+<p>
+  Copyright © 2014 - 残剑 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'txgcwm';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://txgcwm.github.io/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/';
+        var disqus_url = 'http://txgcwm.github.io/blog/2014/03/14/jian-wen-jun-da-%3Apcblayoutnu-hao/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

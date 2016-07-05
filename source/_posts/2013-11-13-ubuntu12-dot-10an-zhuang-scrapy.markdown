@@ -3,7 +3,7 @@ layout: post
 title: "Ubuntu12.10安装Scrapy"
 date: 2013-11-13 15:59
 comments: true
-categories: [网络爬虫, Python]
+categories: [网络爬虫]
 ---
 
 根据官网[Ubuntu packages](http://doc.scrapy.org/en/latest/topics/ubuntu.html#topics-ubuntu)上的方法安装Scrapy，然后创建一个教程目录，却出现了一些问题，如下所示。
